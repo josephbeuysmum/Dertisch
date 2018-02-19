@@ -1,0 +1,991 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A901C3472035D9B10031C156 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A901C33D2035D9B10031C156 /* Filzanzug.framework */; };
+		A901C34C2035D9B10031C156 /* FilzanzugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C34B2035D9B10031C156 /* FilzanzugTests.swift */; };
+		A901C34E2035D9B10031C156 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A901C3402035D9B10031C156 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A901C3D22035DA560031C156 /* FZ_EX_NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */; };
+		A901C3D32035DA560031C156 /* FZ_EX_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */; };
+		A901C3D42035DA560031C156 /* FZ_EX_UnicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */; };
+		A901C3D52035DA560031C156 /* FZ_EX_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */; };
+		A901C3D62035DA560031C156 /* FZ_EX_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3702035DA560031C156 /* FZ_EX_String.swift */; };
+		A901C3D72035DA560031C156 /* FZ_EX_Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3712035DA560031C156 /* FZ_EX_Date.swift */; };
+		A901C3D82035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */; };
+		A901C3D92035DA560031C156 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3732035DA560031C156 /* FZ_EX_Data.swift */; };
+		A901C3DA2035DA560031C156 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */; };
+		A901C3DB2035DA560031C156 /* FZ_CS_Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */; };
+		A901C3DC2035DA560031C156 /* FZ_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3772035DA560031C156 /* FZ_CS_Logs.swift */; };
+		A901C3DD2035DA570031C156 /* FZ_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3782035DA560031C156 /* FZ_CS_Signals.swift */; };
+		A901C3DE2035DA570031C156 /* FZ_CS_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3792035DA560031C156 /* FZ_CS_Keys.swift */; };
+		A901C3DF2035DA570031C156 /* FZ_CS_Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */; };
+		A901C3E02035DA570031C156 /* FZ_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */; };
+		A901C3E12035DA570031C156 /* FZ_CS_Prefixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */; };
+		A901C3E22035DA570031C156 /* FZ_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */; };
+		A901C3E32035DA570031C156 /* FZ_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */; };
+		A901C3E42035DA570031C156 /* FZ_SV_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3802035DA560031C156 /* FZ_SV_Logger.swift */; };
+		A901C3E52035DA570031C156 /* FZ_SV_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3812035DA560031C156 /* FZ_SV_API.swift */; };
+		A901C3E62035DA570031C156 /* FZ_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3832035DA560031C156 /* FZ_UT_Colors.swift */; };
+		A901C3E72035DA570031C156 /* FZ_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */; };
+		A901C3E82035DA570031C156 /* FZ_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3852035DA560031C156 /* FZ_UT_Log.swift */; };
+		A901C3E92035DA570031C156 /* FZ_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3862035DA560031C156 /* FZ_UT_View.swift */; };
+		A901C3EA2035DA570031C156 /* FZ_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3872035DA560031C156 /* FZ_UT_Math.swift */; };
+		A901C3EB2035DA570031C156 /* FZ_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3882035DA560031C156 /* FZ_UT_Misc.swift */; };
+		A901C3EC2035DA570031C156 /* FZ_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3892035DA560031C156 /* FZ_UT_String.swift */; };
+		A901C3ED2035DA570031C156 /* FZ_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38A2035DA560031C156 /* FZ_UT_Time.swift */; };
+		A901C3EE2035DA570031C156 /* FZ_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */; };
+		A901C3EF2035DA570031C156 /* FZ_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */; };
+		A901C3F02035DA570031C156 /* FZ_PT_UT_ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */; };
+		A901C3F12035DA570031C156 /* FZ_PT_UT_IsActivated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */; };
+		A901C3F22035DA570031C156 /* FZ_PT_UT_Activatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */; };
+		A901C3F32035DA570031C156 /* FZ_PT_UT_Initable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */; };
+		A901C3F42035DA570031C156 /* FZ_PT_UT_Deallocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */; };
+		A901C3F52035DA570031C156 /* FZ_PT_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */; };
+		A901C3F62035DA570031C156 /* FZ_PT_CP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */; };
+		A901C3F72035DA570031C156 /* FZ_PT_VP_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */; };
+		A901C3F82035DA570031C156 /* FZ_PT_VP_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */; };
+		A901C3F92035DA570031C156 /* FZ_PT_VP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */; };
+		A901C3FA2035DA570031C156 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */; };
+		A901C3FB2035DA570031C156 /* FZ_PT_VP_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */; };
+		A901C3FC2035DA570031C156 /* FZ_PT_VP_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */; };
+		A901C3FD2035DA570031C156 /* FZ_PT_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */; };
+		A901C3FE2035DA570031C156 /* FZ_PT_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */; };
+		A901C3FF2035DA570031C156 /* FZ_PT_SV_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */; };
+		A901C4002035DA570031C156 /* FZ_PT_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */; };
+		A901C4012035DA570031C156 /* FZ_PT_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */; };
+		A901C4022035DA570031C156 /* FZ_PT_ET_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */; };
+		A901C4032035DA570031C156 /* FZ_PT_ET_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */; };
+		A901C4042035DA570031C156 /* FZ_PT_ET_SignalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */; };
+		A901C4052035DA570031C156 /* FZ_PT_ET_PresenterEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */; };
+		A901C4062035DA570031C156 /* FZ_PT_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */; };
+		A901C4072035DA570031C156 /* FZ_PT_ET_StopwatchCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */; };
+		A901C4082035DA570031C156 /* FZ_PT_ET_WornClosetImplementer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */; };
+		A901C4092035DA570031C156 /* FZ_PT_ET_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */; };
+		A901C40A2035DA570031C156 /* FZ_PT_ET_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */; };
+		A901C40B2035DA570031C156 /* FZ_PT_ET_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */; };
+		A901C40C2035DA570031C156 /* FZ_PT_ET_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */; };
+		A901C40D2035DA570031C156 /* FZ_PT_ET_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */; };
+		A901C40E2035DA570031C156 /* FZ_PT_ET_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */; };
+		A901C40F2035DA570031C156 /* FZ_PT_ET_ModelClassEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */; };
+		A901C4102035DA570031C156 /* FZ_PT_ET_InteractorEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */; };
+		A901C4112035DA570031C156 /* FZ_PT_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */; };
+		A901C4122035DA570031C156 /* FZ_PT_ET_CL_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */; };
+		A901C4132035DA570031C156 /* FZ_PT_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */; };
+		A901C4142035DA570031C156 /* FZ_PT_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */; };
+		A901C4152035DA570031C156 /* FZ_PT_ET_Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */; };
+		A901C4162035DA570031C156 /* FZ_PT_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */; };
+		A901C4172035DA570031C156 /* FZ_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */; };
+		A901C4182035DA570031C156 /* FZ_ET_Caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */; };
+		A901C4192035DA570031C156 /* FZ_ET_SignalSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */; };
+		A901C41A2035DA570031C156 /* FZ_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */; };
+		A901C41B2035DA570031C156 /* FZ_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */; };
+		A901C41C2035DA570031C156 /* FZ_ET_GradedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */; };
+		A901C41D2035DA570031C156 /* FZ_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */; };
+		A901C41E2035DA570031C156 /* FZ_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */; };
+		A901C41F2035DA570031C156 /* FZ_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */; };
+		A901C4202035DA570031C156 /* FZ_ET_CL_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */; };
+		A901C4212035DA570031C156 /* FZ_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */; };
+		A901C4222035DA570031C156 /* FZ_ET_LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */; };
+		A901C4232035DA570031C156 /* FZ_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */; };
+		A901C4242035DA570031C156 /* FZ_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */; };
+		A901C4252035DA570031C156 /* FZ_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */; };
+		A901C4262035DA570031C156 /* FZ_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3D02035DA560031C156 /* FZ_ViewController.swift */; };
+		A901C4272035DA570031C156 /* FZ_VC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3D12035DA560031C156 /* FZ_VC_Page.swift */; };
+		A901C4292035DA820031C156 /* FZImageProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C4282035DA820031C156 /* FZImageProxyTests.swift */; };
+		A901C42B2035DA9A0031C156 /* FZSignalsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */; };
+		F41ACDFA050AB578736BFDCE /* Pods_Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A901C3482035D9B10031C156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A901C3342035D9B10031C156 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A901C33C2035D9B10031C156;
+			remoteInfo = Filzanzug;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.debug.xcconfig"; sourceTree = "<group>"; };
+		A901C33D2035D9B10031C156 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A901C3402035D9B10031C156 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
+		A901C3412035D9B10031C156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A901C3462035D9B10031C156 /* FilzanzugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilzanzugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A901C34B2035D9B10031C156 /* FilzanzugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilzanzugTests.swift; sourceTree = "<group>"; };
+		A901C34D2035D9B10031C156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_NSObject.swift; sourceTree = "<group>"; };
+		A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UIColor.swift; sourceTree = "<group>"; };
+		A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UnicodeScalar.swift; sourceTree = "<group>"; };
+		A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UILabel.swift; sourceTree = "<group>"; };
+		A901C3702035DA560031C156 /* FZ_EX_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_String.swift; sourceTree = "<group>"; };
+		A901C3712035DA560031C156 /* FZ_EX_Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Date.swift; sourceTree = "<group>"; };
+		A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_NSLayoutConstraint.swift; sourceTree = "<group>"; };
+		A901C3732035DA560031C156 /* FZ_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Data.swift; sourceTree = "<group>"; };
+		A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_CommonPhrases.swift; sourceTree = "<group>"; };
+		A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Metrics.swift; sourceTree = "<group>"; };
+		A901C3772035DA560031C156 /* FZ_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Logs.swift; sourceTree = "<group>"; };
+		A901C3782035DA560031C156 /* FZ_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Signals.swift; sourceTree = "<group>"; };
+		A901C3792035DA560031C156 /* FZ_CS_Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Keys.swift; sourceTree = "<group>"; };
+		A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Classes.swift; sourceTree = "<group>"; };
+		A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Chars.swift; sourceTree = "<group>"; };
+		A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Prefixes.swift; sourceTree = "<group>"; };
+		A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Routing.swift; sourceTree = "<group>"; };
+		A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Signals.swift; sourceTree = "<group>"; };
+		A901C3802035DA560031C156 /* FZ_SV_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Logger.swift; sourceTree = "<group>"; };
+		A901C3812035DA560031C156 /* FZ_SV_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_API.swift; sourceTree = "<group>"; };
+		A901C3832035DA560031C156 /* FZ_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Colors.swift; sourceTree = "<group>"; };
+		A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Constraints.swift; sourceTree = "<group>"; };
+		A901C3852035DA560031C156 /* FZ_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Log.swift; sourceTree = "<group>"; };
+		A901C3862035DA560031C156 /* FZ_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_View.swift; sourceTree = "<group>"; };
+		A901C3872035DA560031C156 /* FZ_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Math.swift; sourceTree = "<group>"; };
+		A901C3882035DA560031C156 /* FZ_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Misc.swift; sourceTree = "<group>"; };
+		A901C3892035DA560031C156 /* FZ_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_String.swift; sourceTree = "<group>"; };
+		A901C38A2035DA560031C156 /* FZ_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Time.swift; sourceTree = "<group>"; };
+		A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Consts.swift; sourceTree = "<group>"; };
+		A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CP_Stopwatch.swift; sourceTree = "<group>"; };
+		A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_ClassName.swift; sourceTree = "<group>"; };
+		A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_IsActivated.swift; sourceTree = "<group>"; };
+		A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Activatable.swift; sourceTree = "<group>"; };
+		A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Initable.swift; sourceTree = "<group>"; };
+		A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Deallocatable.swift; sourceTree = "<group>"; };
+		A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_Stopwatch.swift; sourceTree = "<group>"; };
+		A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_WornCloset.swift; sourceTree = "<group>"; };
+		A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Routing.swift; sourceTree = "<group>"; };
+		A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Presenter.swift; sourceTree = "<group>"; };
+		A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_WornCloset.swift; sourceTree = "<group>"; };
+		A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
+		A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ViewController.swift; sourceTree = "<group>"; };
+		A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Interactor.swift; sourceTree = "<group>"; };
+		A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_Image.swift; sourceTree = "<group>"; };
+		A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_LocalAccess.swift; sourceTree = "<group>"; };
+		A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Logger.swift; sourceTree = "<group>"; };
+		A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_UrlSession.swift; sourceTree = "<group>"; };
+		A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Signals.swift; sourceTree = "<group>"; };
+		A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_API.swift; sourceTree = "<group>"; };
+		A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Presenter.swift; sourceTree = "<group>"; };
+		A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_SignalBox.swift; sourceTree = "<group>"; };
+		A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_PresenterEntities.swift; sourceTree = "<group>"; };
+		A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Stopwatch.swift; sourceTree = "<group>"; };
+		A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_StopwatchCase.swift; sourceTree = "<group>"; };
+		A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_WornClosetImplementer.swift; sourceTree = "<group>"; };
+		A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Interactor.swift; sourceTree = "<group>"; };
+		A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Image.swift; sourceTree = "<group>"; };
+		A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_LocalAccess.swift; sourceTree = "<group>"; };
+		A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Routing.swift; sourceTree = "<group>"; };
+		A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ViewController.swift; sourceTree = "<group>"; };
+		A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Logger.swift; sourceTree = "<group>"; };
+		A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ModelClassEntities.swift; sourceTree = "<group>"; };
+		A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_InteractorEntities.swift; sourceTree = "<group>"; };
+		A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Interactor.swift; sourceTree = "<group>"; };
+		A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ViewController.swift; sourceTree = "<group>"; };
+		A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Presenter.swift; sourceTree = "<group>"; };
+		A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
+		A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Collection.swift; sourceTree = "<group>"; };
+		A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Signals.swift; sourceTree = "<group>"; };
+		A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signals.swift; sourceTree = "<group>"; };
+		A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Caller.swift; sourceTree = "<group>"; };
+		A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalSignature.swift; sourceTree = "<group>"; };
+		A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_WornCloset.swift; sourceTree = "<group>"; };
+		A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_TimePeriod.swift; sourceTree = "<group>"; };
+		A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_GradedBool.swift; sourceTree = "<group>"; };
+		A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Stopwatch.swift; sourceTree = "<group>"; };
+		A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Presenter.swift; sourceTree = "<group>"; };
+		A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
+		A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_PageViewController.swift; sourceTree = "<group>"; };
+		A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Interactor.swift; sourceTree = "<group>"; };
+		A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_LogEntry.swift; sourceTree = "<group>"; };
+		A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_ApiResult.swift; sourceTree = "<group>"; };
+		A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_LocalAccess.swift; sourceTree = "<group>"; };
+		A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_Image.swift; sourceTree = "<group>"; };
+		A901C3D02035DA560031C156 /* FZ_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ViewController.swift; sourceTree = "<group>"; };
+		A901C3D12035DA560031C156 /* FZ_VC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_VC_Page.swift; sourceTree = "<group>"; };
+		A901C4282035DA820031C156 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
+		A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZSignalsServiceTests.swift; sourceTree = "<group>"; };
+		FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A901C3392035D9B10031C156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41ACDFA050AB578736BFDCE /* Pods_Filzanzug.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A901C3432035D9B10031C156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A901C3472035D9B10031C156 /* Filzanzug.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2909C96B68D9DF6C771BA1BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */,
+				FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		66F8C45673A26B70B14577BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A901C3332035D9B10031C156 = {
+			isa = PBXGroup;
+			children = (
+				A901C33F2035D9B10031C156 /* Filzanzug */,
+				A901C34A2035D9B10031C156 /* FilzanzugTests */,
+				A901C33E2035D9B10031C156 /* Products */,
+				2909C96B68D9DF6C771BA1BF /* Pods */,
+				66F8C45673A26B70B14577BC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A901C33E2035D9B10031C156 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A901C33D2035D9B10031C156 /* Filzanzug.framework */,
+				A901C3462035D9B10031C156 /* FilzanzugTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A901C33F2035D9B10031C156 /* Filzanzug */ = {
+			isa = PBXGroup;
+			children = (
+				A901C38C2035DA560031C156 /* Components */,
+				A901C3742035DA560031C156 /* Constants */,
+				A901C3BD2035DA560031C156 /* Entities */,
+				A901C36B2035DA560031C156 /* Extensions */,
+				A901C38E2035DA560031C156 /* Protocols */,
+				A901C3CC2035DA560031C156 /* Proxies */,
+				A901C37D2035DA560031C156 /* Services */,
+				A901C3822035DA560031C156 /* Utils */,
+				A901C3CF2035DA560031C156 /* View */,
+				A901C3402035D9B10031C156 /* Filzanzug.h */,
+				A901C3412035D9B10031C156 /* Info.plist */,
+			);
+			path = Filzanzug;
+			sourceTree = "<group>";
+		};
+		A901C34A2035D9B10031C156 /* FilzanzugTests */ = {
+			isa = PBXGroup;
+			children = (
+				A901C34B2035D9B10031C156 /* FilzanzugTests.swift */,
+				A901C4282035DA820031C156 /* FZImageProxyTests.swift */,
+				A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */,
+				A901C34D2035D9B10031C156 /* Info.plist */,
+			);
+			path = FilzanzugTests;
+			sourceTree = "<group>";
+		};
+		A901C36B2035DA560031C156 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */,
+				A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */,
+				A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */,
+				A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */,
+				A901C3702035DA560031C156 /* FZ_EX_String.swift */,
+				A901C3712035DA560031C156 /* FZ_EX_Date.swift */,
+				A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */,
+				A901C3732035DA560031C156 /* FZ_EX_Data.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A901C3742035DA560031C156 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */,
+				A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */,
+				A901C3772035DA560031C156 /* FZ_CS_Logs.swift */,
+				A901C3782035DA560031C156 /* FZ_CS_Signals.swift */,
+				A901C3792035DA560031C156 /* FZ_CS_Keys.swift */,
+				A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */,
+				A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */,
+				A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		A901C37D2035DA560031C156 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */,
+				A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */,
+				A901C3802035DA560031C156 /* FZ_SV_Logger.swift */,
+				A901C3812035DA560031C156 /* FZ_SV_API.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A901C3822035DA560031C156 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3832035DA560031C156 /* FZ_UT_Colors.swift */,
+				A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */,
+				A901C3852035DA560031C156 /* FZ_UT_Log.swift */,
+				A901C3862035DA560031C156 /* FZ_UT_View.swift */,
+				A901C3872035DA560031C156 /* FZ_UT_Math.swift */,
+				A901C3882035DA560031C156 /* FZ_UT_Misc.swift */,
+				A901C3892035DA560031C156 /* FZ_UT_String.swift */,
+				A901C38A2035DA560031C156 /* FZ_UT_Time.swift */,
+				A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A901C38C2035DA560031C156 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A901C38E2035DA560031C156 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A901C38F2035DA560031C156 /* Utils */,
+				A901C3952035DA560031C156 /* Components */,
+				A901C3982035DA560031C156 /* Viper */,
+				A901C39F2035DA560031C156 /* Proxies */,
+				A901C3A22035DA560031C156 /* Services */,
+				A901C3A62035DA560031C156 /* Entities */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A901C38F2035DA560031C156 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */,
+				A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */,
+				A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */,
+				A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */,
+				A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A901C3952035DA560031C156 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */,
+				A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A901C3982035DA560031C156 /* Viper */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */,
+				A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */,
+				A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */,
+				A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */,
+				A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */,
+				A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */,
+			);
+			path = Viper;
+			sourceTree = "<group>";
+		};
+		A901C39F2035DA560031C156 /* Proxies */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */,
+				A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */,
+			);
+			path = Proxies;
+			sourceTree = "<group>";
+		};
+		A901C3A22035DA560031C156 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */,
+				A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */,
+				A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A901C3A62035DA560031C156 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */,
+				A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */,
+				A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */,
+				A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */,
+				A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */,
+				A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */,
+				A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */,
+				A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */,
+				A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */,
+				A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */,
+				A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */,
+				A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */,
+				A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */,
+				A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */,
+				A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */,
+				A901C3B62035DA560031C156 /* Collections */,
+				A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A901C3B62035DA560031C156 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */,
+				A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */,
+				A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */,
+				A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */,
+				A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		A901C3BD2035DA560031C156 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */,
+				A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */,
+				A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */,
+				A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */,
+				A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */,
+				A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */,
+				A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */,
+				A901C3C52035DA560031C156 /* Collections */,
+				A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */,
+				A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A901C3C52035DA560031C156 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */,
+				A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */,
+				A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */,
+				A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		A901C3CC2035DA560031C156 /* Proxies */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */,
+				A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */,
+			);
+			path = Proxies;
+			sourceTree = "<group>";
+		};
+		A901C3CF2035DA560031C156 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A901C3D02035DA560031C156 /* FZ_ViewController.swift */,
+				A901C3D12035DA560031C156 /* FZ_VC_Page.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A901C33A2035D9B10031C156 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A901C34E2035D9B10031C156 /* Filzanzug.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A901C33C2035D9B10031C156 /* Filzanzug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A901C3512035D9B10031C156 /* Build configuration list for PBXNativeTarget "Filzanzug" */;
+			buildPhases = (
+				74649ED3F609AD5D0B9D24C3 /* [CP] Check Pods Manifest.lock */,
+				A901C3382035D9B10031C156 /* Sources */,
+				A901C3392035D9B10031C156 /* Frameworks */,
+				A901C33A2035D9B10031C156 /* Headers */,
+				A901C33B2035D9B10031C156 /* Resources */,
+				883DDB7EC76E7ECFC2B34C10 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Filzanzug;
+			productName = Filzanzug;
+			productReference = A901C33D2035D9B10031C156 /* Filzanzug.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A901C3452035D9B10031C156 /* FilzanzugTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A901C3542035D9B10031C156 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */;
+			buildPhases = (
+				A901C3422035D9B10031C156 /* Sources */,
+				A901C3432035D9B10031C156 /* Frameworks */,
+				A901C3442035D9B10031C156 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A901C3492035D9B10031C156 /* PBXTargetDependency */,
+			);
+			name = FilzanzugTests;
+			productName = FilzanzugTests;
+			productReference = A901C3462035D9B10031C156 /* FilzanzugTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A901C3342035D9B10031C156 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Rich Text Format Ltd.";
+				TargetAttributes = {
+					A901C33C2035D9B10031C156 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					A901C3452035D9B10031C156 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A901C3372035D9B10031C156 /* Build configuration list for PBXProject "Filzanzug" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A901C3332035D9B10031C156;
+			productRefGroup = A901C33E2035D9B10031C156 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A901C33C2035D9B10031C156 /* Filzanzug */,
+				A901C3452035D9B10031C156 /* FilzanzugTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A901C33B2035D9B10031C156 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A901C3442035D9B10031C156 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		74649ED3F609AD5D0B9D24C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Filzanzug-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		883DDB7EC76E7ECFC2B34C10 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A901C3382035D9B10031C156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A901C41D2035DA570031C156 /* FZ_ET_Stopwatch.swift in Sources */,
+				A901C3D92035DA560031C156 /* FZ_EX_Data.swift in Sources */,
+				A901C4062035DA570031C156 /* FZ_PT_ET_Stopwatch.swift in Sources */,
+				A901C3F22035DA570031C156 /* FZ_PT_UT_Activatable.swift in Sources */,
+				A901C3D32035DA560031C156 /* FZ_EX_UIColor.swift in Sources */,
+				A901C3E32035DA570031C156 /* FZ_SV_Signals.swift in Sources */,
+				A901C40D2035DA570031C156 /* FZ_PT_ET_ViewController.swift in Sources */,
+				A901C40C2035DA570031C156 /* FZ_PT_ET_Routing.swift in Sources */,
+				A901C4262035DA570031C156 /* FZ_ViewController.swift in Sources */,
+				A901C4272035DA570031C156 /* FZ_VC_Page.swift in Sources */,
+				A901C4232035DA570031C156 /* FZ_ET_ApiResult.swift in Sources */,
+				A901C3D22035DA560031C156 /* FZ_EX_NSObject.swift in Sources */,
+				A901C41B2035DA570031C156 /* FZ_ET_TimePeriod.swift in Sources */,
+				A901C3DE2035DA570031C156 /* FZ_CS_Keys.swift in Sources */,
+				A901C4002035DA570031C156 /* FZ_PT_SV_UrlSession.swift in Sources */,
+				A901C3F02035DA570031C156 /* FZ_PT_UT_ClassName.swift in Sources */,
+				A901C4222035DA570031C156 /* FZ_ET_LogEntry.swift in Sources */,
+				A901C40A2035DA570031C156 /* FZ_PT_ET_Image.swift in Sources */,
+				A901C4092035DA570031C156 /* FZ_PT_ET_Interactor.swift in Sources */,
+				A901C4022035DA570031C156 /* FZ_PT_ET_API.swift in Sources */,
+				A901C40B2035DA570031C156 /* FZ_PT_ET_LocalAccess.swift in Sources */,
+				A901C3FD2035DA570031C156 /* FZ_PT_PX_Image.swift in Sources */,
+				A901C3DD2035DA570031C156 /* FZ_CS_Signals.swift in Sources */,
+				A901C3E82035DA570031C156 /* FZ_UT_Log.swift in Sources */,
+				A901C4052035DA570031C156 /* FZ_PT_ET_PresenterEntities.swift in Sources */,
+				A901C3FC2035DA570031C156 /* FZ_PT_VP_Interactor.swift in Sources */,
+				A901C4102035DA570031C156 /* FZ_PT_ET_InteractorEntities.swift in Sources */,
+				A901C4192035DA570031C156 /* FZ_ET_SignalSignature.swift in Sources */,
+				A901C4082035DA570031C156 /* FZ_PT_ET_WornClosetImplementer.swift in Sources */,
+				A901C4012035DA570031C156 /* FZ_PT_SV_Signals.swift in Sources */,
+				A901C4072035DA570031C156 /* FZ_PT_ET_StopwatchCase.swift in Sources */,
+				A901C4252035DA570031C156 /* FZ_PX_Image.swift in Sources */,
+				A901C3D42035DA560031C156 /* FZ_EX_UnicodeScalar.swift in Sources */,
+				A901C40E2035DA570031C156 /* FZ_PT_ET_Logger.swift in Sources */,
+				A901C4132035DA570031C156 /* FZ_PT_ET_CL_Presenter.swift in Sources */,
+				A901C4162035DA570031C156 /* FZ_PT_ET_Signals.swift in Sources */,
+				A901C3F32035DA570031C156 /* FZ_PT_UT_Initable.swift in Sources */,
+				A901C4182035DA570031C156 /* FZ_ET_Caller.swift in Sources */,
+				A901C41E2035DA570031C156 /* FZ_ET_CL_Presenter.swift in Sources */,
+				A901C40F2035DA570031C156 /* FZ_PT_ET_ModelClassEntities.swift in Sources */,
+				A901C3E72035DA570031C156 /* FZ_UT_Constraints.swift in Sources */,
+				A901C4142035DA570031C156 /* FZ_PT_ET_CL_ModelClass.swift in Sources */,
+				A901C3F62035DA570031C156 /* FZ_PT_CP_WornCloset.swift in Sources */,
+				A901C3F52035DA570031C156 /* FZ_PT_CP_Stopwatch.swift in Sources */,
+				A901C3D52035DA560031C156 /* FZ_EX_UILabel.swift in Sources */,
+				A901C4152035DA570031C156 /* FZ_PT_ET_Collection.swift in Sources */,
+				A901C3DA2035DA560031C156 /* FZ_CS_CommonPhrases.swift in Sources */,
+				A901C41F2035DA570031C156 /* FZ_ET_CL_ModelClass.swift in Sources */,
+				A901C3DC2035DA560031C156 /* FZ_CS_Logs.swift in Sources */,
+				A901C3E12035DA570031C156 /* FZ_CS_Prefixes.swift in Sources */,
+				A901C3E92035DA570031C156 /* FZ_UT_View.swift in Sources */,
+				A901C3FE2035DA570031C156 /* FZ_PT_PX_LocalAccess.swift in Sources */,
+				A901C3FF2035DA570031C156 /* FZ_PT_SV_Logger.swift in Sources */,
+				A901C3EB2035DA570031C156 /* FZ_UT_Misc.swift in Sources */,
+				A901C4032035DA570031C156 /* FZ_PT_ET_Presenter.swift in Sources */,
+				A901C4242035DA570031C156 /* FZ_PX_LocalAccess.swift in Sources */,
+				A901C3F12035DA570031C156 /* FZ_PT_UT_IsActivated.swift in Sources */,
+				A901C3D72035DA560031C156 /* FZ_EX_Date.swift in Sources */,
+				A901C4042035DA570031C156 /* FZ_PT_ET_SignalBox.swift in Sources */,
+				A901C41A2035DA570031C156 /* FZ_ET_WornCloset.swift in Sources */,
+				A901C41C2035DA570031C156 /* FZ_ET_GradedBool.swift in Sources */,
+				A901C3EF2035DA570031C156 /* FZ_CP_Stopwatch.swift in Sources */,
+				A901C4122035DA570031C156 /* FZ_PT_ET_CL_ViewController.swift in Sources */,
+				A901C3D62035DA560031C156 /* FZ_EX_String.swift in Sources */,
+				A901C3E62035DA570031C156 /* FZ_UT_Colors.swift in Sources */,
+				A901C3D82035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift in Sources */,
+				A901C3F42035DA570031C156 /* FZ_PT_UT_Deallocatable.swift in Sources */,
+				A901C3E22035DA570031C156 /* FZ_SV_Routing.swift in Sources */,
+				A901C3E52035DA570031C156 /* FZ_SV_API.swift in Sources */,
+				A901C3ED2035DA570031C156 /* FZ_UT_Time.swift in Sources */,
+				A901C3EA2035DA570031C156 /* FZ_UT_Math.swift in Sources */,
+				A901C3DF2035DA570031C156 /* FZ_CS_Classes.swift in Sources */,
+				A901C3E02035DA570031C156 /* FZ_CS_Chars.swift in Sources */,
+				A901C3E42035DA570031C156 /* FZ_SV_Logger.swift in Sources */,
+				A901C4212035DA570031C156 /* FZ_ET_CL_Interactor.swift in Sources */,
+				A901C3F82035DA570031C156 /* FZ_PT_VP_Presenter.swift in Sources */,
+				A901C4202035DA570031C156 /* FZ_ET_CL_PageViewController.swift in Sources */,
+				A901C3F92035DA570031C156 /* FZ_PT_VP_WornCloset.swift in Sources */,
+				A901C3EC2035DA570031C156 /* FZ_UT_String.swift in Sources */,
+				A901C4112035DA570031C156 /* FZ_PT_ET_CL_Interactor.swift in Sources */,
+				A901C3EE2035DA570031C156 /* FZ_UT_Consts.swift in Sources */,
+				A901C3F72035DA570031C156 /* FZ_PT_VP_Routing.swift in Sources */,
+				A901C3FA2035DA570031C156 /* FZ_PT_VP_ModelClass.swift in Sources */,
+				A901C3FB2035DA570031C156 /* FZ_PT_VP_ViewController.swift in Sources */,
+				A901C4172035DA570031C156 /* FZ_ET_Signals.swift in Sources */,
+				A901C3DB2035DA560031C156 /* FZ_CS_Metrics.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A901C3422035D9B10031C156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A901C4292035DA820031C156 /* FZImageProxyTests.swift in Sources */,
+				A901C42B2035DA9A0031C156 /* FZSignalsServiceTests.swift in Sources */,
+				A901C34C2035D9B10031C156 /* FilzanzugTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A901C3492035D9B10031C156 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A901C33C2035D9B10031C156 /* Filzanzug */;
+			targetProxy = A901C3482035D9B10031C156 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A901C34F2035D9B10031C156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A901C3502035D9B10031C156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A901C3522035D9B10031C156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DM7DWP6VN6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Filzanzug/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.Filzanzug;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A901C3532035D9B10031C156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DM7DWP6VN6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Filzanzug/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.Filzanzug;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A901C3552035D9B10031C156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DM7DWP6VN6;
+				INFOPLIST_FILE = FilzanzugTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.FilzanzugTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A901C3562035D9B10031C156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DM7DWP6VN6;
+				INFOPLIST_FILE = FilzanzugTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.FilzanzugTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A901C3372035D9B10031C156 /* Build configuration list for PBXProject "Filzanzug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A901C34F2035D9B10031C156 /* Debug */,
+				A901C3502035D9B10031C156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A901C3512035D9B10031C156 /* Build configuration list for PBXNativeTarget "Filzanzug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A901C3522035D9B10031C156 /* Debug */,
+				A901C3532035D9B10031C156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A901C3542035D9B10031C156 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A901C3552035D9B10031C156 /* Debug */,
+				A901C3562035D9B10031C156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A901C3342035D9B10031C156 /* Project object */;
+}
