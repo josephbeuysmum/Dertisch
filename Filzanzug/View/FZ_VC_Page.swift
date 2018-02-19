@@ -11,13 +11,13 @@ import UIKit
 extension FZPageViewController: FZSignalBoxEntityProtocol {}
 
 public class FZPageViewController: UIPageViewController {
-	public var signalBox: FZSignalsEntity!
+	public var signalBox: FZSignalsEntity
 	
 	open let key: String
 	
-	public required init? ( coder: NSCoder ) {
+	required public init? ( coder: NSCoder ) {
 		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity( key )
+		signalBox = FZSignalsEntity()
 		super.init( coder: coder )
 	}
 }

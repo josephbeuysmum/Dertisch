@@ -7,5 +7,5 @@
 //
 
 public protocol FZSignalBoxEntityProtocol {
-	var signalBox: FZSignalsEntity! { get }
+	var signalBox: FZSignalsEntity { get }
 }

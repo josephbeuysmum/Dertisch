@@ -9,24 +9,23 @@
 extension FZSignalsEntity: FZSignalsEntityProtocol {}
 
 public class FZSignalsEntity {
-	fileprivate let key: String
-	
-	fileprivate var signals: FZSignalsService?
-	
-	
-	
-	init ( _ key: String ) { self.key = key }
-	
-	public func deallocate () {
-		signals = nil
+	public var delegate: FZInitialiseSignalsProtocol? {
+		get { return nil }
+		set {
+			guard _delegate == nil else { return }
+			_delegate = newValue
+		}
+	}
+	public var signals: FZSignalsService {
+		get { return _signals }
+		set {
+			guard _signals == nil else { return }
+			_signals = newValue
+			_delegate?.initialiseSignals()
+		}
 	}
 	
-	public func getSignalsServiceBy ( key: String ) -> FZSignalsService? {
-		return key == self.key ? signals : nil
-	}
-	
-	public func set ( signalsService: FZSignalsService ) {
-		guard signals == nil else { return }
-		signals = signalsService
-	}
+	fileprivate var
+	_signals: FZSignalsService!,
+	_delegate: FZInitialiseSignalsProtocol? = nil
 }

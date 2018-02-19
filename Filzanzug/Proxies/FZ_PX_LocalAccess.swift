@@ -9,13 +9,10 @@
 import UIKit
 
 public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
-	public var signalBox: FZSignalsEntity!
-	public var entities: FZModelClassEntities!
-	public var className: String { return FZClassConsts.localAccess }
-	public var signals: FZSignalsService!
+	public var signalBox: FZSignalsEntity
 
 	fileprivate let
-	key: String,
+	_wornCloset: FZWornCloset,
 	storage: UserDefaults = UserDefaults.standard
 	
 	// _values provides a platform for the storage of data that has a
@@ -28,12 +25,11 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	
 	
-	public required init () {
+	required public init () {
 		_isActivated = false
-		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity( key )
-		entities = FZModelClassEntities( key )
-//		_signals = signals
+		signalBox = FZSignalsEntity()
+		_wornCloset = FZWornCloset()
+		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
 		_values = [:]
 	}
 	
@@ -49,9 +45,9 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	public func set ( value: String, by key: String, and caller: FZCaller? = nil ) {
 		let signalKey = FZSignalConsts.valueSet
-		FZMisc.set( signals: signals, withKey: signalKey, andCaller: caller )
+		FZMisc.set( signals: signalBox.signals, withKey: signalKey, andCaller: caller )
 		_values[ key ] = value
-		signals.transmitSignalFor( key: signalKey, data: key )
+		signalBox.signals.transmitSignalFor( key: signalKey, data: key )
 	}
 	
 	public func annulValue ( by key: String ) -> String? {
@@ -61,7 +57,7 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	public func removeValues () {
 		for ( key, _ ) in _values { _ = annulValue( by: key ) }
-		signals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
+		signalBox.signals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
 	}
 	
 	public func deleteValue ( by key: String ) {
@@ -77,10 +73,10 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	// store ("set") the given property
 	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
 		let signalKey = FZSignalConsts.valueStored
-		FZMisc.set( signals: signals, withKey: signalKey, andCaller: caller )
+		FZMisc.set( signals: signalBox.signals, withKey: signalKey, andCaller: caller )
 		storage.setValue( value, forKey: key )
 		storage.synchronize()
-		signals.transmitSignalFor( key: signalKey )
+		signalBox.signals.transmitSignalFor( key: signalKey )
 	}
 	
 	// does this property exist?

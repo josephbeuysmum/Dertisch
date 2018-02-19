@@ -6,5 +6,4 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZEntitiesCollectionProtocol {}
-
+public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}

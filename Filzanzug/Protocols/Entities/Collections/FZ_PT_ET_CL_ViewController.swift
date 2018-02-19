@@ -6,4 +6,4 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZViewControllerEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZRoutingEntityProtocol, FZDeallocatableProtocol {}
+public protocol FZViewControllerEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZRoutingEntityProtocol {}

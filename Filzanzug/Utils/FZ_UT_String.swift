@@ -384,7 +384,7 @@ public class FZString {
 	
 	
 	
-	static fileprivate func _getIndicesFrom (
+	fileprivate static func _getIndicesFrom (
 		subString: NSMutableAttributedString,
 		startIndex: Int?,
 		andEndIndex endIndex: Int? ) -> [ Int ] {
@@ -393,7 +393,7 @@ public class FZString {
 			endIndex != nil ? endIndex! : subString.length ]
 	}
 	
-	static fileprivate func _getIndicesFrom (
+	fileprivate static func _getIndicesFrom (
 		subString: String,
 		startIndex: Int?,
 		andEndIndex endIndex: Int? ) -> [ Int ] {
@@ -402,7 +402,7 @@ public class FZString {
 			endIndex != nil ? endIndex! : subString.count ]
 	}
 	
-	static fileprivate func _getRangeFrom (
+	fileprivate static func _getRangeFrom (
 		attributedText: NSMutableAttributedString,
 		between startIndex: Int,
 		and endIndex: Int ) -> NSRange? {
@@ -411,21 +411,21 @@ public class FZString {
 		return _getRangeFrom( string: attributedText.string, between: startIndex, and: endIndex )
 	}
 	
-	static fileprivate func _getRangeFrom ( string: String, between startIndex: Int, and endIndex: Int ) -> NSRange? {
+	fileprivate static func _getRangeFrom ( string: String, between startIndex: Int, and endIndex: Int ) -> NSRange? {
 		// only return a range if the passed indices are valid
 		return startIndex < endIndex && startIndex > -1 && endIndex <= string.count ?
 			NSMakeRange( startIndex, endIndex - startIndex ) :
 			nil
 	}
 	
-	static fileprivate func _getSubStringOf ( string: String, between startIndex: Int, and endIndex: Int ) -> String? {
+	fileprivate static func _getSubStringOf ( string: String, between startIndex: Int, and endIndex: Int ) -> String? {
 		// only return a range if the passed indices are valid
 		guard let range = getIndexRangeOf( string: string, between: startIndex, and: endIndex ) else { return nil }
 		return String( string[ range ] )
 	}
 	
 	// this method of getting substrings ensures that emojis are treated as individual chars
-	static fileprivate func _getSubStringByScalarsFrom (
+	fileprivate static func _getSubStringByScalarsFrom (
 		string: String,
 		between startIndex: Int,
 		and endIndex: Int ) -> String {
@@ -446,7 +446,7 @@ public class FZString {
 		return subStringByScalars
 	}
 	
-	static fileprivate func _translate ( doubleDigitInt number: Int ) -> String? {
+	fileprivate static func _translate ( doubleDigitInt number: Int ) -> String? {
 		guard number > 9, number < 100 else {
 			fatalError( "doubleDigitInt has a number of digits that does not equal two" )
 		}
@@ -485,7 +485,7 @@ public class FZString {
 		}
 	}
 	
-	static fileprivate func _translate ( singleDigitInt number: Int ) -> String? {
+	fileprivate static func _translate ( singleDigitInt number: Int ) -> String? {
 		guard number > -1, number < 10 else { return nil }
 		switch number {
 		case 1:		return "one"

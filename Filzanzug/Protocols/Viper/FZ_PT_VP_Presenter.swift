@@ -6,55 +6,69 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZPresenterProtocol {
+import Foundation
+
+public extension FZPresenterProtocol {
 	var className: String { return String( describing: self ) }
 	var viewController: FZViewController? {
-		guard let implementerKey = wornCloset.getClosetKey( by: _protocolKey ) else { return nil }
-		return wornCloset.presenterEntities?.getViewControllerBy( key: implementerKey )
+		guard let scopedWornCloset = _wornCloset else { return nil }
+		return scopedWornCloset.presenterEntities?.getViewControllerBy( key: scopedWornCloset.key )
 	}
-	
-	fileprivate var _protocolKey: String { return "CE1DD38A-A355-4FA7-87D5-7A888112CF11" }
+	// todo this is repeated code, is there any way to avoid repeating it?
+	fileprivate var _wornCloset: FZWornCloset? {
+		let selfReflection = Mirror( reflecting: self )
+		for ( _, child ) in selfReflection.children.enumerated() {
+			if child.value is FZWornCloset { return ( child.value as! FZWornCloset ) }
+		}
+		return nil
+	}
 	
 	
 	
 	public func activate () {
-		guard !wornCloset.isActivated else { return }
-		wornCloset.activate( with: _protocolKey )
-		guard
-			let implementerKey = wornCloset.getClosetKey( by: _protocolKey ),
-			let viewController = wornCloset.presenterEntities?.getViewControllerBy( key: implementerKey ),
-			let scopedSignals = wornCloset.signalBox?.getSignalsServiceBy( key: implementerKey )
-			else { return }
-		_ = scopedSignals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
+//		lo()
+		_ = signalBox.signals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
 			[ unowned self ] _, data in
-			guard data as? FZViewController == viewController else { return }
-			scopedSignals.transmitSignalFor( key: FZSignalConsts.presenterActivated, data: self )
+//			lo()
+			guard data as? FZViewController == self.viewController else { return }
+			self.signalBox.signals.transmitSignalFor( key: FZSignalConsts.presenterActivated, data: self )
 			self.postViewActivated() }
 	}
 	
-	public func fillWornCloset () {
-		guard let implementerKey = wornCloset.set( protocolKey: _protocolKey ) else { return }
-		wornCloset.set( entities: FZPresenterEntities( implementerKey ) )
-		wornCloset.set( signalBox: FZSignalsEntity( implementerKey ) )
-	}
-	
-	public func getProtocolKey ( with implementerKey: String ) -> String? {
-		return wornCloset.signalBox?.getSignalsServiceBy( key: implementerKey ) != nil ? _protocolKey : nil
+	public func initialiseSignals () {
+		guard let scopedWornCloset = _wornCloset else { return }
+		scopedWornCloset.entities = FZPresenterEntities( scopedWornCloset.key )
+		signalBox.signals.scanFor( key: FZInjectionConsts.routing, scanner: self ) {
+			_, data in
+			lo(data)
+			guard data is FZRoutingService else { return }
+			scopedWornCloset.presenterEntities?.set( routingService: data as! FZRoutingService ) }
+		signalBox.signals.scanFor( key: FZInjectionConsts.viewController, scanner: self ) {
+			_, data in
+			lo(data)
+			guard data is FZViewController else { return }
+			scopedWornCloset.presenterEntities?.set( viewController: data as! FZViewController ) }
+		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
+			[ unowned self ] timer in
+			lo(timer)
+			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.routing, scanner: self )
+			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.viewController, scanner: self )
+			timer.invalidate() }
 	}
 	
 	public func present ( viewName: String ) {
 		guard
-			let implementerKey = wornCloset.getClosetKey( by: _protocolKey ),
-			let viewController = wornCloset.presenterEntities?.getViewControllerBy( key: implementerKey )
+			let scopedWornCloset = _wornCloset,
+			let viewController = scopedWornCloset.presenterEntities?.getViewControllerBy( key: scopedWornCloset.key )
 			else { return }
-		wornCloset.presenterEntities?.getRoutingServiceBy( key: implementerKey )?.present(
+		scopedWornCloset.presenterEntities?.getRoutingServiceBy( key: scopedWornCloset.key )?.present(
 			viewController: viewName,
 			on: viewController )
 	}
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-	public func deallocate () { wornCloset.deallocate() }
-	public func postViewActivated () {}
+	public func deallocate () { _wornCloset?.deallocate() }
+	public func postViewActivated () { lo() }
 }
 
 public protocol FZPresenterProtocol: FZWornClosetImplementerProtocol {

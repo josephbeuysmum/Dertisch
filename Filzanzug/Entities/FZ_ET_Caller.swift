@@ -7,6 +7,6 @@
 //
 
 public struct FZCaller {
-	public let caller: AnyObject?
-	public let block: ( ( String, Any? ) -> Void )?
+	let caller: AnyObject?
+	let block: ( ( String, Any? ) -> Void )?
 }

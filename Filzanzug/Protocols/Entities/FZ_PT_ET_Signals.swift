@@ -6,8 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZSignalsEntityProtocol: FZDeallocatableProtocol {
-	func getSignalsServiceBy ( key scopedKey: String ) -> FZSignalsService?
-	func set ( signalsService: FZSignalsService )
+public protocol FZSignalsEntityProtocol {
+	var delegate: FZInitialiseSignalsProtocol? { get set }
+	var signals: FZSignalsService { get set }
 }
-

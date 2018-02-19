@@ -12,7 +12,7 @@ public struct FZGradedBool {
 	
 	fileprivate let _value: Double
 	
-	init ( _ value: Double ) {
+	public init ( _ value: Double ) {
 		guard 0.0...1.0 ~= value else { fatalError( "FZGradedBool value must be from 0.0 to 1.0" ) }
 		_value = value
 	}

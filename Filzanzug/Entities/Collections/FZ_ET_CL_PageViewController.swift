@@ -15,7 +15,7 @@ public class FZPageViewControllerEntities {
 
 	
 	
-	init ( _ key: String ) { self.key = key }
+	public init ( _ key: String ) { self.key = key }
 	
 	
 	

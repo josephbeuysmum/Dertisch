@@ -10,7 +10,7 @@ import Foundation
 
 public class FZStopwatch: FZStopwatchProtocol {
 	public var identifier: String { return "FZStopwatch_\( key ).Complete" }
-	public var signalBox: FZSignalsEntity!
+	public var signalBox: FZSignalsEntity
 	
 	fileprivate var
 	key: String,
@@ -19,9 +19,9 @@ public class FZStopwatch: FZStopwatchProtocol {
 	
 	
 	
-	init () {
+	public init () {
 		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity( key )
+		signalBox = FZSignalsEntity()
 	}
 	
 	
@@ -43,8 +43,7 @@ public class FZStopwatch: FZStopwatchProtocol {
 	
 	// stop the count before it ends itself
 	public func stop () {
-		guard let signals = signalBox.getSignalsServiceBy( key: key ) else { return }
-		let _ = signals.stopScanningFor( key: identifier, scanner: self )
+		_ = signalBox.signals.stopScanningFor( key: identifier, scanner: self )
 		guard timer != nil else { return }
 		timer!.invalidate()
 		timer = nil
@@ -57,9 +56,8 @@ public class FZStopwatch: FZStopwatchProtocol {
 		// we set signals to scan to for the internal key, then set a timer for the given delay.
 		// If the timer runs its course, we transmit said key, which calls the external callback,
 		// and then immediately call stop() in _onTimerComplete() to tidy everything up.
-		guard let signals = signalBox.getSignalsServiceBy( key: key ) else { return }
 		stop()
-		signals.scanOnceFor( key: identifier, scanner: self, block: block )
+		signalBox.signals.scanOnceFor( key: identifier, scanner: self, block: block )
 		timer = Timer.scheduledTimer(
 			timeInterval: TimeInterval( delay ),
 			target: self,
@@ -71,8 +69,7 @@ public class FZStopwatch: FZStopwatchProtocol {
 	
 	
 	@objc fileprivate func _onTimerComplete () {
-		guard let signals = signalBox.getSignalsServiceBy( key: key ) else { return }
-		signals.transmitSignalFor( key: identifier, data: data )
+		signalBox.signals.transmitSignalFor( key: identifier, data: data )
 		stop()
 	}
 }

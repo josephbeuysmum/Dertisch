@@ -7,533 +7,500 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A901C3472035D9B10031C156 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A901C33D2035D9B10031C156 /* Filzanzug.framework */; };
-		A901C34C2035D9B10031C156 /* FilzanzugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C34B2035D9B10031C156 /* FilzanzugTests.swift */; };
-		A901C34E2035D9B10031C156 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A901C3402035D9B10031C156 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A901C3D22035DA560031C156 /* FZ_EX_NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */; };
-		A901C3D32035DA560031C156 /* FZ_EX_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */; };
-		A901C3D42035DA560031C156 /* FZ_EX_UnicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */; };
-		A901C3D52035DA560031C156 /* FZ_EX_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */; };
-		A901C3D62035DA560031C156 /* FZ_EX_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3702035DA560031C156 /* FZ_EX_String.swift */; };
-		A901C3D72035DA560031C156 /* FZ_EX_Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3712035DA560031C156 /* FZ_EX_Date.swift */; };
-		A901C3D82035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */; };
-		A901C3D92035DA560031C156 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3732035DA560031C156 /* FZ_EX_Data.swift */; };
-		A901C3DA2035DA560031C156 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */; };
-		A901C3DB2035DA560031C156 /* FZ_CS_Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */; };
-		A901C3DC2035DA560031C156 /* FZ_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3772035DA560031C156 /* FZ_CS_Logs.swift */; };
-		A901C3DD2035DA570031C156 /* FZ_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3782035DA560031C156 /* FZ_CS_Signals.swift */; };
-		A901C3DE2035DA570031C156 /* FZ_CS_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3792035DA560031C156 /* FZ_CS_Keys.swift */; };
-		A901C3DF2035DA570031C156 /* FZ_CS_Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */; };
-		A901C3E02035DA570031C156 /* FZ_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */; };
-		A901C3E12035DA570031C156 /* FZ_CS_Prefixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */; };
-		A901C3E22035DA570031C156 /* FZ_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */; };
-		A901C3E32035DA570031C156 /* FZ_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */; };
-		A901C3E42035DA570031C156 /* FZ_SV_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3802035DA560031C156 /* FZ_SV_Logger.swift */; };
-		A901C3E52035DA570031C156 /* FZ_SV_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3812035DA560031C156 /* FZ_SV_API.swift */; };
-		A901C3E62035DA570031C156 /* FZ_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3832035DA560031C156 /* FZ_UT_Colors.swift */; };
-		A901C3E72035DA570031C156 /* FZ_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */; };
-		A901C3E82035DA570031C156 /* FZ_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3852035DA560031C156 /* FZ_UT_Log.swift */; };
-		A901C3E92035DA570031C156 /* FZ_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3862035DA560031C156 /* FZ_UT_View.swift */; };
-		A901C3EA2035DA570031C156 /* FZ_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3872035DA560031C156 /* FZ_UT_Math.swift */; };
-		A901C3EB2035DA570031C156 /* FZ_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3882035DA560031C156 /* FZ_UT_Misc.swift */; };
-		A901C3EC2035DA570031C156 /* FZ_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3892035DA560031C156 /* FZ_UT_String.swift */; };
-		A901C3ED2035DA570031C156 /* FZ_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38A2035DA560031C156 /* FZ_UT_Time.swift */; };
-		A901C3EE2035DA570031C156 /* FZ_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */; };
-		A901C3EF2035DA570031C156 /* FZ_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */; };
-		A901C3F02035DA570031C156 /* FZ_PT_UT_ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */; };
-		A901C3F12035DA570031C156 /* FZ_PT_UT_IsActivated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */; };
-		A901C3F22035DA570031C156 /* FZ_PT_UT_Activatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */; };
-		A901C3F32035DA570031C156 /* FZ_PT_UT_Initable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */; };
-		A901C3F42035DA570031C156 /* FZ_PT_UT_Deallocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */; };
-		A901C3F52035DA570031C156 /* FZ_PT_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */; };
-		A901C3F62035DA570031C156 /* FZ_PT_CP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */; };
-		A901C3F72035DA570031C156 /* FZ_PT_VP_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */; };
-		A901C3F82035DA570031C156 /* FZ_PT_VP_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */; };
-		A901C3F92035DA570031C156 /* FZ_PT_VP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */; };
-		A901C3FA2035DA570031C156 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */; };
-		A901C3FB2035DA570031C156 /* FZ_PT_VP_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */; };
-		A901C3FC2035DA570031C156 /* FZ_PT_VP_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */; };
-		A901C3FD2035DA570031C156 /* FZ_PT_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */; };
-		A901C3FE2035DA570031C156 /* FZ_PT_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */; };
-		A901C3FF2035DA570031C156 /* FZ_PT_SV_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */; };
-		A901C4002035DA570031C156 /* FZ_PT_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */; };
-		A901C4012035DA570031C156 /* FZ_PT_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */; };
-		A901C4022035DA570031C156 /* FZ_PT_ET_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */; };
-		A901C4032035DA570031C156 /* FZ_PT_ET_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */; };
-		A901C4042035DA570031C156 /* FZ_PT_ET_SignalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */; };
-		A901C4052035DA570031C156 /* FZ_PT_ET_PresenterEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */; };
-		A901C4062035DA570031C156 /* FZ_PT_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */; };
-		A901C4072035DA570031C156 /* FZ_PT_ET_StopwatchCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */; };
-		A901C4082035DA570031C156 /* FZ_PT_ET_WornClosetImplementer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */; };
-		A901C4092035DA570031C156 /* FZ_PT_ET_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */; };
-		A901C40A2035DA570031C156 /* FZ_PT_ET_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */; };
-		A901C40B2035DA570031C156 /* FZ_PT_ET_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */; };
-		A901C40C2035DA570031C156 /* FZ_PT_ET_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */; };
-		A901C40D2035DA570031C156 /* FZ_PT_ET_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */; };
-		A901C40E2035DA570031C156 /* FZ_PT_ET_Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */; };
-		A901C40F2035DA570031C156 /* FZ_PT_ET_ModelClassEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */; };
-		A901C4102035DA570031C156 /* FZ_PT_ET_InteractorEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */; };
-		A901C4112035DA570031C156 /* FZ_PT_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */; };
-		A901C4122035DA570031C156 /* FZ_PT_ET_CL_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */; };
-		A901C4132035DA570031C156 /* FZ_PT_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */; };
-		A901C4142035DA570031C156 /* FZ_PT_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */; };
-		A901C4152035DA570031C156 /* FZ_PT_ET_Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */; };
-		A901C4162035DA570031C156 /* FZ_PT_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */; };
-		A901C4172035DA570031C156 /* FZ_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */; };
-		A901C4182035DA570031C156 /* FZ_ET_Caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */; };
-		A901C4192035DA570031C156 /* FZ_ET_SignalSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */; };
-		A901C41A2035DA570031C156 /* FZ_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */; };
-		A901C41B2035DA570031C156 /* FZ_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */; };
-		A901C41C2035DA570031C156 /* FZ_ET_GradedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */; };
-		A901C41D2035DA570031C156 /* FZ_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */; };
-		A901C41E2035DA570031C156 /* FZ_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */; };
-		A901C41F2035DA570031C156 /* FZ_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */; };
-		A901C4202035DA570031C156 /* FZ_ET_CL_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */; };
-		A901C4212035DA570031C156 /* FZ_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */; };
-		A901C4222035DA570031C156 /* FZ_ET_LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */; };
-		A901C4232035DA570031C156 /* FZ_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */; };
-		A901C4242035DA570031C156 /* FZ_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */; };
-		A901C4252035DA570031C156 /* FZ_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */; };
-		A901C4262035DA570031C156 /* FZ_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3D02035DA560031C156 /* FZ_ViewController.swift */; };
-		A901C4272035DA570031C156 /* FZ_VC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C3D12035DA560031C156 /* FZ_VC_Page.swift */; };
-		A901C4292035DA820031C156 /* FZImageProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C4282035DA820031C156 /* FZImageProxyTests.swift */; };
-		A901C42B2035DA9A0031C156 /* FZSignalsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */; };
-		F41ACDFA050AB578736BFDCE /* Pods_Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */; };
+		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
+		A9B5317C2039F62700DB1C85 /* FilzanzugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5317B2039F62700DB1C85 /* FilzanzugTests.swift */; };
+		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */; };
+		A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */; };
+		A9B531F62039F73500DB1C85 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */; };
+		A9B531F72039F73500DB1C85 /* FZ_CS_Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */; };
+		A9B531F82039F73500DB1C85 /* FZ_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318D2039F73400DB1C85 /* FZ_CS_Logs.swift */; };
+		A9B531F92039F73500DB1C85 /* FZ_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318E2039F73400DB1C85 /* FZ_CS_Signals.swift */; };
+		A9B531FA2039F73500DB1C85 /* FZ_CS_Injections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318F2039F73400DB1C85 /* FZ_CS_Injections.swift */; };
+		A9B531FB2039F73500DB1C85 /* FZ_CS_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531902039F73400DB1C85 /* FZ_CS_Keys.swift */; };
+		A9B531FC2039F73500DB1C85 /* FZ_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531912039F73400DB1C85 /* FZ_CS_Chars.swift */; };
+		A9B531FD2039F73500DB1C85 /* FZ_CS_Prefixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531922039F73400DB1C85 /* FZ_CS_Prefixes.swift */; };
+		A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */; };
+		A9B531FF2039F73500DB1C85 /* FZ_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */; };
+		A9B532012039F73500DB1C85 /* FZ_SV_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531972039F73400DB1C85 /* FZ_SV_API.swift */; };
+		A9B532022039F73500DB1C85 /* FZ_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531992039F73400DB1C85 /* FZ_UT_Colors.swift */; };
+		A9B532032039F73500DB1C85 /* FZ_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319A2039F73400DB1C85 /* FZ_UT_Constraints.swift */; };
+		A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319B2039F73400DB1C85 /* FZ_UT_Log.swift */; };
+		A9B532052039F73500DB1C85 /* FZ_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319C2039F73400DB1C85 /* FZ_UT_View.swift */; };
+		A9B532062039F73500DB1C85 /* FZ_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319D2039F73400DB1C85 /* FZ_UT_Math.swift */; };
+		A9B532072039F73500DB1C85 /* FZ_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319E2039F73400DB1C85 /* FZ_UT_Extensions.swift */; };
+		A9B532082039F73500DB1C85 /* FZ_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319F2039F73400DB1C85 /* FZ_UT_Misc.swift */; };
+		A9B532092039F73500DB1C85 /* FZ_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A02039F73400DB1C85 /* FZ_UT_String.swift */; };
+		A9B5320A2039F73500DB1C85 /* FZ_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A12039F73400DB1C85 /* FZ_UT_Time.swift */; };
+		A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A22039F73400DB1C85 /* FZ_UT_Consts.swift */; };
+		A9B5320C2039F73500DB1C85 /* FZ_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */; };
+		A9B5320D2039F73500DB1C85 /* FZ_PT_UT_ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A72039F73500DB1C85 /* FZ_PT_UT_ClassName.swift */; };
+		A9B532102039F73500DB1C85 /* FZ_PT_UT_InitialisableSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AA2039F73500DB1C85 /* FZ_PT_UT_InitialisableSignals.swift */; };
+		A9B532122039F73500DB1C85 /* FZ_PT_UT_IsActivated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AC2039F73500DB1C85 /* FZ_PT_UT_IsActivated.swift */; };
+		A9B532132039F73500DB1C85 /* FZ_PT_UT_Activatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AD2039F73500DB1C85 /* FZ_PT_UT_Activatable.swift */; };
+		A9B532142039F73500DB1C85 /* FZ_PT_UT_Initable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AE2039F73500DB1C85 /* FZ_PT_UT_Initable.swift */; };
+		A9B532152039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AF2039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift */; };
+		A9B532162039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B12039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift */; };
+		A9B532172039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B22039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift */; };
+		A9B532192039F73500DB1C85 /* FZ_PT_VP_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */; };
+		A9B5321A2039F73500DB1C85 /* FZ_PT_VP_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */; };
+		A9B5321B2039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */; };
+		A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */; };
+		A9B5321D2039F73500DB1C85 /* FZ_PT_VP_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B92039F73500DB1C85 /* FZ_PT_VP_ViewController.swift */; };
+		A9B5321E2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531BA2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift */; };
+		A9B532222039F73500DB1C85 /* FZ_PT_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C02039F73500DB1C85 /* FZ_PT_PX_Image.swift */; };
+		A9B532232039F73500DB1C85 /* FZ_PT_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C12039F73500DB1C85 /* FZ_PT_PX_LocalAccess.swift */; };
+		A9B532252039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C42039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift */; };
+		A9B532262039F73500DB1C85 /* FZ_PT_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C52039F73500DB1C85 /* FZ_PT_SV_Signals.swift */; };
+		A9B532272039F73500DB1C85 /* FZ_PT_ET_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C72039F73500DB1C85 /* FZ_PT_ET_API.swift */; };
+		A9B532282039F73500DB1C85 /* FZ_PT_ET_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C82039F73500DB1C85 /* FZ_PT_ET_Presenter.swift */; };
+		A9B532292039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531C92039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift */; };
+		A9B5322A2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531CA2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift */; };
+		A9B5322B2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531CB2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift */; };
+		A9B5322C2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531CC2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift */; };
+		A9B5322E2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531CE2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift */; };
+		A9B5322F2039F73500DB1C85 /* FZ_PT_ET_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531CF2039F73500DB1C85 /* FZ_PT_ET_Image.swift */; };
+		A9B532302039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D02039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift */; };
+		A9B532312039F73500DB1C85 /* FZ_PT_ET_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D12039F73500DB1C85 /* FZ_PT_ET_Routing.swift */; };
+		A9B532322039F73500DB1C85 /* FZ_PT_ET_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D22039F73500DB1C85 /* FZ_PT_ET_ViewController.swift */; };
+		A9B532342039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D42039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift */; };
+		A9B532352039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D52039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift */; };
+		A9B532362039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D72039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift */; };
+		A9B532372039F73500DB1C85 /* FZ_PT_ET_CL_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D82039F73500DB1C85 /* FZ_PT_ET_CL_ViewController.swift */; };
+		A9B532382039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531D92039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift */; };
+		A9B532392039F73500DB1C85 /* FZ_PT_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DA2039F73500DB1C85 /* FZ_PT_ET_CL_ModelClass.swift */; };
+		A9B5323A2039F73500DB1C85 /* FZ_PT_ET_Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DB2039F73500DB1C85 /* FZ_PT_ET_Collection.swift */; };
+		A9B5323B2039F73500DB1C85 /* FZ_PT_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DC2039F73500DB1C85 /* FZ_PT_ET_Signals.swift */; };
+		A9B5323C2039F73500DB1C85 /* FZ_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */; };
+		A9B5323E2039F73500DB1C85 /* FZ_ET_Caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */; };
+		A9B5323F2039F73500DB1C85 /* FZ_ET_SignalSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */; };
+		A9B532402039F73500DB1C85 /* FZ_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */; };
+		A9B532412039F73500DB1C85 /* FZ_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */; };
+		A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */; };
+		A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */; };
+		A9B532452039F73500DB1C85 /* FZ_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E82039F73500DB1C85 /* FZ_ET_CL_Presenter.swift */; };
+		A9B532462039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E92039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift */; };
+		A9B532472039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531EA2039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift */; };
+		A9B532482039F73500DB1C85 /* FZ_ET_CL_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531EB2039F73500DB1C85 /* FZ_ET_CL_Interactor.swift */; };
+		A9B5324A2039F73500DB1C85 /* FZ_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */; };
+		A9B5324B2039F73500DB1C85 /* FZ_PX_LocalAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531EF2039F73500DB1C85 /* FZ_PX_LocalAccess.swift */; };
+		A9B5324C2039F73500DB1C85 /* FZ_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F02039F73500DB1C85 /* FZ_PX_Image.swift */; };
+		A9B5324D2039F73500DB1C85 /* FZ_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F22039F73500DB1C85 /* FZ_ViewController.swift */; };
+		A9B5324E2039F73500DB1C85 /* FZ_VC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F32039F73500DB1C85 /* FZ_VC_Page.swift */; };
+		B538F2118255732FA7332136 /* Pods_Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A901C3482035D9B10031C156 /* PBXContainerItemProxy */ = {
+		A9B531782039F62700DB1C85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A901C3342035D9B10031C156 /* Project object */;
+			containerPortal = A9B531642039F62600DB1C85 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A901C33C2035D9B10031C156;
+			remoteGlobalIDString = A9B5316C2039F62600DB1C85;
 			remoteInfo = Filzanzug;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.debug.xcconfig"; sourceTree = "<group>"; };
-		A901C33D2035D9B10031C156 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A901C3402035D9B10031C156 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
-		A901C3412035D9B10031C156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A901C3462035D9B10031C156 /* FilzanzugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilzanzugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A901C34B2035D9B10031C156 /* FilzanzugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilzanzugTests.swift; sourceTree = "<group>"; };
-		A901C34D2035D9B10031C156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_NSObject.swift; sourceTree = "<group>"; };
-		A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UIColor.swift; sourceTree = "<group>"; };
-		A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UnicodeScalar.swift; sourceTree = "<group>"; };
-		A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_UILabel.swift; sourceTree = "<group>"; };
-		A901C3702035DA560031C156 /* FZ_EX_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_String.swift; sourceTree = "<group>"; };
-		A901C3712035DA560031C156 /* FZ_EX_Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Date.swift; sourceTree = "<group>"; };
-		A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_NSLayoutConstraint.swift; sourceTree = "<group>"; };
-		A901C3732035DA560031C156 /* FZ_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Data.swift; sourceTree = "<group>"; };
-		A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_CommonPhrases.swift; sourceTree = "<group>"; };
-		A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Metrics.swift; sourceTree = "<group>"; };
-		A901C3772035DA560031C156 /* FZ_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Logs.swift; sourceTree = "<group>"; };
-		A901C3782035DA560031C156 /* FZ_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Signals.swift; sourceTree = "<group>"; };
-		A901C3792035DA560031C156 /* FZ_CS_Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Keys.swift; sourceTree = "<group>"; };
-		A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Classes.swift; sourceTree = "<group>"; };
-		A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Chars.swift; sourceTree = "<group>"; };
-		A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Prefixes.swift; sourceTree = "<group>"; };
-		A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Routing.swift; sourceTree = "<group>"; };
-		A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Signals.swift; sourceTree = "<group>"; };
-		A901C3802035DA560031C156 /* FZ_SV_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Logger.swift; sourceTree = "<group>"; };
-		A901C3812035DA560031C156 /* FZ_SV_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_API.swift; sourceTree = "<group>"; };
-		A901C3832035DA560031C156 /* FZ_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Colors.swift; sourceTree = "<group>"; };
-		A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Constraints.swift; sourceTree = "<group>"; };
-		A901C3852035DA560031C156 /* FZ_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Log.swift; sourceTree = "<group>"; };
-		A901C3862035DA560031C156 /* FZ_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_View.swift; sourceTree = "<group>"; };
-		A901C3872035DA560031C156 /* FZ_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Math.swift; sourceTree = "<group>"; };
-		A901C3882035DA560031C156 /* FZ_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Misc.swift; sourceTree = "<group>"; };
-		A901C3892035DA560031C156 /* FZ_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_String.swift; sourceTree = "<group>"; };
-		A901C38A2035DA560031C156 /* FZ_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Time.swift; sourceTree = "<group>"; };
-		A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Consts.swift; sourceTree = "<group>"; };
-		A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CP_Stopwatch.swift; sourceTree = "<group>"; };
-		A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_ClassName.swift; sourceTree = "<group>"; };
-		A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_IsActivated.swift; sourceTree = "<group>"; };
-		A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Activatable.swift; sourceTree = "<group>"; };
-		A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Initable.swift; sourceTree = "<group>"; };
-		A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Deallocatable.swift; sourceTree = "<group>"; };
-		A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_Stopwatch.swift; sourceTree = "<group>"; };
-		A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_WornCloset.swift; sourceTree = "<group>"; };
-		A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Routing.swift; sourceTree = "<group>"; };
-		A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Presenter.swift; sourceTree = "<group>"; };
-		A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_WornCloset.swift; sourceTree = "<group>"; };
-		A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
-		A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ViewController.swift; sourceTree = "<group>"; };
-		A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Interactor.swift; sourceTree = "<group>"; };
-		A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_Image.swift; sourceTree = "<group>"; };
-		A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_LocalAccess.swift; sourceTree = "<group>"; };
-		A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Logger.swift; sourceTree = "<group>"; };
-		A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_UrlSession.swift; sourceTree = "<group>"; };
-		A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Signals.swift; sourceTree = "<group>"; };
-		A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_API.swift; sourceTree = "<group>"; };
-		A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Presenter.swift; sourceTree = "<group>"; };
-		A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_SignalBox.swift; sourceTree = "<group>"; };
-		A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_PresenterEntities.swift; sourceTree = "<group>"; };
-		A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Stopwatch.swift; sourceTree = "<group>"; };
-		A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_StopwatchCase.swift; sourceTree = "<group>"; };
-		A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_WornClosetImplementer.swift; sourceTree = "<group>"; };
-		A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Interactor.swift; sourceTree = "<group>"; };
-		A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Image.swift; sourceTree = "<group>"; };
-		A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_LocalAccess.swift; sourceTree = "<group>"; };
-		A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Routing.swift; sourceTree = "<group>"; };
-		A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ViewController.swift; sourceTree = "<group>"; };
-		A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Logger.swift; sourceTree = "<group>"; };
-		A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ModelClassEntities.swift; sourceTree = "<group>"; };
-		A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_InteractorEntities.swift; sourceTree = "<group>"; };
-		A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Interactor.swift; sourceTree = "<group>"; };
-		A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ViewController.swift; sourceTree = "<group>"; };
-		A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Presenter.swift; sourceTree = "<group>"; };
-		A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
-		A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Collection.swift; sourceTree = "<group>"; };
-		A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Signals.swift; sourceTree = "<group>"; };
-		A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signals.swift; sourceTree = "<group>"; };
-		A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Caller.swift; sourceTree = "<group>"; };
-		A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalSignature.swift; sourceTree = "<group>"; };
-		A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_WornCloset.swift; sourceTree = "<group>"; };
-		A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_TimePeriod.swift; sourceTree = "<group>"; };
-		A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_GradedBool.swift; sourceTree = "<group>"; };
-		A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Stopwatch.swift; sourceTree = "<group>"; };
-		A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Presenter.swift; sourceTree = "<group>"; };
-		A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
-		A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_PageViewController.swift; sourceTree = "<group>"; };
-		A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Interactor.swift; sourceTree = "<group>"; };
-		A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_LogEntry.swift; sourceTree = "<group>"; };
-		A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_ApiResult.swift; sourceTree = "<group>"; };
-		A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_LocalAccess.swift; sourceTree = "<group>"; };
-		A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_Image.swift; sourceTree = "<group>"; };
-		A901C3D02035DA560031C156 /* FZ_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ViewController.swift; sourceTree = "<group>"; };
-		A901C3D12035DA560031C156 /* FZ_VC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_VC_Page.swift; sourceTree = "<group>"; };
-		A901C4282035DA820031C156 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
-		A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZSignalsServiceTests.swift; sourceTree = "<group>"; };
-		FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.release.xcconfig"; sourceTree = "<group>"; };
+		2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.debug.xcconfig"; sourceTree = "<group>"; };
+		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B531702039F62600DB1C85 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
+		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9B531762039F62700DB1C85 /* FilzanzugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilzanzugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B5317B2039F62700DB1C85 /* FilzanzugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilzanzugTests.swift; sourceTree = "<group>"; };
+		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_SwinjectStoryboard.swift; sourceTree = "<group>"; };
+		A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Data.swift; sourceTree = "<group>"; };
+		A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_CommonPhrases.swift; sourceTree = "<group>"; };
+		A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Metrics.swift; sourceTree = "<group>"; };
+		A9B5318D2039F73400DB1C85 /* FZ_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Logs.swift; sourceTree = "<group>"; };
+		A9B5318E2039F73400DB1C85 /* FZ_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Signals.swift; sourceTree = "<group>"; };
+		A9B5318F2039F73400DB1C85 /* FZ_CS_Injections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Injections.swift; sourceTree = "<group>"; };
+		A9B531902039F73400DB1C85 /* FZ_CS_Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Keys.swift; sourceTree = "<group>"; };
+		A9B531912039F73400DB1C85 /* FZ_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Chars.swift; sourceTree = "<group>"; };
+		A9B531922039F73400DB1C85 /* FZ_CS_Prefixes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Prefixes.swift; sourceTree = "<group>"; };
+		A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Routing.swift; sourceTree = "<group>"; };
+		A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Signals.swift; sourceTree = "<group>"; };
+		A9B531972039F73400DB1C85 /* FZ_SV_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_API.swift; sourceTree = "<group>"; };
+		A9B531992039F73400DB1C85 /* FZ_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Colors.swift; sourceTree = "<group>"; };
+		A9B5319A2039F73400DB1C85 /* FZ_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Constraints.swift; sourceTree = "<group>"; };
+		A9B5319B2039F73400DB1C85 /* FZ_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Log.swift; sourceTree = "<group>"; };
+		A9B5319C2039F73400DB1C85 /* FZ_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_View.swift; sourceTree = "<group>"; };
+		A9B5319D2039F73400DB1C85 /* FZ_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Math.swift; sourceTree = "<group>"; };
+		A9B5319E2039F73400DB1C85 /* FZ_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Extensions.swift; sourceTree = "<group>"; };
+		A9B5319F2039F73400DB1C85 /* FZ_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Misc.swift; sourceTree = "<group>"; };
+		A9B531A02039F73400DB1C85 /* FZ_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_String.swift; sourceTree = "<group>"; };
+		A9B531A12039F73400DB1C85 /* FZ_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Time.swift; sourceTree = "<group>"; };
+		A9B531A22039F73400DB1C85 /* FZ_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Consts.swift; sourceTree = "<group>"; };
+		A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CP_Stopwatch.swift; sourceTree = "<group>"; };
+		A9B531A72039F73500DB1C85 /* FZ_PT_UT_ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_ClassName.swift; sourceTree = "<group>"; };
+		A9B531AA2039F73500DB1C85 /* FZ_PT_UT_InitialisableSignals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_InitialisableSignals.swift; sourceTree = "<group>"; };
+		A9B531AC2039F73500DB1C85 /* FZ_PT_UT_IsActivated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_IsActivated.swift; sourceTree = "<group>"; };
+		A9B531AD2039F73500DB1C85 /* FZ_PT_UT_Activatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Activatable.swift; sourceTree = "<group>"; };
+		A9B531AE2039F73500DB1C85 /* FZ_PT_UT_Initable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Initable.swift; sourceTree = "<group>"; };
+		A9B531AF2039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Deallocatable.swift; sourceTree = "<group>"; };
+		A9B531B12039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_Stopwatch.swift; sourceTree = "<group>"; };
+		A9B531B22039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_WornCloset.swift; sourceTree = "<group>"; };
+		A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Routing.swift; sourceTree = "<group>"; };
+		A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Presenter.swift; sourceTree = "<group>"; };
+		A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_WornCloset.swift; sourceTree = "<group>"; };
+		A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
+		A9B531B92039F73500DB1C85 /* FZ_PT_VP_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ViewController.swift; sourceTree = "<group>"; };
+		A9B531BA2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Interactor.swift; sourceTree = "<group>"; };
+		A9B531C02039F73500DB1C85 /* FZ_PT_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_Image.swift; sourceTree = "<group>"; };
+		A9B531C12039F73500DB1C85 /* FZ_PT_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_PX_LocalAccess.swift; sourceTree = "<group>"; };
+		A9B531C42039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_UrlSession.swift; sourceTree = "<group>"; };
+		A9B531C52039F73500DB1C85 /* FZ_PT_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Signals.swift; sourceTree = "<group>"; };
+		A9B531C72039F73500DB1C85 /* FZ_PT_ET_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_API.swift; sourceTree = "<group>"; };
+		A9B531C82039F73500DB1C85 /* FZ_PT_ET_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Presenter.swift; sourceTree = "<group>"; };
+		A9B531C92039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_SignalBox.swift; sourceTree = "<group>"; };
+		A9B531CA2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_PresenterEntities.swift; sourceTree = "<group>"; };
+		A9B531CB2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Stopwatch.swift; sourceTree = "<group>"; };
+		A9B531CC2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_StopwatchCase.swift; sourceTree = "<group>"; };
+		A9B531CE2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Interactor.swift; sourceTree = "<group>"; };
+		A9B531CF2039F73500DB1C85 /* FZ_PT_ET_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Image.swift; sourceTree = "<group>"; };
+		A9B531D02039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_LocalAccess.swift; sourceTree = "<group>"; };
+		A9B531D12039F73500DB1C85 /* FZ_PT_ET_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Routing.swift; sourceTree = "<group>"; };
+		A9B531D22039F73500DB1C85 /* FZ_PT_ET_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ViewController.swift; sourceTree = "<group>"; };
+		A9B531D42039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_ModelClassEntities.swift; sourceTree = "<group>"; };
+		A9B531D52039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_InteractorEntities.swift; sourceTree = "<group>"; };
+		A9B531D72039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Interactor.swift; sourceTree = "<group>"; };
+		A9B531D82039F73500DB1C85 /* FZ_PT_ET_CL_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ViewController.swift; sourceTree = "<group>"; };
+		A9B531D92039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_Presenter.swift; sourceTree = "<group>"; };
+		A9B531DA2039F73500DB1C85 /* FZ_PT_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
+		A9B531DB2039F73500DB1C85 /* FZ_PT_ET_Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Collection.swift; sourceTree = "<group>"; };
+		A9B531DC2039F73500DB1C85 /* FZ_PT_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Signals.swift; sourceTree = "<group>"; };
+		A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signals.swift; sourceTree = "<group>"; };
+		A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Caller.swift; sourceTree = "<group>"; };
+		A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalSignature.swift; sourceTree = "<group>"; };
+		A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_WornCloset.swift; sourceTree = "<group>"; };
+		A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_TimePeriod.swift; sourceTree = "<group>"; };
+		A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_GradedBool.swift; sourceTree = "<group>"; };
+		A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Stopwatch.swift; sourceTree = "<group>"; };
+		A9B531E82039F73500DB1C85 /* FZ_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Presenter.swift; sourceTree = "<group>"; };
+		A9B531E92039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
+		A9B531EA2039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_PageViewController.swift; sourceTree = "<group>"; };
+		A9B531EB2039F73500DB1C85 /* FZ_ET_CL_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Interactor.swift; sourceTree = "<group>"; };
+		A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_ApiResult.swift; sourceTree = "<group>"; };
+		A9B531EF2039F73500DB1C85 /* FZ_PX_LocalAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_LocalAccess.swift; sourceTree = "<group>"; };
+		A9B531F02039F73500DB1C85 /* FZ_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_Image.swift; sourceTree = "<group>"; };
+		A9B531F22039F73500DB1C85 /* FZ_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ViewController.swift; sourceTree = "<group>"; };
+		A9B531F32039F73500DB1C85 /* FZ_VC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_VC_Page.swift; sourceTree = "<group>"; };
+		E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A901C3392035D9B10031C156 /* Frameworks */ = {
+		A9B531692039F62600DB1C85 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F41ACDFA050AB578736BFDCE /* Pods_Filzanzug.framework in Frameworks */,
+				B538F2118255732FA7332136 /* Pods_Filzanzug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A901C3432035D9B10031C156 /* Frameworks */ = {
+		A9B531732039F62700DB1C85 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A901C3472035D9B10031C156 /* Filzanzug.framework in Frameworks */,
+				A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2909C96B68D9DF6C771BA1BF /* Pods */ = {
+		2856A0DD05AA13AE84312B9A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */,
-				FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */,
+				2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */,
+				E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		66F8C45673A26B70B14577BC /* Frameworks */ = {
+		A9B531632039F62600DB1C85 = {
 			isa = PBXGroup;
 			children = (
-				08A7BE6024815CF6D823425F /* Pods_Filzanzug.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A901C3332035D9B10031C156 = {
-			isa = PBXGroup;
-			children = (
-				A901C33F2035D9B10031C156 /* Filzanzug */,
-				A901C34A2035D9B10031C156 /* FilzanzugTests */,
-				A901C33E2035D9B10031C156 /* Products */,
-				2909C96B68D9DF6C771BA1BF /* Pods */,
-				66F8C45673A26B70B14577BC /* Frameworks */,
+				A9B5316F2039F62600DB1C85 /* Filzanzug */,
+				A9B5317A2039F62700DB1C85 /* FilzanzugTests */,
+				A9B5316E2039F62600DB1C85 /* Products */,
+				2856A0DD05AA13AE84312B9A /* Pods */,
+				FE9BFE95EB6E1CF0D50912D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		A901C33E2035D9B10031C156 /* Products */ = {
+		A9B5316E2039F62600DB1C85 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A901C33D2035D9B10031C156 /* Filzanzug.framework */,
-				A901C3462035D9B10031C156 /* FilzanzugTests.xctest */,
+				A9B5316D2039F62600DB1C85 /* Filzanzug.framework */,
+				A9B531762039F62700DB1C85 /* FilzanzugTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A901C33F2035D9B10031C156 /* Filzanzug */ = {
+		A9B5316F2039F62600DB1C85 /* Filzanzug */ = {
 			isa = PBXGroup;
 			children = (
-				A901C38C2035DA560031C156 /* Components */,
-				A901C3742035DA560031C156 /* Constants */,
-				A901C3BD2035DA560031C156 /* Entities */,
-				A901C36B2035DA560031C156 /* Extensions */,
-				A901C38E2035DA560031C156 /* Protocols */,
-				A901C3CC2035DA560031C156 /* Proxies */,
-				A901C37D2035DA560031C156 /* Services */,
-				A901C3822035DA560031C156 /* Utils */,
-				A901C3CF2035DA560031C156 /* View */,
-				A901C3402035D9B10031C156 /* Filzanzug.h */,
-				A901C3412035D9B10031C156 /* Info.plist */,
+				A9B531A32039F73500DB1C85 /* Components */,
+				A9B5318A2039F73400DB1C85 /* Constants */,
+				A9B531DD2039F73500DB1C85 /* Entities */,
+				A9B531872039F73400DB1C85 /* Extensions */,
+				A9B531A52039F73500DB1C85 /* Protocols */,
+				A9B531EE2039F73500DB1C85 /* Proxies */,
+				A9B531932039F73400DB1C85 /* Services */,
+				A9B531982039F73400DB1C85 /* Utils */,
+				A9B531F12039F73500DB1C85 /* View */,
+				A9B531702039F62600DB1C85 /* Filzanzug.h */,
+				A9B531712039F62600DB1C85 /* Info.plist */,
 			);
 			path = Filzanzug;
 			sourceTree = "<group>";
 		};
-		A901C34A2035D9B10031C156 /* FilzanzugTests */ = {
+		A9B5317A2039F62700DB1C85 /* FilzanzugTests */ = {
 			isa = PBXGroup;
 			children = (
-				A901C34B2035D9B10031C156 /* FilzanzugTests.swift */,
-				A901C4282035DA820031C156 /* FZImageProxyTests.swift */,
-				A901C42A2035DA9A0031C156 /* FZSignalsServiceTests.swift */,
-				A901C34D2035D9B10031C156 /* Info.plist */,
+				A9B5317B2039F62700DB1C85 /* FilzanzugTests.swift */,
+				A9B5317D2039F62700DB1C85 /* Info.plist */,
 			);
 			path = FilzanzugTests;
 			sourceTree = "<group>";
 		};
-		A901C36B2035DA560031C156 /* Extensions */ = {
+		A9B531872039F73400DB1C85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A901C36C2035DA560031C156 /* FZ_EX_NSObject.swift */,
-				A901C36D2035DA560031C156 /* FZ_EX_UIColor.swift */,
-				A901C36E2035DA560031C156 /* FZ_EX_UnicodeScalar.swift */,
-				A901C36F2035DA560031C156 /* FZ_EX_UILabel.swift */,
-				A901C3702035DA560031C156 /* FZ_EX_String.swift */,
-				A901C3712035DA560031C156 /* FZ_EX_Date.swift */,
-				A901C3722035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift */,
-				A901C3732035DA560031C156 /* FZ_EX_Data.swift */,
+				A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */,
+				A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A901C3742035DA560031C156 /* Constants */ = {
+		A9B5318A2039F73400DB1C85 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3752035DA560031C156 /* FZ_CS_CommonPhrases.swift */,
-				A901C3762035DA560031C156 /* FZ_CS_Metrics.swift */,
-				A901C3772035DA560031C156 /* FZ_CS_Logs.swift */,
-				A901C3782035DA560031C156 /* FZ_CS_Signals.swift */,
-				A901C3792035DA560031C156 /* FZ_CS_Keys.swift */,
-				A901C37A2035DA560031C156 /* FZ_CS_Classes.swift */,
-				A901C37B2035DA560031C156 /* FZ_CS_Chars.swift */,
-				A901C37C2035DA560031C156 /* FZ_CS_Prefixes.swift */,
+				A9B531912039F73400DB1C85 /* FZ_CS_Chars.swift */,
+				A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */,
+				A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */,
+				A9B5318D2039F73400DB1C85 /* FZ_CS_Logs.swift */,
+				A9B5318E2039F73400DB1C85 /* FZ_CS_Signals.swift */,
+				A9B5318F2039F73400DB1C85 /* FZ_CS_Injections.swift */,
+				A9B531902039F73400DB1C85 /* FZ_CS_Keys.swift */,
+				A9B531922039F73400DB1C85 /* FZ_CS_Prefixes.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		A901C37D2035DA560031C156 /* Services */ = {
+		A9B531932039F73400DB1C85 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A901C37E2035DA560031C156 /* FZ_SV_Routing.swift */,
-				A901C37F2035DA560031C156 /* FZ_SV_Signals.swift */,
-				A901C3802035DA560031C156 /* FZ_SV_Logger.swift */,
-				A901C3812035DA560031C156 /* FZ_SV_API.swift */,
+				A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */,
+				A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */,
+				A9B531972039F73400DB1C85 /* FZ_SV_API.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A901C3822035DA560031C156 /* Utils */ = {
+		A9B531982039F73400DB1C85 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3832035DA560031C156 /* FZ_UT_Colors.swift */,
-				A901C3842035DA560031C156 /* FZ_UT_Constraints.swift */,
-				A901C3852035DA560031C156 /* FZ_UT_Log.swift */,
-				A901C3862035DA560031C156 /* FZ_UT_View.swift */,
-				A901C3872035DA560031C156 /* FZ_UT_Math.swift */,
-				A901C3882035DA560031C156 /* FZ_UT_Misc.swift */,
-				A901C3892035DA560031C156 /* FZ_UT_String.swift */,
-				A901C38A2035DA560031C156 /* FZ_UT_Time.swift */,
-				A901C38B2035DA560031C156 /* FZ_UT_Consts.swift */,
+				A9B531992039F73400DB1C85 /* FZ_UT_Colors.swift */,
+				A9B5319A2039F73400DB1C85 /* FZ_UT_Constraints.swift */,
+				A9B5319B2039F73400DB1C85 /* FZ_UT_Log.swift */,
+				A9B5319C2039F73400DB1C85 /* FZ_UT_View.swift */,
+				A9B5319D2039F73400DB1C85 /* FZ_UT_Math.swift */,
+				A9B5319E2039F73400DB1C85 /* FZ_UT_Extensions.swift */,
+				A9B5319F2039F73400DB1C85 /* FZ_UT_Misc.swift */,
+				A9B531A02039F73400DB1C85 /* FZ_UT_String.swift */,
+				A9B531A12039F73400DB1C85 /* FZ_UT_Time.swift */,
+				A9B531A22039F73400DB1C85 /* FZ_UT_Consts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A901C38C2035DA560031C156 /* Components */ = {
+		A9B531A32039F73500DB1C85 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A901C38D2035DA560031C156 /* FZ_CP_Stopwatch.swift */,
+				A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		A901C38E2035DA560031C156 /* Protocols */ = {
+		A9B531A52039F73500DB1C85 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				A901C38F2035DA560031C156 /* Utils */,
-				A901C3952035DA560031C156 /* Components */,
-				A901C3982035DA560031C156 /* Viper */,
-				A901C39F2035DA560031C156 /* Proxies */,
-				A901C3A22035DA560031C156 /* Services */,
-				A901C3A62035DA560031C156 /* Entities */,
+				A9B531A62039F73500DB1C85 /* Utils */,
+				A9B531B02039F73500DB1C85 /* Components */,
+				A9B531B32039F73500DB1C85 /* Viper */,
+				A9B531BF2039F73500DB1C85 /* Proxies */,
+				A9B531C22039F73500DB1C85 /* Services */,
+				A9B531C62039F73500DB1C85 /* Entities */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		A901C38F2035DA560031C156 /* Utils */ = {
+		A9B531A62039F73500DB1C85 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3902035DA560031C156 /* FZ_PT_UT_ClassName.swift */,
-				A901C3912035DA560031C156 /* FZ_PT_UT_IsActivated.swift */,
-				A901C3922035DA560031C156 /* FZ_PT_UT_Activatable.swift */,
-				A901C3932035DA560031C156 /* FZ_PT_UT_Initable.swift */,
-				A901C3942035DA560031C156 /* FZ_PT_UT_Deallocatable.swift */,
+				A9B531A72039F73500DB1C85 /* FZ_PT_UT_ClassName.swift */,
+				A9B531AA2039F73500DB1C85 /* FZ_PT_UT_InitialisableSignals.swift */,
+				A9B531AC2039F73500DB1C85 /* FZ_PT_UT_IsActivated.swift */,
+				A9B531AD2039F73500DB1C85 /* FZ_PT_UT_Activatable.swift */,
+				A9B531AE2039F73500DB1C85 /* FZ_PT_UT_Initable.swift */,
+				A9B531AF2039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A901C3952035DA560031C156 /* Components */ = {
+		A9B531B02039F73500DB1C85 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3962035DA560031C156 /* FZ_PT_CP_Stopwatch.swift */,
-				A901C3972035DA560031C156 /* FZ_PT_CP_WornCloset.swift */,
+				A9B531B12039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift */,
+				A9B531B22039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		A901C3982035DA560031C156 /* Viper */ = {
+		A9B531B32039F73500DB1C85 /* Viper */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3992035DA560031C156 /* FZ_PT_VP_Routing.swift */,
-				A901C39A2035DA560031C156 /* FZ_PT_VP_Presenter.swift */,
-				A901C39B2035DA560031C156 /* FZ_PT_VP_WornCloset.swift */,
-				A901C39C2035DA560031C156 /* FZ_PT_VP_ModelClass.swift */,
-				A901C39D2035DA560031C156 /* FZ_PT_VP_ViewController.swift */,
-				A901C39E2035DA560031C156 /* FZ_PT_VP_Interactor.swift */,
+				A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */,
+				A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */,
+				A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */,
+				A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */,
+				A9B531B92039F73500DB1C85 /* FZ_PT_VP_ViewController.swift */,
+				A9B531BA2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift */,
 			);
 			path = Viper;
 			sourceTree = "<group>";
 		};
-		A901C39F2035DA560031C156 /* Proxies */ = {
+		A9B531BF2039F73500DB1C85 /* Proxies */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3A02035DA560031C156 /* FZ_PT_PX_Image.swift */,
-				A901C3A12035DA560031C156 /* FZ_PT_PX_LocalAccess.swift */,
+				A9B531C02039F73500DB1C85 /* FZ_PT_PX_Image.swift */,
+				A9B531C12039F73500DB1C85 /* FZ_PT_PX_LocalAccess.swift */,
 			);
 			path = Proxies;
 			sourceTree = "<group>";
 		};
-		A901C3A22035DA560031C156 /* Services */ = {
+		A9B531C22039F73500DB1C85 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3A32035DA560031C156 /* FZ_PT_SV_Logger.swift */,
-				A901C3A42035DA560031C156 /* FZ_PT_SV_UrlSession.swift */,
-				A901C3A52035DA560031C156 /* FZ_PT_SV_Signals.swift */,
+				A9B531C42039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift */,
+				A9B531C52039F73500DB1C85 /* FZ_PT_SV_Signals.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A901C3A62035DA560031C156 /* Entities */ = {
+		A9B531C62039F73500DB1C85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3A72035DA560031C156 /* FZ_PT_ET_API.swift */,
-				A901C3A82035DA560031C156 /* FZ_PT_ET_Presenter.swift */,
-				A901C3A92035DA560031C156 /* FZ_PT_ET_SignalBox.swift */,
-				A901C3AA2035DA560031C156 /* FZ_PT_ET_PresenterEntities.swift */,
-				A901C3AB2035DA560031C156 /* FZ_PT_ET_Stopwatch.swift */,
-				A901C3AC2035DA560031C156 /* FZ_PT_ET_StopwatchCase.swift */,
-				A901C3AD2035DA560031C156 /* FZ_PT_ET_WornClosetImplementer.swift */,
-				A901C3AE2035DA560031C156 /* FZ_PT_ET_Interactor.swift */,
-				A901C3AF2035DA560031C156 /* FZ_PT_ET_Image.swift */,
-				A901C3B02035DA560031C156 /* FZ_PT_ET_LocalAccess.swift */,
-				A901C3B12035DA560031C156 /* FZ_PT_ET_Routing.swift */,
-				A901C3B22035DA560031C156 /* FZ_PT_ET_ViewController.swift */,
-				A901C3B32035DA560031C156 /* FZ_PT_ET_Logger.swift */,
-				A901C3B42035DA560031C156 /* FZ_PT_ET_ModelClassEntities.swift */,
-				A901C3B52035DA560031C156 /* FZ_PT_ET_InteractorEntities.swift */,
-				A901C3B62035DA560031C156 /* Collections */,
-				A901C3BC2035DA560031C156 /* FZ_PT_ET_Signals.swift */,
+				A9B531C72039F73500DB1C85 /* FZ_PT_ET_API.swift */,
+				A9B531C82039F73500DB1C85 /* FZ_PT_ET_Presenter.swift */,
+				A9B531C92039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift */,
+				A9B531CA2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift */,
+				A9B531CB2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift */,
+				A9B531CC2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift */,
+				A9B531CE2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift */,
+				A9B531CF2039F73500DB1C85 /* FZ_PT_ET_Image.swift */,
+				A9B531D02039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift */,
+				A9B531D12039F73500DB1C85 /* FZ_PT_ET_Routing.swift */,
+				A9B531D22039F73500DB1C85 /* FZ_PT_ET_ViewController.swift */,
+				A9B531D42039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift */,
+				A9B531D52039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift */,
+				A9B531D62039F73500DB1C85 /* Collections */,
+				A9B531DC2039F73500DB1C85 /* FZ_PT_ET_Signals.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		A901C3B62035DA560031C156 /* Collections */ = {
+		A9B531D62039F73500DB1C85 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3B72035DA560031C156 /* FZ_PT_ET_CL_Interactor.swift */,
-				A901C3B82035DA560031C156 /* FZ_PT_ET_CL_ViewController.swift */,
-				A901C3B92035DA560031C156 /* FZ_PT_ET_CL_Presenter.swift */,
-				A901C3BA2035DA560031C156 /* FZ_PT_ET_CL_ModelClass.swift */,
-				A901C3BB2035DA560031C156 /* FZ_PT_ET_Collection.swift */,
+				A9B531D72039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift */,
+				A9B531D82039F73500DB1C85 /* FZ_PT_ET_CL_ViewController.swift */,
+				A9B531D92039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift */,
+				A9B531DA2039F73500DB1C85 /* FZ_PT_ET_CL_ModelClass.swift */,
+				A9B531DB2039F73500DB1C85 /* FZ_PT_ET_Collection.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
 		};
-		A901C3BD2035DA560031C156 /* Entities */ = {
+		A9B531DD2039F73500DB1C85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3BE2035DA560031C156 /* FZ_ET_Signals.swift */,
-				A901C3BF2035DA560031C156 /* FZ_ET_Caller.swift */,
-				A901C3C02035DA560031C156 /* FZ_ET_SignalSignature.swift */,
-				A901C3C12035DA560031C156 /* FZ_ET_WornCloset.swift */,
-				A901C3C22035DA560031C156 /* FZ_ET_TimePeriod.swift */,
-				A901C3C32035DA560031C156 /* FZ_ET_GradedBool.swift */,
-				A901C3C42035DA560031C156 /* FZ_ET_Stopwatch.swift */,
-				A901C3C52035DA560031C156 /* Collections */,
-				A901C3CA2035DA560031C156 /* FZ_ET_LogEntry.swift */,
-				A901C3CB2035DA560031C156 /* FZ_ET_ApiResult.swift */,
+				A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */,
+				A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */,
+				A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */,
+				A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */,
+				A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */,
+				A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */,
+				A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */,
+				A9B531E72039F73500DB1C85 /* Collections */,
+				A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		A901C3C52035DA560031C156 /* Collections */ = {
+		A9B531E72039F73500DB1C85 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3C62035DA560031C156 /* FZ_ET_CL_Presenter.swift */,
-				A901C3C72035DA560031C156 /* FZ_ET_CL_ModelClass.swift */,
-				A901C3C82035DA560031C156 /* FZ_ET_CL_PageViewController.swift */,
-				A901C3C92035DA560031C156 /* FZ_ET_CL_Interactor.swift */,
+				A9B531E82039F73500DB1C85 /* FZ_ET_CL_Presenter.swift */,
+				A9B531E92039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift */,
+				A9B531EA2039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift */,
+				A9B531EB2039F73500DB1C85 /* FZ_ET_CL_Interactor.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
 		};
-		A901C3CC2035DA560031C156 /* Proxies */ = {
+		A9B531EE2039F73500DB1C85 /* Proxies */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3CD2035DA560031C156 /* FZ_PX_LocalAccess.swift */,
-				A901C3CE2035DA560031C156 /* FZ_PX_Image.swift */,
+				A9B531EF2039F73500DB1C85 /* FZ_PX_LocalAccess.swift */,
+				A9B531F02039F73500DB1C85 /* FZ_PX_Image.swift */,
 			);
 			path = Proxies;
 			sourceTree = "<group>";
 		};
-		A901C3CF2035DA560031C156 /* View */ = {
+		A9B531F12039F73500DB1C85 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A901C3D02035DA560031C156 /* FZ_ViewController.swift */,
-				A901C3D12035DA560031C156 /* FZ_VC_Page.swift */,
+				A9B531F22039F73500DB1C85 /* FZ_ViewController.swift */,
+				A9B531F32039F73500DB1C85 /* FZ_VC_Page.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FE9BFE95EB6E1CF0D50912D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		A901C33A2035D9B10031C156 /* Headers */ = {
+		A9B5316A2039F62600DB1C85 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A901C34E2035D9B10031C156 /* Filzanzug.h in Headers */,
+				A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A901C33C2035D9B10031C156 /* Filzanzug */ = {
+		A9B5316C2039F62600DB1C85 /* Filzanzug */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A901C3512035D9B10031C156 /* Build configuration list for PBXNativeTarget "Filzanzug" */;
+			buildConfigurationList = A9B531812039F62700DB1C85 /* Build configuration list for PBXNativeTarget "Filzanzug" */;
 			buildPhases = (
-				74649ED3F609AD5D0B9D24C3 /* [CP] Check Pods Manifest.lock */,
-				A901C3382035D9B10031C156 /* Sources */,
-				A901C3392035D9B10031C156 /* Frameworks */,
-				A901C33A2035D9B10031C156 /* Headers */,
-				A901C33B2035D9B10031C156 /* Resources */,
-				883DDB7EC76E7ECFC2B34C10 /* [CP] Copy Pods Resources */,
+				7E62214A35D08231552249A6 /* [CP] Check Pods Manifest.lock */,
+				A9B531682039F62600DB1C85 /* Sources */,
+				A9B531692039F62600DB1C85 /* Frameworks */,
+				A9B5316A2039F62600DB1C85 /* Headers */,
+				A9B5316B2039F62600DB1C85 /* Resources */,
+				08548231793E160F7B3D00AB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -541,74 +508,74 @@
 			);
 			name = Filzanzug;
 			productName = Filzanzug;
-			productReference = A901C33D2035D9B10031C156 /* Filzanzug.framework */;
+			productReference = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A901C3452035D9B10031C156 /* FilzanzugTests */ = {
+		A9B531752039F62700DB1C85 /* FilzanzugTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A901C3542035D9B10031C156 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */;
+			buildConfigurationList = A9B531842039F62700DB1C85 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */;
 			buildPhases = (
-				A901C3422035D9B10031C156 /* Sources */,
-				A901C3432035D9B10031C156 /* Frameworks */,
-				A901C3442035D9B10031C156 /* Resources */,
+				A9B531722039F62700DB1C85 /* Sources */,
+				A9B531732039F62700DB1C85 /* Frameworks */,
+				A9B531742039F62700DB1C85 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A901C3492035D9B10031C156 /* PBXTargetDependency */,
+				A9B531792039F62700DB1C85 /* PBXTargetDependency */,
 			);
 			name = FilzanzugTests;
 			productName = FilzanzugTests;
-			productReference = A901C3462035D9B10031C156 /* FilzanzugTests.xctest */;
+			productReference = A9B531762039F62700DB1C85 /* FilzanzugTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A901C3342035D9B10031C156 /* Project object */ = {
+		A9B531642039F62600DB1C85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Rich Text Format Ltd.";
 				TargetAttributes = {
-					A901C33C2035D9B10031C156 = {
+					A9B5316C2039F62600DB1C85 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
-					A901C3452035D9B10031C156 = {
+					A9B531752039F62700DB1C85 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = A901C3372035D9B10031C156 /* Build configuration list for PBXProject "Filzanzug" */;
+			buildConfigurationList = A9B531672039F62600DB1C85 /* Build configuration list for PBXProject "Filzanzug" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = A901C3332035D9B10031C156;
-			productRefGroup = A901C33E2035D9B10031C156 /* Products */;
+			mainGroup = A9B531632039F62600DB1C85;
+			productRefGroup = A9B5316E2039F62600DB1C85 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A901C33C2035D9B10031C156 /* Filzanzug */,
-				A901C3452035D9B10031C156 /* FilzanzugTests */,
+				A9B5316C2039F62600DB1C85 /* Filzanzug */,
+				A9B531752039F62700DB1C85 /* FilzanzugTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A901C33B2035D9B10031C156 /* Resources */ = {
+		A9B5316B2039F62600DB1C85 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A901C3442035D9B10031C156 /* Resources */ = {
+		A9B531742039F62700DB1C85 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -618,7 +585,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		74649ED3F609AD5D0B9D24C3 /* [CP] Check Pods Manifest.lock */ = {
+		08548231793E160F7B3D00AB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E62214A35D08231552249A6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -636,139 +618,113 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		883DDB7EC76E7ECFC2B34C10 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A901C3382035D9B10031C156 /* Sources */ = {
+		A9B531682039F62600DB1C85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A901C41D2035DA570031C156 /* FZ_ET_Stopwatch.swift in Sources */,
-				A901C3D92035DA560031C156 /* FZ_EX_Data.swift in Sources */,
-				A901C4062035DA570031C156 /* FZ_PT_ET_Stopwatch.swift in Sources */,
-				A901C3F22035DA570031C156 /* FZ_PT_UT_Activatable.swift in Sources */,
-				A901C3D32035DA560031C156 /* FZ_EX_UIColor.swift in Sources */,
-				A901C3E32035DA570031C156 /* FZ_SV_Signals.swift in Sources */,
-				A901C40D2035DA570031C156 /* FZ_PT_ET_ViewController.swift in Sources */,
-				A901C40C2035DA570031C156 /* FZ_PT_ET_Routing.swift in Sources */,
-				A901C4262035DA570031C156 /* FZ_ViewController.swift in Sources */,
-				A901C4272035DA570031C156 /* FZ_VC_Page.swift in Sources */,
-				A901C4232035DA570031C156 /* FZ_ET_ApiResult.swift in Sources */,
-				A901C3D22035DA560031C156 /* FZ_EX_NSObject.swift in Sources */,
-				A901C41B2035DA570031C156 /* FZ_ET_TimePeriod.swift in Sources */,
-				A901C3DE2035DA570031C156 /* FZ_CS_Keys.swift in Sources */,
-				A901C4002035DA570031C156 /* FZ_PT_SV_UrlSession.swift in Sources */,
-				A901C3F02035DA570031C156 /* FZ_PT_UT_ClassName.swift in Sources */,
-				A901C4222035DA570031C156 /* FZ_ET_LogEntry.swift in Sources */,
-				A901C40A2035DA570031C156 /* FZ_PT_ET_Image.swift in Sources */,
-				A901C4092035DA570031C156 /* FZ_PT_ET_Interactor.swift in Sources */,
-				A901C4022035DA570031C156 /* FZ_PT_ET_API.swift in Sources */,
-				A901C40B2035DA570031C156 /* FZ_PT_ET_LocalAccess.swift in Sources */,
-				A901C3FD2035DA570031C156 /* FZ_PT_PX_Image.swift in Sources */,
-				A901C3DD2035DA570031C156 /* FZ_CS_Signals.swift in Sources */,
-				A901C3E82035DA570031C156 /* FZ_UT_Log.swift in Sources */,
-				A901C4052035DA570031C156 /* FZ_PT_ET_PresenterEntities.swift in Sources */,
-				A901C3FC2035DA570031C156 /* FZ_PT_VP_Interactor.swift in Sources */,
-				A901C4102035DA570031C156 /* FZ_PT_ET_InteractorEntities.swift in Sources */,
-				A901C4192035DA570031C156 /* FZ_ET_SignalSignature.swift in Sources */,
-				A901C4082035DA570031C156 /* FZ_PT_ET_WornClosetImplementer.swift in Sources */,
-				A901C4012035DA570031C156 /* FZ_PT_SV_Signals.swift in Sources */,
-				A901C4072035DA570031C156 /* FZ_PT_ET_StopwatchCase.swift in Sources */,
-				A901C4252035DA570031C156 /* FZ_PX_Image.swift in Sources */,
-				A901C3D42035DA560031C156 /* FZ_EX_UnicodeScalar.swift in Sources */,
-				A901C40E2035DA570031C156 /* FZ_PT_ET_Logger.swift in Sources */,
-				A901C4132035DA570031C156 /* FZ_PT_ET_CL_Presenter.swift in Sources */,
-				A901C4162035DA570031C156 /* FZ_PT_ET_Signals.swift in Sources */,
-				A901C3F32035DA570031C156 /* FZ_PT_UT_Initable.swift in Sources */,
-				A901C4182035DA570031C156 /* FZ_ET_Caller.swift in Sources */,
-				A901C41E2035DA570031C156 /* FZ_ET_CL_Presenter.swift in Sources */,
-				A901C40F2035DA570031C156 /* FZ_PT_ET_ModelClassEntities.swift in Sources */,
-				A901C3E72035DA570031C156 /* FZ_UT_Constraints.swift in Sources */,
-				A901C4142035DA570031C156 /* FZ_PT_ET_CL_ModelClass.swift in Sources */,
-				A901C3F62035DA570031C156 /* FZ_PT_CP_WornCloset.swift in Sources */,
-				A901C3F52035DA570031C156 /* FZ_PT_CP_Stopwatch.swift in Sources */,
-				A901C3D52035DA560031C156 /* FZ_EX_UILabel.swift in Sources */,
-				A901C4152035DA570031C156 /* FZ_PT_ET_Collection.swift in Sources */,
-				A901C3DA2035DA560031C156 /* FZ_CS_CommonPhrases.swift in Sources */,
-				A901C41F2035DA570031C156 /* FZ_ET_CL_ModelClass.swift in Sources */,
-				A901C3DC2035DA560031C156 /* FZ_CS_Logs.swift in Sources */,
-				A901C3E12035DA570031C156 /* FZ_CS_Prefixes.swift in Sources */,
-				A901C3E92035DA570031C156 /* FZ_UT_View.swift in Sources */,
-				A901C3FE2035DA570031C156 /* FZ_PT_PX_LocalAccess.swift in Sources */,
-				A901C3FF2035DA570031C156 /* FZ_PT_SV_Logger.swift in Sources */,
-				A901C3EB2035DA570031C156 /* FZ_UT_Misc.swift in Sources */,
-				A901C4032035DA570031C156 /* FZ_PT_ET_Presenter.swift in Sources */,
-				A901C4242035DA570031C156 /* FZ_PX_LocalAccess.swift in Sources */,
-				A901C3F12035DA570031C156 /* FZ_PT_UT_IsActivated.swift in Sources */,
-				A901C3D72035DA560031C156 /* FZ_EX_Date.swift in Sources */,
-				A901C4042035DA570031C156 /* FZ_PT_ET_SignalBox.swift in Sources */,
-				A901C41A2035DA570031C156 /* FZ_ET_WornCloset.swift in Sources */,
-				A901C41C2035DA570031C156 /* FZ_ET_GradedBool.swift in Sources */,
-				A901C3EF2035DA570031C156 /* FZ_CP_Stopwatch.swift in Sources */,
-				A901C4122035DA570031C156 /* FZ_PT_ET_CL_ViewController.swift in Sources */,
-				A901C3D62035DA560031C156 /* FZ_EX_String.swift in Sources */,
-				A901C3E62035DA570031C156 /* FZ_UT_Colors.swift in Sources */,
-				A901C3D82035DA560031C156 /* FZ_EX_NSLayoutConstraint.swift in Sources */,
-				A901C3F42035DA570031C156 /* FZ_PT_UT_Deallocatable.swift in Sources */,
-				A901C3E22035DA570031C156 /* FZ_SV_Routing.swift in Sources */,
-				A901C3E52035DA570031C156 /* FZ_SV_API.swift in Sources */,
-				A901C3ED2035DA570031C156 /* FZ_UT_Time.swift in Sources */,
-				A901C3EA2035DA570031C156 /* FZ_UT_Math.swift in Sources */,
-				A901C3DF2035DA570031C156 /* FZ_CS_Classes.swift in Sources */,
-				A901C3E02035DA570031C156 /* FZ_CS_Chars.swift in Sources */,
-				A901C3E42035DA570031C156 /* FZ_SV_Logger.swift in Sources */,
-				A901C4212035DA570031C156 /* FZ_ET_CL_Interactor.swift in Sources */,
-				A901C3F82035DA570031C156 /* FZ_PT_VP_Presenter.swift in Sources */,
-				A901C4202035DA570031C156 /* FZ_ET_CL_PageViewController.swift in Sources */,
-				A901C3F92035DA570031C156 /* FZ_PT_VP_WornCloset.swift in Sources */,
-				A901C3EC2035DA570031C156 /* FZ_UT_String.swift in Sources */,
-				A901C4112035DA570031C156 /* FZ_PT_ET_CL_Interactor.swift in Sources */,
-				A901C3EE2035DA570031C156 /* FZ_UT_Consts.swift in Sources */,
-				A901C3F72035DA570031C156 /* FZ_PT_VP_Routing.swift in Sources */,
-				A901C3FA2035DA570031C156 /* FZ_PT_VP_ModelClass.swift in Sources */,
-				A901C3FB2035DA570031C156 /* FZ_PT_VP_ViewController.swift in Sources */,
-				A901C4172035DA570031C156 /* FZ_ET_Signals.swift in Sources */,
-				A901C3DB2035DA560031C156 /* FZ_CS_Metrics.swift in Sources */,
+				A9B532082039F73500DB1C85 /* FZ_UT_Misc.swift in Sources */,
+				A9B5322C2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift in Sources */,
+				A9B531FA2039F73500DB1C85 /* FZ_CS_Injections.swift in Sources */,
+				A9B532142039F73500DB1C85 /* FZ_PT_UT_Initable.swift in Sources */,
+				A9B532052039F73500DB1C85 /* FZ_UT_View.swift in Sources */,
+				A9B532152039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift in Sources */,
+				A9B532342039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift in Sources */,
+				A9B532162039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift in Sources */,
+				A9B5323E2039F73500DB1C85 /* FZ_ET_Caller.swift in Sources */,
+				A9B5322A2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift in Sources */,
+				A9B532032039F73500DB1C85 /* FZ_UT_Constraints.swift in Sources */,
+				A9B532372039F73500DB1C85 /* FZ_PT_ET_CL_ViewController.swift in Sources */,
+				A9B5324A2039F73500DB1C85 /* FZ_ET_ApiResult.swift in Sources */,
+				A9B5320D2039F73500DB1C85 /* FZ_PT_UT_ClassName.swift in Sources */,
+				A9B5324D2039F73500DB1C85 /* FZ_ViewController.swift in Sources */,
+				A9B531FC2039F73500DB1C85 /* FZ_CS_Chars.swift in Sources */,
+				A9B532302039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift in Sources */,
+				A9B5322F2039F73500DB1C85 /* FZ_PT_ET_Image.swift in Sources */,
+				A9B5324B2039F73500DB1C85 /* FZ_PX_LocalAccess.swift in Sources */,
+				A9B532382039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift in Sources */,
+				A9B5321E2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift in Sources */,
+				A9B532062039F73500DB1C85 /* FZ_UT_Math.swift in Sources */,
+				A9B531FF2039F73500DB1C85 /* FZ_SV_Signals.swift in Sources */,
+				A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */,
+				A9B532122039F73500DB1C85 /* FZ_PT_UT_IsActivated.swift in Sources */,
+				A9B531F82039F73500DB1C85 /* FZ_CS_Logs.swift in Sources */,
+				A9B532022039F73500DB1C85 /* FZ_UT_Colors.swift in Sources */,
+				A9B532072039F73500DB1C85 /* FZ_UT_Extensions.swift in Sources */,
+				A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */,
+				A9B5320C2039F73500DB1C85 /* FZ_CP_Stopwatch.swift in Sources */,
+				A9B531FD2039F73500DB1C85 /* FZ_CS_Prefixes.swift in Sources */,
+				A9B532482039F73500DB1C85 /* FZ_ET_CL_Interactor.swift in Sources */,
+				A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */,
+				A9B5323F2039F73500DB1C85 /* FZ_ET_SignalSignature.swift in Sources */,
+				A9B532172039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift in Sources */,
+				A9B531FB2039F73500DB1C85 /* FZ_CS_Keys.swift in Sources */,
+				A9B532352039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift in Sources */,
+				A9B532472039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift in Sources */,
+				A9B532012039F73500DB1C85 /* FZ_SV_API.swift in Sources */,
+				A9B5323B2039F73500DB1C85 /* FZ_PT_ET_Signals.swift in Sources */,
+				A9B532452039F73500DB1C85 /* FZ_ET_CL_Presenter.swift in Sources */,
+				A9B532362039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift in Sources */,
+				A9B532232039F73500DB1C85 /* FZ_PT_PX_LocalAccess.swift in Sources */,
+				A9B5322E2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift in Sources */,
+				A9B5324E2039F73500DB1C85 /* FZ_VC_Page.swift in Sources */,
+				A9B5320A2039F73500DB1C85 /* FZ_UT_Time.swift in Sources */,
+				A9B531F72039F73500DB1C85 /* FZ_CS_Metrics.swift in Sources */,
+				A9B532092039F73500DB1C85 /* FZ_UT_String.swift in Sources */,
+				A9B531F92039F73500DB1C85 /* FZ_CS_Signals.swift in Sources */,
+				A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */,
+				A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */,
+				A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */,
+				A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */,
+				A9B531F62039F73500DB1C85 /* FZ_CS_CommonPhrases.swift in Sources */,
+				A9B5321A2039F73500DB1C85 /* FZ_PT_VP_Presenter.swift in Sources */,
+				A9B5321B2039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift in Sources */,
+				A9B5322B2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift in Sources */,
+				A9B532392039F73500DB1C85 /* FZ_PT_ET_CL_ModelClass.swift in Sources */,
+				A9B5323A2039F73500DB1C85 /* FZ_PT_ET_Collection.swift in Sources */,
+				A9B5324C2039F73500DB1C85 /* FZ_PX_Image.swift in Sources */,
+				A9B532412039F73500DB1C85 /* FZ_ET_TimePeriod.swift in Sources */,
+				A9B532272039F73500DB1C85 /* FZ_PT_ET_API.swift in Sources */,
+				A9B5323C2039F73500DB1C85 /* FZ_ET_Signals.swift in Sources */,
+				A9B532312039F73500DB1C85 /* FZ_PT_ET_Routing.swift in Sources */,
+				A9B532322039F73500DB1C85 /* FZ_PT_ET_ViewController.swift in Sources */,
+				A9B532102039F73500DB1C85 /* FZ_PT_UT_InitialisableSignals.swift in Sources */,
+				A9B532222039F73500DB1C85 /* FZ_PT_PX_Image.swift in Sources */,
+				A9B532262039F73500DB1C85 /* FZ_PT_SV_Signals.swift in Sources */,
+				A9B532252039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift in Sources */,
+				A9B532292039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift in Sources */,
+				A9B532192039F73500DB1C85 /* FZ_PT_VP_Routing.swift in Sources */,
+				A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */,
+				A9B532282039F73500DB1C85 /* FZ_PT_ET_Presenter.swift in Sources */,
+				A9B532462039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift in Sources */,
+				A9B5321D2039F73500DB1C85 /* FZ_PT_VP_ViewController.swift in Sources */,
+				A9B532132039F73500DB1C85 /* FZ_PT_UT_Activatable.swift in Sources */,
+				A9B532402039F73500DB1C85 /* FZ_ET_WornCloset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A901C3422035D9B10031C156 /* Sources */ = {
+		A9B531722039F62700DB1C85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A901C4292035DA820031C156 /* FZImageProxyTests.swift in Sources */,
-				A901C42B2035DA9A0031C156 /* FZSignalsServiceTests.swift in Sources */,
-				A901C34C2035D9B10031C156 /* FilzanzugTests.swift in Sources */,
+				A9B5317C2039F62700DB1C85 /* FilzanzugTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A901C3492035D9B10031C156 /* PBXTargetDependency */ = {
+		A9B531792039F62700DB1C85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A901C33C2035D9B10031C156 /* Filzanzug */;
-			targetProxy = A901C3482035D9B10031C156 /* PBXContainerItemProxy */;
+			target = A9B5316C2039F62600DB1C85 /* Filzanzug */;
+			targetProxy = A9B531782039F62700DB1C85 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A901C34F2035D9B10031C156 /* Debug */ = {
+		A9B5317F2039F62700DB1C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -828,7 +784,7 @@
 			};
 			name = Debug;
 		};
-		A901C3502035D9B10031C156 /* Release */ = {
+		A9B531802039F62700DB1C85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -881,9 +837,9 @@
 			};
 			name = Release;
 		};
-		A901C3522035D9B10031C156 /* Debug */ = {
+		A9B531822039F62700DB1C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4CD9CE2A3AA9F33B351C08D /* Pods-Filzanzug.debug.xcconfig */;
+			baseConfigurationReference = 2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -903,9 +859,9 @@
 			};
 			name = Debug;
 		};
-		A901C3532035D9B10031C156 /* Release */ = {
+		A9B531832039F62700DB1C85 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDA59BC2BCBE3A90C97CE6D0 /* Pods-Filzanzug.release.xcconfig */;
+			baseConfigurationReference = E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -925,7 +881,7 @@
 			};
 			name = Release;
 		};
-		A901C3552035D9B10031C156 /* Debug */ = {
+		A9B531852039F62700DB1C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -940,7 +896,7 @@
 			};
 			name = Debug;
 		};
-		A901C3562035D9B10031C156 /* Release */ = {
+		A9B531862039F62700DB1C85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -958,34 +914,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A901C3372035D9B10031C156 /* Build configuration list for PBXProject "Filzanzug" */ = {
+		A9B531672039F62600DB1C85 /* Build configuration list for PBXProject "Filzanzug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A901C34F2035D9B10031C156 /* Debug */,
-				A901C3502035D9B10031C156 /* Release */,
+				A9B5317F2039F62700DB1C85 /* Debug */,
+				A9B531802039F62700DB1C85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A901C3512035D9B10031C156 /* Build configuration list for PBXNativeTarget "Filzanzug" */ = {
+		A9B531812039F62700DB1C85 /* Build configuration list for PBXNativeTarget "Filzanzug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A901C3522035D9B10031C156 /* Debug */,
-				A901C3532035D9B10031C156 /* Release */,
+				A9B531822039F62700DB1C85 /* Debug */,
+				A9B531832039F62700DB1C85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A901C3542035D9B10031C156 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */ = {
+		A9B531842039F62700DB1C85 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A901C3552035D9B10031C156 /* Debug */,
-				A901C3562035D9B10031C156 /* Release */,
+				A9B531852039F62700DB1C85 /* Debug */,
+				A9B531862039F62700DB1C85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A901C3342035D9B10031C156 /* Project object */;
+	rootObject = A9B531642039F62600DB1C85 /* Project object */;
 }

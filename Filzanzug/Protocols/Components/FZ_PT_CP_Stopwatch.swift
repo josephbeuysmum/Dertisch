@@ -6,6 +6,8 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
+//import Foundation
+
 public protocol FZStopwatchProtocol: FZSignalBoxEntityProtocol {
 	func startWith (
 		delay: Double,

@@ -15,7 +15,7 @@ public class FZStopwatchEntity {
 	
 	
 	
-	init ( _ key: String ) { self.key = key }
+	public init ( _ key: String ) { self.key = key }
 	
 	public func deallocate () {
 		stopwatch = nil

@@ -10,9 +10,7 @@ import SwinjectStoryboard
 import UIKit
 
 public class FZRoutingService: FZRoutingServiceProtocol {
-	public var signalBox: FZSignalsEntity!
-	public var entities: FZModelClassEntities!
-	public var className: String { return FZClassConsts.routing }
+	public var signalBox: FZSignalsEntity
 	public var window: UIWindow? {
 		get { return nil }
 		set {
@@ -24,7 +22,7 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 	}
 	
 	fileprivate var
-	key: String,
+	_wornCloset: FZWornCloset,
 	_isActivated: Bool,
 	storyboards: [ String: SwinjectStoryboard ],
 	_window: UIWindow!,
@@ -36,9 +34,9 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 	
 	required public init () {
 		_isActivated = false
-		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity( key )
-		entities = FZModelClassEntities( key )
+		signalBox = FZSignalsEntity()
+		_wornCloset = FZWornCloset()
+		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
 		storyboards = [:]
 	}
 	
@@ -46,17 +44,20 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 	
 	public func activate () {
 		_isActivated = true
-		guard let scopedSignals = signalBox.getSignalsServiceBy( key: key ) else { return }
-		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
+		_ = signalBox.signals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
 			[ unowned self ] _, data in self.set( interactor: data as? FZInteractorProtocol )
 		}
-		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
+		_ = signalBox.signals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
 			[ unowned self ] _, data in self.set( presenter: data as? FZPresenterProtocol )
 		}
-		_ = scopedSignals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
+		_ = signalBox.signals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
 			[ unowned self ] _, data in self.set( view: data as? FZViewController )
 		}
 	}
+	
+	public func styleApp() {}
+	
+	public func start () {}
 	
 	
 	
@@ -140,7 +141,7 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.signalBox.getSignalsServiceBy( key: self.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
+				self.signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewRemoved )
 		} )
 	}
 	
@@ -166,6 +167,6 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 		_view?.deallocate()
 //		_view = nil
 		_view = view
-		signalBox.getSignalsServiceBy( key: key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
+		signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewSet )
 	}
 }

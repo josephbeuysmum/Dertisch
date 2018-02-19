@@ -25,7 +25,7 @@
 //	}
 //
 //	struct someComplexStruct {
-//	    public enum someNestedEnum { case this, that, theOther }
+//		enum someNestedEnum { case this, that, theOther }
 //
 //		struct someNestedStruct
 //		{
@@ -35,7 +35,7 @@
 //		}
 //	}
 //
-//    public enum someEnum { case this, that, theOther }
+//	enum someEnum { case this, that, theOther }
 //
 //	static let
 //	someSelfReferentialDictionary: [ String: Int ] = [

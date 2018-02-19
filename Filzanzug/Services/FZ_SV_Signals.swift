@@ -17,7 +17,7 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 	
 	
 	
-	public required init () {
+	required public init () {
 		_signals = Dictionary < String, Signal< ( String, Any? ) > >()
 		_signatures = Dictionary < String, [ FZSignalSignature ] >()
 	}
@@ -126,11 +126,11 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 			
 			// then scan
 			if scanContinuously {
-				signal.subscribe( on: scanner, callback: block )
+				signal.subscribe( with: scanner, callback: block )
 			} else {
 				// _onOneOffSignalFired scans to annul single-firing scanners and signals
 				signal.subscribeOnce(
-					on: scanner,
+					with: scanner,
 					callback: {
 						[ unowned self ] key, _ in
 						guard let scopedSignatures = self._signatures[ key ] else { return }
@@ -151,7 +151,7 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 								} )
 							}
 						} } )
-				signal.subscribeOnce( on: scanner, callback: block )
+				signal.subscribeOnce( with: scanner, callback: block )
 			}
 			success = true
 		}

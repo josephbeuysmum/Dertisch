@@ -6,4 +6,4 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZModelClassEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZApiEntityProtocol, FZLocalAccessEntityProtocol, FZDeallocatableProtocol {}
+public protocol FZModelClassEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZApiEntityProtocol, FZLocalAccessEntityProtocol {}

@@ -11,7 +11,7 @@ import Foundation
 public class FZTime {
 	public enum IntervalFormats { case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes }
 	
-	static fileprivate var _startTime: Date?
+	fileprivate static var _startTime: Date?
 	
 	// returns a timestamp based upon the IntervalFormats case passed 
 	// (assumes full case if none passed)
@@ -69,19 +69,19 @@ public class FZTime {
 	
 	
 	// hours and milliseconds have accessor functions because they aren't used in all cases
-	static fileprivate func _getHoursBy ( interval: Int ) -> Int { return interval / 3600 }
+	fileprivate static func _getHoursBy ( interval: Int ) -> Int { return interval / 3600 }
 	
-	static fileprivate func _getMillisecondsBy ( rawInterval: TimeInterval ) -> Int {
+	fileprivate static func _getMillisecondsBy ( rawInterval: TimeInterval ) -> Int {
 		return Int( ( rawInterval.truncatingRemainder( dividingBy: 1 ) ) * 1000 )
 	}
 	
-	static fileprivate func _getMinutesBy ( interval: Int ) -> Int { return ( interval / 60 ) % 60 }
+	fileprivate static func _getMinutesBy ( interval: Int ) -> Int { return ( interval / 60 ) % 60 }
 	
-	static fileprivate func _getSecondsBy ( interval: Int ) -> Int { return interval % 60 }
+	fileprivate static func _getSecondsBy ( interval: Int ) -> Int { return interval % 60 }
 	
 	
 	// raw interval has its own accessor function as it *might* need to restart the _startTime clock
-	static fileprivate func _getRawInterval () -> TimeInterval {
+	fileprivate static func _getRawInterval () -> TimeInterval {
 		if _startTime == nil { _startTime = Date() }
 		return Date().timeIntervalSince( _startTime! )
 	}

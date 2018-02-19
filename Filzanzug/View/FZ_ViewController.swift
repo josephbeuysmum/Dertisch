@@ -11,24 +11,24 @@ import UIKit
 extension FZViewController: FZViewControllerProtocol {}
 
 public class FZViewController: UIViewController {
-	public var signalBox: FZSignalsEntity!
+	public var signalBox: FZSignalsEntity
 	
-	open let key: String
+//	open let key: String
 	
-	public required init? ( coder aDecoder: NSCoder ) {
-		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity( key )
+	required public init? ( coder aDecoder: NSCoder ) {
+//		key = NSUUID().uuidString
+		signalBox = FZSignalsEntity()
 		super.init( coder: aDecoder )
 	}
 	
 	deinit { lo() }
 	
-	public override func viewDidLoad () {
+	override public func viewDidLoad () {
 		super.viewDidLoad()
-		signalBox.getSignalsServiceBy( key: key )?.transmitSignalFor( key: FZSignalConsts.viewLoaded, data: self )
+		signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewLoaded, data: self )
 	}
 	
 	public func deallocate () {
-		signalBox.deallocate()
+//		signalBox = nil
 	}
 }

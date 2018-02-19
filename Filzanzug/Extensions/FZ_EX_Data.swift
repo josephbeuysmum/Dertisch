@@ -10,7 +10,7 @@ import Foundation
 
 // taken from Dmitry Isaev at https://stackoverflow.com/questions/21789770/determine-mime-type-from-nsdata#32765708
 extension Data {
-    public enum mimeTypes: String {
+	enum mimeTypes: String {
 		case AVI, BMP, GIF, JPG, MP3, OCT, OGG, PDF, PNG, /*RAR,*/ RTF, TAR, TIFF, /*TXT,*/ VND, /*WAV,*/ XML, ZIP
 	}
 

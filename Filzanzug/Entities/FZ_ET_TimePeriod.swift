@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FZTimePeriod {
+struct FZTimePeriod {
 	public var description: String { return _getDescription( simplified: false, andTranslate: true ) }
 	public var numericDescription: String { return _getDescription( simplified: false, andTranslate: false ) }
 	public var simplifiedDescription: String { return _getDescription( simplified: true, andTranslate: true ) }
@@ -25,12 +25,12 @@ public struct FZTimePeriod {
 	
 	
 	
-	init ( interval: TimeInterval ) {
+	public init ( interval: TimeInterval ) {
 //		_interval = interval
 		_secondsTotal = Int( interval )
 	}
 	
-	init ( interval: Int ) {
+	public init ( interval: Int ) {
 		_secondsTotal = interval
 	}
 	

@@ -6,4 +6,4 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZWornClosetImplementerProtocol: class, FZWornClosetEntityProtocol, FZActivatableProtocol, FZClassNameProtocol, FZDeallocatableProtocol, FZInitableProtocol {}
+public protocol FZWornClosetImplementerProtocol: class, FZSignalBoxEntityProtocol, FZActivatableProtocol, FZClassNameProtocol, FZDeallocatableProtocol, FZInitableProtocol, FZInitialiseSignalsProtocol {}
