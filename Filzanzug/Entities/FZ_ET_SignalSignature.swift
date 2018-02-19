@@ -1,6 +1,6 @@
 //
 //  FZ_ET_SignalSignature.swift
-//  Boilerplate
+//  Filzanzug
 //
 //  Created by Richard Willis on 04/04/2016.
 //  Copyright © 2016 EoID Ltd. All rights reserved.

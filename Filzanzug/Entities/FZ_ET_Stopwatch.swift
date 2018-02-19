@@ -1,6 +1,6 @@
 //
-//  FZStopwatchEntity.swift
-//  Hasenblut
+//  FZ_ET_StopwatchEntity.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 05/02/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.

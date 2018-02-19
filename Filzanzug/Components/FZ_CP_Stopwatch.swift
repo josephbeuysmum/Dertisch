@@ -1,6 +1,6 @@
 //
-//  FZ_CP_Timer.swift
-//  Hasenblut
+//  FZ_CP_Stopwatch.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 24/08/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  FZ_PT_ModelClass.swift
-//  Hasenblut
+//  FZ_PT_VP_ModelClass.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 11/08/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.

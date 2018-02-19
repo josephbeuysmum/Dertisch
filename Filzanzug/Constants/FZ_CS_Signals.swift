@@ -1,6 +1,6 @@
 //
-//  FZ_UT_Constants.swift
-//  Hasenblut
+//  FZ_UT_SignalConsts.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
@@ -11,7 +11,7 @@ public struct FZSignalConsts {
 	_namespace =				"FZSignals."
 	
 	// the [only] specific signal names used by FZ classes
-	static let
+	public static let
 	interactorActivated = "\( _namespace )Interactor\( FZCommonPhrasesConsts.Activated )",
 	modelClassActivated = "\( _namespace )ModelClass\( FZCommonPhrasesConsts.Activated )",
 	presenterActivated = "\( _namespace )Presenter\( FZCommonPhrasesConsts.Activated )",

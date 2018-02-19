@@ -1,6 +1,6 @@
 //
-//  FZImageProxy.swift
-//  Boilerplate
+//  FZ_PX_Image.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 25/11/2015.
 //  Copyright © 2015 Richard Willis. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  FZUrlSessionService.swift
-//  Boilerplate
+//  FZ_SV_API.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 19/10/2015.
 //  Copyright © 2015 Richard Willis. All rights reserved.

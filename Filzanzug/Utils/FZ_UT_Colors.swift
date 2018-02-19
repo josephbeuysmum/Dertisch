@@ -1,6 +1,6 @@
 //
-//  BT_UT_Colors.swift
-//  Hasenblut
+//  FZ_UT_Colors.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 28/09/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

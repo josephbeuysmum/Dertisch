@@ -1,6 +1,6 @@
 //
-//  FZ_PT_Presenter.swift
-//  Hasenblut
+//  FZ_PT_VP_Presenter.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 22/06/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
@@ -9,8 +9,8 @@
 import Foundation
 
 public extension FZPresenterProtocol {
-	var className: String { return String( describing: self ) }
-	var viewController: FZViewController? {
+	public var className: String { return String( describing: self ) }
+	public var viewController: FZViewController? {
 		guard let scopedWornCloset = _wornCloset else { return nil }
 		return scopedWornCloset.presenterEntities?.getViewControllerBy( key: scopedWornCloset.key )
 	}

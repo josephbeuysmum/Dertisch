@@ -1,13 +1,13 @@
 //
-//  FZ_UT_Constants.swift
-//  Hasenblut
+//  FZ_UT_CommonPhrasesConsts.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
 public struct FZCommonPhrasesConsts {
-	static let
+	public static let
 	Account = "Account",
 	Accounts = "\( Account )s",
 	Activated = "Activated",

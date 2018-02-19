@@ -1,6 +1,6 @@
 //
-//  BT_UT_Time.swift
-//  Boilerplate
+//  FZ_UT_Time.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 19/04/2016.
 //  Copyright © 2016 EoID Ltd. All rights reserved.

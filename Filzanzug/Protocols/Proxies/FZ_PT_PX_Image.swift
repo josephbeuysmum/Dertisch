@@ -1,6 +1,6 @@
 //
-//  FZ_PT_SV_Image.swift
-//  Boilerplate
+//  FZ_PT_PX_Image.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 17/02/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

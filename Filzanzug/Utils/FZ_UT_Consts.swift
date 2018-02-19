@@ -1,6 +1,6 @@
 //
-//  FZ_UT_Constants.swift
-//  Hasenblut
+//  FZ_UT_Consts.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

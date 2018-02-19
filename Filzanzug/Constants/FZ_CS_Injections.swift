@@ -1,6 +1,6 @@
 //
-//  FZ_CS_Injections.swift
-//  Hasenblut
+//  FZ_CS_InjectionConsts.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 16/02/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
@@ -10,7 +10,7 @@ public struct FZInjectionConsts {
 	fileprivate static let
 	_namespace =				"FZInjections."
 	
-	static let
+	public static let
 	api = "\( _namespace )\( FZCommonPhrasesConsts.Api )",
 	image = "\( _namespace )\( FZCommonPhrasesConsts.Image )",
 	localAccess = "\( _namespace )\( FZCommonPhrasesConsts.LocalAccess )",

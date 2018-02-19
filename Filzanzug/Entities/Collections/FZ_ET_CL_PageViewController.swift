@@ -1,6 +1,6 @@
 //
 //  FZ_ET_CL_PageViewController.swift
-//  Hasenblut
+//  Filzanzug
 //
 //  Created by Richard Willis on 08/12/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.

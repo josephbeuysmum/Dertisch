@@ -1,6 +1,6 @@
 //
-//  FZ_UT_Strings.swift
-//  Boilerplate
+//  FZ_UT_String.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 15/02/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  FZ_ET_FZGradedBool.swift
-//  Hasenblut
+//  FZ_ET_GradedBool.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 17/11/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.

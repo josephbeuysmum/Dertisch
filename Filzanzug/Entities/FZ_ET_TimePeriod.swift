@@ -1,6 +1,6 @@
 //
-//  FZ_ET_FZTimePeriod.swift
-//  Hasenblut
+//  FZ_ET_TimePeriod.swift
+//  Filzanzug
 //
 //  Created by Richard Willis on 16/05/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
