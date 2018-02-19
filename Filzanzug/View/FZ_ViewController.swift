@@ -10,7 +10,7 @@ import UIKit
 
 extension FZViewController: FZViewControllerProtocol {}
 
-public class FZViewController: UIViewController {
+open class FZViewController: UIViewController {
 	public var signalBox: FZSignalsEntity
 	
 //	open let key: String
@@ -23,7 +23,7 @@ public class FZViewController: UIViewController {
 	
 	deinit { lo() }
 	
-	override public func viewDidLoad () {
+	override open func viewDidLoad () {
 		super.viewDidLoad()
 		signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewLoaded, data: self )
 	}

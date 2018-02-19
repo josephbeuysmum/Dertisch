@@ -10,7 +10,7 @@ import UIKit
 
 extension FZPageViewController: FZSignalBoxEntityProtocol {}
 
-public class FZPageViewController: UIPageViewController {
+open class FZPageViewController: UIPageViewController {
 	public var signalBox: FZSignalsEntity
 	
 	open let key: String

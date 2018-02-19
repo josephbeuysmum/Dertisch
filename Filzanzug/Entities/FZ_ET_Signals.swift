@@ -27,5 +27,11 @@ public class FZSignalsEntity {
 	
 	fileprivate var
 	_signals: FZSignalsService!,
-	_delegate: FZInitialiseSignalsProtocol? = nil
+	_delegate: FZInitialiseSignalsProtocol?
+	
+	
+	
+	public init () {
+		_delegate = nil
+	}
 }
