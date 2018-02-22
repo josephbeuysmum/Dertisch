@@ -21,92 +21,92 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`import Filzanzug
-
-protocol SomeInteractorProtocol: FZInteractorProtocol {}
-
-extension SomeInteractor: SomeInteractorProtocol {}
-
-class SomeInteractor {
-	var signalBox: FZDelegatableSignalsEntity
-	fileprivate var _wornCloset: FZWornCloset
-	fileprivate var _presenter: SomePresenter { return presenter as! SomePresenter }
+`	import Filzanzug
 	
-	required init () {
-		_wornCloset = FZWornCloset()
-		signalBox = FZDelegatableSignalsEntity()
-		signalBox.delegate = self
-	}
+	protocol SomeInteractorProtocol: FZInteractorProtocol {}
+
+	extension SomeInteractor: SomeInteractorProtocol {}
+
+	class SomeInteractor {
+		var signalBox: FZDelegatableSignalsEntity
+		fileprivate var _wornCloset: FZWornCloset
+		fileprivate var _presenter: SomePresenter { return presenter as! SomePresenter }
 	
-	deinit {}
+		required init () {
+			_wornCloset = FZWornCloset()
+			signalBox = FZDelegatableSignalsEntity()
+			signalBox.delegate = self
+		}
 	
-	func postPresenterActivated () {}
-}`
+		deinit {}
+	
+		func postPresenterActivated () {}
+	}`
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
-`import Filzanzug
+`	import Filzanzug
 
-protocol SomePresenterProtocol: FZPresenterProtocol {}
+	protocol SomePresenterProtocol: FZPresenterProtocol {}
 
-extension SomePresenter: SomePresenterProtocol {}
+	extension SomePresenter: SomePresenterProtocol {}
 
-class SomePresenter {
-	var signalBox: FZDelegatableSignalsEntity
-	fileprivate let _wornCloset: FZWornCloset
-	fileprivate var _viewController: SomeViewController { return viewController as! SomeViewController }
+	class SomePresenter {
+		var signalBox: FZDelegatableSignalsEntity
+		fileprivate let _wornCloset: FZWornCloset
+		fileprivate var _viewController: SomeViewController { return viewController as! SomeViewController }
 	
-	required init () {
-		_wornCloset = FZWornCloset()
-		signalBox = FZDelegatableSignalsEntity()
-		signalBox.delegate = self
-	}
+		required init () {
+			_wornCloset = FZWornCloset()
+			signalBox = FZDelegatableSignalsEntity()
+			signalBox.delegate = self
+		}
 	
-	deinit {}
+		deinit {}
 	
-	func postViewActivated () {}
+		func postViewActivated () {}
 	
-	func show ( pageName: String ) { }
-}`
+		func show ( pageName: String ) { }
+	}`
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
 
-`import Filzanzug
-
-class SomeViewController: FZViewController {}`
+`	import Filzanzug
+	
+	class SomeViewController: FZViewController {}`
 
 Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController relationships:
 
-`import Filzanzug
-import SwinjectStoryboard
+`	import Filzanzug
+	import SwinjectStoryboard
 
-extension SwinjectStoryboard {
-	@objc class func postSetup () {
-		var viewController: FZViewController?
-		let signals: FZSignalsService = defaultContainer.resolve( FZSignalsService.self )!
-		defaultContainer.storyboardInitCompleted( SomeViewController.self ) {
-			resolvable, instance in
-			viewController = instance
-			instance.signalBox.signals = signals
-			_ = resolvable.resolve( SomeInteractor.self )! }
-		defaultContainer.register( SomePresenter.self ) {
-			resolvable in SomePresenter()
-			}.inObjectScope( .container ).initCompleted( {
+	extension SwinjectStoryboard {
+		@objc class func postSetup () {
+			var viewController: FZViewController?
+			let signals: FZSignalsService = defaultContainer.resolve( FZSignalsService.self )!
+			defaultContainer.storyboardInitCompleted( SomeViewController.self ) {
 				resolvable, instance in
+				viewController = instance
 				instance.signalBox.signals = signals
-				signals.transmitSignalFor( key: FZInjectionConsts.routing, data: resolvable.resolve( FZRoutingService.self )! )
-				signals.transmitSignalFor( key: FZInjectionConsts.viewController, data: viewController )
-				viewController = nil
-				instance.activate() } )
-		defaultContainer.register( SomeInteractor.self ) {
-			resolvable in SomeInteractor()
-			}.inObjectScope( .transient ).initCompleted( {
-				resolvable, instance in
-				instance.signalBox.signals = signals
-				signals.transmitSignalFor( key: FZInjectionConsts.image, data: resolvable.resolve( FZImageProxy.self )! )
-				signals.transmitSignalFor( key: FZInjectionConsts.presenter, data: resolvable.resolve( SomePresenter.self )! )
-				instance.activate() } )
-	}
-}`
+				_ = resolvable.resolve( SomeInteractor.self )! }
+			defaultContainer.register( SomePresenter.self ) {
+				resolvable in SomePresenter()
+				}.inObjectScope( .container ).initCompleted( {
+					resolvable, instance in
+					instance.signalBox.signals = signals
+					signals.transmitSignalFor( key: FZInjectionConsts.routing, data: resolvable.resolve( FZRoutingService.self )! )
+					signals.transmitSignalFor( key: FZInjectionConsts.viewController, data: viewController )
+					viewController = nil
+					instance.activate() } )
+			defaultContainer.register( SomeInteractor.self ) {
+				resolvable in SomeInteractor()
+				}.inObjectScope( .transient ).initCompleted( {
+					resolvable, instance in
+					instance.signalBox.signals = signals
+					signals.transmitSignalFor( key: FZInjectionConsts.image, data: resolvable.resolve( FZImageProxy.self )! )
+					signals.transmitSignalFor( key: FZInjectionConsts.presenter, data: resolvable.resolve( SomePresenter.self )! )
+					instance.activate() } )
+		}
+	}`
 
 An example repo will follow this brief, introductory documentation.
