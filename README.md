@@ -21,7 +21,8 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`	import Filzanzug
+`	
+	import Filzanzug
 	
 	protocol SomeInteractorProtocol: FZInteractorProtocol {}
 
@@ -45,7 +46,8 @@ A basic, boilerplate Filzanzug Interactor looks like this:
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
-`	import Filzanzug
+`	
+	import Filzanzug
 
 	protocol SomePresenterProtocol: FZPresenterProtocol {}
 
@@ -71,13 +73,15 @@ A basic, boilerplate Filzanzug Presenter looks like this:
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
 
-`	import Filzanzug
+`	
+	import Filzanzug
 	
 	class SomeViewController: FZViewController {}`
 
 Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController relationships:
 
-`	import Filzanzug
+`	
+	import Filzanzug
 	import SwinjectStoryboard
 
 	extension SwinjectStoryboard {
