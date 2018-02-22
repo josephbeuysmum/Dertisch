@@ -26,10 +26,8 @@ public extension FZPresenterProtocol {
 	
 	
 	public func activate () {
-//		lo()
 		_ = signalBox.signals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
 			[ unowned self ] _, data in
-//			lo()
 			guard data as? FZViewController == self.viewController else { return }
 			self.signalBox.signals.transmitSignalFor( key: FZSignalConsts.presenterActivated, data: self )
 			self.postViewActivated() }
@@ -40,17 +38,14 @@ public extension FZPresenterProtocol {
 		scopedWornCloset.entities = FZPresenterEntities( scopedWornCloset.key )
 		signalBox.signals.scanFor( key: FZInjectionConsts.routing, scanner: self ) {
 			_, data in
-			lo(data)
 			guard data is FZRoutingService else { return }
 			scopedWornCloset.presenterEntities?.set( routingService: data as! FZRoutingService ) }
 		signalBox.signals.scanFor( key: FZInjectionConsts.viewController, scanner: self ) {
 			_, data in
-			lo(data)
 			guard data is FZViewController else { return }
 			scopedWornCloset.presenterEntities?.set( viewController: data as! FZViewController ) }
 		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
 			[ unowned self ] timer in
-			lo(timer)
 			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.routing, scanner: self )
 			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.viewController, scanner: self )
 			timer.invalidate() }
@@ -71,7 +66,7 @@ public extension FZPresenterProtocol {
 	public func postViewActivated () { lo() }
 }
 
-public protocol FZPresenterProtocol: FZWornClosetImplementerProtocol {
+public protocol FZPresenterProtocol: FZDelegatableWornClosetImplementerProtocol {
 	var viewController: FZViewController? { get }
 	func postViewActivated ()
 	func present ( viewName: String )

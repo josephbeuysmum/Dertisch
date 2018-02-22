@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name            = "Filzanzug"
-  s.version         = "0.0.10"
-  s.summary         = "A lightweight VIPER framework for Swift apps."
+  s.version         = "0.0.11"
+  s.summary         = "A lightweight VIPER DI framework for Swift apps."
   s.description     = <<-DESC
   Filzanzug is lightweight VIPER framework for Swift built using a 'write once, read never' ('WORN') dependency injection system,
   meaning properties are injected once and not publicly accessible thereafter.
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license         = "MIT"
   s.author          = { "Richard Willis" => "richard@josephbeuysmum.co.uk" }
   s.platform        = :ios, "10.0"
-  s.source          = { :git => "https://github.com/josephbeuysmum/Filzanzug.git", :tag => "0.0.10" }
+  s.source          = { :git => "https://github.com/josephbeuysmum/Filzanzug.git", :tag => "#{ s.version }" }
   s.source_files    = "Filzanzug/**/*.{h,m,swift}"
   s.swift_version   = "4"
   s.dependency "Signals"

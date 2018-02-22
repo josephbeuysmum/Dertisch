@@ -7,6 +7,5 @@
 //
 
 public protocol FZSignalsEntityProtocol {
-	var delegate: FZInitialiseSignalsProtocol? { get set }
 	var signals: FZSignalsService { get set }
 }

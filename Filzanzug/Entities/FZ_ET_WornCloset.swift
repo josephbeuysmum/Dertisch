@@ -15,7 +15,7 @@ public class FZWornCloset: FZWornClosetProtocol {
 		set {
 			guard _entities == nil else { return }
 			_entities = newValue
-			lo( _key, _entities )
+//			lo( _key, _entities )
 		}
 	}
 	public var key: String { return _key }
@@ -31,7 +31,7 @@ public class FZWornCloset: FZWornClosetProtocol {
 	
 	required public init () {
 		_key = NSUUID().uuidString
-		lo(_key)
+//		lo(_key)
 	}
 
 	public func deallocate () {

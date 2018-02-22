@@ -9,17 +9,17 @@
 import SwinjectStoryboard
 import UIKit
 
-public class FZRoutingService: FZRoutingServiceProtocol {
+open class FZRoutingService: FZRoutingServiceProtocol {
 	public var signalBox: FZSignalsEntity
-	public var window: UIWindow? {
-		get { return nil }
-		set {
-			guard _window == nil else { return }
-			_window = newValue
-			_window.makeKeyAndVisible()
-			start()
-		}
-	}
+//	public var window: UIWindow? {
+//		get { return nil }
+//		set {
+//			guard _window == nil else { return }
+//			_window = newValue
+//			_window.makeKeyAndVisible()
+//			lo( signalBox.signals )
+//		}
+//	}
 	
 	fileprivate var
 	_wornCloset: FZWornCloset,
@@ -55,17 +55,12 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 		}
 	}
 	
-	public func styleApp() {}
-	
-	public func start () {}
 	
 	
-	
-	public func add ( rootViewController id: String ) {
-		_add( rootViewController: id )
-	}
-	
-	public func add ( rootViewController id: String, from storyboard: String ) {
+	public func add ( rootViewController id: String, inside window: UIWindow, from storyboard: String? = nil ) {
+		guard _window == nil else { return }
+		_window = window
+		_window.makeKeyAndVisible()
 		_add( rootViewController: id, from: storyboard )
 	}
 	
@@ -74,11 +69,7 @@ public class FZRoutingService: FZRoutingServiceProtocol {
 		return viewArray[ 0 ] as? UIView
 	}
 	
-	public func create ( viewController id: String ) -> UIViewController? {
-		return _create( viewController: id )
-	}
-	
-	public func create ( viewController id: String, from storyboard: String ) -> UIViewController? {
+	public func create ( viewController id: String, from storyboard: String? = nil ) -> UIViewController? {
 		return _create( viewController: id, from: storyboard )
 	}
 	

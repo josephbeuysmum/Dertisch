@@ -3,7 +3,7 @@
 //  Filzanzug
 //
 //  Created by Richard Willis on 19/04/2016.
-//  Copyright © 2016 EoID Ltd. All rights reserved.
+//  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
 import Foundation

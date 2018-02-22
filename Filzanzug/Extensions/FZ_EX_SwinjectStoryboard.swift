@@ -11,6 +11,8 @@ import SwinjectStoryboard
 extension SwinjectStoryboard {
 	@objc class func postSetup () {}
 	
+	// herehere add assertions throughout (see https://andybargh.com/swift-assertions/)`
+	
 	@objc class func setup () {
 		// signals first, and all classes depend on it
 		defaultContainer.register( FZSignalsService.self ) { _ in FZSignalsService() }.inObjectScope( .container )

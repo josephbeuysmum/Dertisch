@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A995F5CC203F3568009C39A4 /* FZ_PT_ET_DelegatableSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5CB203F3568009C39A4 /* FZ_PT_ET_DelegatableSignals.swift */; };
+		A995F5CE203F35B3009C39A4 /* FZ_ET_DelegatableSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5CD203F35B3009C39A4 /* FZ_ET_DelegatableSignals.swift */; };
+		A995F5D0203F3689009C39A4 /* FZ_PT_ET_DelegatableSignalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5CF203F3689009C39A4 /* FZ_PT_ET_DelegatableSignalBox.swift */; };
+		A995F5D2203F3797009C39A4 /* FZ_PT_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5D1203F3796009C39A4 /* FZ_PT_SV_Routing.swift */; };
+		A995F5D4203F37E1009C39A4 /* FZ_PT_VP_DelegatableWornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5D3203F37E1009C39A4 /* FZ_PT_VP_DelegatableWornCloset.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B5317C2039F62700DB1C85 /* FilzanzugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5317B2039F62700DB1C85 /* FilzanzugTests.swift */; };
 		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,7 +47,6 @@
 		A9B532152039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531AF2039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift */; };
 		A9B532162039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B12039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift */; };
 		A9B532172039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B22039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift */; };
-		A9B532192039F73500DB1C85 /* FZ_PT_VP_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */; };
 		A9B5321A2039F73500DB1C85 /* FZ_PT_VP_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */; };
 		A9B5321B2039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */; };
 		A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */; };
@@ -102,6 +106,11 @@
 
 /* Begin PBXFileReference section */
 		2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.debug.xcconfig"; sourceTree = "<group>"; };
+		A995F5CB203F3568009C39A4 /* FZ_PT_ET_DelegatableSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_DelegatableSignals.swift; sourceTree = "<group>"; };
+		A995F5CD203F35B3009C39A4 /* FZ_ET_DelegatableSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_DelegatableSignals.swift; sourceTree = "<group>"; };
+		A995F5CF203F3689009C39A4 /* FZ_PT_ET_DelegatableSignalBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_DelegatableSignalBox.swift; sourceTree = "<group>"; };
+		A995F5D1203F3796009C39A4 /* FZ_PT_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Routing.swift; sourceTree = "<group>"; };
+		A995F5D3203F37E1009C39A4 /* FZ_PT_VP_DelegatableWornCloset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_DelegatableWornCloset.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531702039F62600DB1C85 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
 		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,7 +149,6 @@
 		A9B531AF2039F73500DB1C85 /* FZ_PT_UT_Deallocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_UT_Deallocatable.swift; sourceTree = "<group>"; };
 		A9B531B12039F73500DB1C85 /* FZ_PT_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_Stopwatch.swift; sourceTree = "<group>"; };
 		A9B531B22039F73500DB1C85 /* FZ_PT_CP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_CP_WornCloset.swift; sourceTree = "<group>"; };
-		A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Routing.swift; sourceTree = "<group>"; };
 		A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Presenter.swift; sourceTree = "<group>"; };
 		A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_WornCloset.swift; sourceTree = "<group>"; };
 		A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
@@ -327,12 +335,12 @@
 		A9B531A52039F73500DB1C85 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531A62039F73500DB1C85 /* Utils */,
 				A9B531B02039F73500DB1C85 /* Components */,
-				A9B531B32039F73500DB1C85 /* Viper */,
+				A9B531C62039F73500DB1C85 /* Entities */,
 				A9B531BF2039F73500DB1C85 /* Proxies */,
 				A9B531C22039F73500DB1C85 /* Services */,
-				A9B531C62039F73500DB1C85 /* Entities */,
+				A9B531A62039F73500DB1C85 /* Utils */,
+				A9B531B32039F73500DB1C85 /* Viper */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -362,7 +370,7 @@
 		A9B531B32039F73500DB1C85 /* Viper */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531B52039F73500DB1C85 /* FZ_PT_VP_Routing.swift */,
+				A995F5D3203F37E1009C39A4 /* FZ_PT_VP_DelegatableWornCloset.swift */,
 				A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */,
 				A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */,
 				A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */,
@@ -384,8 +392,9 @@
 		A9B531C22039F73500DB1C85 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531C42039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift */,
+				A995F5D1203F3796009C39A4 /* FZ_PT_SV_Routing.swift */,
 				A9B531C52039F73500DB1C85 /* FZ_PT_SV_Signals.swift */,
+				A9B531C42039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -393,21 +402,23 @@
 		A9B531C62039F73500DB1C85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				A9B531D62039F73500DB1C85 /* Collections */,
 				A9B531C72039F73500DB1C85 /* FZ_PT_ET_API.swift */,
+				A995F5CF203F3689009C39A4 /* FZ_PT_ET_DelegatableSignalBox.swift */,
+				A995F5CB203F3568009C39A4 /* FZ_PT_ET_DelegatableSignals.swift */,
+				A9B531CF2039F73500DB1C85 /* FZ_PT_ET_Image.swift */,
+				A9B531CE2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift */,
+				A9B531D52039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift */,
+				A9B531D02039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift */,
+				A9B531D42039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift */,
 				A9B531C82039F73500DB1C85 /* FZ_PT_ET_Presenter.swift */,
-				A9B531C92039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift */,
 				A9B531CA2039F73500DB1C85 /* FZ_PT_ET_PresenterEntities.swift */,
+				A9B531D12039F73500DB1C85 /* FZ_PT_ET_Routing.swift */,
+				A9B531C92039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift */,
+				A9B531DC2039F73500DB1C85 /* FZ_PT_ET_Signals.swift */,
 				A9B531CB2039F73500DB1C85 /* FZ_PT_ET_Stopwatch.swift */,
 				A9B531CC2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift */,
-				A9B531CE2039F73500DB1C85 /* FZ_PT_ET_Interactor.swift */,
-				A9B531CF2039F73500DB1C85 /* FZ_PT_ET_Image.swift */,
-				A9B531D02039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift */,
-				A9B531D12039F73500DB1C85 /* FZ_PT_ET_Routing.swift */,
 				A9B531D22039F73500DB1C85 /* FZ_PT_ET_ViewController.swift */,
-				A9B531D42039F73500DB1C85 /* FZ_PT_ET_ModelClassEntities.swift */,
-				A9B531D52039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift */,
-				A9B531D62039F73500DB1C85 /* Collections */,
-				A9B531DC2039F73500DB1C85 /* FZ_PT_ET_Signals.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -427,15 +438,16 @@
 		A9B531DD2039F73500DB1C85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */,
+				A9B531E72039F73500DB1C85 /* Collections */,
+				A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */,
 				A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */,
+				A995F5CD203F35B3009C39A4 /* FZ_ET_DelegatableSignals.swift */,
+				A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */,
 				A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */,
 				A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */,
 				A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */,
 				A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */,
 				A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */,
-				A9B531E72039F73500DB1C85 /* Collections */,
-				A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -626,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9B532082039F73500DB1C85 /* FZ_UT_Misc.swift in Sources */,
+				A995F5D0203F3689009C39A4 /* FZ_PT_ET_DelegatableSignalBox.swift in Sources */,
 				A9B5322C2039F73500DB1C85 /* FZ_PT_ET_StopwatchCase.swift in Sources */,
 				A9B531FA2039F73500DB1C85 /* FZ_CS_Injections.swift in Sources */,
 				A9B532142039F73500DB1C85 /* FZ_PT_UT_Initable.swift in Sources */,
@@ -643,6 +656,7 @@
 				A9B531FC2039F73500DB1C85 /* FZ_CS_Chars.swift in Sources */,
 				A9B532302039F73500DB1C85 /* FZ_PT_ET_LocalAccess.swift in Sources */,
 				A9B5322F2039F73500DB1C85 /* FZ_PT_ET_Image.swift in Sources */,
+				A995F5D2203F3797009C39A4 /* FZ_PT_SV_Routing.swift in Sources */,
 				A9B5324B2039F73500DB1C85 /* FZ_PX_LocalAccess.swift in Sources */,
 				A9B532382039F73500DB1C85 /* FZ_PT_ET_CL_Presenter.swift in Sources */,
 				A9B5321E2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift in Sources */,
@@ -673,8 +687,11 @@
 				A9B5320A2039F73500DB1C85 /* FZ_UT_Time.swift in Sources */,
 				A9B531F72039F73500DB1C85 /* FZ_CS_Metrics.swift in Sources */,
 				A9B532092039F73500DB1C85 /* FZ_UT_String.swift in Sources */,
+				A995F5D4203F37E1009C39A4 /* FZ_PT_VP_DelegatableWornCloset.swift in Sources */,
 				A9B531F92039F73500DB1C85 /* FZ_CS_Signals.swift in Sources */,
+				A995F5CC203F3568009C39A4 /* FZ_PT_ET_DelegatableSignals.swift in Sources */,
 				A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */,
+				A995F5CE203F35B3009C39A4 /* FZ_ET_DelegatableSignals.swift in Sources */,
 				A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */,
 				A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */,
 				A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */,
@@ -695,7 +712,6 @@
 				A9B532262039F73500DB1C85 /* FZ_PT_SV_Signals.swift in Sources */,
 				A9B532252039F73500DB1C85 /* FZ_PT_SV_UrlSession.swift in Sources */,
 				A9B532292039F73500DB1C85 /* FZ_PT_ET_SignalBox.swift in Sources */,
-				A9B532192039F73500DB1C85 /* FZ_PT_VP_Routing.swift in Sources */,
 				A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */,
 				A9B532282039F73500DB1C85 /* FZ_PT_ET_Presenter.swift in Sources */,
 				A9B532462039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift in Sources */,

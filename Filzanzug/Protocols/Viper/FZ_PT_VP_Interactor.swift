@@ -25,15 +25,12 @@ public extension FZInteractorProtocol {
 	
 	
 	public func activate () {
-		lo(_wornCloset?.interactorEntities)
 		guard
 			let scopedWornCloset = _wornCloset,
 			let presenterClassName = scopedWornCloset.interactorEntities?.getPresenterBy( key: scopedWornCloset.key )?.className
 			else { return }
-		lo()
 		_ = signalBox.signals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
 			[ unowned self ] _, data in
-			lo()
 			guard
 				let presenter = data as? FZPresenterProtocol,
 				presenter.className == presenterClassName
@@ -51,17 +48,14 @@ public extension FZInteractorProtocol {
 		scopedWornCloset.entities = FZInteractorEntities( scopedWornCloset.key )
 		signalBox.signals.scanFor( key: FZInjectionConsts.image, scanner: self ) {
 			_, data in
-			lo(data)
 			guard data is FZImageProxy else { return }
 			scopedWornCloset.interactorEntities?.set( imageProxy: data as! FZImageProxy ) }
 		signalBox.signals.scanFor( key: FZInjectionConsts.presenter, scanner: self ) {
 			 _, data in
-			lo(data)
 			guard data is FZPresenterProtocol else { return }
 			scopedWornCloset.interactorEntities?.set( presenter: data as! FZPresenterProtocol ) }
 		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
 			[ unowned self ] timer in
-			lo(timer)
 			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.image, scanner: self )
 			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.presenter, scanner: self )
 			timer.invalidate() }
@@ -72,7 +66,7 @@ public extension FZInteractorProtocol {
 	public func postPresenterActivated () { lo() }
 }
 
-public protocol FZInteractorProtocol: FZWornClosetImplementerProtocol {
+public protocol FZInteractorProtocol: FZDelegatableWornClosetImplementerProtocol {
 	var presenter: FZPresenterProtocol? { get }
 //	func createWornCloset () -> FZWornCloset?
 	func postPresenterActivated ()

@@ -9,29 +9,10 @@
 extension FZSignalsEntity: FZSignalsEntityProtocol {}
 
 public class FZSignalsEntity {
-	public var delegate: FZInitialiseSignalsProtocol? {
-		get { return nil }
-		set {
-			guard _delegate == nil else { return }
-			_delegate = newValue
-		}
-	}
 	public var signals: FZSignalsService {
 		get { return _signals }
-		set {
-			guard _signals == nil else { return }
-			_signals = newValue
-			_delegate?.initialiseSignals()
-		}
+		set { if _signals == nil { _signals = newValue } }
 	}
 	
-	fileprivate var
-	_signals: FZSignalsService!,
-	_delegate: FZInitialiseSignalsProtocol?
-	
-	
-	
-	public init () {
-		_delegate = nil
-	}
+	fileprivate var _signals: FZSignalsService!
 }

@@ -1,5 +1,5 @@
 //
-//  FZ_PT_VP_Routing.swift
+//  FZ_PT_SV_Routing.swift
 //  Filzanzug
 //
 //  Created by Richard Willis on 12/11/2016.
@@ -9,12 +9,9 @@
 import UIKit
 
 public protocol FZRoutingServiceProtocol: FZModelClassProtocol {
-	var window: UIWindow? { get set }
-	func add ( rootViewController id: String )
-	func add ( rootViewController id: String, from storyboard: String )
+	func add ( rootViewController id: String, inside window: UIWindow, from storyboard: String? )
 	func createNibFrom ( name nibName: String, for owner: FZViewController ) -> UIView?
-	func create ( viewController id: String ) -> UIViewController?
-	func create ( viewController id: String, from storyboard: String ) -> UIViewController?
+	func create ( viewController id: String, from storyboard: String? ) -> UIViewController?
 	func createAlertWith (
 		title: String,
 		message: String,
@@ -23,6 +20,4 @@ public protocol FZRoutingServiceProtocol: FZModelClassProtocol {
 		plusExtraButtonLabel extraButtonLabel: String? ) -> UIAlertController
 	func present ( viewController id: String, on currentViewController: FZViewController )
 	func present ( viewController id: String, on currentViewController: FZViewController, from storyboard: String )
-	func start ()
-	func styleApp ()
 }
