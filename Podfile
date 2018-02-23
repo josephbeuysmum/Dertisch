@@ -6,3 +6,10 @@ target 'Filzanzug' do
     pod 'Swinject'
     pod 'SwinjectStoryboard'
 end
+
+target 'FilzanzugTests' do
+    inherit! :search_paths
+    pod 'Signals'
+    pod 'Swinject'
+    pod 'SwinjectStoryboard'
+end
