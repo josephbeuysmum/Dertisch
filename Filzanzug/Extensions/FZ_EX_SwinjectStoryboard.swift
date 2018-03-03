@@ -18,18 +18,17 @@ extension SwinjectStoryboard {
 		defaultContainer.register( FZSignalsService.self ) { _ in FZSignalsService() }.inObjectScope( .container )
 		
 		// next all the model classes that only depend on signals
-		// todo uh... this --v
-//		defaultContainer.register( FZLocalAccessProxy.self ) {
-//			_ in FZLocalAccessProxy()
-//			}.inObjectScope( .container ).initCompleted( {
-//				resolvable, instance in
-//				instance.signals = resolvable.resolve( FZSignalsService.self )!
-//				instance.activate() } )
+		defaultContainer.register( FZLocalAccessProxy.self ) {
+			_ in FZLocalAccessProxy()
+			}.inObjectScope( .container ).initCompleted( {
+				resolvable, instance in
+				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
+				instance.activate() } )
 		defaultContainer.register( FZRoutingService.self ) {
 			_ in FZRoutingService()
 			}.inObjectScope( .container ).initCompleted( {
 				resolvable, instance in
-				instance.signalBox.signals = resolvable.resolve( FZSignalsService.self )!
+				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
 				instance.activate() } )
 		defaultContainer.register( FZStopwatch.self ) {
 			_ in FZStopwatch()
@@ -40,7 +39,7 @@ extension SwinjectStoryboard {
 			_ in FZUrlSessionService()
 			}.inObjectScope( .container ).initCompleted( {
 				resolvable, instance in
-				instance.signalBox.signals = resolvable.resolve( FZSignalsService.self )!
+				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
 				instance.activate() } )
 		
 		// finally image as it also needs URLSession
@@ -48,9 +47,11 @@ extension SwinjectStoryboard {
 			_ in FZImageProxy()
 			}.inObjectScope( .container ).initCompleted( {
 				resolvable, instance in
-				let signals = defaultContainer.resolve( FZSignalsService.self )!
-				instance.signalBox.signals = signals
-				signals.transmitSignalFor( key: FZInjectionConsts.api, data: resolvable.resolve( FZUrlSessionService.self )! )
+				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
+				instance.wornCloset.set(
+					entities: FZModelClassEntities(
+//						localAccess: resolvable.resolve( FZLocalAccessProxy.self )!,
+						urlSession: resolvable.resolve( FZUrlSessionService.self )! ) )
 				instance.activate() } )
 		
 		// dead implementations of two UI management classes so as to silence unnecessary Swinject warnings

@@ -7,5 +7,5 @@
 //
 
 public protocol FZSignalsEntityProtocol {
-	var signals: FZSignalsService { get set }
+	var signals: FZSignalsService? { get set }
 }

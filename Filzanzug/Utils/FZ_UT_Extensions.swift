@@ -6,6 +6,7 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
+// todo split these up into individual files?
 import UIKit
 
 // Date extensions make accessing properties easier

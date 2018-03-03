@@ -6,10 +6,12 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZWornClosetProtocol: FZDeallocatableProtocol, FZInitableProtocol {
-	var entities: FZEntitiesCollectionProtocol? { get set }
-	var key: String { get }
-	var interactorEntities: FZInteractorEntities? { get }
-	var modelClassEntities: FZModelClassEntities? { get }
-	var presenterEntities: FZPresenterEntities? { get }
+public protocol FZWornClosetProtocol: FZDeallocatableProtocol {
+	init ( _ key: String )
+	func getInteractorEntities ( by key: String? ) -> FZInteractorEntities?
+	func getModelClassEntities ( by key: String? ) -> FZModelClassEntities?
+	func getPresenterEntities ( by key: String? ) -> FZPresenterEntities?
+	func getSignals ( by key: String? ) -> FZSignalsService?
+	func set ( entities: FZEntitiesCollectionProtocol )
+	func set ( signals: FZSignalsService )
 }

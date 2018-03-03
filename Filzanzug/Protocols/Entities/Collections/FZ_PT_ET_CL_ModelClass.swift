@@ -6,4 +6,8 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZModelClassEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZApiEntityProtocol, FZLocalAccessEntityProtocol {}
+public protocol FZModelClassEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
+	var localAccess: FZLocalAccessProxy? { get }
+	var urlSession: FZUrlSessionService? { get }
+	init ( localAccess: FZLocalAccessProxy?, urlSession: FZUrlSessionService? )
+}

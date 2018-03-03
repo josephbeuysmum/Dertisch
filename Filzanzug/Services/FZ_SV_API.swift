@@ -11,19 +11,23 @@ import UIKit
 public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var signalBox: FZSignalsEntity
 	public var timeOut: TimeInterval
-	
-	fileprivate let _wornCloset: FZWornCloset
+	public var wornCloset: FZWornCloset {
+		get { return _wornCloset }
+		set {}
+	}
+
+	fileprivate let
+	_keyring: FZKeyring,
+	_wornCloset: FZWornCloset
 	
 	fileprivate var ongoingCalls: [ String ]
 	
 	
 	
 	required public init () {
-		signalBox = FZSignalsEntity()
-		_wornCloset = FZWornCloset()
-		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
+		_keyring = FZKeyring()
+		_wornCloset = FZWornCloset( _keyring.key )
 		timeOut = 3.0
 		ongoingCalls = []
 	}
@@ -47,7 +51,9 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 			let validUrl = URL( string: url )
 			else { return }
 		ongoingCalls.append( url )
-		if scanner != nil && block != nil { signalBox.signals.scanOnceFor( key: url, scanner: scanner!, block: block! ) }
+		if scanner != nil && block != nil {
+			wornCloset.getSignals( by: _keyring.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
+		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
 		
@@ -106,7 +112,7 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		signalBox.signals.transmitSignalFor(
+		wornCloset.getSignals( by: _keyring.key )?.transmitSignalFor(
 			key: url,
 			data: FZApiResult( success: success, url: url, data: data ) )
 }

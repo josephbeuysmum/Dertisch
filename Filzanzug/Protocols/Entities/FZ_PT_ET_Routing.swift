@@ -7,6 +7,7 @@
 //
 
 public protocol FZRoutingEntityProtocol {
-	func getRoutingServiceBy ( key: String ) -> FZRoutingService?
-	func set ( routingService: FZRoutingService )
+	var routing: FZRoutingService? { get set }
+//	func getRoutingServiceBy ( key: String ) -> FZRoutingService?
+//	func set ( routingService: FZRoutingService )
 }

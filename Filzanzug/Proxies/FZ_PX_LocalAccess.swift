@@ -8,10 +8,15 @@
 
 import UIKit
 
+// todo remove this temp. UserDefaults stuff and put core data in here
 public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
-	public var signalBox: FZSignalsEntity
+	public var wornCloset: FZWornCloset {
+		get { return _wornCloset }
+		set {}
+	}
 
 	fileprivate let
+	_keyring: FZKeyring,
 	_wornCloset: FZWornCloset,
 	storage: UserDefaults = UserDefaults.standard
 	
@@ -27,9 +32,8 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	required public init () {
 		_isActivated = false
-		signalBox = FZSignalsEntity()
-		_wornCloset = FZWornCloset()
-		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
+		_keyring = FZKeyring()
+		_wornCloset = FZWornCloset( _keyring.key )
 		_values = [:]
 	}
 	
@@ -44,10 +48,11 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	public func getValue ( by key: String ) -> String? { return _values[ key ] }
 	
 	public func set ( value: String, by key: String, and caller: FZCaller? = nil ) {
+		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
 		let signalKey = FZSignalConsts.valueSet
-		FZMisc.set( signals: signalBox.signals, withKey: signalKey, andCaller: caller )
+		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		_values[ key ] = value
-		signalBox.signals.transmitSignalFor( key: signalKey, data: key )
+		scopedSignals.transmitSignalFor( key: signalKey, data: key )
 	}
 	
 	public func annulValue ( by key: String ) -> String? {
@@ -56,8 +61,9 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	}
 	
 	public func removeValues () {
+		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
 		for ( key, _ ) in _values { _ = annulValue( by: key ) }
-		signalBox.signals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
+		scopedSignals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
 	}
 	
 	public func deleteValue ( by key: String ) {
@@ -72,11 +78,12 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	// store ("set") the given property
 	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
+		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
 		let signalKey = FZSignalConsts.valueStored
-		FZMisc.set( signals: signalBox.signals, withKey: signalKey, andCaller: caller )
+		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		storage.setValue( value, forKey: key )
 		storage.synchronize()
-		signalBox.signals.transmitSignalFor( key: signalKey )
+		scopedSignals.transmitSignalFor( key: signalKey )
 	}
 	
 	// does this property exist?

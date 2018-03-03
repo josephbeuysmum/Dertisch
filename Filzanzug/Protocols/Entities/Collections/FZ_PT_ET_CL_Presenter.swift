@@ -6,4 +6,8 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZPresenterEntitiesCollectionProtocol: FZEntitiesCollectionProtocol, FZRoutingEntityProtocol, FZViewControllerEntityProtocol, FZIsActivatedProtocol {}
+public protocol FZPresenterEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
+	var routing: FZRoutingService? { get }
+	var viewController: FZViewController? { get }
+	init ( routing: FZRoutingService?, viewController: FZViewController? )
+}

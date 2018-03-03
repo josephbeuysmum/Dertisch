@@ -8,11 +8,16 @@
 
 extension FZSignalsEntity: FZSignalsEntityProtocol {}
 
-public class FZSignalsEntity {
-	public var signals: FZSignalsService {
+public struct FZSignalsEntity {
+	public var signals: FZSignalsService? {
 		get { return _signals }
-		set { if _signals == nil { _signals = newValue } }
+		set {
+			guard _signals == nil else { return }
+			_signals = newValue
+		}
 	}
 	
-	fileprivate var _signals: FZSignalsService!
+	
+	
+	fileprivate var _signals: FZSignalsService?
 }

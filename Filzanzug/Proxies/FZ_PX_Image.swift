@@ -9,9 +9,9 @@
 import UIKit
 
 public class FZImageProxy: FZImageProxyProtocol {
-	public var signalBox: FZSignalsEntity
+	public var wornCloset: FZWornCloset
 
-	fileprivate let _wornCloset: FZWornCloset
+	fileprivate let _keyring: FZKeyring
 
 	fileprivate var
 	urlsResolving: [ String ],
@@ -20,9 +20,8 @@ public class FZImageProxy: FZImageProxyProtocol {
 	
 	
 	required public init () {
-		signalBox = FZSignalsEntity()
-		_wornCloset = FZWornCloset()
-		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
+		_keyring = FZKeyring()
+		wornCloset = FZWornCloset( _keyring.key )
 		urlsResolving = []
 		rawImages = [:]
 	}
@@ -39,27 +38,30 @@ public class FZImageProxy: FZImageProxyProtocol {
 //		}
 	}
 	
-	public func initialiseSignals () {
-		signalBox.signals.scanFor( key: FZInjectionConsts.api, scanner: self ) {
-			_, data in
-			lo(data)
-			guard data is FZUrlSessionService else { return }
-			self._wornCloset.modelClassEntities?.set( apiService: data as! FZUrlSessionService ) }
-		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
-			[ unowned self ] timer in
-			lo(timer)
-			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.api, scanner: self )
-			timer.invalidate() }
-	}
+//	public func initialiseSignals () {
+//		signalBox.signals?.scanFor( key: FZInjectionConsts.urlSession, scanner: self ) {
+//			_, data in
+//			lo(data)
+//			guard data is FZUrlSessionService else { return }
+//			self._wornCloset.getModelClassEntities( by: self._keyring.key )?.urlSession = data as? FZUrlSessionService
+//		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
+//			[ unowned self ] timer in
+//			lo(timer)
+//			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.urlSession, scanner: self )
+//			timer.invalidate() } }
+//	}
 	
 
 	
 	public func getImage ( by url: String, block:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
-		guard block != nil else { return nil }
+		guard
+			block != nil,
+			let scopedSignals = wornCloset.getSignals( by: _keyring.key )
+			else { return nil }
 		let urlKey = getUrlKey( by: url )
-		signalBox.signals.scanOnceFor( key: urlKey, scanner: self ) {
+		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
 			[ unowned self ] _, data in
 			guard self.assess( result: data ) else { return }
 			block!( url, self.getLocalImage( by: url ) )
@@ -69,16 +71,19 @@ public class FZImageProxy: FZImageProxyProtocol {
 	}
 	
 	public func loadImage ( by url: String ) {
-		guard let scopedApi = _wornCloset.modelClassEntities?.getApiServiceBy( key: _wornCloset.key ) else { return }
-		_ = signalBox.signals.scanOnceFor( key: url, scanner: self ) {
+		guard
+			let scopedUrlSession = wornCloset.getModelClassEntities( by: _keyring.key )?.urlSession,
+			let scopedSignals = wornCloset.getSignals( by: _keyring.key )
+			else { return }
+		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) {
 			[ unowned self ] _, data in
 			if let urlIndex = self.urlsResolving.index( of: url ) { self.urlsResolving.remove( at: urlIndex ) }
 			guard self.assess( result: data ) else { return }
 			let result = data as! FZApiResult
 			self.rawImages[ url ] = result.data as? Data
-			self.signalBox.signals.transmitSignalFor( key: self.getUrlKey( by: url ), data: result )
+			scopedSignals.transmitSignalFor( key: self.getUrlKey( by: url ), data: result )
 		}
-		scopedApi.call( url: url, method: FZUrlSessionService.methods.GET )
+		scopedUrlSession.call( url: url, method: FZUrlSessionService.methods.GET )
 	}
 	
 	
@@ -97,5 +102,5 @@ public class FZImageProxy: FZImageProxyProtocol {
 		return rawImages[ url ] != nil ? UIImage( data: rawImages[ url ]! ) : nil
 	}
 	
-	fileprivate func getUrlKey ( by url: String ) -> String { return "\( _wornCloset.key )_\( url )" }
+	fileprivate func getUrlKey ( by url: String ) -> String { return "\( _keyring.key )_\( url )" }
 }

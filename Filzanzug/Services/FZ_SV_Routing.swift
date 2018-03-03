@@ -10,7 +10,7 @@ import SwinjectStoryboard
 import UIKit
 
 open class FZRoutingService: FZRoutingServiceProtocol {
-	public var signalBox: FZSignalsEntity
+	public var wornCloset: FZWornCloset
 //	public var window: UIWindow? {
 //		get { return nil }
 //		set {
@@ -21,8 +21,9 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 //		}
 //	}
 	
+	fileprivate let _keyring: FZKeyring
+	
 	fileprivate var
-	_wornCloset: FZWornCloset,
 	_isActivated: Bool,
 	storyboards: [ String: SwinjectStoryboard ],
 	_window: UIWindow!,
@@ -34,23 +35,23 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 	
 	required public init () {
 		_isActivated = false
-		signalBox = FZSignalsEntity()
-		_wornCloset = FZWornCloset()
-		_wornCloset.entities = FZModelClassEntities( _wornCloset.key )
+		_keyring = FZKeyring()
+		wornCloset = FZWornCloset( _keyring.key )
 		storyboards = [:]
 	}
 	
 	deinit {}
 	
 	public func activate () {
+		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
 		_isActivated = true
-		_ = signalBox.signals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
+		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
 			[ unowned self ] _, data in self.set( interactor: data as? FZInteractorProtocol )
 		}
-		_ = signalBox.signals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
+		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
 			[ unowned self ] _, data in self.set( presenter: data as? FZPresenterProtocol )
 		}
-		_ = signalBox.signals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
+		_ = scopedSignals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
 			[ unowned self ] _, data in self.set( view: data as? FZViewController )
 		}
 	}
@@ -132,7 +133,7 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewRemoved )
+				self.wornCloset.getSignals( by: self._keyring.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
 		} )
 	}
 	
@@ -158,6 +159,6 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 		_view?.deallocate()
 //		_view = nil
 		_view = view
-		signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewSet )
+		wornCloset.getSignals( by: _keyring.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
 	}
 }

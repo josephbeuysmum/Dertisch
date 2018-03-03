@@ -9,34 +9,22 @@
 extension FZModelClassEntities: FZModelClassEntitiesCollectionProtocol {}
 
 public class FZModelClassEntities {
-	fileprivate let key: String
+	public var localAccess: FZLocalAccessProxy? { return _localAccess }
+	public var urlSession: FZUrlSessionService? { return _urlSession }
 	
 	fileprivate var
-	api: FZUrlSessionService?,
-	localAccess: FZLocalAccessProxy?
+	_localAccess: FZLocalAccessProxy?,
+	_urlSession: FZUrlSessionService?
 	
 	
 	
-	public init ( _ key: String ) { self.key = key }
-	
-	
+	public required init ( localAccess: FZLocalAccessProxy? = nil, urlSession: FZUrlSessionService? = nil ) {
+		_localAccess = localAccess
+		_urlSession = urlSession
+	}
 	
 	public func deallocate () {
-		api = nil
-		localAccess = nil
-	}
-	
-	public func getApiServiceBy ( key: String ) -> FZUrlSessionService? { return key == self.key ? api : nil }
-	
-	public func getLocalAccessProxyBy ( key: String ) -> FZLocalAccessProxy? { return key == self.key ? localAccess : nil }
-	
-	public func set ( apiService: FZUrlSessionService ) {
-		guard api == nil else { return }
-		api = apiService
-	}
-	
-	public func set ( localAccessProxy: FZLocalAccessProxy ) {
-		guard localAccess == nil else { return }
-		localAccess = localAccessProxy
+		_localAccess = nil
+		_urlSession = nil
 	}
 }

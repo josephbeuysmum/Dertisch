@@ -9,36 +9,22 @@
 extension FZPresenterEntities: FZPresenterEntitiesCollectionProtocol {}
 
 public class FZPresenterEntities {
-	public var isActivated: Bool { return viewController != nil ? viewController!.isViewLoaded : false }
-	
-	fileprivate let key: String
+	public var routing: FZRoutingService? { return _routing }
+	public var viewController: FZViewController? { return _viewController }
 	
 	fileprivate var
-	routing: FZRoutingService?,
-	viewController: FZViewController?
+	_routing: FZRoutingService?,
+	_viewController: FZViewController?
 	
 	
 	
-	public init ( _ key: String ) { self.key = key }
-	
-	
+	public required init ( routing: FZRoutingService? = nil, viewController: FZViewController? = nil ) {
+		_routing = routing
+		_viewController = viewController
+	}
 	
 	public func deallocate () {
-		routing = nil
-		viewController = nil
-	}
-	
-	public func getRoutingServiceBy ( key: String ) -> FZRoutingService? { return key == self.key ? routing : nil }
-	
-	public func getViewControllerBy ( key: String ) -> FZViewController? { return key == self.key ? viewController : nil }
-	
-	public func set ( routingService: FZRoutingService ) {
-		guard routing == nil else { return }
-		routing = routingService
-	}
-	
-	public func set ( viewController: FZViewController ) {
-		guard self.viewController == nil else { return }
-		self.viewController = viewController
+		_routing = nil
+		_viewController = nil
 	}
 }

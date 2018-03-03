@@ -43,8 +43,10 @@ public class FZStopwatch: FZStopwatchProtocol {
 	
 	// stop the count before it ends itself
 	public func stop () {
-		_ = signalBox.signals.stopScanningFor( key: identifier, scanner: self )
-		guard timer != nil else { return }
+		guard
+			signalBox.signals?.stopScanningFor( key: identifier, scanner: self ) == true,
+			timer != nil
+			else { return }
 		timer!.invalidate()
 		timer = nil
 		data = nil
@@ -57,19 +59,11 @@ public class FZStopwatch: FZStopwatchProtocol {
 		// If the timer runs its course, we transmit said key, which calls the external callback,
 		// and then immediately call stop() in _onTimerComplete() to tidy everything up.
 		stop()
-		signalBox.signals.scanOnceFor( key: identifier, scanner: self, block: block )
-		timer = Timer.scheduledTimer(
-			timeInterval: TimeInterval( delay ),
-			target: self,
-			selector: #selector( _onTimerComplete ),
-			userInfo: nil,
-			repeats: false )
-	}
-	
-	
-	
-	@objc fileprivate func _onTimerComplete () {
-		signalBox.signals.transmitSignalFor( key: identifier, data: data )
-		stop()
+		guard signalBox.signals?.scanOnceFor( key: identifier, scanner: self, block: block ) == true else { return }
+		timer = Timer.scheduledTimer( withTimeInterval: TimeInterval( delay ), repeats: false ) {
+			[ unowned self ] timer in
+			self.signalBox.signals?.transmitSignalFor( key: self.identifier, data: self.data )
+			timer.invalidate()
+			self.stop() }
 	}
 }

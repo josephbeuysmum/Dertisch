@@ -9,34 +9,22 @@
 extension FZInteractorEntities: FZInteractorEntitiesCollectionProtocol {}
 
 public class FZInteractorEntities {
-	fileprivate let key: String
+	public var image: FZImageProxy? { return _image }
+	public var presenter: FZPresenterProtocol? { return _presenter }
 	
 	fileprivate var
-	image: FZImageProxy?,
-	presenter: FZPresenterProtocol?
+	_image: FZImageProxy?,
+	_presenter: FZPresenterProtocol?
 	
 	
 	
-	public init ( _ key: String ) { self.key = key }
-	
-	
+	public required init ( image: FZImageProxy? = nil, presenter: FZPresenterProtocol? = nil ) {
+		_image = image
+		_presenter = presenter
+	}
 	
 	public func deallocate () {
-		image = nil
-		presenter = nil
-	}
-	
-	public func getImageProxyBy ( key: String ) -> FZImageProxy? { return key == self.key ? image : nil }
-	
-	public func getPresenterBy ( key: String ) -> FZPresenterProtocol? { return key == self.key ? presenter : nil }
-	
-	public func set ( imageProxy: FZImageProxy ) {
-		guard image == nil else { return }
-		image = imageProxy
-	}
-	
-	public func set ( presenter: FZPresenterProtocol ) {
-		guard self.presenter == nil else { return }
-		self.presenter = presenter
+		_image = nil
+		_presenter = nil
 	}
 }

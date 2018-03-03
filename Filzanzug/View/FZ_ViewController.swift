@@ -25,7 +25,7 @@ open class FZViewController: UIViewController {
 	
 	override open func viewDidLoad () {
 		super.viewDidLoad()
-		signalBox.signals.transmitSignalFor( key: FZSignalConsts.viewLoaded, data: self )
+		signalBox.signals?.transmitSignalFor( key: FZSignalConsts.viewLoaded, data: self )
 	}
 	
 	public func deallocate () {

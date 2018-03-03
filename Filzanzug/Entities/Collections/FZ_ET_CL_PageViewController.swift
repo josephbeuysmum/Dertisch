@@ -9,24 +9,23 @@
 extension FZPageViewControllerEntities: FZRoutingEntityProtocol, FZDeallocatableProtocol {}
 
 public class FZPageViewControllerEntities {
+	public var routing: FZRoutingService? {
+		get { return _routing }
+		set {
+			guard _routing == nil else { return }
+			_routing = newValue
+		}
+	}
+	
 	fileprivate let key: String
 	
-	fileprivate var routing: FZRoutingService?
+	fileprivate var _routing: FZRoutingService?
 
 	
 	
 	public init ( _ key: String ) { self.key = key }
 	
-	
-	
 	public func deallocate () {
-		routing = nil
-	}
-	
-	public func getRoutingServiceBy ( key: String ) -> FZRoutingService? { return key == self.key ? routing : nil }
-	
-	public func set ( routingService: FZRoutingService ) {
-		guard routing == nil else { return }
-		routing = routingService
+		_routing = nil
 	}
 }

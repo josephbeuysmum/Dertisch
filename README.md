@@ -29,13 +29,13 @@ A basic, boilerplate Filzanzug Interactor looks like this:
 	extension SomeInteractor: SomeInteractorProtocol {}
 
 	class SomeInteractor {
-		var signalBox: FZDelegatableSignalsEntity
+		var signalBox: FZSignalsEntity
 		fileprivate var _wornCloset: FZWornCloset
 		fileprivate var _presenter: SomePresenter { return presenter as! SomePresenter }
 	
 		required init () {
 			_wornCloset = FZWornCloset()
-			signalBox = FZDelegatableSignalsEntity()
+			signalBox = FZSignalsEntity()
 			signalBox.delegate = self
 		}
 	
@@ -54,13 +54,13 @@ A basic, boilerplate Filzanzug Presenter looks like this:
 	extension SomePresenter: SomePresenterProtocol {}
 
 	class SomePresenter {
-		var signalBox: FZDelegatableSignalsEntity
+		var signalBox: FZSignalsEntity
 		fileprivate let _wornCloset: FZWornCloset
 		fileprivate var _viewController: SomeViewController { return viewController as! SomeViewController }
 	
 		required init () {
 			_wornCloset = FZWornCloset()
-			signalBox = FZDelegatableSignalsEntity()
+			signalBox = FZSignalsEntity()
 			signalBox.delegate = self
 		}
 	

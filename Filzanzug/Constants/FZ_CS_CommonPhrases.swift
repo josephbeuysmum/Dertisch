@@ -12,7 +12,6 @@ public struct FZCommonPhrasesConsts {
 	Accounts = "\( Account )s",
 	Activated = "Activated",
 	Added = "Added",
-	Api = "Api",
 	Back = "Back",
 	Changed = "Changed",
 	Complete = "Complete",
@@ -48,6 +47,7 @@ public struct FZCommonPhrasesConsts {
 	Stored = "Stored",
 	Up = "Up",
 	Updated = "\( Up )dated",
+	Url = "Url",
 	View = "View",
 	ViewController = "\( View )\( Controller )"
 }
