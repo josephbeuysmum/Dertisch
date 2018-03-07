@@ -75,7 +75,6 @@ And a basic, boilerplate Filzanzug ViewController looks like this:
 
 Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController relationships:
 
-`	
 	import Filzanzug
 	import SwinjectStoryboard
 
