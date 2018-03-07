@@ -44,7 +44,6 @@ A basic, boilerplate Filzanzug Interactor looks like this:
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
-`	
 	import Filzanzug
 
 	extension SomePresenter: FZPresenterProtocol {
@@ -67,11 +66,9 @@ A basic, boilerplate Filzanzug Presenter looks like this:
 			_wornCloset = FZWornCloset( _keyring.key )
 		}
 	}
-`
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
 
-`	
 	import Filzanzug
 	
 	class SomeViewController: FZViewController {}`
@@ -110,6 +107,5 @@ Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController
 					instance.activate() } )
 		}
 	}
-`
 
 An example repo will follow this brief, introductory documentation.
