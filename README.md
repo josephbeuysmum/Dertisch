@@ -69,6 +69,31 @@ And a basic, boilerplate Filzanzug ViewController looks like this:
 	
 	class SomeViewController: FZViewController {}`
 
+A basic, boilerplate Filzanzug Proxy (or Service) looks like this:
+
+	protocol SomeProxyProtocol: FZModelClassProtocol {
+		func someFunction ( someData: Any )
+	}
+	
+	class SomeProxy: SomeProxyProtocol {
+		public var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
+	
+		fileprivate let
+		_keyring: FZKeyring,
+		_wornCloset: FZWornCloset
+	
+		required init () {
+			_keyring = FZKeyring()
+			_wornCloset = FZWornCloset( _keyring.key )
+		}
+		
+		func activate () {}
+		
+		func deallocate () {}
+		
+		func someFunction ( someData: Any ) {}
+	}
+
 Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController relationships:
 
 	import Filzanzug
