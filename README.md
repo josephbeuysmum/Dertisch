@@ -21,7 +21,7 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`	.
+`	
 	import Filzanzug
 
 	extension SomeInteractor: FZInteractorProtocol {
@@ -45,7 +45,7 @@ A basic, boilerplate Filzanzug Interactor looks like this:
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
-`	.
+`	
 	import Filzanzug
 
 	extension SomePresenter: FZPresenterProtocol {
