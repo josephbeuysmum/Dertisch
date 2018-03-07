@@ -38,7 +38,7 @@ A boilerplate Filzanzug Interactor looks like this:
 			_wornCloset = FZWornCloset( _keyring.key )
 		}
 		
-		func postPresenterActivated () { lo( wornCloset.getInteractorEntities(by: _keyring.key) ) }
+		func postPresenterActivated () {}
 	}
 
 A boilerplate Filzanzug Presenter looks like this:
