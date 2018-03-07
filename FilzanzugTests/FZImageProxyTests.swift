@@ -10,33 +10,54 @@ import XCTest
 @testable import Filzanzug
 
 class FZImageProxyTests: XCTestCase {
-	var image: FZImageProxy!
+	var imageProxy: FZImageProxy!
+	var signalsService: FZSignalsService!
 	var getImageExpectation: XCTestExpectation!
+	var loadImageExpectation: XCTestExpectation!
 
     override func setUp () {
         super.setUp()
-		image = FZImageProxy()
-		let sigs = FZSignalsService()
-		image.signalBox.delegate = image
-		image.signalBox.signals = sigs
-		sigs.transmitSignalFor( key: FZInjectionConsts.urlSession, data: FZUrlSessionService() )
+		
+		imageProxy = FZImageProxy()
+		signalsService = FZSignalsService()
+		
+		let urls = FZUrlSessionService()
+		urls.wornCloset.set( signals: signalsService )
+		
+		imageProxy.wornCloset.set( signals: signalsService )
+		imageProxy.wornCloset.set( entities: FZModelClassEntities( urlSession: urls ) )
     }
 	
     override func tearDown () {
         super.tearDown()
-//		image.signalBox.deallocate()
-		image = nil
+		imageProxy.wornCloset.deallocate()
+		imageProxy = nil
 		getImageExpectation = nil
     }
 	
     func testGetImage () {
-		lo()
+		let url = "https://cdn0.iconfinder.com/data/icons/feather/96/clock-512.png"
 		getImageExpectation = expectation( description: "getImage" )
-		_ = image.getImage( by: "https://cdn0.iconfinder.com/data/icons/feather/96/clock-512.png" ) {
-			[ unowned self ] _,_ in
-			self.getImageExpectation.fulfill()
+		_ = imageProxy.getImage( by: url ) {
+			[ unowned self ] _, data in
+			if  data is UIImage,
+				let _ = self.imageProxy.getImage( by: url ) {
+				self.getImageExpectation.fulfill()
+			}
 		}
-		wait( for: [ getImageExpectation ], timeout: 10 )
+		wait( for: [ getImageExpectation ], timeout: 4 )
     }
+	
+	func testLoadImage () {
+		let url = "http://www.photosinbox.com/download/clock-icon.jpg"
+		loadImageExpectation = expectation( description: "loadImage" )
+		signalsService.scanOnceFor( key: url, scanner: self ) {
+			[ unowned self ] _, data in
+			if  let result = data as? FZApiResult,
+				result.success == true {
+				self.loadImageExpectation.fulfill() } }
+		imageProxy.loadImage( by: url )
+		wait( for: [ loadImageExpectation ], timeout: 4 )
+	}
 }
 

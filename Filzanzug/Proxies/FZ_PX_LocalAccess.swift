@@ -10,10 +10,7 @@ import UIKit
 
 // todo remove this temp. UserDefaults stuff and put core data in here
 public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
-	public var wornCloset: FZWornCloset {
-		get { return _wornCloset }
-		set {}
-	}
+	public var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
 
 	fileprivate let
 	_keyring: FZKeyring,

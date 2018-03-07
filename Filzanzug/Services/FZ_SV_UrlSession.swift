@@ -56,7 +56,6 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
-		
 		// todo serialise json for POSTs here?
 		
 		_ = URLSession.shared.dataTask( with: request ) {

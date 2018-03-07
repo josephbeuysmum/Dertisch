@@ -13,6 +13,7 @@
 		A9024A4020435F0B0070FFB3 /* FZ_PT_ET_Keyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A3F20435F0B0070FFB3 /* FZ_PT_ET_Keyring.swift */; };
 		A97B8CA920499D7600B76082 /* FZ_PT_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97B8CA820499D7600B76082 /* FZ_PT_ET_WornCloset.swift */; };
 		A995F5D2203F3797009C39A4 /* FZ_PT_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A995F5D1203F3796009C39A4 /* FZ_PT_SV_Routing.swift */; };
+		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */; };
@@ -26,7 +27,7 @@
 		A9B531FD2039F73500DB1C85 /* FZ_CS_Prefixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531922039F73400DB1C85 /* FZ_CS_Prefixes.swift */; };
 		A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */; };
 		A9B531FF2039F73500DB1C85 /* FZ_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */; };
-		A9B532012039F73500DB1C85 /* FZ_SV_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531972039F73400DB1C85 /* FZ_SV_API.swift */; };
+		A9B532012039F73500DB1C85 /* FZ_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531972039F73400DB1C85 /* FZ_SV_UrlSession.swift */; };
 		A9B532022039F73500DB1C85 /* FZ_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531992039F73400DB1C85 /* FZ_UT_Colors.swift */; };
 		A9B532032039F73500DB1C85 /* FZ_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319A2039F73400DB1C85 /* FZ_UT_Constraints.swift */; };
 		A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5319B2039F73400DB1C85 /* FZ_UT_Log.swift */; };
@@ -108,6 +109,7 @@
 		A9024A3F20435F0B0070FFB3 /* FZ_PT_ET_Keyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_Keyring.swift; sourceTree = "<group>"; };
 		A97B8CA820499D7600B76082 /* FZ_PT_ET_WornCloset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_ET_WornCloset.swift; sourceTree = "<group>"; };
 		A995F5D1203F3796009C39A4 /* FZ_PT_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Routing.swift; sourceTree = "<group>"; };
+		A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZUrlSessionServiceTests.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531702039F62600DB1C85 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
 		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +126,7 @@
 		A9B531922039F73400DB1C85 /* FZ_CS_Prefixes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Prefixes.swift; sourceTree = "<group>"; };
 		A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Routing.swift; sourceTree = "<group>"; };
 		A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Signals.swift; sourceTree = "<group>"; };
-		A9B531972039F73400DB1C85 /* FZ_SV_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_API.swift; sourceTree = "<group>"; };
+		A9B531972039F73400DB1C85 /* FZ_SV_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_UrlSession.swift; sourceTree = "<group>"; };
 		A9B531992039F73400DB1C85 /* FZ_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Colors.swift; sourceTree = "<group>"; };
 		A9B5319A2039F73400DB1C85 /* FZ_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Constraints.swift; sourceTree = "<group>"; };
 		A9B5319B2039F73400DB1C85 /* FZ_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Log.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */,
 				A9024A382040AF610070FFB3 /* FZSignalsServiceTests.swift */,
+				A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */,
 				A9B5317D2039F62700DB1C85 /* Info.plist */,
 			);
 			path = FilzanzugTests;
@@ -291,9 +294,9 @@
 		A9B531932039F73400DB1C85 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531972039F73400DB1C85 /* FZ_SV_API.swift */,
 				A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */,
 				A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */,
+				A9B531972039F73400DB1C85 /* FZ_SV_UrlSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -716,7 +719,7 @@
 				A9B531FB2039F73500DB1C85 /* FZ_CS_Keys.swift in Sources */,
 				A9B532352039F73500DB1C85 /* FZ_PT_ET_InteractorEntities.swift in Sources */,
 				A9B532472039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift in Sources */,
-				A9B532012039F73500DB1C85 /* FZ_SV_API.swift in Sources */,
+				A9B532012039F73500DB1C85 /* FZ_SV_UrlSession.swift in Sources */,
 				A9B5323B2039F73500DB1C85 /* FZ_PT_ET_Signals.swift in Sources */,
 				A9B532452039F73500DB1C85 /* FZ_ET_CL_Presenter.swift in Sources */,
 				A9B532362039F73500DB1C85 /* FZ_PT_ET_CL_Interactor.swift in Sources */,
@@ -759,6 +762,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9024A3C2040B78C0070FFB3 /* FZImageProxyTests.swift in Sources */,
+				A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */,
 				A9024A3A2040AF610070FFB3 /* FZSignalsServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,9 +9,12 @@
 import UIKit
 
 public class FZImageProxy: FZImageProxyProtocol {
-	public var wornCloset: FZWornCloset
+	public var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
 
-	fileprivate let _keyring: FZKeyring
+	fileprivate let
+	_keyring: FZKeyring,
+	_wornCloset: FZWornCloset
+
 
 	fileprivate var
 	urlsResolving: [ String ],
@@ -21,37 +24,16 @@ public class FZImageProxy: FZImageProxyProtocol {
 	
 	required public init () {
 		_keyring = FZKeyring()
-		wornCloset = FZWornCloset( _keyring.key )
+		_wornCloset = FZWornCloset( _keyring.key )
 		urlsResolving = []
 		rawImages = [:]
 	}
 	
 	deinit {}
 	
-	public func activate () {
-//		_wornCloset.modelClassEntities?.getApiServiceBy( key: key )?.call(
-//			url: "http://localhost:8080/api/average_number_of_followers",
-//			method: FZUrlSessionService.methods.GET,
-//			parameters: nil,
-//			scanner: self ) {
-//			[ unowned self ] key, data in lo( data )
-//		}
-	}
+	public func activate () {}
 	
-//	public func initialiseSignals () {
-//		signalBox.signals?.scanFor( key: FZInjectionConsts.urlSession, scanner: self ) {
-//			_, data in
-//			lo(data)
-//			guard data is FZUrlSessionService else { return }
-//			self._wornCloset.getModelClassEntities( by: self._keyring.key )?.urlSession = data as? FZUrlSessionService
-//		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 0.5 ), repeats: false ) {
-//			[ unowned self ] timer in
-//			lo(timer)
-//			_ = self.signalBox.signals.stopScanningFor( key: FZInjectionConsts.urlSession, scanner: self )
-//			timer.invalidate() } }
-//	}
 	
-
 	
 	public func getImage ( by url: String, block:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )
