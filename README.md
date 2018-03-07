@@ -21,54 +21,52 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`	
+`	.
 	import Filzanzug
-	
-	protocol SomeInteractorProtocol: FZInteractorProtocol {}
 
-	extension SomeInteractor: SomeInteractorProtocol {}
+	extension SomeInteractor: FZInteractorProtocol {
+		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
 
-	class SomeInteractor {
-		var signalBox: FZSignalsEntity
-		fileprivate var _wornCloset: FZWornCloset
-		fileprivate var _presenter: SomePresenter { return presenter as! SomePresenter }
-	
-		required init () {
-			_wornCloset = FZWornCloset()
-			signalBox = FZSignalsEntity()
-			signalBox.delegate = self
-		}
-	
-		deinit {}
-	
 		func postPresenterActivated () {}
+	}
+
+	struct SomeInteractor {
+		fileprivate let _keyring: FZKeyring
+		fileprivate let _wornCloset: FZWornCloset
+		fileprivate var _presenter: SomePresenter? {
+			return wornCloset.getInteractorEntities( by: _keyring.key )?.presenter as? SomePresenter
+		}
+		
+		init () {
+			_keyring = FZKeyring()
+			_wornCloset = FZWornCloset( _keyring.key )
+		}
 	}`
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
-`	
+`	.
 	import Filzanzug
 
-	protocol SomePresenterProtocol: FZPresenterProtocol {}
-
-	extension SomePresenter: SomePresenterProtocol {}
-
-	class SomePresenter {
-		var signalBox: FZSignalsEntity
-		fileprivate let _wornCloset: FZWornCloset
-		fileprivate var _viewController: SomeViewController { return viewController as! SomeViewController }
-	
-		required init () {
-			_wornCloset = FZWornCloset()
-			signalBox = FZSignalsEntity()
-			signalBox.delegate = self
-		}
-	
-		deinit {}
-	
+	extension SomePresenter: FZPresenterProtocol {
+		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
+		
 		func postViewActivated () {}
-	
+		
 		func show ( pageName: String ) { }
+	}
+
+	struct SomePresenter {
+		fileprivate let _keyring: FZKeyring
+		fileprivate let _wornCloset: FZWornCloset
+		fileprivate var _viewController: SomeViewController? {
+			return wornCloset.getPresenterEntities( by: _keyring.key )?.viewController as? SomeViewController
+		}
+		
+		init () {
+			_keyring = FZKeyring()
+			_wornCloset = FZWornCloset( _keyring.key )
+		}
 	}`
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
