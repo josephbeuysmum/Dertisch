@@ -20,44 +20,35 @@ Filzanzug interactors work by implementing the *FZInteractorProtocol* protocol; 
 Using Filzanzug
 ---------------
 
-A basic, boilerplate Filzanzug Interactor looks like this:
+A boilerplate Filzanzug Interactor looks like this:
 
 	import Filzanzug
-	
-	extension SomeInteractor: FZInteractorProtocol {
+
+	struct SomeInteractor: FZInteractorProtocol {
 		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
-	
-		func postPresenterActivated () {}
-	}
-	
-	struct SomeInteractor {
+		
 		fileprivate let _keyring: FZKeyring
 		fileprivate let _wornCloset: FZWornCloset
 		fileprivate var _presenter: SomePresenter? {
 			return wornCloset.getInteractorEntities( by: _keyring.key )?.presenter as? SomePresenter
 		}
-	
+		
 		init () {
 			_keyring = FZKeyring()
 			_wornCloset = FZWornCloset( _keyring.key )
 		}
+		
+		func postPresenterActivated () { lo( wornCloset.getInteractorEntities(by: _keyring.key) ) }
 	}
 
-A basic, boilerplate Filzanzug Presenter looks like this:
+A boilerplate Filzanzug Presenter looks like this:
 
 	import Filzanzug
 
-	extension SomePresenter: FZPresenterProtocol {
+	struct SomePresenter: FZPresenterProtocol {} {
 		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
 		
-		func postViewActivated () {}
-		
-		func show ( pageName: String ) { }
-	}
-
-	struct SomePresenter {
-		fileprivate let _keyring: FZKeyring
-		fileprivate let _wornCloset: FZWornCloset
+		fileprivate let _keyring: FZKeyring, _wornCloset: FZWornCloset
 		fileprivate var _viewController: SomeViewController? {
 			return wornCloset.getPresenterEntities( by: _keyring.key )?.viewController as? SomeViewController
 		}
@@ -66,6 +57,10 @@ A basic, boilerplate Filzanzug Presenter looks like this:
 			_keyring = FZKeyring()
 			_wornCloset = FZWornCloset( _keyring.key )
 		}
+		
+		func postViewActivated () {}
+		
+		func show ( pageName: String ) {}
 	}
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
@@ -82,28 +77,31 @@ Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController
 	extension SwinjectStoryboard {
 		@objc class func postSetup () {
 			var viewController: FZViewController?
-			let signals: FZSignalsService = defaultContainer.resolve( FZSignalsService.self )!
 			defaultContainer.storyboardInitCompleted( SomeViewController.self ) {
 				resolvable, instance in
 				viewController = instance
-				instance.signalBox.signals = signals
+				instance.signalBox.signals = defaultContainer.resolve( FZSignalsService.self )!
 				_ = resolvable.resolve( SomeInteractor.self )! }
 			defaultContainer.register( SomePresenter.self ) {
 				resolvable in SomePresenter()
 				}.inObjectScope( .container ).initCompleted( {
 					resolvable, instance in
-					instance.signalBox.signals = signals
-					signals.transmitSignalFor( key: FZInjectionConsts.routing, data: resolvable.resolve( FZRoutingService.self )! )
-					signals.transmitSignalFor( key: FZInjectionConsts.viewController, data: viewController )
+					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
+					instance.wornCloset.set(
+						entities: FZPresenterEntities(
+							routing: resolvable.resolve( FZRoutingService.self )!,
+							viewController: viewController ) )
 					viewController = nil
 					instance.activate() } )
 			defaultContainer.register( SomeInteractor.self ) {
 				resolvable in SomeInteractor()
 				}.inObjectScope( .transient ).initCompleted( {
 					resolvable, instance in
-					instance.signalBox.signals = signals
-					signals.transmitSignalFor( key: FZInjectionConsts.image, data: resolvable.resolve( FZImageProxy.self )! )
-					signals.transmitSignalFor( key: FZInjectionConsts.presenter, data: resolvable.resolve( SomePresenter.self )! )
+					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
+					instance.wornCloset.set(
+						entities: FZInteractorEntities(
+							image: resolvable.resolve( FZImageProxy.self )!,
+							presenter: resolvable.resolve( SomePresenter.self )! ) )
 					instance.activate() } )
 		}
 	}
