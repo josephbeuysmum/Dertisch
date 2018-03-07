@@ -21,26 +21,26 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`import Filzanzug
-
-extension SomeInteractor: FZInteractorProtocol {
-	var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
-
-	func postPresenterActivated () {}
-}
-
-struct SomeInteractor {
-	fileprivate let _keyring: FZKeyring
-	fileprivate let _wornCloset: FZWornCloset
-	fileprivate var _presenter: SomePresenter? {
-		return wornCloset.getInteractorEntities( by: _keyring.key )?.presenter as? SomePresenter
+`	import Filzanzug
+	
+	extension SomeInteractor: FZInteractorProtocol {
+		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
+	
+		func postPresenterActivated () {}
 	}
-		
-	init () {
-		_keyring = FZKeyring()
-		_wornCloset = FZWornCloset( _keyring.key )
-	}
-}`
+	
+	struct SomeInteractor {
+		fileprivate let _keyring: FZKeyring
+		fileprivate let _wornCloset: FZWornCloset
+		fileprivate var _presenter: SomePresenter? {
+			return wornCloset.getInteractorEntities( by: _keyring.key )?.presenter as? SomePresenter
+		}
+	
+		init () {
+			_keyring = FZKeyring()
+			_wornCloset = FZWornCloset( _keyring.key )
+		}
+	}`
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
