@@ -21,7 +21,7 @@ Using Filzanzug
 
 A basic, boilerplate Filzanzug Interactor looks like this:
 
-`	import Filzanzug
+	import Filzanzug
 	
 	extension SomeInteractor: FZInteractorProtocol {
 		var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
@@ -40,7 +40,7 @@ A basic, boilerplate Filzanzug Interactor looks like this:
 			_keyring = FZKeyring()
 			_wornCloset = FZWornCloset( _keyring.key )
 		}
-	}`
+	}
 
 A basic, boilerplate Filzanzug Presenter looks like this:
 
