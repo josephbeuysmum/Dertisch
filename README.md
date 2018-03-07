@@ -10,9 +10,10 @@ Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate **_
 
 Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means:
 
--   API calls
--   Management of external images
--   Simplified access to Core Data
+-   API calls;
+-   management of external images;
+-   simplified access to Core Data; and
+-   the capacity to add custom proxies and services.
 
 Filzanzug interactors work by implementing the *FZInteractorProtocol* protocol; presenters by implementing the *FZPresenterProtocol* protocol; and viewControllers by subclassing *FZViewController*. It uses the **dependency injection** framework [Swinject](https://github.com/Swinject/Swinject) to register Interactor/Presenter/ViewController relationships at start-up.
 
