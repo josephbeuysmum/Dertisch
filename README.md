@@ -71,6 +71,8 @@ And a basic, boilerplate Filzanzug ViewController looks like this:
 
 A basic, boilerplate Filzanzug Proxy (or Service) looks like this:
 
+	import Filzanzug
+	
 	protocol SomeProxyProtocol: FZModelClassProtocol {
 		func someFunction ( someData: Any )
 	}
