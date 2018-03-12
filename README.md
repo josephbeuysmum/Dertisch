@@ -159,3 +159,11 @@ Presently `Filzanzug` uses the cocoapod dependency `SwinjectStoryboard` to regis
 	}
 
 An example repo will follow this brief, introductory documentation.
+
+-----------------------
+On the name "Filzanzug"
+-----------------------
+
+In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" very well. Richard is the author of `Filzanzug`, and was born the same year that Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting. 
+
+"Filzanzug" means "felt suit" in Deutsche, and is the name of an artwork by Joseph Beuys, which consists of 100 identical felt suits. [One of the suits](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) is in the collection of the Tate Gallery in the UK. If you'll permit me a bad pun, given that `Filzanzug` (the Swift library) is built around a "WORN closet" object, from all of Beuys' works, [Filzanzug](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) (the artwork) is "tailor-made" as a name. 
