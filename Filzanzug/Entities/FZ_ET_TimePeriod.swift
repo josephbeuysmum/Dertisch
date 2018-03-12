@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FZTimePeriod {
+extension FZTimePeriod {
 	public var description: String { return _getDescription( simplified: false, andTranslate: true ) }
 	public var numericDescription: String { return _getDescription( simplified: false, andTranslate: false ) }
 	public var simplifiedDescription: String { return _getDescription( simplified: true, andTranslate: true ) }
@@ -20,19 +20,6 @@ struct FZTimePeriod {
 	public var minutesTotal: Int { return _secondsTotal / 60 }
 	public var secondsRemainder: Int { return _secondsTotal % 60 }
 	public var secondsTotal: Int { return _secondsTotal }
-	
-	fileprivate var _secondsTotal: Int
-	
-	
-	
-	public init ( interval: TimeInterval ) {
-//		_interval = interval
-		_secondsTotal = Int( interval )
-	}
-	
-	public init ( interval: Int ) {
-		_secondsTotal = interval
-	}
 	
 	
 	
@@ -53,7 +40,7 @@ struct FZTimePeriod {
 		switch countMetrics {
 		case 0:			return ""
 		case 1:			return serialisations[ 0 ]
-		
+			
 		default:
 			var conjuction = "", value = ""
 			for i in 0..<countMetrics {
@@ -73,5 +60,17 @@ struct FZTimePeriod {
 		let serialisedValue = translate ? FZString.translate( intToText: value ) : "\( value )"
 		let serialisedMetric = "\( String( describing: serialisedValue ) ) \( metric )"
 		return value == 1 ? serialisedMetric : "\( serialisedMetric )s"
+	}
+}
+
+struct FZTimePeriod {
+	fileprivate var _secondsTotal: Int
+	
+	public init ( interval: TimeInterval ) {
+		_secondsTotal = Int( interval )
+	}
+	
+	public init ( interval: Int ) {
+		_secondsTotal = interval
 	}
 }

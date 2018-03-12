@@ -6,8 +6,10 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZInteractorEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
+public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
 	var image: FZImageProxy? { get }
 	var presenter: FZPresenterProtocol? { get }
 	init ( image: FZImageProxy?, presenter: FZPresenterProtocol? )
+//	func add ( modelClass: FZModelClassProtocol )
+//	func getModelClass ( by type: FZModelClassProtocol.Type? ) -> FZModelClassProtocol?
 }

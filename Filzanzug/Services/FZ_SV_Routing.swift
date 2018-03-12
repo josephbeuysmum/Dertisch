@@ -9,42 +9,10 @@
 import SwinjectStoryboard
 import UIKit
 
-open class FZRoutingService: FZRoutingServiceProtocol {
-	public var wornCloset: FZWornCloset
-//	public var window: UIWindow? {
-//		get { return nil }
-//		set {
-//			guard _window == nil else { return }
-//			_window = newValue
-//			_window.makeKeyAndVisible()
-//			lo( signalBox.signals )
-//		}
-//	}
-	
-	fileprivate let _keyring: FZKeyring
-	
-	fileprivate var
-	_isActivated: Bool,
-	storyboards: [ String: SwinjectStoryboard ],
-	_window: UIWindow!,
-	_view: FZViewController?,
-	_interactor: FZInteractorProtocol?,
-	_presenter: FZPresenterProtocol?
-
-	
-	
-	required public init () {
-		_isActivated = false
-		_keyring = FZKeyring()
-		wornCloset = FZWornCloset( _keyring.key )
-		storyboards = [:]
-	}
-	
-	deinit {}
-	
+extension FZRoutingService: FZRoutingServiceProtocol {
 	public func activate () {
-		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
-		_isActivated = true
+		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
+		is_activated = true
 		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
 			[ unowned self ] _, data in self.set( interactor: data as? FZInteractorProtocol )
 		}
@@ -59,9 +27,9 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 	
 	
 	public func add ( rootViewController id: String, inside window: UIWindow, from storyboard: String? = nil ) {
-		guard _window == nil else { return }
-		_window = window
-		_window.makeKeyAndVisible()
+		guard window_ == nil else { return }
+		window_ = window
+		window_.makeKeyAndVisible()
 		_add( rootViewController: id, from: storyboard )
 	}
 	
@@ -113,13 +81,13 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 	
 	fileprivate func _add ( rootViewController id: String, from storyboard: String? = nil ) {
 		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
-		_window.rootViewController = viewController
+		window_.rootViewController = viewController
 	}
 	
 	fileprivate func _create ( viewController id: String, from storyboardName: String? = nil ) -> UIViewController? {
 		let name = storyboardName ?? "Main"
-		if storyboards[ name ] == nil { storyboards[ name ] = SwinjectStoryboard.create( name: name, bundle: nil ) }
-		return storyboards[ name ]!.instantiateViewController( withIdentifier: id )
+		if storyboards_[ name ] == nil { storyboards_[ name ] = SwinjectStoryboard.create( name: name, bundle: nil ) }
+		return storyboards_[ name ]!.instantiateViewController( withIdentifier: id )
 	}
 	
 	fileprivate func _present (
@@ -127,38 +95,70 @@ open class FZRoutingService: FZRoutingServiceProtocol {
 		on currentViewController: FZViewController,
 		from storyboard: String? = nil ) {
 		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
-//		lo(currentViewController, currentViewController.parent)
+		//		lo(currentViewController, currentViewController.parent)
 		currentViewController.present(
 			viewController,
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.wornCloset.getSignals( by: self._keyring.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
+				self.wornCloset.getSignals( by: self.keyring_.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
 		} )
 	}
 	
 	fileprivate func set ( interactor: FZInteractorProtocol? ) {
-//		guard interactor != _interactor else { return }
-//		lo( _interactor, interactor )
-		_interactor?.deallocate()
-		_interactor = nil
-		_interactor = interactor
+		//		guard interactor != interactor_ else { return }
+		//		lo( interactor_, interactor )
+		interactor_?.deallocate()
+		interactor_ = nil
+		interactor_ = interactor
 	}
 	
 	fileprivate func set ( presenter: FZPresenterProtocol? ) {
-//		guard presenter != _presenter else { return }
-//		lo( _presenter, presenter )
-		_presenter?.deallocate()
-		_presenter = nil
-		_presenter = presenter
+		//		guard presenter != presenter_ else { return }
+		//		lo( presenter_, presenter )
+		presenter_?.deallocate()
+		presenter_ = nil
+		presenter_ = presenter
 	}
-
+	
 	fileprivate func set ( view: FZViewController? ) {
-		guard view != _view else { return }
-//		lo( _view, view )
-		_view?.deallocate()
-//		_view = nil
-		_view = view
-		wornCloset.getSignals( by: _keyring.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
+		guard view != view_ else { return }
+		//		lo( view_, view )
+		view_?.deallocate()
+		//		view_ = nil
+		view_ = view
+		wornCloset.getSignals( by: keyring_.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
 	}
+}
+
+open class FZRoutingService {
+	public var wornCloset: FZWornCloset
+//	public var window: UIWindow? {
+//		get { return nil }
+//		set {
+//			guard window_ == nil else { return }
+//			window_ = newValue
+//			window_.makeKeyAndVisible()
+//			lo( signalBox.signals )
+//		}
+//	}
+	
+	fileprivate let keyring_: FZKeyring
+	
+	fileprivate var
+	is_activated: Bool,
+	storyboards_: [ String: SwinjectStoryboard ],
+	window_: UIWindow!,
+	view_: FZViewController?,
+	interactor_: FZInteractorProtocol?,
+	presenter_: FZPresenterProtocol?
+
+	required public init () {
+		is_activated = false
+		keyring_ = FZKeyring()
+		wornCloset = FZWornCloset( keyring_.key )
+		storyboards_ = [:]
+	}
+	
+	deinit {}
 }

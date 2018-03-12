@@ -6,25 +6,30 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZModelClassEntities: FZModelClassEntitiesCollectionProtocol {}
-
-public class FZModelClassEntities {
-	public var localAccess: FZLocalAccessProxy? { return _localAccess }
-	public var urlSession: FZUrlSessionService? { return _urlSession }
-	
-	fileprivate var
-	_localAccess: FZLocalAccessProxy?,
-	_urlSession: FZUrlSessionService?
-	
-	
-	
-	public required init ( localAccess: FZLocalAccessProxy? = nil, urlSession: FZUrlSessionService? = nil ) {
-		_localAccess = localAccess
-		_urlSession = urlSession
-	}
+extension FZModelClassEntities: FZModelClassEntitiesCollectionProtocol {
+	public var bespokeRail: FZBespokeEntities { return bespoke_entities! }
+	public var localAccess: FZLocalAccessProxy? { return local_access }
+	public var urlSession: FZUrlSessionService? { return url_session }
 	
 	public func deallocate () {
-		_localAccess = nil
-		_urlSession = nil
+		bespoke_entities?.deallocate()
+		local_access?.deallocate()
+		url_session?.deallocate()
+		bespoke_entities = nil
+		local_access = nil
+		url_session = nil
+	}
+}
+
+public class FZModelClassEntities {
+	fileprivate var
+	local_access: FZLocalAccessProxy?,
+	url_session: FZUrlSessionService?
+	
+	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
+	
+	public required init ( localAccess: FZLocalAccessProxy? = nil, urlSession: FZUrlSessionService? = nil ) {
+		local_access = localAccess
+		url_session = urlSession
 	}
 }

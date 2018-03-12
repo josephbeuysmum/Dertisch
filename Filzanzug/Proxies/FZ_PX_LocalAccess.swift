@@ -9,43 +9,17 @@
 import UIKit
 
 // todo remove this temp. UserDefaults stuff and put core data in here
-public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
-	public var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
-
-	fileprivate let
-	_keyring: FZKeyring,
-	_wornCloset: FZWornCloset,
-	storage: UserDefaults = UserDefaults.standard
-	
-	// _values provides a platform for the storage of data that has a
-	// very short lifespan, like an ID that needs somwhere to live whilst one
-	// ViewController segues out, and another segues in. These temporary
-	// values are stored in the _values Dictionary below
-	fileprivate var
-	_isActivated: Bool,
-	_values: Dictionary < String, String >
+extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
+	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
 	
 	
-	required public init () {
-		_isActivated = false
-		_keyring = FZKeyring()
-		_wornCloset = FZWornCloset( _keyring.key )
-		_values = [:]
-	}
-	
-	deinit {}
-	
-	public func activate () {
-		_isActivated = true
-	}
-	
-	
+	public func activate () { _isActivated = true }
 	
 	public func getValue ( by key: String ) -> String? { return _values[ key ] }
 	
 	public func set ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
 		let signalKey = FZSignalConsts.valueSet
 		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		_values[ key ] = value
@@ -58,7 +32,7 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	}
 	
 	public func removeValues () {
-		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
 		for ( key, _ ) in _values { _ = annulValue( by: key ) }
 		scopedSignals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
 	}
@@ -67,7 +41,7 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 		storage.removeObject( forKey: key )
 	}
 	
-//	public func deleteValues ( key: String ) {}
+	//	public func deleteValues ( key: String ) {}
 	
 	public func retrieveValue ( by key: String ) -> String? {
 		return storage.string( forKey: key )
@@ -75,17 +49,36 @@ public class FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	// store ("set") the given property
 	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: _keyring.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
 		let signalKey = FZSignalConsts.valueStored
 		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		storage.setValue( value, forKey: key )
 		storage.synchronize()
 		scopedSignals.transmitSignalFor( key: signalKey )
 	}
+
+}
+
+public class FZLocalAccessProxy {
+	fileprivate let
+	keyring_: FZKeyring,
+	worn_closet: FZWornCloset,
+	storage: UserDefaults = UserDefaults.standard
 	
-	// does this property exist?
-//	public func has ( key: String ) -> Bool
-//	{
-//		return retrieve( key: key ) != nil
-//	}
+	// _values provides a platform for the storage of data that has a
+	// very short lifespan, like an ID that needs somwhere to live whilst one
+	// ViewController segues out, and another segues in. These temporary
+	// values are stored in the _values Dictionary below
+	fileprivate var
+	_isActivated: Bool,
+	_values: Dictionary < String, String >
+	
+	required public init () {
+		_isActivated = false
+		keyring_ = FZKeyring()
+		worn_closet = FZWornCloset( keyring_.key )
+		_values = [:]
+	}
+	
+	deinit {}
 }

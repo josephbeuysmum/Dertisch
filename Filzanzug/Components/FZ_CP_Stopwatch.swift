@@ -9,18 +9,18 @@
 import Foundation
 
 public class FZStopwatch: FZStopwatchProtocol {
-	public var identifier: String { return "FZStopwatch_\( key ).Complete" }
+	public var identifier: String { return "FZStopwatch_\( key_ ).Complete" }
 	public var signalBox: FZSignalsEntity
 	
 	fileprivate var
-	key: String,
+	key_: String,
 	timer: Timer?,
 	data: Any?
 	
 	
 	
 	public init () {
-		key = NSUUID().uuidString
+		key_ = NSUUID().uuidString
 		signalBox = FZSignalsEntity()
 	}
 	

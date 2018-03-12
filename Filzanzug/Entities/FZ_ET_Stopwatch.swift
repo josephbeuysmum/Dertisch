@@ -6,27 +6,25 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZStopwatchEntity: FZStopwatchEntityProtocol {}
-
-public class FZStopwatchEntity {
-	fileprivate let key: String
-	
-	fileprivate var stopwatch: FZStopwatch?
-	
-	
-	
-	public init ( _ key: String ) { self.key = key }
-	
+extension FZStopwatchEntity: FZStopwatchEntityProtocol {
 	public func deallocate () {
-		stopwatch = nil
+		stopwatch_ = nil
 	}
 	
-	public func getStopwatchBy ( key scopedKey: String ) -> FZStopwatch? {
-		return key == self.key ? stopwatch : nil
+	public func getStopwatchBy ( key: String ) -> FZStopwatch? {
+		return key == key_ ? stopwatch_ : nil
 	}
 	
 	public func set ( stopwatch: FZStopwatch ) {
-		guard self.stopwatch == nil else { return }
-		self.stopwatch = stopwatch
+		guard stopwatch_ == nil else { return }
+		stopwatch_ = stopwatch
 	}
+}
+
+public class FZStopwatchEntity {
+	fileprivate let key_: String
+	
+	fileprivate var stopwatch_: FZStopwatch?
+	
+	public init ( _ key: String ) { self.key_ = key }
 }

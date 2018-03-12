@@ -8,39 +8,19 @@
 
 import UIKit
 
-public class FZImageProxy: FZImageProxyProtocol {
-	public var wornCloset: FZWornCloset { get { return _wornCloset } set {} }
-
-	fileprivate let
-	_keyring: FZKeyring,
-	_wornCloset: FZWornCloset
-
-
-	fileprivate var
-	urlsResolving: [ String ],
-	rawImages: Dictionary< String, Data >
-
+extension FZImageProxy: FZImageProxyProtocol {
+	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
 	
-	required public init () {
-		_keyring = FZKeyring()
-		_wornCloset = FZWornCloset( _keyring.key )
-		urlsResolving = []
-		rawImages = [:]
-	}
-	
-	deinit {}
 	
 	public func activate () {}
-	
-	
 	
 	public func getImage ( by url: String, block:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
 		guard
 			block != nil,
-			let scopedSignals = wornCloset.getSignals( by: _keyring.key )
+			let scopedSignals = wornCloset.getSignals( by: keyring_.key )
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
@@ -54,15 +34,15 @@ public class FZImageProxy: FZImageProxyProtocol {
 	
 	public func loadImage ( by url: String ) {
 		guard
-			let scopedUrlSession = wornCloset.getModelClassEntities( by: _keyring.key )?.urlSession,
-			let scopedSignals = wornCloset.getSignals( by: _keyring.key )
+			let scopedUrlSession = wornCloset.getModelClassEntities( by: keyring_.key )?.urlSession,
+			let scopedSignals = wornCloset.getSignals( by: keyring_.key )
 			else { return }
 		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) {
 			[ unowned self ] _, data in
 			if let urlIndex = self.urlsResolving.index( of: url ) { self.urlsResolving.remove( at: urlIndex ) }
 			guard self.assess( result: data ) else { return }
 			let result = data as! FZApiResult
-			self.rawImages[ url ] = result.data as? Data
+			self.raw_images[ url ] = result.data as? Data
 			scopedSignals.transmitSignalFor( key: self.getUrlKey( by: url ), data: result )
 		}
 		scopedUrlSession.call( url: url, method: FZUrlSessionService.methods.GET )
@@ -81,8 +61,28 @@ public class FZImageProxy: FZImageProxyProtocol {
 	}
 	
 	fileprivate func getLocalImage ( by url: String ) -> UIImage? {
-		return rawImages[ url ] != nil ? UIImage( data: rawImages[ url ]! ) : nil
+		return raw_images[ url ] != nil ? UIImage( data: raw_images[ url ]! ) : nil
 	}
 	
-	fileprivate func getUrlKey ( by url: String ) -> String { return "\( _keyring.key )_\( url )" }
+	fileprivate func getUrlKey ( by url: String ) -> String { return "\( keyring_.key )_\( url )" }
+}
+
+public class FZImageProxy {
+	fileprivate let
+	keyring_: FZKeyring,
+	worn_closet: FZWornCloset
+
+
+	fileprivate var
+	urlsResolving: [ String ],
+	raw_images: Dictionary< String, Data >
+
+	required public init () {
+		keyring_ = FZKeyring()
+		worn_closet = FZWornCloset( keyring_.key )
+		urlsResolving = []
+		raw_images = [:]
+	}
+	
+	deinit {}
 }

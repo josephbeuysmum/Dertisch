@@ -1,5 +1,5 @@
 //
-//  FZ_ET_WornCloset.swift
+//  FZ_ETworn_closet.swift
 //  Filzanzug
 //
 //  Created by Richard Willis on 12/02/2018.
@@ -9,61 +9,44 @@
 import Foundation
 
 // we have to make the WornCloset a class not a struct because we access it from a protocol extension and in that context will simply be copied if it is a struct
-public class FZWornCloset: FZWornClosetProtocol {
-//	public var signals: FZSignalsService? {
-//		get { return nil }
-//		set {
-//			guard _signals == nil else { return }
-//			_signals = newValue
-//		}
-//	}
-//	public var entities: FZEntitiesCollectionProtocol? {
-//		get { return _entities }
-//		set {
-//			guard _entities == nil else { return }
-//			_entities = newValue
-//		}
-//	}
-	
-	fileprivate let _key: String
-	
-	fileprivate var
-	_signals: FZSignalsService?,
-	_entities: FZEntitiesCollectionProtocol?
-
-	
-	
-	required public init ( _ key: String ) { _key = key }
-	
+extension FZWornCloset: FZWornClosetProtocol {
 	public func deallocate () {
-		_entities?.deallocate()
-		_entities = nil
-		_signals = nil
+		entities_?.deallocate()
+		entities_ = nil
+		signals_ = nil
 	}
 	
-	
-	
 	public func getInteractorEntities ( by key: String? ) -> FZInteractorEntities? {
-		return key == _key ? _entities as? FZInteractorEntities : nil
+		return key == key_ ? entities_ as? FZInteractorEntities : nil
 	}
 	
 	public func getModelClassEntities ( by key: String? ) -> FZModelClassEntities? {
-		return key == _key ? _entities as? FZModelClassEntities : nil
+		return key == key_ ? entities_ as? FZModelClassEntities : nil
 	}
 	
 	public func getPresenterEntities ( by key: String? ) -> FZPresenterEntities? {
-		return key == _key ? _entities as? FZPresenterEntities : nil
+		return key == key_ ? entities_ as? FZPresenterEntities : nil
 	}
 	
-	public func getSignals ( by key: String? ) -> FZSignalsService? { return key == _key ? _signals : nil }
+	public func getSignals ( by key: String? ) -> FZSignalsService? { return key == key_ ? signals_ : nil }
 	
 	public func set ( entities: FZEntitiesCollectionProtocol ) {
-		guard _entities == nil else { return }
-		_entities = entities
+		guard entities_ == nil else { return }
+		entities_ = entities
 	}
 	
 	public func set ( signals: FZSignalsService ) {
-		guard _signals == nil else { return }
-		_signals = signals
+		guard signals_ == nil else { return }
+		signals_ = signals
 	}
+}
+
+public class FZWornCloset {
+	fileprivate let key_: String
+	
+	fileprivate var
+	signals_: FZSignalsService?,
+	entities_: FZEntitiesCollectionProtocol?
+	
+	required public init ( _ key: String ) { key_ = key }
 }

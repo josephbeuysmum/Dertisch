@@ -6,25 +6,23 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZPresenterEntities: FZPresenterEntitiesCollectionProtocol {}
-
-public class FZPresenterEntities {
-	public var routing: FZRoutingService? { return _routing }
-	public var viewController: FZViewController? { return _viewController }
-	
-	fileprivate var
-	_routing: FZRoutingService?,
-	_viewController: FZViewController?
-	
-	
-	
-	public required init ( routing: FZRoutingService? = nil, viewController: FZViewController? = nil ) {
-		_routing = routing
-		_viewController = viewController
-	}
+extension FZPresenterEntities: FZPresenterEntitiesCollectionProtocol {
+	public var routing: FZRoutingService? { return routing_ }
+	public var viewController: FZViewController? { return view_controller }
 	
 	public func deallocate () {
-		_routing = nil
-		_viewController = nil
+		routing_ = nil
+		view_controller = nil
+	}
+}
+
+public class FZPresenterEntities {
+	fileprivate var
+	routing_: FZRoutingService?,
+	view_controller: FZViewController?
+	
+	public required init ( routing: FZRoutingService? = nil, viewController: FZViewController? = nil ) {
+		routing_ = routing
+		view_controller = viewController
 	}
 }

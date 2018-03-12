@@ -8,12 +8,12 @@
 
 // a FZGradedBool delivers a figure between 0.0 and 1.0 to indicate the degree of success in function calls that attempt multiple things
 public struct FZGradedBool {
-	public var value: Double { return _value }
+	public var value: Double { return value_ }
 	
-	fileprivate let _value: Double
+	fileprivate let value_: Double
 	
 	public init ( _ value: Double ) {
 		guard 0.0...1.0 ~= value else { fatalError( "FZGradedBool value must be from 0.0 to 1.0" ) }
-		_value = value
+		value_ = value
 	}
 }

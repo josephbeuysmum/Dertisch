@@ -6,26 +6,23 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZPageViewControllerEntities: FZRoutingEntityProtocol, FZDeallocatableProtocol {}
-
-public class FZPageViewControllerEntities {
+extension FZPageViewControllerEntities: FZRoutingEntityProtocol, FZDeallocatableProtocol {
 	public var routing: FZRoutingService? {
-		get { return _routing }
+		get { return routing_ }
 		set {
-			guard _routing == nil else { return }
-			_routing = newValue
+			guard routing_ == nil else { return }
+			routing_ = newValue
 		}
 	}
-	
+	public func deallocate () {
+		routing_ = nil
+	}
+}
+
+public class FZPageViewControllerEntities {
 	fileprivate let key: String
 	
-	fileprivate var _routing: FZRoutingService?
+	fileprivate var routing_: FZRoutingService?
 
-	
-	
 	public init ( _ key: String ) { self.key = key }
-	
-	public func deallocate () {
-		_routing = nil
-	}
 }

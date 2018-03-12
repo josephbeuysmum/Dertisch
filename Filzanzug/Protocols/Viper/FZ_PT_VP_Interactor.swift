@@ -10,8 +10,8 @@ import Foundation
 
 public extension FZInteractorProtocol {
 	public var className: String { return String( describing: self ) }
-//	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: _closetKey )?.presenter }
-	fileprivate var _closetKey: String? {
+//	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: closetkey_ )?.presenter }
+	fileprivate var closetkey_: String? {
 		let selfReflection = Mirror( reflecting: self )
 		for ( _, child ) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
@@ -23,7 +23,7 @@ public extension FZInteractorProtocol {
 	
 	public func activate () {
 		guard
-			let scopedKey = _closetKey,
+			let scopedKey = closetkey_,
 			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter?.className,
 			let scopedSignals = wornCloset.getSignals( by: scopedKey )
 			else { return }

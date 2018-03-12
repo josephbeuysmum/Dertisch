@@ -7,6 +7,6 @@
 //
 
 public protocol FZStopwatchEntityProtocol: FZDeallocatableProtocol {
-	func getStopwatchBy ( key scopedKey: String ) -> FZStopwatch?
+	func getStopwatchBy ( key: String ) -> FZStopwatch?
 	func set ( stopwatch: FZStopwatch )
 }

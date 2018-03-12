@@ -1,5 +1,5 @@
  //
-//  FZ_SV_Signals.swift
+//  FZ_SVsignals_.swift
 //  Filzanzug
 //
 //  Created by Richard Willis on 11/02/2016.
@@ -8,24 +8,7 @@
 
 import Signals
 
-public class FZSignalsService: FZSignalsServiceProtocol {
-	// _signals are the actual signals, whilst _signatures are references to the classes that observer them
-	// a signal may have many signatures, but a signature only has one signal
-	fileprivate var
-	_signals: Dictionary < String, Signal< ( String, Any? ) > >,
-	_signatures: Dictionary < String, [ FZSignalSignature ] >
-	
-	
-	
-	required public init () {
-		_signals = Dictionary < String, Signal< ( String, Any? ) > >()
-		_signatures = Dictionary < String, [ FZSignalSignature ] >()
-	}
-	
-	deinit {}
-	
-	
-	
+extension FZSignalsService: FZSignalsServiceProtocol {
 	// removes a signal
 	public func annulSignalFor ( key: String, scanner: AnyObject ) {
 		guard
@@ -33,15 +16,15 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 			else { return }
 		_annulSignalFor( key: key, signal: signal )
 		loFeedback( "_annulSignalFor", key )
-//		_log()
+		//		_log()
 	}
 	
-	public func hasSignalFor ( key: String ) -> Bool { return _signals[ key ] != nil }
+	public func hasSignalFor ( key: String ) -> Bool { return signals_[ key ] != nil }
 	
 	// can be called from without to check current list of signals and scanners
 	public func logSignatures () {
 		var output = "CURRENT SIGNATURES:"
-		for ( _, signatures ) in _signatures {
+		for ( _, signatures ) in signatures_ {
 			_ = signatures.map { signature in output = "\( output ) \( signature.description )" }
 		}
 	}
@@ -84,7 +67,7 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 	// removes a scanner
 	public func stopScanningFor ( key: String, scanner: AnyObject ) -> Bool {
 		return _stopScanningFor( key: key, scanner: scanner )
-//		_log()
+		//		_log()
 	}
 	
 	// removes multiple scanners
@@ -121,8 +104,8 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 				scansContinuously: scanContinuously )
 			
 			// register the scanner to the signal
-			if _signatures[ key ] == nil { _signatures[ key ] = [ FZSignalSignature ]() }
-			_signatures[ key ]!.append( signature )
+			if signatures_[ key ] == nil { signatures_[ key ] = [ FZSignalSignature ]() }
+			signatures_[ key ]!.append( signature )
 			
 			// then scan
 			if scanContinuously {
@@ -133,9 +116,9 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 					with: scanner,
 					callback: {
 						[ unowned self ] key, _ in
-						guard let scopedSignatures = self._signatures[ key ] else { return }
-//							let len = scopedSignatures.count as Int?
-//						var scopedSignature: FZSignalSignature
+						guard let scopedSignatures = self.signatures_[ key ] else { return }
+						//							let len = scopedSignatures.count as Int?
+						//						var scopedSignature: FZSignalSignature
 						
 						// loop through all scopedSignatures
 						_ = scopedSignatures.map {
@@ -170,30 +153,30 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 	// annuls a signal
 	fileprivate func _annulSignalFor ( key: String, signal: Signal< ( String, Any? ) > ) {
 		signal.cancelAllSubscriptions()
-		_signals.removeValue( forKey: key )
-		_signatures.removeValue( forKey: key )
+		signals_.removeValue( forKey: key )
+		signatures_.removeValue( forKey: key )
 	}
 	
 	// returns a signal by a key; creates the signal if it's missing
 	fileprivate func _getSignalBy ( key: String, createIfMissing: Bool ) -> Signal< ( String, Any? ) >? {
-		if _signals[ key ] == nil && createIfMissing {
-			_signals[ key ] = Signal< ( String, Any? ) >()
+		if signals_[ key ] == nil && createIfMissing {
+			signals_[ key ] = Signal< ( String, Any? ) >()
 		}
 		
-		return _signals[ key ] == nil ? nil : _signals[ key ]!
+		return signals_[ key ] == nil ? nil : signals_[ key ]!
 	}
 	
 	// logging function
 	fileprivate func _getFZSignalSignaturesDescription () -> String {
 		var signaturesDescription = FZCharConsts.emptyString
-		for ( key, _ ) in _signals { signaturesDescription = "\( signaturesDescription )\n^                           \( key )" }
+		for ( key, _ ) in signals_ { signaturesDescription = "\( signaturesDescription )\n^                           \( key )" }
 		return signaturesDescription
 	}
 	
 	// checks for existence of a scanner
 	fileprivate func _scannerExistsFor ( key: String, scanner: AnyObject ) -> Bool {
 		guard
-			let scanners = _signatures[ key ] as [ FZSignalSignature ]?,
+			let scanners = signatures_[ key ] as [ FZSignalSignature ]?,
 			let countScanners = scanners.count as Int?
 			else { return false }
 		for i in 0..<countScanners { if scanners[ i ].scanner === scanner { return true } }
@@ -210,7 +193,7 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 		// if nothing is left scanning to this signal, we might as well delete it
 		_annulEmpty( signal: signal, key: key, scanner: scanner )
 		
-		if let scopedSignatures = _signatures[ key ] {
+		if let scopedSignatures = signatures_[ key ] {
 			let countScopedSignatures = scopedSignatures.count
 			var scopedSignature: FZSignalSignature
 			for i in 0..<countScopedSignatures {
@@ -219,7 +202,7 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 				// any signature with the signal's key that belongs to the calling object can also be deleted
 				if  scopedSignature.key == key,
 					scopedSignature.scanner === scanner {
-					_signatures[ key ]!.remove( at: i )
+					signatures_[ key ]!.remove( at: i )
 					break
 				}
 			}
@@ -237,4 +220,19 @@ public class FZSignalsService: FZSignalsServiceProtocol {
 		signal => ( key, data: data )
 		//		if _logs { _log() }
 	}
+}
+
+public class FZSignalsService {
+	// signals_ are the actual signals, whilst signatures_ are references to the classes that observer them
+	// a signal may have many signatures, but a signature only has one signal
+	fileprivate var
+	signals_: Dictionary < String, Signal< ( String, Any? ) > >,
+	signatures_: Dictionary < String, [ FZSignalSignature ] >
+	
+	required public init () {
+		signals_ = Dictionary < String, Signal< ( String, Any? ) > >()
+		signatures_ = Dictionary < String, [ FZSignalSignature ] >()
+	}
+	
+	deinit {}
 }

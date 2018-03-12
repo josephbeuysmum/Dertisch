@@ -9,7 +9,7 @@
 public extension FZModelClassProtocol {
 	public var className: String { return String( describing: self ) }
 	// todo this is repeated code, is there any way to avoid repeating it?
-	fileprivate var _closetKey: String? {
+	fileprivate var closetkey_: String? {
 		let selfReflection = Mirror( reflecting: self )
 		for ( _, child ) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
@@ -22,7 +22,7 @@ public extension FZModelClassProtocol {
 	public func activate () {}
 	
 	func transmitActivation ( with key: String ) {
-		guard let scopedKey = _closetKey else { return }
+		guard let scopedKey = closetkey_ else { return }
 		wornCloset.getSignals( by: scopedKey )?.transmitSignalFor( key: FZSignalConsts.modelClassActivated, data: className )
 	}
 	

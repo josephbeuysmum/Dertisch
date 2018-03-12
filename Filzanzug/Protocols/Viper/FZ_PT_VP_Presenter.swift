@@ -10,8 +10,8 @@ import Foundation
 
 public extension FZPresenterProtocol {
 	public var className: String { return String( describing: self ) }
-//	public var viewController: FZViewController? { return wornCloset.getPresenterEntities( by: _closetKey )?.viewController }
-	fileprivate var _closetKey: String? {
+//	public var viewController: FZViewController? { return wornCloset.getPresenterEntities( by: closetkey_ )?.viewController }
+	fileprivate var closetkey_: String? {
 		let selfReflection = Mirror( reflecting: self )
 		for ( _, child ) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
@@ -23,10 +23,10 @@ public extension FZPresenterProtocol {
 	
 	public func activate () {
 		guard
-			let scopedClosetKey = _closetKey,
+			let scopedClosetKey = closetkey_,
 			let scopedSignals = wornCloset.getSignals( by: scopedClosetKey )
 			else { return }
-//		guard let scopedKey = _closetKey else { return }
+//		guard let scopedKey = closetkey_ else { return }
 		_ = scopedSignals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self as AnyObject ) {
 //			[ unowned self ]
 			_, data in
@@ -36,7 +36,7 @@ public extension FZPresenterProtocol {
 	}
 	
 	public func present ( viewName: String ) {
-		guard let presenterEntities = wornCloset.getPresenterEntities( by: _closetKey ) else { return }
+		guard let presenterEntities = wornCloset.getPresenterEntities( by: closetkey_ ) else { return }
 		presenterEntities.routing?.present( viewController: viewName, on: presenterEntities.viewController! )
 	}
 	

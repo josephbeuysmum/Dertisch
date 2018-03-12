@@ -6,25 +6,30 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZInteractorEntities: FZInteractorEntitiesCollectionProtocol {}
-
-public class FZInteractorEntities {
-	public var image: FZImageProxy? { return _image }
-	public var presenter: FZPresenterProtocol? { return _presenter }
-	
-	fileprivate var
-	_image: FZImageProxy?,
-	_presenter: FZPresenterProtocol?
-	
-	
-	
-	public required init ( image: FZImageProxy? = nil, presenter: FZPresenterProtocol? = nil ) {
-		_image = image
-		_presenter = presenter
-	}
+extension FZInteractorEntities: FZInteractorEntitiesCollectionProtocol {
+	public var bespokeRail: FZBespokeEntities { return bespoke_entities! }
+	public var image: FZImageProxy? { return image_ }
+	public var presenter: FZPresenterProtocol? { return presenter_ }
 	
 	public func deallocate () {
-		_image = nil
-		_presenter = nil
+		bespoke_entities?.deallocate()
+		image_?.deallocate()
+		presenter_?.deallocate()
+		bespoke_entities = nil
+		image_ = nil
+		presenter_ = nil
+	}
+}
+
+public class FZInteractorEntities {
+	fileprivate var
+	image_: FZImageProxy?,
+	presenter_: FZPresenterProtocol?
+	
+	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
+	
+	public required init ( image: FZImageProxy? = nil, presenter: FZPresenterProtocol? = nil ) {
+		image_ = image
+		presenter_ = presenter
 	}
 }

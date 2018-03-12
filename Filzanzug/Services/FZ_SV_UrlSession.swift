@@ -8,35 +8,14 @@
 
 import UIKit
 
-public class FZUrlSessionService: FZUrlSessionServiceProtocol {
+extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var timeOut: TimeInterval
-	public var wornCloset: FZWornCloset {
-		get { return _wornCloset }
-		set {}
-	}
-
-	fileprivate let
-	_keyring: FZKeyring,
-	_wornCloset: FZWornCloset
-	
-	fileprivate var ongoingCalls: [ String ]
+	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
 	
-	
-	required public init () {
-		_keyring = FZKeyring()
-		_wornCloset = FZWornCloset( _keyring.key )
-		timeOut = 3.0
-		ongoingCalls = []
-	}
-	
-	deinit {}
 	
 	public func activate () {}
-
-	
 	
 	public func call (
 		url: String,
@@ -44,15 +23,15 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 		parameters: Dictionary< String, String >? = nil,
 		scanner: AnyObject? = nil,
 		block: ( ( String, Any? ) -> Void )? = nil ) {
-//		lo( url )
-//		lo( method, parameters, scanner, block )
+		//		lo( url )
+		//		lo( method, parameters, scanner, block )
 		guard
-			ongoingCalls.index( of: url ) == nil,
+			ongoing_calls.index( of: url ) == nil,
 			let validUrl = URL( string: url )
 			else { return }
-		ongoingCalls.append( url )
+		ongoing_calls.append( url )
 		if scanner != nil && block != nil {
-			wornCloset.getSignals( by: _keyring.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
+			wornCloset.getSignals( by: keyring_.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -69,7 +48,7 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 				return
 			}
 			// todo reintroduce stopwatch so hanging calls can be cancelled?
-			if let callIndex = self.ongoingCalls.index( of: url ) { self.ongoingCalls.remove( at: callIndex ) }
+			if let callIndex = self.ongoing_calls.index( of: url ) { self.ongoing_calls.remove( at: callIndex ) }
 			do {
 				switch data!.mimeType {
 				case Data.mimeTypes.RTF:		try self.cast( richText: data!, with: url )
@@ -82,7 +61,7 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 			} catch {
 				self.transmit( success: false, with: url )
 			}
-		}.resume()
+			}.resume()
 	}
 	
 	
@@ -95,7 +74,7 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 	fileprivate func cast ( richText data: Data, with url: String ) throws {
 		do {
 			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
-//			let success = json[ FZKeyConsts.success ] is Bool ? json[ FZKeyConsts.success ] as? Bool : nil
+			//			let success = json[ FZKeyConsts.success ] is Bool ? json[ FZKeyConsts.success ] as? Bool : nil
 			let castArray: [ Dictionary< String, Any > ]
 			if let rawData = json[ FZKeyConsts.data ] {
 				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!
@@ -111,17 +90,36 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		wornCloset.getSignals( by: _keyring.key )?.transmitSignalFor(
+		wornCloset.getSignals( by: keyring_.key )?.transmitSignalFor(
 			key: url,
 			data: FZApiResult( success: success, url: url, data: data ) )
+	}
 }
 
+public class FZUrlSessionService {
+//	public var time_out: TimeInterval
+
+	fileprivate let
+	keyring_: FZKeyring,
+	worn_closet: FZWornCloset
+	
+	fileprivate var ongoing_calls: [ String ]
+	
+	required public init () {
+		keyring_ = FZKeyring()
+		worn_closet = FZWornCloset( keyring_.key )
+//		time_out = 3.0
+		ongoing_calls = []
+	}
+	
+	deinit {}
+	
 	
 	
 //	fileprivate func annulCallFor ( _ url: String ) {
-//		guard let callIndex = ongoingCalls.index( of: url ), callIndex > -1 else { return }
-//		ongoingCalls.remove( at: callIndex )
-////		lo( "calls remaining:", ongoingCalls.count )
+//		guard let callIndex = ongoing_calls.index( of: url ), callIndex > -1 else { return }
+//		ongoing_calls.remove( at: callIndex )
+////		lo( "calls remaining:", ongoing_calls.count )
 //	}
 	
 //	fileprivate func _call (
@@ -129,11 +127,11 @@ public class FZUrlSessionService: FZUrlSessionServiceProtocol {
 //		method: FZUrlSessionService.methods,
 //		parameters: Dictionary< String, String >? = nil ) {
 //		guard
-//			ongoingCalls.index( of: url ) == nil,
+//			ongoing_calls.index( of: url ) == nil,
 //			let scopedSignals = signalBox.getSignalsServiceBy( key: key ),
 //			let validUrl = URL( string: url )
 //			else { return }
-//		ongoingCalls.append( url )
+//		ongoing_calls.append( url )
 //		Alamofire.request(
 //			url,
 //			method: method,
