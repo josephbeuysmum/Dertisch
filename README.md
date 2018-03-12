@@ -24,43 +24,47 @@ A boilerplate Filzanzug Interactor looks like this:
 
 	import Filzanzug
 
-	struct SomeInteractor: FZInteractorProtocol {
+	extension SomeInteractor: FZInteractorProtocol {
 		var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		
+		func postPresenterActivated () {}
+	}
 
+	struct SomeInteractor {
 		fileprivate let keyring_: FZKeyring
 		fileprivate let worn_closet: FZWornCloset
-		fileprivate var _presenter: SomePresenter? {
-			return wornCloset.getInteractorEntities( by: keyring_.key )?.presenter as? SomePresenter
+		fileprivate var presenter_: SomePresenter? {
+			return worn_closet.getInteractorEntities( by: keyring_.key )?.presenter as? SomePresenter
 		}
-
+		
 		init () {
 			keyring_ = FZKeyring()
 			worn_closet = FZWornCloset( keyring_.key )
 		}
-
-		func postPresenterActivated () {}
 	}
 
 A boilerplate Filzanzug Presenter looks like this:
 
 	import Filzanzug
 
-	struct SomePresenter: FZPresenterProtocol {
+	extension SomePresenter: FZPresenterProtocol {
 		var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		
+		func postViewActivated () {}
+		
+		func show ( pageName: String ) {}
+	}
 
+	struct SomePresenter {
 		fileprivate let keyring_: FZKeyring, worn_closet: FZWornCloset
 		fileprivate var _viewController: SomeViewController? {
-			return wornCloset.getPresenterEntities( by: keyring_.key )?.viewController as? SomeViewController
+			return worn_closet.getPresenterEntities( by: keyring_.key )?.viewController as? SomeViewController
 		}
-
+		
 		init () {
 			keyring_ = FZKeyring()
 			worn_closet = FZWornCloset( keyring_.key )
 		}
-
-		func postViewActivated () {}
-
-		func show ( pageName: String ) {}
 	}
 
 And a basic, boilerplate Filzanzug ViewController looks like this:
@@ -77,32 +81,52 @@ A basic, boilerplate Filzanzug Proxy (or Service) looks like this:
 		func someFunction ( someData: Any )
 	}
 
-	class SomeProxy: SomeProxyProtocol {
+	extension SomeProxy: SomeProxyProtocol {
 		public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		
+		func activate () {}
+		
+		func deallocate () {}
+		
+		func someFunction ( someData: Any ) {}
+	}
 
+	class SomeProxy {
 		fileprivate let
 		keyring_: FZKeyring,
 		worn_closet: FZWornCloset
-
+		
 		required init () {
 			keyring_ = FZKeyring()
 			worn_closet = FZWornCloset( keyring_.key )
 		}
-
-		func activate () {}
-
-		func deallocate () {}
-
-		func someFunction ( someData: Any ) {}
 	}
 
-Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController relationships:
+Presently `Filzanzug` uses the cocoapod dependency `SwinjectStoryboard` to register and dependency-inject  ModelClass/Interactor/Presenter/ViewController relationships, the next version of `Filzanzug` aims to remove this dependency:
 
 	import Filzanzug
 	import SwinjectStoryboard
 
 	extension SwinjectStoryboard {
+		
 		@objc class func postSetup () {
+			
+			defaultContainer.register( SomeService.self ) {
+				_ in SomeService()
+				}.inObjectScope( .container ).initCompleted( {
+					resolvable, instance in
+					instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
+					instance.activate() } )
+			defaultContainer.register( SomeProxy.self ) {
+				_ in SomeProxy()
+				}.inObjectScope( .container ).initCompleted( {
+					resolvable, instance in
+					instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
+					let entities = FZModelClassEntities()
+					entities.bespokeRail.add( modelClass: defaultContainer.resolve( SomeService.self )! )
+					instance.wornCloset.set( entities: entities )
+					instance.activate() } )
+
 			var viewController: FZViewController?
 			defaultContainer.storyboardInitCompleted( SomeViewController.self ) {
 				resolvable, instance in
@@ -111,7 +135,7 @@ Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController
 				_ = resolvable.resolve( SomeInteractor.self )! }
 			defaultContainer.register( SomePresenter.self ) {
 				resolvable in SomePresenter()
-				}.inObjectScope( .container ).initCompleted( {
+				}.inObjectScope( .transient ).initCompleted( {
 					resolvable, instance in
 					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
 					instance.wornCloset.set(
@@ -125,10 +149,11 @@ Extend `SwinjectStoryboard` to register your Interactor/Presenter/ViewController
 				}.inObjectScope( .transient ).initCompleted( {
 					resolvable, instance in
 					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
-					instance.wornCloset.set(
-						entities: FZInteractorEntities(
-							image: resolvable.resolve( FZImageProxy.self )!,
-							presenter: resolvable.resolve( SomePresenter.self )! ) )
+					let entities = FZInteractorEntities(
+						image: resolvable.resolve( FZImageProxy.self )!,
+						presenter: resolvable.resolve( SomePresenter.self )! )
+					entities.bespokeRail.add( modelClass: defaultContainer.resolve( SomeProxy.self )! )
+					instance.wornCloset.set( entities: entities )
 					instance.activate() } )
 		}
 	}
