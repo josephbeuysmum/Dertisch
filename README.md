@@ -15,7 +15,7 @@ Filzanzug is specifically structured with the goal of **minimising code resuse**
 -   simplified access to Core Data; and
 -   the capacity to add custom proxies and services.
 
-Filzanzug interactors work by implementing the *FZInteractorProtocol* protocol; presenters by implementing the *FZPresenterProtocol* protocol; and viewControllers by subclassing *FZViewController*. It uses the **dependency injection** framework [Swinject](https://github.com/Swinject/Swinject) to register Interactor/Presenter/ViewController relationships at start-up.
+Filzanzug interactors work by implementing the *FZInteractorProtocol* protocol; presenters by implementing the *FZPresenterProtocol* protocol; and viewControllers by subclassing *FZViewController*. It uses dependency injection to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
 
 Using Filzanzug
 ---------------
@@ -102,59 +102,26 @@ A basic, boilerplate Filzanzug Proxy (or Service) looks like this:
 		}
 	}
 
-Presently `Filzanzug` uses the cocoapod dependency `SwinjectStoryboard` to register and dependency-inject  ModelClass/Interactor/Presenter/ViewController relationships, the next version of `Filzanzug` aims to remove this dependency:
+
+
+Extending `FZRoutingService` and implementing the `registerDependencies()` function allows you to register dependency-injection Interactor/Presenter/ViewController/ModelClass relationships:
 
 	import Filzanzug
-	import SwinjectStoryboard
 
-	extension SwinjectStoryboard {
-		
-		@objc class func postSetup () {
-			
-			defaultContainer.register( SomeService.self ) {
-				_ in SomeService()
-				}.inObjectScope( .container ).initCompleted( {
-					resolvable, instance in
-					instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
-					instance.activate() } )
-			defaultContainer.register( SomeProxy.self ) {
-				_ in SomeProxy()
-				}.inObjectScope( .container ).initCompleted( {
-					resolvable, instance in
-					instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
-					let entities = FZModelClassEntities()
-					entities.bespokeRail.add( modelClass: defaultContainer.resolve( SomeService.self )! )
-					instance.wornCloset.set( entities: entities )
-					instance.activate() } )
-
-			var viewController: FZViewController?
-			defaultContainer.storyboardInitCompleted( SomeViewController.self ) {
-				resolvable, instance in
-				viewController = instance
-				instance.signalBox.signals = defaultContainer.resolve( FZSignalsService.self )!
-				_ = resolvable.resolve( SomeInteractor.self )! }
-			defaultContainer.register( SomePresenter.self ) {
-				resolvable in SomePresenter()
-				}.inObjectScope( .transient ).initCompleted( {
-					resolvable, instance in
-					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
-					instance.wornCloset.set(
-						entities: FZPresenterEntities(
-							routing: resolvable.resolve( FZRoutingService.self )!,
-							viewController: viewController ) )
-					viewController = nil
-					instance.activate() } )
-			defaultContainer.register( SomeInteractor.self ) {
-				resolvable in SomeInteractor()
-				}.inObjectScope( .transient ).initCompleted( {
-					resolvable, instance in
-					instance.wornCloset.set( signals: defaultContainer.resolve( FZSignalsService.self )! )
-					let entities = FZInteractorEntities(
-						image: resolvable.resolve( FZImageProxy.self )!,
-						presenter: resolvable.resolve( SomePresenter.self )! )
-					entities.bespokeRail.add( modelClass: defaultContainer.resolve( SomeProxy.self )! )
-					instance.wornCloset.set( entities: entities )
-					instance.activate() } )
+	extension FZRoutingService: FZRoutingServiceExtensionProtocol {
+		public func registerDependencies ( with key: String ) {
+			register( FZLocalAccessProxy.self, with: key )
+			register( FZUrlSessionService.self, with: key )
+			register( FZImageProxy.self, with: key, injecting: [ FZLocalAccessProxy.self, FZUrlSessionService.self ] )
+			register( SomeProxy.self, with: key )
+			register( SomeService.self, with: key, injecting: [ SomeProxy.self ] )
+			register(
+				viewControllerId: "SomeViewController",
+				viewControllerType: SomeViewController.self,
+				interactorType: SomeInteractor.self,
+				presenterType: SomePresenter.self,
+				with: key,
+				injecting: [ SomeProxy.self ] )
 		}
 	}
 
