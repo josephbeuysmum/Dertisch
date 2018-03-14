@@ -6,31 +6,33 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-import SwinjectStoryboard
+//import SwinjectStoryboard
 import UIKit
 
 extension FZRoutingService: FZRoutingServiceProtocol {
+	public var wornCloset: FZWornCloset { return worn_closet }
+
+	
+	
 	public func activate () {
-		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
+//		guard let scopedSignals = worn_closet.getSignals( by: key_ring.key ) else { return }
 		is_activated = true
-		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
-			[ unowned self ] _, data in self.set( interactor: data as? FZInteractorProtocol )
-		}
-		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
-			[ unowned self ] _, data in self.set( presenter: data as? FZPresenterProtocol )
-		}
-		_ = scopedSignals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
-			[ unowned self ] _, data in self.set( view: data as? FZViewController )
-		}
+//		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
+//			[ unowned self ] _, data in self.set( interactor: data as? FZInteractorProtocol )
+//		}
+//		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
+//			[ unowned self ] _, data in self.set( presenter: data as? FZPresenterProtocol )
+//		}
+//		_ = scopedSignals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
+//			[ unowned self ] _, data in self.set( view: data as? FZViewController )
+//		}
 	}
 	
 	
 	
-	public func add ( rootViewController id: String, inside window: UIWindow, from storyboard: String? = nil ) {
-		guard window_ == nil else { return }
-		window_ = window
-		window_.makeKeyAndVisible()
-		_add( rootViewController: id, from: storyboard )
+	public func add ( rootViewController id: String, from storyboard: String? = nil ) {
+		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
+		window_.rootViewController = viewController
 	}
 	
 	public func createNibFrom ( name nibName: String, for owner: FZViewController ) -> UIView? {
@@ -38,7 +40,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		return viewArray[ 0 ] as? UIView
 	}
 	
-	public func create ( viewController id: String, from storyboard: String? = nil ) -> UIViewController? {
+	public func create ( viewController id: String, from storyboard: String? = nil ) -> FZViewController? {
 		return _create( viewController: id, from: storyboard )
 	}
 	
@@ -77,17 +79,84 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		_present( viewController: id, on: currentViewController, from: storyboard )
 	}
 	
-	
-	
-	fileprivate func _add ( rootViewController id: String, from storyboard: String? = nil ) {
-		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
-		window_.rootViewController = viewController
+	public func register (
+		_ modelClassType: FZModelClassProtocol.Type,
+		with key: String,
+		injecting dependencyTypes: [ FZModelClassProtocol.Type ]? = nil ) {
+		let modelClassId = String( describing: modelClassType )
+		guard canRegister( with: key ) else { return }
+		let modelClass = modelClassType.init()
+		let entities = FZModelClassEntities()
+		lo( modelClass )
+		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
+		if dependencyTypes != nil {
+			_ = dependencyTypes!.map {
+				dependencyType in
+				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
+					lo( dependencyClass )
+					switch true {
+					case dependencyClass is FZLocalAccessProxy:			entities.set( localAccess: dependencyClass as! FZLocalAccessProxy )
+					case dependencyClass is FZUrlSessionService:		entities.set( urlSession: dependencyClass as! FZUrlSessionService )
+					default:											entities.bespokeRail.add( modelClass: dependencyClass )
+					}
+				} else {
+					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
+				}
+			}
+		}
+		modelClass.wornCloset.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		modelClass.wornCloset.set( entities: entities )
+		model_class_singletons[ modelClassId ] = modelClass
 	}
 	
-	fileprivate func _create ( viewController id: String, from storyboardName: String? = nil ) -> UIViewController? {
+	public func register (
+		viewControllerId: String,
+		viewControllerType: FZViewControllerProtocol.Type,
+		interactorType: FZInteractorProtocol.Type,
+		presenterType: FZPresenterProtocol.Type,
+		with key: String,
+		injecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? = nil ) {
+		guard
+			vip_relationships[ viewControllerId ] == nil,
+			canRegister( with: key )
+			else { return }
+		vip_relationships[ viewControllerId ] = FZVipRelationship(
+			viewControllerType: viewControllerType,
+			interactorType: interactorType,
+			presenterType: presenterType,
+			interactorDependencyTypes: interactorDependencyTypes )
+	}
+	
+	public func start ( rootViewController: String, window: UIWindow, storyboard: String? = nil ) {
+		guard
+			window_ == nil,
+			self is FZRoutingServiceExtensionProtocol
+			else { return }
+		( self as! FZRoutingServiceExtensionProtocol ).registerDependencies( with: key_ring.key )
+		window_ = window
+		window_.makeKeyAndVisible()
+		add( rootViewController: rootViewController, from: storyboard )
+	}
+	
+
+	
+
+	
+	fileprivate func canRegister ( with key: String ) -> Bool {
+//		lo( is_activated, key, key_ring.key, id )
+		return is_activated == false && key == key_ring.key
+	}
+	
+	fileprivate func _create ( viewController id: String, from storyboardName: String? = nil ) -> FZViewController? {
 		let name = storyboardName ?? "Main"
-		if storyboards_[ name ] == nil { storyboards_[ name ] = SwinjectStoryboard.create( name: name, bundle: nil ) }
-		return storyboards_[ name ]!.instantiateViewController( withIdentifier: id )
+		guard
+			let vipRelationship = vip_relationships[ id ],
+			let viewController = UIStoryboard( name: name, bundle: nil ).instantiateViewController( withIdentifier: id ) as? FZViewController
+			else { return nil }
+		set( viewController )
+		set( presenter: vipRelationship.presenterType.init() )
+		set( interactor: vipRelationship.interactorType.init(), with: vipRelationship.interactorDependencyTypes )
+		return viewController
 	}
 	
 	fileprivate func _present (
@@ -101,63 +170,73 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.wornCloset.getSignals( by: self.keyring_.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
+				self.worn_closet.getSignals( by: self.key_ring.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
 		} )
 	}
 	
-	fileprivate func set ( interactor: FZInteractorProtocol? ) {
-		//		guard interactor != interactor_ else { return }
-		//		lo( interactor_, interactor )
+	fileprivate func set ( interactor: FZInteractorProtocol, with dependencyTypes: [ FZModelClassProtocol.Type ]? ) {
 		interactor_?.deallocate()
-		interactor_ = nil
 		interactor_ = interactor
+		let entities = FZInteractorEntities( presenter: presenter_! )
+		if dependencyTypes != nil {
+			_ = dependencyTypes!.map {
+				dependencyType in
+				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
+//					lo( dependencyClass )
+					if dependencyClass is FZImageProxy {
+						entities.set( image: dependencyClass as! FZImageProxy )
+					} else {
+						entities.bespokeRail.add( modelClass: dependencyClass )
+					}
+				} else {
+					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
+				}
+			}
+		}
+		interactor_!.wornCloset.set( entities: entities )
+		interactor_!.wornCloset.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		interactor_!.activate()
 	}
 	
-	fileprivate func set ( presenter: FZPresenterProtocol? ) {
-		//		guard presenter != presenter_ else { return }
-		//		lo( presenter_, presenter )
+	fileprivate func set ( presenter: FZPresenterProtocol ) {
 		presenter_?.deallocate()
-		presenter_ = nil
 		presenter_ = presenter
+		presenter_!.wornCloset.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		presenter_!.wornCloset.set( entities: FZPresenterEntities( routing: self, viewController: view_controller ) )
+		presenter_!.activate()
 	}
 	
-	fileprivate func set ( view: FZViewController? ) {
-		guard view != view_ else { return }
-		//		lo( view_, view )
-		view_?.deallocate()
-		//		view_ = nil
-		view_ = view
-		wornCloset.getSignals( by: keyring_.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
+	fileprivate func set ( _ viewController: FZViewController ) {
+		guard viewController != view_controller else { return }
+//		lo( view_controller, view )
+		view_controller?.deallocate()
+		view_controller = viewController
+		view_controller!.signalBox.signals = worn_closet.getSignals( by: key_ring.key )!
+//		worn_closet.getSignals( by: key_ring.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
 	}
 }
 
-open class FZRoutingService {
-	public var wornCloset: FZWornCloset
-//	public var window: UIWindow? {
-//		get { return nil }
-//		set {
-//			guard window_ == nil else { return }
-//			window_ = newValue
-//			window_.makeKeyAndVisible()
-//			lo( signalBox.signals )
-//		}
-//	}
-	
-	fileprivate let keyring_: FZKeyring
-	
+public class FZRoutingService {
+	fileprivate let key_ring: FZKeyring
+
 	fileprivate var
 	is_activated: Bool,
-	storyboards_: [ String: SwinjectStoryboard ],
+	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
+	vip_relationships: Dictionary< String, FZVipRelationship >,
+	worn_closet: FZWornCloset,
 	window_: UIWindow!,
-	view_: FZViewController?,
+	view_controller: FZViewController?,
 	interactor_: FZInteractorProtocol?,
 	presenter_: FZPresenterProtocol?
 
 	required public init () {
 		is_activated = false
-		keyring_ = FZKeyring()
-		wornCloset = FZWornCloset( keyring_.key )
-		storyboards_ = [:]
+		key_ring = FZKeyring()
+		worn_closet = FZWornCloset( key_ring.key )
+		worn_closet.set( signals: FZSignalsService() )
+		model_class_singletons = [:]
+		vip_relationships = [:]
+		lo()
 	}
 	
 	deinit {}

@@ -19,7 +19,7 @@ extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	public func getValue ( by key: String ) -> String? { return _values[ key ] }
 	
 	public func set ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
 		let signalKey = FZSignalConsts.valueSet
 		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		_values[ key ] = value
@@ -32,7 +32,7 @@ extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	}
 	
 	public func removeValues () {
-		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
 		for ( key, _ ) in _values { _ = annulValue( by: key ) }
 		scopedSignals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
 	}
@@ -49,7 +49,7 @@ extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 	
 	// store ("set") the given property
 	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: keyring_.key ) else { return }
+		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
 		let signalKey = FZSignalConsts.valueStored
 		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
 		storage.setValue( value, forKey: key )
@@ -61,7 +61,7 @@ extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 
 public class FZLocalAccessProxy {
 	fileprivate let
-	keyring_: FZKeyring,
+	key_ring: FZKeyring,
 	worn_closet: FZWornCloset,
 	storage: UserDefaults = UserDefaults.standard
 	
@@ -75,9 +75,10 @@ public class FZLocalAccessProxy {
 	
 	required public init () {
 		_isActivated = false
-		keyring_ = FZKeyring()
-		worn_closet = FZWornCloset( keyring_.key )
+		key_ring = FZKeyring()
+		worn_closet = FZWornCloset( key_ring.key )
 		_values = [:]
+		lo()
 	}
 	
 	deinit {}

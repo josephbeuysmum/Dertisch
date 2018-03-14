@@ -10,8 +10,8 @@ import Foundation
 
 public extension FZInteractorProtocol {
 	public var className: String { return String( describing: self ) }
-//	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: closetkey_ )?.presenter }
-	fileprivate var closetkey_: String? {
+//	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: closet_key )?.presenter }
+	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
 		for ( _, child ) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
@@ -23,8 +23,8 @@ public extension FZInteractorProtocol {
 	
 	public func activate () {
 		guard
-			let scopedKey = closetkey_,
-			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter?.className,
+			let scopedKey = closet_key,
+			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter.className,
 			let scopedSignals = wornCloset.getSignals( by: scopedKey )
 			else { return }
 		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self as AnyObject ) {
@@ -34,7 +34,7 @@ public extension FZInteractorProtocol {
 				let presenter = data as? FZPresenterProtocol,
 				presenter.className == presenterClassName
 				else { return }
-			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
+//			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
 			self.postPresenterActivated() }
 		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) {
 //			[ unowned self ]

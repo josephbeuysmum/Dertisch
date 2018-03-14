@@ -31,7 +31,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && block != nil {
-			wornCloset.getSignals( by: keyring_.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
+			wornCloset.getSignals( by: key_ring.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -90,7 +90,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		wornCloset.getSignals( by: keyring_.key )?.transmitSignalFor(
+		wornCloset.getSignals( by: key_ring.key )?.transmitSignalFor(
 			key: url,
 			data: FZApiResult( success: success, url: url, data: data ) )
 	}
@@ -100,16 +100,17 @@ public class FZUrlSessionService {
 //	public var time_out: TimeInterval
 
 	fileprivate let
-	keyring_: FZKeyring,
+	key_ring: FZKeyring,
 	worn_closet: FZWornCloset
 	
 	fileprivate var ongoing_calls: [ String ]
 	
 	required public init () {
-		keyring_ = FZKeyring()
-		worn_closet = FZWornCloset( keyring_.key )
+		key_ring = FZKeyring()
+		worn_closet = FZWornCloset( key_ring.key )
 //		time_out = 3.0
 		ongoing_calls = []
+		lo()
 	}
 	
 	deinit {}

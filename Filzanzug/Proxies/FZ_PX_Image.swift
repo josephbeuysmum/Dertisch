@@ -20,7 +20,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 		guard image == nil else { return image }
 		guard
 			block != nil,
-			let scopedSignals = wornCloset.getSignals( by: keyring_.key )
+			let scopedSignals = wornCloset.getSignals( by: key_ring.key )
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
@@ -34,8 +34,8 @@ extension FZImageProxy: FZImageProxyProtocol {
 	
 	public func loadImage ( by url: String ) {
 		guard
-			let scopedUrlSession = wornCloset.getModelClassEntities( by: keyring_.key )?.urlSession,
-			let scopedSignals = wornCloset.getSignals( by: keyring_.key )
+			let scopedUrlSession = wornCloset.getModelClassEntities( by: key_ring.key )?.urlSession,
+			let scopedSignals = wornCloset.getSignals( by: key_ring.key )
 			else { return }
 		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) {
 			[ unowned self ] _, data in
@@ -64,12 +64,12 @@ extension FZImageProxy: FZImageProxyProtocol {
 		return raw_images[ url ] != nil ? UIImage( data: raw_images[ url ]! ) : nil
 	}
 	
-	fileprivate func getUrlKey ( by url: String ) -> String { return "\( keyring_.key )_\( url )" }
+	fileprivate func getUrlKey ( by url: String ) -> String { return "\( key_ring.key )_\( url )" }
 }
 
 public class FZImageProxy {
 	fileprivate let
-	keyring_: FZKeyring,
+	key_ring: FZKeyring,
 	worn_closet: FZWornCloset
 
 
@@ -78,10 +78,11 @@ public class FZImageProxy {
 	raw_images: Dictionary< String, Data >
 
 	required public init () {
-		keyring_ = FZKeyring()
-		worn_closet = FZWornCloset( keyring_.key )
+		key_ring = FZKeyring()
+		worn_closet = FZWornCloset( key_ring.key )
 		urlsResolving = []
 		raw_images = [:]
+		lo()
 	}
 	
 	deinit {}

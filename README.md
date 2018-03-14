@@ -31,15 +31,15 @@ A boilerplate Filzanzug Interactor looks like this:
 	}
 
 	struct SomeInteractor {
-		fileprivate let keyring_: FZKeyring
+		fileprivate let key_ring: FZKeyring
 		fileprivate let worn_closet: FZWornCloset
 		fileprivate var presenter_: SomePresenter? {
-			return worn_closet.getInteractorEntities( by: keyring_.key )?.presenter as? SomePresenter
+			return worn_closet.getInteractorEntities( by: key_ring.key )?.presenter as? SomePresenter
 		}
 		
 		init () {
-			keyring_ = FZKeyring()
-			worn_closet = FZWornCloset( keyring_.key )
+			key_ring = FZKeyring()
+			worn_closet = FZWornCloset( key_ring.key )
 		}
 	}
 
@@ -56,14 +56,14 @@ A boilerplate Filzanzug Presenter looks like this:
 	}
 
 	struct SomePresenter {
-		fileprivate let keyring_: FZKeyring, worn_closet: FZWornCloset
+		fileprivate let key_ring: FZKeyring, worn_closet: FZWornCloset
 		fileprivate var _viewController: SomeViewController? {
-			return worn_closet.getPresenterEntities( by: keyring_.key )?.viewController as? SomeViewController
+			return worn_closet.getPresenterEntities( by: key_ring.key )?.viewController as? SomeViewController
 		}
 		
 		init () {
-			keyring_ = FZKeyring()
-			worn_closet = FZWornCloset( keyring_.key )
+			key_ring = FZKeyring()
+			worn_closet = FZWornCloset( key_ring.key )
 		}
 	}
 
@@ -93,12 +93,12 @@ A basic, boilerplate Filzanzug Proxy (or Service) looks like this:
 
 	class SomeProxy {
 		fileprivate let
-		keyring_: FZKeyring,
+		key_ring: FZKeyring,
 		worn_closet: FZWornCloset
 		
 		required init () {
-			keyring_ = FZKeyring()
-			worn_closet = FZWornCloset( keyring_.key )
+			key_ring = FZKeyring()
+			worn_closet = FZWornCloset( key_ring.key )
 		}
 	}
 

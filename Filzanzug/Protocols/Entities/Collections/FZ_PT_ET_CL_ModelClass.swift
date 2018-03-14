@@ -9,5 +9,7 @@
 public protocol FZModelClassEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
 	var localAccess: FZLocalAccessProxy? { get }
 	var urlSession: FZUrlSessionService? { get }
-	init ( localAccess: FZLocalAccessProxy?, urlSession: FZUrlSessionService? )
+	func set ( localAccess newValue: FZLocalAccessProxy )
+	func set ( urlSession newValue: FZUrlSessionService )
+//	init ( localAccess: FZLocalAccessProxy?, urlSession: FZUrlSessionService? )
 }

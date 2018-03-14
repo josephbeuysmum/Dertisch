@@ -19,6 +19,16 @@ extension FZModelClassEntities: FZModelClassEntitiesCollectionProtocol {
 		local_access = nil
 		url_session = nil
 	}
+	
+	public func set ( localAccess newValue: FZLocalAccessProxy ) {
+		guard local_access == nil else { return }
+		local_access = newValue
+	}
+	
+	public func set ( urlSession newValue: FZUrlSessionService ) {
+		guard url_session == nil else { return }
+		url_session = newValue
+	}
 }
 
 public class FZModelClassEntities {
@@ -28,8 +38,8 @@ public class FZModelClassEntities {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	public required init ( localAccess: FZLocalAccessProxy? = nil, urlSession: FZUrlSessionService? = nil ) {
-		local_access = localAccess
-		url_session = urlSession
-	}
+//	public required init ( localAccess: FZLocalAccessProxy? = nil, urlSession: FZUrlSessionService? = nil ) {
+//		local_access = localAccess
+//		url_session = urlSession
+//	}
 }

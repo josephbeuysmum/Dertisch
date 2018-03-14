@@ -8,8 +8,11 @@
 
 public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
 	var image: FZImageProxy? { get }
-	var presenter: FZPresenterProtocol? { get }
-	init ( image: FZImageProxy?, presenter: FZPresenterProtocol? )
+	var presenter: FZPresenterProtocol { get }
+	func set ( image newValue: FZImageProxy )
+//	func set ( presenter newValue: FZPresenterProtocol )
+
+	init ( presenter: FZPresenterProtocol )
 //	func add ( modelClass: FZModelClassProtocol )
 //	func getModelClass ( by type: FZModelClassProtocol.Type? ) -> FZModelClassProtocol?
 }

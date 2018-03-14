@@ -232,6 +232,7 @@ public class FZSignalsService {
 	required public init () {
 		signals_ = Dictionary < String, Signal< ( String, Any? ) > >()
 		signatures_ = Dictionary < String, [ FZSignalSignature ] >()
+		lo()
 	}
 	
 	deinit {}

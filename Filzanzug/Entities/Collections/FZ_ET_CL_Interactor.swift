@@ -8,28 +8,37 @@
 
 extension FZInteractorEntities: FZInteractorEntitiesCollectionProtocol {
 	public var bespokeRail: FZBespokeEntities { return bespoke_entities! }
+	public var presenter: FZPresenterProtocol { return presenter_ }
 	public var image: FZImageProxy? { return image_ }
-	public var presenter: FZPresenterProtocol? { return presenter_ }
 	
 	public func deallocate () {
 		bespoke_entities?.deallocate()
 		image_?.deallocate()
-		presenter_?.deallocate()
+		presenter_.deallocate()
 		bespoke_entities = nil
 		image_ = nil
-		presenter_ = nil
+//		presenter_ = nil
 	}
+	
+	public func set ( image newValue: FZImageProxy ) {
+		guard image_ == nil else { return }
+		image_ = newValue
+	}
+	
+//	public func set ( presenter newValue: FZPresenterProtocol ) {
+//		guard presenter_ == nil else { return }
+//		presenter_ = newValue
+//	}
 }
 
 public class FZInteractorEntities {
-	fileprivate var
-	image_: FZImageProxy?,
-	presenter_: FZPresenterProtocol?
+	fileprivate let presenter_: FZPresenterProtocol
+	
+	fileprivate var image_: FZImageProxy?
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	public required init ( image: FZImageProxy? = nil, presenter: FZPresenterProtocol? = nil ) {
-		image_ = image
+	public required init ( presenter: FZPresenterProtocol ) {
 		presenter_ = presenter
 	}
 }

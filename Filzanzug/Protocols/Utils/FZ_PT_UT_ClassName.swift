@@ -9,3 +9,4 @@
 public protocol FZClassNameProtocol {
 	var className: String { get }
 }
+
