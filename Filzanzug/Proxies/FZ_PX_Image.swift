@@ -20,7 +20,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 		guard image == nil else { return image }
 		guard
 			block != nil,
-			let scopedSignals = wornCloset.getSignals( by: key_ring.key )
+			let scopedSignals = worn_closet.getSignals( by: key_ring.key )
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
@@ -34,8 +34,8 @@ extension FZImageProxy: FZImageProxyProtocol {
 	
 	public func loadImage ( by url: String ) {
 		guard
-			let scopedUrlSession = wornCloset.getModelClassEntities( by: key_ring.key )?.urlSession,
-			let scopedSignals = wornCloset.getSignals( by: key_ring.key )
+			let scopedUrlSession = worn_closet.getModelClassEntities( by: key_ring.key )?.urlSession,
+			let scopedSignals = worn_closet.getSignals( by: key_ring.key )
 			else { return }
 		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) {
 			[ unowned self ] _, data in
