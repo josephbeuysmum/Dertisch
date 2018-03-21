@@ -95,7 +95,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
 					lo( dependencyClass )
 					switch true {
-					case dependencyClass is FZLocalAccessProxy:			entities.set( localAccess: dependencyClass as! FZLocalAccessProxy )
+					case dependencyClass is FZCoreDataProxy:			entities.set( coreData: dependencyClass as! FZCoreDataProxy )
 					case dependencyClass is FZUrlSessionService:		entities.set( urlSession: dependencyClass as! FZUrlSessionService )
 					default:											entities.bespokeRail.add( modelClass: dependencyClass )
 					}

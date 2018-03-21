@@ -18,8 +18,8 @@
 //		defaultContainer.register( FZSignalsService.self ) { _ in FZSignalsService() }.inObjectScope( .container )
 //
 //		// next all the model classes that only depend on signals
-//		defaultContainer.register( FZLocalAccessProxy.self ) {
-//			_ in FZLocalAccessProxy()
+//		defaultContainer.register( FZCoreDataProxy.self ) {
+//			_ in FZCoreDataProxy()
 //			}.inObjectScope( .container ).initCompleted( {
 //				resolvable, instance in
 //				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
@@ -50,7 +50,7 @@
 //				instance.wornCloset.set( signals: resolvable.resolve( FZSignalsService.self )! )
 //				instance.wornCloset.set(
 //					entities: FZModelClassEntities(
-////						localAccess: resolvable.resolve( FZLocalAccessProxy.self )!,
+////						coreData: resolvable.resolve( FZCoreDataProxy.self )!,
 //						urlSession: resolvable.resolve( FZUrlSessionService.self )! ) )
 //				instance.activate() } )
 //

@@ -1,10 +1,21 @@
 //
-//  FZ_PT_ETworn_closet.swift
+//  FZ_PT_Components.swift
 //  Filzanzug
 //
-//  Created by Richard Willis on 13/02/2018.
+//  Created by Richard Willis on 21/03/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
+
+public protocol FZStopwatchProtocol: FZSignalBoxEntityProtocol {
+	func startWith (
+		delay: Double,
+		andEndWith block: @escaping ( String, Any? ) -> Void )
+	func startWith (
+		delay: Double,
+		andData userInfo: AnyObject,
+		andEndWith block: @escaping ( String, Any? ) -> Void )
+	func stop ()
+}
 
 public protocol FZWornClosetProtocol: FZDeallocatableProtocol {
 	init ( _ key: String )

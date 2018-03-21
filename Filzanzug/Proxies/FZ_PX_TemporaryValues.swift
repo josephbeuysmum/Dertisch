@@ -8,8 +8,7 @@
 
 import UIKit
 
-// todo remove this temp. UserDefaults stuff and put core data in here
-extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
+extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
 	
@@ -37,33 +36,33 @@ extension FZLocalAccessProxy: FZLocalAccessProxyProtocol {
 		scopedSignals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
 	}
 	
-	public func deleteValue ( by key: String ) {
-		storage.removeObject( forKey: key )
-	}
-	
-	//	public func deleteValues ( key: String ) {}
-	
-	public func retrieveValue ( by key: String ) -> String? {
-		return storage.string( forKey: key )
-	}
-	
-	// store ("set") the given property
-	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
-		let signalKey = FZSignalConsts.valueStored
-		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
-		storage.setValue( value, forKey: key )
-		storage.synchronize()
-		scopedSignals.transmitSignalFor( key: signalKey )
-	}
+//	public func deleteValue ( by key: String ) {
+//		storage.removeObject( forKey: key )
+//	}
+//	
+//	//	public func deleteValues ( key: String ) {}
+//	
+//	public func retrieveValue ( by key: String ) -> String? {
+//		return storage.string( forKey: key )
+//	}
+//	
+//	// store ("set") the given property
+//	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
+//		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
+//		let signalKey = FZSignalConsts.valueStored
+//		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
+//		storage.setValue( value, forKey: key )
+//		storage.synchronize()
+//		scopedSignals.transmitSignalFor( key: signalKey )
+//	}
 
 }
 
-public class FZLocalAccessProxy {
+public class FZTemporaryValuesProxy {
 	fileprivate let
 	key_ring: FZKeyring,
-	worn_closet: FZWornCloset,
-	storage: UserDefaults = UserDefaults.standard
+	worn_closet: FZWornCloset
+//	, storage: UserDefaults = UserDefaults.standard
 	
 	// _values provides a platform for the storage of data that has a
 	// very short lifespan, like an ID that needs somwhere to live whilst one

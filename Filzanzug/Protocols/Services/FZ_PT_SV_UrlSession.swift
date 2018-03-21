@@ -2,8 +2,8 @@
 //  FZ_PT_SV_UrlSession.swift
 //  Filzanzug
 //
-//  Created by Richard Willis on 17/02/2016.
-//  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
+//  Created by Richard Willis on 21/03/2018.
+//  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
 public protocol FZUrlSessionServiceProtocol: FZModelClassProtocol {
