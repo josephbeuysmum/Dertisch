@@ -6,40 +6,4 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-@testable import Filzanzug
-import XCTest
-
-class FZCoreDataProxyTests: XCTestCase {
-	var signalsService: FZSignalsService!
-	var coreDataProxy: FZCoreDataProxy!
-	
-	override func setUp () {
-		super.setUp()
-		signalsService = FZSignalsService()
-		coreDataProxy = FZCoreDataProxy()
-		coreDataProxy.dataModelName =  "FilzanzugTests"
-		coreDataProxy.wornCloset.set( signals: signalsService )
-	}
-	
-	override func tearDown () {
-		super.tearDown()
-		coreDataProxy.wornCloset.deallocate()
-		coreDataProxy = nil
-	}
-	
-	func testStoreEntities () {
-		var entities = FZCoreDataEntity(
-			name: "Cat",
-			keys: [
-				FZCoreDataKey( key: "name", type: FZCoreDataTypes.string( "" ) ),
-				FZCoreDataKey( key: "isFavourite", type: FZCoreDataTypes.bool( true ) ) ] )
-		entities.add( multipleAttributes: [
-			[ FZCoreDataTypes.string( "Nursemaid" ), FZCoreDataTypes.bool( true ) ],
-			[ FZCoreDataTypes.string( "Urik" ), FZCoreDataTypes.bool( false ) ],
-			[ FZCoreDataTypes.string( "Feelings" ), FZCoreDataTypes.bool( true ) ],
-			[ FZCoreDataTypes.string( "Vhom" ), FZCoreDataTypes.bool( false ) ],
-			[ FZCoreDataTypes.string( "Erskin" ), FZCoreDataTypes.bool( false ) ],
-			[ FZCoreDataTypes.string( "Plapp" ), FZCoreDataTypes.bool( false ) ] ] )
-		coreDataProxy.store( entities: entities )
-	}
-}
+// I may be completely wrong about this, but it seems that unit tests on code that contains references to NSPersistentContainer instances in a Cocoa Touch Framework project (like this) cannot be run as the unit test framework is incapable of finding the DB.xcdatamodeld file it needs to establish a DB connection. Keeping this file for now solely as a note of this problem.

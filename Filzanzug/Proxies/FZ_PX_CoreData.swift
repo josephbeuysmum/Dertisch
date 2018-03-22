@@ -11,11 +11,11 @@ import CoreData
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
-
+	
 	
 	public func delete ( entityName: String ) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-		lo( "start deleteAll" )
+//		lo( "start deleteAll" )
 		let
 		request = NSFetchRequest< NSFetchRequestResult >( entityName: entityName ),
 		deleteRequest = NSBatchDeleteRequest( fetchRequest: request )
@@ -23,20 +23,20 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		} catch let error {
 			lo( "delete error: \( error )" )
 		}
-		lo( "end deleteAll" )
+//		lo( "end deleteAll" )
 	}
 	
 	public func delete ( entityName: String, byCondition closure: @escaping ( NSManagedObject ) -> Bool ) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-		lo( "start deleteSome" )
+//		lo( "start deleteSome" )
 		let
 		request = NSFetchRequest< NSFetchRequestResult >( entityName: entityName ),
 		asyncRequest = NSAsynchronousFetchRequest( fetchRequest: request ) { asyncResult in
 			guard let managedObjects = asyncResult.finalResult as? [ NSManagedObject ] else { return }
-			lo( "no. of objects: \( managedObjects.count )" )
+//			lo( "no. of objects: \( managedObjects.count )" )
 			managedObjects.forEach { managedObject in
 				if closure( managedObject ) {
-					lo( "deleting object: \( String( describing: managedObject ) )" )
+//					lo( "deleting object: \( String( describing: managedObject ) )" )
 					privateContext.delete( managedObject )
 				}
 			}
@@ -50,12 +50,12 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		} catch let error {
 			lo( "asyncRequest error: \( error )" )
 		}
-		lo( "end deleteSome" )
+//		lo( "end deleteSome" )
 	}
 	
 	public func retrieve ( entityName: String, byPredicate predicate: String? = nil ) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-		lo("retrieveAll start")
+//		lo("retrieveAll start")
 		let
 		fetchRequest = NSFetchRequest< NSFetchRequestResult >( entityName: entityName )
 		if predicate != nil { fetchRequest.predicate = NSPredicate( format: predicate! ) }
@@ -76,13 +76,12 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		} catch let error {
 			lo("NSAsynchronousFetchRequest error: \(error)")
 		}
-		lo("retrieveAll end")
+//		lo("retrieveAll end")
 	}
 	
 	public func store ( entities entitiesData: FZCoreDataEntity ) {
-		let pc = persistentContainer
-		lo( "start store", pc )
-		pc?.performBackgroundTask { privateContext in
+//		lo( "start store" )
+		persistentContainer?.performBackgroundTask { privateContext in
 			entitiesData.allAttributes.forEach { attributes in
 				let entity = NSEntityDescription.insertNewObject( forEntityName: entitiesData.name, into: privateContext )
 				let count = attributes.count
@@ -92,22 +91,20 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 					lo( val, entitiesData.getKey( by: i ) as Any )
 					entity.setValue( val, forKey: entitiesData.getKey( by: i )! )
 				}
-				lo( "new \( entitiesData.name )" )
+//				lo( "new \( entitiesData.name )" )
 			}
 			do {
 				try privateContext.save()
-				lo("saved?")
 			} catch {
 				fatalError("Failure to save context: \(error)")
 			}
-			lo("ended?")
 		}
-		lo("end store")
+//		lo("end store")
 	}
 	
 	public func update ( entityName: String, byPredicate predicate: String, updatingTo key: FZCoreDataKey ) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-		lo( "start update" )
+//		lo( "start update" )
 		privateContext.perform {
 			let updateRequest = NSBatchUpdateRequest( entityName: entityName )
 			updateRequest.predicate = NSPredicate( format: predicate )
@@ -117,7 +114,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 				let result = try privateContext.execute( updateRequest ) as? NSBatchUpdateResult
 				guard let objectIDs = result?.result as? [ NSManagedObjectID ] else { return }
 				lo( objectIDs.count )
-				
+
 				// Iterates the object IDs
 //				objectIDs.forEach { objectID in
 //					// Retrieve a `Dog` object queue-safe
@@ -131,7 +128,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 				fatalError( "request error: \( error )" )
 			}
 		}
-		lo( "end update" )
+//		lo( "end update" )
 	}
 	
 	
@@ -150,11 +147,12 @@ public class FZCoreDataProxy {
 	
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard dataModelName != nil else { return nil }
-		let container = NSPersistentContainer( name: dataModelName! )
-		container.loadPersistentStores { _, error in
+		let ccontainer = NSPersistentContainer( name: dataModelName! )
+		ccontainer.loadPersistentStores { thing, error in
+//			lo( thing, error )
 			if error != nil { fatalError( " Core Data error: \( error! )" ) }
 		}
-		return container
+		return ccontainer
 	}()
 	
 	fileprivate let

@@ -87,9 +87,9 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 		}
 	}
 
-In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.*
+In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.^
 
-* *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
+^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
 All `Filzanzug` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
 
@@ -176,9 +176,9 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 		}
 	}
 
-The `worn_closet` property in a model class, interactor, or presenter needs the `key` property* from its accompanying `key_ring` property to access the properties stored within it, and because `key_ring` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
+The `worn_closet` property in a model class, interactor, or presenter needs the `key` property^ from its accompanying `key_ring` property to access the properties stored within it, and because `key_ring` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
 
-* *a `NSUUID().uuidString` generated at runtime.*
+^ *a `NSUUID().uuidString` generated at runtime.*
 
 A boilerplate `Filzanzug` ViewController looks like this:
 
