@@ -6,6 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+@testable import Filzanzug
 import XCTest
 
 class FZUrlSessionServiceTests: XCTestCase {

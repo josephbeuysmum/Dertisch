@@ -6,8 +6,9 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-import XCTest
+
 @testable import Filzanzug
+import XCTest
 
 class FZImageProxyTests: XCTestCase {
 	var imageProxy: FZImageProxy!

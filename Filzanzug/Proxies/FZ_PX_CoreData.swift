@@ -11,16 +11,7 @@ import CoreData
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
-	var persistentContainer: NSPersistentContainer? {
-		guard dataModelName != nil else { return nil }
-		let container = NSPersistentContainer( name: dataModelName! )
-		container.loadPersistentStores { _, error in
-			if error != nil { fatalError(" Failed to load Core Data stack: \( error! )" ) }
-		}
-		return container
-	}
-	
-	
+
 	
 	public func delete ( entityName: String ) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
@@ -156,6 +147,15 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 
 public class FZCoreDataProxy {
 	public var dataModelName: String?
+	
+	lazy var persistentContainer: NSPersistentContainer? = {
+		guard dataModelName != nil else { return nil }
+		let container = NSPersistentContainer( name: dataModelName! )
+		container.loadPersistentStores { _, error in
+			if error != nil { fatalError( " Core Data error: \( error! )" ) }
+		}
+		return container
+	}()
 	
 	fileprivate let
 	key_ring: FZKeyring,

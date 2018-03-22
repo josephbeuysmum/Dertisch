@@ -122,7 +122,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 		}
 	}
 
-`key_ring` and `worn_closet` are private properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to `SomeProxy`.
+`key_ring` and `worn_closet` are private properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeProxy`.
 
 `Filzanzug` Interactors and Presenters have identical `key_ring` and `worn_closet` properties for the same purpose.
 

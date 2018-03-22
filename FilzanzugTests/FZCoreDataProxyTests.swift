@@ -6,8 +6,8 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-import XCTest
 @testable import Filzanzug
+import XCTest
 
 class FZCoreDataProxyTests: XCTestCase {
 	var signalsService: FZSignalsService!

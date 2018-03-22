@@ -20,8 +20,13 @@ extension FZCoreDataTypes: Equatable {
 }
 
 public struct FZCoreDataKey {
-	let key: String
-	let type: FZCoreDataTypes
+	public let key: String
+	public let type: FZCoreDataTypes
+	
+	public init ( key: String, type: FZCoreDataTypes ) {
+		self.key = key
+		self.type = type
+	}
 }
 
 public struct FZCoreDataEntity: FZCoreDataEntityProtocol {

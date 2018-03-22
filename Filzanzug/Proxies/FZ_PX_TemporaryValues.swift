@@ -25,9 +25,9 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 		scopedSignals.transmitSignalFor( key: signalKey, data: key )
 	}
 	
-	public func annulValue ( by key: String ) -> String? {
-		guard _values[ key ] != nil else { return nil }
-		return _values.removeValue( forKey: key )
+	public func annulValue ( by key: String ) {
+		guard _values[ key ] != nil else { return }
+		_values.removeValue( forKey: key )
 	}
 	
 	public func removeValues () {
