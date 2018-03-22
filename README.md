@@ -8,12 +8,18 @@ Filzanzug is lightweight VIPER framework for Swift built using a "write once, re
 
 Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `worn_closet` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
 
-Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means:
+Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means the following
+
+On the Model side:
 
 -   API calls;
 -   management of external images;
 -   simplified access to Core Data; and
 -   the capacity to add custom proxies and services.
+
+And on the View side:
+
+-	registration and presentation of ViewControllers with related Presenters and Interactors.
 
 Filzanzug interactors work by implementing the `FZInteractorProtocol` protocol; presenters by implementing the `FZPresenterProtocol` protocol; and viewControllers by subclassing `FZViewController`. It uses dependency injection to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
 
