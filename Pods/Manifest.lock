@@ -1,19 +1,12 @@
 PODS:
   - Signals (5.0.0)
-  - Swinject (2.2.0)
-  - SwinjectStoryboard (1.1.2):
-    - Swinject (~> 2.1)
 
 DEPENDENCIES:
   - Signals
-  - Swinject
-  - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Signals: 6c41253cc172e4251d6064341bbc555a589c8d9f
-  Swinject: 4ca48bca7de5f398229a26abe1ac902b9f3ee541
-  SwinjectStoryboard: 92e75763c3299cdf627bef98a5180dc894864336
 
-PODFILE CHECKSUM: 523f403eadf6fa78485c4fcedbacb51ab088d81b
+PODFILE CHECKSUM: ebd3f51123a7730871c003f27f281ba8abb40831
 
 COCOAPODS: 1.4.0

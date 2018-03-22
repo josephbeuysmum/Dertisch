@@ -4,9 +4,9 @@ Filzanzug
 A lightweight VIPER framework for Swift apps
 --------------------------------------------
 
-Filzanzug is lightweight VIPER framework for Swift built using a 'write once, read never', or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
+Filzanzug is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
 
-Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate **worn_closet** property that grants access to singleton-with-a-small-s proxies and services, including the **FZSignalsService**, which is used to transmit and receive events throughout implementing apps.
+Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `worn_closet` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
 
 Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means:
 
@@ -23,12 +23,24 @@ Using Filzanzug
 
 Filzanzug comes with six in-built model classes:
 
-	FZCoreDataProxy // provides simplified access to Core Data data storage
-	FZImageProxy // provides capacity to load and get copies of images
-	FZRoutingService // manages the addition and removal of ViewControllers, and their relationships with Interactors and Presenters
-	FZSignalsService // provides an independent app-wide communications mechanism
-	FZTemporaryValuesProxy // provides temporary storage for simple data in runtime memory
-	FZUrlSessionService // provides access to RESTful APIs
+	FZCoreDataProxy
+	// provides simplified access to Core Data data storage
+
+	FZImageProxy
+	// provides capacity to load and get copies of images
+
+	FZRoutingService
+	// manages the addition and removal of ViewControllers
+	// and their relationships with Interactors and Presenters
+
+	FZSignalsService
+	// provides an independent app-wide communications mechanism
+
+	FZTemporaryValuesProxy
+	// provides temporary storage for simple data in runtime memory
+
+	FZUrlSessionService
+	// provides access to RESTful APIs
 
 These - and all model classes - in `Filzanzug` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `FZTemporaryValuesProxy` injected have *the same instance* of `FZTemporaryValuesProxy` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `FZTemporaryValuesProxy` elsewhere.
 
@@ -75,11 +87,13 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 		}
 	}
 
-In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented out, injectable instances of these two model classes will not be instantiated, as the app in question has no need of their functionality (it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed).
+In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.*
+
+* *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
 All `Filzanzug` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
 
-The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes specific to the implementing app in question. The boilerplate code for `SomeProxy` would look like this:
+The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Filzanzug` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` would look like this:
 
 	import Filzanzug
 
@@ -108,9 +122,9 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 		}
 	}
 
-`key_ring` and `worn_closet` are the private properties that allow dependencies to be injected, but for them to be locked privately inside a bespoke model class post-injection.
+`key_ring` and `worn_closet` are private properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to `SomeProxy`.
 
-`Filzanzug` Interactors and Presenters also have a `key_ring` property and a `worn_closet` property for the same purpose.
+`Filzanzug` Interactors and Presenters have identical `key_ring` and `worn_closet` properties for the same purpose.
 
 A boilerplate `Filzanzug` Interactor looks like this:
 
@@ -123,8 +137,9 @@ A boilerplate `Filzanzug` Interactor looks like this:
 	}
 
 	struct SomeInteractor {
-		fileprivate let key_ring: FZKeyring
-		fileprivate let worn_closet: FZWornCloset
+		fileprivate let
+		key_ring: FZKeyring,
+		worn_closet: FZWornCloset
 		fileprivate var presenter_: SomePresenter? {
 			return worn_closet.getInteractorEntities( by: key_ring.key )?.presenter as? SomePresenter
 		}
@@ -148,7 +163,9 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 	}
 
 	struct SomePresenter {
-		fileprivate let key_ring: FZKeyring, worn_closet: FZWornCloset
+		fileprivate let
+		key_ring: FZKeyring,
+		worn_closet: FZWornCloset
 		fileprivate var view_controller: SomeViewController? {
 			return worn_closet.getPresenterEntities( by: key_ring.key )?.viewController as? SomeViewController
 		}
@@ -159,7 +176,9 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 		}
 	}
 
-The `worn_closet` property in a model class or an interactor or a presenter needs the `key` property (an `NSUUID().uuidString` string generated at runtime) from its accompanying `key_ring` property to access the properties stored within it, and because `key_ring` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access them.
+The `worn_closet` property in a model class, interactor, or presenter needs the `key` property* from its accompanying `key_ring` property to access the properties stored within it, and because `key_ring` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
+
+* *a `NSUUID().uuidString` generated at runtime.*
 
 A boilerplate `Filzanzug` ViewController looks like this:
 
@@ -167,7 +186,7 @@ A boilerplate `Filzanzug` ViewController looks like this:
 
 	class SomeViewController: FZViewController {}
 
-ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each `Filzanzug` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library though, uses `protocol`s and `extension`s exclusively.
+ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each `Filzanzug` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
 
 ---------------------
 Developmental Roadmap
@@ -179,11 +198,12 @@ There is no timescale nor official plan for updates and new versions, but - in n
 -	work out which classes, structs, and protocols can be made internal, and make them internal;
 -	look to replace `deallocate()` functions with an improved method of garbage collection;
 -	complete suite of unit tests;
+-	replace Artman's `Signals` pod with own functionality;
 -	check whether `activate()` functions are still necessary;
 -	try to find a way to ensure the repeated `fileprivate var closet_key: String?` code can be written just once;
 -	reintroduce timeout stopwatch to `FZUrlSessionService`;
 -	complete list of MIME types in `FZUrlSessionService`;
--	allow multiple `FZInteractorProtocol` instance to be associated with a single `FZPresenterProtocol` instance.
+-	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance.
 
 -----------------------
 On the name "Filzanzug"

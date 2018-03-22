@@ -17,15 +17,14 @@ class FZImageProxyTests: XCTestCase {
 
     override func setUp () {
         super.setUp()
-		
 		imageProxy = FZImageProxy()
 		signalsService = FZSignalsService()
-		
-		let urls = FZUrlSessionService()
-		urls.wornCloset.set( signals: signalsService )
-		
+		let urlSessionService = FZUrlSessionService()
+		urlSessionService.wornCloset.set( signals: signalsService )
+		let entities = FZModelClassEntities()
+		entities.set( urlSession: urlSessionService )
 		imageProxy.wornCloset.set( signals: signalsService )
-		imageProxy.wornCloset.set( entities: FZModelClassEntities( urlSession: urls ) )
+		imageProxy.wornCloset.set( entities: entities )
     }
 	
     override func tearDown () {

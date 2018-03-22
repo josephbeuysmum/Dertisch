@@ -11,6 +11,15 @@ import CoreData
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
 	
+	var persistentContainer: NSPersistentContainer? {
+		guard dataModelName != nil else { return nil }
+		let container = NSPersistentContainer( name: dataModelName! )
+		container.loadPersistentStores { _, error in
+			if error != nil { fatalError(" Failed to load Core Data stack: \( error! )" ) }
+		}
+		return container
+	}
+	
 	
 	
 	public func delete ( entityName: String ) {
@@ -80,8 +89,9 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 	}
 	
 	public func store ( entities entitiesData: FZCoreDataEntity ) {
-		lo("start store")
-		persistentContainer?.performBackgroundTask { privateContext in
+		let pc = persistentContainer
+		lo( "start store", pc )
+		pc?.performBackgroundTask { privateContext in
 			entitiesData.allAttributes.forEach { attributes in
 				let entity = NSEntityDescription.insertNewObject( forEntityName: entitiesData.name, into: privateContext )
 				let count = attributes.count
@@ -95,9 +105,11 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 			}
 			do {
 				try privateContext.save()
+				lo("saved?")
 			} catch {
 				fatalError("Failure to save context: \(error)")
 			}
+			lo("ended?")
 		}
 		lo("end store")
 	}
@@ -150,16 +162,6 @@ public class FZCoreDataProxy {
 	worn_closet: FZWornCloset
 	
 	fileprivate var _isActivated: Bool
-	
-	fileprivate lazy var persistentContainer: NSPersistentContainer? = {
-		guard dataModelName != nil else { return nil }
-		let container = NSPersistentContainer( name: dataModelName! )
-		container.loadPersistentStores {
-			thing, error in
-			if error != nil { fatalError(" Failed to load Core Data stack: \( error! )" ) }
-		}
-		return container
-	}()
 	
 	required public init () {
 		_isActivated = false

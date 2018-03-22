@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-@interface PodsDummysignals_ : NSObject
+@interface PodsDummy_Signals : NSObject
 @end
-@implementation PodsDummysignals_
+@implementation PodsDummy_Signals
 @end
