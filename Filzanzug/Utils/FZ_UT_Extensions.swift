@@ -6,7 +6,6 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo split these up into individual files?
 import UIKit
 
 // Date extensions make accessing properties easier
@@ -100,22 +99,18 @@ public extension UIColor {
 	// allows creating colors from simple hex strings
 	public convenience init? ( hexString: String ) {
 		let red, green, blue, alpha: CGFloat
-		
 		if hexString.hasPrefix( "#" ) {
 			let start = hexString.index( hexString.startIndex, offsetBy: 1 )
 			let hexColor = String( hexString.suffix( from: start ) )
-				//hexString.substring( from: start )
-			
+			//hexString.substring( from: start )
 			if hexColor.count == 8 {
 				let scanner = Scanner( string: hexColor )
 				var hexNumber: UInt64 = 0
-				
 				if scanner.scanHexInt64( &hexNumber ) {
 					red = CGFloat( ( hexNumber & 0xff000000 ) >> 24 ) / 255
 					green = CGFloat( ( hexNumber & 0x00ff0000 ) >> 16 ) / 255
 					blue = CGFloat( ( hexNumber & 0x0000ff00 ) >> 8 ) / 255
 					alpha = CGFloat( hexNumber & 0x000000ff ) / 255
-					
 					self.init( red: red, green: green, blue: blue, alpha: alpha )
 					return
 				}
@@ -137,20 +132,18 @@ public extension UILabel {
 
 
 
-extension UnicodeScalar {
+public extension UnicodeScalar {
 	// tell us whethere the scalar in question is an emoji or not, but examining it's value against known emoji ranges
 	// from: stackoverflow.com/questions/30757193/find-out-if-character-in-string-is-emoji
 	public var isEmoji: Bool {
-		switch value
-		{
+		switch value {
 		case 0x3030, 0x00AE, 0x00A9, // Special Characters
 		0x1D000 ... 0x1F77F, // Emoticons
 		0x2100 ... 0x27BF, // Misc symbols and Dingbats
 		0xFE00 ... 0xFE0F, // Variation Selectors
 		0x1F900 ... 0x1F9FF: // Supplemental Symbols and Pictographs
-			return true
-			
-		default: return false
+					return true
+		default: 	return false
 		}
 	}
 }

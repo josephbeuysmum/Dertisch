@@ -15,8 +15,9 @@ Filzanzug is specifically structured with the goal of **minimising code resuse**
 -   simplified access to Core Data; and
 -   the capacity to add custom proxies and services.
 
-Filzanzug interactors work by implementing the *FZInteractorProtocol* protocol; presenters by implementing the *FZPresenterProtocol* protocol; and viewControllers by subclassing *FZViewController*. It uses dependency injection to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
+Filzanzug interactors work by implementing the `FZInteractorProtocol` protocol; presenters by implementing the `FZPresenterProtocol` protocol; and viewControllers by subclassing `FZViewController`. It uses dependency injection to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
 
+---------------
 Using Filzanzug
 ---------------
 
@@ -168,7 +169,21 @@ A boilerplate `Filzanzug` ViewController looks like this:
 
 ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each `Filzanzug` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library though, uses `protocol`s and `extension`s exclusively.
 
-An example repo will follow this brief, introductory documentation.
+---------------------
+Developmental Roadmap
+---------------------
+
+There is no timescale nor official plan for updates and new versions, but - in no particular order - the present todo list for `Filzanzug` is as follows:
+
+create an example boilerplate app;
+work out which classes, structs, and protocols can be made internal, and make them internal;
+look to replace `deallocate()` functions with an improved method of garbage collection;
+complete suite of unit tests;
+check whether `activate()` functions are still necessary;
+try to find a way to ensure the repeated `fileprivate var closet_key: String?` code can be written just once;
+reintroduce timeout stopwatch to `FZUrlSessionService`;
+complete list of MIME types in `FZUrlSessionService`;
+allow multiple `FZInteractorProtocol` instance to be associated with a single `FZPresenterProtocol` instance.
 
 -----------------------
 On the name "Filzanzug"

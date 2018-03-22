@@ -25,9 +25,7 @@ public class FZString {
 		let
 		stringDouble = String( double ),
 		pointIndex = FZString.getIndexOf( subString: FZCharConsts.dot, inString: stringDouble )
-		
-		return pointIndex != nil && pointIndex! + 2 < stringDouble.count ?
-			stringDouble : "\( stringDouble )0"
+		return pointIndex != nil && pointIndex! + 2 < stringDouble.count ? stringDouble : "\( stringDouble )0"
 	}
 	
 	// returns an attributed string with the section between "start" and "end" bold
@@ -37,9 +35,7 @@ public class FZString {
 		withFontSizeOf fontSize: CGFloat,
 		between startIndex: Int? = nil,
 		and endIndex: Int? = nil ) -> NSMutableAttributedString? {
-		// todo make start and end optional like this from all func in here
 		let indices = _getIndicesFrom( subString: subString, startIndex: startIndex, andEndIndex: endIndex )
-		
 		if let range = _getRangeFrom( attributedText: subString, between: indices[ 0 ], and: indices[ 1 ] ) {
 			subString.addAttributes( [ NSAttributedStringKey.font: UIFont.boldSystemFont( ofSize: fontSize ) ], range: range )
 			return subString
@@ -94,7 +90,6 @@ public class FZString {
 		var
 		subStringIndex = FZString.getIndexOf( subString: subString, inString: string, startingAt: 0 ),
 		indices: [ Int ] = []
-		
 		while subStringIndex != nil {
 			indices.append( subStringIndex! )
 			subStringIndex = FZString.getIndexOf(
@@ -102,7 +97,6 @@ public class FZString {
 				inString: string,
 				startingAt: subStringIndex! + 1 )
 		}
-		
 		return indices.count > 0 ? indices : nil
 	}
 	
@@ -152,17 +146,14 @@ public class FZString {
 	// removes instances of the given substring from the given string
 	public static func removeInstancesOf ( subString: String, from string: String ) -> String {
 		let countSubString = subString.count
-		
 		var
 		newValue = string,
 		subStringIndex = getIndexOf( subString: subString, inString: newValue )
-		
 		// while there is at least one index of the substring remaining, cut it out of the string
 		while subStringIndex != nil {
 			newValue = "\( String( describing: getSubStringOf( string: newValue, between: 0, and: subStringIndex! ) ) )\( String( describing: getSubStringOf( string: newValue, between: subStringIndex! + countSubString, and: newValue.count ) ) )"
 			subStringIndex = getIndexOf( subString: subString, inString: newValue )
 		}
-		
 		return newValue
 	}
 	
@@ -173,17 +164,14 @@ public class FZString {
 		inString string: String
 		) -> String {
 		let countOldSubString = oldSubString.count
-		
 		var
 		newValue = string,
 		oldSubStringIndex = getIndexOf( subString: oldSubString, inString: newValue )
-		
 		// while there is at least one index of the old substring remaining, replace it with the new one
 		while oldSubStringIndex != nil {
 			newValue = "\( String( describing: getSubStringOf( string: newValue, between: 0, and: oldSubStringIndex! ) ) )\( newSubString )\( String( describing: getSubStringOf( string: newValue, between: oldSubStringIndex! + countOldSubString, and: newValue.count ) ) )"
 			oldSubStringIndex = getIndexOf( subString: oldSubString, inString: newValue )
 		}
-		
 		return newValue
 	}
 	
@@ -199,7 +187,6 @@ public class FZString {
 			// iterate through the array and build the serialised param string
 			_ = values.map { element in serialisedParams = "\( serialisedParams )\( FZCharConsts.doubleQuote )\( key )\( FZCharConsts.doubleQuote )\( FZCharConsts.colon )\( FZCharConsts.space ) \( FZCharConsts.doubleQuote )\( element )\( FZCharConsts.doubleQuote )\( FZCharConsts.comma )\( FZCharConsts.space )" }
 		}
-		
 		// knock off trailing ampersand and return
 		countValues = serialisedParams.count
 		guard countValues > 0 else { return nil }
@@ -235,7 +222,6 @@ public class FZString {
 			[ NSAttributedStringKey.font: UIFont.systemFont( ofSize: fontSize ) ],
 			range: NSMakeRange( 0, string.mutableString.length )
 		)
-		
 		return string
 	}
 	
@@ -245,20 +231,16 @@ public class FZString {
 	
 	public static func set ( length newLength: Int, ofText string: String ) -> String? {
 		var adjustedString: String? = string
-		
 		switch true {
 		// if the new length is shorter, just shorten it...
 		case adjustedString!.count > newLength:
 			adjustedString = getSubStringOf( string: string, between: 0, and: newLength )
-			
 		// ...otherwise keep adding a space to the end until the new length is reached
 		case adjustedString!.count < newLength:
 			let space = FZCharConsts.space
 			while adjustedString!.count < newLength { adjustedString = "\( adjustedString! )\( space )" }
-			
 		default: ()
 		}
-		
 		return adjustedString
 	}
 	
@@ -291,7 +273,6 @@ public class FZString {
 				NSAttributedStringKey.foregroundColor,
 				value: color,
 				range: range )
-			
 			return subString
 		} else {
 			return nil
@@ -317,7 +298,6 @@ public class FZString {
 		let
 		serialisedNumber = "\( number )",
 		countIntChars = serialisedNumber.count
-		
 		guard countIntChars < 5 else { fatalError( "CLAUSE NEEDS WRITING FOR THIS NUMBER" ) }
 		let countIntCharsMinusTwo = countIntChars - 2
 		var value = FZCharConsts.emptyString
@@ -333,19 +313,15 @@ public class FZString {
 				}
 			}
 		}
-		
 		// remove last comma
 		value = getSubStringOf( string: value, between: 0, and: value.count - 2 )!
-		
 		guard
 			let lastIntAsString = getSubStringOf( string: serialisedNumber, between: countIntChars - 2, and: countIntChars ),
 			let lastInt = Int( lastIntAsString ),
 			lastInt > 0
 		else { return nil }
-		
 		// add "and"
 		value = "\( value ) and "
-		
 		return lastInt < 10 ?
 			"\( value )\( String( describing: _translate( singleDigitInt: lastInt ) ) )" :
 			"\( value )\( String( describing: _translate( doubleDigitInt: lastInt ) ) )"
@@ -367,7 +343,6 @@ public class FZString {
 				NSAttributedStringKey.underlineStyle,
 				value: NSUnderlineStyle.styleSingle.rawValue,
 				range: range )
-			
 			return subString
 		} else {
 			return nil
@@ -433,7 +408,6 @@ public class FZString {
 		var
 		index = 0,
 		subStringByScalars = FZCharConsts.emptyString
-		
 		for scalar in string.unicodeScalars {
 			// keep skipping scalars until we get to the desired start index,
 			// then progressively add each char until we reach the end of the phrase
@@ -441,7 +415,6 @@ public class FZString {
 			if index == endIndex { break }
 			index += 1
 		}
-		
 		//	lo( "subStringByScalars: <<<\( subStringByScalars )>>>" )
 		return subStringByScalars
 	}
