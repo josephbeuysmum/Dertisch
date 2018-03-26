@@ -23,6 +23,8 @@ public protocol FZKeyringProtocol {
 	var key: String { get }
 }
 
+public protocol FZObject: Hashable {}
+
 public protocol FZRoutingEntityProtocol {
 	var routing: FZRoutingService? { get set }
 }
@@ -35,16 +37,27 @@ public protocol FZSignalsEntityProtocol {
 	var signals: FZSignalsService? { get set }
 }
 
-public protocol FZStopwatchEntityProtocol: FZDeallocatableProtocol {
-	func getStopwatchBy ( key: String ) -> FZStopwatch?
-	func set ( stopwatch: FZStopwatch )
-}
-
-public protocol FZWornClosetEntityProtocol {
-	var wornCloset: FZWornCloset { get }
+public protocol FZSignalProtocol: FZDeallocatableProtocol {
+	typealias FZSignalCallback = ( String, Any? ) -> Void
+	var hasScanners: Bool { get }
+	init ( _ transmission: String )
+	mutating func add ( _ scanner: FZSignalReceivableProtocol, scansContinuously: Bool, callback: @escaping FZSignalCallback ) -> Bool
+	mutating func remove ( _ scanner: FZSignalReceivableProtocol )
+	mutating func removeAllScanners ()
+	func transmit ( with value: Any? )
 }
 
 // [seemingly] deprecated
+
+//public protocol FZStopwatchEntityProtocol: FZDeallocatableProtocol {
+//	func getStopwatchBy ( key: String ) -> FZStopwatch?
+//	func set ( stopwatch: FZStopwatch )
+//}
+
+//public protocol FZWornClosetEntityProtocol {
+//	var wornCloset: FZWornCloset { get }
+//}
+
 //public protocol FZInteractorEntityProtocol {
 //	func getInteractorBy ( key: String ) -> FZInteractorProtocol?
 //	func set ( interactor: FZInteractorProtocol )

@@ -6,14 +6,14 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZStopwatchProtocol: FZSignalBoxEntityProtocol {
+public protocol FZStopwatchProtocol: FZSignalBoxEntityProtocol, FZSignalReceivableProtocol {
 	func startWith (
 		delay: Double,
-		andEndWith block: @escaping ( String, Any? ) -> Void )
+		andEndWith callback: @escaping ( String, Any? ) -> Void )
 	func startWith (
 		delay: Double,
 		andData userInfo: AnyObject,
-		andEndWith block: @escaping ( String, Any? ) -> Void )
+		andEndWith callback: @escaping ( String, Any? ) -> Void )
 	func stop ()
 }
 

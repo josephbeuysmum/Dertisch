@@ -10,7 +10,7 @@
 @testable import Filzanzug
 import XCTest
 
-class FZImageProxyTests: XCTestCase {
+class FZImageProxyTests: XCTestCase, FZSignalReceivableProtocol {
 	var imageProxy: FZImageProxy!
 	var signalsService: FZSignalsService!
 	var getImageExpectation: XCTestExpectation!

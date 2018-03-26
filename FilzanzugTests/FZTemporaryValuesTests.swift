@@ -28,7 +28,7 @@ class FZTemporaryValuesTests: XCTestCase {
 		let
 		key = "testAnnulValueKey",
 		value = "testAnnulValueValue"
-		temporaryValues.set( value: value, by: key )
+		temporaryValues.set( value, by: key )
 		temporaryValues.annulValue( by: key )
 		XCTAssertNil( temporaryValues.getValue( by: key ) )
 	}
@@ -41,7 +41,7 @@ class FZTemporaryValuesTests: XCTestCase {
 		let
 		key = "testGetValueKey",
 		value = "testGetValueValue"
-		temporaryValues.set( value: value, by: key )
+		temporaryValues.set( value, by: key )
 		XCTAssertTrue( temporaryValues.getValue( by: key ) == value )
 	}
 	
@@ -51,8 +51,8 @@ class FZTemporaryValuesTests: XCTestCase {
 		key2 = "testRemoveValuesKey2",
 		value1 = "testRemoveValuesValue1",
 		value2 = "testRemoveValuesValue2"
-		temporaryValues.set( value: value1, by: key1 )
-		temporaryValues.set( value: value2, by: key2 )
+		temporaryValues.set( value1, by: key1 )
+		temporaryValues.set( value2, by: key2 )
 		temporaryValues.removeValues()
 		XCTAssertTrue( temporaryValues.getValue( by: key1 ) == nil && temporaryValues.getValue( by: key2 ) == nil )
 	}

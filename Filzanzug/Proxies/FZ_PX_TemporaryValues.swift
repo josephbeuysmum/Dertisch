@@ -9,7 +9,7 @@
 import UIKit
 
 extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
-	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+	public var wornCloset: FZWornCloset { return worn_closet }
 	
 	
 	
@@ -17,12 +17,9 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	
 	public func getValue ( by key: String ) -> String? { return _values[ key ] }
 	
-	public func set ( value: String, by key: String, and caller: FZCaller? = nil ) {
-		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
-		let signalKey = FZSignalConsts.valueSet
-		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
+	public func set ( _ value: String, by key: String ) {
 		_values[ key ] = value
-		scopedSignals.transmitSignalFor( key: signalKey, data: key )
+		wornCloset.getSignals( by: key_ring.key )?.transmitSignal( by: FZSignalConsts.valueSet, with: key )
 	}
 	
 	public func annulValue ( by key: String ) {
@@ -33,7 +30,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	public func removeValues () {
 		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
 		for ( key, _ ) in _values { _ = annulValue( by: key ) }
-		scopedSignals.transmitSignalFor( key: FZSignalConsts.valuesRemoved )
+		scopedSignals.transmitSignal( by: FZSignalConsts.valuesRemoved )
 	}
 	
 //	public func deleteValue ( by key: String ) {

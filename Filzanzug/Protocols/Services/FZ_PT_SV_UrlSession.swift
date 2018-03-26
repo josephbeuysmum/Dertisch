@@ -11,6 +11,6 @@ public protocol FZUrlSessionServiceProtocol: FZModelClassProtocol {
 		url: String,
 		method: FZUrlSessionService.methods,
 		parameters: Dictionary< String, String >?,
-		scanner: AnyObject?,
-		block: ( ( String, Any? ) -> Void )? )
+		scanner: FZSignalReceivableProtocol?,
+		callback: ( ( String, Any? ) -> Void )? )
 }

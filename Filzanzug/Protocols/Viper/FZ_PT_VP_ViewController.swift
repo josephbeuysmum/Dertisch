@@ -6,4 +6,4 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZViewControllerProtocol: class, FZSignalBoxEntityProtocol, FZDeallocatableProtocol {}
+public protocol FZViewControllerProtocol: class, FZDeallocatableProtocol, FZSignalBoxEntityProtocol, FZSignalReceivableProtocol {}

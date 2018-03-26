@@ -8,7 +8,7 @@ Filzanzug is lightweight VIPER framework for Swift built using a "write once, re
 
 Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `worn_closet` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
 
-Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means the following
+Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
 
 On the Model side:
 
@@ -21,7 +21,7 @@ And on the View side:
 
 -	registration and presentation of ViewControllers with related Presenters and Interactors.
 
-Filzanzug interactors work by implementing the `FZInteractorProtocol` protocol; presenters by implementing the `FZPresenterProtocol` protocol; and viewControllers by subclassing `FZViewController`. It uses dependency injection to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
+`Filzanzug` Interactors work by implementing the `FZInteractorProtocol` protocol; Presenters by implementing the `FZPresenterProtocol` protocol; and ViewControllers by subclassing `FZViewController`. It uses **dependency injection** to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
 
 ---------------
 Using Filzanzug
@@ -108,7 +108,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 	}
 
 	extension SomeProxy: SomeProxyProtocol {
-		public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		var wornCloset: FZWornCloset { return worn_closet }
 
 		func activate () {}
 
@@ -137,7 +137,7 @@ A boilerplate `Filzanzug` Interactor looks like this:
 	import Filzanzug
 
 	extension SomeInteractor: FZInteractorProtocol {
-		var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		var wornCloset: FZWornCloset { return worn_closet }
 
 		func postPresenterActivated () {}
 	}
@@ -161,7 +161,7 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 	import Filzanzug
 
 	extension SomePresenter: FZPresenterProtocol {
-		var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+		var wornCloset: FZWornCloset { return worn_closet }
 
 		func postViewActivated () {}
 
@@ -198,13 +198,16 @@ ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each
 Developmental Roadmap
 ---------------------
 
-There is no timescale nor official plan for updates and new versions, but - in no particular order - the present todo list for `Filzanzug` is as follows:
+Currently working on:
+
+-	replace Artman's `Signals` pod with own functionality.
+
+As for the rest, there is no timescale nor official plan for updates and new versions, but - in no particular order - the present todo list for `Filzanzug` is as follows:
 
 -	create an example boilerplate app;
 -	work out which classes, structs, and protocols can be made internal, and make them internal;
--	look to replace `deallocate()` functions with an improved method of garbage collection;
--	complete suite of unit tests;
--	replace Artman's `Signals` pod with own functionality;
+-	replace `deallocate()` functions with an improved method of garbage collection;
+-	complete unit tests;
 -	check whether `activate()` functions are still necessary;
 -	try to find a way to ensure the repeated `fileprivate var closet_key: String?` code can be written just once;
 -	reintroduce timeout stopwatch to `FZUrlSessionService`;

@@ -68,7 +68,7 @@ public extension NSLayoutConstraint {
 
 public extension NSObject {
 	// helps to identify classes by letting the wind out of their names
-	public var className: String? {
+	public var instanceDescriptor: String? {
 		guard let value = NSStringFromClass( type( of: self ) ).components( separatedBy: "." ).last else { return nil }
 		return value
 	}

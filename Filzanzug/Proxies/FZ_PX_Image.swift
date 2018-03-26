@@ -9,24 +9,24 @@
 import UIKit
 
 extension FZImageProxy: FZImageProxyProtocol {
-	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+	public var wornCloset: FZWornCloset { return worn_closet }
 	
 	
 	
 	public func activate () {}
 	
-	public func getImage ( by url: String, block:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
+	public func getImage ( by url: String, callback:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
 		guard
-			block != nil,
+			callback != nil,
 			let scopedSignals = worn_closet.getSignals( by: key_ring.key )
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
 			[ unowned self ] _, data in
 			guard self.assess( result: data ) else { return }
-			block!( url, self.getLocalImage( by: url ) )
+			callback!( url, self.getLocalImage( by: url ) )
 		}
 		loadImage( by: url )
 		return nil
@@ -43,7 +43,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 			guard self.assess( result: data ) else { return }
 			let result = data as! FZApiResult
 			self.raw_images[ url ] = result.data as? Data
-			scopedSignals.transmitSignalFor( key: self.getUrlKey( by: url ), data: result )
+			scopedSignals.transmitSignal( by: self.getUrlKey( by: url ), with: url )
 		}
 		scopedUrlSession.call( url: url, method: FZUrlSessionService.methods.GET )
 	}

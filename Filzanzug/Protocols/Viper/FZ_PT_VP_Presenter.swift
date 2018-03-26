@@ -9,7 +9,7 @@
 import Foundation
 
 public extension FZPresenterProtocol {
-	public var className: String { return String( describing: self ) }
+	public var instanceDescriptor: String { return String( describing: self ) }
 //	public var viewController: FZViewController? { return wornCloset.getPresenterEntities( by: closet_key )?.viewController }
 	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
@@ -27,11 +27,11 @@ public extension FZPresenterProtocol {
 			let scopedSignals = wornCloset.getSignals( by: scopedClosetKey )
 			else { return }
 //		guard let scopedKey = closet_key else { return }
-		_ = scopedSignals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self as AnyObject ) {
+		_ = scopedSignals.scanOnceFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
 //			[ unowned self ]
 			_, data in
 			guard data as? FZViewController == self.wornCloset.getPresenterEntities( by: scopedClosetKey )?.viewController else { return }
-			scopedSignals.transmitSignalFor( key: FZSignalConsts.presenterActivated, data: self )
+			scopedSignals.transmitSignal( by: FZSignalConsts.presenterActivated, with: self )
 			self.postViewActivated() }
 	}
 	

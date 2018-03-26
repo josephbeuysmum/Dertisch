@@ -12,6 +12,7 @@
 		A9024A3E20435ECA0070FFB3 /* FZ_ET_Keyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */; };
 		A91514872063BABB000A410B /* FZCoreDataProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */; };
 		A92919F32063DFFC00A6AA16 /* FZTemporaryValuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */; };
+		A960A6FB20653C160085A4A5 /* FZ_ET_Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,9 +44,9 @@
 		A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */; };
 		A9B5321D2039F73500DB1C85 /* FZ_PT_VP_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B92039F73500DB1C85 /* FZ_PT_VP_ViewController.swift */; };
 		A9B5321E2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531BA2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift */; };
-		A9B5323C2039F73500DB1C85 /* FZ_ET_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */; };
+		A9B5323C2039F73500DB1C85 /* FZ_ET_SignalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531DE2039F73500DB1C85 /* FZ_ET_SignalsService.swift */; };
 		A9B5323E2039F73500DB1C85 /* FZ_ET_Caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */; };
-		A9B5323F2039F73500DB1C85 /* FZ_ET_SignalSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */; };
+		A9B5323F2039F73500DB1C85 /* FZ_ET_SignalWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E12039F73500DB1C85 /* FZ_ET_SignalWaveform.swift */; };
 		A9B532402039F73500DB1C85 /* FZ_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */; };
 		A9B532412039F73500DB1C85 /* FZ_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */; };
 		A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */; };
@@ -66,15 +67,12 @@
 		A9FB4CBD2062601B0038FCEE /* FZ_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CBC2062601B0038FCEE /* FZ_PT_Entities.swift */; };
 		A9FB4CBF206260D10038FCEE /* FZ_PT_Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CBE206260D10038FCEE /* FZ_PT_Components.swift */; };
 		A9FB4CC12062613C0038FCEE /* FZ_PT_Proxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CC02062613C0038FCEE /* FZ_PT_Proxies.swift */; };
-		A9FB4CC320626D4A0038FCEE /* FZ_PT_Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CC220626D4A0038FCEE /* FZ_PT_Services.swift */; };
 		A9FB4CC520626D940038FCEE /* FZ_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CC420626D940038FCEE /* FZ_PT_Utils.swift */; };
 		A9FB4CC82062703A0038FCEE /* FZ_PT_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CC72062703A0038FCEE /* FZ_PT_SV_Routing.swift */; };
 		A9FB4CCA206270650038FCEE /* FZ_PT_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CC9206270650038FCEE /* FZ_PT_SV_Signals.swift */; };
 		A9FB4CCC206270820038FCEE /* FZ_PT_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CCB206270820038FCEE /* FZ_PT_SV_UrlSession.swift */; };
 		A9FB4CCE206271140038FCEE /* FZ_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CCD206271140038FCEE /* FZ_ET_CoreData.swift */; };
 		A9FB4CD0206276B90038FCEE /* FZ_PX_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CCF206276B90038FCEE /* FZ_PX_CoreData.swift */; };
-		B538F2118255732FA7332136 /* Pods_Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */; };
-		FDEADE9EC61752F3AE70B782 /* Pods_FilzanzugTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C160EB01706AD2ACDDC51E5 /* Pods_FilzanzugTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,15 +86,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		290C4327FA3BB31E5F3019C3 /* Pods-FilzanzugTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilzanzugTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FilzanzugTests/Pods-FilzanzugTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C160EB01706AD2ACDDC51E5 /* Pods_FilzanzugTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilzanzugTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.debug.xcconfig"; sourceTree = "<group>"; };
-		558C4FCD340816303252EC59 /* Pods-FilzanzugTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilzanzugTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FilzanzugTests/Pods-FilzanzugTests.release.xcconfig"; sourceTree = "<group>"; };
 		A9024A382040AF610070FFB3 /* FZSignalsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZSignalsServiceTests.swift; sourceTree = "<group>"; };
 		A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
 		A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Keyring.swift; sourceTree = "<group>"; };
 		A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZCoreDataProxyTests.swift; sourceTree = "<group>"; };
 		A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZTemporaryValuesTests.swift; sourceTree = "<group>"; };
+		A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signal.swift; sourceTree = "<group>"; };
 		A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZUrlSessionServiceTests.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531702039F62600DB1C85 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
@@ -131,9 +126,9 @@
 		A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
 		A9B531B92039F73500DB1C85 /* FZ_PT_VP_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ViewController.swift; sourceTree = "<group>"; };
 		A9B531BA2039F73500DB1C85 /* FZ_PT_VP_Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Interactor.swift; sourceTree = "<group>"; };
-		A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signals.swift; sourceTree = "<group>"; };
+		A9B531DE2039F73500DB1C85 /* FZ_ET_SignalsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalsService.swift; sourceTree = "<group>"; };
 		A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Caller.swift; sourceTree = "<group>"; };
-		A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalSignature.swift; sourceTree = "<group>"; };
+		A9B531E12039F73500DB1C85 /* FZ_ET_SignalWaveform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalWaveform.swift; sourceTree = "<group>"; };
 		A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_WornCloset.swift; sourceTree = "<group>"; };
 		A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_TimePeriod.swift; sourceTree = "<group>"; };
 		A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_GradedBool.swift; sourceTree = "<group>"; };
@@ -154,15 +149,12 @@
 		A9FB4CBC2062601B0038FCEE /* FZ_PT_Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_Entities.swift; sourceTree = "<group>"; };
 		A9FB4CBE206260D10038FCEE /* FZ_PT_Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_Components.swift; sourceTree = "<group>"; };
 		A9FB4CC02062613C0038FCEE /* FZ_PT_Proxies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_Proxies.swift; sourceTree = "<group>"; };
-		A9FB4CC220626D4A0038FCEE /* FZ_PT_Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_Services.swift; sourceTree = "<group>"; };
 		A9FB4CC420626D940038FCEE /* FZ_PT_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_Utils.swift; sourceTree = "<group>"; };
 		A9FB4CC72062703A0038FCEE /* FZ_PT_SV_Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Routing.swift; sourceTree = "<group>"; };
 		A9FB4CC9206270650038FCEE /* FZ_PT_SV_Signals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Signals.swift; sourceTree = "<group>"; };
 		A9FB4CCB206270820038FCEE /* FZ_PT_SV_UrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_UrlSession.swift; sourceTree = "<group>"; };
 		A9FB4CCD206271140038FCEE /* FZ_ET_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_CoreData.swift; sourceTree = "<group>"; };
 		A9FB4CCF206276B90038FCEE /* FZ_PX_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PX_CoreData.swift; sourceTree = "<group>"; };
-		E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filzanzug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +162,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B538F2118255732FA7332136 /* Pods_Filzanzug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,32 +170,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */,
-				FDEADE9EC61752F3AE70B782 /* Pods_FilzanzugTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2856A0DD05AA13AE84312B9A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */,
-				E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */,
-				290C4327FA3BB31E5F3019C3 /* Pods-FilzanzugTests.debug.xcconfig */,
-				558C4FCD340816303252EC59 /* Pods-FilzanzugTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A9B531632039F62600DB1C85 = {
 			isa = PBXGroup;
 			children = (
 				A9B5316F2039F62600DB1C85 /* Filzanzug */,
 				A9B5317A2039F62700DB1C85 /* FilzanzugTests */,
 				A9B5316E2039F62600DB1C85 /* Products */,
-				2856A0DD05AA13AE84312B9A /* Pods */,
-				FE9BFE95EB6E1CF0D50912D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,7 +293,6 @@
 				A9FB4CBC2062601B0038FCEE /* FZ_PT_Entities.swift */,
 				A9FB4CBA20625F890038FCEE /* FZ_PT_EntityCollections.swift */,
 				A9FB4CC02062613C0038FCEE /* FZ_PT_Proxies.swift */,
-				A9FB4CC220626D4A0038FCEE /* FZ_PT_Services.swift */,
 				A9FB4CC420626D940038FCEE /* FZ_PT_Utils.swift */,
 			);
 			path = Protocols;
@@ -343,8 +319,9 @@
 				A9FB4CCD206271140038FCEE /* FZ_ET_CoreData.swift */,
 				A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */,
 				A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */,
-				A9B531DE2039F73500DB1C85 /* FZ_ET_Signals.swift */,
-				A9B531E12039F73500DB1C85 /* FZ_ET_SignalSignature.swift */,
+				A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */,
+				A9B531DE2039F73500DB1C85 /* FZ_ET_SignalsService.swift */,
+				A9B531E12039F73500DB1C85 /* FZ_ET_SignalWaveform.swift */,
 				A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */,
 				A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */,
 				A9FB4CB82061D9720038FCEE /* FZ_ET_VipRelationship.swift */,
@@ -394,15 +371,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		FE9BFE95EB6E1CF0D50912D2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E4E114A300E0B2E8BC0AEBDD /* Pods_Filzanzug.framework */,
-				2C160EB01706AD2ACDDC51E5 /* Pods_FilzanzugTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -421,12 +389,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9B531812039F62700DB1C85 /* Build configuration list for PBXNativeTarget "Filzanzug" */;
 			buildPhases = (
-				7E62214A35D08231552249A6 /* [CP] Check Pods Manifest.lock */,
 				A9B531682039F62600DB1C85 /* Sources */,
 				A9B531692039F62600DB1C85 /* Frameworks */,
 				A9B5316A2039F62600DB1C85 /* Headers */,
 				A9B5316B2039F62600DB1C85 /* Resources */,
-				08548231793E160F7B3D00AB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -441,12 +407,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9B531842039F62700DB1C85 /* Build configuration list for PBXNativeTarget "FilzanzugTests" */;
 			buildPhases = (
-				5E17F9EE747F6612BD670BBF /* [CP] Check Pods Manifest.lock */,
 				A9B531722039F62700DB1C85 /* Sources */,
 				A9B531732039F62700DB1C85 /* Frameworks */,
 				A9B531742039F62700DB1C85 /* Resources */,
-				C68C31F1D0E3977EF032DFCF /* [CP] Embed Pods Frameworks */,
-				E1753C7EC49E84403FA2DE90 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -513,93 +476,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		08548231793E160F7B3D00AB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Filzanzug/Pods-Filzanzug-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5E17F9EE747F6612BD670BBF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FilzanzugTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7E62214A35D08231552249A6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Filzanzug-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C68C31F1D0E3977EF032DFCF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FilzanzugTests/Pods-FilzanzugTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Signals/Signals.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Signals.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FilzanzugTests/Pods-FilzanzugTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E1753C7EC49E84403FA2DE90 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FilzanzugTests/Pods-FilzanzugTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		A9B531682039F62600DB1C85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -624,7 +500,6 @@
 				A9B531FF2039F73500DB1C85 /* FZ_SV_Signals.swift in Sources */,
 				A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */,
 				A9B531F82039F73500DB1C85 /* FZ_CS_Logs.swift in Sources */,
-				A9FB4CC320626D4A0038FCEE /* FZ_PT_Services.swift in Sources */,
 				A9B532022039F73500DB1C85 /* FZ_UT_Colors.swift in Sources */,
 				A9B532072039F73500DB1C85 /* FZ_UT_Extensions.swift in Sources */,
 				A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */,
@@ -634,7 +509,7 @@
 				A9B532482039F73500DB1C85 /* FZ_ET_CL_Interactor.swift in Sources */,
 				A9FB4CC12062613C0038FCEE /* FZ_PT_Proxies.swift in Sources */,
 				A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */,
-				A9B5323F2039F73500DB1C85 /* FZ_ET_SignalSignature.swift in Sources */,
+				A9B5323F2039F73500DB1C85 /* FZ_ET_SignalWaveform.swift in Sources */,
 				A9B531FB2039F73500DB1C85 /* FZ_CS_Keys.swift in Sources */,
 				A9B532472039F73500DB1C85 /* FZ_ET_CL_PageViewController.swift in Sources */,
 				A9B532012039F73500DB1C85 /* FZ_SV_UrlSession.swift in Sources */,
@@ -659,10 +534,11 @@
 				A9B5321B2039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift in Sources */,
 				A9B5324C2039F73500DB1C85 /* FZ_PX_Image.swift in Sources */,
 				A9B532412039F73500DB1C85 /* FZ_ET_TimePeriod.swift in Sources */,
-				A9B5323C2039F73500DB1C85 /* FZ_ET_Signals.swift in Sources */,
+				A9B5323C2039F73500DB1C85 /* FZ_ET_SignalsService.swift in Sources */,
 				A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */,
 				A9B532462039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift in Sources */,
 				A9B5321D2039F73500DB1C85 /* FZ_PT_VP_ViewController.swift in Sources */,
+				A960A6FB20653C160085A4A5 /* FZ_ET_Signal.swift in Sources */,
 				A9B532402039F73500DB1C85 /* FZ_ET_WornCloset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,7 +681,6 @@
 		};
 		A9B531822039F62700DB1C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E44272EE4396C0EC16A6E4C /* Pods-Filzanzug.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -827,7 +702,6 @@
 		};
 		A9B531832039F62700DB1C85 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E970D0134B9AE39A8CDDC1BB /* Pods-Filzanzug.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -849,7 +723,6 @@
 		};
 		A9B531852039F62700DB1C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 290C4327FA3BB31E5F3019C3 /* Pods-FilzanzugTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -865,7 +738,6 @@
 		};
 		A9B531862039F62700DB1C85 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 558C4FCD340816303252EC59 /* Pods-FilzanzugTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

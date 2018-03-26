@@ -6,10 +6,11 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct FZKeyConsts {
-	public static let
-	data = "data",
-	message = "message",
-	success = "success",
-	url = "url"
-}
+//public struct FZKeyConsts {
+//	public static let
+//	data = "data",
+//	message = "message",
+//	success = "success",
+//	url = "url"
+//}
+

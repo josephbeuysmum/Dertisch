@@ -9,7 +9,7 @@
 import Foundation
 
 public extension FZInteractorProtocol {
-	public var className: String { return String( describing: self ) }
+	public var instanceDescriptor: String { return String( describing: self ) }
 //	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: closet_key )?.presenter }
 	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
@@ -24,15 +24,15 @@ public extension FZInteractorProtocol {
 	public func activate () {
 		guard
 			let scopedKey = closet_key,
-			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter.className,
+			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter.instanceDescriptor,
 			let scopedSignals = wornCloset.getSignals( by: scopedKey )
 			else { return }
-		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self as AnyObject ) {
+		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
 //			[ unowned self ]
 			_, data in
 			guard
 				let presenter = data as? FZPresenterProtocol,
-				presenter.className == presenterClassName
+				presenter.instanceDescriptor == presenterClassName
 				else { return }
 //			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
 			self.postPresenterActivated() }

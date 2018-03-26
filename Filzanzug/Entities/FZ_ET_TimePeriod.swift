@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension FZTimePeriod {
+extension FZTimePeriod: FZDescribableProtocol {
 	public var description: String { return _getDescription( simplified: false, andTranslate: true ) }
 	public var numericDescription: String { return _getDescription( simplified: false, andTranslate: false ) }
 	public var simplifiedDescription: String { return _getDescription( simplified: true, andTranslate: true ) }

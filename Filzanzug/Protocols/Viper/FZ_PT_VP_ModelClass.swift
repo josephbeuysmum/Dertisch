@@ -7,7 +7,7 @@
 //
 
 public extension FZModelClassProtocol {
-	public var className: String { return String( describing: self ) }
+	public var instanceDescriptor: String { return String( describing: self ) }
 	// todo this is repeated code, is there any way to avoid repeating it?
 	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )

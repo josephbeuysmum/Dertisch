@@ -11,6 +11,12 @@ public protocol FZDeallocatableProtocol {
 	func deallocate ()
 }
 
+public protocol FZDescribableProtocol {
+	var description: String { get }
+}
+
+public protocol FZSignalReceivableProtocol {}
+
 // [seemingly] deprecated
 //public protocol FZIsActivatedProtocol {
 //	var isActivated: Bool { get }
@@ -21,7 +27,7 @@ public protocol FZDeallocatableProtocol {
 //}
 
 //public protocol FZClassNameProtocol {
-//	var className: String { get }
+//	var instanceDescriptor: String { get }
 //}
 
 //public protocol FZInitableProtocol {

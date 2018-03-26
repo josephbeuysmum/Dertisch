@@ -1,6 +1,0 @@
-framework module Pods_FilzanzugTests {
-  umbrella header "Pods-FilzanzugTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

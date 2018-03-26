@@ -6,7 +6,8 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct FZCaller {
-	let caller: AnyObject?
-	let block: ( ( String, Any? ) -> Void )?
-}
+//public struct FZCaller {
+//	public typealias FZSignalCallback = ( ( String, Any? ) ) -> Void
+//	let caller: FZSignalReceivableProtocol
+//	let callback: FZSignalCallback
+//}

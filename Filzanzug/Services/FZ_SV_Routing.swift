@@ -170,7 +170,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.worn_closet.getSignals( by: self.key_ring.key )?.transmitSignalFor( key: FZSignalConsts.viewRemoved )
+				self.worn_closet.getSignals( by: self.key_ring.key )?.transmitSignal( by: FZSignalConsts.viewRemoved )
 		} )
 	}
 	

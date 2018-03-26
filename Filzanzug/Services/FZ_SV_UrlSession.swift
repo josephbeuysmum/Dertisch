@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+	public var wornCloset: FZWornCloset { return worn_closet }
 	
 	
 	
@@ -21,17 +21,17 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 		url: String,
 		method: FZUrlSessionService.methods,
 		parameters: Dictionary< String, String >? = nil,
-		scanner: AnyObject? = nil,
-		block: ( ( String, Any? ) -> Void )? = nil ) {
+		scanner: FZSignalReceivableProtocol? = nil,
+		callback: ( ( String, Any? ) -> Void )? = nil ) {
 		//		lo( url )
-		//		lo( method, parameters, scanner, block )
+		//		lo( method, parameters, scanner, callback )
 		guard
 			ongoing_calls.index( of: url ) == nil,
 			let validUrl = URL( string: url )
 			else { return }
 		ongoing_calls.append( url )
-		if scanner != nil && block != nil {
-			wornCloset.getSignals( by: key_ring.key )?.scanOnceFor( key: url, scanner: scanner!, block: block! )
+		if scanner != nil && callback != nil {
+			wornCloset.getSignals( by: key_ring.key )?.scanOnceFor( key: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -76,7 +76,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
 			//			let success = json[ FZKeyConsts.success ] is Bool ? json[ FZKeyConsts.success ] as? Bool : nil
 			let castArray: [ Dictionary< String, Any > ]
-			if let rawData = json[ FZKeyConsts.data ] {
+			if let rawData = json[ "data" ] {
 				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!
 			} else {
 				castArray = [ json ]
@@ -90,9 +90,9 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		wornCloset.getSignals( by: key_ring.key )?.transmitSignalFor(
-			key: url,
-			data: FZApiResult( success: success, url: url, data: data ) )
+		wornCloset.getSignals( by: key_ring.key )?.transmitSignal(
+			by: url,
+			with: FZApiResult( success: success, url: url, data: data ) )
 	}
 }
 

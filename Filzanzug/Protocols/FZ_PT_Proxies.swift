@@ -20,7 +20,7 @@ public protocol FZCoreDataProxyProtocol: FZModelClassProtocol {
 
 public protocol FZTemporaryValuesProxyProtocol: FZModelClassProtocol {
 	func getValue ( by key: String ) -> String?
-	func set ( value: String, by key: String, and caller: FZCaller? )
+	func set ( _ value: String, by key: String )
 	func annulValue ( by key: String )
 	func removeValues ()
 //	// on device [deprecated]
@@ -31,6 +31,6 @@ public protocol FZTemporaryValuesProxyProtocol: FZModelClassProtocol {
 
 public protocol FZImageProxyProtocol: FZModelClassProtocol {
 //	func clearStorage ()
-	func getImage ( by url: String, block: ( ( String, Any? ) -> Void )? ) -> UIImage?
+	func getImage ( by url: String, callback: ( ( String, Any? ) -> Void )? ) -> UIImage?
 	func loadImage ( by url: String )
 }

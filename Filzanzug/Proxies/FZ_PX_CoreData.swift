@@ -9,7 +9,7 @@
 import CoreData
 
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
-	public var wornCloset: FZWornCloset { get { return worn_closet } set {} }
+	public var wornCloset: FZWornCloset { return worn_closet }
 	
 	
 	

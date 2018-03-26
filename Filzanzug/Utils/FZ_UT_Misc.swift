@@ -6,17 +6,18 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-import UIKit
+//import UIKit
 
-public class FZMisc {
-	public static func set (
-		signals: FZSignalsService,
-		withKey key: String,
-		data: Any? = nil,
-		andCaller caller: FZCaller? ) {
-		guard caller != nil else { return }
-		signals.scanOnceFor( key: key, scanner: caller!.caller!, block: caller!.block! )
-//		caller!.annul()
-		signals.transmitSignalFor( key: key, data: data )
-	}
-}
+//public class FZMisc {
+//	public static func set (
+//		signals: FZSignalsService,
+//		withKey key: String,
+//		data: Any? = nil,
+//		andCaller caller: FZCaller? ) {
+//		guard caller != nil else { return }
+//		signals.scanOnceFor( key: key, scanner: caller!.caller!, callback: caller!.callback! )
+////		caller!.annul()
+//		signals.transmitSignalFor( key: key, data: data )
+//	}
+//}
+

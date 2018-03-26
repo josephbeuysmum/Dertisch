@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct FZApiResult {
+public struct FZApiResult: FZDescribableProtocol {
 	public var description: String {
 		return "<FZApiResult success: \( String( describing:  success ) ) url: \( String( describing: url ) ) hasData: \( data != nil ) >"
 	}

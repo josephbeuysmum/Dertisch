@@ -6,23 +6,19 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZSignalsServiceProtocol {
-	func annulSignalFor ( key: String, scanner: AnyObject )
-	func hasSignalFor ( key: String ) -> Bool
-	func logSignatures ()
+protocol FZSignalsServiceProtocol {
+	typealias FZSignalCallback = ( String, Any? ) -> Void
+	func annulSignal ( by key: String, scanner: AnyObject )
+	func hasSignal ( for key: String ) -> Bool
 	func scanFor (
 		key: String,
-		scanner: AnyObject,
-		block: @escaping ( String, Any? ) -> Void ) -> Bool
-	func scanFor (
-		keys: [ String ],
-		scanner: AnyObject,
-		block: @escaping ( String, Any? ) -> Void ) -> FZGradedBool
+		scanner: FZSignalReceivableProtocol,
+		callback: @escaping FZSignalCallback ) -> Bool
 	func scanOnceFor (
 		key: String,
-		scanner: AnyObject,
-		block: @escaping ( String, Any? ) -> Void ) -> Bool
-	func stopScanningFor ( key: String, scanner: AnyObject ) -> Bool
-	func stopScanningFor ( keys: [ String ], scanner: AnyObject ) -> FZGradedBool
-	func transmitSignalFor ( key: String, data: Any? )
+		scanner: FZSignalReceivableProtocol,
+		callback: @escaping FZSignalCallback
+		) -> Bool
+	func stopScanningFor ( key: String, scanner: AnyObject )
+	func transmitSignal ( by key: String, with value: Any?)
 }
