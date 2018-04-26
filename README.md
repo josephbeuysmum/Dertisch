@@ -203,12 +203,6 @@ ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each
 Developmental Roadmap
 ---------------------
 
-Currently working on:
-
--	replace Artman's `Signals` pod with own functionality.
-
-As for the rest, there is no timescale nor official plan for updates and new versions, but - in no particular order - the present todo list for `Filzanzug` is as follows:
-
 -	create an example boilerplate app;
 -	work out which classes, structs, and protocols can be made internal, and make them internal;
 -	replace `deallocate()` functions with an improved method of garbage collection;
