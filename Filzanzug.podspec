@@ -13,5 +13,4 @@ Pod::Spec.new do |s|
   s.source          = { :git => "https://github.com/josephbeuysmum/Filzanzug.git", :tag => "#{ s.version }" }
   s.source_files    = "Filzanzug/**/*.{h,m,swift}"
   s.swift_version   = "4"
-  s.dependency "Signals"
 end

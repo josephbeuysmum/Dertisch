@@ -1,11 +1,6 @@
 Filzanzug
 =========
 
-NOTICE
-------
-
-The latest push has not yet been unit tested and is almost certainly broken (for the time being).
-
 A lightweight VIPER framework for Swift apps
 --------------------------------------------
 
