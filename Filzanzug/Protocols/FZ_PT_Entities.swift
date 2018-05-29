@@ -10,13 +10,12 @@ public protocol FZBespokeEntitiesEntityProtocol {
 	var bespokeRail: FZBespokeEntities { get }
 }
 
-public protocol FZCoreDataEntityProtocol {
-	var allAttributes: [ [ FZCoreDataTypes ] ] { get }
+public protocol FZCDEntityProtocol {
+	var attributes: [String: FZCDAble] { get }
 	var name: String { get }
-	init ( name: String, keys: [ FZCoreDataKey ] )
-	mutating func add ( attributes: [ FZCoreDataTypes ] )
-	mutating func add ( multipleAttributes: [ [ FZCoreDataTypes ] ] )
-	func getKey ( by index: Int ) -> String?
+	init (_ name: String, keys: [FZCDKey])
+	mutating func add(_ attribute: FZCDAttribute) 
+	mutating func add (attributes: [FZCDAttribute])
 }
 
 public protocol FZKeyringProtocol {

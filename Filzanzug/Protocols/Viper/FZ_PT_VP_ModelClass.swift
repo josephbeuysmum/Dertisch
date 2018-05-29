@@ -9,14 +9,18 @@
 public extension FZModelClassProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 	// todo this is repeated code, is there any way to avoid repeating it?
-	fileprivate var closet_key: String? {
-		let selfReflection = Mirror( reflecting: self )
-		for ( _, child ) in selfReflection.children.enumerated() {
-			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
-		}
-		return nil
-	}
-
+//	fileprivate var closet_key: String? {
+//		let selfReflection = Mirror( reflecting: self )
+//		var key: String?
+//		for ( _, child ) in selfReflection.children.enumerated() {
+//			if child.value is FZKeyring {
+//				if key != nil { fatalError("FZInteractors can only possess one FZKeyring") }
+//				key = (child.value as? FZKeyring)?.key
+//			}
+//		}
+//		return key
+//	}
+	
 	
 	
 	public func activate () {}

@@ -14,13 +14,14 @@ public struct FZSignalConsts {
 
 	// the [only] specific signal names used by FZ classes
 	public static let
-//	interactorActivated = "\( name_space )Interactor\( FZCommonPhrasesConsts.Activated )",
-//	modelClassActivated = "\( name_space )ModelClass\( FZCommonPhrasesConsts.Activated )",
+	navigateTo = "\( name_space )NavigateTo",
 	presenterActivated = "\( name_space )Presenter\( FZCommonPhrasesConsts.Activated )",
 	valuesRemoved = "\( name_space )\( value_ )s\( FZCommonPhrasesConsts.Removed )",
 	valueSet = "\( name_space )\( value_ )\( FZCommonPhrasesConsts.Set )",
 	valueStored = "\( name_space )\( value_ )\( FZCommonPhrasesConsts.Stored )",
+	viewAppeared = "\( name_space )\( FZCommonPhrasesConsts.View )Appeared",
 	viewLoaded = "\( name_space )\( FZCommonPhrasesConsts.View )\( FZCommonPhrasesConsts.Loaded )",
-	viewRemoved = "\( name_space )\( FZCommonPhrasesConsts.View )\( FZCommonPhrasesConsts.Removed )"
+	viewRemoved = "\( name_space )\( FZCommonPhrasesConsts.View )\( FZCommonPhrasesConsts.Removed )",
+	viewWarnedAboutMemory = "\( name_space )\( FZCommonPhrasesConsts.View )WarnedAboutMemory"
 //	viewSet = "\( name_space )\( FZCommonPhrasesConsts.View )\( FZCommonPhrasesConsts.Set )"
 }

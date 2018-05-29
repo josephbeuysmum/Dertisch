@@ -415,7 +415,6 @@ public class FZString {
 			if index == endIndex { break }
 			index += 1
 		}
-		//	lo( "subStringByScalars: <<<\( subStringByScalars )>>>" )
 		return subStringByScalars
 	}
 	

@@ -124,7 +124,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 		required init () {
 			key_ring = FZKeyring()
-			worn_closet = FZWornCloset( key_ring.key )
+			worn_closet = FZWornCloset(key_ring.key)
 		}
 	}
 
@@ -152,7 +152,7 @@ A boilerplate `Filzanzug` Interactor looks like this:
 
 		init () {
 			key_ring = FZKeyring()
-			worn_closet = FZWornCloset( key_ring.key )
+			worn_closet = FZWornCloset(key_ring.key)
 		}
 	}
 
@@ -178,7 +178,7 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 
 		init () {
 			key_ring = FZKeyring()
-			worn_closet = FZWornCloset( key_ring.key )
+			worn_closet = FZWornCloset(key_ring.key)
 		}
 	}
 

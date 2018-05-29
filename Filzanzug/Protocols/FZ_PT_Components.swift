@@ -7,22 +7,16 @@
 //
 
 public protocol FZStopwatchProtocol: FZSignalBoxEntityProtocol, FZSignalReceivableProtocol {
-	func startWith (
-		delay: Double,
-		andEndWith callback: @escaping ( String, Any? ) -> Void )
-	func startWith (
-		delay: Double,
-		andData userInfo: AnyObject,
-		andEndWith callback: @escaping ( String, Any? ) -> Void )
+	func startWith (delay: Double, andData data: Any?, _ callback: @escaping (String, Any?) -> Void)
 	func stop ()
 }
 
 public protocol FZWornClosetProtocol: FZDeallocatableProtocol {
-	init ( _ key: String )
-	func getInteractorEntities ( by key: String? ) -> FZInteractorEntities?
-	func getModelClassEntities ( by key: String? ) -> FZModelClassEntities?
-	func getPresenterEntities ( by key: String? ) -> FZPresenterEntities?
-	func getSignals ( by key: String? ) -> FZSignalsService?
-	func set ( entities: FZEntitiesCollectionProtocol )
-	func set ( signals: FZSignalsService )
+	init (_ key: String)
+	func getInteractorEntities (by key: String?) -> FZInteractorEntities?
+	func getModelClassEntities (by key: String?) -> FZModelClassEntities?
+	func getPresenterEntities (by key: String?) -> FZPresenterEntities?
+	func getSignals (by key: String?) -> FZSignalsService?
+	func set (entities: FZEntitiesCollectionProtocol)
+	func set (signals: FZSignalsService)
 }

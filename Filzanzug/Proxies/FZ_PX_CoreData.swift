@@ -8,165 +8,168 @@
 
 import CoreData
 
+public enum FZCDOperationTypes { case delete, retrieve, store, update }
+
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
+	public var dataModelName: String? {
+		get { return data_model_name }
+		set {
+			guard data_model_name == nil else { fatalError("Currently FZCoreDataProxy dataModelName can only be set once") }
+			data_model_name = newValue
+		}
+	}
+	
 	public var wornCloset: FZWornCloset { return worn_closet }
 	
 	
 	
-	public func delete ( entityName: String ) {
+	public func delete(entityName: String, _ callback: @escaping FZCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-//		lo( "start deleteAll" )
 		let
-		request = NSFetchRequest< NSFetchRequestResult >( entityName: entityName ),
-		deleteRequest = NSBatchDeleteRequest( fetchRequest: request )
-		do { try privateContext.execute( deleteRequest )
-		} catch let error {
-			lo( "delete error: \( error )" )
+		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
+		deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+		do {
+			try privateContext.execute(deleteRequest)
+			DispatchQueue.main.async { callback(true) }
+		} catch {
+			DispatchQueue.main.async { callback(false) }
 		}
-//		lo( "end deleteAll" )
 	}
 	
-	public func delete ( entityName: String, byCondition closure: @escaping ( NSManagedObject ) -> Bool ) {
+	public func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FZCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-//		lo( "start deleteSome" )
 		let
-		request = NSFetchRequest< NSFetchRequestResult >( entityName: entityName ),
-		asyncRequest = NSAsynchronousFetchRequest( fetchRequest: request ) { asyncResult in
-			guard let managedObjects = asyncResult.finalResult as? [ NSManagedObject ] else { return }
-//			lo( "no. of objects: \( managedObjects.count )" )
+		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
+		asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asyncResult in
+			guard let managedObjects = asyncResult.finalResult as? [NSManagedObject] else { return }
 			managedObjects.forEach { managedObject in
-				if closure( managedObject ) {
-//					lo( "deleting object: \( String( describing: managedObject ) )" )
-					privateContext.delete( managedObject )
+				if condition(managedObject) {
+					privateContext.delete(managedObject)
 				}
 			}
 			do { try privateContext.save()
-			} catch let error {
-				lo( "delete save error: \( error )" )
+			} catch {
+				DispatchQueue.main.async { callback(false) }
+				return
 			}
 		}
 		do {
 			try privateContext.execute( asyncRequest )
-		} catch let error {
-			lo( "asyncRequest error: \( error )" )
+			DispatchQueue.main.async { callback(true) }
+		} catch {
+			DispatchQueue.main.async { callback(false) }
 		}
-//		lo( "end deleteSome" )
 	}
 	
-	public func retrieve ( entityName: String, byPredicate predicate: String? = nil ) {
+	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping FZCDCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-//		lo("retrieveAll start")
-		let
-		fetchRequest = NSFetchRequest< NSFetchRequestResult >( entityName: entityName )
-		if predicate != nil { fetchRequest.predicate = NSPredicate( format: predicate! ) }
-		let asyncFetchRequest = NSAsynchronousFetchRequest( fetchRequest: fetchRequest ) { asyncFetchResult in
-			guard let result = asyncFetchResult.finalResult as? [ NSManagedObject ] else { return }
-			lo( "no. of results: \( result.count )" )
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+		if let scopedPredicate = predicate {
+			fetchRequest.predicate = NSPredicate(format: scopedPredicate)
+		}
+		let asyncFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { asyncFetchResult in
+			guard let result = asyncFetchResult.finalResult as? [NSManagedObject] else { return }
 			DispatchQueue.main.async {
-				// Create a new queue-safe array of copied dogs on the main thread
-				var safeManagedObjects = [ NSManagedObject ]()
+				// create queue-safe array on the main thread
+				var safeManagedObjects = [NSManagedObject]()
 				for managedObject in result {
-					let safeManagedObject = privateContext.object( with: managedObject.objectID )
-					lo( safeManagedObject )
-					safeManagedObjects.append( safeManagedObject )
+					let safeManagedObject = privateContext.object(with: managedObject.objectID)
+					safeManagedObjects.append(safeManagedObject)
 				}
+				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
+//				self.worn_closet.getSignals(by: self.key_ring.key)?.transmitSignal(
+//					by: self.getSignalKey(by: entityName, and: FZCDOperationTypes.retrieve),
+//					with: safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
 		}
-		do { try privateContext.execute( asyncFetchRequest )
+		do { try privateContext.execute(asyncFetchRequest)
 		} catch let error {
-			lo("NSAsynchronousFetchRequest error: \(error)")
+			loWarning("NSAsynchronousFetchRequest error: \(error)")
 		}
-//		lo("retrieveAll end")
 	}
 	
-	public func store ( entities entitiesData: FZCoreDataEntity ) {
-//		lo( "start store" )
+	public func store(_ entity: FZCDEntity, _ callback: @escaping FZCDCallback) {
+		var managedEntity: NSManagedObject?
 		persistentContainer?.performBackgroundTask { privateContext in
-			entitiesData.allAttributes.forEach { attributes in
-				let entity = NSEntityDescription.insertNewObject( forEntityName: entitiesData.name, into: privateContext )
-				let count = attributes.count
-				var val: Any
-				for i in 0..<count {
-					val = self.getCoreDataValue( by: attributes[ i ] )
-					lo( val, entitiesData.getKey( by: i ) as Any )
-					entity.setValue( val, forKey: entitiesData.getKey( by: i )! )
-				}
-//				lo( "new \( entitiesData.name )" )
+			managedEntity = NSEntityDescription.insertNewObject( forEntityName: entity.name, into: privateContext )
+			for (key, value) in entity.attributes {
+				managedEntity?.setValue(value, forKey: key)
 			}
 			do {
 				try privateContext.save()
+				DispatchQueue.main.async {
+					callback(managedEntity != nil ? [managedEntity!] : nil)
+				}
 			} catch {
 				fatalError("Failure to save context: \(error)")
 			}
 		}
-//		lo("end store")
 	}
 	
-	public func update ( entityName: String, byPredicate predicate: String, updatingTo key: FZCoreDataKey ) {
+	public func update(_ entityName: String, to attribute: FZCDAttribute, by predicate: String? = nil, _ callback: @escaping FZCDCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
-//		lo( "start update" )
 		privateContext.perform {
-			let updateRequest = NSBatchUpdateRequest( entityName: entityName )
-			updateRequest.predicate = NSPredicate( format: predicate )
-			updateRequest.propertiesToUpdate = [ key.key: self.getCoreDataValue( by: key.type ) ]
+			let updateRequest = NSBatchUpdateRequest(entityName: entityName)
+			updateRequest.propertiesToUpdate = [attribute.key: attribute.value]
 			updateRequest.resultType = .updatedObjectIDsResultType
+			if let scopedPredicate = predicate {
+				updateRequest.predicate = NSPredicate(format: scopedPredicate)
+			}
 			do {
-				let result = try privateContext.execute( updateRequest ) as? NSBatchUpdateResult
-				guard let objectIDs = result?.result as? [ NSManagedObjectID ] else { return }
-				lo( objectIDs.count )
-
-				// Iterates the object IDs
-//				objectIDs.forEach { objectID in
-//					// Retrieve a `Dog` object queue-safe
-//					let dog = self.mainManagedObjectContext.object( with: objectID ) as! Dog
-//					lo( dog.name as Any )
-//
-//					// Updates the main context
-//					self.mainManagedObjectContext.refresh( dog, mergeChanges: false )
-//				}
+				let result = try privateContext.execute(updateRequest) as? NSBatchUpdateResult
+				DispatchQueue.main.async {
+					guard let objectIDs = result?.result as? [NSManagedObjectID] else { return }
+					var objects = [NSManagedObject]()
+					objectIDs.forEach { objectID in
+						let object = privateContext.object(with: objectID)
+						privateContext.refresh(object, mergeChanges: false)
+						objects.append(object)
+					}
+					callback(objects)
+				}
 			} catch {
-				fatalError( "request error: \( error )" )
+				fatalError( "request error: \(error)")
 			}
 		}
-//		lo( "end update" )
 	}
 	
 	
 	
-	fileprivate func getCoreDataValue ( by type: FZCoreDataTypes ) -> Any {
-		switch type {
-		case let .string( string ):		return string
-		case let .int( int ):			return int
-		case let .bool( bool ):			return bool
-		}
-	}
+//	fileprivate func getCoreDataValue(by type: FZCDTypes) -> Any {
+//		switch type {
+//		case let .string:	return string
+//		case let .int:			return int
+//		case let .bool:		return bool
+//		}
+//	}
 }
 
 public class FZCoreDataProxy {
-	public var dataModelName: String?
-	
 	lazy var persistentContainer: NSPersistentContainer? = {
-		guard dataModelName != nil else { return nil }
-		let ccontainer = NSPersistentContainer( name: dataModelName! )
-		ccontainer.loadPersistentStores { thing, error in
-//			lo( thing, error )
-			if error != nil { fatalError( " Core Data error: \( error! )" ) }
+		guard let dmn = dataModelName else {
+			loWarning("FZCoreDataProxy dataModelName is nil")
+			return nil
 		}
-		return ccontainer
+		let container = NSPersistentContainer(name: dmn)
+		container.loadPersistentStores { _, error in
+			guard error == nil else { fatalError(" Core Data error: \(error!)") }
+		}
+		return container
 	}()
 	
 	fileprivate let
 	key_ring: FZKeyring,
 	worn_closet: FZWornCloset
 	
-	fileprivate var _isActivated: Bool
-	
-	required public init () {
-		_isActivated = false
-		key_ring = FZKeyring()
-		worn_closet = FZWornCloset( key_ring.key )
+	fileprivate var
+	is_activated: Bool,
+	data_model_name: String?
+
+	required public init(with keyring: FZKeyring) {
+		is_activated = false
+		key_ring = keyring
+		worn_closet = FZWornCloset(key_ring.key)
 	}
 	
 	deinit {}
 }
-

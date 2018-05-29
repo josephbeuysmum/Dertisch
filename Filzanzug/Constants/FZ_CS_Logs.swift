@@ -7,7 +7,7 @@
 //
 
 public struct FZLogConsts {
-	// used by lo() functions to decide what to log or not
+	// used by log functions to decide what to log or not
 	public struct logLevel {
 		static let
 		output = 0,

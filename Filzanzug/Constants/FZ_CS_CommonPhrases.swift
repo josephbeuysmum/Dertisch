@@ -9,11 +9,16 @@
 public struct FZCommonPhrasesConsts {
 	public static let
 	Activated = "Activated",
+	Controller = "Controller",
+	Deleted = "Deleted",
 	Loaded = "Loaded",
 	Removed = "Removed",
+	Retrieved = "Retrieved",
 	Set = "Set",
 	Stored = "Stored",
-	View = "View"
+	Updated = "Updated",
+	View = "View",
+	ViewController = "\( View )\( Controller )"
 
 //	Account = "Account",
 //	Accounts = "\( Account )s",
@@ -21,7 +26,6 @@ public struct FZCommonPhrasesConsts {
 //	Back = "Back",
 //	Changed = "Changed",
 //	Complete = "Complete",
-//	Controller = "Controller",
 //	CoreData = "CoreData",
 //	Count = "Count",
 //	Dialog = "Dialog",
@@ -48,7 +52,5 @@ public struct FZCommonPhrasesConsts {
 //	Start = "Start",
 //	Started = "\( Start )ed",
 //	Up = "Up",
-//	Updated = "\( Up )dated",
-//	Url = "Url",
-//	ViewController = "\( View )\( Controller )"
+//	Url = "Url"
 }

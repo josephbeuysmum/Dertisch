@@ -7,9 +7,9 @@
 //
 
 protocol FZSignalsServiceProtocol {
-	typealias FZSignalCallback = ( String, Any? ) -> Void
-	func annulSignal ( by key: String, scanner: AnyObject )
-	func hasSignal ( for key: String ) -> Bool
+	typealias FZSignalCallback = (String, Any?) -> Void
+	func annulSignal (by key: String, scanner: AnyObject)
+	func hasSignal (for key: String) -> Bool
 	func scanFor (
 		key: String,
 		scanner: FZSignalReceivableProtocol,
@@ -19,6 +19,6 @@ protocol FZSignalsServiceProtocol {
 		scanner: FZSignalReceivableProtocol,
 		callback: @escaping FZSignalCallback
 		) -> Bool
-	func stopScanningFor ( key: String, scanner: AnyObject )
-	func transmitSignal ( by key: String, with value: Any?)
+	func stopScanningFor (key: String, scanner: AnyObject)
+	func transmitSignal (by key: String, with value: Any?)
 }

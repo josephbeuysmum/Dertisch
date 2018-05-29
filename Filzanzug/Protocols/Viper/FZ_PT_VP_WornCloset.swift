@@ -10,6 +10,6 @@ public protocol FZWornClosetImplementerProtocol: FZDeallocatableProtocol, FZSign
 	// formerly also: FZWornClosetEntityProtocol, FZActivatableProtocol, FZClassNameProtocol, FZInitableProtocol
 	var instanceDescriptor: String { get }
 	var wornCloset: FZWornCloset { get }
-	init ()
-	func activate ()
+	init(with keyring: FZKeyring)
+	func activate()
 }

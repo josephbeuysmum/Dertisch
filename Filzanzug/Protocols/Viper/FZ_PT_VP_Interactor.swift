@@ -11,12 +11,17 @@ import Foundation
 public extension FZInteractorProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 //	public var presenter: FZPresenterProtocol? { return wornCloset.getInteractorEntities( by: closet_key )?.presenter }
+	// todo this is repeated code, is there any way to avoid repeating it?
 	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
+		var key: String?
 		for ( _, child ) in selfReflection.children.enumerated() {
-			if child.value is FZKeyring { return ( child.value as? FZKeyring )?.key }
+			if child.value is FZKeyring {
+				if key != nil { fatalError("FZInteractors can only possess one FZKeyring") }
+				key = (child.value as? FZKeyring)?.key
+			}
 		}
-		return nil
+		return key
 	}
 
 	
@@ -28,7 +33,7 @@ public extension FZInteractorProtocol {
 			let scopedSignals = wornCloset.getSignals( by: scopedKey )
 			else { return }
 		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
-//			[ unowned self ]
+//			[weak self]
 			_, data in
 			guard
 				let presenter = data as? FZPresenterProtocol,
@@ -37,7 +42,7 @@ public extension FZInteractorProtocol {
 //			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
 			self.postPresenterActivated() }
 		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) {
-//			[ unowned self ]
+//			[weak self]
 			timer in
 			_ = self.wornCloset.getSignals( by: scopedKey )?.stopScanningFor(
 				key: FZSignalConsts.presenterActivated,
@@ -47,7 +52,7 @@ public extension FZInteractorProtocol {
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
 	public func deallocate () { wornCloset.deallocate() }
-	public func postPresenterActivated () { lo() }
+	public func postPresenterActivated () {}
 }
 
 public protocol FZInteractorProtocol: FZWornClosetImplementerProtocol {

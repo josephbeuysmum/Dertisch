@@ -69,12 +69,11 @@ public class FZTemporaryValuesProxy {
 	_isActivated: Bool,
 	_values: Dictionary < String, String >
 	
-	required public init () {
+	required public init(with keyring: FZKeyring) {
 		_isActivated = false
-		key_ring = FZKeyring()
-		worn_closet = FZWornCloset( key_ring.key )
+		key_ring = keyring
+		worn_closet = FZWornCloset(key_ring.key)
 		_values = [:]
-		lo()
 	}
 	
 	deinit {}

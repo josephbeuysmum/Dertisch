@@ -23,8 +23,6 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 		parameters: Dictionary< String, String >? = nil,
 		scanner: FZSignalReceivableProtocol? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
-		//		lo( url )
-		//		lo( method, parameters, scanner, callback )
 		guard
 			ongoing_calls.index( of: url ) == nil,
 			let validUrl = URL( string: url )
@@ -37,8 +35,8 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 		request.httpMethod = method.rawValue
 		// todo serialise json for POSTs here?
 		
-		_ = URLSession.shared.dataTask( with: request ) {
-			[ unowned self ] data, response, error in
+		_ = URLSession.shared.dataTask( with: request ) { [weak self] data, response, error in
+			guard let safeSelf = self else { return }
 			guard error == nil else {
 				lo( "todo ERROR to be handled here", url )
 				return
@@ -48,18 +46,20 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 				return
 			}
 			// todo reintroduce stopwatch so hanging calls can be cancelled?
-			if let callIndex = self.ongoing_calls.index( of: url ) { self.ongoing_calls.remove( at: callIndex ) }
+			if let callIndex = safeSelf.ongoing_calls.index( of: url ) {
+				safeSelf.ongoing_calls.remove( at: callIndex )
+			}
 			do {
 				switch data!.mimeType {
-				case Data.mimeTypes.RTF:		try self.cast( richText: data!, with: url )
+				case Data.mimeTypes.RTF:		try safeSelf.cast( richText: data!, with: url )
 				case Data.mimeTypes.BMP,
 					 Data.mimeTypes.GIF,
 					 Data.mimeTypes.JPG,
-					 Data.mimeTypes.PNG:		try self.cast( image: data!, with: url )
+					 Data.mimeTypes.PNG:		try safeSelf.cast( image: data!, with: url )
 				default: ()						// todo process other mime types here as and when required...
 				}
 			} catch {
-				self.transmit( success: false, with: url )
+				safeSelf.transmit( success: false, with: url )
 			}
 			}.resume()
 	}
@@ -105,12 +105,11 @@ public class FZUrlSessionService {
 	
 	fileprivate var ongoing_calls: [ String ]
 	
-	required public init () {
-		key_ring = FZKeyring()
-		worn_closet = FZWornCloset( key_ring.key )
+	required public init(with keyring: FZKeyring) {
+		key_ring = keyring
+		worn_closet = FZWornCloset(key_ring.key)
 //		time_out = 3.0
 		ongoing_calls = []
-		lo()
 	}
 	
 	deinit {}
@@ -120,7 +119,6 @@ public class FZUrlSessionService {
 //	fileprivate func annulCallFor ( _ url: String ) {
 //		guard let callIndex = ongoing_calls.index( of: url ), callIndex > -1 else { return }
 //		ongoing_calls.remove( at: callIndex )
-////		lo( "calls remaining:", ongoing_calls.count )
 //	}
 	
 //	fileprivate func _call (
@@ -139,7 +137,7 @@ public class FZUrlSessionService {
 //			parameters: parameters,
 //			encoding: JSONEncoding.default
 //		).responseJSON {
-//			[ unowned self ] response in
+//			[weak self] response in
 //			let responseResult = response.result
 //			let apiResult: FZApiResult
 //

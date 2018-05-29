@@ -9,28 +9,28 @@
 import CoreData
 import UIKit
 
+public typealias FZCDCallback = ([NSManagedObject]?) -> Void
+public typealias FZCDDeletionCallback = (Bool) -> Void
+
+// todo make more funcs etc "final"
 public protocol FZCoreDataProxyProtocol: FZModelClassProtocol {
 	var dataModelName: String? { get set }
-	func delete ( entityName: String )
-	func delete ( entityName: String, byCondition closure: @escaping ( NSManagedObject ) -> Bool )
-	func retrieve ( entityName: String, byPredicate predicate: String? )
-	func store ( entities entitiesData: FZCoreDataEntity )
-	func update ( entityName: String, byPredicate predicate: String, updatingTo key: FZCoreDataKey )
+	func delete(entityName: String, _ callback: @escaping FZCDDeletionCallback)
+	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FZCDDeletionCallback)
+	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping FZCDCallback)
+	func store(_ entity: FZCDEntity, _ callback: @escaping FZCDCallback)
+//	func update(_ entityName: String, to key: FZCDKey, by predicate: String?, _ callback: @escaping FZCDCallback)
+	func update(_ entityName: String, to attribute: FZCDAttribute, by predicate: String?, _ callback: @escaping FZCDCallback)
 }
 
 public protocol FZTemporaryValuesProxyProtocol: FZModelClassProtocol {
-	func getValue ( by key: String ) -> String?
-	func set ( _ value: String, by key: String )
-	func annulValue ( by key: String )
+	func getValue(by key: String) -> String?
+	func set(_ value: String, by key: String)
+	func annulValue(by key: String)
 	func removeValues ()
-//	// on device [deprecated]
-//	func retrieveValue ( by key: String ) -> String?
-//	func store ( value: String, by key: String, and caller: FZCaller? )
-//	func deleteValue ( by key: String )
 }
 
 public protocol FZImageProxyProtocol: FZModelClassProtocol {
-//	func clearStorage ()
-	func getImage ( by url: String, callback: ( ( String, Any? ) -> Void )? ) -> UIImage?
-	func loadImage ( by url: String )
+	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
+	func loadImage(by url: String)
 }

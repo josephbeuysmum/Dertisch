@@ -21,11 +21,21 @@ open class FZViewController: UIViewController {
 		super.init( coder: aDecoder )
 	}
 	
-	deinit { lo() }
+	deinit {}
 	
-	override open func viewDidLoad () {
+	override open func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		signalBox.signals?.transmitSignal(by: FZSignalConsts.viewWarnedAboutMemory, with: self)
+	}
+	
+	override open func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		signalBox.signals?.transmitSignal(by: FZSignalConsts.viewAppeared, with: self)
+	}
+	
+	override open func viewDidLoad() {
 		super.viewDidLoad()
-		signalBox.signals?.transmitSignal( by: FZSignalConsts.viewLoaded, with: self )
+		signalBox.signals?.transmitSignal(by: FZSignalConsts.viewLoaded, with: self)
 	}
 	
 	public func deallocate () {

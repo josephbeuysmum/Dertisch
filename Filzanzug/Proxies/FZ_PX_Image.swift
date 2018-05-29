@@ -23,10 +23,9 @@ extension FZImageProxy: FZImageProxyProtocol {
 			let scopedSignals = worn_closet.getSignals( by: key_ring.key )
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
-		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) {
-			[ unowned self ] _, data in
-			guard self.assess( result: data ) else { return }
-			callback!( url, self.getLocalImage( by: url ) )
+		scopedSignals.scanOnceFor( key: urlKey, scanner: self ) { [weak self] _, data in
+			guard let safeSelf = self, safeSelf.assess( result: data ) else { return }
+			callback!( url, safeSelf.getLocalImage( by: url ) )
 		}
 		loadImage( by: url )
 		return nil
@@ -37,13 +36,13 @@ extension FZImageProxy: FZImageProxyProtocol {
 			let scopedUrlSession = worn_closet.getModelClassEntities( by: key_ring.key )?.urlSession,
 			let scopedSignals = worn_closet.getSignals( by: key_ring.key )
 			else { return }
-		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) {
-			[ unowned self ] _, data in
-			if let urlIndex = self.urlsResolving.index( of: url ) { self.urlsResolving.remove( at: urlIndex ) }
-			guard self.assess( result: data ) else { return }
+		_ = scopedSignals.scanOnceFor( key: url, scanner: self ) { [weak self] _, data in
+			guard let safeSelf = self else { return }
+			if let urlIndex = safeSelf.urlsResolving.index( of: url ) { safeSelf.urlsResolving.remove( at: urlIndex ) }
+			guard safeSelf.assess( result: data ) else { return }
 			let result = data as! FZApiResult
-			self.raw_images[ url ] = result.data as? Data
-			scopedSignals.transmitSignal( by: self.getUrlKey( by: url ), with: url )
+			safeSelf.raw_images[ url ] = result.data as? Data
+			scopedSignals.transmitSignal( by: safeSelf.getUrlKey( by: url ), with: url )
 		}
 		scopedUrlSession.call( url: url, method: FZUrlSessionService.methods.GET )
 	}
@@ -77,12 +76,11 @@ public class FZImageProxy {
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >
 
-	required public init () {
-		key_ring = FZKeyring()
-		worn_closet = FZWornCloset( key_ring.key )
+	required public init(with keyring: FZKeyring) {
+		key_ring = keyring
+		worn_closet = FZWornCloset(key_ring.key)
 		urlsResolving = []
 		raw_images = [:]
-		lo()
 	}
 	
 	deinit {}

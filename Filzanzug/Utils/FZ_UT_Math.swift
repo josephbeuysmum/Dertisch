@@ -26,8 +26,6 @@ public class FZMath {
 	
 	public static func roundDouble ( _ double: Double, toNumberOfPlaces places: Int ) -> Double {
 		let rounding = pow( 10.0, Double( places ) )
-//		roundedDouble = round( double * rounding ) / rounding
-//		lo(roundedDouble)
 		return round( double * rounding ) / rounding
 	}
 }
