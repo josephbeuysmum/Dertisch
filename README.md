@@ -62,11 +62,11 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 
 		var window: UIWindow?
 
-		func application (
+		func application(
 			_ application: UIApplication,
-			didFinishLaunchingWithOptions launchOptions: [ UIApplicationLaunchOptionsKey: Any ]? ) -> Bool {
-			window = UIWindow( frame: UIScreen.main.bounds )
-			FZRoutingService().start( rootViewController: "SomeViewController", window: window! )
+			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+			window = UIWindow(frame: UIScreen.main.bounds)
+			FZRoutingService(with: FZKeyring()).start(rootViewController: Consts.introViewController, window: window!)
 			return true
 		}
 	}
@@ -76,20 +76,20 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 	import Filzanzug
 
 	extension FZRoutingService: FZRoutingServiceExtensionProtocol {
-		public func registerDependencies ( with key: String ) {
-	//		register( FZCoreDataProxy.self, with: key )
-			register( FZTemporaryValuesProxy.self, with: key )
-			register( FZUrlSessionService.self, with: key )
-	//		register( FZImageProxy.self, with: key, injecting: [ FZUrlSessionService.self ] )
-			register( SomeProxy.self, with: key )
-			register( SomeService.self, with: key, injecting: [ SomeProxy.self ] )
+		public func registerDependencies(with key: String) {
+	//		register(FZCoreDataProxy.self, with: key)
+			register(FZTemporaryValuesProxy.self, with: key)
+			register(FZUrlSessionService.self, with: key)
+	//		register(FZImageProxy.self, with: key, injecting: [FZUrlSessionService.self])
+			register(SomeProxy.self, with: key)
+			register(SomeService.self, with: key, injecting: [SomeProxy.self])
 			register(
 				viewControllerId: "SomeViewController",
 				viewControllerType: SomeViewController.self,
 				interactorType: SomeInteractor.self,
 				presenterType: SomePresenter.self,
 				with: key,
-				injecting: [ SomeProxy.self ] )
+				injecting: [SomeProxy.self])
 		}
 	}
 
@@ -104,17 +104,17 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 	import Filzanzug
 
 	protocol SomeProxyProtocol: FZModelClassProtocol {
-		func someFunction ( someData: Any )
+		func someFunction(someData: Any)
 	}
 
 	extension SomeProxy: SomeProxyProtocol {
 		var wornCloset: FZWornCloset { return worn_closet }
 
-		func activate () {}
+		func activate() {}
 
-		func deallocate () {}
+		func deallocate() {}
 
-		func someFunction ( someData: Any ) {}
+		func someFunction(someData: Any) {}
 	}
 
 	class SomeProxy {
@@ -122,7 +122,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 		key_ring: FZKeyring,
 		worn_closet: FZWornCloset
 
-		required init () {
+		required init() {
 			key_ring = FZKeyring()
 			worn_closet = FZWornCloset(key_ring.key)
 		}
@@ -139,7 +139,7 @@ A boilerplate `Filzanzug` Interactor looks like this:
 	extension SomeInteractor: FZInteractorProtocol {
 		var wornCloset: FZWornCloset { return worn_closet }
 
-		func postPresenterActivated () {}
+		func postPresenterActivated() {}
 	}
 
 	struct SomeInteractor {
@@ -147,10 +147,10 @@ A boilerplate `Filzanzug` Interactor looks like this:
 		key_ring: FZKeyring,
 		worn_closet: FZWornCloset
 		fileprivate var presenter_: SomePresenter? {
-			return worn_closet.getInteractorEntities( by: key_ring.key )?.presenter as? SomePresenter
+			return worn_closet.getInteractorEntities(by: key_ring.key)?.presenter as? SomePresenter
 		}
 
-		init () {
+		init() {
 			key_ring = FZKeyring()
 			worn_closet = FZWornCloset(key_ring.key)
 		}
@@ -163,9 +163,9 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 	extension SomePresenter: FZPresenterProtocol {
 		var wornCloset: FZWornCloset { return worn_closet }
 
-		func postViewActivated () {}
+		func postViewActivated() {}
 
-		func show ( pageName: String ) {}
+		func show(pageName: String) {}
 	}
 
 	struct SomePresenter {
@@ -173,10 +173,10 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 		key_ring: FZKeyring,
 		worn_closet: FZWornCloset
 		fileprivate var view_controller: SomeViewController? {
-			return worn_closet.getPresenterEntities( by: key_ring.key )?.viewController as? SomeViewController
+			return worn_closet.getPresenterEntities(by: key_ring.key)?.viewController as? SomeViewController
 		}
 
-		init () {
+		init() {
 			key_ring = FZKeyring()
 			worn_closet = FZWornCloset(key_ring.key)
 		}
@@ -198,7 +198,10 @@ ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each
 Developmental Roadmap
 ---------------------
 
--	create an example boilerplate app;
+No official timescale exists for the roadmap, but at present it is as follows:
+
+-	create example boilerplate app;
+-	check whether `FZKeyring`s can be privately instantiated rather than injected;
 -	work out which classes, structs, and protocols can be made internal, and make them internal;
 -	replace `deallocate()` functions with an improved method of garbage collection;
 -	complete unit tests;
