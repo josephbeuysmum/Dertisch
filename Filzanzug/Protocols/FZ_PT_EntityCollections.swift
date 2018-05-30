@@ -35,4 +35,6 @@ public protocol FZPresenterEntitiesCollectionProtocol: FZEntitiesCollectionProto
 	var routing: FZRoutingService? { get }
 	var viewController: FZViewController? { get }
 	init ( routing: FZRoutingService?, viewController: FZViewController? )
+	func getValue(by key: String) -> Any?
+	func set(_ value: Any, by key: String)
 }

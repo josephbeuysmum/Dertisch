@@ -37,12 +37,13 @@ public extension FZPresenterProtocol {
 				let passedVC = data as? FZViewController,
 				passedVC == self.wornCloset.getPresenterEntities(by: scopedClosetKey)?.viewController
 				else { return }
-			scopedSignals.transmitSignal(by: FZSignalConsts.presenterActivated, with: self)
 			scopedSignals.scanOnceFor(key: FZSignalConsts.navigateTo, scanner: self) { _, data in
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			self.postViewActivated() }
+			self.postViewActivated()
+			scopedSignals.transmitSignal(by: FZSignalConsts.presenterActivated, with: self)
+		}
 	}
 	
 	public func present (_ viewName: String) {

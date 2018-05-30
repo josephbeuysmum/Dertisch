@@ -43,7 +43,7 @@ extension FZSignal: FZSignalProtocol {
 	public func transmit ( with value: Any? ) {
 		wave_forms.forEach { waveForm in
 			guard waveForm.value.callback != nil else { return }
-			waveForm.value.callback!( transmission, value )
+			waveForm.value.callback?( transmission, value )
 		}
 	}
 }

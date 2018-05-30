@@ -202,6 +202,7 @@ No official timescale exists for the roadmap, but at present it is as follows:
 
 -	create example boilerplate app;
 -	check whether `FZKeyring`s can be privately instantiated rather than injected;
+-	make access to the bespoke rail a lot less wordy;
 -	work out which classes, structs, and protocols can be made internal, and make them internal;
 -	replace `deallocate()` functions with an improved method of garbage collection;
 -	complete unit tests;

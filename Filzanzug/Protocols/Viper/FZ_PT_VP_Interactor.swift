@@ -32,21 +32,16 @@ public extension FZInteractorProtocol {
 			let presenterClassName = wornCloset.getInteractorEntities( by: scopedKey )?.presenter.instanceDescriptor,
 			let scopedSignals = wornCloset.getSignals( by: scopedKey )
 			else { return }
-		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
-//			[weak self]
-			_, data in
+		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) { _, data in
 			guard
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
 //			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
-			self.postPresenterActivated() }
-		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) {
-//			[weak self]
-			timer in
-			_ = self.wornCloset.getSignals( by: scopedKey )?.stopScanningFor(
-				key: FZSignalConsts.presenterActivated,
-				scanner: self as AnyObject )
+			self.postPresenterActivated()
+		}
+		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) { timer in
+			_ = self.wornCloset.getSignals( by: scopedKey )?.stopScanningFor( key: FZSignalConsts.presenterActivated, scanner: self as AnyObject )
 			timer.invalidate() }
 	}
 	
