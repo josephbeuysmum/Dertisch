@@ -16,7 +16,6 @@
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */; };
 		A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */; };
 		A9B531F62039F73500DB1C85 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */; };
 		A9B531F72039F73500DB1C85 /* FZ_CS_Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */; };
@@ -38,7 +37,6 @@
 		A9B532092039F73500DB1C85 /* FZ_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A02039F73400DB1C85 /* FZ_UT_String.swift */; };
 		A9B5320A2039F73500DB1C85 /* FZ_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A12039F73400DB1C85 /* FZ_UT_Time.swift */; };
 		A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A22039F73400DB1C85 /* FZ_UT_Consts.swift */; };
-		A9B5320C2039F73500DB1C85 /* FZ_CP_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */; };
 		A9B5321A2039F73500DB1C85 /* FZ_PT_VP_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */; };
 		A9B5321B2039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */; };
 		A9B5321C2039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */; };
@@ -49,7 +47,6 @@
 		A9B5323F2039F73500DB1C85 /* FZ_ET_SignalWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E12039F73500DB1C85 /* FZ_ET_SignalWaveform.swift */; };
 		A9B532402039F73500DB1C85 /* FZ_ET_WornCloset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */; };
 		A9B532412039F73500DB1C85 /* FZ_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */; };
-		A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */; };
 		A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */; };
 		A9B532452039F73500DB1C85 /* FZ_ET_CL_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E82039F73500DB1C85 /* FZ_ET_CL_Presenter.swift */; };
 		A9B532462039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531E92039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift */; };
@@ -98,7 +95,6 @@
 		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9B531762039F62700DB1C85 /* FilzanzugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilzanzugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_SwinjectStoryboard.swift; sourceTree = "<group>"; };
 		A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_EX_Data.swift; sourceTree = "<group>"; };
 		A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_CommonPhrases.swift; sourceTree = "<group>"; };
 		A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Metrics.swift; sourceTree = "<group>"; };
@@ -120,7 +116,6 @@
 		A9B531A02039F73400DB1C85 /* FZ_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_String.swift; sourceTree = "<group>"; };
 		A9B531A12039F73400DB1C85 /* FZ_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Time.swift; sourceTree = "<group>"; };
 		A9B531A22039F73400DB1C85 /* FZ_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_UT_Consts.swift; sourceTree = "<group>"; };
-		A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CP_Stopwatch.swift; sourceTree = "<group>"; };
 		A9B531B62039F73500DB1C85 /* FZ_PT_VP_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_Presenter.swift; sourceTree = "<group>"; };
 		A9B531B72039F73500DB1C85 /* FZ_PT_VP_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_WornCloset.swift; sourceTree = "<group>"; };
 		A9B531B82039F73500DB1C85 /* FZ_PT_VP_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_VP_ModelClass.swift; sourceTree = "<group>"; };
@@ -131,7 +126,6 @@
 		A9B531E12039F73500DB1C85 /* FZ_ET_SignalWaveform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalWaveform.swift; sourceTree = "<group>"; };
 		A9B531E22039F73500DB1C85 /* FZ_ET_WornCloset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_WornCloset.swift; sourceTree = "<group>"; };
 		A9B531E32039F73500DB1C85 /* FZ_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_TimePeriod.swift; sourceTree = "<group>"; };
-		A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_GradedBool.swift; sourceTree = "<group>"; };
 		A9B531E52039F73500DB1C85 /* FZ_ET_Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Stopwatch.swift; sourceTree = "<group>"; };
 		A9B531E82039F73500DB1C85 /* FZ_ET_CL_Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_Presenter.swift; sourceTree = "<group>"; };
 		A9B531E92039F73500DB1C85 /* FZ_ET_CL_ModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_CL_ModelClass.swift; sourceTree = "<group>"; };
@@ -197,7 +191,6 @@
 		A9B5316F2039F62600DB1C85 /* Filzanzug */ = {
 			isa = PBXGroup;
 			children = (
-				A9B531A32039F73500DB1C85 /* Components */,
 				A9B5318A2039F73400DB1C85 /* Constants */,
 				A9B531DD2039F73500DB1C85 /* Entities */,
 				A9B531872039F73400DB1C85 /* Extensions */,
@@ -230,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */,
-				A9B531882039F73400DB1C85 /* FZ_EX_SwinjectStoryboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -276,14 +268,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A9B531A32039F73500DB1C85 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				A9B531A42039F73500DB1C85 /* FZ_CP_Stopwatch.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		A9B531A52039F73500DB1C85 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +301,6 @@
 				A9B531ED2039F73500DB1C85 /* FZ_ET_ApiResult.swift */,
 				A9B531E02039F73500DB1C85 /* FZ_ET_Caller.swift */,
 				A9FB4CCD206271140038FCEE /* FZ_ET_CoreData.swift */,
-				A9B531E42039F73500DB1C85 /* FZ_ET_GradedBool.swift */,
 				A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */,
 				A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */,
 				A9B531DE2039F73500DB1C85 /* FZ_ET_SignalsService.swift */,
@@ -498,13 +481,11 @@
 				A9FB4CB92061D9720038FCEE /* FZ_ET_VipRelationship.swift in Sources */,
 				A9B532062039F73500DB1C85 /* FZ_UT_Math.swift in Sources */,
 				A9B531FF2039F73500DB1C85 /* FZ_SV_Signals.swift in Sources */,
-				A9B532422039F73500DB1C85 /* FZ_ET_GradedBool.swift in Sources */,
 				A9B531F82039F73500DB1C85 /* FZ_CS_Logs.swift in Sources */,
 				A9B532022039F73500DB1C85 /* FZ_UT_Colors.swift in Sources */,
 				A9B532072039F73500DB1C85 /* FZ_UT_Extensions.swift in Sources */,
 				A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */,
 				A9FB4CBD2062601B0038FCEE /* FZ_PT_Entities.swift in Sources */,
-				A9B5320C2039F73500DB1C85 /* FZ_CP_Stopwatch.swift in Sources */,
 				A9B531FD2039F73500DB1C85 /* FZ_CS_Prefixes.swift in Sources */,
 				A9B532482039F73500DB1C85 /* FZ_ET_CL_Interactor.swift in Sources */,
 				A9FB4CC12062613C0038FCEE /* FZ_PT_Proxies.swift in Sources */,
@@ -523,7 +504,6 @@
 				A9B532092039F73500DB1C85 /* FZ_UT_String.swift in Sources */,
 				A9B531F92039F73500DB1C85 /* FZ_CS_Signals.swift in Sources */,
 				A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */,
-				A9B531F42039F73500DB1C85 /* FZ_EX_SwinjectStoryboard.swift in Sources */,
 				A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */,
 				A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */,
 				A9BB88602064583E009FB8E0 /* Filzanzug.xcdatamodeld in Sources */,

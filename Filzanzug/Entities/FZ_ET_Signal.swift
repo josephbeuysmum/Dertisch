@@ -11,9 +11,7 @@ extension FZSignal: FZSignalProtocol {
 
 	public var hasScanners: Bool { return wave_forms.count > 0 }
 	
-	public func deallocate () {
-		lo("what happens here?")
-	}
+	public func deallocate () {}
 	
 
 	public mutating func add ( _ scanner: FZSignalReceivableProtocol, scansContinuously: Bool, callback: @escaping FZSignalCallback ) -> Bool {

@@ -32,8 +32,6 @@ extension FZSignalsService: FZSignalsServiceProtocol {
 	
 	// removes a scanner
 	public func stopScanningFor (key: String, scanner: AnyObject) {
-//		guard !hasSignal( for: key ) else { return }
-//		guard signals_[ key ] != nil else { return false }
 		_annulSignal(by: key)
 	}
 	

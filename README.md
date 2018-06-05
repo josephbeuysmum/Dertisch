@@ -198,19 +198,20 @@ ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each
 Developmental Roadmap
 ---------------------
 
-No official timescale exists for the roadmap, but at present it is as follows:
+No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
+-	privately instantiate `FZKeyring`s rather than inject them;
+-	make access to the `bespokeRail` a lot less wordy;
+-	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
+-	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance.
+-	instigate a check-out/check-in process for model classes so they can become structs;
+-	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
+-	add Firebase service;
 -	create example boilerplate app;
--	check whether `FZKeyring`s can be privately instantiated rather than injected;
--	make access to the bespoke rail a lot less wordy;
--	work out which classes, structs, and protocols can be made internal, and make them internal;
 -	replace `deallocate()` functions with an improved method of garbage collection;
--	complete unit tests;
--	check whether `activate()` functions are still necessary;
 -	try to find a way to ensure the repeated `fileprivate var closet_key: String?` code can be written just once;
 -	reintroduce timeout stopwatch to `FZUrlSessionService`;
 -	complete list of MIME types in `FZUrlSessionService`;
--	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance.
 
 -----------------------
 On the name "Filzanzug"
