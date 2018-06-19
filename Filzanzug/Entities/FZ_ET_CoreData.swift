@@ -6,9 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public enum FZCDTypes {
-	case string, int, bool
-}
+public enum FZCDTypes { case bool, double, int, string }
 
 //extension FZCDTypes: Equatable {
 //	public static func == (lhs: FZCDTypes, rhs: FZCDTypes) -> Bool {
@@ -23,6 +21,7 @@ public enum FZCDTypes {
 public protocol FZCDAble {}
 
 extension Bool: FZCDAble {}
+extension Double: FZCDAble {}
 extension Int: FZCDAble {}
 extension String: FZCDAble {}
 
@@ -75,18 +74,20 @@ public struct FZCDEntity: FZCDEntityProtocol {
 		types_ = types
 	}
 	
-	mutating public func add (_ attribute: FZCDAttribute) {
+//	mutating public func add (_ attribute: FZCDAttribute) {
+	mutating public func add(_ attribute: FZCDAble, by key: String) -> Bool {
 		guard
-			let type = types_[attribute.key],
+			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)
-			else { return }
-		attributes_[attribute.key] = attribute.value
+			else { return false }
+		attributes_[key] = attribute
+		return true
 	}
 	
-	mutating public func add (attributes: [FZCDAttribute]) {
-		attributes.forEach { attribute in add(attribute) }
-	}
-	
+//	mutating public func add (attributes: [FZCDAttribute]) {
+//		attributes.forEach { attribute in add(attribute) }
+//	}
+
 //	mutating public func add ( multipleAttributes: [ [ FZCDTypes ] ] ) {
 //		multipleAttributes.forEach { attributes in add( attributes: attributes ) }
 //	}
@@ -95,12 +96,12 @@ public struct FZCDEntity: FZCDEntityProtocol {
 //		return types_[ index ].key
 //	}
 	
-	fileprivate func assessValidity(of attribute: FZCDAttribute, by type: FZCDTypes) -> Bool {
-		let value = attribute.value
+fileprivate func assessValidity(of attribute: FZCDAble, by type: FZCDTypes) -> Bool {
 		switch type {
-		case FZCDTypes.bool:	return value is Bool
-		case FZCDTypes.int:		return value is Int || value is Int16 || value is Int32 || value is Int64
-		case FZCDTypes.string:	return value is String
+		case FZCDTypes.bool:	return attribute is Bool
+		case FZCDTypes.double:	return attribute is Double
+		case FZCDTypes.int:		return attribute is Int || attribute is Int16 || attribute is Int32 || attribute is Int64
+		case FZCDTypes.string:	return attribute is String
 		}
 	}
 }

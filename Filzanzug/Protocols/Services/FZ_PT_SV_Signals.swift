@@ -8,17 +8,17 @@
 
 protocol FZSignalsServiceProtocol {
 	typealias FZSignalCallback = (String, Any?) -> Void
-	func annulSignal (by key: String, scanner: AnyObject)
-	func hasSignal (for key: String) -> Bool
+	func annul(signal key: String, scanner: AnyObject)
+	func has(signal key: String) -> Bool
 	func scanFor (
-		key: String,
+		signal key: String,
 		scanner: FZSignalReceivableProtocol,
 		callback: @escaping FZSignalCallback ) -> Bool
 	func scanOnceFor (
-		key: String,
+		signal key: String,
 		scanner: FZSignalReceivableProtocol,
 		callback: @escaping FZSignalCallback
 		) -> Bool
-	func stopScanningFor (key: String, scanner: AnyObject)
-	func transmitSignal (by key: String, with value: Any?)
+	func stopScanningFor(signal key: String, scanner: AnyObject)
+	func transmit(signal key: String, with value: Any?)
 }

@@ -33,10 +33,10 @@ public protocol FZRoutingServiceRegistrarProtocol {
 		with key: String,
 		injecting dependencyTypes: [ FZModelClassProtocol.Type ]? )
 	func register (
-		viewControllerId: String,
-		viewControllerType: FZViewControllerProtocol.Type,
-		interactorType: FZInteractorProtocol.Type,
-		presenterType: FZPresenterProtocol.Type,
-		with key: String,
-		injecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? )
+		_ viewControllerId: String,
+		as viewControllerType: FZViewControllerProtocol.Type,
+		with interactorType: FZInteractorProtocol.Type,
+		and presenterType: FZPresenterProtocol.Type,
+		lockedBy key: String,
+		andInjecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? )
 }

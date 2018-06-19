@@ -14,8 +14,9 @@ public protocol FZCDEntityProtocol {
 	var attributes: [String: FZCDAble] { get }
 	var name: String { get }
 	init (_ name: String, keys: [FZCDKey])
-	mutating func add(_ attribute: FZCDAttribute) 
-	mutating func add (attributes: [FZCDAttribute])
+	mutating func add(_ attribute: FZCDAble, by key: String) -> Bool
+//	mutating func add(_ attribute: FZCDAttribute)
+//	mutating func add (attributes: [FZCDAttribute])
 }
 
 public protocol FZKeyringProtocol {
@@ -42,7 +43,8 @@ public protocol FZSignalProtocol: FZDeallocatableProtocol {
 	init ( _ transmission: String )
 	mutating func add ( _ scanner: FZSignalReceivableProtocol, scansContinuously: Bool, callback: @escaping FZSignalCallback ) -> Bool
 	mutating func remove ( _ scanner: FZSignalReceivableProtocol )
-	mutating func removeAllScanners ()
+	mutating func removeAllWavelengths()
+	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )
 }
 

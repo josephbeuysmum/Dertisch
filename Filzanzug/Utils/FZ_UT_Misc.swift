@@ -15,7 +15,7 @@
 //		data: Any? = nil,
 //		andCaller caller: FZCaller? ) {
 //		guard caller != nil else { return }
-//		signals.scanOnceFor( key: key, scanner: caller!.caller!, callback: caller!.callback! )
+//		signals.scanOnceFor(signal: key, scanner: caller!.caller!, callback: caller!.callback! )
 ////		caller!.annul()
 //		signals.transmitSignalFor( key: key, data: data )
 //	}

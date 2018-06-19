@@ -9,7 +9,7 @@
 public protocol FZWornClosetImplementerProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
 	// formerly also: FZWornClosetEntityProtocol, FZActivatableProtocol, FZClassNameProtocol, FZInitableProtocol
 	var instanceDescriptor: String { get }
-	var wornCloset: FZWornCloset { get }
+	var wornCloset: FZWornCloset? { get }
 	init(with keyring: FZKeyring)
 	func activate()
 }

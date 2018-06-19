@@ -19,7 +19,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-	public var wornCloset: FZWornCloset { return worn_closet }
+	public var wornCloset: FZWornCloset? { return worn_closet }
 	
 	
 	

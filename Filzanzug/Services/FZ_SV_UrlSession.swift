@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var wornCloset: FZWornCloset { return worn_closet }
+	public var wornCloset: FZWornCloset? { return worn_closet }
 	
 	
 	
@@ -29,7 +29,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && callback != nil {
-			wornCloset.getSignals( by: key_ring.key )?.scanOnceFor( key: url, scanner: scanner!, callback: callback! )
+			wornCloset?.getSignals( by: key_ring.key )?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -90,8 +90,8 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		wornCloset.getSignals( by: key_ring.key )?.transmitSignal(
-			by: url,
+		wornCloset?.getSignals( by: key_ring.key )?.transmit(
+			signal: url,
 			with: FZApiResult( success: success, url: url, data: data ) )
 	}
 }

@@ -6,38 +6,35 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-//import Signals
-
 extension FZSignalsService: FZSignalsServiceProtocol {
 	public typealias FZSignalCallback = (String, Any?) -> Void
 	
-	// removes a signal
-	public func annulSignal (by key: String, scanner: AnyObject) {
+	public func annul(signal key: String, scanner: AnyObject) {
 		_annulSignal( by: key )
 	}
 	
-	public func hasSignal (for key: String) -> Bool { return signals_[ key ] != nil }
+	public func has(signal key: String) -> Bool { return signals_[ key ] != nil }
 	
-	// adds a scanner
 	@discardableResult
-	public func scanFor (key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
+	public func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
 		return _scanFor(key: key, scanner: scanner, scanContinuously: true, callback: callback)
 	}
 	
-	// adds a scanner once
 	@discardableResult
-	public func scanOnceFor (key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
+	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
 		return _scanFor(key: key, scanner: scanner, scanContinuously: false, callback: callback)
 	}
 	
-	// removes a scanner
-	public func stopScanningFor (key: String, scanner: AnyObject) {
+	public func stopScanningFor(signal key: String, scanner: AnyObject) {
 		_annulSignal(by: key)
 	}
 	
-	// transmits a signal
-	public func transmitSignal(by key: String, with value: Any? = nil) {
-		signals_[ key ]?.transmit(with: value)
+	public func transmit(signal key: String, with value: Any? = nil) {
+		guard var signal = signals_[key] else { return }
+		signal.transmit(with: value)
+		// permitting myself a comment here. adding this extra function 'removeSingleUseWavelengths()' because if we try to remove the wavelengths in the signal.transmit() function call the compiler will complain that we are potentially modifying the internal wave_lengths dictionary from two places simultaneously, which is obviously dangerous. The fact that we are accessing it from out here means it would be safe, but the compiler does not know that
+		signal.removeSingleUseWavelengths()
+		signals_[key] = signal
 	}
 	
 	
@@ -55,31 +52,31 @@ extension FZSignalsService: FZSignalsServiceProtocol {
 	
 	// if nothing is left scanning to this signal, it might as well be deleted
 	fileprivate func _annulEmpty ( signal: FZSignal, key: String, scanner: AnyObject ) {
-//		loFeedback( "ANNUL EMPTY key: \( key ) signals: \( _getFZSignalWaveformsDescription() )" )
+//		loFeedback( "ANNUL EMPTY key: \( key ) signals: \( _getFZSignalWavelengthsDescription() )" )
 		guard !signal.hasScanners else { return }
 		_annulSignal( by: key )
 	}
 	
 	// annuls a signal
 	fileprivate func _annulSignal ( by key: String ) {
-		guard hasSignal( for: key ) else { return }
-		signals_[ key ]!.removeAllScanners()
+		guard has(signal: key) else { return }
+		signals_[key]!.removeAllWavelengths()
 		signals_.removeValue( forKey: key )
 	}
 	
 	// returns a signal by a key; creates the signal if it's missing
 	fileprivate func _createSignalIfNecessary ( by key: String ) {
-		guard !hasSignal( for: key ) else { return }
-		signals_[ key ] = FZSignal( key )
+		guard !has(signal: key) else { return }
+		signals_[key] = FZSignal( key )
 	}
 }
 
 public class FZSignalsService {
 	fileprivate var
-	signals_: Dictionary < String, FZSignal >
+	signals_: Dictionary<String, FZSignal>
 	
 	required public init () {
-		signals_ = Dictionary < String, FZSignal >()
+		signals_ = [:]
 	}
 	
 	deinit {}

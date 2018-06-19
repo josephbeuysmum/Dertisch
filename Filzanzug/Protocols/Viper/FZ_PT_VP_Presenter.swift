@@ -10,12 +10,23 @@ import Foundation
 
 public extension FZPresenterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
-//	public var viewController: FZViewController? { return wornCloset.getPresenterEntities( by: closet_key )?.viewController }
-	// todo this is repeated code, is there any way to avoid repeating it?
+	
+	// todo this is repeated code, here and in FZInteractorProtocol, is there any way to avoid repeating it?
+	public var wornCloset: FZWornCloset? {
+		let selfReflection = Mirror( reflecting: self )
+		var wc: FZWornCloset?
+		for (_, child) in selfReflection.children.enumerated() {
+			if child.value is FZWornCloset {
+				if wc != nil { fatalError("FZPresenters can only possess one FZWornCloset") }
+				wc = (child.value as? FZWornCloset)
+			}
+		}
+		return wc
+	}
 	fileprivate var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
 		var key: String?
-		for ( _, child ) in selfReflection.children.enumerated() {
+		for (_, child) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring {
 				if key != nil { fatalError("FZPresenters can only possess one FZKeyring") }
 				key = (child.value as? FZKeyring)?.key
@@ -29,32 +40,33 @@ public extension FZPresenterProtocol {
 	public func activate () {
 		guard
 			let scopedClosetKey = closet_key,
-			let scopedSignals = wornCloset.getSignals(by: scopedClosetKey)
+			let scopedSignals = wornCloset?.getSignals(by: scopedClosetKey)
 			else { return }
 //		guard let scopedKey = closet_key else { return }
-		_ = scopedSignals.scanOnceFor(key: FZSignalConsts.viewLoaded, scanner: self) { _, data in
+		_ = scopedSignals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedVC = data as? FZViewController,
-				passedVC == self.wornCloset.getPresenterEntities(by: scopedClosetKey)?.viewController
+				passedVC == self.wornCloset?.getPresenterEntities(by: scopedClosetKey)?.viewController
 				else { return }
-			scopedSignals.scanOnceFor(key: FZSignalConsts.navigateTo, scanner: self) { _, data in
+			scopedSignals.scanOnceFor(signal: FZSignalConsts.navigateTo, scanner: self) { _, data in
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
 			self.postViewActivated()
-			scopedSignals.transmitSignal(by: FZSignalConsts.presenterActivated, with: self)
+			scopedSignals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
 	}
 	
 	public func present (_ viewName: String) {
 		guard
-			let presenterEntities = wornCloset.getPresenterEntities(by: closet_key) else {
+			let presenterEntities = wornCloset?.getPresenterEntities(by: closet_key) else {
 				return }
 		presenterEntities.routing?.present(viewController: viewName, on: presenterEntities.viewController!)
 	}
 	
+	// todo use a mirror to run through objects checking if they are FZDeallocatable and deallocating if so, and same in interactor?
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-	public func deallocate () { wornCloset.deallocate() }
+	public func deallocate () { wornCloset?.deallocate() }
 	public func postViewActivated () {}
 }
 

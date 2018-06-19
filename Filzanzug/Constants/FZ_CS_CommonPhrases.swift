@@ -9,6 +9,7 @@
 public struct FZCommonPhrasesConsts {
 	public static let
 	Activated = "Activated",
+	Added = "Added",
 	Controller = "Controller",
 	Deleted = "Deleted",
 	Loaded = "Loaded",
@@ -22,7 +23,6 @@ public struct FZCommonPhrasesConsts {
 
 //	Account = "Account",
 //	Accounts = "\( Account )s",
-//	Added = "Added",
 //	Back = "Back",
 //	Changed = "Changed",
 //	Complete = "Complete",

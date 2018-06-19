@@ -30,7 +30,7 @@ public extension FZModelClassProtocol {
 //		wornCloset.getSignals( by: scopedKey )?.transmitSignalFor( key: FZSignalConsts.modelClassActivated, data: className )
 //	}
 	
-	public func deallocate () { wornCloset.deallocate() }
+	public func deallocate () { wornCloset?.deallocate() }
 }
 
 public protocol FZModelClassProtocol: FZWornClosetImplementerProtocol {

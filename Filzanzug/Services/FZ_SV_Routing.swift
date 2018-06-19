@@ -10,7 +10,7 @@
 import UIKit
 
 extension FZRoutingService: FZRoutingServiceProtocol {
-	public var wornCloset: FZWornCloset { return worn_closet }
+	public var wornCloset: FZWornCloset? { return worn_closet }
 
 	
 	
@@ -95,26 +95,26 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 					switch true {
 					case dependencyClass is FZCoreDataProxy:		entities.set(coreData: dependencyClass as! FZCoreDataProxy)
 					case dependencyClass is FZUrlSessionService:	entities.set(urlSession: dependencyClass as! FZUrlSessionService)
-					default:										entities.bespokeRail.add(modelClass: dependencyClass)
+					default:										entities.bespokeRail.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		modelClass.wornCloset.set(signals: worn_closet.getSignals(by: key_ring.key)!)
-		modelClass.wornCloset.set(entities: entities)
+		modelClass.wornCloset?.set(signals: worn_closet.getSignals(by: key_ring.key)!)
+		modelClass.wornCloset?.set(entities: entities)
 		model_class_singletons[modelClassId] = modelClass
 		modelClass.activate()
 	}
 	
 	public func register (
-		viewControllerId: String,
-		viewControllerType: FZViewControllerProtocol.Type,
-		interactorType: FZInteractorProtocol.Type,
-		presenterType: FZPresenterProtocol.Type,
-		with key: String,
-		injecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? = nil ) {
+		_ viewControllerId: String,
+		as viewControllerType: FZViewControllerProtocol.Type,
+		with interactorType: FZInteractorProtocol.Type,
+		and presenterType: FZPresenterProtocol.Type,
+		lockedBy key: String,
+		andInjecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? = nil ) {
 		guard
 			vip_relationships[ viewControllerId ] == nil,
 			canRegister( with: key )
@@ -167,7 +167,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.worn_closet.getSignals( by: self.key_ring.key )?.transmitSignal( by: FZSignalConsts.viewRemoved )
+				self.worn_closet.getSignals( by: self.key_ring.key )?.transmit(signal: FZSignalConsts.viewRemoved )
 		} )
 	}
 	
@@ -182,23 +182,23 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 					if dependencyClass is FZImageProxy {
 						entities.set( image: dependencyClass as! FZImageProxy )
 					} else {
-						entities.bespokeRail.add( modelClass: dependencyClass )
+						entities.bespokeRail.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		interactor_!.wornCloset.set( entities: entities )
-		interactor_!.wornCloset.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		interactor_!.wornCloset?.set( entities: entities )
+		interactor_!.wornCloset?.set( signals: worn_closet.getSignals( by: key_ring.key )! )
 		interactor_!.activate()
 	}
 	
 	fileprivate func set ( presenter: FZPresenterProtocol ) {
 		presenter_?.deallocate()
 		presenter_ = presenter
-		presenter_!.wornCloset.set( signals: worn_closet.getSignals( by: key_ring.key )! )
-		presenter_!.wornCloset.set( entities: FZPresenterEntities( routing: self, viewController: view_controller ) )
+		presenter_!.wornCloset?.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		presenter_!.wornCloset?.set( entities: FZPresenterEntities( routing: self, viewController: view_controller ) )
 		presenter_!.activate()
 	}
 	

@@ -9,8 +9,8 @@
 public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
 
 public protocol FZBespokeEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
-	func add ( modelClass: FZModelClassProtocol )
-	func getModelClass ( by type: FZModelClassProtocol.Type? ) -> FZModelClassProtocol?
+	func add(_ modelClass: FZModelClassProtocol)
+	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
 }
 
 public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
