@@ -40,7 +40,7 @@ public extension FZInteractorProtocol {
 	public func activate () {
 		guard
 			let scopedKey = closet_key,
-			let presenterClassName = wornCloset?.getInteractorEntities( by: scopedKey )?.presenter.instanceDescriptor,
+			let presenterClassName = wornCloset?.getInteractorEntities(by: scopedKey)?.presenter.instanceDescriptor,
 			let scopedSignals = wornCloset?.getSignals( by: scopedKey )
 			else { return }
 		_ = scopedSignals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self ) { _, data in
@@ -52,7 +52,7 @@ public extension FZInteractorProtocol {
 			self.postPresenterActivated()
 		}
 		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) { timer in
-			_ = self.wornCloset?.getSignals( by: scopedKey )?.stopScanningFor( signal: FZSignalConsts.presenterActivated, scanner: self as AnyObject )
+			_ = self.wornCloset?.getSignals(by: scopedKey)?.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
 			timer.invalidate() }
 	}
 	

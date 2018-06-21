@@ -25,14 +25,14 @@ extension FZSignalsService: FZSignalsServiceProtocol {
 		return _scanFor(key: key, scanner: scanner, scanContinuously: false, callback: callback)
 	}
 	
-	public func stopScanningFor(signal key: String, scanner: AnyObject) {
+	public func stopScanningFor(signal key: String, scanner: FZSignalReceivableProtocol) {
 		_annulSignal(by: key)
 	}
 	
 	public func transmit(signal key: String, with value: Any? = nil) {
 		guard var signal = signals_[key] else { return }
 		signal.transmit(with: value)
-		// permitting myself a comment here. adding this extra function 'removeSingleUseWavelengths()' because if we try to remove the wavelengths in the signal.transmit() function call the compiler will complain that we are potentially modifying the internal wave_lengths dictionary from two places simultaneously, which is obviously dangerous. The fact that we are accessing it from out here means it would be safe, but the compiler does not know that
+		// permitting myself a comment here. adding this extra function 'removeSingleUseWavelengths()' because if we try to remove the wavelengths in the signal.transmit() function call the compiler will complain that we are potentially modifying the internal wave_lengths dictionary from two places simultaneously, which is obviously dangerous. The fact that we are accessing it from out here means it would be safe, but the compiler does not know that. I believe this is because FZSignals are structs, although I need to look into this
 		signal.removeSingleUseWavelengths()
 		signals_[key] = signal
 	}
