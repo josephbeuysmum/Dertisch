@@ -61,12 +61,6 @@ extension FZSignal: FZSignalProtocol {
 // whilst wave_lengths are references to the classes that observe them
 // a signal may have many signatures, but a signature only has one signal
 
-/*
-mand value/id
-array closures
-func transmit ( with value/id )
-
-*/
 public struct FZSignal {
 	public var transmission: String
 	
