@@ -6,6 +6,8 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+import Foundation
+
 extension FZKeyring: FZKeyringProtocol {
 	public var key: String { return key_ }
 }

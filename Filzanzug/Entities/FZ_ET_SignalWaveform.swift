@@ -6,6 +6,8 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
+import Foundation
+
 // FZSignalWavelength stores a uniquely identifiable way to track signal scanners, with a key and a flag denoting whether the signal is permanently observed or just a one-off
 extension FZSignalWavelength {
 	public typealias FZSignalCallback = (String, Any?) -> Void

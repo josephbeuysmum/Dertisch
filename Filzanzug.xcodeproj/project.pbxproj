@@ -15,7 +15,6 @@
 		A960A6FB20653C160085A4A5 /* FZ_ET_Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
-		A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B531702039F62600DB1C85 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */; };
 		A9B531F62039F73500DB1C85 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318B2039F73400DB1C85 /* FZ_CS_CommonPhrases.swift */; };
 		A9B531F72039F73500DB1C85 /* FZ_CS_Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B5318C2039F73400DB1C85 /* FZ_CS_Metrics.swift */; };
@@ -57,7 +56,6 @@
 		A9B5324C2039F73500DB1C85 /* FZ_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F02039F73500DB1C85 /* FZ_PX_Image.swift */; };
 		A9B5324D2039F73500DB1C85 /* FZ_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F22039F73500DB1C85 /* FZ_ViewController.swift */; };
 		A9B5324E2039F73500DB1C85 /* FZ_VC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531F32039F73500DB1C85 /* FZ_VC_Page.swift */; };
-		A9BB88602064583E009FB8E0 /* Filzanzug.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9BB885E2064583E009FB8E0 /* Filzanzug.xcdatamodeld */; };
 		A9FB4CB72061D93D0038FCEE /* FZ_ET_Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CB62061D93C0038FCEE /* FZ_ET_Collection.swift */; };
 		A9FB4CB92061D9720038FCEE /* FZ_ET_VipRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CB82061D9720038FCEE /* FZ_ET_VipRelationship.swift */; };
 		A9FB4CBB20625F890038FCEE /* FZ_PT_EntityCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4CBA20625F890038FCEE /* FZ_PT_EntityCollections.swift */; };
@@ -91,7 +89,6 @@
 		A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signal.swift; sourceTree = "<group>"; };
 		A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZUrlSessionServiceTests.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9B531702039F62600DB1C85 /* Filzanzug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
 		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9B531762039F62700DB1C85 /* FilzanzugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilzanzugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,7 +133,6 @@
 		A9B531F02039F73500DB1C85 /* FZ_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_Image.swift; sourceTree = "<group>"; };
 		A9B531F22039F73500DB1C85 /* FZ_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ViewController.swift; sourceTree = "<group>"; };
 		A9B531F32039F73500DB1C85 /* FZ_VC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_VC_Page.swift; sourceTree = "<group>"; };
-		A9BB885F2064583E009FB8E0 /* Filzanzug.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Filzanzug.xcdatamodel; sourceTree = "<group>"; };
 		A9FB4CB62061D93C0038FCEE /* FZ_ET_Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Collection.swift; sourceTree = "<group>"; };
 		A9FB4CB82061D9720038FCEE /* FZ_ET_VipRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_VipRelationship.swift; sourceTree = "<group>"; };
 		A9FB4CBA20625F890038FCEE /* FZ_PT_EntityCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_PT_EntityCollections.swift; sourceTree = "<group>"; };
@@ -199,9 +195,7 @@
 				A9B531932039F73400DB1C85 /* Services */,
 				A9B531982039F73400DB1C85 /* Utils */,
 				A9B531F12039F73500DB1C85 /* View */,
-				A9B531702039F62600DB1C85 /* Filzanzug.h */,
 				A9B531712039F62600DB1C85 /* Info.plist */,
-				A9BB885E2064583E009FB8E0 /* Filzanzug.xcdatamodeld */,
 			);
 			path = Filzanzug;
 			sourceTree = "<group>";
@@ -361,7 +355,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9B5317E2039F62700DB1C85 /* Filzanzug.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +499,6 @@
 				A9B532432039F73500DB1C85 /* FZ_ET_Stopwatch.swift in Sources */,
 				A9B531FE2039F73500DB1C85 /* FZ_SV_Routing.swift in Sources */,
 				A9B5320B2039F73500DB1C85 /* FZ_UT_Consts.swift in Sources */,
-				A9BB88602064583E009FB8E0 /* Filzanzug.xcdatamodeld in Sources */,
 				A9024A3E20435ECA0070FFB3 /* FZ_ET_Keyring.swift in Sources */,
 				A9FB4CCC206270820038FCEE /* FZ_PT_SV_UrlSession.swift in Sources */,
 				A9B531F62039F73500DB1C85 /* FZ_CS_CommonPhrases.swift in Sources */,
@@ -762,19 +754,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A9BB885E2064583E009FB8E0 /* Filzanzug.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A9BB885F2064583E009FB8E0 /* Filzanzug.xcdatamodel */,
-			);
-			currentVersion = A9BB885F2064583E009FB8E0 /* Filzanzug.xcdatamodel */;
-			path = Filzanzug.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A9B531642039F62600DB1C85 /* Project object */;
 }
