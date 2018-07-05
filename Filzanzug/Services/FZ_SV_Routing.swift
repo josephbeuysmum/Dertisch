@@ -93,6 +93,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 				dependencyType in
 				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
 					switch true {
+					case dependencyClass is FZBundledJsonService:	entities.set(bundledJson: dependencyClass as! FZBundledJsonService)
 					case dependencyClass is FZCoreDataProxy:		entities.set(coreData: dependencyClass as! FZCoreDataProxy)
 					case dependencyClass is FZUrlSessionService:	entities.set(urlSession: dependencyClass as! FZUrlSessionService)
 					default:										entities.bespokeRail.add(dependencyClass)

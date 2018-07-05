@@ -204,7 +204,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	make access to the `bespokeRail` a lot less wordy;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
--	instigate a check-out/check-in process for model classes so they can become structs;
+-	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
 -	new `MetricsProxy` for serving device-specific numeric constants?;
 -	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
 -	add Firebase service;

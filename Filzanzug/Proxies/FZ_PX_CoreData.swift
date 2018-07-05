@@ -69,7 +69,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 		let asyncFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { asyncFetchResult in
 			guard let result = asyncFetchResult.finalResult as? [NSManagedObject] else { return }
-			DispatchQueue.main.async {
+			DispatchQueue	.main.async {
 				// create queue-safe array on the main thread
 				var safeManagedObjects = [NSManagedObject]()
 				for managedObject in result {

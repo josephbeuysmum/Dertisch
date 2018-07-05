@@ -10,7 +10,8 @@ public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
 
 public protocol FZBespokeEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
 	func add(_ modelClass: FZModelClassProtocol)
-	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
+	subscript(type: FZModelClassProtocol.Type) -> FZModelClassProtocol? { get }
+//	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
 }
 
 public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
@@ -24,10 +25,12 @@ public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityP
 }
 
 public protocol FZModelClassEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
+	var bundledJson: FZBundledJsonService? { get }
 	var coreData: FZCoreDataProxy? { get }
 	var urlSession: FZUrlSessionService? { get }
-	func set ( coreData newValue: FZCoreDataProxy )
-	func set ( urlSession newValue: FZUrlSessionService )
+	func set(bundledJson newValue: FZBundledJsonService)
+	func set(coreData newValue: FZCoreDataProxy)
+	func set(urlSession newValue: FZUrlSessionService)
 	//	init ( coreData: FZCoreDataProxy?, urlSession: FZUrlSessionService? )
 }
 

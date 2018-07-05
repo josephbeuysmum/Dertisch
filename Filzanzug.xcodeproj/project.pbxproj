@@ -13,6 +13,7 @@
 		A91514872063BABB000A410B /* FZCoreDataProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */; };
 		A92919F32063DFFC00A6AA16 /* FZTemporaryValuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */; };
 		A960A6FB20653C160085A4A5 /* FZ_ET_Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */; };
+		A97B025F20DC180100619354 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A97B025E20DC180100619354 /* Filzanzug.h */; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */; };
@@ -87,6 +88,7 @@
 		A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZCoreDataProxyTests.swift; sourceTree = "<group>"; };
 		A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZTemporaryValuesTests.swift; sourceTree = "<group>"; };
 		A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signal.swift; sourceTree = "<group>"; };
+		A97B025E20DC180100619354 /* Filzanzug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
 		A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZUrlSessionServiceTests.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Filzanzug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Filzanzug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531712039F62600DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		A9B5316F2039F62600DB1C85 /* Filzanzug */ = {
 			isa = PBXGroup;
 			children = (
+				A97B025E20DC180100619354 /* Filzanzug.h */,
 				A9B5318A2039F73400DB1C85 /* Constants */,
 				A9B531DD2039F73500DB1C85 /* Entities */,
 				A9B531872039F73400DB1C85 /* Extensions */,
@@ -355,6 +358,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A97B025F20DC180100619354 /* Filzanzug.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

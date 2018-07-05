@@ -13,6 +13,7 @@ public typealias FZCDCallback = ([NSManagedObject]?) -> Void
 public typealias FZCDDeletionCallback = (Bool) -> Void
 
 // todo make more funcs etc "final"
+// todo? maybe move protocols into their implementing classes
 public protocol FZCoreDataProxyProtocol: FZModelClassProtocol {
 	var dataModelName: String? { get set }
 	func delete(entityName: String, _ callback: @escaping FZCDDeletionCallback)

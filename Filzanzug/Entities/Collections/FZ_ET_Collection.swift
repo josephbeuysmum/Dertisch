@@ -17,9 +17,8 @@ extension FZBespokeEntities: FZBespokeEntitiesCollectionProtocol {
 		model_classes![id] = modelClass
 	}
 	
-	public func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol? {
-		guard type != nil else { return nil }
-		return model_classes?[getModelClassId(by: String(describing: type!))]
+	public subscript(type: FZModelClassProtocol.Type) -> FZModelClassProtocol? {
+		return model_classes?[getModelClassId(by: String(describing: type))]
 	}
 	
 
