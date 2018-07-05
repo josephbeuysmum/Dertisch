@@ -27,10 +27,10 @@ And on the View side:
 Using Filzanzug
 ---------------
 
-Filzanzug comes with six in-built model classes:
+Filzanzug comes with seven in-built model classes:
 
 	FZBundledJsonService
-	// provides simplified access json bundled with the app
+	// provides simplified access to json config data bundled with the app
 
 	FZCoreDataProxy
 	// provides simplified access to Core Data data storage
