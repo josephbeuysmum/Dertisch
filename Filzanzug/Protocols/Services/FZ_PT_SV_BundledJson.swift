@@ -7,6 +7,6 @@
 
 public protocol FZBundledJsonServiceProtocol: FZModelClassProtocol {
 	var settings: FZJsonSettings? { get }
-	func decode<T>(json fileName: String, by type: T.Type) -> T? where T : Decodable
+	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 	//	subscript(key: String) -> String? { get }
 }

@@ -109,6 +109,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		modelClass.activate()
 	}
 	
+	// todo some presenters and view controllers do not need an interactor (intro page in Cirk for example) and this registation should handle that case too
 	public func register (
 		_ viewControllerId: String,
 		as viewControllerType: FZViewControllerProtocol.Type,

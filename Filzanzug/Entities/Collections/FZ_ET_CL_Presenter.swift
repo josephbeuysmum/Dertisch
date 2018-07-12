@@ -31,7 +31,7 @@ public class FZPresenterEntities {
 		return values?[key]
 	}
 	
-	public func set(_ value: Any, by key: String) {
+	public func set(_ value: Any?, by key: String) {
 		if values == nil { values = [:] }
 		values![key] = value
 	}

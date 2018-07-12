@@ -21,7 +21,7 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 	
 	public func activate () {}
 	
-	public func decode<T>(json fileName: String, by type: T.Type) -> T? where T : Decodable {
+	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard
 			// todo add sub-directories to jsonPath
 			let jsonPath = Bundle.main.path(forResource: fileName, ofType: "json"),
@@ -55,7 +55,7 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 	}
 	
 	fileprivate func parseSettings() {
-		guard let decodedSettings = decode(json: FZPrivateSettings.CodingKeys.data.rawValue, by: FZPrivateSettings.self) else { return }
+		guard let decodedSettings = decode(json: FZPrivateSettings.CodingKeys.data.rawValue, into: FZPrivateSettings.self) else { return }
 		var settings: Dictionary<String, String> = [:]
 		for setting in decodedSettings.data {
 			guard settings[setting.key] == nil else { fatalError("DUPLICATED SETTING") }

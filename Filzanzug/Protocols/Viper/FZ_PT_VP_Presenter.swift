@@ -23,7 +23,7 @@ public extension FZPresenterProtocol {
 		}
 		return wc
 	}
-	fileprivate var closet_key: String? {
+	var closet_key: String? {
 		let selfReflection = Mirror( reflecting: self )
 		var key: String?
 		for (_, child) in selfReflection.children.enumerated() {

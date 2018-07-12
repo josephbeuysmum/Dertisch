@@ -39,11 +39,10 @@ Filzanzug comes with seven in-built model classes:
 	// provides capacity to load and get copies of images
 
 	FZRoutingService
-	// manages the addition and removal of ViewControllers
-	// and their relationships with Interactors and Presenters
+	// manages the addition and removal of ViewControllers and their relationships with Interactors and Presenters
 
 	FZSignalsService
-	// provides an independent app-wide communications mechanism
+	// provides an independent and scoped app-wide communications mechanism
 
 	FZTemporaryValuesProxy
 	// provides temporary storage for simple data in runtime memory
