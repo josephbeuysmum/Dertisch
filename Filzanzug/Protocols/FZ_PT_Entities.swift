@@ -21,7 +21,7 @@ public protocol FZCDEntityProtocol {
 
 public protocol FZKeyProtocol: FZViperClassSingleInstanceProtocol {
 	var hash: String { get }
-	init (delegate: FZViperClassProtocol)
+	init (_ delegate: FZViperClassProtocol)
 //	mutating func set(delegate: FZViperClassProtocol)
 }
 

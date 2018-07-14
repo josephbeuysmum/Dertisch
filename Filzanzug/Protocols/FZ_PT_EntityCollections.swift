@@ -9,7 +9,7 @@
 //public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
 
 public protocol FZInitViperClassProtocol {
-	init(delegate: FZViperClassProtocol, key: String)
+	init(_ delegate: FZViperClassProtocol, key: String)
 }
 
 public protocol FZSignalsEntityGetterProtocol {
@@ -28,14 +28,14 @@ public protocol FZBespokeEntitiesProtocol: FZDeallocatableProtocol {
 //	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
 }
 
-public protocol FZInteractorEntitiesProtocol: FZInitViperClassProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
+public protocol FZInteractorClosetProtocol: FZInitViperClassProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
 	func imageProxy(_ key: String?) -> FZImageProxy?
 	func presenter(_ key: String?) -> FZPresenterProtocol?
 	func set(imageProxy: FZImageProxy)
 	func set(presenter: FZPresenterProtocol)
 }
 
-public protocol FZModelClassEntitiesProtocol: FZInitViperClassProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
+public protocol FZModelClassClosetProtocol: FZInitViperClassProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
 	func bundledJson(_ key: String?) -> FZBundledJsonService?
 	func coreData(_ key: String?) -> FZCoreDataProxy?
 	func urlSession(_ key: String?) -> FZUrlSessionService?
@@ -44,7 +44,7 @@ public protocol FZModelClassEntitiesProtocol: FZInitViperClassProtocol, FZBespok
 	func set(urlSession: FZUrlSessionService)
 }
 
-public protocol FZPresenterEntitiesProtocol: FZInitViperClassProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
+public protocol FZPresenterClosetProtocol: FZInitViperClassProtocol, FZSignalsEntityProtocol, FZViperClassSingleInstanceProtocol {
 	func routing(_ key: String?) -> FZRoutingService?
 	func viewController(_ key: String?) -> FZViewController?
 	func set(routing: FZRoutingService)

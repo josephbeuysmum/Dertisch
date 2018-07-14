@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZModelClassEntities: FZModelClassEntitiesProtocol {
+extension FZModelClassCloset: FZModelClassClosetProtocol {
 	public var bespoke: FZBespokeEntities { return bespoke_entities! }
 
 	public func bundledJson(_ key: String?) -> FZBundledJsonService? {
@@ -57,7 +57,7 @@ extension FZModelClassEntities: FZModelClassEntitiesProtocol {
 	}
 }
 
-public class FZModelClassEntities {
+public class FZModelClassCloset {
 	fileprivate let key_: String
 
 	fileprivate var
@@ -68,7 +68,7 @@ public class FZModelClassEntities {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	required public init(delegate: FZViperClassProtocol, key: String) {
+	required public init(_ delegate: FZViperClassProtocol, key: String) {
 		key_ = key
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}

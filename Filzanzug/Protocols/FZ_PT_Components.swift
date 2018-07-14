@@ -13,9 +13,9 @@ public protocol FZStopwatchProtocol: FZSignalsEntityProtocol, FZSignalReceivable
 
 //public protocol FZWornClosetProtocol: FZDeallocatableProtocol {
 //	init(_ key: String)
-////	func getInteractorEntities(by key: String?) -> FZInteractorEntities?
-//	func getModelClassEntities(by key: String?) -> FZModelClassEntities?
-//	func getPresenterEntities(by key: String?) -> FZPresenterEntities?
+////	func getInteractorEntities(by key: String?) -> FZInteractorCloset?
+//	func getModelClassEntities(by key: String?) -> FZModelClassCloset?
+//	func getPresenterEntities(by key: String?) -> FZPresenterCloset?
 //	func getSignals(by key: String?) -> FZSignalsService?
 //	func set(entities: FZEntitiesCollectionProtocol)
 //	func set(signals: FZSignalsService)

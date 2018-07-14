@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZPresenterEntities: FZPresenterEntitiesProtocol {
+extension FZPresenterCloset: FZPresenterClosetProtocol {
 //	public var routing: FZRoutingService? { return routing_service }
 //	public var viewController: FZViewController? { return view_controller }
 	
@@ -44,7 +44,7 @@ extension FZPresenterEntities: FZPresenterEntitiesProtocol {
 	}
 }
 
-public class FZPresenterEntities {
+public class FZPresenterCloset {
 	fileprivate let key_: String
 
 	fileprivate var
@@ -53,7 +53,7 @@ public class FZPresenterEntities {
 	view_controller: FZViewController?,
 	values: Dictionary<String, Any>?
 	
-	required public init(delegate: FZViperClassProtocol, key: String) {
+	required public init(_ delegate: FZViperClassProtocol, key: String) {
 		key_ = key
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}

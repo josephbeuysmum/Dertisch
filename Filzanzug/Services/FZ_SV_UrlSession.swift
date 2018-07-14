@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 	
 	
 	
@@ -98,12 +98,12 @@ public class FZUrlSessionService {
 	fileprivate var
 	ongoing_calls: [ String ],
 	key_: FZKey!,
-	closet_: FZModelClassEntities!
+	closet_: FZModelClassCloset!
 	
 	required public init() {
 		ongoing_calls = []
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 //		time_out = 3.0
 	}
 	

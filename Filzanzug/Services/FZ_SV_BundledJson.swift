@@ -16,7 +16,7 @@ public struct FZJsonSettings {
 }
 
 extension FZBundledJsonService: FZBundledJsonServiceProtocol {
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 	public var settings: FZJsonSettings? { return settings_ }
 	
 	public func activate () {}
@@ -68,12 +68,12 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 public class FZBundledJsonService {
 	fileprivate var
 	key_: FZKey!,
-	closet_: FZModelClassEntities!,
+	closet_: FZModelClassCloset!,
 	settings_: FZJsonSettings?
 	
 	required public init() {
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 		parseSettings()
 	}
 	

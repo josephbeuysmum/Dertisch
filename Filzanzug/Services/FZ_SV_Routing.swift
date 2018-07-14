@@ -10,7 +10,7 @@
 import UIKit
 
 extension FZRoutingService: FZRoutingServiceProtocol {
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 
 	
 	
@@ -215,7 +215,7 @@ public class FZRoutingService {
 	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
 	vip_relationships: Dictionary< String, FZVipRelationship >,
 	key_: FZKey!,
-	closet_: FZModelClassEntities!,
+	closet_: FZModelClassCloset!,
 	window_: UIWindow!,
 	view_controller: FZViewController?,
 	interactor_: FZInteractorProtocol?,
@@ -225,8 +225,8 @@ public class FZRoutingService {
 		is_activated = false
 		model_class_singletons = [:]
 		vip_relationships = [:]
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 		closet_.set(signalsService: FZSignalsService())
 	}
 	

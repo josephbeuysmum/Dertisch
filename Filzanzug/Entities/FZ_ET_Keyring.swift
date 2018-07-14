@@ -15,7 +15,7 @@ extension FZKey: FZKeyProtocol {
 public struct FZKey {
 	fileprivate var hash_: String
 	
-	public init (delegate: FZViperClassProtocol) {
+	public init (_ delegate: FZViperClassProtocol) {
 		hash_ = NSUUID().uuidString
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}

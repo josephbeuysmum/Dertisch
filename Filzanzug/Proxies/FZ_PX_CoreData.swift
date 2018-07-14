@@ -11,7 +11,7 @@ import CoreData
 public enum FZCDOperationTypes { case delete, retrieve, store, update }
 
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 	
 	public var dataModelName: String? {
 		get { return data_model_name }
@@ -162,13 +162,13 @@ public class FZCoreDataProxy {
 	fileprivate var
 	is_activated: Bool,
 	key_: FZKey!,
-	closet_: FZModelClassEntities!,
+	closet_: FZModelClassCloset!,
 	data_model_name: String?
 
 	required public init() {
 		is_activated = false
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 	}
 	
 	deinit {}

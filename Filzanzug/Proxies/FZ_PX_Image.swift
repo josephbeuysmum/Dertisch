@@ -9,7 +9,7 @@
 import UIKit
 
 extension FZImageProxy: FZImageProxyProtocol {
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 	
 	
 	
@@ -71,13 +71,13 @@ public class FZImageProxy {
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >,
 	key_: FZKey!,
-	closet_: FZModelClassEntities!
+	closet_: FZModelClassCloset!
 
 	required public init() {
 		urlsResolving = []
 		raw_images = [:]
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 	}
 	
 	deinit {}

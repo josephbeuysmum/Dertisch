@@ -12,13 +12,13 @@ public extension FZInteractorProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 	
 	// todo this is repeated code, here and in FZPresenterProtocol, is there any way to avoid repeating it?
-	public var closet: FZInteractorEntities? {
+	public var closet: FZInteractorCloset? {
 		let selfReflection = Mirror( reflecting: self )
-		var ents: FZInteractorEntities?
+		var ents: FZInteractorCloset?
 		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZInteractorEntities {
-				if ents != nil { fatalError("FZInteractors can only possess one FZInteractorEntities") }
-				ents = (child.value as? FZInteractorEntities)
+			if child.value is FZInteractorCloset {
+				if ents != nil { fatalError("FZInteractors can only possess one FZInteractorCloset") }
+				ents = (child.value as? FZInteractorCloset)
 			}
 		}
 		return ents
@@ -62,6 +62,6 @@ public extension FZInteractorProtocol {
 }
 
 public protocol FZInteractorProtocol: FZViperClassProtocol {
-	var closet: FZInteractorEntities? { get }
+	var closet: FZInteractorCloset? { get }
 	func postPresenterActivated ()
 }

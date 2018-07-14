@@ -9,7 +9,7 @@
 import UIKit
 
 extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
-	public var closet: FZModelClassEntities { return closet_ }
+	public var closet: FZModelClassCloset { return closet_ }
 	
 	
 	
@@ -60,13 +60,13 @@ public class FZTemporaryValuesProxy {
 	is_activated: Bool,
 	values_: Dictionary < String, String >,
 	key_: FZKey!,
-	closet_: FZModelClassEntities!
+	closet_: FZModelClassCloset!
 
 	required public init() {
 		is_activated = false
 		values_ = [:]
-		key_ = FZKey(delegate: self)
-		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		key_ = FZKey(self)
+		closet_ = FZModelClassCloset(self, key: key_.hash)
 	}
 	
 	deinit {}

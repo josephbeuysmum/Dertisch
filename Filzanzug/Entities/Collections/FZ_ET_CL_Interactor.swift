@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZInteractorEntities: FZInteractorEntitiesProtocol {
+extension FZInteractorCloset: FZInteractorClosetProtocol {
 	public var bespoke: FZBespokeEntities { return bespoke_entities! }
 	
 	// todo make these (and equivs in Presenter and ModelClass files) into optional subscripts
@@ -48,7 +48,7 @@ extension FZInteractorEntities: FZInteractorEntitiesProtocol {
 	}
 }
 
-public class FZInteractorEntities {
+public class FZInteractorCloset {
 	fileprivate let key_: String
 	
 	fileprivate var
@@ -58,7 +58,7 @@ public class FZInteractorEntities {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	required public init(delegate: FZViperClassProtocol, key: String) {
+	required public init(_ delegate: FZViperClassProtocol, key: String) {
 		key_ = key
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
