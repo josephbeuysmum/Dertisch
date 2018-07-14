@@ -27,9 +27,9 @@ public extension FZPresenterProtocol {
 		let selfReflection = Mirror( reflecting: self )
 		var key: String?
 		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZKeyring {
-				if key != nil { fatalError("FZPresenters can only possess one FZKeyring") }
-				key = (child.value as? FZKeyring)?.hash
+			if child.value is FZKey {
+				if key != nil { fatalError("FZPresenters can only possess one FZKey") }
+				key = (child.value as? FZKey)?.hash
 			}
 		}
 		return key

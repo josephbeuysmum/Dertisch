@@ -97,12 +97,12 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 public class FZUrlSessionService {
 	fileprivate var
 	ongoing_calls: [ String ],
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!
 	
 	required public init() {
 		ongoing_calls = []
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 //		time_out = 3.0
 	}

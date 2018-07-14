@@ -1,5 +1,5 @@
 //
-//  FZ_ETkey_.swift
+//  FZKey_.swift
 //  Filzanzug
 //
 //  Created by Richard Willis on 25/02/2018.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-extension FZKeyring: FZKeyringProtocol {
-	public var hash: String { return key_ }
+extension FZKey: FZKeyProtocol {
+	public var hash: String { return hash_ }
 }
 
-public struct FZKeyring {
-	fileprivate var key_: String
+public struct FZKey {
+	fileprivate var hash_: String
 	
 	public init (delegate: FZViperClassProtocol) {
-		key_ = NSUUID().uuidString
+		hash_ = NSUUID().uuidString
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

@@ -70,13 +70,13 @@ public class FZImageProxy {
 	fileprivate var
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >,
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!
 
 	required public init() {
 		urlsResolving = []
 		raw_images = [:]
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 	}
 	

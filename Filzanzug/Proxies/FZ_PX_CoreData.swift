@@ -161,13 +161,13 @@ public class FZCoreDataProxy {
 	
 	fileprivate var
 	is_activated: Bool,
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!,
 	data_model_name: String?
 
 	required public init() {
 		is_activated = false
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 	}
 	

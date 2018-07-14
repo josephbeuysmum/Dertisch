@@ -19,7 +19,7 @@ public protocol FZCDEntityProtocol {
 //	mutating func add (attributes: [FZCDAttribute])
 }
 
-public protocol FZKeyringProtocol: FZViperClassSingleInstanceProtocol {
+public protocol FZKeyProtocol: FZViperClassSingleInstanceProtocol {
 	var hash: String { get }
 	init (delegate: FZViperClassProtocol)
 //	mutating func set(delegate: FZViperClassProtocol)

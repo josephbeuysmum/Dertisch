@@ -59,13 +59,13 @@ public class FZTemporaryValuesProxy {
 	fileprivate var
 	is_activated: Bool,
 	values_: Dictionary < String, String >,
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!
 
 	required public init() {
 		is_activated = false
 		values_ = [:]
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 	}
 	

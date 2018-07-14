@@ -67,12 +67,12 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 
 public class FZBundledJsonService {
 	fileprivate var
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!,
 	settings_: FZJsonSettings?
 	
 	required public init() {
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 		parseSettings()
 	}

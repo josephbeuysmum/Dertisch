@@ -214,7 +214,7 @@ public class FZRoutingService {
 	is_activated: Bool,
 	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
 	vip_relationships: Dictionary< String, FZVipRelationship >,
-	key_: FZKeyring!,
+	key_: FZKey!,
 	closet_: FZModelClassEntities!,
 	window_: UIWindow!,
 	view_controller: FZViewController?,
@@ -225,7 +225,7 @@ public class FZRoutingService {
 		is_activated = false
 		model_class_singletons = [:]
 		vip_relationships = [:]
-		key_ = FZKeyring(delegate: self)
+		key_ = FZKey(delegate: self)
 		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 		closet_.set(signalsService: FZSignalsService())
 	}

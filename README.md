@@ -68,7 +68,7 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 			_ application: UIApplication,
 			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 			window = UIWindow(frame: UIScreen.main.bounds)
-			FZRoutingService(with: FZKeyring()).start(rootViewController: Consts.introViewController, window: window!)
+			FZRoutingService(with: FZKey()).start(rootViewController: Consts.introViewController, window: window!)
 			return true
 		}
 	}
@@ -121,11 +121,11 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 	class SomeProxy {
 		fileprivate let
-		key_: FZKeyring,
+		key_: FZKey,
 		worn_closet: FZWornCloset
 
 		required init() {
-			key_ = FZKeyring()
+			key_ = FZKey()
 			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
@@ -146,14 +146,14 @@ A boilerplate `Filzanzug` Interactor looks like this:
 
 	struct SomeInteractor {
 		fileprivate let
-		key_: FZKeyring,
+		key_: FZKey,
 		worn_closet: FZWornCloset
 		fileprivate var presenter_: SomePresenter? {
 			return worn_closet.getInteractorEntities(by: key_.hash)?.presenter as? SomePresenter
 		}
 
 		init() {
-			key_ = FZKeyring()
+			key_ = FZKey()
 			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
@@ -172,14 +172,14 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 
 	struct SomePresenter {
 		fileprivate let
-		key_: FZKeyring,
+		key_: FZKey,
 		worn_closet: FZWornCloset
 		fileprivate var view_controller: SomeViewController? {
 			return worn_closet.getPresenterEntities(by: key_.hash)?.viewController as? SomeViewController
 		}
 
 		init() {
-			key_ = FZKeyring()
+			key_ = FZKey()
 			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
@@ -202,7 +202,7 @@ Developmental Roadmap
 
 No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
--	privately instantiate `FZKeyring`s rather than inject them;
+-	privately instantiate `FZKey`s rather than inject them;
 -	make access to the `bespokeRail` a lot less wordy;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;

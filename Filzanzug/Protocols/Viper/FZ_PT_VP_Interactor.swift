@@ -26,8 +26,8 @@ public extension FZInteractorProtocol {
 	fileprivate var key_: String? {
 		let selfReflection = Mirror( reflecting: self )
 		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZKeyring {
-				return (child.value as? FZKeyring)?.hash
+			if child.value is FZKey {
+				return (child.value as? FZKey)?.hash
 			}
 		}
 		return nil
