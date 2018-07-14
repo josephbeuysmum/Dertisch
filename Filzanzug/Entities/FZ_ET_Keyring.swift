@@ -10,22 +10,13 @@ import Foundation
 
 extension FZKeyring: FZKeyringProtocol {
 	public var key: String { return key_ }
-	
-	fileprivate func assess(_ delegate: FZViperTemporaryNameProtocol) {
-		let reflection = Mirror(reflecting: delegate)
-		for (_, child) in reflection.children.enumerated() {
-			if child.value is FZKeyring {
-				fatalError("FZKeyring delegates can only possess one FZKeyring")
-			}
-		}
-	}
 }
 
 public struct FZKeyring {
 	fileprivate var key_: String
 	
-	public init (_ delegate: FZViperTemporaryNameProtocol) {
+	public init (_ delegate: FZViperClassProtocol) {
 		key_ = NSUUID().uuidString
-		assess(delegate)
+		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

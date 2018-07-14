@@ -72,7 +72,7 @@ public extension FZPresenterProtocol {
 	public func postViewActivated () {}
 }
 
-public protocol FZPresenterProtocol: FZViperTemporaryNameProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol {
 	var entities: FZPresenterEntities? { get }
 	mutating func postViewActivated()
 	func present(_ viewName: String)

@@ -16,21 +16,3 @@ public protocol FZDescribableProtocol {
 }
 
 public protocol FZSignalReceivableProtocol {}
-
-// [seemingly] deprecated
-//public protocol FZIsActivatedProtocol {
-//	var isActivated: Bool { get }
-//}
-
-//public protocol FZActivatableProtocol {
-//	func activate ()
-//}
-
-//public protocol FZClassNameProtocol {
-//	var instanceDescriptor: String { get }
-//}
-
-//public protocol FZInitableProtocol {
-//	init ()
-//}
-

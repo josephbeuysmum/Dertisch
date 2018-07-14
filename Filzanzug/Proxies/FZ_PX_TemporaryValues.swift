@@ -66,7 +66,7 @@ public class FZTemporaryValuesProxy {
 		is_activated = false
 		values_ = [:]
 		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key_ring.key)
+		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
 	}
 	
 	deinit {}

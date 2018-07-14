@@ -228,7 +228,7 @@ public class FZRoutingService {
 		model_class_singletons = [:]
 		vip_relationships = [:]
 		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key_ring.key)
+		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
 		entities_.set(signalsService: FZSignalsService())
 	}
 	

@@ -103,7 +103,7 @@ public class FZUrlSessionService {
 	required public init() {
 		ongoing_calls = []
 		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key_ring.key)
+		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
 //		time_out = 3.0
 	}
 	

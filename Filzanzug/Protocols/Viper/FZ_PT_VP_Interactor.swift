@@ -17,7 +17,7 @@ public extension FZInteractorProtocol {
 		var ents: FZInteractorEntities?
 		for (_, child) in selfReflection.children.enumerated() {
 			if child.value is FZInteractorEntities {
-				if ents != nil { fatalError("FZInteractors can only possess one FZWornCloset") }
+				if ents != nil { fatalError("FZInteractors can only possess one FZInteractorEntities") }
 				ents = (child.value as? FZInteractorEntities)
 			}
 		}
@@ -36,31 +36,32 @@ public extension FZInteractorProtocol {
 	
 	
 	public func activate () {
-		lo("CURRENTLY DISABLED")
-//		guard
-//			let scopedKey = key_,
-//			let presenterClassName = wornCloset?.getInteractorEntities(by: scopedKey)?.presenter.instanceDescriptor,
-//			let signals = wornCloset?.getSignals( by: scopedKey )
-//			else { return }
-//		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self ) { _, data in
-//			guard
-//				let presenter = data as? FZPresenterProtocol,
-//				presenter.instanceDescriptor == presenterClassName
-//				else { return }
-////			signals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
-//			self.postPresenterActivated()
-//		}
-//		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) { timer in
-//			_ = self.wornCloset?.getSignals(by: scopedKey)?.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
-//			timer.invalidate() }
+		guard
+			let scopedKey = key_,
+			let scopedEntities = entities,
+			let presenterClassName = scopedEntities.presenter(scopedKey)?.instanceDescriptor,
+			let signals = scopedEntities.signals(scopedKey)
+			else { return }
+		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
+			guard
+				let presenter = data as? FZPresenterProtocol,
+				presenter.instanceDescriptor == presenterClassName
+				else { return }
+			self.postPresenterActivated()
+		}
+		// todo why is this not simply in the closure immediately above?
+		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
+			_ = signals.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
+			timer.invalidate()
+		}
 	}
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-//	public func deallocate () { wornCloset?.deallocate() }
+	public func deallocate () { entities?.deallocate() }
 	public func postPresenterActivated () {}
 }
 
-public protocol FZInteractorProtocol: FZViperTemporaryNameProtocol {
+public protocol FZInteractorProtocol: FZViperClassProtocol {
 	var entities: FZInteractorEntities? { get }
 	func postPresenterActivated ()
 }

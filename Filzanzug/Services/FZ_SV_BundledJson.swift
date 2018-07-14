@@ -73,7 +73,7 @@ public class FZBundledJsonService {
 	
 	required public init() {
 		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key_ring.key)
+		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
 		parseSettings()
 	}
 	

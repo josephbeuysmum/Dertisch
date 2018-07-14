@@ -53,7 +53,8 @@ public class FZPresenterEntities {
 	view_controller: FZViewController?,
 	values: Dictionary<String, Any>?
 	
-	required public init (_ key: String) {
+	required public init(key: String, delegate: FZViperClassProtocol) {
 		key_ = key
+		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

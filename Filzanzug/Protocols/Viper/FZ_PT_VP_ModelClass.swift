@@ -33,7 +33,7 @@ public extension FZModelClassProtocol {
 	public func deallocate () {}
 }
 
-public protocol FZModelClassProtocol: FZViperTemporaryNameProtocol {
+public protocol FZModelClassProtocol: FZViperClassProtocol {
 	var entities: FZModelClassEntities { get }
 //	func transmitActivation ( with key: String )
 }

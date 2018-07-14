@@ -58,7 +58,8 @@ public class FZInteractorEntities {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	required public init (_ key: String) {
+	required public init(key: String, delegate: FZViperClassProtocol) {
 		key_ = key
+		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }
