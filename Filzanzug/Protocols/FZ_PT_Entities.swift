@@ -7,7 +7,7 @@
 //
 
 public protocol FZBespokeEntitiesEntityProtocol {
-	var bespokeRail: FZBespokeEntities { get }
+	var bespoke: FZBespokeEntities { get }
 }
 
 public protocol FZCDEntityProtocol {
@@ -21,28 +21,26 @@ public protocol FZCDEntityProtocol {
 
 public protocol FZKeyringProtocol {
 	var key: String { get }
+//	mutating func set(delegate: FZViperTemporaryNameProtocol)
 }
 
 public protocol FZObject: Hashable {}
 
-public protocol FZRoutingEntityProtocol {
-	var routing: FZRoutingService? { get set }
-}
+//public protocol FZRoutingEntityProtocol {
+//	var routing: FZRoutingService? { get set }
+//}
 
-public protocol FZSignalBoxEntityProtocol {
-	var signalBox: FZSignalsEntity { get }
-}
-
-public protocol FZSignalsEntityProtocol {
-	var signals: FZSignalsService? { get set }
-}
+//public protocol FZSignalBoxEntityProtocol {
+//	var signalBox: FZSignalsEntity { get }
+//}
 
 public protocol FZSignalProtocol: FZDeallocatableProtocol {
-	typealias FZSignalCallback = ( String, Any? ) -> Void
+//	typealias FZSignalCallback = ( String, Any? ) -> Void
 	var hasScanners: Bool { get }
 	init ( _ transmission: String )
-	mutating func add ( _ scanner: FZSignalReceivableProtocol, scansContinuously: Bool, callback: @escaping FZSignalCallback ) -> Bool
-	mutating func remove ( _ scanner: FZSignalReceivableProtocol )
+	mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool
+	mutating func add(delegate: FZSignalCallbackDelegateProtocol, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool
+	mutating func remove(scanner: FZSignalReceivableProtocol)
 	mutating func removeAllWavelengths()
 	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )

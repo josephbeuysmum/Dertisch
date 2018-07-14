@@ -12,57 +12,55 @@ public extension FZInteractorProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 	
 	// todo this is repeated code, here and in FZPresenterProtocol, is there any way to avoid repeating it?
-	public var wornCloset: FZWornCloset? {
+	public var entities: FZInteractorEntities? {
 		let selfReflection = Mirror( reflecting: self )
-		var wc: FZWornCloset?
+		var ents: FZInteractorEntities?
 		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZWornCloset {
-				if wc != nil { fatalError("FZInteractors can only possess one FZWornCloset") }
-				wc = (child.value as? FZWornCloset)
+			if child.value is FZInteractorEntities {
+				if ents != nil { fatalError("FZInteractors can only possess one FZWornCloset") }
+				ents = (child.value as? FZInteractorEntities)
 			}
 		}
-		return wc
+		return ents
 	}
-	fileprivate var closet_key: String? {
+	fileprivate var key_: String? {
 		let selfReflection = Mirror( reflecting: self )
-		var key: String?
-		for ( _, child ) in selfReflection.children.enumerated() {
+		for (_, child) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring {
-				if key != nil { fatalError("FZInteractors can only possess one FZKeyring") }
-				key = (child.value as? FZKeyring)?.key
+				return (child.value as? FZKeyring)?.key
 			}
 		}
-		return key
+		return nil
 	}
 
 	
 	
 	public func activate () {
-		guard
-			let scopedKey = closet_key,
-			let presenterClassName = wornCloset?.getInteractorEntities(by: scopedKey)?.presenter.instanceDescriptor,
-			let scopedSignals = wornCloset?.getSignals( by: scopedKey )
-			else { return }
-		_ = scopedSignals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self ) { _, data in
-			guard
-				let presenter = data as? FZPresenterProtocol,
-				presenter.instanceDescriptor == presenterClassName
-				else { return }
-//			scopedSignals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
-			self.postPresenterActivated()
-		}
-		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) { timer in
-			_ = self.wornCloset?.getSignals(by: scopedKey)?.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
-			timer.invalidate() }
+		lo("CURRENTLY DISABLED")
+//		guard
+//			let scopedKey = key_,
+//			let presenterClassName = wornCloset?.getInteractorEntities(by: scopedKey)?.presenter.instanceDescriptor,
+//			let signals = wornCloset?.getSignals( by: scopedKey )
+//			else { return }
+//		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self ) { _, data in
+//			guard
+//				let presenter = data as? FZPresenterProtocol,
+//				presenter.instanceDescriptor == presenterClassName
+//				else { return }
+////			signals.transmitSignalFor( key: FZSignalConsts.interactorActivated, data: self )
+//			self.postPresenterActivated()
+//		}
+//		_ = Timer.scheduledTimer( withTimeInterval: TimeInterval( 1.0 ), repeats: false ) { timer in
+//			_ = self.wornCloset?.getSignals(by: scopedKey)?.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
+//			timer.invalidate() }
 	}
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-	public func deallocate () { wornCloset?.deallocate() }
+//	public func deallocate () { wornCloset?.deallocate() }
 	public func postPresenterActivated () {}
 }
 
-public protocol FZInteractorProtocol: FZWornClosetImplementerProtocol {
-//	var presenter: FZPresenterProtocol? { get }
-//	func createWornCloset () -> FZWornCloset?
+public protocol FZInteractorProtocol: FZViperTemporaryNameProtocol {
+	var entities: FZInteractorEntities? { get }
 	func postPresenterActivated ()
 }

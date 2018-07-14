@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var wornCloset: FZWornCloset? { return worn_closet }
+	public var entities: FZModelClassEntities { return entities_ }
 	
 	
 	
@@ -29,7 +29,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && callback != nil {
-			wornCloset?.getSignals( by: key_ring.key )?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
+			entities_.signals(key_ring.key)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -90,26 +90,21 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		wornCloset?.getSignals( by: key_ring.key )?.transmit(
-			signal: url,
-			with: FZApiResult( success: success, url: url, data: data ) )
+		entities_.signals(key_ring.key)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
 	}
 }
 
 public class FZUrlSessionService {
-//	public var time_out: TimeInterval
-
-	fileprivate let
-	key_ring: FZKeyring,
-	worn_closet: FZWornCloset
+	fileprivate var
+	ongoing_calls: [ String ],
+	key_ring: FZKeyring!,
+	entities_: FZModelClassEntities!
 	
-	fileprivate var ongoing_calls: [ String ]
-	
-	required public init(with keyring: FZKeyring) {
-		key_ring = keyring
-		worn_closet = FZWornCloset(key_ring.key)
-//		time_out = 3.0
+	required public init() {
 		ongoing_calls = []
+		key_ring = FZKeyring(self)
+		entities_ = FZModelClassEntities(key_ring.key)
+//		time_out = 3.0
 	}
 	
 	deinit {}
@@ -127,7 +122,7 @@ public class FZUrlSessionService {
 //		parameters: Dictionary< String, String >? = nil ) {
 //		guard
 //			ongoing_calls.index( of: url ) == nil,
-//			let scopedSignals = signalBox.getSignalsServiceBy( key: key ),
+//			let signals = signalBox.getSignalsServiceBy( key: key ),
 //			let validUrl = URL( string: url )
 //			else { return }
 //		ongoing_calls.append( url )
@@ -170,7 +165,7 @@ public class FZUrlSessionService {
 //			self.annulCallFor( url )
 //
 //			// transmit (signals deals with annulment internally)
-//			scopedSignals.transmitSignalFor( key: url, data: apiResult )
+//			signals.transmitSignalFor( key: url, data: apiResult )
 //		}
 //	}
 }

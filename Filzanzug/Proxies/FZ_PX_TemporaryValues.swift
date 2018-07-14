@@ -9,28 +9,28 @@
 import UIKit
 
 extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
-	public var wornCloset: FZWornCloset? { return worn_closet }
+	public var entities: FZModelClassEntities { return entities_ }
 	
 	
 	
-	public func activate () { _isActivated = true }
+	public func activate () { is_activated = true }
 	
-	public func getValue ( by key: String ) -> String? { return _values[ key ] }
+	public func getValue ( by key: String ) -> String? { return values_[ key ] }
 	
 	public func set ( _ value: String, by key: String ) {
-		_values[ key ] = value
-		wornCloset?.getSignals( by: key_ring.key )?.transmit(signal: FZSignalConsts.valueSet, with: key )
+		values_[ key ] = value
+		entities_.signals(key_ring.key)?.transmit(signal: FZSignalConsts.valueSet, with: key )
 	}
 	
 	public func annulValue ( by key: String ) {
-		guard _values[ key ] != nil else { return }
-		_values.removeValue( forKey: key )
+		guard values_[ key ] != nil else { return }
+		values_.removeValue( forKey: key )
 	}
 	
 	public func removeValues () {
-		guard let scopedSignals = wornCloset?.getSignals( by: key_ring.key ) else { return }
-		for ( key, _ ) in _values { _ = annulValue( by: key ) }
-		scopedSignals.transmit(signal: FZSignalConsts.valuesRemoved )
+		guard let signals = entities_.signals(key_ring.key) else { return }
+		for ( key, _ ) in values_ { _ = annulValue( by: key ) }
+		signals.transmit(signal: FZSignalConsts.valuesRemoved )
 	}
 	
 //	public func deleteValue ( by key: String ) {
@@ -45,35 +45,28 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 //	
 //	// store ("set") the given property
 //	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-//		guard let scopedSignals = wornCloset.getSignals( by: key_ring.key ) else { return }
+//		guard let signals = wornCloset.getSignals( by: key_ring.key ) else { return }
 //		let signalKey = FZSignalConsts.valueStored
-//		FZMisc.set( signals: scopedSignals, withKey: signalKey, andCaller: caller )
+//		FZMisc.set( signals: signals, withKey: signalKey, andCaller: caller )
 //		storage.setValue( value, forKey: key )
 //		storage.synchronize()
-//		scopedSignals.transmitSignalFor( key: signalKey )
+//		signals.transmitSignalFor( key: signalKey )
 //	}
 
 }
 
 public class FZTemporaryValuesProxy {
-	fileprivate let
-	key_ring: FZKeyring,
-	worn_closet: FZWornCloset
-//	, storage: UserDefaults = UserDefaults.standard
-	
-	// _values provides a platform for the storage of data that has a
-	// very short lifespan, like an ID that needs somwhere to live whilst one
-	// ViewController segues out, and another segues in. These temporary
-	// values are stored in the _values Dictionary below
 	fileprivate var
-	_isActivated: Bool,
-	_values: Dictionary < String, String >
-	
-	required public init(with keyring: FZKeyring) {
-		_isActivated = false
-		key_ring = keyring
-		worn_closet = FZWornCloset(key_ring.key)
-		_values = [:]
+	is_activated: Bool,
+	values_: Dictionary < String, String >,
+	key_ring: FZKeyring!,
+	entities_: FZModelClassEntities!
+
+	required public init() {
+		is_activated = false
+		values_ = [:]
+		key_ring = FZKeyring(self)
+		entities_ = FZModelClassEntities(key_ring.key)
 	}
 	
 	deinit {}

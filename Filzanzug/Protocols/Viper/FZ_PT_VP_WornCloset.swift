@@ -6,10 +6,10 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZWornClosetImplementerProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
-	// formerly also: FZWornClosetEntityProtocol, FZActivatableProtocol, FZClassNameProtocol, FZInitableProtocol
+public protocol FZViperTemporaryNameProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
 	var instanceDescriptor: String { get }
-	var wornCloset: FZWornCloset? { get }
-	init(with keyring: FZKeyring)
+//	var wornCloset: FZWornCloset? { get }
+//	init(with keyring: FZKeyring)
+	init()
 	func activate()
 }

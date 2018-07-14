@@ -16,7 +16,7 @@ public struct FZJsonSettings {
 }
 
 extension FZBundledJsonService: FZBundledJsonServiceProtocol {
-	public var wornCloset: FZWornCloset? { return worn_closet }
+	public var entities: FZModelClassEntities { return entities_ }
 	public var settings: FZJsonSettings? { return settings_ }
 	
 	public func activate () {}
@@ -66,15 +66,14 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 }
 
 public class FZBundledJsonService {
-	fileprivate let
-	key_ring: FZKeyring,
-	worn_closet: FZWornCloset
+	fileprivate var
+	key_ring: FZKeyring!,
+	entities_: FZModelClassEntities!,
+	settings_: FZJsonSettings?
 	
-	fileprivate var settings_: FZJsonSettings?
-	
-	required public init(with keyring: FZKeyring) {
-		key_ring = keyring
-		worn_closet = FZWornCloset(key_ring.key)
+	required public init() {
+		key_ring = FZKeyring(self)
+		entities_ = FZModelClassEntities(key_ring.key)
 		parseSettings()
 	}
 	

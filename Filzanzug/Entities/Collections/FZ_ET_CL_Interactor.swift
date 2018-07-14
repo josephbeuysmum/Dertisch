@@ -6,39 +6,59 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZInteractorEntities: FZInteractorEntitiesCollectionProtocol {
-	public var bespokeRail: FZBespokeEntities { return bespoke_entities! }
-	public var presenter: FZPresenterProtocol { return presenter_ }
-	public var image: FZImageProxy? { return image_ }
+extension FZInteractorEntities: FZInteractorEntitiesProtocol {
+	public var bespoke: FZBespokeEntities { return bespoke_entities! }
+	
+	// todo make these (and equivs in Presenter and ModelClass files) into optional subscripts
+	public func imageProxy(_ key: String?) -> FZImageProxy? {
+		return key == key_ ? image_proxy : nil
+	}
+
+	public func presenter(_ key: String?) -> FZPresenterProtocol? {
+		return key == key_ ? presenter_ : nil
+	}
+	
+	public func signals(_ key: String?) -> FZSignalsService? {
+		return key == key_ ? signals_service : nil
+	}
 	
 	public func deallocate () {
 		bespoke_entities?.deallocate()
-		image_?.deallocate()
-		presenter_.deallocate()
+		image_proxy?.deallocate()
+		presenter_?.deallocate()
 		bespoke_entities = nil
-		image_ = nil
-//		presenter_ = nil
+		image_proxy = nil
+		presenter_ = nil
+		signals_service = nil
 	}
 	
-	public func set ( image newValue: FZImageProxy ) {
-		guard image_ == nil else { return }
-		image_ = newValue
+	public func set(imageProxy: FZImageProxy) {
+		guard image_proxy == nil else { return }
+		image_proxy = imageProxy
+	}
+
+	public func set(presenter: FZPresenterProtocol) {
+		guard presenter_ == nil else { return }
+		presenter_ = presenter
 	}
 	
-//	public func set ( presenter newValue: FZPresenterProtocol ) {
-//		guard presenter_ == nil else { return }
-//		presenter_ = newValue
-//	}
+	public func set(signalsService: FZSignalsService) {
+		guard signals_service == nil else { return }
+		signals_service = signalsService
+	}
 }
 
 public class FZInteractorEntities {
-	fileprivate let presenter_: FZPresenterProtocol
+	fileprivate let key_: String
 	
-	fileprivate var image_: FZImageProxy?
+	fileprivate var
+	image_proxy: FZImageProxy?,
+	presenter_: FZPresenterProtocol?,
+	signals_service: FZSignalsService?
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	public required init ( presenter: FZPresenterProtocol ) {
-		presenter_ = presenter
+	required public init (_ key: String) {
+		key_ = key
 	}
 }

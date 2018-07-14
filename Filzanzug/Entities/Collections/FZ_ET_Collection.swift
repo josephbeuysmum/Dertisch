@@ -5,7 +5,7 @@
 //  Created by Richard Willis on 11/03/2018.
 //
 
-extension FZBespokeEntities: FZBespokeEntitiesCollectionProtocol {
+extension FZBespokeEntities: FZBespokeEntitiesProtocol {
 	public func deallocate() {
 		model_classes?.removeAll()
 		model_classes = nil

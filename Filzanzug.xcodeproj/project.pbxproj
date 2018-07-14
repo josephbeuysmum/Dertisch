@@ -10,10 +10,12 @@
 		A9024A3A2040AF610070FFB3 /* FZSignalsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A382040AF610070FFB3 /* FZSignalsServiceTests.swift */; };
 		A9024A3C2040B78C0070FFB3 /* FZImageProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */; };
 		A9024A3E20435ECA0070FFB3 /* FZ_ET_Keyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */; };
+		A9028DB220F7570000F4A4F8 /* FZ_SV_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9028DB120F756FF00F4A4F8 /* FZ_SV_BundledJson.swift */; };
+		A9028DB420F7571700F4A4F8 /* FZ_PT_SV_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9028DB320F7571700F4A4F8 /* FZ_PT_SV_BundledJson.swift */; };
 		A91514872063BABB000A410B /* FZCoreDataProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */; };
 		A92919F32063DFFC00A6AA16 /* FZTemporaryValuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */; };
 		A960A6FB20653C160085A4A5 /* FZ_ET_Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */; };
-		A97B025F20DC180100619354 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A97B025E20DC180100619354 /* Filzanzug.h */; };
+		A97B025F20DC180100619354 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A97B025E20DC180100619354 /* Filzanzug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Filzanzug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Filzanzug.framework */; };
 		A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B531892039F73400DB1C85 /* FZ_EX_Data.swift */; };
@@ -85,6 +87,8 @@
 		A9024A382040AF610070FFB3 /* FZSignalsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZSignalsServiceTests.swift; sourceTree = "<group>"; };
 		A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
 		A9024A3D20435ECA0070FFB3 /* FZ_ET_Keyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Keyring.swift; sourceTree = "<group>"; };
+		A9028DB120F756FF00F4A4F8 /* FZ_SV_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_BundledJson.swift; sourceTree = "<group>"; };
+		A9028DB320F7571700F4A4F8 /* FZ_PT_SV_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_BundledJson.swift; sourceTree = "<group>"; };
 		A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZCoreDataProxyTests.swift; sourceTree = "<group>"; };
 		A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZTemporaryValuesTests.swift; sourceTree = "<group>"; };
 		A960A6FA20653C160085A4A5 /* FZ_ET_Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signal.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		A9B531932039F73400DB1C85 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A9028DB120F756FF00F4A4F8 /* FZ_SV_BundledJson.swift */,
 				A9B531942039F73400DB1C85 /* FZ_SV_Routing.swift */,
 				A9B531952039F73400DB1C85 /* FZ_SV_Signals.swift */,
 				A9B531972039F73400DB1C85 /* FZ_SV_UrlSession.swift */,
@@ -344,6 +349,7 @@
 		A9FB4CC6206270270038FCEE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A9028DB320F7571700F4A4F8 /* FZ_PT_SV_BundledJson.swift */,
 				A9FB4CC72062703A0038FCEE /* FZ_PT_SV_Routing.swift */,
 				A9FB4CC9206270650038FCEE /* FZ_PT_SV_Signals.swift */,
 				A9FB4CCB206270820038FCEE /* FZ_PT_SV_UrlSession.swift */,
@@ -470,6 +476,7 @@
 				A9B5324A2039F73500DB1C85 /* FZ_ET_ApiResult.swift in Sources */,
 				A9B5324D2039F73500DB1C85 /* FZ_ViewController.swift in Sources */,
 				A9FB4CB72061D93D0038FCEE /* FZ_ET_Collection.swift in Sources */,
+				A9028DB220F7570000F4A4F8 /* FZ_SV_BundledJson.swift in Sources */,
 				A9FB4CC520626D940038FCEE /* FZ_PT_Utils.swift in Sources */,
 				A9B531FC2039F73500DB1C85 /* FZ_CS_Chars.swift in Sources */,
 				A9FB4CC82062703A0038FCEE /* FZ_PT_SV_Routing.swift in Sources */,
@@ -484,6 +491,7 @@
 				A9B532042039F73500DB1C85 /* FZ_UT_Log.swift in Sources */,
 				A9FB4CBD2062601B0038FCEE /* FZ_PT_Entities.swift in Sources */,
 				A9B531FD2039F73500DB1C85 /* FZ_CS_Prefixes.swift in Sources */,
+				A9028DB420F7571700F4A4F8 /* FZ_PT_SV_BundledJson.swift in Sources */,
 				A9B532482039F73500DB1C85 /* FZ_ET_CL_Interactor.swift in Sources */,
 				A9FB4CC12062613C0038FCEE /* FZ_PT_Proxies.swift in Sources */,
 				A9B531F52039F73500DB1C85 /* FZ_EX_Data.swift in Sources */,

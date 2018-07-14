@@ -10,23 +10,11 @@
 import UIKit
 
 extension FZRoutingService: FZRoutingServiceProtocol {
-	public var wornCloset: FZWornCloset? { return worn_closet }
+	public var entities: FZModelClassEntities { return entities_ }
 
 	
 	
-	public func activate () {
-//		guard let scopedSignals = worn_closet.getSignals( by: key_ring.key ) else { return }
-		is_activated = true
-//		_ = scopedSignals.scanFor( key: FZSignalConsts.interactorActivated, scanner: self ) {
-//			[weak self] _, data in self.set( interactor: data as? FZInteractorProtocol )
-//		}
-//		_ = scopedSignals.scanFor( key: FZSignalConsts.presenterActivated, scanner: self ) {
-//			[weak self] _, data in self.set( presenter: data as? FZPresenterProtocol )
-//		}
-//		_ = scopedSignals.scanFor( key: FZSignalConsts.viewLoaded, scanner: self ) {
-//			[weak self] _, data in self.set( view: data as? FZViewController )
-//		}
-	}
+	public func activate () {}
 	
 	
 	
@@ -83,29 +71,32 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		_ modelClassType: FZModelClassProtocol.Type,
 		with key: String,
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
-		let modelClassId = String(describing: modelClassType)
-		guard canRegister(with: key) else { return }
-		let modelClass = modelClassType.init(with: FZKeyring())
-		let entities = FZModelClassEntities()
+		guard
+			canRegister(with: key),
+			let signals = entities_.signals(key_ring.key)
+			else { return }
+		let modelClass = modelClassType.init()
 		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
 		if dependencyTypes != nil {
-			_ = dependencyTypes!.map {
-				dependencyType in
-				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
+			_ = dependencyTypes!.map { dependencyType in
+				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
 					switch true {
-					case dependencyClass is FZBundledJsonService:	entities.set(bundledJson: dependencyClass as! FZBundledJsonService)
-					case dependencyClass is FZCoreDataProxy:		entities.set(coreData: dependencyClass as! FZCoreDataProxy)
-					case dependencyClass is FZUrlSessionService:	entities.set(urlSession: dependencyClass as! FZUrlSessionService)
-					default:										entities.bespokeRail.add(dependencyClass)
+					case dependencyClass is FZBundledJsonService:
+						modelClass.entities.set(bundledJson: dependencyClass as! FZBundledJsonService)
+					case dependencyClass is FZCoreDataProxy:
+						modelClass.entities.set(coreData: dependencyClass as! FZCoreDataProxy)
+					case dependencyClass is FZUrlSessionService:
+						modelClass.entities.set(urlSession: dependencyClass as! FZUrlSessionService)
+					default:
+						modelClass.entities.bespoke.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		modelClass.wornCloset?.set(signals: worn_closet.getSignals(by: key_ring.key)!)
-		modelClass.wornCloset?.set(entities: entities)
-		model_class_singletons[modelClassId] = modelClass
+		modelClass.entities.set(signalsService: signals)
+		model_class_singletons[String(describing: modelClassType)] = modelClass
 		modelClass.activate()
 	}
 	
@@ -154,8 +145,8 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			let viewController = UIStoryboard( name: name, bundle: nil ).instantiateViewController( withIdentifier: id ) as? FZViewController
 			else { return nil }
 		set(viewController)
-		set(presenter: vipRelationship.presenterType.init(with: FZKeyring()))
-		set(interactor: vipRelationship.interactorType.init(with: FZKeyring()), with: vipRelationship.interactorDependencyTypes)
+		set(presenter: vipRelationship.presenterType.init())
+		set(interactor: vipRelationship.interactorType.init(), with: vipRelationship.interactorDependencyTypes)
 		return viewController
 	}
 	
@@ -163,76 +154,82 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		viewController id: String,
 		on currentViewController: FZViewController,
 		from storyboard: String? = nil ) {
-		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
+		guard let viewController = _create(viewController: id, from: storyboard) else { return }
 		currentViewController.present(
 			viewController,
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.worn_closet.getSignals( by: self.key_ring.key )?.transmit(signal: FZSignalConsts.viewRemoved )
+				self.entities_.signals(self.key_ring.key)?.transmit(signal: FZSignalConsts.viewRemoved)
 		} )
 	}
 	
-	fileprivate func set ( interactor: FZInteractorProtocol, with dependencyTypes: [ FZModelClassProtocol.Type ]? ) {
+	fileprivate func set(interactor: FZInteractorProtocol, with dependencyTypes: [FZModelClassProtocol.Type]?) {
 		interactor_?.deallocate()
+		guard let signals = entities_.signals(key_ring.key) else { return }
 		interactor_ = interactor
-		let entities = FZInteractorEntities( presenter: presenter_! )
 		if dependencyTypes != nil {
 			_ = dependencyTypes!.map {
 				dependencyType in
-				if let dependencyClass = model_class_singletons[ String( describing: dependencyType ) ] {
+				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
 					if dependencyClass is FZImageProxy {
-						entities.set( image: dependencyClass as! FZImageProxy )
+						interactor.entities?.set(imageProxy: dependencyClass as! FZImageProxy)
 					} else {
-						entities.bespokeRail.add(dependencyClass)
+						interactor.entities?.bespoke.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		interactor_!.wornCloset?.set( entities: entities )
-		interactor_!.wornCloset?.set( signals: worn_closet.getSignals( by: key_ring.key )! )
+		interactor_!.entities?.set(signalsService: signals)
 		interactor_!.activate()
 	}
 	
-	fileprivate func set ( presenter: FZPresenterProtocol ) {
+	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
+	fileprivate func set(presenter: FZPresenterProtocol) {
 		presenter_?.deallocate()
+		guard
+			let signals = entities_.signals(key_ring.key),
+			let viewController = view_controller
+			else { return }
 		presenter_ = presenter
-		presenter_!.wornCloset?.set( signals: worn_closet.getSignals( by: key_ring.key )! )
-		presenter_!.wornCloset?.set( entities: FZPresenterEntities( routing: self, viewController: view_controller ) )
+		presenter_!.entities?.set(signalsService: signals)
+		presenter_!.entities?.set(routing: self)
+		presenter_!.entities?.set(viewController: viewController)
 		presenter_!.activate()
 	}
 	
-	fileprivate func set ( _ viewController: FZViewController ) {
-		guard viewController != view_controller else { return }
+	fileprivate func set(_ viewController: FZViewController) {
+		guard
+			let signals = entities_.signals(key_ring.key),
+			let viewController = view_controller
+			else { return }
 		view_controller?.deallocate()
 		view_controller = viewController
-		view_controller!.signalBox.signals = worn_closet.getSignals( by: key_ring.key )!
-//		worn_closet.getSignals( by: key_ring.key )?.transmitSignalFor( key: FZSignalConsts.viewSet )
+		view_controller!.set(signalsService: signals)
 	}
 }
 
 public class FZRoutingService {
-	fileprivate let key_ring: FZKeyring
-
 	fileprivate var
 	is_activated: Bool,
 	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
 	vip_relationships: Dictionary< String, FZVipRelationship >,
-	worn_closet: FZWornCloset,
+	key_ring: FZKeyring!,
+	entities_: FZModelClassEntities!,
 	window_: UIWindow!,
 	view_controller: FZViewController?,
 	interactor_: FZInteractorProtocol?,
 	presenter_: FZPresenterProtocol?
 
-	required public init(with keyring: FZKeyring) {
+	required public init() {
 		is_activated = false
-		key_ring = keyring
-		worn_closet = FZWornCloset(key_ring.key)
-		worn_closet.set( signals: FZSignalsService() )
 		model_class_singletons = [:]
 		vip_relationships = [:]
+		key_ring = FZKeyring(self)
+		entities_ = FZModelClassEntities(key_ring.key)
+		entities_.set(signalsService: FZSignalsService())
 	}
 	
 	deinit {}

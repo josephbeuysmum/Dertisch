@@ -8,16 +8,15 @@
 
 import UIKit
 
-extension FZPageViewController: FZSignalBoxEntityProtocol {}
+extension FZPageViewController: FZSignalsEntitySetterProtocol {
+	public func set(signalsService: FZSignalsService) {
+		guard signals_service == nil else { return }
+		signals_service = signalsService
+	}
+	
+	public func deallocate() {}
+}
 
 open class FZPageViewController: UIPageViewController {
-	public var signalBox: FZSignalsEntity
-	
-	open let key: String
-	
-	required public init? ( coder: NSCoder ) {
-		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity()
-		super.init( coder: coder )
-	}
+	fileprivate var signals_service: FZSignalsService?
 }

@@ -9,8 +9,10 @@
 import CoreData
 import UIKit
 
+// todo should these be living here?
 public typealias FZCDCallback = ([NSManagedObject]?) -> Void
 public typealias FZCDDeletionCallback = (Bool) -> Void
+public typealias FZSignalCallback = (String, Any?) -> Void
 
 // todo make more funcs etc "final"
 // todo? maybe move protocols into their implementing classes

@@ -6,38 +6,47 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
+//public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
 
-public protocol FZBespokeEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
+public protocol FZInitableWithKeyProtocol {
+	init (_ key: String)
+}
+
+public protocol FZSignalsEntityGetterProtocol {
+	func signals(_ key: String?) -> FZSignalsService?
+}
+
+public protocol FZSignalsEntitySetterProtocol: FZDeallocatableProtocol {
+	func set (signalsService: FZSignalsService)
+}
+
+public protocol FZSignalsEntityProtocol: FZSignalsEntityGetterProtocol, FZSignalsEntitySetterProtocol {}
+
+public protocol FZBespokeEntitiesProtocol: FZDeallocatableProtocol {
 	func add(_ modelClass: FZModelClassProtocol)
 	subscript(type: FZModelClassProtocol.Type) -> FZModelClassProtocol? { get }
 //	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
 }
 
-public protocol FZInteractorEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
-	var image: FZImageProxy? { get }
-	var presenter: FZPresenterProtocol { get }
-	func set ( image newValue: FZImageProxy )
-	//	func set ( presenter newValue: FZPresenterProtocol )
-	init ( presenter: FZPresenterProtocol )
-	//	func add ( modelClass: FZModelClassProtocol )
-	//	func getModelClass ( by type: FZModelClassProtocol.Type? ) -> FZModelClassProtocol?
+public protocol FZInteractorEntitiesProtocol: FZInitableWithKeyProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol {
+	func imageProxy(_ key: String?) -> FZImageProxy?
+	func presenter(_ key: String?) -> FZPresenterProtocol?
+	func set(imageProxy: FZImageProxy)
+	func set(presenter: FZPresenterProtocol)
 }
 
-public protocol FZModelClassEntitiesCollectionProtocol: FZBespokeEntitiesEntityProtocol, FZEntitiesCollectionProtocol {
-	var bundledJson: FZBundledJsonService? { get }
-	var coreData: FZCoreDataProxy? { get }
-	var urlSession: FZUrlSessionService? { get }
-	func set(bundledJson newValue: FZBundledJsonService)
-	func set(coreData newValue: FZCoreDataProxy)
-	func set(urlSession newValue: FZUrlSessionService)
-	//	init ( coreData: FZCoreDataProxy?, urlSession: FZUrlSessionService? )
+public protocol FZModelClassEntitiesProtocol: FZInitableWithKeyProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol {
+	func bundledJson(_ key: String?) -> FZBundledJsonService?
+	func coreData(_ key: String?) -> FZCoreDataProxy?
+	func urlSession(_ key: String?) -> FZUrlSessionService?
+	func set(bundledJson: FZBundledJsonService)
+	func set(coreData: FZCoreDataProxy)
+	func set(urlSession: FZUrlSessionService)
 }
 
-public protocol FZPresenterEntitiesCollectionProtocol: FZEntitiesCollectionProtocol {
-	var routing: FZRoutingService? { get }
-	var viewController: FZViewController? { get }
-	init ( routing: FZRoutingService?, viewController: FZViewController? )
-	func getValue(by key: String) -> Any?
-	func set(_ value: Any?, by key: String)
+public protocol FZPresenterEntitiesProtocol: FZInitableWithKeyProtocol, FZSignalsEntityProtocol {
+	func routing(_ key: String?) -> FZRoutingService?
+	func viewController(_ key: String?) -> FZViewController?
+	func set(routing: FZRoutingService)
+	func set(viewController: FZViewController)
 }

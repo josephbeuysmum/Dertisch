@@ -51,7 +51,7 @@ fileprivate func _lo ( _ args: [ Any? ], file: String, function: String, line: I
 		let shortenedLine = FZString.set( length: 4, ofText: String( line ) ),
 		let shortenedInterval = FZString.set(
 			length: 5,
-			ofText: String( FZTime.getInterval( format: FZTime.IntervalFormats.withoutHoursAndMinutes ) ) ) {
+			ofText: String( FZTime.getInterval( format: FZTime.intervalFormats.withoutHoursAndMinutes ) ) ) {
 		_log( printableArgs, location: "\( fileName ) \( shortenedLine ) \( shortenedInterval )" )
 	// otherwise just log the args as-are
 	} else {

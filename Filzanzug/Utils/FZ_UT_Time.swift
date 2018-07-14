@@ -9,13 +9,13 @@
 import Foundation
 
 public class FZTime {
-	public enum IntervalFormats { case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes }
+	public enum intervalFormats { case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes }
 	
 	fileprivate static var _startTime: Date?
 	
-	// returns a timestamp based upon the IntervalFormats case passed 
+	// returns a timestamp based upon the intervalFormats case passed 
 	// (assumes full case if none passed)
-	public static func getInterval ( format: IntervalFormats = .full ) -> String {
+	public static func getInterval ( format: intervalFormats = .full ) -> String {
 		let rawInterval = _getRawInterval()
 		let interval = Int( rawInterval )
 		

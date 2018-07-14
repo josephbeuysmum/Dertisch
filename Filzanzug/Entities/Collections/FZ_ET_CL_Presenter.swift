@@ -6,33 +6,54 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZPresenterEntities: FZPresenterEntitiesCollectionProtocol {
-	public var routing: FZRoutingService? { return routing_ }
-	public var viewController: FZViewController? { return view_controller }
+extension FZPresenterEntities: FZPresenterEntitiesProtocol {
+//	public var routing: FZRoutingService? { return routing_service }
+//	public var viewController: FZViewController? { return view_controller }
+	
+	public func routing(_ key: String?) -> FZRoutingService? {
+		return key == key_ ? routing_service : nil
+	}
+	
+	public func signals(_ key: String?) -> FZSignalsService? {
+		return key == key_ ? signals_service : nil
+	}
+	
+	public func viewController(_ key: String?) -> FZViewController? {
+		return key == key_ ? view_controller : nil
+	}
 	
 	public func deallocate() {
-		routing_ = nil
+		view_controller?.deallocate()
+		routing_service = nil
 		view_controller = nil
+	}
+	
+	public func set(routing: FZRoutingService) {
+		guard routing_service == nil else { return }
+		routing_service = routing
+	}
+	
+	public func set(signalsService: FZSignalsService) {
+		guard signals_service == nil else { return }
+		signals_service = signalsService
+	}
+	
+	public func set(viewController: FZViewController) {
+		guard view_controller == nil else { return }
+		view_controller = viewController
 	}
 }
 
 public class FZPresenterEntities {
+	fileprivate let key_: String
+
 	fileprivate var
-	routing_: FZRoutingService?,
+	routing_service: FZRoutingService?,
+	signals_service: FZSignalsService?,
 	view_controller: FZViewController?,
 	values: Dictionary<String, Any>?
 	
-	public required init(routing: FZRoutingService? = nil, viewController: FZViewController? = nil) {
-		routing_ = routing
-		view_controller = viewController
-	}
-	
-	public func getValue(by key: String) -> Any? {
-		return values?[key]
-	}
-	
-	public func set(_ value: Any?, by key: String) {
-		if values == nil { values = [:] }
-		values![key] = value
+	required public init (_ key: String) {
+		key_ = key
 	}
 }

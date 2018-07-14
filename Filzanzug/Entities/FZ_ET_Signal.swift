@@ -7,30 +7,37 @@
 //
 
 extension FZSignal: FZSignalProtocol {
-	public typealias FZSignalCallback = (String, Any?) -> Void
-
 	public var hasScanners: Bool { return wave_lengths.count > 0 }
 	
 	public func deallocate () {}
 	
 
-	public mutating func add(_ scanner: FZSignalReceivableProtocol, scansContinuously: Bool, callback: @escaping FZSignalCallback) -> Bool {
-		let
-		wavelength = FZSignalWavelength(key: transmission, scanner: scanner, scansContinuously: scansContinuously, callback: callback),
-		key = wavelength.description
-		guard wave_lengths[key] == nil else { return false }
-		wave_lengths[key] = wavelength
-		return true
+	public mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
+		return add(wavelength: FZSignalWavelength(
+			key: transmission,
+			scanner: scanner,
+			scansContinuously: scansContinuously,
+			delegate: nil,
+			callback: callback))
 	}
 	
-	public mutating func remove(_ scanner: FZSignalReceivableProtocol) {
+	public mutating func add(delegate: FZSignalCallbackDelegateProtocol, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
+		return add(wavelength: FZSignalWavelength(
+			key: transmission,
+			scanner: scanner,
+			scansContinuously: scansContinuously,
+			delegate: delegate,
+			callback: nil))
+	}
+	
+	public mutating func remove(scanner: FZSignalReceivableProtocol) {
 		var tempWavelength = FZSignalWavelength(key: transmission, scanner: scanner)
 		let key = tempWavelength.description
 		tempWavelength.deallocate()
 		removeWavelength(by: key)
 	}
 	
-	public mutating func removeAllWavelengths () {
+	public mutating func removeAllWavelengths() {
 		wave_lengths.forEach { wavelength in
 			var mutatableWavelength = wavelength.value
 			mutatableWavelength.deallocate()
@@ -46,9 +53,21 @@ extension FZSignal: FZSignalProtocol {
 	}
 	
 	public func transmit(with value: Any?) {
-		wave_lengths.forEach { wavelength in
-			wavelength.value.callback?(transmission, value)
+		wave_lengths.forEach { wavelengthReference in
+			let wavelength = wavelengthReference.value
+			switch wavelength.returnMethod {
+			case FZSignalWavelength.returnMethods.callback:		wavelength.callback!(transmission, value)
+			case FZSignalWavelength.returnMethods.delegate:		wavelength.delegate!.callback(transmission: transmission, data: value)
+			case FZSignalWavelength.returnMethods.none:			()
+			}
 		}
+	}
+	
+	fileprivate mutating func add(wavelength: FZSignalWavelength) -> Bool {
+		let key = wavelength.description
+		guard wave_lengths[key] == nil else { return false }
+		wave_lengths[key] = wavelength
+		return true
 	}
 	
 	fileprivate mutating func removeWavelength(by key: String) {

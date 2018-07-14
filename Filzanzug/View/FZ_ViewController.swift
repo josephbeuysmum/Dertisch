@@ -8,37 +8,32 @@
 
 import UIKit
 
-extension FZViewController: FZViewControllerProtocol {}
+extension FZViewController: FZViewControllerProtocol {
+	public func set(signalsService: FZSignalsService) {
+		guard signals_service == nil else { return }
+		signals_service = signalsService
+	}
+
+	public func deallocate () {}
+}
 
 open class FZViewController: UIViewController {
-	public var signalBox: FZSignalsEntity
-	
-//	open let key: String
-	
-	required public init? ( coder aDecoder: NSCoder ) {
-//		key = NSUUID().uuidString
-		signalBox = FZSignalsEntity()
-		super.init( coder: aDecoder )
-	}
+	fileprivate var signals_service: FZSignalsService?
 	
 	deinit {}
 	
 	override open func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		signalBox.signals?.transmit(signal: FZSignalConsts.viewWarnedAboutMemory, with: self)
+		signals_service?.transmit(signal: FZSignalConsts.viewWarnedAboutMemory, with: self)
 	}
 	
 	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		signalBox.signals?.transmit(signal: FZSignalConsts.viewAppeared, with: self)
+		signals_service?.transmit(signal: FZSignalConsts.viewAppeared, with: self)
 	}
 	
 	override open func viewDidLoad() {
 		super.viewDidLoad()
-		signalBox.signals?.transmit(signal: FZSignalConsts.viewLoaded, with: self)
-	}
-	
-	public func deallocate () {
-//		signalBox = nil
+		signals_service?.transmit(signal: FZSignalConsts.viewLoaded, with: self)
 	}
 }
