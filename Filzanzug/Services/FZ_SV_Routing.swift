@@ -10,13 +10,11 @@
 import UIKit
 
 extension FZRoutingService: FZRoutingServiceProtocol {
-	public var entities: FZModelClassEntities { return entities_ }
+	public var closet: FZModelClassEntities { return closet_ }
 
 	
 	
 	public func activate () {}
-	
-	
 	
 	public func add ( rootViewController id: String, from storyboard: String? = nil ) {
 		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
@@ -73,7 +71,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
 		guard
 			canRegister(with: key),
-			let signals = entities_.signals(key_ring.key)
+			let signals = closet_.signals(key_.hash)
 			else { return }
 		let modelClass = modelClassType.init()
 		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
@@ -82,20 +80,20 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
 					switch true {
 					case dependencyClass is FZBundledJsonService:
-						modelClass.entities.set(bundledJson: dependencyClass as! FZBundledJsonService)
+						modelClass.closet.set(bundledJson: dependencyClass as! FZBundledJsonService)
 					case dependencyClass is FZCoreDataProxy:
-						modelClass.entities.set(coreData: dependencyClass as! FZCoreDataProxy)
+						modelClass.closet.set(coreData: dependencyClass as! FZCoreDataProxy)
 					case dependencyClass is FZUrlSessionService:
-						modelClass.entities.set(urlSession: dependencyClass as! FZUrlSessionService)
+						modelClass.closet.set(urlSession: dependencyClass as! FZUrlSessionService)
 					default:
-						modelClass.entities.bespoke.add(dependencyClass)
+						modelClass.closet.bespoke.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		modelClass.entities.set(signalsService: signals)
+		modelClass.closet.set(signalsService: signals)
 		model_class_singletons[String(describing: modelClassType)] = modelClass
 		modelClass.activate()
 	}
@@ -124,7 +122,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			window_ == nil,
 			self is FZRoutingServiceExtensionProtocol
 			else { return }
-		( self as! FZRoutingServiceExtensionProtocol ).registerDependencies( with: key_ring.key )
+		( self as! FZRoutingServiceExtensionProtocol ).registerDependencies( with: key_.hash )
 		window_ = window
 		window_.makeKeyAndVisible()
 		add( rootViewController: rootViewController, from: storyboard )
@@ -135,7 +133,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 
 	
 	fileprivate func canRegister ( with key: String ) -> Bool {
-		return is_activated == false && key == key_ring.key
+		return is_activated == false && key == key_.hash
 	}
 	
 	fileprivate func _create ( viewController id: String, from storyboardName: String? = nil ) -> FZViewController? {
@@ -160,29 +158,29 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.entities_.signals(self.key_ring.key)?.transmit(signal: FZSignalConsts.viewRemoved)
+				self.closet_.signals(self.key_.hash)?.transmit(signal: FZSignalConsts.viewRemoved)
 		} )
 	}
 	
 	fileprivate func set(interactor: FZInteractorProtocol, with dependencyTypes: [FZModelClassProtocol.Type]?) {
 		interactor_?.deallocate()
-		guard let signals = entities_.signals(key_ring.key) else { return }
+		guard let signals = closet_.signals(key_.hash) else { return }
 		interactor_ = interactor
 		if dependencyTypes != nil {
 			_ = dependencyTypes!.map {
 				dependencyType in
 				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
 					if dependencyClass is FZImageProxy {
-						interactor.entities?.set(imageProxy: dependencyClass as! FZImageProxy)
+						interactor.closet?.set(imageProxy: dependencyClass as! FZImageProxy)
 					} else {
-						interactor.entities?.bespoke.add(dependencyClass)
+						interactor.closet?.bespoke.add(dependencyClass)
 					}
 				} else {
 					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
 				}
 			}
 		}
-		interactor_!.entities?.set(signalsService: signals)
+		interactor_!.closet?.set(signalsService: signals)
 		interactor_!.activate()
 	}
 	
@@ -190,19 +188,19 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	fileprivate func set(presenter: FZPresenterProtocol) {
 		presenter_?.deallocate()
 		guard
-			let signals = entities_.signals(key_ring.key),
+			let signals = closet_.signals(key_.hash),
 			let viewController = view_controller
 			else { return }
 		presenter_ = presenter
-		presenter_!.entities?.set(signalsService: signals)
-		presenter_!.entities?.set(routing: self)
-		presenter_!.entities?.set(viewController: viewController)
+		presenter_!.closet?.set(signalsService: signals)
+		presenter_!.closet?.set(routing: self)
+		presenter_!.closet?.set(viewController: viewController)
 		presenter_!.activate()
 	}
 	
 	fileprivate func set(_ viewController: FZViewController) {
 		guard
-			let signals = entities_.signals(key_ring.key),
+			let signals = closet_.signals(key_.hash),
 			let viewController = view_controller
 			else { return }
 		view_controller?.deallocate()
@@ -216,8 +214,8 @@ public class FZRoutingService {
 	is_activated: Bool,
 	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
 	vip_relationships: Dictionary< String, FZVipRelationship >,
-	key_ring: FZKeyring!,
-	entities_: FZModelClassEntities!,
+	key_: FZKeyring!,
+	closet_: FZModelClassEntities!,
 	window_: UIWindow!,
 	view_controller: FZViewController?,
 	interactor_: FZInteractorProtocol?,
@@ -227,9 +225,9 @@ public class FZRoutingService {
 		is_activated = false
 		model_class_singletons = [:]
 		vip_relationships = [:]
-		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
-		entities_.set(signalsService: FZSignalsService())
+		key_ = FZKeyring(delegate: self)
+		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
+		closet_.set(signalsService: FZSignalsService())
 	}
 	
 	deinit {}

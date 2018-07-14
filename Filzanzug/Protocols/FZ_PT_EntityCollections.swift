@@ -9,7 +9,7 @@
 //public protocol FZEntitiesCollectionProtocol: FZDeallocatableProtocol {}
 
 public protocol FZInitViperClassProtocol {
-	init(key: String, delegate: FZViperClassProtocol)
+	init(delegate: FZViperClassProtocol, key: String)
 }
 
 public protocol FZSignalsEntityGetterProtocol {

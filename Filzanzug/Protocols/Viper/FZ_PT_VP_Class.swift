@@ -17,10 +17,9 @@ public extension FZViperClassSingleInstanceProtocol {
 		let reflection = Mirror(reflecting: delegate)
 		for (_, child) in reflection.children.enumerated() {
 			if child.value is Self {
-				fatalError("FZKeyring delegates can only possess one FZKeyring")
+				fatalError("FZViperClassSingleInstanceProtocol delegates can only possess one instance of Self")
 			}
 		}
-		lo("all good!")
 	}
 }
 

@@ -68,7 +68,7 @@ public class FZModelClassEntities {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	required public init(key: String, delegate: FZViperClassProtocol) {
+	required public init(delegate: FZViperClassProtocol, key: String) {
 		key_ = key
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}

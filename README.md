@@ -121,18 +121,18 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 	class SomeProxy {
 		fileprivate let
-		key_ring: FZKeyring,
+		key_: FZKeyring,
 		worn_closet: FZWornCloset
 
 		required init() {
-			key_ring = FZKeyring()
-			worn_closet = FZWornCloset(key_ring.key)
+			key_ = FZKeyring()
+			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
 
-`key_ring` and `worn_closet` are private properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeProxy`.
+`key_` and `worn_closet` are private properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeProxy`.
 
-`Filzanzug` Interactors and Presenters have identical `key_ring` and `worn_closet` properties for the same purpose.
+`Filzanzug` Interactors and Presenters have identical `key_` and `worn_closet` properties for the same purpose.
 
 A boilerplate `Filzanzug` Interactor looks like this:
 
@@ -146,15 +146,15 @@ A boilerplate `Filzanzug` Interactor looks like this:
 
 	struct SomeInteractor {
 		fileprivate let
-		key_ring: FZKeyring,
+		key_: FZKeyring,
 		worn_closet: FZWornCloset
 		fileprivate var presenter_: SomePresenter? {
-			return worn_closet.getInteractorEntities(by: key_ring.key)?.presenter as? SomePresenter
+			return worn_closet.getInteractorEntities(by: key_.hash)?.presenter as? SomePresenter
 		}
 
 		init() {
-			key_ring = FZKeyring()
-			worn_closet = FZWornCloset(key_ring.key)
+			key_ = FZKeyring()
+			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
 
@@ -172,19 +172,19 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 
 	struct SomePresenter {
 		fileprivate let
-		key_ring: FZKeyring,
+		key_: FZKeyring,
 		worn_closet: FZWornCloset
 		fileprivate var view_controller: SomeViewController? {
-			return worn_closet.getPresenterEntities(by: key_ring.key)?.viewController as? SomeViewController
+			return worn_closet.getPresenterEntities(by: key_.hash)?.viewController as? SomeViewController
 		}
 
 		init() {
-			key_ring = FZKeyring()
-			worn_closet = FZWornCloset(key_ring.key)
+			key_ = FZKeyring()
+			worn_closet = FZWornCloset(key_.hash)
 		}
 	}
 
-The `worn_closet` property in a model class, interactor, or presenter needs the `key` property^ from its accompanying `key_ring` property to access the properties stored within it, and because `key_ring` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
+The `worn_closet` property in a model class, interactor, or presenter needs the `key` property^ from its accompanying `key_` property to access the properties stored within it, and because `key_` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
 
 ^ *a `NSUUID().uuidString` generated at runtime.*
 

@@ -11,7 +11,7 @@ import CoreData
 public enum FZCDOperationTypes { case delete, retrieve, store, update }
 
 extension FZCoreDataProxy: FZCoreDataProxyProtocol {
-	public var entities: FZModelClassEntities { return entities_ }
+	public var closet: FZModelClassEntities { return closet_ }
 	
 	public var dataModelName: String? {
 		get { return data_model_name }
@@ -79,7 +79,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 					safeManagedObjects.append(safeManagedObject)
 				}
 				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
-//				self.worn_closet.getSignals(by: self.key_ring.key)?.transmitSignal(
+//				self.worn_closet.getSignals(by: self.key_.hash)?.transmitSignal(
 //					by: self.getSignalKey(by: entityName, and: FZCDOperationTypes.retrieve),
 //					with: safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
@@ -161,14 +161,14 @@ public class FZCoreDataProxy {
 	
 	fileprivate var
 	is_activated: Bool,
-	key_ring: FZKeyring!,
-	entities_: FZModelClassEntities!,
+	key_: FZKeyring!,
+	closet_: FZModelClassEntities!,
 	data_model_name: String?
 
 	required public init() {
 		is_activated = false
-		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
+		key_ = FZKeyring(delegate: self)
+		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 	}
 	
 	deinit {}

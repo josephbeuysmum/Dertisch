@@ -20,8 +20,8 @@ public protocol FZCDEntityProtocol {
 }
 
 public protocol FZKeyringProtocol: FZViperClassSingleInstanceProtocol {
-	var key: String { get }
-	init (_ delegate: FZViperClassProtocol)
+	var hash: String { get }
+	init (delegate: FZViperClassProtocol)
 //	mutating func set(delegate: FZViperClassProtocol)
 }
 
@@ -46,35 +46,3 @@ public protocol FZSignalProtocol: FZDeallocatableProtocol {
 	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )
 }
-
-// [seemingly] deprecated
-
-//public protocol FZStopwatchEntityProtocol: FZDeallocatableProtocol {
-//	func getStopwatchBy ( key: String ) -> FZStopwatch?
-//	func set ( stopwatch: FZStopwatch )
-//}
-
-//public protocol FZWornClosetEntityProtocol {
-//	var wornCloset: FZWornCloset { get }
-//}
-
-//public protocol FZInteractorEntityProtocol {
-//	func getInteractorBy ( key: String ) -> FZInteractorProtocol?
-//	func set ( interactor: FZInteractorProtocol )
-//}
-
-//public protocol FZInteractorEntitiesEntityProtocol {
-//	var entities: FZInteractorEntities! { get }
-//}
-
-//public protocol FZModelClassEntitiesEntityProtocol {
-//	var entities: FZModelClassEntities! { get }
-//}
-
-//public protocol FZPresenterEntitiesEntityProtocol {
-//	var entities: FZPresenterEntities! { get }
-//}
-
-//public protocol FZStopwatchCaseEntityProtocol {
-//	var stopwatchCase: FZStopwatchEntity! { get }
-//}

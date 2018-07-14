@@ -12,7 +12,7 @@ public extension FZPresenterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
 	// todo this is repeated code, here and in FZInteractorProtocol, is there any way to avoid repeating it?
-	public var entities: FZPresenterEntities? {
+	public var closet: FZPresenterEntities? {
 		let selfReflection = Mirror( reflecting: self )
 		var ents: FZPresenterEntities?
 		for (_, child) in selfReflection.children.enumerated() {
@@ -29,7 +29,7 @@ public extension FZPresenterProtocol {
 		for (_, child) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring {
 				if key != nil { fatalError("FZPresenters can only possess one FZKeyring") }
-				key = (child.value as? FZKeyring)?.key
+				key = (child.value as? FZKeyring)?.hash
 			}
 		}
 		return key
@@ -40,13 +40,13 @@ public extension FZPresenterProtocol {
 	public func activate () {
 		guard
 			let closetKey = closet_key,
-			let signals = entities?.signals(closetKey)
+			let signals = closet?.signals(closetKey)
 			else { return }
 //		guard let scopedKey = closet_key else { return }
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedViewController = data as? FZViewController,
-				let ownViewController = self.entities?.viewController(closetKey),
+				let ownViewController = self.closet?.viewController(closetKey),
 				passedViewController == ownViewController
 				else { return }
 			signals.scanOnceFor(signal: FZSignalConsts.navigateTo, scanner: self) { _, data in
@@ -61,9 +61,9 @@ public extension FZPresenterProtocol {
 	public func present (_ viewName: String) {
 		guard
 			let closetKey = closet_key,
-			let viewController = entities?.viewController(closetKey)
+			let viewController = closet?.viewController(closetKey)
 			else { return }
-		entities?.routing(closetKey)?.present(viewController: viewName, on: viewController)
+		closet?.routing(closetKey)?.present(viewController: viewName, on: viewController)
 	}
 	
 	// todo use a mirror to run through objects checking if they are FZDeallocatable and deallocating if so, and same in interactor?
@@ -73,7 +73,7 @@ public extension FZPresenterProtocol {
 }
 
 public protocol FZPresenterProtocol: FZViperClassProtocol {
-	var entities: FZPresenterEntities? { get }
+	var closet: FZPresenterEntities? { get }
 	mutating func postViewActivated()
 	func present(_ viewName: String)
 }

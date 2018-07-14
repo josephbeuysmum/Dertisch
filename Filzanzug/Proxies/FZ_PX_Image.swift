@@ -9,7 +9,7 @@
 import UIKit
 
 extension FZImageProxy: FZImageProxyProtocol {
-	public var entities: FZModelClassEntities { return entities_ }
+	public var closet: FZModelClassEntities { return closet_ }
 	
 	
 	
@@ -20,7 +20,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 		guard image == nil else { return image }
 		guard
 			callback != nil,
-			let signals = entities_.signals(key_ring.key)
+			let signals = closet_.signals(key_.hash)
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		signals.scanOnceFor( signal: urlKey, scanner: self ) { [weak self] _, data in
@@ -33,8 +33,8 @@ extension FZImageProxy: FZImageProxyProtocol {
 	
 	public func loadImage ( by url: String ) {
 		guard
-			let urlSession = entities_.urlSession(key_ring.key),
-			let signals = entities_.signals(key_ring.key)
+			let urlSession = closet_.urlSession(key_.hash),
+			let signals = closet_.signals(key_.hash)
 			else { return }
 		_ = signals.scanOnceFor( signal: url, scanner: self ) { [weak self] _, data in
 			guard let safeSelf = self else { return }
@@ -63,21 +63,21 @@ extension FZImageProxy: FZImageProxyProtocol {
 		return raw_images[ url ] != nil ? UIImage( data: raw_images[ url ]! ) : nil
 	}
 	
-	fileprivate func getUrlKey ( by url: String ) -> String { return "\( key_ring.key )_\( url )" }
+	fileprivate func getUrlKey ( by url: String ) -> String { return "\( key_.hash )_\( url )" }
 }
 
 public class FZImageProxy {
 	fileprivate var
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >,
-	key_ring: FZKeyring!,
-	entities_: FZModelClassEntities!
+	key_: FZKeyring!,
+	closet_: FZModelClassEntities!
 
 	required public init() {
 		urlsResolving = []
 		raw_images = [:]
-		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
+		key_ = FZKeyring(delegate: self)
+		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 	}
 	
 	deinit {}

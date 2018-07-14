@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var entities: FZModelClassEntities { return entities_ }
+	public var closet: FZModelClassEntities { return closet_ }
 	
 	
 	
@@ -29,7 +29,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && callback != nil {
-			entities_.signals(key_ring.key)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
+			closet_.signals(key_.hash)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -90,20 +90,20 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		entities_.signals(key_ring.key)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
+		closet_.signals(key_.hash)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
 	}
 }
 
 public class FZUrlSessionService {
 	fileprivate var
 	ongoing_calls: [ String ],
-	key_ring: FZKeyring!,
-	entities_: FZModelClassEntities!
+	key_: FZKeyring!,
+	closet_: FZModelClassEntities!
 	
 	required public init() {
 		ongoing_calls = []
-		key_ring = FZKeyring(self)
-		entities_ = FZModelClassEntities(key: key_ring.key, delegate: self)
+		key_ = FZKeyring(delegate: self)
+		closet_ = FZModelClassEntities(delegate: self, key: key_.hash)
 //		time_out = 3.0
 	}
 	

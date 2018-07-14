@@ -34,6 +34,6 @@ public extension FZModelClassProtocol {
 }
 
 public protocol FZModelClassProtocol: FZViperClassProtocol {
-	var entities: FZModelClassEntities { get }
+	var closet: FZModelClassEntities { get }
 //	func transmitActivation ( with key: String )
 }

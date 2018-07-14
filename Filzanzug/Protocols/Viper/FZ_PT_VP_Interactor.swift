@@ -12,7 +12,7 @@ public extension FZInteractorProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 	
 	// todo this is repeated code, here and in FZPresenterProtocol, is there any way to avoid repeating it?
-	public var entities: FZInteractorEntities? {
+	public var closet: FZInteractorEntities? {
 		let selfReflection = Mirror( reflecting: self )
 		var ents: FZInteractorEntities?
 		for (_, child) in selfReflection.children.enumerated() {
@@ -27,7 +27,7 @@ public extension FZInteractorProtocol {
 		let selfReflection = Mirror( reflecting: self )
 		for (_, child) in selfReflection.children.enumerated() {
 			if child.value is FZKeyring {
-				return (child.value as? FZKeyring)?.key
+				return (child.value as? FZKeyring)?.hash
 			}
 		}
 		return nil
@@ -38,7 +38,7 @@ public extension FZInteractorProtocol {
 	public func activate () {
 		guard
 			let scopedKey = key_,
-			let scopedEntities = entities,
+			let scopedEntities = closet,
 			let presenterClassName = scopedEntities.presenter(scopedKey)?.instanceDescriptor,
 			let signals = scopedEntities.signals(scopedKey)
 			else { return }
@@ -57,11 +57,11 @@ public extension FZInteractorProtocol {
 	}
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-	public func deallocate () { entities?.deallocate() }
+	public func deallocate () { closet?.deallocate() }
 	public func postPresenterActivated () {}
 }
 
 public protocol FZInteractorProtocol: FZViperClassProtocol {
-	var entities: FZInteractorEntities? { get }
+	var closet: FZInteractorEntities? { get }
 	func postPresenterActivated ()
 }
