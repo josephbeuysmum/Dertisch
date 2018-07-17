@@ -27,5 +27,5 @@ public struct FZSignalConsts {
 //	viewSet = "\(name_space)\(FZCommonPhrasesConsts.View )\(FZCommonPhrasesConsts.Set )"
 	
 	internal static let
-	presenterCheckIn = "\(name_space)\(presenter_)\(FZCommonPhrasesConsts.Activated)"
+	presenterUpdated = "\(name_space)\(presenter_)\(FZCommonPhrasesConsts.Updated)"
 }

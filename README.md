@@ -167,7 +167,7 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 	extension SomePresenter: FZPresenterProtocol {
 		var closet: FZPresenterCloset? { return closet_ }
 		mutating func deallocate() {}
-		func viewActivated() {}
+		mutating func viewActivated() {}
 	}
 
 	struct SomePresenter {

@@ -30,7 +30,6 @@ public extension FZPresenterProtocol {
 			let key = key_,
 			let signals = closet?.signals(key)
 			else { return }
-//		_ = signals.scanOnceFor(signal: view_activated, scanner: self, delegate: self)
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedViewController = data as? FZViewController,
@@ -41,14 +40,10 @@ public extension FZPresenterProtocol {
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			self.viewActivated()
+			var mutatingSelf = self
+			mutatingSelf.viewActivated()
 			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
-	}
-	
-	func checkIn() {
-		guard let signals = closet?.signals(key_) else { return }
-		signals.transmit(signal: FZSignalConsts.presenterCheckIn, with: self)
 	}
 	
 	func present(_ viewName: String) {
@@ -58,12 +53,17 @@ public extension FZPresenterProtocol {
 			else { return }
 		closet?.routing(key)?.present(viewController: viewName, on: viewController)
 	}
+	
+	func updateSelf() {
+		guard let signals = closet?.signals(key_) else { return }
+		signals.transmit(signal: FZSignalConsts.presenterUpdated, with: self)
+	}
 }
 
 public protocol FZPresenterProtocol: FZViperClassProtocol {
 	var closet: FZPresenterCloset? { get }
-	func checkIn()
+	func updateSelf()
 	mutating func populateView<T>(with data: T?)
 	func present(_ viewName: String)
-	func viewActivated()
+	mutating func viewActivated()
 }
