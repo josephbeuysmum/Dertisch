@@ -108,7 +108,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 	import Filzanzug
 
-	extension SomeProxy: SomeProxyProtocol {
+	extension SomeProxy {
 		var closet: FZModelClassCloset { return closet_ }
 		func activate() {}
 		mutating func deallocate() {}
