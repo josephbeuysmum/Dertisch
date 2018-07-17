@@ -193,6 +193,12 @@ A boilerplate `Filzanzug` ViewController looks like this:
 ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each `Filzanzug` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
 
 ---------------------
+Indepth Documentation
+---------------------
+
+There are more elements to `Filzanzug` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
+
+---------------------
 Developmental Roadmap
 ---------------------
 
