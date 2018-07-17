@@ -203,7 +203,8 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
 -	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
 -	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
--	new `MetricsProxy` for serving device-specific numeric constants?;
+-	make utils functions native class extensions instead;
+-	new `MetricsProxy` for serving device-specific numeric constants;
 -	new `FirebaseService`;
 -	create example boilerplate app;
 -	replace `deallocate()` functions with weak vars etc.;

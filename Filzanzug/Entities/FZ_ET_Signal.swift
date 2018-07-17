@@ -11,7 +11,6 @@ extension FZSignal: FZSignalProtocol {
 	
 	public mutating func deallocate() {}
 	
-
 	public mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
 		return add(wavelength: FZSignalWavelength(
 			key: transmissionName,

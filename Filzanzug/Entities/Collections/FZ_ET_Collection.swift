@@ -21,7 +21,7 @@ extension FZBespokeEntities: FZBespokeEntitiesProtocol {
 		return model_classes?[getModelClassId(by: String(describing: type))]
 	}
 	
-
+	
 	
 	fileprivate func getModelClassId(by className: String) -> String {
 		guard let dotIndex = FZString.getIndexOf(subString: FZCharConsts.dot, inString: className) else { return className }

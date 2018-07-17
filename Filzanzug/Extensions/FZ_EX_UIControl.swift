@@ -6,7 +6,7 @@
 //
 
 // taken from aepryus at: https://stackoverflow.com/questions/25919472/adding-a-closure-as-target-to-a-uibutton
-class ClosureSleeve {
+fileprivate class ClosureSleeve {
 	let closure: ()->()
 	
 	init (_ closure: @escaping ()->()) {

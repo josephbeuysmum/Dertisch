@@ -128,9 +128,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		add(rootViewController: rootViewController, from: storyboard)
 	}
 	
-
 	
-
 	
 	fileprivate func canRegister ( with key: String ) -> Bool {
 		return is_activated == false && key == key_.teeth

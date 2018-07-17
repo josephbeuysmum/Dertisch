@@ -25,7 +25,6 @@ public protocol FZSignalsEntityProtocol: FZSignalsEntityGetterProtocol, FZSignal
 public protocol FZBespokeEntitiesProtocol: FZDeallocatableProtocol {
 	func add(_ modelClass: FZModelClassProtocol)
 	subscript(type: FZModelClassProtocol.Type) -> FZModelClassProtocol? { get }
-//	func get(_ type: FZModelClassProtocol.Type?) -> FZModelClassProtocol?
 }
 
 public protocol FZInteractorClosetProtocol: FZClosetProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZSingleInstanceProtocol {

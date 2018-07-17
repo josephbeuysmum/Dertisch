@@ -10,13 +10,3 @@ public protocol FZStopwatchProtocol: FZSignalsEntityProtocol, FZSignalReceivable
 	func startWith(delay: Double, andData data: Any?, _ callback: @escaping(String, Any?) -> Void)
 	func stop()
 }
-
-//public protocol FZWornClosetProtocol: FZDeallocatableProtocol {
-//	init(_ key: String)
-////	func getInteractorEntities(by key: String?) -> FZInteractorCloset?
-//	func getModelClassEntities(by key: String?) -> FZModelClassCloset?
-//	func getPresenterEntities(by key: String?) -> FZPresenterCloset?
-//	func getSignals(by key: String?) -> FZSignalsService?
-//	func set(entities: FZEntitiesCollectionProtocol)
-//	func set(signals: FZSignalsService)
-//}

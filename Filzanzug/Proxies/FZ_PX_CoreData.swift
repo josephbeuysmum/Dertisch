@@ -21,8 +21,6 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-//	public var wornCloset: FZWornCloset? { return worn_closet }
-	
 	
 	
 	public func delete(entityName: String, _ callback: @escaping FZCDDeletionCallback) {
@@ -134,16 +132,6 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 			}
 		}
 	}
-	
-	
-	
-//	fileprivate func getCoreDataValue(by type: FZCDTypes) -> Any {
-//		switch type {
-//		case let .string:	return string
-//		case let .int:			return int
-//		case let .bool:		return bool
-//		}
-//	}
 }
 
 public class FZCoreDataProxy {

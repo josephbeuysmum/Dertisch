@@ -18,7 +18,6 @@ public protocol FZRoutingServiceProtocol: FZModelClassProtocol, FZRoutingService
 		buttonLabel: String,
 		handler: @escaping ( ( UIAlertAction ) -> Void ),
 		plusExtraButtonLabel extraButtonLabel: String? ) -> UIAlertController
-	//	func present ( viewController id: String, on currentViewController: FZViewController )
 	func present ( viewController id: String, on currentViewController: FZViewController, from storyboard: String )
 	func start ( rootViewController: String, window: UIWindow, storyboard: String? )
 }

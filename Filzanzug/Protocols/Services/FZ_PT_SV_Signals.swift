@@ -11,7 +11,6 @@ public protocol FZSignalCallbackDelegateProtocol {
 }
 
 protocol FZSignalsServiceProtocol {
-//	typealias FZSignalCallback = (String, Any?) -> Void
 	func annul(signal key: String, scanner: AnyObject)
 	func has(signal key: String) -> Bool
 	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool
