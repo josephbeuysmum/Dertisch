@@ -109,23 +109,19 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 	import Filzanzug
 
 	protocol SomeProxyProtocol: FZModelClassProtocol {
-		func someFunction(someData: Any)
+		mutating func someFunction(someData: Any)
 	}
 
 	extension SomeProxy: SomeProxyProtocol {
 		var closet: FZModelClassCloset { return closet_ }
-
 		func activate() {}
-
-		func deallocate() {}
-
-		func someFunction(someData: Any) {}
+		mutating func deallocate() {}
+		mutating func someFunction(someData: Any) {}
 	}
 
 	class SomeProxy {
-		fileprivate var
-		key_: FZKey!,
-		closet_: FZModelClassCloset!,
+		fileprivate var key_: FZKey!
+		fileprivate varcloset_: FZModelClassCloset!,
 
 		required init() {
 			key_ = FZKey(self)
