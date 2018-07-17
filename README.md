@@ -104,19 +104,14 @@ In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented
 
 All `Filzanzug` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
 
-The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Filzanzug` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` would look like this:
+The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Filzanzug` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` looks like this:
 
 	import Filzanzug
-
-	protocol SomeProxyProtocol: FZModelClassProtocol {
-		mutating func someFunction(someData: Any)
-	}
 
 	extension SomeProxy: SomeProxyProtocol {
 		var closet: FZModelClassCloset { return closet_ }
 		func activate() {}
 		mutating func deallocate() {}
-		mutating func someFunction(someData: Any) {}
 	}
 
 	class SomeProxy {
@@ -127,6 +122,17 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 			key_ = FZKey(self)
 			closet_ = FZModelClassCloset(self, key: key_)
 		}
+	}
+
+And adding your own functionality in looks like this:
+
+	protocol SomeProxyProtocol: FZModelClassProtocol {
+		mutating func someFunction(someData: Any)
+	}
+
+	extension SomeProxy: SomeProxyProtocol {
+		...
+		mutating func someFunction(someData: Any) {}
 	}
 
 `key_`, `closet_`, and `closet` are properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeProxy`. `key_` and `closet_` are forced unwrapped vars so that `self` can be injected into them at initialisation.^^^
