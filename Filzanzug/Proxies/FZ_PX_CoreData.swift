@@ -79,7 +79,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 					safeManagedObjects.append(safeManagedObject)
 				}
 				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
-//				self.worn_closet.getSignals(by: self.key_.hash)?.transmitSignal(
+//				self.worn_closet.getSignals(by: self.key_.teeth)?.transmitSignal(
 //					by: self.getSignalKey(by: entityName, and: FZCDOperationTypes.retrieve),
 //					with: safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
@@ -168,7 +168,7 @@ public class FZCoreDataProxy {
 	required public init() {
 		is_activated = false
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.hash)
+		closet_ = FZModelClassCloset(self, key: key_.teeth)
 	}
 	
 	deinit {}

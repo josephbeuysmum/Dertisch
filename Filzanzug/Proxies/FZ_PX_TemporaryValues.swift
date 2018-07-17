@@ -19,7 +19,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	
 	public func set ( _ value: String, by key: String ) {
 		values_[ key ] = value
-		closet_.signals(key_.hash)?.transmit(signal: FZSignalConsts.valueSet, with: key )
+		closet_.signals(key_.teeth)?.transmit(signal: FZSignalConsts.valueSet, with: key )
 	}
 	
 	public func annulValue ( by key: String ) {
@@ -28,7 +28,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	}
 	
 	public func removeValues () {
-		guard let signals = closet_.signals(key_.hash) else { return }
+		guard let signals = closet_.signals(key_.teeth) else { return }
 		for ( key, _ ) in values_ { _ = annulValue( by: key ) }
 		signals.transmit(signal: FZSignalConsts.valuesRemoved )
 	}
@@ -45,7 +45,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 //	
 //	// store ("set") the given property
 //	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-//		guard let signals = wornCloset.getSignals( by: key_.hash ) else { return }
+//		guard let signals = wornCloset.getSignals( by: key_.teeth ) else { return }
 //		let signalKey = FZSignalConsts.valueStored
 //		FZMisc.set( signals: signals, withKey: signalKey, andCaller: caller )
 //		storage.setValue( value, forKey: key )
@@ -66,7 +66,7 @@ public class FZTemporaryValuesProxy {
 		is_activated = false
 		values_ = [:]
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.hash)
+		closet_ = FZModelClassCloset(self, key: key_.teeth)
 	}
 	
 	deinit {}

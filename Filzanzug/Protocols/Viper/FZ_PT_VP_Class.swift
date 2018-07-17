@@ -6,23 +6,24 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+//extension FZFirstInstanceProtocol {
+//	func get<T>(firstInstanceOf: T.Type) -> T? {
+//		let mirror = Mirror(reflecting: self)
+//		for (_, child) in mirror.children.enumerated() {
+//			if let t = child.value as? T {
+//				return t
+//			}
+//		}
+//		return nil
+//	}
+//}
+
 public protocol FZViperClassProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
 	var instanceDescriptor: String { get }
 	init()
 	func activate()
 }
 
-public extension FZViperClassSingleInstanceProtocol {
-	func guaranteeSingleInstanceOfSelf(within delegate: FZViperClassProtocol) {
-		let reflection = Mirror(reflecting: delegate)
-		for (_, child) in reflection.children.enumerated() {
-			if child.value is Self {
-				fatalError("FZViperClassSingleInstanceProtocol delegates can only possess one instance of Self")
-			}
-		}
-	}
-}
-
-public protocol FZViperClassSingleInstanceProtocol {
-	func guaranteeSingleInstanceOfSelf(within delegate: FZViperClassProtocol)
-}
+//protocol FZFirstInstanceProtocol {
+//	func get<T>(firstInstanceOf: T.Type) -> T?
+//}

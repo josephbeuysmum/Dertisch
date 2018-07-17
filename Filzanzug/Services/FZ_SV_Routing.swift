@@ -71,7 +71,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
 		guard
 			canRegister(with: key),
-			let signals = closet_.signals(key_.hash)
+			let signals = closet_.signals(key_.teeth)
 			else { return }
 		let modelClass = modelClassType.init()
 		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
@@ -117,15 +117,15 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			interactorDependencyTypes: interactorDependencyTypes )
 	}
 	
-	public func start ( rootViewController: String, window: UIWindow, storyboard: String? = nil ) {
+	public func start(rootViewController: String, window: UIWindow, storyboard: String? = nil) {
 		guard
 			window_ == nil,
 			self is FZRoutingServiceExtensionProtocol
 			else { return }
-		( self as! FZRoutingServiceExtensionProtocol ).registerDependencies( with: key_.hash )
+		(self as! FZRoutingServiceExtensionProtocol).registerDependencies(with: key_.teeth)
 		window_ = window
 		window_.makeKeyAndVisible()
-		add( rootViewController: rootViewController, from: storyboard )
+		add(rootViewController: rootViewController, from: storyboard)
 	}
 	
 
@@ -133,14 +133,14 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 
 	
 	fileprivate func canRegister ( with key: String ) -> Bool {
-		return is_activated == false && key == key_.hash
+		return is_activated == false && key == key_.teeth
 	}
 	
-	fileprivate func _create ( viewController id: String, from storyboardName: String? = nil ) -> FZViewController? {
+	fileprivate func _create(viewController id: String, from storyboardName: String? = nil) -> FZViewController? {
 		let name = storyboardName ?? "Main"
 		guard
 			let vipRelationship = vip_relationships[ id ],
-			let viewController = UIStoryboard( name: name, bundle: nil ).instantiateViewController( withIdentifier: id ) as? FZViewController
+			let viewController = UIStoryboard(name: name, bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController
 			else { return nil }
 		set(viewController)
 		set(presenter: vipRelationship.presenterType.init())
@@ -158,13 +158,17 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.closet_.signals(self.key_.hash)?.transmit(signal: FZSignalConsts.viewRemoved)
+				self.closet_.signals(self.key_.teeth)?.transmit(signal: FZSignalConsts.viewRemoved)
 		} )
 	}
 	
 	fileprivate func set(interactor: FZInteractorProtocol, with dependencyTypes: [FZModelClassProtocol.Type]?) {
 		interactor_?.deallocate()
-		guard let signals = closet_.signals(key_.hash) else { return }
+		guard
+			let signals = closet_.signals(key_.teeth),
+			let presenter = presenter_
+			else {
+				return }
 		interactor_ = interactor
 		if dependencyTypes != nil {
 			_ = dependencyTypes!.map {
@@ -181,6 +185,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			}
 		}
 		interactor_!.closet?.set(signalsService: signals)
+		interactor_!.closet?.set(presenter: presenter)
 		interactor_!.activate()
 	}
 	
@@ -188,7 +193,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	fileprivate func set(presenter: FZPresenterProtocol) {
 		presenter_?.deallocate()
 		guard
-			let signals = closet_.signals(key_.hash),
+			let signals = closet_.signals(key_.teeth),
 			let viewController = view_controller
 			else { return }
 		presenter_ = presenter
@@ -199,10 +204,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	}
 	
 	fileprivate func set(_ viewController: FZViewController) {
-		guard
-			let signals = closet_.signals(key_.hash),
-			let viewController = view_controller
-			else { return }
+		guard let signals = closet_.signals(key_.teeth) else { return }
 		view_controller?.deallocate()
 		view_controller = viewController
 		view_controller!.set(signalsService: signals)
@@ -212,8 +214,8 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 public class FZRoutingService {
 	fileprivate var
 	is_activated: Bool,
-	model_class_singletons: Dictionary< String, FZModelClassProtocol >,
-	vip_relationships: Dictionary< String, FZVipRelationship >,
+	model_class_singletons: Dictionary<String, FZModelClassProtocol>,
+	vip_relationships: Dictionary<String, FZVipRelationship>,
 	key_: FZKey!,
 	closet_: FZModelClassCloset!,
 	window_: UIWindow!,
@@ -226,7 +228,7 @@ public class FZRoutingService {
 		model_class_singletons = [:]
 		vip_relationships = [:]
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.hash)
+		closet_ = FZModelClassCloset(self, key: key_.teeth)
 		closet_.set(signalsService: FZSignalsService())
 	}
 	

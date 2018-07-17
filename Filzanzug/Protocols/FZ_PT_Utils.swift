@@ -16,3 +16,19 @@ public protocol FZDescribableProtocol {
 }
 
 public protocol FZSignalReceivableProtocol {}
+
+public protocol FZSingleInstanceProtocol {
+	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)
+}
+
+// todo the places where protocols and their extensions live is becoming increasingly messy, refactor into some sensible system
+public extension FZSingleInstanceProtocol {
+	func guaranteeSingleInstanceOfSelf<T>(within delegate: T) {
+		let reflection = Mirror(reflecting: delegate)
+		for (_, child) in reflection.children.enumerated() {
+			if child.value is Self {
+				fatalError("FZSingleInstanceProtocol delegates can only possess one instance of <T>.self")
+			}
+		}
+	}
+}

@@ -73,7 +73,7 @@ public class FZBundledJsonService {
 	
 	required public init() {
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.hash)
+		closet_ = FZModelClassCloset(self, key: key_.teeth)
 		parseSettings()
 	}
 	

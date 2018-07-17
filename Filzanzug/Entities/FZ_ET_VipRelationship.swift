@@ -11,6 +11,6 @@ internal struct FZVipRelationship {
 	viewControllerType: FZViewControllerProtocol.Type,
 	interactorType: FZInteractorProtocol.Type,
 	presenterType: FZPresenterProtocol.Type,
-	interactorDependencyTypes: [ FZModelClassProtocol.Type ]?
+	interactorDependencyTypes: [FZModelClassProtocol.Type]?
 }
 

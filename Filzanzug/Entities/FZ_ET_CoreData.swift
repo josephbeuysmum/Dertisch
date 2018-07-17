@@ -84,18 +84,6 @@ public struct FZCDEntity: FZCDEntityProtocol {
 		return true
 	}
 	
-//	mutating public func add (attributes: [FZCDAttribute]) {
-//		attributes.forEach { attribute in add(attribute) }
-//	}
-
-//	mutating public func add ( multipleAttributes: [ [ FZCDTypes ] ] ) {
-//		multipleAttributes.forEach { attributes in add( attributes: attributes ) }
-//	}
-	
-//	public func getKey ( by index: Int ) -> String? {
-//		return types_[ index ].key
-//	}
-	
 fileprivate func assessValidity(of attribute: FZCDAble, by type: FZCDTypes) -> Bool {
 		switch type {
 		case FZCDTypes.bool:	return attribute is Bool

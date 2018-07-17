@@ -23,12 +23,12 @@ extension FZBespokeEntities: FZBespokeEntitiesProtocol {
 	
 
 	
-	fileprivate func getModelClassId(by className: String ) -> String {
+	fileprivate func getModelClassId(by className: String) -> String {
 		guard let dotIndex = FZString.getIndexOf(subString: FZCharConsts.dot, inString: className) else { return className }
 		return FZString.getSubStringOf(string: className, between: dotIndex + 1, and: className.count)!
 	}
 }
 
 public class FZBespokeEntities {
-	fileprivate lazy var model_classes: Dictionary< String, FZModelClassProtocol >? = [:]
+	fileprivate lazy var model_classes: Dictionary<String, FZModelClassProtocol>? = [:]
 }

@@ -7,9 +7,6 @@
 //
 
 extension FZPresenterCloset: FZPresenterClosetProtocol {
-//	public var routing: FZRoutingService? { return routing_service }
-//	public var viewController: FZViewController? { return view_controller }
-	
 	public func routing(_ key: String?) -> FZRoutingService? {
 		return key == key_ ? routing_service : nil
 	}

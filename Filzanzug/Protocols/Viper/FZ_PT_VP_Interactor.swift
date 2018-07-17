@@ -9,45 +9,29 @@
 import Foundation
 
 public extension FZInteractorProtocol {
-	public var instanceDescriptor: String { return String( describing: self ) }
+	public var instanceDescriptor: String { return String(describing: self) }
 	
-	// todo this is repeated code, here and in FZPresenterProtocol, is there any way to avoid repeating it?
 	public var closet: FZInteractorCloset? {
-		let selfReflection = Mirror( reflecting: self )
-		var ents: FZInteractorCloset?
-		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZInteractorCloset {
-				if ents != nil { fatalError("FZInteractors can only possess one FZInteractorCloset") }
-				ents = (child.value as? FZInteractorCloset)
-			}
-		}
-		return ents
+		return FirstInstance().get(FZInteractorCloset.self, from: mirror_)
 	}
-	fileprivate var key_: String? {
-		let selfReflection = Mirror( reflecting: self )
-		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZKey {
-				return (child.value as? FZKey)?.hash
-			}
-		}
-		return nil
-	}
-
 	
+	private var mirror_: Mirror { return Mirror(reflecting: self) }
+	
+
 	
 	public func activate () {
 		guard
-			let scopedKey = key_,
-			let scopedEntities = closet,
-			let presenterClassName = scopedEntities.presenter(scopedKey)?.instanceDescriptor,
-			let signals = scopedEntities.signals(scopedKey)
+			let key = FirstInstance().get(FZKey.self, from: Mirror(reflecting: self))?.teeth,
+			let safeCloset = closet,
+			let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
+			let signals = safeCloset.signals(key)
 			else { return }
 		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
 			guard
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
-			self.postPresenterActivated()
+			self.presenterActivated()
 		}
 		// todo why is this not simply in the closure immediately above?
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
@@ -58,10 +42,10 @@ public extension FZInteractorProtocol {
 	
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
 	public func deallocate () { closet?.deallocate() }
-	public func postPresenterActivated () {}
+	public func presenterActivated () {}
 }
 
 public protocol FZInteractorProtocol: FZViperClassProtocol {
 	var closet: FZInteractorCloset? { get }
-	func postPresenterActivated ()
+	func presenterActivated ()
 }

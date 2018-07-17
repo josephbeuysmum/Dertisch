@@ -9,14 +9,14 @@
 import Foundation
 
 extension FZKey: FZKeyProtocol {
-	public var hash: String { return hash_ }
+	public var teeth: String { return teeth_ }
 }
 
 public struct FZKey {
-	fileprivate var hash_: String
+	fileprivate var teeth_: String
 	
 	public init (_ delegate: FZViperClassProtocol) {
-		hash_ = NSUUID().uuidString
+		teeth_ = NSUUID().uuidString
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

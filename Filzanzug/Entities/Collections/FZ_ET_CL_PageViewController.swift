@@ -7,20 +7,11 @@
 //
 
 extension FZPageViewControllerEntities: FZDeallocatableProtocol {
-//	public var routing: FZRoutingService? {
-//		get { return routing_ }
-//		set {
-//			guard routing_ == nil else { return }
-//			routing_ = newValue
-//		}
-//	}
 	public func deallocate () {}
 }
 
 public class FZPageViewControllerEntities {
 	fileprivate let key_: String
-	
-//	fileprivate var routing_: FZRoutingService?
 	
 	// todo needs routing injected
 	public init (_ key: String) {

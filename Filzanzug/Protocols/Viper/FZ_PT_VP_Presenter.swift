@@ -11,69 +11,56 @@ import Foundation
 public extension FZPresenterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
-	// todo this is repeated code, here and in FZInteractorProtocol, is there any way to avoid repeating it?
 	public var closet: FZPresenterCloset? {
-		let selfReflection = Mirror( reflecting: self )
-		var ents: FZPresenterCloset?
-		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZPresenterCloset {
-				if ents != nil { fatalError("FZPresenters can only possess one FZWornCloset") }
-				ents = (child.value as? FZPresenterCloset)
-			}
-		}
-		return ents
-	}
-	var closet_key: String? {
-		let selfReflection = Mirror( reflecting: self )
-		var key: String?
-		for (_, child) in selfReflection.children.enumerated() {
-			if child.value is FZKey {
-				if key != nil { fatalError("FZPresenters can only possess one FZKey") }
-				key = (child.value as? FZKey)?.hash
-			}
-		}
-		return key
+		return FirstInstance().get(FZPresenterCloset.self, from: mirror_)
 	}
 	
+	private var key_: String? {
+		return FirstInstance().get(FZKey.self, from: mirror_)?.teeth
+	}
+	
+	private var mirror_: Mirror { return Mirror(reflecting: self) }
+
 	
 	
 	public func activate () {
 		guard
-			let closetKey = closet_key,
-			let signals = closet?.signals(closetKey)
+			let key = key_,
+			let signals = closet?.signals(key)
 			else { return }
-//		guard let scopedKey = closet_key else { return }
+//		guard let scopedKey = key_ else { return }
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedViewController = data as? FZViewController,
-				let ownViewController = self.closet?.viewController(closetKey),
+				let ownViewController = self.closet?.viewController(key),
 				passedViewController == ownViewController
 				else { return }
 			signals.scanOnceFor(signal: FZSignalConsts.navigateTo, scanner: self) { _, data in
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			self.postViewActivated()
+			self.viewActivated()
 			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
 	}
 	
 	public func present (_ viewName: String) {
 		guard
-			let closetKey = closet_key,
-			let viewController = closet?.viewController(closetKey)
+			let key = key_,
+			let viewController = closet?.viewController(key)
 			else { return }
-		closet?.routing(closetKey)?.present(viewController: viewName, on: viewController)
+		closet?.routing(key)?.present(viewController: viewName, on: viewController)
 	}
 	
 	// todo use a mirror to run through objects checking if they are FZDeallocatable and deallocating if so, and same in interactor?
 	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
 	public func deallocate () {}
-	public func postViewActivated () {}
+	public func viewActivated () {}
 }
 
 public protocol FZPresenterProtocol: FZViperClassProtocol {
 	var closet: FZPresenterCloset? { get }
-	mutating func postViewActivated()
+	mutating func viewActivated()
+	mutating func populateView<T>(with data: T?)
 	func present(_ viewName: String)
 }
