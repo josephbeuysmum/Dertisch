@@ -33,8 +33,9 @@ public struct FZSignalWavelength {
 	public let
 	key: String,
 	scansContinuously: Bool,
-	delegate: FZSignalCallbackDelegateProtocol?,
 	callback: FZSignalCallback?
+	
+	public var delegate: FZSignalCallbackDelegateProtocol?
 	
 	fileprivate let id_: String
 	

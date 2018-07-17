@@ -13,7 +13,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	
 	
 	
-	public func activate () { is_activated = true }
+	public func activate() { is_activated = true }
 	
 	public func getValue ( by key: String ) -> String? { return values_[ key ] }
 	

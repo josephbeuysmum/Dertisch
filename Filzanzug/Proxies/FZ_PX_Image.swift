@@ -13,7 +13,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 	
 	
 	
-	public func activate () {}
+	public func activate() {}
 	
 	public func getImage ( by url: String, callback:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )

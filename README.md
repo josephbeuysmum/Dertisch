@@ -147,6 +147,8 @@ A boilerplate `Filzanzug` Interactor looks like this:
 		func deallocate() {}
 
 		func presenterActivated() {}
+
+		mutating func signalReceived<T>(name: String, data: T?) {}
 	}
 
 	struct SomeInteractor {
@@ -168,6 +170,8 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 		var closet: FZPresenterCloset? { return closet_ }
 
 		func deallocate() {}
+
+		mutating func signalReceived<T>(name: String, data: T?) {}
 
 		func viewActivated() {}
 	}

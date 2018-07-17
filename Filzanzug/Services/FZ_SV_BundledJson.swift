@@ -19,7 +19,7 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 	public var closet: FZModelClassCloset { return closet_ }
 	public var settings: FZJsonSettings? { return settings_ }
 	
-	public func activate () {}
+	public func activate() {}
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard

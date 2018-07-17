@@ -20,15 +20,17 @@ public extension FZPresenterProtocol {
 	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
+	
+	private var view_activated: String { return "ViewActivated" }
 
 	
 	
-	public func activate () {
+	func activate() {
 		guard
 			let key = key_,
 			let signals = closet?.signals(key)
 			else { return }
-//		guard let scopedKey = key_ else { return }
+		_ = signals.scanOnceFor(signal: view_activated, scanner: self, delegate: self)
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedViewController = data as? FZViewController,
@@ -39,12 +41,12 @@ public extension FZPresenterProtocol {
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			self.viewActivated()
+			signals.transmit(signal: self.view_activated)
 			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
 	}
 	
-	public func present (_ viewName: String) {
+	func present (_ viewName: String) {
 		guard
 			let key = key_,
 			let viewController = closet?.viewController(key)
@@ -52,13 +54,15 @@ public extension FZPresenterProtocol {
 		closet?.routing(key)?.present(viewController: viewName, on: viewController)
 	}
 	
-	// todo use a mirror to run through objects checking if they are FZDeallocatable and deallocating if so, and same in interactor?
-	// implemented just in case they are not required in their given implementer, so that a functionless function need not be added
-	public func deallocate () {}
-	public func viewActivated () {}
+	mutating func signalTransmission<T>(name: String, data: T?) {
+		switch name {
+		case view_activated:	viewActivated()
+		default:				signalReceived(name: name, data: data)
+		}
+	}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol, FZViperSignalTransmissionProtocol, FZSignalCallbackDelegateProtocol {
 	var closet: FZPresenterCloset? { get }
 	mutating func viewActivated()
 	mutating func populateView<T>(with data: T?)

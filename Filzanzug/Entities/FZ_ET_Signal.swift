@@ -14,7 +14,7 @@ extension FZSignal: FZSignalProtocol {
 
 	public mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
 		return add(wavelength: FZSignalWavelength(
-			key: transmission,
+			key: transmissionName,
 			scanner: scanner,
 			scansContinuously: scansContinuously,
 			delegate: nil,
@@ -23,7 +23,7 @@ extension FZSignal: FZSignalProtocol {
 	
 	public mutating func add(delegate: FZSignalCallbackDelegateProtocol, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
 		return add(wavelength: FZSignalWavelength(
-			key: transmission,
+			key: transmissionName,
 			scanner: scanner,
 			scansContinuously: scansContinuously,
 			delegate: delegate,
@@ -31,7 +31,7 @@ extension FZSignal: FZSignalProtocol {
 	}
 	
 	public mutating func remove(scanner: FZSignalReceivableProtocol) {
-		var tempWavelength = FZSignalWavelength(key: transmission, scanner: scanner)
+		var tempWavelength = FZSignalWavelength(key: transmissionName, scanner: scanner)
 		let key = tempWavelength.description
 		tempWavelength.deallocate()
 		removeWavelength(by: key)
@@ -54,10 +54,10 @@ extension FZSignal: FZSignalProtocol {
 	
 	public func transmit(with value: Any?) {
 		wave_lengths.forEach { wavelengthReference in
-			let wavelength = wavelengthReference.value
+			var wavelength = wavelengthReference.value
 			switch wavelength.returnMethod {
-			case FZSignalWavelength.returnMethods.callback:		wavelength.callback!(transmission, value)
-			case FZSignalWavelength.returnMethods.delegate:		wavelength.delegate!.callback(transmission: transmission, data: value)
+			case FZSignalWavelength.returnMethods.callback:		wavelength.callback!(transmissionName, value)
+			case FZSignalWavelength.returnMethods.delegate:		wavelength.delegate!.signalTransmission(name: transmissionName, data: value)
 			case FZSignalWavelength.returnMethods.none:			()
 			}
 		}
@@ -81,12 +81,12 @@ extension FZSignal: FZSignalProtocol {
 // a signal may have many signatures, but a signature only has one signal
 
 public struct FZSignal {
-	public var transmission: String
+	public var transmissionName: String
 	
 	fileprivate var wave_lengths: Dictionary<String, FZSignalWavelength>
 	
-	public init (_ transmission: String) {
-		self.transmission = transmission
+	public init (_ transmissionName: String) {
+		self.transmissionName = transmissionName
 		wave_lengths = [:]
 	}
 }

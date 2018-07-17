@@ -14,7 +14,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 
 	
 	
-	public func activate () {}
+	public func activate() {}
 	
 	public func add ( rootViewController id: String, from storyboard: String? = nil ) {
 		guard let viewController = _create( viewController: id, from: storyboard ) else { return }

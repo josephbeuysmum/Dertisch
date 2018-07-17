@@ -15,7 +15,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	
-	public func activate () {}
+	public func activate() {}
 	
 	public func call (
 		url: String,

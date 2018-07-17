@@ -7,7 +7,7 @@
 //
 
 public protocol FZSignalCallbackDelegateProtocol {
-	func callback(transmission: String, data: Any?)
+	mutating func signalTransmission<T>(name: String, data: T?)
 }
 
 protocol FZSignalsServiceProtocol {
@@ -17,6 +17,7 @@ protocol FZSignalsServiceProtocol {
 	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool
 	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
 	func scanOnceFor( signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool
+	func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
 	func stopScanningFor(signal key: String, scanner: FZSignalReceivableProtocol)
 	func transmit(signal key: String, with value: Any?)
 }

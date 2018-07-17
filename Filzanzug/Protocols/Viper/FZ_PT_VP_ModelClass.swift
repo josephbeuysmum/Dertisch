@@ -11,7 +11,7 @@ public extension FZModelClassProtocol {
 	
 	
 	
-	public func activate () {}
+	public func activate() {}
 	
 	public func deallocate () {}
 }
