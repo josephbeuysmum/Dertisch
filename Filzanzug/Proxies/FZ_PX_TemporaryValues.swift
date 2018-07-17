@@ -19,7 +19,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	
 	public func set ( _ value: String, by key: String ) {
 		values_[ key ] = value
-		closet_.signals(key_.teeth)?.transmit(signal: FZSignalConsts.valueSet, with: key )
+		closet_.signals(key_)?.transmit(signal: FZSignalConsts.valueSet, with: key )
 	}
 	
 	public func annulValue ( by key: String ) {
@@ -28,7 +28,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	}
 	
 	public func removeValues () {
-		guard let signals = closet_.signals(key_.teeth) else { return }
+		guard let signals = closet_.signals(key_) else { return }
 		for ( key, _ ) in values_ { _ = annulValue( by: key ) }
 		signals.transmit(signal: FZSignalConsts.valuesRemoved )
 	}
@@ -66,7 +66,7 @@ public class FZTemporaryValuesProxy {
 		is_activated = false
 		values_ = [:]
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.teeth)
+		closet_ = FZModelClassCloset(self, key: key_)
 	}
 	
 	deinit {}

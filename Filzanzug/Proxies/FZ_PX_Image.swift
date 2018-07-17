@@ -20,7 +20,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 		guard image == nil else { return image }
 		guard
 			callback != nil,
-			let signals = closet_.signals(key_.teeth)
+			let signals = closet_.signals(key_)
 			else { return nil }
 		let urlKey = getUrlKey( by: url )
 		signals.scanOnceFor( signal: urlKey, scanner: self ) { [weak self] _, data in
@@ -33,8 +33,8 @@ extension FZImageProxy: FZImageProxyProtocol {
 	
 	public func loadImage ( by url: String ) {
 		guard
-			let urlSession = closet_.urlSession(key_.teeth),
-			let signals = closet_.signals(key_.teeth)
+			let urlSession = closet_.urlSession(key_),
+			let signals = closet_.signals(key_)
 			else { return }
 		_ = signals.scanOnceFor( signal: url, scanner: self ) { [weak self] _, data in
 			guard let safeSelf = self else { return }
@@ -63,7 +63,7 @@ extension FZImageProxy: FZImageProxyProtocol {
 		return raw_images[ url ] != nil ? UIImage( data: raw_images[ url ]! ) : nil
 	}
 	
-	fileprivate func getUrlKey ( by url: String ) -> String { return "\( key_.teeth )_\( url )" }
+	fileprivate func getUrlKey ( by url: String ) -> String { return "\( key_ )_\( url )" }
 }
 
 public class FZImageProxy {
@@ -77,7 +77,7 @@ public class FZImageProxy {
 		urlsResolving = []
 		raw_images = [:]
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.teeth)
+		closet_ = FZModelClassCloset(self, key: key_)
 	}
 	
 	deinit {}

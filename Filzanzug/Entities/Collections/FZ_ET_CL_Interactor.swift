@@ -10,19 +10,19 @@ extension FZInteractorCloset: FZInteractorClosetProtocol {
 	public var bespoke: FZBespokeEntities { return bespoke_entities! }
 	
 	// todo make these (and equivs in Presenter and ModelClass files) into optional subscripts
-	public func imageProxy(_ key: String?) -> FZImageProxy? {
-		return key == key_ ? image_proxy : nil
+	public func imageProxy(_ key: FZKey?) -> FZImageProxy? {
+		return key?.teeth == key_ ? image_proxy : nil
 	}
 
-	public func presenter(_ key: String?) -> FZPresenterProtocol? {
-		return key == key_ ? presenter_ : nil
+	public func presenter(_ key: FZKey?) -> FZPresenterProtocol? {
+		return key?.teeth == key_ ? presenter_ : nil
 	}
 	
-	public func signals(_ key: String?) -> FZSignalsService? {
-		return key == key_ ? signals_service : nil
+	public func signals(_ key: FZKey?) -> FZSignalsService? {
+		return key?.teeth == key_ ? signals_service : nil
 	}
 	
-	public func deallocate () {
+	public func deallocate() {
 		bespoke_entities?.deallocate()
 		image_proxy?.deallocate()
 		presenter_?.deallocate()
@@ -58,8 +58,8 @@ public class FZInteractorCloset {
 	
 	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
 	
-	required public init(_ delegate: FZViperClassProtocol, key: String) {
-		key_ = key
+	required public init(_ delegate: FZViperClassProtocol, key: FZKey) {
+		key_ = key.teeth
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

@@ -24,9 +24,9 @@ public protocol FZViperClassProtocol: FZDeallocatableProtocol, FZSignalReceivabl
 	func activate()
 }
 
-public protocol FZViperSignalTransmissionProtocol {
-	mutating func signalReceived<T>(name: String, data: T?)
-}
+//public protocol FZViperSignalTransmissionProtocol {
+//	mutating func signalReceived<T>(name: String, data: T?)
+//}
 
 //protocol FZFirstInstanceProtocol {
 //	func get<T>(firstInstanceOf: T.Type) -> T?

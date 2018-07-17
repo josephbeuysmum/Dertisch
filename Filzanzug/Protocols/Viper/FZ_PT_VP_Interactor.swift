@@ -15,8 +15,8 @@ public extension FZInteractorProtocol {
 		return FirstInstance().get(FZInteractorCloset.self, from: mirror_)
 	}
 	
-	private var key_: String? {
-		return FirstInstance().get(FZKey.self, from: mirror_)?.teeth
+	private var key_: FZKey? {
+		return FirstInstance().get(FZKey.self, from: mirror_)
 	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
@@ -28,43 +28,44 @@ public extension FZInteractorProtocol {
 	public func activate() {
 		guard
 			let key = key_,
-//			let safeCloset = closet,
-//			let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
+			let safeCloset = closet,
+			let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
 			let signals = closet?.signals(key)
 			else { return }
-		_ = signals.scanOnceFor(signal: FZSignalConsts.presenterActivated, scanner: self, delegate: self)
-//		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
-//			guard
-//				let presenter = data as? FZPresenterProtocol,
-//				presenter.instanceDescriptor == presenterClassName
-//				else { return }
-//			self.presenterActivated()
-//		}
-//		// todo why is this not simply in the closure immediately above?
-//		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
-//			_ = signals.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
-//			timer.invalidate()
-//		}
-	}
-	
-	mutating func signalTransmission<T>(name: String, data: T?) {
-		switch name {
-		case FZSignalConsts.presenterActivated:
+//		_ = signals.scanOnceFor(signal: FZSignalConsts.presenterActivated, scanner: self, delegate: self)
+		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
 			guard
-				let key = key_,
-				let safeCloset = closet,
-				let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
-			presenterActivated()
-		default:
-			signalReceived(name: name, data: data)
+			var mutableSelf = self
+			mutableSelf.presenterActivated()
+		}
+		// todo why is this not simply in the closure immediately above?
+		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
+			_ = signals.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
+			timer.invalidate()
 		}
 	}
+	
+//	mutating func signalTransmission<T>(name: String, data: T?) {
+//		switch name {
+//		case FZSignalConsts.presenterActivated:
+//			guard
+//				let key = key_,
+//				let safeCloset = closet,
+//				let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
+//				let presenter = data as? FZPresenterProtocol,
+//				presenter.instanceDescriptor == presenterClassName
+//				else { return }
+//			presenterActivated()
+//		default:
+//			signalReceived(name: name, data: data)
+//		}
+//	}
 }
 
-public protocol FZInteractorProtocol: FZViperClassProtocol, FZViperSignalTransmissionProtocol, FZSignalCallbackDelegateProtocol {
+public protocol FZInteractorProtocol: FZViperClassProtocol {
 	var closet: FZInteractorCloset? { get }
 	mutating func presenterActivated ()
 }

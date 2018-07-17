@@ -7,7 +7,7 @@
 //
 
 extension FZPageViewControllerEntities: FZDeallocatableProtocol {
-	public func deallocate () {}
+	public func deallocate() {}
 }
 
 public class FZPageViewControllerEntities {

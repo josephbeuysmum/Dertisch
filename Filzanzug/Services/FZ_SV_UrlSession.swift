@@ -29,7 +29,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && callback != nil {
-			closet_.signals(key_.teeth)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
+			closet_.signals(key_)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -90,7 +90,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		closet_.signals(key_.teeth)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
+		closet_.signals(key_)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
 	}
 }
 
@@ -103,7 +103,7 @@ public class FZUrlSessionService {
 	required public init() {
 		ongoing_calls = []
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.teeth)
+		closet_ = FZModelClassCloset(self, key: key_)
 //		time_out = 3.0
 	}
 	

@@ -9,7 +9,7 @@
 extension FZSignal: FZSignalProtocol {
 	public var hasScanners: Bool { return wave_lengths.count > 0 }
 	
-	public func deallocate () {}
+	public mutating func deallocate() {}
 	
 
 	public mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {

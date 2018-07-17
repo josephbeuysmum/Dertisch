@@ -24,7 +24,7 @@ extension FZSignalWavelength {
 		}
 	}
 	
-	public mutating func deallocate () {
+	public mutating func deallocate() {
 		scanner_ = nil
 	}
 }

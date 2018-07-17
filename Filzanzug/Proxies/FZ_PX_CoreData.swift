@@ -168,7 +168,7 @@ public class FZCoreDataProxy {
 	required public init() {
 		is_activated = false
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.teeth)
+		closet_ = FZModelClassCloset(self, key: key_)
 	}
 	
 	deinit {}

@@ -9,11 +9,11 @@
 public protocol FZClosetProtocol: FZInitViperClassProtocol {}
 
 public protocol FZInitViperClassProtocol {
-	init(_ delegate: FZViperClassProtocol, key: String)
+	init(_ delegate: FZViperClassProtocol, key: FZKey)
 }
 
 public protocol FZSignalsEntityGetterProtocol {
-	func signals(_ key: String?) -> FZSignalsService?
+	func signals(_ key: FZKey?) -> FZSignalsService?
 }
 
 public protocol FZSignalsEntitySetterProtocol: FZDeallocatableProtocol {
@@ -29,24 +29,24 @@ public protocol FZBespokeEntitiesProtocol: FZDeallocatableProtocol {
 }
 
 public protocol FZInteractorClosetProtocol: FZClosetProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZSingleInstanceProtocol {
-	func imageProxy(_ key: String?) -> FZImageProxy?
-	func presenter(_ key: String?) -> FZPresenterProtocol?
+	func imageProxy(_ key: FZKey?) -> FZImageProxy?
+	func presenter(_ key: FZKey?) -> FZPresenterProtocol?
 	func set(imageProxy: FZImageProxy)
 	func set(presenter: FZPresenterProtocol)
 }
 
 public protocol FZModelClassClosetProtocol: FZClosetProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZSingleInstanceProtocol {
-	func bundledJson(_ key: String?) -> FZBundledJsonService?
-	func coreData(_ key: String?) -> FZCoreDataProxy?
-	func urlSession(_ key: String?) -> FZUrlSessionService?
+	func bundledJson(_ key: FZKey?) -> FZBundledJsonService?
+	func coreData(_ key: FZKey?) -> FZCoreDataProxy?
+	func urlSession(_ key: FZKey?) -> FZUrlSessionService?
 	func set(bundledJson: FZBundledJsonService)
 	func set(coreData: FZCoreDataProxy)
 	func set(urlSession: FZUrlSessionService)
 }
 
 public protocol FZPresenterClosetProtocol: FZClosetProtocol, FZSignalsEntityProtocol, FZSingleInstanceProtocol {
-	func routing(_ key: String?) -> FZRoutingService?
-	func viewController(_ key: String?) -> FZViewController?
+	func routing(_ key: FZKey?) -> FZRoutingService?
+	func viewController(_ key: FZKey?) -> FZViewController?
 	func set(routing: FZRoutingService)
 	func set(viewController: FZViewController)
 }

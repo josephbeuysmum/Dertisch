@@ -7,16 +7,16 @@
 //
 
 extension FZPresenterCloset: FZPresenterClosetProtocol {
-	public func routing(_ key: String?) -> FZRoutingService? {
-		return key == key_ ? routing_service : nil
+	public func routing(_ key: FZKey?) -> FZRoutingService? {
+		return key?.teeth == key_ ? routing_service : nil
 	}
 	
-	public func signals(_ key: String?) -> FZSignalsService? {
-		return key == key_ ? signals_service : nil
+	public func signals(_ key: FZKey?) -> FZSignalsService? {
+		return key?.teeth == key_ ? signals_service : nil
 	}
 	
-	public func viewController(_ key: String?) -> FZViewController? {
-		return key == key_ ? view_controller : nil
+	public func viewController(_ key: FZKey?) -> FZViewController? {
+		return key?.teeth == key_ ? view_controller : nil
 	}
 	
 	public func deallocate() {
@@ -50,8 +50,8 @@ public class FZPresenterCloset {
 	view_controller: FZViewController?,
 	values: Dictionary<String, Any>?
 	
-	required public init(_ delegate: FZViperClassProtocol, key: String) {
-		key_ = key
+	required public init(_ delegate: FZViperClassProtocol, key: FZKey) {
+		key_ = key.teeth
 		guaranteeSingleInstanceOfSelf(within: delegate)
 	}
 }

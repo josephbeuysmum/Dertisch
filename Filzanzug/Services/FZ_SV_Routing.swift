@@ -71,7 +71,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
 		guard
 			canRegister(with: key),
-			let signals = closet_.signals(key_.teeth)
+			let signals = closet_.signals(key_)
 			else { return }
 		let modelClass = modelClassType.init()
 		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
@@ -158,14 +158,14 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			animated: true,
 			completion: {
 				currentViewController.removeFromParentViewController()
-				self.closet_.signals(self.key_.teeth)?.transmit(signal: FZSignalConsts.viewRemoved)
+				self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.viewRemoved)
 		} )
 	}
 	
 	fileprivate func set(interactor: FZInteractorProtocol, with dependencyTypes: [FZModelClassProtocol.Type]?) {
 		interactor_?.deallocate()
 		guard
-			let signals = closet_.signals(key_.teeth),
+			let signals = closet_.signals(key_),
 			let presenter = presenter_
 			else {
 				return }
@@ -193,7 +193,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	fileprivate func set(presenter: FZPresenterProtocol) {
 		presenter_?.deallocate()
 		guard
-			let signals = closet_.signals(key_.teeth),
+			let signals = closet_.signals(key_),
 			let viewController = view_controller
 			else { return }
 		presenter_ = presenter
@@ -204,7 +204,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	}
 	
 	fileprivate func set(_ viewController: FZViewController) {
-		guard let signals = closet_.signals(key_.teeth) else { return }
+		guard let signals = closet_.signals(key_) else { return }
 		view_controller?.deallocate()
 		view_controller = viewController
 		view_controller!.set(signalsService: signals)
@@ -228,7 +228,7 @@ public class FZRoutingService {
 		model_class_singletons = [:]
 		vip_relationships = [:]
 		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_.teeth)
+		closet_ = FZModelClassCloset(self, key: key_)
 		closet_.set(signalsService: FZSignalsService())
 	}
 	

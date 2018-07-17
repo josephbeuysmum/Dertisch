@@ -13,7 +13,7 @@ public extension FZModelClassProtocol {
 	
 	public func activate() {}
 	
-	public func deallocate () {}
+	public mutating func deallocate() {}
 }
 
 public protocol FZModelClassProtocol: FZViperClassProtocol {

@@ -14,7 +14,7 @@ extension FZViewController: FZViewControllerProtocol {
 		signals_service = signalsService
 	}
 
-	public func deallocate () {}
+	public func deallocate() {}
 }
 
 open class FZViewController: UIViewController {

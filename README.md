@@ -129,7 +129,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 		required init() {
 			key_ = FZKey(self)
-			closet_ = FZModelClassCloset(self, key: key_.teeth)
+			closet_ = FZModelClassCloset(self, key: key_)
 		}
 	}
 
@@ -144,21 +144,17 @@ A boilerplate `Filzanzug` Interactor looks like this:
 	import Filzanzug
 
 	extension SomeInteractor: FZInteractorProtocol {
-		func deallocate() {}
-
-		func presenterActivated() {}
-
-		mutating func signalReceived<T>(name: String, data: T?) {}
+		mutating func deallocate() {}
+		mutating func presenterActivated() {}
 	}
 
 	struct SomeInteractor {
-		fileprivate var
-		key_: FZKey!,
-		closet_: FZInteractorCloset!
+		fileprivate var key_: FZKey!
+		fileprivate var closet_: FZPresenterCloset!
 
 		init(){
 			key_ = FZKey(self)
-			closet_ = FZInteractorCloset(self, key: key_.teeth)
+			closet_ = FZInteractorCloset(self, key: key_)
 		}
 	}
 
@@ -168,22 +164,17 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 
 	extension SomePresenter: FZPresenterProtocol {
 		var closet: FZPresenterCloset? { return closet_ }
-
-		func deallocate() {}
-
-		mutating func signalReceived<T>(name: String, data: T?) {}
-
-		func viewActivated() {}
+		mutating func deallocate() {}
+		mutating func viewActivated() {}
 	}
 
 	struct SomePresenter {
-		fileprivate var
-		key_: FZKey!,
-		closet_: FZPresenterCloset!
+		fileprivate var key_: FZKey!
+		fileprivate var closet_: FZPresenterCloset!
 
 		init() {
 			key_ = FZKey(self)
-			closet_ = FZPresenterCloset(self, key: key_.teeth)
+			closet_ = FZPresenterCloset(self, key: key_)
 		}
 	}
 

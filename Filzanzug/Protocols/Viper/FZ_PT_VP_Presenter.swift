@@ -15,13 +15,13 @@ public extension FZPresenterProtocol {
 		return FirstInstance().get(FZPresenterCloset.self, from: mirror_)
 	}
 	
-	private var key_: String? {
-		return FirstInstance().get(FZKey.self, from: mirror_)?.teeth
+	private var key_: FZKey? {
+		return FirstInstance().get(FZKey.self, from: mirror_)
 	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
 	
-	private var view_activated: String { return "ViewActivated" }
+//	private var view_activated: String { return "ViewActivated" }
 
 	
 	
@@ -30,7 +30,7 @@ public extension FZPresenterProtocol {
 			let key = key_,
 			let signals = closet?.signals(key)
 			else { return }
-		_ = signals.scanOnceFor(signal: view_activated, scanner: self, delegate: self)
+//		_ = signals.scanOnceFor(signal: view_activated, scanner: self, delegate: self)
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
 				let passedViewController = data as? FZViewController,
@@ -41,7 +41,8 @@ public extension FZPresenterProtocol {
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			signals.transmit(signal: self.view_activated)
+			var mutableSelf = self
+			mutableSelf.viewActivated()
 			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
 	}
@@ -54,15 +55,15 @@ public extension FZPresenterProtocol {
 		closet?.routing(key)?.present(viewController: viewName, on: viewController)
 	}
 	
-	mutating func signalTransmission<T>(name: String, data: T?) {
-		switch name {
-		case view_activated:	viewActivated()
-		default:				signalReceived(name: name, data: data)
-		}
-	}
+//	mutating func signalTransmission<T>(name: String, data: T?) {
+//		switch name {
+//		case view_activated:	viewActivated()
+//		default:				signalReceived(name: name, data: data)
+//		}
+//	}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol, FZViperSignalTransmissionProtocol, FZSignalCallbackDelegateProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol {
 	var closet: FZPresenterCloset? { get }
 	mutating func viewActivated()
 	mutating func populateView<T>(with data: T?)

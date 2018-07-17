@@ -8,7 +8,7 @@
 
 // todo deallocate in a better way, with weak vars etc
 public protocol FZDeallocatableProtocol {
-	func deallocate ()
+	mutating func deallocate ()
 }
 
 public protocol FZDescribableProtocol {
