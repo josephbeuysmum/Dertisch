@@ -18,18 +18,18 @@ extension FZSignalsService: FZSignalsServiceProtocol {
 		return scanFor(callback: callback, key: key, scanner: scanner, scanContinuously: true)
 	}
 	
-	public func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
-		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: true)
-	}
+//	public func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
+//		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: true)
+//	}
 	
 	@discardableResult
 	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
 		return scanFor(callback: callback, key: key, scanner: scanner, scanContinuously: false)
 	}
 	
-	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
-		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: false)
-	}
+//	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
+//		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: false)
+//	}
 	
 	public func stopScanningFor(signal key: String, scanner: FZSignalReceivableProtocol) {
 		annulSignal(by: key)

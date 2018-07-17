@@ -27,7 +27,7 @@ public protocol FZBespokeEntitiesProtocol: FZDeallocatableProtocol {
 	subscript(type: FZModelClassProtocol.Type) -> FZModelClassProtocol? { get }
 }
 
-public protocol FZInteractorClosetProtocol: FZClosetProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZSingleInstanceProtocol {
+public protocol FZInteractorClosetProtocol: FZClosetProtocol, FZBespokeEntitiesEntityProtocol, FZSignalsEntityProtocol, FZSignalReceivableProtocol, FZSingleInstanceProtocol {
 	func imageProxy(_ key: FZKey?) -> FZImageProxy?
 	func presenter(_ key: FZKey?) -> FZPresenterProtocol?
 	func set(imageProxy: FZImageProxy)

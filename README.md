@@ -167,7 +167,7 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 	extension SomePresenter: FZPresenterProtocol {
 		var closet: FZPresenterCloset? { return closet_ }
 		mutating func deallocate() {}
-		mutating func viewActivated() {}
+		func viewActivated() {}
 	}
 
 	struct SomePresenter {
@@ -201,10 +201,12 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	make access to `closet_` properties via subscripts rather than getters;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
+-	make Interactors optional [at registration] so some screens can be entirely Presenter controlled;
 -	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
 -	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
 -	make utils functions native class extensions instead;
 -	new `MetricsProxy` for serving device-specific numeric constants;
+-	new `LanguageProxy` for multi-lingual capabilities;
 -	new `FirebaseService`;
 -	create example boilerplate app;
 -	replace `deallocate()` functions with weak vars etc.;

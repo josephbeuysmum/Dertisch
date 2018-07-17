@@ -45,6 +45,10 @@ extension FZInteractorCloset: FZInteractorClosetProtocol {
 	public func set(signalsService: FZSignalsService) {
 		guard signals_service == nil else { return }
 		signals_service = signalsService
+		signals_service!.scanFor(signal: FZSignalConsts.presenterCheckIn, scanner: self) { _, data in
+			guard let presenter = data as? FZPresenterProtocol else { return }
+			self.presenter_ = presenter
+		}
 	}
 }
 

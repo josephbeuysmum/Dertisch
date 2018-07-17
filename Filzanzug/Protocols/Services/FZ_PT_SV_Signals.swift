@@ -14,9 +14,9 @@ protocol FZSignalsServiceProtocol {
 	func annul(signal key: String, scanner: AnyObject)
 	func has(signal key: String) -> Bool
 	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool
-	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
+//	func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
 	func scanOnceFor( signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool
-	func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
+//	func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool
 	func stopScanningFor(signal key: String, scanner: FZSignalReceivableProtocol)
 	func transmit(signal key: String, with value: Any?)
 }

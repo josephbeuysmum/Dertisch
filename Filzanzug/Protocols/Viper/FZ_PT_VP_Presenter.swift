@@ -41,31 +41,29 @@ public extension FZPresenterProtocol {
 				guard let viewName = data as? String else { return }
 				self.present(viewName)
 			}
-			var mutableSelf = self
-			mutableSelf.viewActivated()
+			self.viewActivated()
 			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
 		}
 	}
 	
-	func present (_ viewName: String) {
+	func checkIn() {
+		guard let signals = closet?.signals(key_) else { return }
+		signals.transmit(signal: FZSignalConsts.presenterCheckIn, with: self)
+	}
+	
+	func present(_ viewName: String) {
 		guard
 			let key = key_,
 			let viewController = closet?.viewController(key)
 			else { return }
 		closet?.routing(key)?.present(viewController: viewName, on: viewController)
 	}
-	
-//	mutating func signalTransmission<T>(name: String, data: T?) {
-//		switch name {
-//		case view_activated:	viewActivated()
-//		default:				signalReceived(name: name, data: data)
-//		}
-//	}
 }
 
 public protocol FZPresenterProtocol: FZViperClassProtocol {
 	var closet: FZPresenterCloset? { get }
-	mutating func viewActivated()
+	func checkIn()
 	mutating func populateView<T>(with data: T?)
 	func present(_ viewName: String)
+	func viewActivated()
 }
