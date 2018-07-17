@@ -116,7 +116,7 @@ The above code example features the two model classes `SomeProxy` and `SomeServi
 
 	class SomeProxy {
 		fileprivate var key_: FZKey!
-		fileprivate varcloset_: FZModelClassCloset!,
+		fileprivate var closet_: FZModelClassCloset!,
 
 		required init() {
 			key_ = FZKey(self)
