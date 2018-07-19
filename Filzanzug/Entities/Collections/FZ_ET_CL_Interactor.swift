@@ -26,6 +26,7 @@ extension FZInteractorCloset: FZInteractorClosetProtocol {
 		bespoke_entities?.deallocate()
 		image_proxy?.deallocate()
 		presenter_?.deallocate()
+		signals_service?.stopScanningFor(signal: FZSignalConsts.presenterUpdated, scanner: self)
 		bespoke_entities = nil
 		image_proxy = nil
 		presenter_ = nil

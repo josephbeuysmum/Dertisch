@@ -189,6 +189,8 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
 	fileprivate func set(presenter: FZPresenterProtocol) {
+		// todo herehere see note on checkIn in FZPresenterProtocol
+//		presenter_?.checkIn()
 		presenter_?.deallocate()
 		guard
 			let signals = closet_.signals(key_),

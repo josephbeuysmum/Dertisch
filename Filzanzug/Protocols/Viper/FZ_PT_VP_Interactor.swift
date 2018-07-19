@@ -38,8 +38,8 @@ public extension FZInteractorProtocol {
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
-			var mutableSelf = self
-			mutableSelf.presenterActivated()
+			var mutatingSelf = self
+			mutatingSelf.presenterActivated()
 		}
 		// todo why is this not simply in the closure immediately above?
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in

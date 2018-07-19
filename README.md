@@ -71,7 +71,7 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 			_ application: UIApplication,
 			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 			window = UIWindow(frame: UIScreen.main.bounds)
-			FZRoutingService(with: FZKey()).start(rootViewController: Consts.introViewController, window: window!)
+			FZRoutingService().start(rootViewController: "SomeViewController", window: window!)
 			return true
 		}
 	}
@@ -166,8 +166,6 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 
 	extension SomePresenter: FZPresenterProtocol {
 		var closet: FZPresenterCloset? { return closet_ }
-		mutating func deallocate() {}
-		mutating func viewActivated() {}
 	}
 
 	struct SomePresenter {
@@ -180,9 +178,19 @@ And a boilerplate `Filzanzug` Presenter looks like this:
 		}
 	}
 
-The `closet_` property in a model class, interactor, or presenter needs the `teeth` property^^^^ from its accompanying `key_` property to access the properties stored within it, and because `key_` is a private property, only the owning struct - `SomeInteractor` in the above example, say - can access it.
+The `closet_` property in a model class, interactor, or presenter needs its accompanying `key_` property to access the properties stored within it, and because both are fileprivate properties, only the owning object - the `SomePresenter` struct in the above example, say - can access it.
 
-^^^^ *a `NSUUID().uuidString` generated at runtime.*
+There are four additional functions that can be implemented if required.
+
+	extension SomePresenter: FZPresenterProtocol {
+		...
+		func viewLoaded() {}
+		mutating func populateView<T>(with data: T?) {}
+		func viewAppeared() {}
+		mutating func deallocate() {}
+	}
+
+Hopefully these functions are self-explanatory, and they are called in the order they are listed above.
 
 A boilerplate `Filzanzug` ViewController looks like this:
 
