@@ -15,15 +15,21 @@ public class FZColors {
 	}
 	
 	// converts a hex string to a UIColor
-	public static func getColorBy (hexString: String) -> UIColor? {
-		guard hexString.count == 8 else { return nil }
+	public static func getColorBy (hex: String) -> UIColor? {
 		let permittedChars = "0123456789ABCDEF"
-		for char in hexString.uppercased() {
+		for char in hex.uppercased() {
 			if permittedChars.index(of: char) == nil {
 				return nil
 			}
 		}
-		return UIColor(hexString: "#\(hexString)")
+		let adjustedHex: String?
+		switch hex.count {
+		case 6:		adjustedHex = "\(hex)FF"
+		case 8:		adjustedHex = "\(hex)"
+		default:	adjustedHex = nil
+		}
+		guard adjustedHex != nil else { return nil }
+		return UIColor(hex: "#\(adjustedHex!)")
 	}
 	
 	// gives the all passed views a transparent background

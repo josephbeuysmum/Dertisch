@@ -82,7 +82,7 @@ public class FZString {
 		between startIndex: Int,
 		and endIndex: Int ) -> Range < String.Index >? {
 		let range = _getRangeFrom( string: string, between: startIndex, and: endIndex )
-		return range != nil ? string.getRange( From: range! ) : nil
+		return range != nil ? string.getRange( from: range! ) : nil
 	}
 	
 	// returns the indices of the given one-char String, or nil if none can be found
