@@ -62,7 +62,6 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		_ viewControllerId: String,
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
-		lo(viewControllerId, popover_bundle == nil)
 		guard
 			popover_bundle == nil,
 			let currentViewController = view_bundle?.viewController,
@@ -84,7 +83,6 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		_ viewControllerId: String,
 		via presentation: Presentations? = nil,
 		from storyboard: String? = nil) {
-		lo(viewControllerId, view_bundle)
 		let presentationType = presentation ?? Presentations.show
 		guard
 			let currentViewController = view_bundle?.viewController,

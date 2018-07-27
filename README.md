@@ -28,7 +28,7 @@ And on the View side:
 Using Filzanzug
 ---------------
 
-Filzanzug comes with seven in-built model classes:
+Filzanzug allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
 
 	FZBundledJsonService
 	// provides simplified access to json config data bundled with the app
