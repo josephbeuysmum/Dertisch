@@ -254,5 +254,6 @@ public class FZRoutingService {
 		closet_.set(signalsService: FZSignalsService())
 	}
 	
+	// todo FZRoutingService lives for the lifetime of an app, is this really needed?
 	deinit {}
 }
