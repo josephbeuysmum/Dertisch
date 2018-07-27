@@ -146,13 +146,13 @@ A boilerplate `Filzanzug` Interactor looks like this:
 	import Filzanzug
 
 	extension SomeInteractor: FZInteractorProtocol {
-		mutating func deallocate() {}
 		mutating func presenterActivated() {}
+		mutating func deallocate() {}
 	}
 
 	struct SomeInteractor {
 		fileprivate var key_: FZKey!
-		fileprivate var closet_: FZPresenterCloset!
+		fileprivate var closet_: FZInteractorCloset!
 
 		init(){
 			key_ = FZKey(self)
@@ -190,7 +190,7 @@ There are four additional functions that can be implemented if required.
 		mutating func deallocate() {}
 	}
 
-Hopefully these functions are self-explanatory, and they are called in the order they are listed above.
+These functions are hopefully self-explanatory, and they are called in the order they are listed above.
 
 A boilerplate `Filzanzug` ViewController looks like this:
 
