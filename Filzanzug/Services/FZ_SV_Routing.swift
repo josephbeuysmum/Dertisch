@@ -6,8 +6,11 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-//import SwinjectStoryboard
 import UIKit
+
+public enum Presentations {
+	case curl, dissolve, flip, rise, show
+}
 
 extension FZRoutingService: FZRoutingServiceProtocol {
 	public var closet: FZModelClassCloset { return closet_ }
@@ -16,61 +19,99 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	public func activate() {}
 	
-	public func add ( rootViewController id: String, from storyboard: String? = nil ) {
-		guard let viewController = _create( viewController: id, from: storyboard ) else { return }
-		window_.rootViewController = viewController
+	public func add(rootViewController id: String, from storyboard: String? = nil) {
+		guard let viperBundle = create_bundle(viewController: id, from: storyboard) else { return }
+		window_.rootViewController = viperBundle.viewController
+		view_bundle = viperBundle
 	}
 	
-	public func createNibFrom ( name nibName: String, for owner: FZViewController ) -> UIView? {
-		guard let viewArray = Bundle.main.loadNibNamed( nibName, owner: owner, options: nil ) else { return nil }
-		return viewArray[ 0 ] as? UIView
+	public func createNibFrom(name nibName: String, for owner: FZViewController) -> UIView? {
+		guard let viewArray = Bundle.main.loadNibNamed(nibName, owner: owner, options: nil) else { return nil }
+		return viewArray[0] as? UIView
 	}
 	
-	public func create ( viewController id: String, from storyboard: String? = nil ) -> FZViewController? {
-		return _create( viewController: id, from: storyboard )
+	public func create(_ viewControllerId: String, from storyboard: String? = nil) -> FZViewController? {
+		return create_bundle(viewController: viewControllerId, from: storyboard)?.viewController
 	}
 	
-	public func createAlertWith (
-		title: String,
-		message: String,
-		buttonLabel: String,
-		handler: @escaping ( ( UIAlertAction ) -> Void ),
-		plusExtraButtonLabel extraButtonLabel: String? = nil ) -> UIAlertController {
-		let alert = UIAlertController(
-			title: title,
-			message: message,
-			preferredStyle: UIAlertControllerStyle.alert )
-		
-		// copy
-		alert.addAction( UIAlertAction(
-			title: buttonLabel,
-			style: UIAlertActionStyle.default,
-			handler: handler ) )
-		
-		if extraButtonLabel != nil {
-			alert.addAction( UIAlertAction(
-				title: extraButtonLabel!,
-				style: UIAlertActionStyle.default,
-				handler: nil ) )
+//	public func createAlertWith(
+//		title: String,
+//		message: String,
+//		buttonLabel: String,
+//		handler: @escaping((UIAlertAction) -> Void),
+//		plusExtraButtonLabel extraButtonLabel: String? = nil) -> UIAlertController {
+//		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+//		// copy
+//		alert.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default, handler: handler))
+//		if extraButtonLabel != nil {
+//			alert.addAction(UIAlertAction(title: extraButtonLabel!, style: UIAlertActionStyle.default, handler: nil))
+//		}
+//		return alert
+//	}
+	
+	public func dismissPopover() {
+		guard popover_bundle != nil else { return }
+		popover_bundle!.viewController?.dismiss(animated: true) {
+			self.popover_bundle!.deallocate()
+			self.popover_bundle = nil
+			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverAdded)
 		}
-		
-		return alert
 	}
 	
-	public func present ( viewController id: String, on currentViewController: FZViewController ) {
-		_present( viewController: id, on: currentViewController )
+	public func popover(
+		_ viewControllerId: String,
+		inside rect: CGRect? = nil,
+		from storyboard: String? = nil) {
+		lo(viewControllerId, popover_bundle == nil)
+		guard
+			popover_bundle == nil,
+			let currentViewController = view_bundle?.viewController,
+			let viperBundle = create_bundle(viewController: viewControllerId, from: storyboard),
+			let popover = viperBundle.viewController
+			else { return }
+		popover.modalPresentationStyle = .popover
+		currentViewController.present(popover, animated: true) {
+			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverAdded)
+		}
+		popover.popoverPresentationController?.sourceView = currentViewController.view
+		if let safeRect = rect {
+			popover.popoverPresentationController?.sourceRect = safeRect
+		}
+		popover_bundle = viperBundle
 	}
 	
-	public func present ( viewController id: String, on currentViewController: FZViewController, from storyboard: String ) {
-		_present( viewController: id, on: currentViewController, from: storyboard )
+	public func present(
+		_ viewControllerId: String,
+		via presentation: Presentations? = nil,
+		from storyboard: String? = nil) {
+		lo(viewControllerId, view_bundle)
+		let presentationType = presentation ?? Presentations.show
+		guard
+			let currentViewController = view_bundle?.viewController,
+			let viperBundle = create_bundle(viewController: viewControllerId, from: storyboard),
+			let viewController = viperBundle.viewController
+			else { return }
+		switch presentationType {
+		case .curl:			viewController.modalTransitionStyle = .partialCurl
+		case .dissolve:		viewController.modalTransitionStyle = .crossDissolve
+		case .flip:			viewController.modalTransitionStyle = .flipHorizontal
+		case .rise:			viewController.modalTransitionStyle = .coverVertical
+		default:			()
+		}
+		currentViewController.present(viewController, animated: true) {
+			currentViewController.removeFromParentViewController()
+			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.viewRemoved)
+		}
+		view_bundle?.deallocate()
+		view_bundle = viperBundle
 	}
 	
-	public func register (
+	public func register(
 		_ modelClassType: FZModelClassProtocol.Type,
 		with key: String,
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
 		guard
-			canRegister(with: key),
+			can_register(with: key),
 			let signals = closet_.signals(key_)
 			else { return }
 		let modelClass = modelClassType.init()
@@ -89,7 +130,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 						modelClass.closet.bespoke.add(dependencyClass)
 					}
 				} else {
-					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
+					fatalError("Attempting to inject a model class that has not been registered itself yet")
 				}
 			}
 		}
@@ -99,22 +140,22 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	}
 	
 	// todo some presenters and view controllers do not need an interactor (intro page in Cirk for example) and this registation should handle that case too
-	public func register (
+	public func register(
 		_ viewControllerId: String,
 		as viewControllerType: FZViewControllerProtocol.Type,
 		with interactorType: FZInteractorProtocol.Type,
 		and presenterType: FZPresenterProtocol.Type,
 		lockedBy key: String,
-		andInjecting interactorDependencyTypes: [ FZModelClassProtocol.Type ]? = nil ) {
+		andInjecting interactorDependencyTypes: [FZModelClassProtocol.Type]? = nil) {
 		guard
-			vip_relationships[ viewControllerId ] == nil,
-			canRegister( with: key )
+			vip_relationships[viewControllerId] == nil,
+			can_register(with: key)
 			else { return }
-		vip_relationships[ viewControllerId ] = FZVipRelationship(
+		vip_relationships[viewControllerId] = FZVipRelationship(
 			viewControllerType: viewControllerType,
 			interactorType: interactorType,
 			presenterType: presenterType,
-			interactorDependencyTypes: interactorDependencyTypes )
+			interactorDependencyTypes: interactorDependencyTypes)
 	}
 	
 	public func start(rootViewController: String, window: UIWindow, storyboard: String? = nil) {
@@ -130,44 +171,34 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	
 	
-	fileprivate func canRegister ( with key: String ) -> Bool {
+	fileprivate func can_register(with key: String) -> Bool {
 		return is_activated == false && key == key_.teeth
 	}
 	
-	fileprivate func _create(viewController id: String, from storyboardName: String? = nil) -> FZViewController? {
-		let name = storyboardName ?? "Main"
+	fileprivate func create_bundle(viewController id: String, from storyboard: String? = nil) -> FZViperBundle? {
 		guard
-			let vipRelationship = vip_relationships[ id ],
-			let viewController = UIStoryboard(name: name, bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController
+			let vipRelationship = vip_relationships[id],
+			var viewController = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController,
+			initialise_(viewController: &viewController)
 			else { return nil }
-		set(viewController)
-		set(presenter: vipRelationship.presenterType.init())
-		set(interactor: vipRelationship.interactorType.init(), with: vipRelationship.interactorDependencyTypes)
-		return viewController
-	}
-	
-	fileprivate func _present (
-		viewController id: String,
-		on currentViewController: FZViewController,
-		from storyboard: String? = nil ) {
-		guard let viewController = _create(viewController: id, from: storyboard) else { return }
-		currentViewController.present(
-			viewController,
-			animated: true,
-			completion: {
-				currentViewController.removeFromParentViewController()
-				self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.viewRemoved)
-		} )
-	}
-	
-	fileprivate func set(interactor: FZInteractorProtocol, with dependencyTypes: [FZModelClassProtocol.Type]?) {
-		interactor_?.deallocate()
+		var presenter = vipRelationship.presenterType.init()
+		guard initialise_(presenter: &presenter, with: viewController) else { return nil }
+		var interactor = vipRelationship.interactorType.init()
 		guard
-			let signals = closet_.signals(key_),
-			let presenter = presenter_
-			else {
-				return }
-		interactor_ = interactor
+			initialise_(interactor: &interactor, with: presenter, and: vipRelationship.interactorDependencyTypes)
+			else { return nil }
+		return FZViperBundle(viewController: viewController, interactor: interactor, presenter: presenter)
+	}
+	
+	fileprivate func get_(_ storyboard: String?) -> String {
+		return storyboard ?? "Main"
+	}
+	
+	fileprivate func initialise_(
+		interactor: inout FZInteractorProtocol,
+		with presenter: FZPresenterProtocol,
+		and dependencyTypes: [FZModelClassProtocol.Type]?) -> Bool {
+		guard let signals = closet_.signals(key_) else { return false }
 		if dependencyTypes != nil {
 			_ = dependencyTypes!.map {
 				dependencyType in
@@ -178,36 +209,30 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 						interactor.closet?.bespoke.add(dependencyClass)
 					}
 				} else {
-					fatalError( "Attempting to inject a model class that has not been registered itself yet" )
+					fatalError("Attempting to inject a model class that has not been registered itself yet")
 				}
 			}
 		}
-		interactor_!.closet?.set(signalsService: signals)
-		interactor_!.closet?.set(presenter: presenter)
-		interactor_!.activate()
+		interactor.closet?.set(signalsService: signals)
+		interactor.closet?.set(presenter: presenter)
+		interactor.activate()
+		return true
 	}
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
-	fileprivate func set(presenter: FZPresenterProtocol) {
-		// todo herehere see note on checkIn in FZPresenterProtocol
-//		presenter_?.checkIn()
-		presenter_?.deallocate()
-		guard
-			let signals = closet_.signals(key_),
-			let viewController = view_controller
-			else { return }
-		presenter_ = presenter
-		presenter_!.closet?.set(signalsService: signals)
-		presenter_!.closet?.set(routing: self)
-		presenter_!.closet?.set(viewController: viewController)
-		presenter_!.activate()
+	fileprivate func initialise_(presenter: inout FZPresenterProtocol, with viewController: FZViewController) -> Bool {
+		guard let signals = closet_.signals(key_) else { return false }
+		presenter.closet?.set(signalsService: signals)
+		presenter.closet?.set(routing: self)
+		presenter.closet?.set(viewController: viewController)
+		presenter.activate()
+		return true
 	}
 	
-	fileprivate func set(_ viewController: FZViewController) {
-		guard let signals = closet_.signals(key_) else { return }
-		view_controller?.deallocate()
-		view_controller = viewController
-		view_controller!.set(signalsService: signals)
+	fileprivate func initialise_(viewController: inout FZViewController) -> Bool {
+		guard let signals = closet_.signals(key_) else { return false }
+		viewController.set(signalsService: signals)
+		return true
 	}
 }
 
@@ -219,9 +244,8 @@ public class FZRoutingService {
 	key_: FZKey!,
 	closet_: FZModelClassCloset!,
 	window_: UIWindow!,
-	view_controller: FZViewController?,
-	interactor_: FZInteractorProtocol?,
-	presenter_: FZPresenterProtocol?
+	view_bundle: FZViperBundle?,
+	popover_bundle: FZViperBundle?
 
 	required public init() {
 		is_activated = false

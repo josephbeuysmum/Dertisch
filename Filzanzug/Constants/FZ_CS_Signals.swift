@@ -16,6 +16,8 @@ public struct FZSignalConsts {
 	// the [only] specific signal names used by FZ classes
 	public static let
 	navigateTo = "\(name_space)NavigateTo",
+	popoverAdded = "\(name_space)Popover\(FZCommonPhrasesConsts.Added)",
+	popoverRemoved = "\(name_space)Popover\(FZCommonPhrasesConsts.Removed)",
 	presenterActivated = "\(name_space)\(presenter_)\(FZCommonPhrasesConsts.Activated)",
 	valuesRemoved = "\(name_space)\(value_)s\(FZCommonPhrasesConsts.Removed)",
 	valueSet = "\(name_space)\(value_)\(FZCommonPhrasesConsts.Set)",

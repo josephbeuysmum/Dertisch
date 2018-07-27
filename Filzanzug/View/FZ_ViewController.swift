@@ -27,10 +27,17 @@ open class FZViewController: UIViewController {
 		signals_service?.transmit(signal: FZSignalConsts.viewWarnedAboutMemory, with: self)
 	}
 	
+	// todo? some sort of key'ed way of ensuring this can only be called by FZRoutingService
+//	override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {}
+	
 	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		signals_service?.transmit(signal: FZSignalConsts.viewAppeared, with: self)
 	}
+	
+//	override open func viewDidDisappear(_ animated: Bool) {
+//		super.viewDidDisappear(animated)
+//	}
 	
 	override open func viewDidLoad() {
 		super.viewDidLoad()

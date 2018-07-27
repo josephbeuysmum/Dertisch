@@ -13,6 +13,7 @@ public struct FZCommonPhrasesConsts {
 	Controller = "Controller",
 	Deleted = "Deleted",
 	Loaded = "Loaded",
+	Popover = "Popover",
 	Removed = "Removed",
 	Retrieved = "Retrieved",
 	Set = "Set",
