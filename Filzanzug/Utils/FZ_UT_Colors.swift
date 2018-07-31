@@ -17,6 +17,7 @@ public class FZColors {
 	// converts a hex string to a UIColor
 	public static func getColorBy (hex: String) -> UIColor? {
 		let permittedChars = "0123456789ABCDEF"
+		// todo this could be better
 		for char in hex.uppercased() {
 			if permittedChars.index(of: char) == nil {
 				return nil

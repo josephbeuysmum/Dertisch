@@ -10,6 +10,7 @@ public struct FZCommonPhrasesConsts {
 	public static let
 	Activated = "Activated",
 	Added = "Added",
+	Cell = "Cell",
 	Controller = "Controller",
 	Deleted = "Deleted",
 	Loaded = "Loaded",

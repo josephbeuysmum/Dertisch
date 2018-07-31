@@ -15,6 +15,10 @@ public protocol FZDescribableProtocol {
 	var description: String { get }
 }
 
+public protocol FZPopulatableViewProtocol {
+	mutating func populate<T>(with data: T?)
+}
+
 public protocol FZSignalReceivableProtocol {}
 
 public protocol FZSingleInstanceProtocol {

@@ -44,7 +44,7 @@ public extension FZPresenterProtocol {
 	}
 	
 	
-	// todo herehere we may well have persistent viper objects in future versions of FZ, in which case an internal non-protocol (ie: extension only) function is an excellent way (the best way I currently know of) for FZ classes (ie: Routing) to talk to other FZ classes (ie: EntityCollections) without allowing apps utilising FZ (ie: Cirk) to access said function
+	// todo we may well have persistent viper objects in future versions of FZ, in which case an internal non-protocol (ie: extension only) function is an excellent way (the best way I currently know of) for FZ classes (ie: Routing) to talk to other FZ classes (ie: EntityCollections) without allowing apps utilising FZ (ie: Cirk) to access said function
 //	internal func checkIn() {
 //		closet?.signals(key_)?.transmit(signal: FZSignalConsts.presenterUpdated, with: self)
 //	}
@@ -66,14 +66,14 @@ public extension FZPresenterProtocol {
 	}
 	
 	mutating func deallocate() {}
-	mutating func populateView<T>(with data: T?) {}
+	mutating func populate<T>(with data: T?) {}
 	func viewAppeared() {}
 	func viewLoaded() {}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol {
 	var closet: FZPresenterCloset? { get }
-	mutating func populateView<T>(with data: T?)
+//	mutating func populate<T>(with data: T?)
 //	func present(_ viewName: String)
 	func viewLoaded()
 	func viewAppeared()

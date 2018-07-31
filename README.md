@@ -6,9 +6,71 @@ A lightweight VIPER framework for Swift apps
 
 Filzanzug is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
 
-Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
-
 Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
+
+What is a VIPER framework?
+--------------------------
+
+VIPER is an acronym, combining the following five words:
+
+-   View
+-   Interactor
+-   Presenter
+-   Entities
+-   Routing
+
+VIPER frameworks take separate of concerns to a greater level of granularity. If you'll allow me to SWITCH to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
+
+-   Staff
+-   Waiters
+-   Ingredients
+-   Tables
+-   Customers
+-   Head chefs
+
+I will now outline these six elements of `Filzanzug` in the order in which it uses them:
+
+Ingredients
+-----------
+
+The raw materials of any dish. Ingredients are `services`, which query APIs etc. for data.
+
+Staff
+-----
+
+The kitchen staff who take the ingredients and combine them into dishes. Staff are `proxies`, which get and set data internally.
+
+Head Chefs
+----------
+
+The people who control of the staff and the menu. Head Chefs are `interactors`, which have access to specific `proxies` in order to create particular combinations of data.
+
+Waiters
+-------
+
+The people who take dishes from kitchen to table. Waiters are `presenters`, which are given data by `interactors` in order to populate and control `views`.
+
+Tables
+------
+
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are `views`, the screens the user sees.
+
+Customers
+---------
+
+The people ordering the food. Customers are `users`, the people using the actual app.
+
+How this SWITCH/VIPER works
+---------------------------
+
+-   A customer makes an order (a `user` interacts with their device);
+-   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
+-   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need asynchronously from their `services`);
+-   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter` with data);
+-   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
+-   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
+
+Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
 
 On the Model side:
 
@@ -185,7 +247,7 @@ There are four additional functions that can be implemented if required.
 	extension SomePresenter: FZPresenterProtocol {
 		...
 		func viewLoaded() {}
-		mutating func populateView<T>(with data: T?) {}
+		mutating func populate<T>(with data: T?) {}
 		func viewAppeared() {}
 		mutating func deallocate() {}
 	}

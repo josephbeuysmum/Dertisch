@@ -12,7 +12,7 @@ internal struct FZViperBundle: FZDeallocatableProtocol {
 	presenter: FZPresenterProtocol?
 	
 	mutating func deallocate() {
-		// todo herehere see note on checkIn in FZPresenterProtocol
+		// todo see note on checkIn in FZPresenterProtocol
 //		presenter_?.checkIn()
 		interactor?.deallocate()
 		presenter?.deallocate()
