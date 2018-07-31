@@ -6,7 +6,7 @@ A lightweight VIPER framework for Swift apps
 
 Filzanzug is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
 
-Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
+Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
 
 What is a VIPER framework?
 --------------------------
@@ -43,7 +43,7 @@ The kitchen staff who take the ingredients and combine them into dishes. Staff a
 Head Chefs
 ----------
 
-The people who control of the staff and the menu. Head Chefs are `interactors`, which have access to specific `proxies` in order to create particular combinations of data.
+The people who control the staff and the menu. Head Chefs are `interactors`, which have access to specific `proxies` in order to create particular combinations of data.
 
 Waiters
 -------
@@ -60,8 +60,8 @@ Customers
 
 The people ordering the food. Customers are `users`, the people using the actual app.
 
-How this SWITCH/VIPER works
----------------------------
+How SWITCH/VIPER works in Filzanzug
+-----------------------------------
 
 -   A customer makes an order (a `user` interacts with their device);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
@@ -70,7 +70,7 @@ How this SWITCH/VIPER works
 -   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
-Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps.
+Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
 
 On the Model side:
 
