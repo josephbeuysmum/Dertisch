@@ -20,8 +20,6 @@ public extension FZInteractorProtocol {
 	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-
-//	private var presenter_activated: String { return "PresenterActivated" }
 	
 	
 	
@@ -32,13 +30,13 @@ public extension FZInteractorProtocol {
 			let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
 			let signals = closet?.signals(key)
 			else { return }
-//		_ = signals.scanOnceFor(signal: FZSignalConsts.presenterActivated, scanner: self, delegate: self)
 		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
 			guard
+				let safeSelf = self as FZInteractorProtocol?,
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
-			var mutatingSelf = self
+			var mutatingSelf = safeSelf
 			mutatingSelf.presenterActivated()
 		}
 		// todo why is this not simply in the closure immediately above?
@@ -47,22 +45,6 @@ public extension FZInteractorProtocol {
 			timer.invalidate()
 		}
 	}
-	
-//	mutating func signalTransmission<T>(name: String, data: T?) {
-//		switch name {
-//		case FZSignalConsts.presenterActivated:
-//			guard
-//				let key = key_,
-//				let safeCloset = closet,
-//				let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
-//				let presenter = data as? FZPresenterProtocol,
-//				presenter.instanceDescriptor == presenterClassName
-//				else { return }
-//			presenterActivated()
-//		default:
-//			signalReceived(name: name, data: data)
-//		}
-//	}
 }
 
 public protocol FZInteractorProtocol: FZViperClassProtocol {

@@ -29,17 +29,19 @@ public extension FZPresenterProtocol {
 			let signals = closet?.signals(key)
 			else { return }
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
-			guard self.check(data) else { return }
-//			signals.scanOnceFor(signal: FZSignalConsts.navigateTo, scanner: self) { _, data in
-//				guard let viewName = data as? String else { return }
-//				self.present(viewName)
-//			}
-			self.viewLoaded()
-			signals.transmit(signal: FZSignalConsts.presenterActivated, with: self)
+			guard
+				let safeSelf = self as FZPresenterProtocol?,
+				safeSelf.check(data)
+				else { return }
+			safeSelf.viewLoaded()
+			signals.transmit(signal: FZSignalConsts.presenterActivated, with: safeSelf)
 		}
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewAppeared, scanner: self) { _, data in
-			guard self.check(data) else { return }
-			self.viewAppeared()
+			guard
+				let safeSelf = self as FZPresenterProtocol?,
+				safeSelf.check(data)
+				else { return }
+			safeSelf.viewAppeared()
 		}
 	}
 	
@@ -67,11 +69,12 @@ public extension FZPresenterProtocol {
 	
 	mutating func deallocate() {}
 	mutating func populate<T>(with data: T?) {}
+	mutating func update<T>(with data: T?) {}
 	func viewAppeared() {}
 	func viewLoaded() {}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol, FZUpdatableProtocol {
 	var closet: FZPresenterCloset? { get }
 //	mutating func populate<T>(with data: T?)
 //	func present(_ viewName: String)

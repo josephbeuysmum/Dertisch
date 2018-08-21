@@ -286,6 +286,8 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	new `FirebaseService`;
 -	create example boilerplate app;
 -	replace `deallocate()` functions with weak vars etc.;
+-	force `FZCoreDataProxy` to take `dataModelName` at start up;
+-	remove `...Protocol` from protocol names?
 -	reintroduce timeout stopwatch to `FZUrlSessionService`;
 -	complete list of MIME types in `FZUrlSessionService`;
 

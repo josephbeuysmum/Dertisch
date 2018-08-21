@@ -25,6 +25,10 @@ public protocol FZSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)
 }
 
+public protocol FZUpdatableProtocol {
+	mutating func update<T>(with data: T?)
+}
+
 // todo the places where protocols and their extensions live is becoming increasingly messy, refactor into some sensible system
 public extension FZSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T) {

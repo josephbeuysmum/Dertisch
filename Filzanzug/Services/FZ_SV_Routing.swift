@@ -15,14 +15,23 @@ public enum Presentations {
 extension FZRoutingService: FZRoutingServiceProtocol {
 	public var closet: FZModelClassCloset { return closet_ }
 
-	
-	
 	public func activate() {}
 	
 	public func add(rootViewController id: String, from storyboard: String? = nil) {
 		guard let viperBundle = create_bundle(viewController: id, from: storyboard) else { return }
 		window_.rootViewController = viperBundle.viewController
 		view_bundle = viperBundle
+	}
+	
+	public func alert(actions: [UIAlertAction], title: String? = nil, message: String? = nil, style: UIAlertControllerStyle? = .alert) {
+		guard let viewController = view_bundle?.viewController else { return }
+		let
+		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
+		countActions = actions.count
+		for i in 0..<countActions {
+			alert.addAction(actions[i])
+		}
+		viewController.present(alert, animated: true)
 	}
 	
 	public func createNibFrom(name nibName: String, for owner: FZViewController) -> UIView? {
@@ -81,6 +90,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	public func present(
 		_ viewControllerId: String,
+		animated: Bool? = true,
 		via presentation: Presentations? = nil,
 		from storyboard: String? = nil) {
 		let presentationType = presentation ?? Presentations.show
@@ -96,7 +106,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		case .rise:			viewController.modalTransitionStyle = .coverVertical
 		default:			()
 		}
-		currentViewController.present(viewController, animated: true) {
+		currentViewController.present(viewController, animated: animated!) {
 			currentViewController.removeFromParentViewController()
 			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.viewRemoved)
 		}

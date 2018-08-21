@@ -12,8 +12,9 @@ internal struct FZViperBundle: FZDeallocatableProtocol {
 	presenter: FZPresenterProtocol?
 	
 	mutating func deallocate() {
-		// todo see note on checkIn in FZPresenterProtocol
+		viewController?.removeFromParentViewController()
 //		presenter_?.checkIn()
+		// todo see note on checkIn in FZPresenterProtocol
 		interactor?.deallocate()
 		presenter?.deallocate()
 		viewController?.deallocate()
