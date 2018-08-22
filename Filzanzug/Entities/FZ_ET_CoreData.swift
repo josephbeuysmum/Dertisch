@@ -22,6 +22,7 @@ public protocol FZCDAble {}
 
 extension Bool: FZCDAble {}
 extension Double: FZCDAble {}
+extension Float: FZCDAble {}
 extension Int: FZCDAble {}
 extension String: FZCDAble {}
 

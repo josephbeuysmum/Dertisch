@@ -290,6 +290,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	remove `...Protocol` from protocol names?
 -	reintroduce timeout stopwatch to `FZUrlSessionService`;
 -	complete list of MIME types in `FZUrlSessionService`;
+-   use cuisine as a metaphor instead of tailoring.
 
 -----------------------
 On the name "Filzanzug"
