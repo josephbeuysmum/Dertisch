@@ -33,12 +33,12 @@ I will now outline these six elements of `Filzanzug` in the order in which it us
 Ingredients
 -----------
 
-The raw materials of any dish. Ingredients are `services`, which query APIs etc. for data.
+The raw materials of any dish. Ingredients are `services`, which query APIs etc. for data (`entities`).
 
 Staff
 -----
 
-The kitchen staff who take the ingredients and combine them into dishes. Staff are `proxies`, which get and set data internally.
+The kitchen staff who take the ingredients and combine them into dishes. Staff are `proxies`, which get and set data (`entities`) internally.
 
 Head Chefs
 ----------
@@ -58,7 +58,7 @@ The literal, physical tables in the restaurant upon which the dishes are served.
 Customers
 ---------
 
-The people ordering the food. Customers are `users`, the people using the actual app.
+The people ordering the food. Customers are users: the actual people using the actual app.
 
 How SWITCH/VIPER works in Filzanzug
 -----------------------------------
