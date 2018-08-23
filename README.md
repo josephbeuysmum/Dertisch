@@ -21,12 +21,12 @@ VIPER is an acronym, combining the following five words:
 
 VIPER frameworks take separate of concerns to a greater level of granularity. If you'll allow me to SWITCH to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
 
--   Staff
--   Waiters
--   Ingredients
--   Tables
--   Customers
--   Head chefs
+-   `S`: Staff
+-   `W`: Waiters
+-   `I`: Ingredients
+-   `T`: Tables
+-   `C`: Customers
+-   `H`: Head chefs
 
 I will now outline these six elements of `Filzanzug` in the order in which it uses them:
 
