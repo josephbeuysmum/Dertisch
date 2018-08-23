@@ -19,6 +19,10 @@ public protocol FZPopulatableViewProtocol {
 	mutating func populate<T>(with data: T?)
 }
 
+public protocol FZPresentableViewProtocol {
+	func present(_ viewControllerId: String, animated: Bool)
+}
+
 public protocol FZSignalReceivableProtocol {}
 
 public protocol FZSingleInstanceProtocol {

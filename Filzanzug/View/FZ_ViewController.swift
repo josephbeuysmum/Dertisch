@@ -9,6 +9,12 @@
 import UIKit
 
 extension FZViewController: FZViewControllerProtocol {
+	public var key: String? {
+		guard key_ == nil else { return nil }
+		key_ = NSUUID().uuidString
+		return key_!
+	}
+	
 	public func deallocate() {}
 	
 	override open func didReceiveMemoryWarning() {
@@ -22,14 +28,15 @@ extension FZViewController: FZViewControllerProtocol {
 		signals_service = signalsService
 	}
 	
+	public func signals(_ key: String?) -> FZSignalsService? {
+		guard key != nil else { return nil }
+		return key == key_ ? signals_service : nil
+	}
+	
 	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		signals_service?.transmit(signal: FZSignalConsts.viewAppeared, with: self)
 	}
-	
-	//	override open func viewDidDisappear(_ animated: Bool) {
-	//		super.viewDidDisappear(animated)
-	//	}
 	
 	override open func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,6 +46,7 @@ extension FZViewController: FZViewControllerProtocol {
 
 open class FZViewController: UIViewController {
 	fileprivate var
+	key_: String?,
 	signals_service: FZSignalsService?
 	
 //	required public init?(coder aDecoder: NSCoder) {

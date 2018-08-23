@@ -9,6 +9,7 @@
 import UIKit
 
 public protocol FZRoutingServiceProtocol: FZModelClassProtocol, FZRoutingServiceRegistrarProtocol {
+	var hasPopover: Bool { get }
 	func add(rootViewController id: String, from storyboard: String?)
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertControllerStyle?)
 	func createNibFrom(name nibName: String, for owner: FZViewController) -> UIView?

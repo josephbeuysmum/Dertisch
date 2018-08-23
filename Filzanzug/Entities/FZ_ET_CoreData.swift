@@ -18,15 +18,6 @@ public enum FZCDTypes { case bool, double, int, string }
 //}
 
 
-public protocol FZCDAble {}
-
-extension Bool: FZCDAble {}
-extension Double: FZCDAble {}
-extension Float: FZCDAble {}
-extension Int: FZCDAble {}
-extension String: FZCDAble {}
-
-
 
 public struct FZCDKey {
 	public let key: String
@@ -42,9 +33,9 @@ public struct FZCDKey {
 
 public struct FZCDAttribute {
 	public let key: String
-	public let value: FZCDAble
+	public let value: FZStorableDataType
 	
-	public init (_ key: String, _ value: FZCDAble) {
+	public init (_ key: String, _ value: FZStorableDataType) {
 		self.key = key
 		self.value = value
 	}
@@ -54,14 +45,14 @@ public struct FZCDAttribute {
 public struct FZCDEntity: FZCDEntityProtocol {
 	fileprivate typealias TypesCollection = [String: FZCDTypes]
 	
-	public var attributes: [String: FZCDAble] { return attributes_ }
+	public var attributes: [String: FZStorableDataType] { return attributes_ }
 	public var name: String { return name_ }
 	
 	fileprivate let
 	name_: String,
 	types_: TypesCollection
 	
-	fileprivate var attributes_: [String: FZCDAble]
+	fileprivate var attributes_: [String: FZStorableDataType]
 	
 	init () { fatalError("init() has not been implemented") }
 	
@@ -76,7 +67,7 @@ public struct FZCDEntity: FZCDEntityProtocol {
 	}
 	
 //	mutating public func add (_ attribute: FZCDAttribute) {
-	mutating public func add(_ attribute: FZCDAble, by key: String) -> Bool {
+	mutating public func add(_ attribute: FZStorableDataType, by key: String) -> Bool {
 		guard
 			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)
@@ -85,7 +76,7 @@ public struct FZCDEntity: FZCDEntityProtocol {
 		return true
 	}
 	
-fileprivate func assessValidity(of attribute: FZCDAble, by type: FZCDTypes) -> Bool {
+fileprivate func assessValidity(of attribute: FZStorableDataType, by type: FZCDTypes) -> Bool {
 		switch type {
 		case FZCDTypes.bool:	return attribute is Bool
 		case FZCDTypes.double:	return attribute is Double

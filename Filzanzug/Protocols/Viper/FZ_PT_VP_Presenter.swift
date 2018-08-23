@@ -51,14 +51,22 @@ public extension FZPresenterProtocol {
 //		closet?.signals(key_)?.transmit(signal: FZSignalConsts.presenterUpdated, with: self)
 //	}
 	
-//	func present(_ viewName: String) {
-//		guard
-//			let key = key_,
-//			let viewController = closet?.viewController(key)
-//			else { return }
-//		closet?.routing(key)?.present(viewController: viewName, on: viewController)
-//	}
-	
+	func present(_ viewControllerId: String, animated: Bool) {
+		guard
+			let key = key_,
+			let signals = closet?.signals(key),
+			let routing = closet?.routing(key)
+			else { return }
+		if routing.hasPopover {
+			signals.scanOnceFor(signal: FZSignalConsts.popoverRemoved, scanner: self) { _,_ in
+				routing.present(viewControllerId, animated: animated)
+			}
+			routing.dismissPopover()
+		} else {
+			routing.present(viewControllerId, animated: animated)
+		}
+	}
+
 	private func check(_ data: Any?) -> Bool {
 		guard
 			let passedViewController = data as? FZViewController,
@@ -74,10 +82,8 @@ public extension FZPresenterProtocol {
 	func viewLoaded() {}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol, FZUpdatableProtocol {
+public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol, FZPresentableViewProtocol, FZUpdatableProtocol {
 	var closet: FZPresenterCloset? { get }
-//	mutating func populate<T>(with data: T?)
-//	func present(_ viewName: String)
 	func viewLoaded()
 	func viewAppeared()
 }

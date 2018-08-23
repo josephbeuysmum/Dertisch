@@ -15,6 +15,10 @@ public enum Presentations {
 extension FZRoutingService: FZRoutingServiceProtocol {
 	public var closet: FZModelClassCloset { return closet_ }
 
+	public var hasPopover: Bool {
+		return popover_bundle != nil
+	}
+	
 	public func activate() {}
 	
 	public func add(rootViewController id: String, from storyboard: String? = nil) {
@@ -59,11 +63,11 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 //	}
 	
 	public func dismissPopover() {
-		guard popover_bundle != nil else { return }
+		guard hasPopover else { return }
 		popover_bundle!.viewController?.dismiss(animated: true) {
 			self.popover_bundle!.deallocate()
 			self.popover_bundle = nil
-			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverAdded)
+			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverRemoved)
 		}
 	}
 	
@@ -72,7 +76,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
 		guard
-			popover_bundle == nil,
+			!hasPopover,
 			let currentViewController = view_bundle?.viewController,
 			let viperBundle = create_bundle(viewController: viewControllerId, from: storyboard),
 			let popover = viperBundle.viewController
@@ -192,9 +196,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		var presenter = vipRelationship.presenterType.init()
 		guard initialise_(presenter: &presenter, with: viewController) else { return nil }
 		var interactor = vipRelationship.interactorType.init()
-		guard
-			initialise_(interactor: &interactor, with: presenter, and: vipRelationship.interactorDependencyTypes)
-			else { return nil }
+		guard initialise_(interactor: &interactor, with: presenter, and: vipRelationship.interactorDependencyTypes) else { return nil }
 		return FZViperBundle(viewController: viewController, interactor: interactor, presenter: presenter)
 	}
 	

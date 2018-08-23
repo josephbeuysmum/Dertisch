@@ -27,8 +27,8 @@ public protocol FZCoreDataProxyProtocol: FZModelClassProtocol {
 }
 
 public protocol FZTemporaryValuesProxyProtocol: FZModelClassProtocol {
-	func getValue(by key: String) -> String?
-	func set(_ value: String, by key: String)
+	func getValue(by key: String, andAnnul: Bool?) -> FZStorableDataType?
+	func set(_ value: FZStorableDataType, by key: String)
 	func annulValue(by key: String)
 	func removeValues ()
 }

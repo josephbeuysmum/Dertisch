@@ -15,21 +15,26 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	
 	public func activate() { is_activated = true }
 	
-	public func getValue ( by key: String ) -> String? { return values_[ key ] }
-	
-	public func set ( _ value: String, by key: String ) {
-		values_[ key ] = value
-		closet_.signals(key_)?.transmit(signal: FZSignalConsts.valueSet, with: key )
+	public func getValue(by key: String, andAnnul: Bool? = false) -> FZStorableDataType? {
+		guard let value = values_[key] else { return nil }
+		if andAnnul! { annulValue(by: key) }
+		return value
 	}
 	
-	public func annulValue ( by key: String ) {
-		guard values_[ key ] != nil else { return }
-		values_.removeValue( forKey: key )
+	// todo use FZStorableDataType protocol (or something damned similar) to make value more flexible than just String
+	public func set(_ value: FZStorableDataType, by key: String) {
+		values_[key] = value
+		closet_.signals(key_)?.transmit(signal: FZSignalConsts.valueSet, with: key)
 	}
 	
-	public func removeValues () {
+	public func annulValue(by key: String) {
+		guard values_[key] != nil else { return }
+		values_.removeValue(forKey: key)
+	}
+	
+	public func removeValues() {
 		guard let signals = closet_.signals(key_) else { return }
-		for ( key, _ ) in values_ { _ = annulValue( by: key ) }
+		for (key, _) in values_ { _ = annulValue(by: key) }
 		signals.transmit(signal: FZSignalConsts.valuesRemoved )
 	}
 	
@@ -58,7 +63,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 public class FZTemporaryValuesProxy {
 	fileprivate var
 	is_activated: Bool,
-	values_: Dictionary < String, String >,
+	values_: Dictionary<String, FZStorableDataType>,
 	key_: FZKey!,
 	closet_: FZModelClassCloset!
 

@@ -11,10 +11,10 @@ public protocol FZBespokeEntitiesEntityProtocol {
 }
 
 public protocol FZCDEntityProtocol {
-	var attributes: [String: FZCDAble] { get }
+	var attributes: [String: FZStorableDataType] { get }
 	var name: String { get }
 	init (_ name: String, keys: [FZCDKey])
-	mutating func add(_ attribute: FZCDAble, by key: String) -> Bool
+	mutating func add(_ attribute: FZStorableDataType, by key: String) -> Bool
 }
 
 public protocol FZKeyProtocol: FZSingleInstanceProtocol {
@@ -34,3 +34,11 @@ public protocol FZSignalProtocol: FZDeallocatableProtocol {
 	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )
 }
+
+public protocol FZStorableDataType {}
+
+extension Bool: FZStorableDataType {}
+extension Double: FZStorableDataType {}
+extension Float: FZStorableDataType {}
+extension Int: FZStorableDataType {}
+extension String: FZStorableDataType {}
