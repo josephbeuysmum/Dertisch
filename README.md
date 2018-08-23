@@ -19,7 +19,7 @@ VIPER is an acronym, combining the following five words:
 -   `E` Entities
 -   `R` Routing
 
-`VIPER` frameworks take separate of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
+`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
 
 -   `S` Staff
 -   `W` Waiters
