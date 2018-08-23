@@ -13,20 +13,20 @@ What is a VIPER framework?
 
 VIPER is an acronym, combining the following five words:
 
--   View
--   Interactor
--   Presenter
--   Entities
--   Routing
+-   `V` View
+-   `I` Interactor
+-   `P` Presenter
+-   `E` Entities
+-   `R` Routing
 
 VIPER frameworks take separate of concerns to a greater level of granularity. If you'll allow me to SWITCH to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
 
--   `S`: Staff
--   `W`: Waiters
--   `I`: Ingredients
--   `T`: Tables
--   `C`: Customers
--   `H`: Head chefs
+-   `S` Staff
+-   `W` Waiters
+-   `I` Ingredients
+-   `T` Tables
+-   `C` Customers
+-   `H` Head chefs
 
 I will now outline these six elements of `Filzanzug` in the order in which it uses them:
 
