@@ -274,7 +274,7 @@ Developmental Roadmap
 
 No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
--	replace `closet_` properties with init functions with optional params (bespoke aside);
+-	replace `closet_` properties with init functions with optional params;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
 -	make Interactors optional [at registration] so some screens can be entirely Presenter controlled;
