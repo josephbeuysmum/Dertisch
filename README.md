@@ -19,7 +19,7 @@ VIPER is an acronym, combining the following five words:
 -   `E` Entities
 -   `R` Routing
 
-`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular VIPER arrangement `Filzanzug` uses well.
+`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular `VIPER` arrangement `Filzanzug` uses well.
 
 -   `S` Staff
 -   `W` Waiters
@@ -274,7 +274,7 @@ Developmental Roadmap
 
 No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
--	make access to `closet_` properties via subscripts rather than getters;
+-	replace `closet_` properties with init functions with optional params (bespoke aside);
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
 -	make Interactors optional [at registration] so some screens can be entirely Presenter controlled;
