@@ -16,32 +16,32 @@ extension Data {
 
 	var mimeType: Data.mimeTypes {
 		var c: UInt8 = 0
-		copyBytes( to: &c, count: 1 )
-		return Data.mimeTypeSignatures[ c ] ?? mimeTypes.OCT
+		copyBytes(to: &c, count: 1)
+		return Data.mimeTypeSignatures[c] ?? mimeTypes.OCT
 	}
 	
 	
 	
 	// todo check these are correct, distinguish between clashing MIMEs like 0x52
 	// see: https://en.wikipedia.org/wiki/List_of_file_signatures
-	private static let mimeTypeSignatures: [ UInt8 : Data.mimeTypes ] = [
-		0x1F : Data.mimeTypes.TAR,
-		0x25 : Data.mimeTypes.PDF,
-		0x3C : Data.mimeTypes.XML,
-		0x46 : Data.mimeTypes.BMP,
-//		0x46 : Data.mimeTypes.TXT,
-		0x47 : Data.mimeTypes.GIF,
-		0x49 : Data.mimeTypes.MP3,
-//		0x49 : Data.mimeTypes.TIFF,
-		0x4D : Data.mimeTypes.TIFF,
-		0x4F : Data.mimeTypes.OGG,
-		0x50 : Data.mimeTypes.ZIP,
-//		0x52 : Data.mimeTypes.RAR,
-//		0x52 : Data.mimeTypes.WAV,
-		0x75 : Data.mimeTypes.TAR,
-		0x7B : Data.mimeTypes.RTF,
-		0x89 : Data.mimeTypes.PNG,
-		0xD0 : Data.mimeTypes.VND,
-		0xFF : Data.mimeTypes.JPG
+	private static let mimeTypeSignatures: [UInt8: Data.mimeTypes] = [
+		0x1F: Data.mimeTypes.TAR,
+		0x25: Data.mimeTypes.PDF,
+		0x3C: Data.mimeTypes.XML,
+		0x46: Data.mimeTypes.BMP,
+//		0x46: Data.mimeTypes.TXT,
+		0x47: Data.mimeTypes.GIF,
+		0x49: Data.mimeTypes.MP3,
+//		0x49: Data.mimeTypes.TIFF,
+		0x4D: Data.mimeTypes.TIFF,
+		0x4F: Data.mimeTypes.OGG,
+		0x50: Data.mimeTypes.ZIP,
+//		0x52: Data.mimeTypes.RAR,
+//		0x52: Data.mimeTypes.WAV,
+		0x75: Data.mimeTypes.TAR,
+		0x7B: Data.mimeTypes.RTF,
+		0x89: Data.mimeTypes.PNG,
+		0xD0: Data.mimeTypes.VND,
+		0xFF: Data.mimeTypes.JPG
 	]
 }
