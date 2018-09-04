@@ -1,25 +1,25 @@
 //
-//  FZ_ET_ViperBundle.swift
+//  DT_ET_ViperBundle.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct FZViperBundle: FZDeallocatableProtocol {
+internal struct DTSwitchRelationship: DTDeallocatableProtocol {
 	var
-	viewController: FZViewController?,
-	interactor: FZInteractorProtocol?,
-	presenter: FZPresenterProtocol?
+	dish: DTDish?,
+	headChef: DTHeadChefProtocol?,
+	waiter: DTWaiterProtocol?
 	
-	mutating func deallocate() {
-		viewController?.removeFromParentViewController()
-//		presenter_?.checkIn()
-		// todo see note on checkIn in FZPresenterProtocol
-		interactor?.deallocate()
-		presenter?.deallocate()
-		viewController?.deallocate()
-		interactor = nil
-		presenter = nil
-		viewController = nil
+	mutating func cleanUp() {
+		dish?.removeFromParentViewController()
+//		waiter_?.checkIn()
+		// todo see note on checkIn in DTWaiterProtocol
+		headChef?.cleanUp()
+		waiter?.cleanUp()
+		dish?.cleanUp()
+		headChef = nil
+		waiter = nil
+		dish = nil
 	}
 }

@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Consts.swift
+//  DT_UT_Consts.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
@@ -7,7 +7,7 @@
 //
 
 // EXAMPLES OF CONST CONSTRUCTION
-//struct FZConsts {
+//struct DTConsts {
 //	static let simpleProperty =		"property_zero"
 //	
 //	struct someSimpleStruct {

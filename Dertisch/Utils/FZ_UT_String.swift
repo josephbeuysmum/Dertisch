@@ -1,5 +1,5 @@
 //
-//  FZ_UT_String.swift
+//  DT_UT_String.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 15/02/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FZString {
+public class DTString {
 	// returns a string with the first char uppercase, and the remaining chars lowercase
 	public static func capitalise ( string: String, firstCharOnly: Bool = false ) -> String? {
 		guard
@@ -24,7 +24,7 @@ public class FZString {
 	public static func decimalise ( double: Double ) -> String {
 		let
 		stringDouble = String( double ),
-		pointIndex = FZString.getIndexOf( subString: FZCharConsts.dot, inString: stringDouble )
+		pointIndex = DTString.getIndexOf( subString: DTCharConsts.dot, inString: stringDouble )
 		return pointIndex != nil && pointIndex! + 2 < stringDouble.count ? stringDouble : "\( stringDouble )0"
 	}
 	
@@ -60,7 +60,7 @@ public class FZString {
 	}
 	
 	public static func getFileName ( from url: String ) -> String? {
-		guard let slashIndex = getLastIndexOf( subString: FZCharConsts.slash, inString: url ) else { return nil }
+		guard let slashIndex = getLastIndexOf( subString: DTCharConsts.slash, inString: url ) else { return nil }
 		return getSubStringOf( string: url, between: slashIndex + 1, and: url.count )
 	}
 	
@@ -88,11 +88,11 @@ public class FZString {
 	// returns the indices of the given one-char String, or nil if none can be found
 	public static func getIndicesOf ( subString: String, inString string: String ) -> [ Int ]? {
 		var
-		subStringIndex = FZString.getIndexOf( subString: subString, inString: string, startingAt: 0 ),
+		subStringIndex = DTString.getIndexOf( subString: subString, inString: string, startingAt: 0 ),
 		indices: [ Int ] = []
 		while subStringIndex != nil {
 			indices.append( subStringIndex! )
-			subStringIndex = FZString.getIndexOf(
+			subStringIndex = DTString.getIndexOf(
 				subString: subString,
 				inString: string,
 				startingAt: subStringIndex! + 1 )
@@ -177,7 +177,7 @@ public class FZString {
 	
 	public static func serialise ( params: Dictionary< String, String > ) -> String? {
 		var
-		serialisedParams = FZCharConsts.openSquareBracket,
+		serialisedParams = DTCharConsts.openSquareBracket,
 		countValues: Int
 		// iterate through params collection
 		for ( key, value ) in params {
@@ -185,7 +185,7 @@ public class FZString {
 			let values = value.split { $0 == "," }.map { String( $0 ) }
 			countValues = values.count
 			// iterate through the array and build the serialised param string
-			_ = values.map { element in serialisedParams = "\( serialisedParams )\( FZCharConsts.doubleQuote )\( key )\( FZCharConsts.doubleQuote )\( FZCharConsts.colon )\( FZCharConsts.space ) \( FZCharConsts.doubleQuote )\( element )\( FZCharConsts.doubleQuote )\( FZCharConsts.comma )\( FZCharConsts.space )" }
+			_ = values.map { element in serialisedParams = "\( serialisedParams )\( DTCharConsts.doubleQuote )\( key )\( DTCharConsts.doubleQuote )\( DTCharConsts.colon )\( DTCharConsts.space ) \( DTCharConsts.doubleQuote )\( element )\( DTCharConsts.doubleQuote )\( DTCharConsts.comma )\( DTCharConsts.space )" }
 		}
 		// knock off trailing ampersand and return
 		countValues = serialisedParams.count
@@ -193,13 +193,13 @@ public class FZString {
 		serialisedParams = String( serialisedParams.prefix( upTo: serialisedParams.index(
 			serialisedParams.startIndex,
 			offsetBy: countValues - 2 ) ) )
-		return "\( serialisedParams )\( FZCharConsts.closedSquareBracket )"
+		return "\( serialisedParams )\( DTCharConsts.closedSquareBracket )"
 	}
 	
 	public static func serialise ( array: [ Any ]?, withSeparator separator: String? = " " ) -> String? {
 		guard array != nil else { return nil }
 //		let countValues = values.count
-		var result = FZCharConsts.emptyString
+		var result = DTCharConsts.emptyString
 		// serialise first value
 		if array!.count > 0 { result = "\( array![ 0 ] )" }
 		// loop through rest serialising then adding them
@@ -237,7 +237,7 @@ public class FZString {
 			adjustedString = getSubStringOf( string: string, between: 0, and: newLength )
 		// ...otherwise keep adding a space to the end until the new length is reached
 		case adjustedString!.count < newLength:
-			let space = FZCharConsts.space
+			let space = DTCharConsts.space
 			while adjustedString!.count < newLength { adjustedString = "\( adjustedString! )\( space )" }
 		default: ()
 		}
@@ -246,9 +246,9 @@ public class FZString {
 	
 	public static func simplify ( description: String ) -> String? {
 		guard
-			let lessThanIndex = getIndexOf( subString: FZCharConsts.lessThan, inString: description ) as Int?,
+			let lessThanIndex = getIndexOf( subString: DTCharConsts.lessThan, inString: description ) as Int?,
 			lessThanIndex > -1,
-			let colonIndex = getIndexOf( subString: FZCharConsts.colon, inString: description ),
+			let colonIndex = getIndexOf( subString: DTCharConsts.colon, inString: description ),
 			let simplifiedString = getSubStringOf( string: description, between: lessThanIndex + 1, and: colonIndex )
 			else { return nil }
 		return simplifiedString
@@ -300,7 +300,7 @@ public class FZString {
 		countIntChars = serialisedNumber.count
 		guard countIntChars < 5 else { fatalError( "CLAUSE NEEDS WRITING FOR THIS NUMBER" ) }
 		let countIntCharsMinusTwo = countIntChars - 2
-		var value = FZCharConsts.emptyString
+		var value = DTCharConsts.emptyString
 		
 		for i in 0..<countIntCharsMinusTwo {
 			if  let substring = getSubStringOf( string: serialisedNumber, between: i, and: i + 1 ),
@@ -407,7 +407,7 @@ public class FZString {
 		// runs through scalars scalar-by-scalar building the phrase
 		var
 		index = 0,
-		subStringByScalars = FZCharConsts.emptyString
+		subStringByScalars = DTCharConsts.emptyString
 		for scalar in string.unicodeScalars {
 			// keep skipping scalars until we get to the desired start index,
 			// then progressively add each char until we reach the end of the phrase
@@ -444,7 +444,7 @@ public class FZString {
 			} else {
 				let
 				ty = "ty",
-				secondDigitSuffix = secondDigit > 0 ? "\( FZCharConsts.hyphen )\( secondDigitString )" : ""
+				secondDigitSuffix = secondDigit > 0 ? "\( DTCharConsts.hyphen )\( secondDigitString )" : ""
 				switch firstDigit {
 				case 2:		return "twen\( ty )\( secondDigitSuffix )"
 				case 3:		return "thir\( ty )\( secondDigitSuffix )"

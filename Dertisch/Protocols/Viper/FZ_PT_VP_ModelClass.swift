@@ -1,23 +1,23 @@
 //
-//  FZ_PT_VP_ModelClass.swift
+//  DT_PT_VP_ModelClass.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/08/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public extension FZModelClassProtocol {
+public extension DTKitchenProtocol {
 	public var instanceDescriptor: String { return String( describing: self ) }
 	
 	
 	
-	public func activate() {}
+	public func startShift() {}
 	
-	public mutating func deallocate() {}
+	public mutating func cleanUp() {}
 }
 
-public protocol FZModelClassProtocol: FZViperClassProtocol {
-	init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?)
+public protocol DTKitchenProtocol: DTSwitchClassProtocol {
+	init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?)
 //	init()
-//	var closet: FZModelClassCloset { get }
+//	var closet: DTKitchenCloset { get }
 }

@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Math.swift
+//  DT_UT_Math.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 15/02/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FZMath {
+public class DTMath {
 	static fileprivate var _primaryKey: Int32 = 0
 	
 	// gives your app an endless supply of unique Ints

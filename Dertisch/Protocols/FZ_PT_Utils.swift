@@ -1,45 +1,45 @@
 //
-//  FZ_PT_Utils.swift
+//  DT_PT_Utils.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo deallocate in a better way, with weak vars etc
-public protocol FZDeallocatableProtocol {
-	mutating func deallocate ()
+// todo cleanUp in a better way, with weak vars etc
+public protocol DTDeallocatableProtocol {
+	mutating func cleanUp ()
 }
 
-public protocol FZDescribableProtocol {
+public protocol DTDescribableProtocol {
 	var description: String { get }
 }
 
-public protocol FZPopulatableViewProtocol {
-	mutating func populate<T>(with data: T?)
+public protocol DTPopulatableDishProtocol {
+	mutating func serve<T>(with data: T?)
 }
 
-public protocol FZPresentableViewProtocol {
-	func present(_ viewControllerId: String, animated: Bool)
+public protocol DTPresentableDishProtocol {
+	func serve(_ dishId: String, animated: Bool)
 }
 
-public protocol FZSignalReceivableProtocol {}
+public protocol DTOrderReceivableProtocol {}
 
-public protocol FZSingleInstanceProtocol {
+public protocol DTSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)
 }
 
-public protocol FZUpdatableProtocol {
+public protocol DTUpdatableProtocol {
 	mutating func update<T>(with data: T?)
 }
 
 // todo the places where protocols and their extensions live is becoming increasingly messy, refactor into some sensible system
-public extension FZSingleInstanceProtocol {
+public extension DTSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T) {
 		let reflection = Mirror(reflecting: delegate)
 		for (_, child) in reflection.children.enumerated() {
 			if child.value is Self {
-				fatalError("FZSingleInstanceProtocol delegates can only possess one instance of <T>.self")
+				fatalError("DTSingleInstanceProtocol delegates can only possess one instance of <T>.self")
 			}
 		}
 	}

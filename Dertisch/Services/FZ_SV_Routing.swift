@@ -1,5 +1,5 @@
 //
-//  FZ_SV_Routing.swift
+//  DT_SV_Routing.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 12/11/2016.
@@ -12,39 +12,39 @@ public enum Presentations {
 	case curl, dissolve, flip, rise, show
 }
 
-extension FZRoutingService: FZRoutingServiceProtocol {
-//	public var closet: FZModelClassCloset { return closet_ }
+extension DTMaitreD: DTMaitreDProtocol {
+//	public var closet: DTKitchenCloset { return closet_ }
 
 	public var hasPopover: Bool {
-		return popover_bundle != nil
+		return side_dish_relationship != nil
 	}
 	
-	public func activate() {}
+	public func startShift() {}
 	
-	public func add(rootViewController id: String, from storyboard: String? = nil) {
-		guard let viperBundle = create_bundle(viewController: id, from: storyboard) else { return }
-		window_.rootViewController = viperBundle.viewController
-		view_bundle = viperBundle
+	public func add(rootDish id: String, from storyboard: String? = nil) {
+		guard let viperBundle = create_bundle(dish: id, from: storyboard) else { return }
+		window_.rootViewController = viperBundle.dish
+		dish_relationship = viperBundle
 	}
 	
 	public func alert(actions: [UIAlertAction], title: String? = nil, message: String? = nil, style: UIAlertControllerStyle? = .alert) {
-		guard let viewController = view_bundle?.viewController else { return }
+		guard let dish = dish_relationship?.dish else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
 		countActions = actions.count
 		for i in 0..<countActions {
 			alert.addAction(actions[i])
 		}
-		viewController.present(alert, animated: true)
+		dish.present(alert, animated: true)
 	}
 	
-	public func createNibFrom(name nibName: String, for owner: FZViewController) -> UIView? {
+	public func createNibFrom(name nibName: String, for owner: DTDish) -> UIView? {
 		guard let viewArray = Bundle.main.loadNibNamed(nibName, owner: owner, options: nil) else { return nil }
 		return viewArray[0] as? UIView
 	}
 	
-	public func create(_ viewControllerId: String, from storyboard: String? = nil) -> FZViewController? {
-		return create_bundle(viewController: viewControllerId, from: storyboard)?.viewController
+	public func create(_ dishId: String, from storyboard: String? = nil) -> DTDish? {
+		return create_bundle(dish: dishId, from: storyboard)?.dish
 	}
 	
 //	public func createAlertWith(
@@ -64,109 +64,109 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	public func dismissPopover() {
 		guard hasPopover else { return }
-		popover_bundle!.viewController?.dismiss(animated: true) {
-			self.popover_bundle!.deallocate()
-			self.popover_bundle = nil
-			self.signals_.transmit(signal: FZSignalConsts.popoverRemoved)
+		side_dish_relationship!.dish?.dismiss(animated: true) {
+			self.side_dish_relationship!.cleanUp()
+			self.side_dish_relationship = nil
+			self.orders_.make(order: DTOrderConsts.popoverRemoved)
 		}
 	}
 	
 	public func popover(
-		_ viewControllerId: String,
+		_ dishId: String,
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
 		guard
 			!hasPopover,
-			let currentViewController = view_bundle?.viewController,
-			let viperBundle = create_bundle(viewController: viewControllerId, from: storyboard),
-			let popover = viperBundle.viewController
+			let currentDish = dish_relationship?.dish,
+			let viperBundle = create_bundle(dish: dishId, from: storyboard),
+			let popover = viperBundle.dish
 			else { return }
 		popover.modalPresentationStyle = .popover
-		currentViewController.present(popover, animated: true) {
-			self.signals_.transmit(signal: FZSignalConsts.popoverAdded)
+		currentDish.present(popover, animated: true) {
+			self.orders_.make(order: DTOrderConsts.popoverAdded)
 		}
-		popover.popoverPresentationController?.sourceView = currentViewController.view
+		popover.popoverPresentationController?.sourceView = currentDish.view
 		if let safeRect = rect {
 			popover.popoverPresentationController?.sourceRect = safeRect
 		}
-		popover_bundle = viperBundle
+		side_dish_relationship = viperBundle
 	}
 	
-	public func present(
-		_ viewControllerId: String,
+	public func serve(
+		_ dishId: String,
 		animated: Bool? = true,
 		via presentation: Presentations? = nil,
 		from storyboard: String? = nil) {
 		let presentationType = presentation ?? Presentations.show
 		guard
-			let currentViewController = view_bundle?.viewController,
-			let viperBundle = create_bundle(viewController: viewControllerId, from: storyboard),
-			let viewController = viperBundle.viewController
+			let currentDish = dish_relationship?.dish,
+			let viperBundle = create_bundle(dish: dishId, from: storyboard),
+			let dish = viperBundle.dish
 			else { return }
 		switch presentationType {
-		case .curl:			viewController.modalTransitionStyle = .partialCurl
-		case .dissolve:		viewController.modalTransitionStyle = .crossDissolve
-		case .flip:			viewController.modalTransitionStyle = .flipHorizontal
-		case .rise:			viewController.modalTransitionStyle = .coverVertical
+		case .curl:			dish.modalTransitionStyle = .partialCurl
+		case .dissolve:		dish.modalTransitionStyle = .crossDissolve
+		case .flip:			dish.modalTransitionStyle = .flipHorizontal
+		case .rise:			dish.modalTransitionStyle = .coverVertical
 		default:			()
 		}
-		currentViewController.present(viewController, animated: animated!) {
-			currentViewController.removeFromParentViewController()
-			self.signals_.transmit(signal: FZSignalConsts.viewRemoved)
+		currentDish.present(dish, animated: animated!) {
+			currentDish.removeFromParentViewController()
+			self.orders_.make(order: DTOrderConsts.viewRemoved)
 		}
-		view_bundle?.deallocate()
-		view_bundle = viperBundle
+		dish_relationship?.cleanUp()
+		dish_relationship = viperBundle
 	}
 	
 	public func register(
-		_ modelClassType: FZModelClassProtocol.Type,
+		_ kitchenStaffType: DTKitchenProtocol.Type,
 		with key: String,
-		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
+		injecting dependencyTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard can_register(with: key) else { return }
-		var modelClasses: [FZModelClassProtocol]?
+		var kitchenStaffMembers: [DTKitchenProtocol]?
 		if let strongDependencyTypes = dependencyTypes {
-			modelClasses = []
+			kitchenStaffMembers = []
 			for dependencyType in strongDependencyTypes {
-				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
-					modelClasses!.append(dependencyClass)
+				if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
+					kitchenStaffMembers!.append(dependencyClass)
 				} else {
 					fatalError("Attempting to inject a model class that has not been registered itself yet")
 				}
 			}
 		}
-		let modelClass = modelClassType.init(signals: signals_, modelClasses: modelClasses)
-		model_class_singletons[String(describing: modelClassType)] = modelClass
-		modelClass.activate()
+		let kitchenStaff = kitchenStaffType.init(orders: orders_, kitchenStaffMembers: kitchenStaffMembers)
+		kitchen_staff_singletons[String(describing: kitchenStaffType)] = kitchenStaff
+		kitchenStaff.startShift()
 	}
 	
-	// todo some presenters and view controllers do not need an interactor (intro page in Cirk for example) and this registation should handle that case too
+	// todo some waiters and view controllers do not need an headChef (intro page in Cirk for example) and this registation should handle that case too
 	public func register(
-		_ viewControllerId: String,
-		as viewControllerType: FZViewControllerProtocol.Type,
-		with interactorType: FZInteractorProtocol.Type,
-		and presenterType: FZPresenterProtocol.Type,
+		_ dishId: String,
+		as dishType: DTDishProtocol.Type,
+		with headChefType: DTHeadChefProtocol.Type,
+		and waiterType: DTWaiterProtocol.Type,
 		lockedBy key: String,
-		andInjecting interactorDependencyTypes: [FZModelClassProtocol.Type]? = nil) {
+		andInjecting kitchenStaffTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard
-			vip_relationships[viewControllerId] == nil,
+			switch_relationships[dishId] == nil,
 			can_register(with: key)
 			else { return }
-		vip_relationships[viewControllerId] = FZVipRelationship(
-			viewControllerType: viewControllerType,
-			interactorType: interactorType,
-			presenterType: presenterType,
-			interactorDependencyTypes: interactorDependencyTypes)
+		switch_relationships[dishId] = DTVipRelationship(
+			dishType: dishType,
+			headChefType: headChefType,
+			waiterType: waiterType,
+			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func start(rootViewController: String, window: UIWindow, storyboard: String? = nil) {
+	public func start(rootDish: String, window: UIWindow, storyboard: String? = nil) {
 		guard
 			window_ == nil,
-			self is FZRoutingServiceExtensionProtocol
+			self is DTMaitreDExtensionProtocol
 			else { return }
-		(self as! FZRoutingServiceExtensionProtocol).registerDependencies(with: key_)
+		(self as! DTMaitreDExtensionProtocol).registerDependencies(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
-		add(rootViewController: rootViewController, from: storyboard)
+		add(rootDish: rootDish, from: storyboard)
 	}
 	
 	
@@ -175,90 +175,90 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		return is_activated == false && key == key_
 	}
 	
-	fileprivate func create_bundle(viewController id: String, from storyboard: String? = nil) -> FZViperBundle? {
+	fileprivate func create_bundle(dish id: String, from storyboard: String? = nil) -> DTSwitchRelationship? {
 		guard
-			let vipRelationship = vip_relationships[id],
-			let viewController = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController
+			let vipRelationship = switch_relationships[id],
+			let dish = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? DTDish
 			else { return nil }
-		let presenter = vipRelationship.presenterType.init(signals: signals_, routing: self)
-		viewController.set(signals_, and: presenter)
-		let interactor = vipRelationship.interactorType.init(
-			signals: signals_,
-			presenter: presenter,
-			dependencies: get_interactor_dependencies(from: vipRelationship.interactorDependencyTypes))
-		presenter.activate()
-		interactor.activate()
-		return FZViperBundle(viewController: viewController, interactor: interactor, presenter: presenter)
+		let waiter = vipRelationship.waiterType.init(orders: orders_, maitreD: self)
+		dish.set(orders_, and: waiter)
+		let headChef = vipRelationship.headChefType.init(
+			orders: orders_,
+			waiter: waiter,
+			kitchenStaff: get_head_chefkitchenStaff(from: vipRelationship.kitchenStaffTypes))
+		waiter.startShift()
+		headChef.startShift()
+		return DTSwitchRelationship(dish: dish, headChef: headChef, waiter: waiter)
 	}
 	
 	fileprivate func get_(_ storyboard: String?) -> String {
 		return storyboard ?? "Main"
 	}
 	
-	fileprivate func get_interactor_dependencies(
-//		interactor: inout FZInteractorProtocol,
-//		with presenter: FZPresenterProtocol,
-		from dependencyTypes: [FZModelClassProtocol.Type]?) -> [FZModelClassProtocol]? {
+	fileprivate func get_head_chefkitchenStaff(
+//		headChef: inout DTHeadChefProtocol,
+//		with waiter: DTWaiterProtocol,
+		from dependencyTypes: [DTKitchenProtocol.Type]?) -> [DTKitchenProtocol]? {
 		guard let dependencyTypes = dependencyTypes else { return nil }
-		var dependencies: [FZModelClassProtocol] = []
+		var kitchenStaff: [DTKitchenProtocol] = []
 		_ = dependencyTypes.map {
 			dependencyType in
-			if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
-				dependencies.append(dependencyClass)
-//				if dependencyClass is FZImageProxy {
-//					interactor.closet?.set(imageProxy: dependencyClass as! FZImageProxy)
+			if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
+				kitchenStaff.append(dependencyClass)
+//				if dependencyClass is DTImageSousChef {
+//					headChef.closet?.set(imageSousChef: dependencyClass as! DTImageSousChef)
 //				} else {
-//					interactor.closet?.bespoke.add(dependencyClass)
+//					headChef.closet?.bespoke.add(dependencyClass)
 //				}
 			} else {
 				fatalError("Attempting to inject a model class that has not been registered itself yet")
 			}
 		}
-//		interactor.closet?.set(signalsService: signals)
-//		interactor.closet?.set(presenter: presenter)
-//		interactor.activate()
-		return dependencies.count > 0 ? dependencies : nil
+//		headChef.closet?.set(ordersService: orders)
+//		headChef.closet?.set(waiter: waiter)
+//		headChef.activate()
+		return kitchenStaff.count > 0 ? kitchenStaff : nil
 	}
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
-//	fileprivate func initialise_(presenter: inout FZPresenterProtocol, with viewController: FZViewController) -> Bool {
-//		guard let signals = closet_.signals(key_) else { return false }
-//		presenter.closet?.set(signalsService: signals)
-//		presenter.closet?.set(routing: self)
-//		presenter.closet?.set(viewController: viewController)
-//		presenter.activate()
+//	fileprivate func initialise_(waiter: inout DTWaiterProtocol, with dish: DTDish) -> Bool {
+//		guard let orders = closet_.orders(key_) else { return false }
+//		waiter.closet?.set(ordersService: orders)
+//		waiter.closet?.set(routing: self)
+//		waiter.closet?.set(dish: dish)
+//		waiter.activate()
 //		return true
 //	}
 	
-//	fileprivate func initialise_(viewController: inout FZViewController) -> Bool {
-//		guard let signals = closet_.signals(key_) else { return false }
-//		viewController.set(signalsService: signals)
+//	fileprivate func initialise_(dish: inout DTDish) -> Bool {
+//		guard let orders = closet_.orders(key_) else { return false }
+//		dish.set(ordersService: orders)
 //		return true
 //	}
 }
 
-public class FZRoutingService {
+public class DTMaitreD {
 	fileprivate let
-	signals_: FZSignalsService,
+	orders_: DTOrders,
 	key_: String
 	
 	fileprivate var
 	is_activated: Bool,
-	model_class_singletons: Dictionary<String, FZModelClassProtocol>,
-	vip_relationships: Dictionary<String, FZVipRelationship>,
-//	key_: FZKey!,
-//	closet_: FZModelClassCloset!,
+	kitchen_staff_singletons: Dictionary<String, DTKitchenProtocol>,
+	switch_relationships: Dictionary<String, DTVipRelationship>,
+//	key_: DTKey!,
+//	closet_: DTKitchenCloset!,
 	window_: UIWindow!,
-	view_bundle: FZViperBundle?,
-	popover_bundle: FZViperBundle?
+	dish_relationship: DTSwitchRelationship?,
+	side_dish_relationship: DTSwitchRelationship?
 
 	required public init() {
-		signals_ = FZSignalsService()
-		key_ = NSUUID().uuidString // FZKey(self)
+		orders_ = DTOrders()
+		key_ = NSUUID().uuidString // DTKey(self)
 		is_activated = false
-		model_class_singletons = [:]
-		vip_relationships = [:]
-//		closet_ = FZModelClassCloset(self, key: key_)
-//		closet_.set(signals: FZSignalsService())
+		kitchen_staff_singletons = [:]
+		switch_relationships = [:]
+//		closet_ = DTKitchenCloset(self, key: key_)
+//		closet_.set(orders: DTOrders())
 	}
 }

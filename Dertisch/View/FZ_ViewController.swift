@@ -1,5 +1,5 @@
 //
-//  FZ_ViewController.swift
+//  DT_Dish.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 30/07/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension FZViewController: FZViewControllerProtocol {
+extension DTDish: DTDishProtocol {
 //	public var key: String? {
 //		guard key_ == nil else { return nil }
 //		key_ = NSUUID().uuidString
@@ -16,32 +16,32 @@ extension FZViewController: FZViewControllerProtocol {
 //	}
 }
 
-open class FZViewController: UIViewController {
+open class DTDish: UIViewController {
 	fileprivate var
 	key_: String?,
-	signals_: FZSignalsService?
+	orders_: DTOrders?
 	
-	public func deallocate() {}
+	public func cleanUp() {}
 	
 	override open func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		signals_?.transmit(signal: FZSignalConsts.viewWarnedAboutMemory, with: self)
+		orders_?.make(order: DTOrderConsts.viewWarnedAboutMemory, with: self)
 	}
 	
-	open func set(_ signals: FZSignalsService, and presenter: FZPresenterProtocol) {}
+	open func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
 	
-	//	public func signals(_ key: String?) -> FZSignalsService? {
+	//	public func orders(_ key: String?) -> DTOrders? {
 	//		guard key != nil else { return nil }
-	//		return key == key_ ? signals_ : nil
+	//		return key == key_ ? orders_ : nil
 	//	}
 	
 	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		signals_?.transmit(signal: FZSignalConsts.viewAppeared, with: self)
+		orders_?.make(order: DTOrderConsts.viewAppeared, with: self)
 	}
 	
 	override open func viewDidLoad() {
 		super.viewDidLoad()
-		signals_?.transmit(signal: FZSignalConsts.viewLoaded, with: self)
+		orders_?.make(order: DTOrderConsts.viewLoaded, with: self)
 	}
 }

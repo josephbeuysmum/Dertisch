@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Logs.swift
+//  DT_UT_Logs.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 14/10/2016.
@@ -18,24 +18,24 @@ public func lobject ( _ object: [ String: Any ], file: String = #file, function:
 	}
 }
 
-// differing levels of log (see FZConsts logLevel and logModes)
+// differing levels of log (see DTConsts logLevel and logModes)
 public func loInfo ( _ args: Any... , file: String = #file, function: String = #function, line: Int = #line ) {
-	guard FZLogConsts.logModes.index( of: FZLogConsts.logLevel.info ) != nil else { return }
+	guard DTLogConsts.logModes.index( of: DTLogConsts.logLevel.info ) != nil else { return }
 	_lo( args, file: file, function: function, line: line )
 }
 
 public func loFeedback ( _ args: Any... , file: String = #file, function: String = #function, line: Int = #line ) {
-	guard FZLogConsts.logModes.index( of: FZLogConsts.logLevel.feedback ) != nil else { return }
+	guard DTLogConsts.logModes.index( of: DTLogConsts.logLevel.feedback ) != nil else { return }
 	_lo( args, file: file, function: function, line: line )
 }
 
 public func loWarning ( _ args: Any... , file: String = #file, function: String = #function, line: Int = #line ) {
-	guard FZLogConsts.logModes.index( of: FZLogConsts.logLevel.warning ) != nil else { return }
+	guard DTLogConsts.logModes.index( of: DTLogConsts.logLevel.warning ) != nil else { return }
 	_lo( args, file: file, function: function, line: line )
 }
 
 public func loError ( _ args: Any... , file: String = #file, function: String = #function, line: Int = #line ) {
-	guard FZLogConsts.logModes.index( of: FZLogConsts.logLevel.error ) != nil else { return }
+	guard DTLogConsts.logModes.index( of: DTLogConsts.logLevel.error ) != nil else { return }
 	_lo( args, file: file, function: function, line: line )
 }
 
@@ -44,14 +44,14 @@ public func loError ( _ args: Any... , file: String = #file, function: String = 
 fileprivate func _lo ( _ args: [ Any? ], file: String, function: String, line: Int ) {
 	let printableArgs = args.count > 0 ? args : [ "\( function ) ()" ]
 	// if a file name is passed, create a shortened version of it to aid logging
-	if  let lastSlash = FZString.getLastIndexOf( subString: "/", inString: file ) as Int?,
-		let lastDot = FZString.getLastIndexOf( subString: ".", inString: file ) as Int?,
-		let shortenedFileName = FZString.getSubStringOf( string: file, between: lastSlash + 1, and: lastDot ),
-		let fileName = FZString.set( length: 16, ofText: shortenedFileName ),
-		let shortenedLine = FZString.set( length: 4, ofText: String( line ) ),
-		let shortenedInterval = FZString.set(
+	if  let lastSlash = DTString.getLastIndexOf( subString: "/", inString: file ) as Int?,
+		let lastDot = DTString.getLastIndexOf( subString: ".", inString: file ) as Int?,
+		let shortenedFileName = DTString.getSubStringOf( string: file, between: lastSlash + 1, and: lastDot ),
+		let fileName = DTString.set( length: 16, ofText: shortenedFileName ),
+		let shortenedLine = DTString.set( length: 4, ofText: String( line ) ),
+		let shortenedInterval = DTString.set(
 			length: 5,
-			ofText: String( FZTime.getInterval( format: FZTime.intervalFormats.withoutHoursAndMinutes ) ) ) {
+			ofText: String( DTTime.getInterval( format: DTTime.intervalFormats.withoutHoursAndMinutes ) ) ) {
 		_log( printableArgs, location: "\( fileName ) \( shortenedLine ) \( shortenedInterval )" )
 	// otherwise just log the args as-are
 	} else {
@@ -65,9 +65,9 @@ fileprivate func _log ( _ args: [ Any? ], location: String? = nil ) {
 	if  args.count == 1, let args = args[ 0 ] as? [ Any ] { mutableArgs = args }
 	// turn args into single message string
 	guard mutableArgs.count > 0 else { return }
-	var message = FZCharConsts.emptyString
+	var message = DTCharConsts.emptyString
 	_ = mutableArgs.map { element in
-		if let messageSuffix = FZString.serialise( value: _serialise( arg: element ) ) {
+		if let messageSuffix = DTString.serialise( value: _serialise( arg: element ) ) {
 			message = "\( message )  \( messageSuffix )"
 		}
 	}
@@ -90,7 +90,7 @@ fileprivate func _log ( _ args: [ Any? ], location: String? = nil ) {
 	
 	// log!
 	print( "\( prefix )\( output )" )
-//	print( "\( prefix )\( output )\( FZCharConsts.lineBreak )" )
+//	print( "\( prefix )\( output )\( DTCharConsts.lineBreak )" )
 }
 
 fileprivate func _serialise ( arg: Any? ) -> String {

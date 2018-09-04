@@ -1,5 +1,5 @@
 //
-//  FZ_PT_VP_Presenter.swift
+//  DT_PT_VP_Presenter.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 22/06/2017.
@@ -8,89 +8,89 @@
 
 import Foundation
 
-public extension FZPresenterProtocol {
+public extension DTWaiterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
-//	public var closet: FZPresenterCloset? {
-//		return FirstInstance().get(FZPresenterCloset.self, from: mirror_)
+//	public var closet: DTWaiterCloset? {
+//		return FirstInstance().get(DTWaiterCloset.self, from: mirror_)
 //	}
 	
-//	private var key_: FZKey? {
-//		return FirstInstance().get(FZKey.self, from: mirror_)
+//	private var key_: DTKey? {
+//		return FirstInstance().get(DTKey.self, from: mirror_)
 //	}
 	
 	// todo these vars need to be made single instance safe
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	private var routing_: FZRoutingService? { return FirstInstance().get(FZRoutingService.self, from: mirror_) }
-	private var signals_: FZSignalsService? { return FirstInstance().get(FZSignalsService.self, from: mirror_) }
-	private var view_controller: FZViewController? { return FirstInstance().get(FZViewController.self, from: mirror_) }
+	private var maitre_d: DTMaitreD? { return FirstInstance().get(DTMaitreD.self, from: mirror_) }
+	private var orders_: DTOrders? { return FirstInstance().get(DTOrders.self, from: mirror_) }
+	private var dish_: DTDish? { return FirstInstance().get(DTDish.self, from: mirror_) }
 	
 
 	
-	func activate() {
+	func startShift() {
 		guard
 //			let key = key_,
-			let signals = signals_
+			let orders = orders_
 			else { return }
-		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
+		_ = orders.listenForOneOff(order: DTOrderConsts.viewLoaded, order: self) { _, data in
 			guard
-				let strongSelf = self as FZPresenterProtocol?,
+				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.viewLoaded()
-			signals.transmit(signal: FZSignalConsts.presenterActivated, with: strongSelf)
+			strongSelf.dishCooked()
+			orders.make(order: DTOrderConsts.waiterActivated, with: strongSelf)
 		}
-		_ = signals.scanOnceFor(signal: FZSignalConsts.viewAppeared, scanner: self) { _, data in
+		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, order: self) { _, data in
 			guard
-				let strongSelf = self as FZPresenterProtocol?,
+				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.viewAppeared()
+			strongSelf.dishServed()
 		}
 	}
 	
 	
-	// todo we may well have persistent viper objects in future versions of FZ, in which case an internal non-protocol (ie: extension only) function is an excellent way (the best way I currently know of) for FZ classes (ie: Routing) to talk to other FZ classes (ie: EntityCollections) without allowing apps utilising FZ (ie: Cirk) to access said function
+	// todo we may well have persistent viper objects in future versions of DT, in which case an internal non-protocol (ie: extension only) function is an excellent way (the best way I currently know of) for DT classes (ie: Routing) to talk to other DT classes (ie: EntityCollections) without allowing apps utilising DT (ie: Cirk) to access said function
 //	internal func checkIn() {
-//		closet?.signals(key_)?.transmit(signal: FZSignalConsts.presenterUpdated, with: self)
+//		closet?.orders(key_)?.make(order: DTOrderConsts.waiterUpdated, with: self)
 //	}
 	
-	func present(_ viewControllerId: String, animated: Bool) {
+	func serve(_ dishId: String, animated: Bool) {
 		guard
 //			let key = key_,
-			let signals = signals_,
-			let routing = routing_
+			let orders = orders_,
+			let maitreD = maitre_d
 			else { return }
-		if routing.hasPopover {
-			signals.scanOnceFor(signal: FZSignalConsts.popoverRemoved, scanner: self) { _,_ in
-				routing.present(viewControllerId, animated: animated)
+		if maitreD.hasPopover {
+			orders.listenForOneOff(order: DTOrderConsts.popoverRemoved, order: self) { _,_ in
+				maitreD.serve(dishId, animated: animated)
 			}
-			routing.dismissPopover()
+			maitreD.dismissPopover()
 		} else {
-			routing.present(viewControllerId, animated: animated)
+			maitreD.serve(dishId, animated: animated)
 		}
 	}
 
 	private func check(_ data: Any?) -> Bool {
 		guard
-			let passedViewController = data as? FZViewController,
-			let ownViewController = view_controller
+			let passedDish = data as? DTDish,
+			let ownDish = dish_
 			else { return false }
-		return passedViewController == ownViewController
+		return passedDish == ownDish
 	}
 	
-	mutating func deallocate() {}
-	mutating func populate<T>(with data: T?) {}
+	mutating func cleanUp() {}
+	mutating func serve<T>(with data: T?) {}
 	mutating func update<T>(with data: T?) {}
-	func viewAppeared() {}
-	func viewLoaded() {}
+	func dishServed() {}
+	func dishCooked() {}
 }
 
-public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol, FZPresentableViewProtocol, FZUpdatableProtocol {
-	init(signals: FZSignalsService, routing: FZRoutingService)//, viewController: FZViewController)
-//	var closet: FZPresenterCloset? { get }
-	func viewLoaded()
-	func viewAppeared()
+public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTPopulatableDishProtocol, DTPresentableDishProtocol, DTUpdatableProtocol {
+	init(orders: DTOrders, maitreD: DTMaitreD)//, dish: DTDish)
+//	var closet: DTWaiterCloset? { get }
+	func dishCooked()
+	func dishServed()
 }
 
 

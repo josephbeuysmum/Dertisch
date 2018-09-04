@@ -1,5 +1,5 @@
 //
-//  FZ_PX_LocalAccess.swift
+//  DT_PX_LocalAccess.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/02/2016.
@@ -8,23 +8,23 @@
 
 import UIKit
 
-extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
-//	public var closet: FZModelClassCloset { return closet_ }
+extension DTTemporaryValuesSousChef: DTTemporaryValuesSousChefProtocol {
+//	public var closet: DTKitchenCloset { return closet_ }
 	
 	
 	
-	public func activate() { is_activated = true }
+	public func startShift() { is_activated = true }
 	
-	public func getValue(by key: String, andAnnul: Bool? = false) -> FZStorableDataType? {
+	public func getValue(by key: String, andAnnul: Bool? = false) -> DTStorableDataType? {
 		guard let value = values_[key] else { return nil }
 		if andAnnul! { annulValue(by: key) }
 		return value
 	}
 	
-	// todo use FZStorableDataType protocol (or something damned similar) to make value more flexible than just String
-	public func set(_ value: FZStorableDataType, by key: String) {
+	// todo use DTStorableDataType protocol (or something damned similar) to make value more flexible than just String
+	public func set(_ value: DTStorableDataType, by key: String) {
 		values_[key] = value
-		signals_.transmit(signal: FZSignalConsts.valueSet, with: key)
+		orders_.make(order: DTOrderConsts.valueSet, with: key)
 	}
 	
 	public func annulValue(by key: String) {
@@ -33,9 +33,9 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	}
 	
 	public func removeValues() {
-//		guard let signals = closet_.signals(key_) else { return }
+//		guard let orders = closet_.orders(key_) else { return }
 		for (key, _) in values_ { _ = annulValue(by: key) }
-		signals_.transmit(signal: FZSignalConsts.valuesRemoved )
+		orders_.make(order: DTOrderConsts.valuesRemoved )
 	}
 	
 //	public func deleteValue ( by key: String ) {
@@ -49,32 +49,32 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 //	}
 //	
 //	// store ("set") the given property
-//	public func store ( value: String, by key: String, and caller: FZCaller? = nil ) {
-//		guard let signals = wornCloset.getSignals( by: key_.teeth ) else { return }
-//		let signalKey = FZSignalConsts.valueStored
-//		FZMisc.set( signals: signals, withKey: signalKey, andCaller: caller )
+//	public func store ( value: String, by key: String, and caller: DTCaller? = nil ) {
+//		guard let orders = wornCloset.getSignals( by: key_.teeth ) else { return }
+//		let signalKey = DTOrderConsts.valueStored
+//		DTMisc.set( orders: orders, withKey: signalKey, andCaller: caller )
 //		storage.setValue( value, forKey: key )
 //		storage.synchronize()
-//		signals.transmitSignalFor( key: signalKey )
+//		orders.transmitSignalFor( key: signalKey )
 //	}
 
 }
 
-public class FZTemporaryValuesProxy {
-	fileprivate let signals_: FZSignalsService
+public class DTTemporaryValuesSousChef {
+	fileprivate let orders_: DTOrders
 	
 	fileprivate var
 	is_activated: Bool,
-	values_: Dictionary<String, FZStorableDataType>
-//	key_: FZKey!,
-//	closet_: FZModelClassCloset!
+	values_: Dictionary<String, DTStorableDataType>
+//	key_: DTKey!,
+//	closet_: DTKitchenCloset!
 
-	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
-		signals_ = signals
+	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+		orders_ = orders
 		is_activated = false
 		values_ = [:]
-//		key_ = FZKey(self)
-//		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = DTKey(self)
+//		closet_ = DTKitchenCloset(self, key: key_)
 	}
 	
 	deinit {}

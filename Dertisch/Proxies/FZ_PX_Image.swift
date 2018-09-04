@@ -1,5 +1,5 @@
 //
-//  FZ_PX_Image.swift
+//  DT_PX_Image.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 25/11/2015.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-extension FZImageProxy: FZImageProxyProtocol {
-//	public var closet: FZModelClassCloset { return closet_ }
+extension DTImageSousChef: DTImageSousChefProtocol {
+//	public var closet: DTKitchenCloset { return closet_ }
 	
 	
 	
-	public func activate() {}
+	public func startShift() {}
 	
 	public func getImage ( by url: String, callback:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
 		guard callback != nil else { return nil }
 		let urlKey = getUrlKey( by: url )
-		signals_.scanOnceFor( signal: urlKey, scanner: self ) { [weak self] _, data in
+		orders_.listenForOneOff( order: urlKey, order: self ) { [weak self] _, data in
 			guard let strongSelf = self, strongSelf.assess( result: data ) else { return }
 			callback!( url, strongSelf.getLocalImage( by: url ) )
 		}
@@ -29,22 +29,22 @@ extension FZImageProxy: FZImageProxyProtocol {
 	}
 	
 	public func loadImage ( by url: String ) {
-		_ = signals_.scanOnceFor( signal: url, scanner: self ) { [weak self] _, data in
+		_ = orders_.listenForOneOff( order: url, order: self ) { [weak self] _, data in
 			guard let strongSelf = self else { return }
 			if let urlIndex = strongSelf.urlsResolving.index( of: url ) { strongSelf.urlsResolving.remove( at: urlIndex ) }
 			guard strongSelf.assess( result: data ) else { return }
-			let result = data as! FZApiResult
+			let result = data as! DTRawIngredient
 			strongSelf.raw_images[ url ] = result.data as? Data
-			strongSelf.signals_.transmit(signal: strongSelf.getUrlKey( by: url ), with: url )
+			strongSelf.orders_.make(order: strongSelf.getUrlKey( by: url ), with: url )
 		}
-		url_session.call( url: url, method: FZUrlSessionService.methods.GET )
+		url_session.call( url: url, method: DTUrlSessionSousChef.methods.GET )
 	}
 	
 	
 	
 	fileprivate func assess ( result: Any? ) -> Bool {
 		guard
-			let result = result as? FZApiResult,
+			let result = result as? DTRawIngredient,
 			let success = result.success,
 			success,
 			result.data is Data
@@ -59,40 +59,40 @@ extension FZImageProxy: FZImageProxyProtocol {
 	fileprivate func getUrlKey(by url: String) -> String { return "\(key_)_\(url)" }
 }
 
-public class FZImageProxy {
+public class DTImageSousChef {
 	// herehere...
 	/*
 	- test changes
 	- forced unwraps for url_session and key_ is unacceptable, revisit this
-	- rename signals to orders?
-	- rename interactors to headChefs etc?
+	- rename orders to orders?
+	- rename headChefs to headChefs etc?
 	*/
 	fileprivate let
-	signals_: FZSignalsService,
+	orders_: DTOrders,
 	key_: String
 
 	fileprivate var
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >,
-//	key_: FZKey!,
-	url_session: FZUrlSessionService!
-//	closet_: FZModelClassCloset!
+//	key_: DTKey!,
+	url_session: DTUrlSessionSousChef!
+//	closet_: DTKitchenCloset!
 
-	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
-		signals_ = signals
+	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+		orders_ = orders
 		key_ = NSUUID().uuidString
-		if let strongModelClasses = modelClasses {
+		if let strongModelClasses = kitchenStaffMembers {
 			for modelClass in strongModelClasses {
-				if type(of: modelClass) == FZUrlSessionService.self {
-					url_session = modelClass as! FZUrlSessionService
+				if type(of: modelClass) == DTUrlSessionSousChef.self {
+					url_session = modelClass as! DTUrlSessionSousChef
 					break
 				}
 			}
 		}
 		urlsResolving = []
 		raw_images = [:]
-//		key_ = FZKey(self)
-//		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = DTKey(self)
+//		closet_ = DTKitchenCloset(self, key: key_)
 	}
 	
 	deinit {}

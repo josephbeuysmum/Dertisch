@@ -1,94 +1,94 @@
  //
-//  FZ_SVsignals_.swift
+//  DT_SVorders_.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/02/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-extension FZSignalsService: FZSignalsServiceProtocol {
-	public func annul(signal key: String, scanner: AnyObject) {
-		annulSignal( by: key )
+extension DTOrders: DTOrdersProtocol {
+	public func cancel(order key: String, order: AnyObject) {
+		annulOrder( by: key )
 	}
 	
-	public func has(signal key: String) -> Bool { return signals_[key] != nil }
+	public func has(order key: String) -> Bool { return orders_[key] != nil }
 	
 	@discardableResult
-	public func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
-		return scanFor(callback: callback, key: key, scanner: scanner, scanContinuously: true)
+	public func listenFor(order key: String, order: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+		return make(callback: callback, key: key, order: order, isContinuous: true)
 	}
 	
-//	public func scanFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
-//		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: true)
+//	public func listenFor(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
+//		return make(delegate: delegate, key: key, order: order, isContinuous: true)
 //	}
 	
 	@discardableResult
-	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, callback: @escaping FZSignalCallback) -> Bool {
-		return scanFor(callback: callback, key: key, scanner: scanner, scanContinuously: false)
+	public func listenForOneOff(order key: String, order: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+		return make(callback: callback, key: key, order: order, isContinuous: false)
 	}
 	
-//	public func scanOnceFor(signal key: String, scanner: FZSignalReceivableProtocol, delegate: FZSignalCallbackDelegateProtocol) -> Bool {
-//		return scanFor(delegate: delegate, key: key, scanner: scanner, scanContinuously: false)
+//	public func listenForOneOff(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
+//		return make(delegate: delegate, key: key, order: order, isContinuous: false)
 //	}
 	
-	public func stopScanningFor(signal key: String, scanner: FZSignalReceivableProtocol) {
-		annulSignal(by: key)
+	public func stopWaitingFor(order key: String, order: DTOrderReceivableProtocol) {
+		annulOrder(by: key)
 	}
 	
-	public func transmit(signal key: String, with value: Any? = nil) {
-		guard var signal = signals_[key] else { return }
-		signal.transmit(with: value)
-		// permitting myself a comment here. adding this extra function 'removeSingleUseWavelengths()' because if we try to remove the wavelengths in the signal.transmit() function call the compiler will complain that we are potentially modifying the internal wave_lengths dictionary from two places simultaneously, which is obviously dangerous. The fact that we are accessing it from out here means it would be safe, but the compiler does not know that. I believe this is because FZSignals are structs, although I'm not sure yet
-		signal.removeSingleUseWavelengths()
-		signals_[key] = signal
+	public func make(order key: String, with value: Any? = nil) {
+		guard var order = orders_[key] else { return }
+		order.transmit(with: value)
+		// permitting myself a comment here. adding this extra function 'removeSingleUseWavelengths()' because if we try to remove the wavelengths in the order.transmit() function call the compiler will complain that we are potentially modifying the internal wave_lengths dictionary from two places simultaneously, which is obviously dangerous. The fact that we are accessing it from out here means it would be safe, but the compiler does not know that. I believe this is because DTOrders are structs, although I'm not sure yet
+		order.removeSingleUseWavelengths()
+		orders_[key] = order
 	}
 	
 	
 	
-	fileprivate func scanFor(
-		callback: @escaping FZSignalCallback,
+	fileprivate func make(
+		callback: @escaping DTOrderCallback,
 		key: String,
-		scanner: FZSignalReceivableProtocol,
-		scanContinuously: Bool) -> Bool {
-		createSignalIfNecessary(by: key)
-		return signals_[key]!.add(callback: callback, scanner: scanner, scansContinuously: scanContinuously)
+		order: DTOrderReceivableProtocol,
+		isContinuous: Bool) -> Bool {
+		createOrderIfNecessary(by: key)
+		return orders_[key]!.add(callback: callback, order: order, isContinuous: isContinuous)
 	}
 	
-	fileprivate func scanFor(
-		delegate: FZSignalCallbackDelegateProtocol,
+	fileprivate func make(
+		delegate: DTOrderCallbackDelegateProtocol,
 		key: String,
-		scanner: FZSignalReceivableProtocol,
-		scanContinuously: Bool) -> Bool {
-		createSignalIfNecessary(by: key)
-		return signals_[key]!.add(delegate: delegate, scanner: scanner, scansContinuously: scanContinuously)
+		order: DTOrderReceivableProtocol,
+		isContinuous: Bool) -> Bool {
+		createOrderIfNecessary(by: key)
+		return orders_[key]!.add(delegate: delegate, order: order, isContinuous: isContinuous)
 	}
 	
-	// if nothing is left scanning to this signal, it might as well be deleted
-	fileprivate func annulEmpty ( signal: FZSignal, key: String, scanner: AnyObject ) {
-//		loFeedback( "ANNUL EMPTY key: \( key ) signals: \( _getFZSignalWavelengthsDescription() )" )
-		guard !signal.hasScanners else { return }
-		annulSignal( by: key )
+	// if nothing is left scanning to this order, it might as well be deleted
+	fileprivate func annulEmpty ( order: DTOrder, key: String ){//}, order: AnyObject ) {
+//		loFeedback( "ANNUL EMPTY key: \( key ) orders: \( _getDTOrderDetailssDescription() )" )
+		guard !order.hasOrders else { return }
+		annulOrder( by: key )
 	}
 	
-	// annuls a signal
-	fileprivate func annulSignal ( by key: String ) {
-		guard has(signal: key) else { return }
-		signals_[key]!.removeAllWavelengths()
-		signals_.removeValue( forKey: key )
+	// annuls a order
+	fileprivate func annulOrder ( by key: String ) {
+		guard has(order: key) else { return }
+		orders_[key]!.removeAllDetails()
+		orders_.removeValue( forKey: key )
 	}
 	
-	// returns a signal by a key; creates the signal if it's missing
-	fileprivate func createSignalIfNecessary ( by key: String ) {
-		guard !has(signal: key) else { return }
-		signals_[key] = FZSignal( key )
+	// returns a order by a key; creates the order if it's missing
+	fileprivate func createOrderIfNecessary ( by key: String ) {
+		guard !has(order: key) else { return }
+		orders_[key] = DTOrder( key )
 	}
 }
 
-public class FZSignalsService {
-	fileprivate var signals_: Dictionary<String, FZSignal>
+public class DTOrders {
+	fileprivate var orders_: Dictionary<String, DTOrder>
 	
 	required public init () {
-		signals_ = [:]
+		orders_ = [:]
 	}
 	
 	deinit {}

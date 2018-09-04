@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Colors.swift
+//  DT_UT_Colors.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 28/09/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FZColors {
+public class DTColors {
 	// tints a view's background color
 	public static func color (views: [UIView], With color: UIColor) {
 		_ = views.map { view in view.backgroundColor = color }

@@ -1,5 +1,5 @@
 //
-//  FZ_VC_Page.swift
+//  DT_VC_Page.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 30/07/2017.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-extension FZPageViewController: FZSignalsEntitySetterProtocol {
-	public func set(signals: FZSignalsService) {
-		guard signals_service == nil else { return }
-		signals_service = signals
+extension DTPageDish {//}: DTOrdersEntitySetterProtocol {
+	public func set(orders: DTOrders) {
+		guard orders_ == nil else { return }
+		orders_ = orders
 	}
 	
-	public func deallocate() {}
+	public func cleanUp() {}
 }
 
-open class FZPageViewController: UIPageViewController {
-	fileprivate var signals_service: FZSignalsService?
+open class DTPageDish: UIPageViewController {
+	fileprivate var orders_: DTOrders?
 }

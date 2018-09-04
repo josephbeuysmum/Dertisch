@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Time.swift
+//  DT_UT_Time.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 19/04/2016.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FZTime {
+public class DTTime {
 	public enum intervalFormats { case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes }
 	
 	fileprivate static var _startTime: Date?

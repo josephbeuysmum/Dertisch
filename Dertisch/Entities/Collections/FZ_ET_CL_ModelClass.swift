@@ -1,74 +1,74 @@
 //
-//  FZ_ET_CL_ModelClassEntities.swift
+//  DT_ET_CL_ModelClassEntities.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/08/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-//extension FZModelClassCloset: FZModelClassClosetProtocol {
-//	public var bespoke: FZBespokeEntities { return bespoke_entities! }
+//extension DTKitchenCloset: DTKitchenClosetProtocol {
+//	public var bespoke: DTBespokeEntities { return bespoke_entities! }
 //
-//	public func bundledJson(_ key: FZKey?) -> FZBundledJsonService? {
+//	public func bundledJson(_ key: DTKey?) -> DTBundledJsonService? {
 //		return key?.teeth == key_ ? bundled_json : nil
 //	}
 //	
-//	public func coreData(_ key: FZKey?) -> FZCoreDataProxy? {
+//	public func coreData(_ key: DTKey?) -> DTCoreDataSousChef? {
 //		return key?.teeth == key_ ? core_data : nil
 //	}
 //	
-//	public func signals(_ key: FZKey?) -> FZSignalsService? {
-//		return key?.teeth == key_ ? signals_service : nil
+//	public func orders(_ key: DTKey?) -> DTOrders? {
+//		return key?.teeth == key_ ? orders_ : nil
 //	}
 //	
-//	public func urlSession(_ key: FZKey?) -> FZUrlSessionService? {
+//	public func urlSession(_ key: DTKey?) -> DTUrlSessionSousChef? {
 //		return key?.teeth == key_ ? url_session : nil
 //	}
 //	
-//	public func deallocate() {
-//		bundled_json?.deallocate()
-//		bespoke_entities?.deallocate()
-//		core_data?.deallocate()
-//		url_session?.deallocate()
+//	public func cleanUp() {
+//		bundled_json?.cleanUp()
+//		bespoke_entities?.cleanUp()
+//		core_data?.cleanUp()
+//		url_session?.cleanUp()
 //		bespoke_entities = nil
 //		core_data = nil
-//		signals_service = nil
+//		orders_ = nil
 //		url_session = nil
 //	}
 //	
-//	public func set(bundledJson: FZBundledJsonService) {
+//	public func set(bundledJson: DTBundledJsonService) {
 //		guard bundled_json == nil else { return }
 //		bundled_json = bundledJson
 //	}
 //
-//	public func set(coreData: FZCoreDataProxy) {
+//	public func set(coreData: DTCoreDataSousChef) {
 //		guard core_data == nil else { return }
 //		core_data = coreData
 //	}
 //	
-//	public func set(signalsService: FZSignalsService) {
-//		guard signals_service == nil else { return }
-//		signals_service = signalsService
+//	public func set(ordersService: DTOrders) {
+//		guard orders_ == nil else { return }
+//		orders_ = ordersService
 //	}
 //	
-//	public func set(urlSession: FZUrlSessionService) {
+//	public func set(urlSession: DTUrlSessionSousChef) {
 //		guard url_session == nil else { return }
 //		url_session = urlSession
 //	}
 //}
 //
-//public class FZModelClassCloset {
+//public class DTKitchenCloset {
 //	fileprivate let key_: String
 //
 //	fileprivate var
-//	bundled_json: FZBundledJsonService?,
-//	core_data: FZCoreDataProxy?,
-//	signals_service: FZSignalsService?,
-//	url_session: FZUrlSessionService?
+//	bundled_json: DTBundledJsonService?,
+//	core_data: DTCoreDataSousChef?,
+//	orders_: DTOrders?,
+//	url_session: DTUrlSessionSousChef?
 //	
-//	fileprivate lazy var bespoke_entities: FZBespokeEntities? = FZBespokeEntities()
+//	fileprivate lazy var bespoke_entities: DTBespokeEntities? = DTBespokeEntities()
 //	
-//	required public init(_ delegate: FZViperClassProtocol, key: FZKey) {
+//	required public init(_ delegate: DTSwitchClassProtocol, key: DTKey) {
 //		key_ = key.teeth
 //		guaranteeSingleInstanceOfSelf(within: delegate)
 //	}

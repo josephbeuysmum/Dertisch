@@ -1,5 +1,5 @@
 //
-//  FZ_PT_UT_Interactor.swift
+//  DT_PT_UT_Interactor.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 22/06/2017.
@@ -8,49 +8,49 @@
 
 import Foundation
 
-public extension FZInteractorProtocol {
+public extension DTHeadChefProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
-//	public var closet: FZInteractorCloset? {
-//		return FirstInstance().get(FZInteractorCloset.self, from: mirror_)
+//	public var closet: DTHeadChefCloset? {
+//		return FirstInstance().get(DTHeadChefCloset.self, from: mirror_)
 //	}
 	
-//	private var key_: FZKey? {
-//		return FirstInstance().get(FZKey.self, from: mirror_)
+//	private var key_: DTKey? {
+//		return FirstInstance().get(DTKey.self, from: mirror_)
 //	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	private var presenter_: FZPresenterProtocol? { return FirstInstance().get(FZPresenterProtocol.self, from: mirror_) }
-	private var signals_: FZSignalsService? { return FirstInstance().get(FZSignalsService.self, from: mirror_) }
+	private var waiter_: DTWaiterProtocol? { return FirstInstance().get(DTWaiterProtocol.self, from: mirror_) }
+	private var orders_: DTOrders? { return FirstInstance().get(DTOrders.self, from: mirror_) }
 
 	
 	
-	public func activate() {
+	public func startShift() {
 		guard
 //			let key = key_,
 //			let safeCloset = closet,
-			let presenterClassName = presenter_?.instanceDescriptor,
-			let signals = signals_
+			let waiterClassName = waiter_?.instanceDescriptor,
+			let orders = orders_
 			else { return }
-		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
+		_ = orders.listenFor(order: DTOrderConsts.waiterActivated, order: self) { _, data in
 			guard
-				let strongSelf = self as FZInteractorProtocol?,
-				let presenter = data as? FZPresenterProtocol,
-				presenter.instanceDescriptor == presenterClassName
+				let strongSelf = self as DTHeadChefProtocol?,
+				let waiter = data as? DTWaiterProtocol,
+				waiter.instanceDescriptor == waiterClassName
 				else { return }
 			var mutatingSelf = strongSelf
-			mutatingSelf.presenterActivated()
+			mutatingSelf.waiterActivated()
 		}
 		// todo why is this not simply in the closure immediately above?
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
-			_ = signals.stopScanningFor(signal: FZSignalConsts.presenterActivated, scanner: self)
+			_ = orders.stopWaitingFor(order: DTOrderConsts.waiterActivated, order: self)
 			timer.invalidate()
 		}
 	}
 }
 
-public protocol FZInteractorProtocol: FZViperClassProtocol {
-	init(signals: FZSignalsService, presenter: FZPresenterProtocol, dependencies: [FZModelClassProtocol]?)
-//	var closet: FZInteractorCloset? { get }
-	mutating func presenterActivated ()
+public protocol DTHeadChefProtocol: DTSwitchClassProtocol {
+	init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?)
+//	var closet: DTHeadChefCloset? { get }
+	mutating func waiterActivated ()
 }

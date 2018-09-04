@@ -1,5 +1,5 @@
 //
-//  FZ_SV_API.swift
+//  DT_SV_API.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 19/10/2015.
@@ -8,28 +8,28 @@
 
 import UIKit
 
-extension FZUrlSessionService: FZUrlSessionServiceProtocol {
+extension DTUrlSessionSousChef: DTUrlSessionSousChefProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-//	public var closet: FZModelClassCloset { return closet_ }
+//	public var closet: DTKitchenCloset { return closet_ }
 	
 	
 	
-	public func activate() {}
+	public func startShift() {}
 	
 	public func call (
 		url: String,
-		method: FZUrlSessionService.methods,
+		method: DTUrlSessionSousChef.methods,
 		parameters: Dictionary< String, String >? = nil,
-		scanner: FZSignalReceivableProtocol? = nil,
+		order: DTOrderReceivableProtocol? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
 		guard
 			ongoing_calls.index( of: url ) == nil,
 			let validUrl = URL( string: url )
 			else { return }
 		ongoing_calls.append( url )
-		if scanner != nil && callback != nil {
-			signals_.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
+		if order != nil && callback != nil {
+			orders_.listenForOneOff(order: url, order: order!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -66,7 +66,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	
-	// unadulterated transmission because FZImageProxy deals with post-processing
+	// unadulterated transmission because DTImageSousChef deals with post-processing
 	fileprivate func cast ( image data: Data, with url: String ) throws {
 		transmit( success: true, with: url, and: data )
 	}
@@ -74,7 +74,7 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	fileprivate func cast ( richText data: Data, with url: String ) throws {
 		do {
 			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
-			//			let success = json[ FZKeyConsts.success ] is Bool ? json[ FZKeyConsts.success ] as? Bool : nil
+			//			let success = json[ DTKeyConsts.success ] is Bool ? json[ DTKeyConsts.success ] as? Bool : nil
 			let castArray: [ Dictionary< String, Any > ]
 			if let rawData = json[ "data" ] {
 				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!
@@ -90,23 +90,23 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		signals_.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
+		orders_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
 	}
 }
 
-public class FZUrlSessionService {
-	fileprivate let signals_:FZSignalsService
+public class DTUrlSessionSousChef {
+	fileprivate let orders_:DTOrders
 	
 	fileprivate var
 	ongoing_calls: [ String ]
-//	key_: FZKey!,
-//	closet_: FZModelClassCloset!
+//	key_: DTKey!,
+//	closet_: DTKitchenCloset!
 	
-	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
-		signals_ = signals
+	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+		orders_ = orders
 		ongoing_calls = []
-//		key_ = FZKey(self)
-//		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = DTKey(self)
+//		closet_ = DTKitchenCloset(self, key: key_)
 //		time_out = 3.0
 	}
 	

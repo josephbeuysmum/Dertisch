@@ -49,12 +49,12 @@ The kitchen staff who take the ingredients and combine them into dishes. Staff a
 Head Chefs
 ----------
 
-The people who control the staff and the menu. Head Chefs are `interactors`, which have access to specific `proxies` in order to create particular combinations of data.
+The people who control the staff and the menu. Head Chefs are `headChefs`, which have access to specific `proxies` in order to create particular combinations of data.
 
 Waiters
 -------
 
-The people who take dishes from kitchen to table. Waiters are `presenters`, which are given data by `interactors` in order to populate and control `views`.
+The people who take dishes from kitchen to table. Waiters are `waiters`, which are given data by `headChefs` in order to populate and control `views`.
 
 Tables
 ------
@@ -70,13 +70,13 @@ How SWITCH/VIPER works in Dertisch
 -----------------------------------
 
 -   A customer makes an order (a `user` interacts with their device);
--   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
+-   the head chef instructs their staff as to the required dishes (the `headChef` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need asynchronously from their `services`);
--   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter` with data);
--   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
+-   the head chef gives the dishes to the waiter (the `headChef` calls its `waiter` with data);
+-   the waiter takes the dishes to the table (the `waiter` populates its `view` with data); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
-Dertisch Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
+Dertisch Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `DTOrders`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
 
 On the Model side:
 
@@ -88,9 +88,9 @@ On the Model side:
 
 And on the View side:
 
--	registration and presentation of ViewControllers with related Presenters and Interactors.
+-	registration and presentation of Dishs with related Presenters and Interactors.
 
-`Dertisch` Interactors work by implementing the `FZInteractorProtocol` protocol; Presenters by implementing the `FZPresenterProtocol` protocol; and ViewControllers by subclassing `FZViewController`. It uses **dependency injection** to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
+`Dertisch` Interactors work by implementing the `DTHeadChefProtocol` protocol; Presenters by implementing the `DTWaiterProtocol` protocol; and Dishs by subclassing `DTDish`. It uses **dependency injection** to register Interactor/Presenter/Dish/ModelClass relationships at start-up.
 
 ---------------
 Using Dertisch
@@ -98,34 +98,34 @@ Using Dertisch
 
 Dertisch allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
 
-	FZBundledJsonService
+	DTBundledJsonService
 	// provides simplified access to json config data bundled with the app
 
-	FZCoreDataProxy
+	DTCoreDataSousChef
 	// provides simplified access to Core Data data storage
 
-	FZImageProxy
+	DTImageSousChef
 	// provides capacity to load and get copies of images
 
-	FZRoutingService
-	// manages the addition and removal of ViewControllers and their relationships with Interactors and Presenters
+	DTMaitreD
+	// manages the addition and removal of Dishs and their relationships with Interactors and Presenters
 
-	FZSignalsService
+	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
 
-	FZTemporaryValuesProxy
+	DTTemporaryValuesSousChef
 	// provides app-wide storage for simple data in runtime memory
 
-	FZUrlSessionService
+	DTUrlSessionSousChef
 	// provides access to RESTful APIs
 
-These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `FZTemporaryValuesProxy` injected have *the same instance* of `FZTemporaryValuesProxy` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `FZTemporaryValuesProxy` elsewhere.^
+These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `DTTemporaryValuesSousChef` injected have *the same instance* of `DTTemporaryValuesSousChef` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValuesSousChef` elsewhere.^
 
 ^ *this currently means that all `Dertisch` model classes are exactly that: classes, although the longer term goal to make `Dertisch` class-free (with the exception of View classes, which are already unavoidably class-based).*
 
-Amongst other things, `FZRoutingService` is responsible for starting `Dertisch` apps, and `FZSignalsService` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
+Amongst other things, `DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
-Start up your `Dertisch` app by calling `FZRoutingService.start()` from your `AppDelegate`:
+Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelegate`:
 
 	import Dertisch
 	import UIKit
@@ -139,71 +139,71 @@ Start up your `Dertisch` app by calling `FZRoutingService.start()` from your `Ap
 			_ application: UIApplication,
 			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 			window = UIWindow(frame: UIScreen.main.bounds)
-			FZRoutingService().start(rootViewController: "SomeViewController", window: window!)
+			DTMaitreD().start(rootDish: "SomeDish", window: window!)
 			return true
 		}
 	}
 
-`FZRoutingService`'s start up routine includes a call to its own `registerDependencies()` function, which is where the app's required dependencies must be registered. Extend `FZRoutingService` to implement this function:
+`DTMaitreD`'s start up routine includes a call to its own `registerDependencies()` function, which is where the app's required kitchenStaff must be registered. Extend `DTMaitreD` to implement this function:
 
 	import Dertisch
 
-	extension FZRoutingService: FZRoutingServiceExtensionProtocol {
+	extension DTMaitreD: DTMaitreDExtensionProtocol {
 		public func registerDependencies(with key: String) {
-	//		register(FZCoreDataProxy.self, with: key)
-			register(FZTemporaryValuesProxy.self, with: key)
-			register(FZUrlSessionService.self, with: key)
-	//		register(FZImageProxy.self, with: key, injecting: [FZUrlSessionService.self])
-			register(SomeProxy.self, with: key)
-			register(SomeService.self, with: key, injecting: [SomeProxy.self])
+	//		register(DTCoreDataSousChef.self, with: key)
+			register(DTTemporaryValuesSousChef.self, with: key)
+			register(DTUrlSessionSousChef.self, with: key)
+	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSessionSousChef.self])
+			register(SomeSousChef.self, with: key)
+			register(SomeService.self, with: key, injecting: [SomeSousChef.self])
 			register(
-				"SomeViewController",
-				as: SomeViewController.self,
+				"SomeDish",
+				as: SomeDish.self,
 				with: SomeInteractor.self,
 				and: SomePresenter.self,
 				lockedBy: key,
-				andInjecting: [SomeProxy.self])
+				andInjecting: [SomeSousChef.self])
 		}
 	}
 
-In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.^^
+In the above example, because `DTCoreDataSousChef` and `DTImageSousChef` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.^^
 
 ^^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
-All `Dertisch` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
+All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSessionSousChef` injected as it depends upon it to load external images.
 
-The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` looks like this:
+The above code example features the two model classes `SomeSousChef` and `SomeService`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
 	import Dertisch
 
-	extension SomeProxy: FZModelClassProtocol {
-		var closet: FZModelClassCloset { return closet_ }
-		func activate() {}
-		mutating func deallocate() {}
+	extension SomeSousChef: DTKitchenProtocol {
+		var closet: DTKitchenCloset { return closet_ }
+		func startShift() {}
+		mutating func cleanUp() {}
 	}
 
-	class SomeProxy {
-		fileprivate var key_: FZKey!
-		fileprivate var closet_: FZModelClassCloset!
+	class SomeSousChef {
+		fileprivate var key_: DTKey!
+		fileprivate var closet_: DTKitchenCloset!
 
 		required init() {
-			key_ = FZKey(self)
-			closet_ = FZModelClassCloset(self, key: key_)
+			key_ = DTKey(self)
+			closet_ = DTKitchenCloset(self, key: key_)
 		}
 	}
 
 And adding your own functionality in looks like this:
 
-	protocol SomeProxyProtocol: FZModelClassProtocol {
+	protocol SomeSousChefProtocol: DTKitchenProtocol {
 		mutating func someFunction(someData: Any)
 	}
 
-	extension SomeProxy: SomeProxyProtocol {
+	extension SomeSousChef: SomeSousChefProtocol {
 		...
 		mutating func someFunction(someData: Any) {}
 	}
 
-`key_`, `closet_`, and `closet` are properties which allow dependencies to be injected by `FZRoutingService`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeProxy`. `key_` and `closet_` are forced unwrapped vars so that `self` can be injected into them at initialisation.^^^
+`key_`, `closet_`, and `closet` are properties which allow kitchenStaff to be injected by `DTMaitreD`, whilst simultaneously ensuring they are locked privately inside thereafter, and only available to - in this case - `SomeSousChef`. `key_` and `closet_` are forced unwrapped vars so that `self` can be injected into them at initialisation.^^^
 
 ^^^ *the purpose of which is to ensure that the object they are injected into can only have one instance of each, as multiple instances of either would cause runtime errors.*
 
@@ -213,18 +213,18 @@ A boilerplate `Dertisch` Interactor looks like this:
 
 	import Dertisch
 
-	extension SomeInteractor: FZInteractorProtocol {
-		mutating func presenterActivated() {}
-		mutating func deallocate() {}
+	extension SomeInteractor: DTHeadChefProtocol {
+		mutating func waiterActivated() {}
+		mutating func cleanUp() {}
 	}
 
 	struct SomeInteractor {
-		fileprivate var key_: FZKey!
-		fileprivate var closet_: FZInteractorCloset!
+		fileprivate var key_: DTKey!
+		fileprivate var closet_: DTHeadChefCloset!
 
 		init(){
-			key_ = FZKey(self)
-			closet_ = FZInteractorCloset(self, key: key_)
+			key_ = DTKey(self)
+			closet_ = DTHeadChefCloset(self, key: key_)
 		}
 	}
 
@@ -232,41 +232,41 @@ And a boilerplate `Dertisch` Presenter looks like this:
 
 	import Dertisch
 
-	extension SomePresenter: FZPresenterProtocol {
-		var closet: FZPresenterCloset? { return closet_ }
+	extension SomePresenter: DTWaiterProtocol {
+		var closet: DTWaiterCloset? { return closet_ }
 	}
 
 	struct SomePresenter {
-		fileprivate var key_: FZKey!
-		fileprivate var closet_: FZPresenterCloset!
+		fileprivate var key_: DTKey!
+		fileprivate var closet_: DTWaiterCloset!
 
 		init() {
-			key_ = FZKey(self)
-			closet_ = FZPresenterCloset(self, key: key_)
+			key_ = DTKey(self)
+			closet_ = DTWaiterCloset(self, key: key_)
 		}
 	}
 
-The `closet_` property in a model class, interactor, or presenter needs its accompanying `key_` property to access the properties stored within it, and because both are fileprivate properties, only the owning object - the `SomePresenter` struct in the above example, say - can access it.
+The `closet_` property in a model class, headChef, or waiter needs its accompanying `key_` property to access the properties stored within it, and because both are fileprivate properties, only the owning object - the `SomePresenter` struct in the above example, say - can access it.
 
 There are four additional functions that can be implemented if required.
 
-	extension SomePresenter: FZPresenterProtocol {
+	extension SomePresenter: DTWaiterProtocol {
 		...
-		func viewLoaded() {}
-		mutating func populate<T>(with data: T?) {}
-		func viewAppeared() {}
-		mutating func deallocate() {}
+		func dishCooked() {}
+		mutating func serve<T>(with data: T?) {}
+		func dishServed() {}
+		mutating func cleanUp() {}
 	}
 
 These functions are hopefully self-explanatory, and they are called in the order they are listed above.
 
-A boilerplate `Dertisch` ViewController looks like this:
+A boilerplate `Dertisch` Dish looks like this:
 
 	import Dertisch
 
-	class SomeViewController: FZViewController {}
+	class SomeDish: DTDish {}
 
-ViewControllers are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
+Dishs are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` Dish being required to extend the `DTDish` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
 
 ---------------------
 Indepth Documentation
@@ -282,20 +282,20 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 
 -	replace `closet_` properties with init functions with optional params;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
--	allow multiple `FZInteractorProtocol` instances to be associated with a single `FZPresenterProtocol` instance;
+-	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
 -	make Interactors optional [at registration] so some screens can be entirely Presenter controlled;
 -	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
 -	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
 -	make utils functions native class extensions instead;
--	new `MetricsProxy` for serving device-specific numeric constants;
--	new `LanguageProxy` for multi-lingual capabilities;
+-	new `MetricsSousChef` for serving device-specific numeric constants;
+-	new `LanguageSousChef` for multi-lingual capabilities;
 -	new `FirebaseService`;
 -	create example boilerplate app;
--	replace `deallocate()` functions with weak vars etc.;
--	force `FZCoreDataProxy` to take `dataModelName` at start up;
+-	replace `cleanUp()` functions with weak vars etc.;
+-	force `DTCoreDataSousChef` to take `dataModelName` at start up;
 -	remove `...Protocol` from protocol names?
--	reintroduce timeout stopwatch to `FZUrlSessionService`;
--	complete list of MIME types in `FZUrlSessionService`;
+-	reintroduce timeout stopwatch to `DTUrlSessionSousChef`;
+-	complete list of MIME types in `DTUrlSessionSousChef`;
 -   use cuisine as a metaphor instead of tailoring.
 
 -----------------------

@@ -1,12 +1,12 @@
 //
-//  FZ_UT_LogConsts.swift
+//  DT_UT_LogConsts.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct FZLogConsts {
+public struct DTLogConsts {
 	// used by log functions to decide what to log or not
 	public struct logLevel {
 		static let
@@ -18,6 +18,6 @@ public struct FZLogConsts {
 	}
 	
 	// the current list of types of logs that should be written to the output window
-	// add logLevel.feedback if you want signals output
+	// add logLevel.feedback if you want orders output
 	public static let logModes = [ logLevel.output, logLevel.info, logLevel.warning ]//, logLevel.feedback ]
 }

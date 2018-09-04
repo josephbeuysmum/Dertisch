@@ -1,56 +1,56 @@
 //
-//  FZ_ET_CL_PresenterEntities.swift
+//  DT_ET_CL_PresenterEntities.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/08/2017.
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-//extension FZPresenterCloset: FZPresenterClosetProtocol {
-//	public func routing(_ key: FZKey?) -> FZRoutingService? {
-//		return key?.teeth == key_ ? routing_service : nil
+//extension DTWaiterCloset: DTWaiterClosetProtocol {
+//	public func routing(_ key: DTKey?) -> DTMaitreD? {
+//		return key?.teeth == key_ ? maitre_dservice : nil
 //	}
 //	
-//	public func signals(_ key: FZKey?) -> FZSignalsService? {
-//		return key?.teeth == key_ ? signals_service : nil
+//	public func orders(_ key: DTKey?) -> DTOrders? {
+//		return key?.teeth == key_ ? orders_ : nil
 //	}
 //	
-//	public func viewController(_ key: FZKey?) -> FZViewController? {
-//		return key?.teeth == key_ ? view_controller : nil
+//	public func dishController(_ key: DTKey?) -> DTDish? {
+//		return key?.teeth == key_ ? dish_ : nil
 //	}
 //	
-//	public func deallocate() {
-//		view_controller?.deallocate()
-//		routing_service = nil
-//		view_controller = nil
+//	public func cleanUp() {
+//		dish_?.cleanUp()
+//		maitre_dservice = nil
+//		dish_ = nil
 //	}
 //	
-//	public func set(routing: FZRoutingService) {
-//		guard routing_service == nil else { return }
-//		routing_service = routing
+//	public func set(routing: DTMaitreD) {
+//		guard maitre_dservice == nil else { return }
+//		maitre_dservice = routing
 //	}
 //	
-//	public func set(signalsService: FZSignalsService) {
-//		guard signals_service == nil else { return }
-//		signals_service = signalsService
+//	public func set(ordersService: DTOrders) {
+//		guard orders_ == nil else { return }
+//		orders_ = ordersService
 //	}
 //	
-//	public func set(viewController: FZViewController) {
-//		guard view_controller == nil else { return }
-//		view_controller = viewController
+//	public func set(dish: DTDish) {
+//		guard dish_ == nil else { return }
+//		dish_ = dish
 //	}
 //}
 //
-//public class FZPresenterCloset {
+//public class DTWaiterCloset {
 //	fileprivate let key_: String
 //
 //	fileprivate var
-//	routing_service: FZRoutingService?,
-//	signals_service: FZSignalsService?,
-//	view_controller: FZViewController?,
+//	maitre_dservice: DTMaitreD?,
+//	orders_: DTOrders?,
+//	dish_: DTDish?,
 //	values: Dictionary<String, Any>?
 //	
-//	required public init(_ delegate: FZViperClassProtocol, key: FZKey) {
+//	required public init(_ delegate: DTSwitchClassProtocol, key: DTKey) {
 //		key_ = key.teeth
 //		guaranteeSingleInstanceOfSelf(within: delegate)
 //	}

@@ -1,15 +1,15 @@
 //
-//  FZ_ET_CoreData.swift
+//  DT_ET_CoreData.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public enum FZCDTypes { case bool, double, int, string }
+public enum DTCDTypes { case bool, double, int, string }
 
-//extension FZCDTypes: Equatable {
-//	public static func == (lhs: FZCDTypes, rhs: FZCDTypes) -> Bool {
+//extension DTCDTypes: Equatable {
+//	public static func == (lhs: DTCDTypes, rhs: DTCDTypes) -> Bool {
 //		switch (lhs, rhs) {
 //		case (.string, .string), (.int, .int), (.bool, .bool):		return true
 //		default:													return false
@@ -19,11 +19,11 @@ public enum FZCDTypes { case bool, double, int, string }
 
 
 
-public struct FZCDKey {
+public struct DTCDKey {
 	public let key: String
-	public let type: FZCDTypes
+	public let type: DTCDTypes
 	
-	public init (_ key: String, _ type: FZCDTypes) {
+	public init (_ key: String, _ type: DTCDTypes) {
 		self.key = key
 		self.type = type
 	}
@@ -31,32 +31,32 @@ public struct FZCDKey {
 
 
 
-public struct FZCDAttribute {
+public struct DTCDAttribute {
 	public let key: String
-	public let value: FZStorableDataType
+	public let value: DTStorableDataType
 	
-	public init (_ key: String, _ value: FZStorableDataType) {
+	public init (_ key: String, _ value: DTStorableDataType) {
 		self.key = key
 		self.value = value
 	}
 }
 
 
-public struct FZCDEntity: FZCDEntityProtocol {
-	fileprivate typealias TypesCollection = [String: FZCDTypes]
+public struct DTCDEntity: DTCDEntityProtocol {
+	fileprivate typealias TypesCollection = [String: DTCDTypes]
 	
-	public var attributes: [String: FZStorableDataType] { return attributes_ }
+	public var attributes: [String: DTStorableDataType] { return attributes_ }
 	public var name: String { return name_ }
 	
 	fileprivate let
 	name_: String,
 	types_: TypesCollection
 	
-	fileprivate var attributes_: [String: FZStorableDataType]
+	fileprivate var attributes_: [String: DTStorableDataType]
 	
 	init () { fatalError("init() has not been implemented") }
 	
-	public init (_ name: String, keys: [FZCDKey]) {
+	public init (_ name: String, keys: [DTCDKey]) {
 		name_ = name
 		attributes_ = [:]
 		var types: TypesCollection = [:]
@@ -66,8 +66,8 @@ public struct FZCDEntity: FZCDEntityProtocol {
 		types_ = types
 	}
 	
-//	mutating public func add (_ attribute: FZCDAttribute) {
-	mutating public func add(_ attribute: FZStorableDataType, by key: String) -> Bool {
+//	mutating public func add (_ attribute: DTCDAttribute) {
+	mutating public func add(_ attribute: DTStorableDataType, by key: String) -> Bool {
 		guard
 			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)
@@ -76,12 +76,12 @@ public struct FZCDEntity: FZCDEntityProtocol {
 		return true
 	}
 	
-fileprivate func assessValidity(of attribute: FZStorableDataType, by type: FZCDTypes) -> Bool {
+fileprivate func assessValidity(of attribute: DTStorableDataType, by type: DTCDTypes) -> Bool {
 		switch type {
-		case FZCDTypes.bool:	return attribute is Bool
-		case FZCDTypes.double:	return attribute is Double
-		case FZCDTypes.int:		return attribute is Int || attribute is Int16 || attribute is Int32 || attribute is Int64
-		case FZCDTypes.string:	return attribute is String
+		case DTCDTypes.bool:	return attribute is Bool
+		case DTCDTypes.double:	return attribute is Double
+		case DTCDTypes.int:		return attribute is Int || attribute is Int16 || attribute is Int32 || attribute is Int64
+		case DTCDTypes.string:	return attribute is String
 		}
 	}
 }

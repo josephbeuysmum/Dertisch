@@ -1,5 +1,5 @@
 //
-//  FZ_PX_CoreData.swift
+//  DT_PX_CoreData.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
@@ -8,22 +8,22 @@
 
 import CoreData
 
-public enum FZCDOperationTypes { case delete, retrieve, store, update }
+public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
-extension FZCoreDataProxy: FZCoreDataProxyProtocol {
-//	public var closet: FZModelClassCloset { return closet_ }
+extension DTCoreDataSousChef: DTCoreDataSousChefProtocol {
+//	public var closet: DTKitchenCloset { return closet_ }
 	
 	public var dataModelName: String? {
 		get { return data_model_name }
 		set {
-			guard data_model_name == nil else { fatalError("Currently FZCoreDataProxy dataModelName can only be set once") }
+			guard data_model_name == nil else { fatalError("Currently DTCoreDataSousChef dataModelName can only be set once") }
 			data_model_name = newValue
 		}
 	}
 	
 	
 	
-	public func delete(entityName: String, _ callback: @escaping FZCDDeletionCallback) {
+	public func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -36,7 +36,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-	public func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FZCDDeletionCallback) {
+	public func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -61,7 +61,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping FZCDCallback) {
+	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping DTCDCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		if let scopedPredicate = predicate {
@@ -78,7 +78,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 				}
 				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 //				self.worn_closet.getSignals(by: self.key_.teeth)?.transmitSignal(
-//					by: self.getSignalKey(by: entityName, and: FZCDOperationTypes.retrieve),
+//					by: self.getSignalKey(by: entityName, and: DTCDOperationTypes.retrieve),
 //					with: safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
 		}
@@ -88,7 +88,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-	public func store(_ entity: FZCDEntity, _ callback: @escaping FZCDCallback) {
+	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback) {
 		var managedEntity: NSManagedObject?
 		persistentContainer?.performBackgroundTask { privateContext in
 			managedEntity = NSEntityDescription.insertNewObject( forEntityName: entity.name, into: privateContext )
@@ -106,7 +106,7 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 		}
 	}
 	
-	public func update(_ entityName: String, to attribute: FZCDAttribute, by predicate: String? = nil, _ callback: @escaping FZCDCallback) {
+	public func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String? = nil, _ callback: @escaping DTCDCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		privateContext.perform {
 			let updateRequest = NSBatchUpdateRequest(entityName: entityName)
@@ -134,10 +134,10 @@ extension FZCoreDataProxy: FZCoreDataProxyProtocol {
 	}
 }
 
-public class FZCoreDataProxy {
+public class DTCoreDataSousChef {
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
-			loWarning("FZCoreDataProxy dataModelName is nil")
+			loWarning("DTCoreDataSousChef dataModelName is nil")
 			return nil
 		}
 		let container = NSPersistentContainer(name: dmn)
@@ -147,19 +147,19 @@ public class FZCoreDataProxy {
 		return container
 	}()
 	
-	fileprivate let signals_:FZSignalsService
+	fileprivate let orders_:DTOrders
 	
 	fileprivate var
 	is_activated: Bool,
-//	key_: FZKey!,
-//	closet_: FZModelClassCloset!,
+//	key_: DTKey!,
+//	closet_: DTKitchenCloset!,
 	data_model_name: String?
 
-	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
-		signals_ = signals
+	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+		orders_ = orders
 		is_activated = false
-//		key_ = FZKey(self)
-//		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = DTKey(self)
+//		closet_ = DTKitchenCloset(self, key: key_)
 	}
 	
 	deinit {}

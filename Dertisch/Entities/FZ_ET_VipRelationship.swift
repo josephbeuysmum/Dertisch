@@ -1,16 +1,16 @@
 //
-//  FZ_ET_VipRelationship.swift
+//  DT_ET_VipRelationship.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 13/03/2018.
 //
 
 // todo a bunch more files can be made internal, no?
-internal struct FZVipRelationship {
+internal struct DTVipRelationship {
 	let
-	viewControllerType: FZViewControllerProtocol.Type,
-	interactorType: FZInteractorProtocol.Type,
-	presenterType: FZPresenterProtocol.Type,
-	interactorDependencyTypes: [FZModelClassProtocol.Type]?
+	dishType: DTDishProtocol.Type,
+	headChefType: DTHeadChefProtocol.Type,
+	waiterType: DTWaiterProtocol.Type,
+	kitchenStaffTypes: [DTKitchenProtocol.Type]?
 }
 

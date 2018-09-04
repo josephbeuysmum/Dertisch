@@ -1,5 +1,5 @@
 //
-//  FZ_PX_Settings.swift
+//  DT_PX_Settings.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/07/2018.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FZJsonSettings {
+public struct DTJsonSettings {
 	let settings: Dictionary<String, String>
 	
 	public subscript(key: String) -> String? {
@@ -15,11 +15,11 @@ public struct FZJsonSettings {
 	}
 }
 
-extension FZBundledJsonService: FZBundledJsonServiceProtocol {
-//	public var closet: FZModelClassCloset { return closet_ }
-	public var settings: FZJsonSettings? { return settings_ }
+extension DTBundledJsonService: DTBundledJsonServiceProtocol {
+//	public var closet: DTKitchenCloset { return closet_ }
+	public var settings: DTJsonSettings? { return settings_ }
 	
-	public func activate() {}
+	public func startShift() {}
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard
@@ -55,43 +55,43 @@ extension FZBundledJsonService: FZBundledJsonServiceProtocol {
 	}
 	
 	fileprivate func parseSettings() {
-		guard let decodedSettings = decode(json: FZPrivateSettings.CodingKeys.data.rawValue, into: FZPrivateSettings.self) else { return }
+		guard let decodedSettings = decode(json: DTPrivateSettings.CodingKeys.data.rawValue, into: DTPrivateSettings.self) else { return }
 		var settings: Dictionary<String, String> = [:]
 		for setting in decodedSettings.data {
 			guard settings[setting.key] == nil else { fatalError("DUPLICATED SETTING") }
 			settings[setting.key] = setting.value
 		}
-		settings_ = FZJsonSettings(settings: settings)
+		settings_ = DTJsonSettings(settings: settings)
 	}
 }
 
-public class FZBundledJsonService {
-	fileprivate let signals_:FZSignalsService
+public class DTBundledJsonService {
+	fileprivate let orders_:DTOrders
 	
 	fileprivate var
-//	key_: FZKey!,
-//	closet_: FZModelClassCloset!,
-	settings_: FZJsonSettings?
+//	key_: DTKey!,
+//	closet_: DTKitchenCloset!,
+	settings_: DTJsonSettings?
 	
-	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
-		signals_ = signals
-//		key_ = FZKey(self)
-//		closet_ = FZModelClassCloset(self, key: key_)
+	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+		orders_ = orders
+//		key_ = DTKey(self)
+//		closet_ = DTKitchenCloset(self, key: key_)
 		parseSettings()
 	}
 	
 	deinit {}
 }
 
-fileprivate struct FZPrivateSettings: Decodable {
-	let data: [FZPrivateSetting]
+fileprivate struct DTPrivateSettings: Decodable {
+	let data: [DTPrivateSetting]
 	
 	enum CodingKeys: String, CodingKey {
 		case data = "settings"
 	}
 }
 
-fileprivate struct FZPrivateSetting: Decodable {
+fileprivate struct DTPrivateSetting: Decodable {
 	let key: String
 	let value: String
 }

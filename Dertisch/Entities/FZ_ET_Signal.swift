@@ -1,52 +1,52 @@
 //
-//  FZ_ET_Signal.swift
+//  DT_ET_Signal.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 23/03/2018.
 //  Copyright © 2018 Rich Text Lengthat Ltd. All rights reserved.
 //
 
-extension FZSignal: FZSignalProtocol {
-	public var hasScanners: Bool { return wave_lengths.count > 0 }
+extension DTOrder: DTOrderProtocol {
+	public var hasOrders: Bool { return wave_lengths.count > 0 }
 	
-	public mutating func deallocate() {}
+	public mutating func cleanUp() {}
 	
-	public mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
-		return add(wavelength: FZSignalWavelength(
+	public mutating func add(callback: @escaping DTOrderCallback, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
+		return add(wavelength: DTOrderDetails(
 			key: transmissionName,
-			scanner: scanner,
-			scansContinuously: scansContinuously,
+			order: order,
+			isContinuous: isContinuous,
 			delegate: nil,
 			callback: callback))
 	}
 	
-	public mutating func add(delegate: FZSignalCallbackDelegateProtocol, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool {
-		return add(wavelength: FZSignalWavelength(
+	public mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
+		return add(wavelength: DTOrderDetails(
 			key: transmissionName,
-			scanner: scanner,
-			scansContinuously: scansContinuously,
+			order: order,
+			isContinuous: isContinuous,
 			delegate: delegate,
 			callback: nil))
 	}
 	
-	public mutating func remove(scanner: FZSignalReceivableProtocol) {
-		var tempWavelength = FZSignalWavelength(key: transmissionName, scanner: scanner)
+	public mutating func cancel(order: DTOrderReceivableProtocol) {
+		var tempWavelength = DTOrderDetails(key: transmissionName, order: order)
 		let key = tempWavelength.description
-		tempWavelength.deallocate()
+		tempWavelength.cleanUp()
 		removeWavelength(by: key)
 	}
 	
-	public mutating func removeAllWavelengths() {
+	public mutating func removeAllDetails() {
 		wave_lengths.forEach { wavelength in
 			var mutatableWavelength = wavelength.value
-			mutatableWavelength.deallocate()
+			mutatableWavelength.cleanUp()
 		}
 		wave_lengths.removeAll()
 	}
 		
 	public mutating func removeSingleUseWavelengths() {
 		wave_lengths.forEach { wavelength in
-			guard !wavelength.value.scansContinuously else { return }
+			guard !wavelength.value.isContinuous else { return }
 			self.removeWavelength(by: wavelength.value.description)
 		}
 	}
@@ -55,14 +55,14 @@ extension FZSignal: FZSignalProtocol {
 		wave_lengths.forEach { wavelengthReference in
 			var wavelength = wavelengthReference.value
 			switch wavelength.returnMethod {
-			case FZSignalWavelength.returnMethods.callback:		wavelength.callback!(transmissionName, value)
-			case FZSignalWavelength.returnMethods.delegate:		wavelength.delegate!.signalTransmission(name: transmissionName, data: value)
-			case FZSignalWavelength.returnMethods.none:			()
+			case DTOrderDetails.returnMethods.callback:		wavelength.callback!(transmissionName, value)
+			case DTOrderDetails.returnMethods.delegate:		wavelength.delegate!.orderTransmission(name: transmissionName, data: value)
+			case DTOrderDetails.returnMethods.none:			()
 			}
 		}
 	}
 	
-	fileprivate mutating func add(wavelength: FZSignalWavelength) -> Bool {
+	fileprivate mutating func add(wavelength: DTOrderDetails) -> Bool {
 		let key = wavelength.description
 		guard wave_lengths[key] == nil else { return false }
 		wave_lengths[key] = wavelength
@@ -71,18 +71,18 @@ extension FZSignal: FZSignalProtocol {
 	
 	fileprivate mutating func removeWavelength(by key: String) {
 		guard var wavelength = wave_lengths.removeValue(forKey: key) else { return }
-		wavelength.deallocate()
+		wavelength.cleanUp()
 	}
 }
 
-// signals_ are the actual signals,
+// orders_ are the actual orders,
 // whilst wave_lengths are references to the classes that observe them
 // a signal may have many signatures, but a signature only has one signal
 
-public struct FZSignal {
+public struct DTOrder {
 	public var transmissionName: String
 	
-	fileprivate var wave_lengths: Dictionary<String, FZSignalWavelength>
+	fileprivate var wave_lengths: Dictionary<String, DTOrderDetails>
 	
 	public init (_ transmissionName: String) {
 		self.transmissionName = transmissionName

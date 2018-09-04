@@ -1,5 +1,5 @@
 //
-//  FZ_ETsignals_ignature.swift
+//  DT_ETorders_ignature.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 04/04/2016.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// FZSignalWavelength stores a uniquely identifiable way to track signal scanners, with a key and a flag denoting whether the signal is permanently observed or just a one-off
-extension FZSignalWavelength {
+// DTOrderDetails stores a uniquely identifiable way to track signal orders, with a key and a flag denoting whether the signal is permanently observed or just a one-off
+extension DTOrderDetails {
 	public enum returnMethods { case callback, delegate, none }
 	
 	public var description: String {
@@ -24,34 +24,34 @@ extension FZSignalWavelength {
 		}
 	}
 	
-	public mutating func deallocate() {
-		scanner_ = nil
+	public mutating func cleanUp() {
+		order_ = nil
 	}
 }
 
-public struct FZSignalWavelength {
+public struct DTOrderDetails {
 	public let
 	key: String,
-	scansContinuously: Bool,
-	callback: FZSignalCallback?
+	isContinuous: Bool,
+	callback: DTOrderCallback?
 	
-	public var delegate: FZSignalCallbackDelegateProtocol?
+	public var delegate: DTOrderCallbackDelegateProtocol?
 	
 	fileprivate let id_: String
 	
-	fileprivate var scanner_: FZSignalReceivableProtocol?
+	fileprivate var order_: DTOrderReceivableProtocol?
 	
 	init(
 		key: String,
-		scanner: FZSignalReceivableProtocol,
-		scansContinuously: Bool = true,
-		delegate: FZSignalCallbackDelegateProtocol? = nil,
-		callback: FZSignalCallback? = nil) {
+		order: DTOrderReceivableProtocol,
+		isContinuous: Bool = true,
+		delegate: DTOrderCallbackDelegateProtocol? = nil,
+		callback: DTOrderCallback? = nil) {
 		self.key = key
 		self.callback = callback
 		self.delegate = delegate
-		self.scansContinuously = scansContinuously
+		self.isContinuous = isContinuous
 		id_ = NSUUID().uuidString
-		scanner_ = scanner
+		order_ = order
 	}
 }

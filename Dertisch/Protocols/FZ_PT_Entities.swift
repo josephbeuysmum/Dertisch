@@ -1,44 +1,44 @@
 //
-//  FZ_PT_Entities.swift
+//  DT_PT_Entities.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-//public protocol FZBespokeEntitiesEntityProtocol {
-//	var bespoke: FZBespokeEntities { get }
+//public protocol DTBespokeEntitiesEntityProtocol {
+//	var bespoke: DTBespokeEntities { get }
 //}
 
-public protocol FZCDEntityProtocol {
-	var attributes: [String: FZStorableDataType] { get }
+public protocol DTCDEntityProtocol {
+	var attributes: [String: DTStorableDataType] { get }
 	var name: String { get }
-	init (_ name: String, keys: [FZCDKey])
-	mutating func add(_ attribute: FZStorableDataType, by key: String) -> Bool
+	init (_ name: String, keys: [DTCDKey])
+	mutating func add(_ attribute: DTStorableDataType, by key: String) -> Bool
 }
 
-public protocol FZKeyProtocol: FZSingleInstanceProtocol {
+public protocol DTKeyProtocol: DTSingleInstanceProtocol {
 	var teeth: String { get }
-	init(_ delegate: FZViperClassProtocol)
+	init(_ delegate: DTSwitchClassProtocol)
 }
 
-public protocol FZObject: Hashable {}
+public protocol DTObject: Hashable {}
 
-public protocol FZSignalProtocol: FZDeallocatableProtocol {
-	var hasScanners: Bool { get }
+public protocol DTOrderProtocol: DTDeallocatableProtocol {
+	var hasOrders: Bool { get }
 	init ( _ transmission: String )
-	mutating func add(callback: @escaping FZSignalCallback, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool
-	mutating func add(delegate: FZSignalCallbackDelegateProtocol, scanner: FZSignalReceivableProtocol, scansContinuously: Bool) -> Bool
-	mutating func remove(scanner: FZSignalReceivableProtocol)
-	mutating func removeAllWavelengths()
+	mutating func add(callback: @escaping DTOrderCallback, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool
+	mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool
+	mutating func cancel(order: DTOrderReceivableProtocol)
+	mutating func removeAllDetails()
 	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )
 }
 
-public protocol FZStorableDataType {}
+public protocol DTStorableDataType {}
 
-extension Bool: FZStorableDataType {}
-extension Double: FZStorableDataType {}
-extension Float: FZStorableDataType {}
-extension Int: FZStorableDataType {}
-extension String: FZStorableDataType {}
+extension Bool: DTStorableDataType {}
+extension Double: DTStorableDataType {}
+extension Float: DTStorableDataType {}
+extension Int: DTStorableDataType {}
+extension String: DTStorableDataType {}

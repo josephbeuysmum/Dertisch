@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Extensions.swift
+//  DT_UT_Extensions.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/02/2016.
@@ -46,7 +46,7 @@ public extension Date {
 		if hours(from: date) > 0 { return "\(hours(from: date))h" }
 		if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
 		if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
-		return FZCharConsts.emptyString
+		return DTCharConsts.emptyString
 	}
 }
 
@@ -103,9 +103,9 @@ public extension UIColor {
 			let start = hex.index(hex.startIndex, offsetBy: 1)
 			let hexColor = String(hex.suffix(from: start))
 			if hexColor.count == 8 {
-				let scanner = Scanner(string: hexColor)
+				let order = Scanner(string: hexColor)
 				var hexNumber: UInt64 = 0
-				if scanner.scanHexInt64(&hexNumber) {
+				if order.scanHexInt64(&hexNumber) {
 					red = CGFloat((hexNumber & 0xff000000) >> 24) / 255
 					green = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
 					blue = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255

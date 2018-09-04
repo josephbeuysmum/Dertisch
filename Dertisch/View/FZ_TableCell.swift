@@ -1,5 +1,5 @@
 //
-//  FZ_TableCell.swift
+//  DT_TableCell.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-public protocol FZTableViewCellProtocol: class, FZPopulatableViewProtocol {}
+public protocol DTTableViewCellProtocol: class, DTPopulatableDishProtocol {}
 
-open class FZTableViewCell: UITableViewCell, FZTableViewCellProtocol {
-	open func populate<T>(with data: T?) {}
+open class DTTableViewCell: UITableViewCell, DTTableViewCellProtocol {
+	open func serve<T>(with data: T?) {}
 }

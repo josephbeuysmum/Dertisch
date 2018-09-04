@@ -1,5 +1,5 @@
 //
-//  FZ_PT_SV_A.swift
+//  DT_PT_SV_A.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-public protocol FZRoutingServiceProtocol: FZRoutingServiceRegistrarProtocol {
+public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 	var hasPopover: Bool { get }
-	func add(rootViewController id: String, from storyboard: String?)
+	func add(rootDish id: String, from storyboard: String?)
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertControllerStyle?)
-	func createNibFrom(name nibName: String, for owner: FZViewController) -> UIView?
-	func create(_ viewControllerId: String, from storyboard: String?) -> FZViewController?
+	func createNibFrom(name nibName: String, for owner: DTDish) -> UIView?
+	func create(_ dishId: String, from storyboard: String?) -> DTDish?
 //	func createAlertWith(
 //		title: String,
 //		message: String,
@@ -21,25 +21,25 @@ public protocol FZRoutingServiceProtocol: FZRoutingServiceRegistrarProtocol {
 //		handler: @escaping ((UIAlertAction) -> Void),
 //		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
 	func dismissPopover()
-	func popover(_ viewControllerId: String, inside rect: CGRect?, from storyboard: String?)
-	func present(_ viewControllerId: String, animated: Bool?, via presentationType: Presentations?, from storyboard: String?)
-	func start(rootViewController: String, window: UIWindow, storyboard: String?)
+	func popover(_ dishId: String, inside rect: CGRect?, from storyboard: String?)
+	func serve(_ dishId: String, animated: Bool?, via presentationType: Presentations?, from storyboard: String?)
+	func start(rootDish: String, window: UIWindow, storyboard: String?)
 }
 
-public protocol FZRoutingServiceExtensionProtocol {
+public protocol DTMaitreDExtensionProtocol {
 	func registerDependencies(with key: String)
 }
 
-public protocol FZRoutingServiceRegistrarProtocol {
+public protocol DTMaitreDRegistrarProtocol {
 	func register(
-		_ modelClassType: FZModelClassProtocol.Type,
+		_ modelClassType: DTKitchenProtocol.Type,
 		with key: String,
-		injecting dependencyTypes: [FZModelClassProtocol.Type]?)
+		injecting dependencyTypes: [DTKitchenProtocol.Type]?)
 	func register(
-		_ viewControllerId: String,
-		as viewControllerType: FZViewControllerProtocol.Type,
-		with interactorType: FZInteractorProtocol.Type,
-		and presenterType: FZPresenterProtocol.Type,
+		_ dishId: String,
+		as dishType: DTDishProtocol.Type,
+		with headChefType: DTHeadChefProtocol.Type,
+		and waiterType: DTWaiterProtocol.Type,
 		lockedBy key: String,
-		andInjecting interactorDependencyTypes: [FZModelClassProtocol.Type]?)
+		andInjecting kitchenStaffTypes: [DTKitchenProtocol.Type]?)
 }

@@ -1,12 +1,12 @@
 //
-//  FZ_UT_CommonPhrasesConsts.swift
+//  DT_UT_CommonPhrasesConsts.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct FZCommonPhrasesConsts {
+public struct DTCommonPhrasesConsts {
 	public static let
 	Activated = "Activated",
 	Added = "Added",
@@ -22,7 +22,7 @@ public struct FZCommonPhrasesConsts {
 	Stored = "Stored",
 	Updated = "Updated",
 	View = "View",
-	ViewController = "\( View )\( Controller )"
+	Dish = "\( View )\( Controller )"
 
 //	Account = "Account",
 //	Accounts = "\( Account )s",
@@ -43,7 +43,7 @@ public struct FZCommonPhrasesConsts {
 //	Page = "Page",
 //	Ping = "Ping",
 //	Presenter = "Presenter",
-//	Proxy = "Proxy",
+//	SousChef = "SousChef",
 //	Reloaded = "Reloaded",
 //	Released = "Released",
 //	Resolved = "Resolved",

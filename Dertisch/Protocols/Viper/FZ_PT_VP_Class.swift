@@ -1,13 +1,13 @@
 //
-//  FZ_PT_VPworn_closet.swift
+//  DT_PT_VPworn_closet.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 13/02/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZViperClassProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
+public protocol DTSwitchClassProtocol: DTDeallocatableProtocol, DTOrderReceivableProtocol {
 	var instanceDescriptor: String { get }
 //	init()
-	func activate()
+	func startShift()
 }

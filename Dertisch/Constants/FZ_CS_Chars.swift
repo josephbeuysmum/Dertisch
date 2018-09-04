@@ -1,5 +1,5 @@
 //
-//  FZ_UT_CharConsts.swift
+//  DT_UT_CharConsts.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
@@ -8,7 +8,7 @@
 
 // set of popular chars, created so as to ensure that an ampersand (say)
 // in one class is the same as an ampersand in another
-public struct FZCharConsts {
+public struct DTCharConsts {
 	public static let
 	ampersand =					"&",
 	asterisk =					"*",

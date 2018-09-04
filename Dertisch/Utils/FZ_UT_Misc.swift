@@ -1,5 +1,5 @@
 //
-//  FZ_UT_Misc.swift
+//  DT_UT_Misc.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/06/2017.
@@ -8,16 +8,16 @@
 
 //import UIKit
 
-//public class FZMisc {
+//public class DTMisc {
 //	public static func set (
-//		signals: FZSignalsService,
+//		orders: DTOrders,
 //		withKey key: String,
 //		data: Any? = nil,
-//		andCaller caller: FZCaller? ) {
+//		andCaller caller: DTCaller? ) {
 //		guard caller != nil else { return }
-//		signals.scanOnceFor(signal: key, scanner: caller!.caller!, callback: caller!.callback! )
+//		orders.listenForOneOff(order: key, order: caller!.caller!, callback: caller!.callback! )
 ////		caller!.annul()
-//		signals.transmitSignalFor( key: key, data: data )
+//		orders.transmitSignalFor( key: key, data: data )
 //	}
 //}
 
