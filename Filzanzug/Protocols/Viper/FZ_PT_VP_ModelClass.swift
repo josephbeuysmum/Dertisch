@@ -17,5 +17,7 @@ public extension FZModelClassProtocol {
 }
 
 public protocol FZModelClassProtocol: FZViperClassProtocol {
-	var closet: FZModelClassCloset { get }
+	init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?)
+//	init()
+//	var closet: FZModelClassCloset { get }
 }

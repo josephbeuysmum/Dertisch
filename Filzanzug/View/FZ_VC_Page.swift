@@ -9,9 +9,9 @@
 import UIKit
 
 extension FZPageViewController: FZSignalsEntitySetterProtocol {
-	public func set(signalsService: FZSignalsService) {
+	public func set(signals: FZSignalsService) {
 		guard signals_service == nil else { return }
-		signals_service = signalsService
+		signals_service = signals
 	}
 	
 	public func deallocate() {}

@@ -6,9 +6,9 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZBespokeEntitiesEntityProtocol {
-	var bespoke: FZBespokeEntities { get }
-}
+//public protocol FZBespokeEntitiesEntityProtocol {
+//	var bespoke: FZBespokeEntities { get }
+//}
 
 public protocol FZCDEntityProtocol {
 	var attributes: [String: FZStorableDataType] { get }

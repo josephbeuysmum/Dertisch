@@ -8,6 +8,6 @@
 
 public protocol FZViperClassProtocol: FZDeallocatableProtocol, FZSignalReceivableProtocol {
 	var instanceDescriptor: String { get }
-	init()
+//	init()
 	func activate()
 }

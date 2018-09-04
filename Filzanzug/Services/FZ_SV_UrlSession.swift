@@ -11,7 +11,7 @@ import UIKit
 extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
-	public var closet: FZModelClassCloset { return closet_ }
+//	public var closet: FZModelClassCloset { return closet_ }
 	
 	
 	
@@ -29,14 +29,14 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if scanner != nil && callback != nil {
-			closet_.signals(key_)?.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
+			signals_.scanOnceFor(signal: url, scanner: scanner!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
 		// todo serialise json for POSTs here?
 		
 		_ = URLSession.shared.dataTask( with: request ) { [weak self] data, response, error in
-			guard let safeSelf = self else { return }
+			guard let strongSelf = self else { return }
 			guard error == nil else {
 				lo( "todo ERROR to be handled here", url )
 				return
@@ -46,20 +46,20 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 				return
 			}
 			// todo reintroduce stopwatch so hanging calls can be cancelled?
-			if let callIndex = safeSelf.ongoing_calls.index( of: url ) {
-				safeSelf.ongoing_calls.remove( at: callIndex )
+			if let callIndex = strongSelf.ongoing_calls.index( of: url ) {
+				strongSelf.ongoing_calls.remove( at: callIndex )
 			}
 			do {
 				switch data!.mimeType {
-				case Data.mimeTypes.RTF:		try safeSelf.cast( richText: data!, with: url )
+				case Data.mimeTypes.RTF:		try strongSelf.cast( richText: data!, with: url )
 				case Data.mimeTypes.BMP,
 					 Data.mimeTypes.GIF,
 					 Data.mimeTypes.JPG,
-					 Data.mimeTypes.PNG:		try safeSelf.cast( image: data!, with: url )
+					 Data.mimeTypes.PNG:		try strongSelf.cast( image: data!, with: url )
 				default: ()						// todo process other mime types here as and when required...
 				}
 			} catch {
-				safeSelf.transmit( success: false, with: url )
+				strongSelf.transmit( success: false, with: url )
 			}
 			}.resume()
 	}
@@ -90,20 +90,23 @@ extension FZUrlSessionService: FZUrlSessionServiceProtocol {
 	
 	
 	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		closet_.signals(key_)?.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
+		signals_.transmit(signal: url, with: FZApiResult(success: success, url: url, data: data))
 	}
 }
 
 public class FZUrlSessionService {
-	fileprivate var
-	ongoing_calls: [ String ],
-	key_: FZKey!,
-	closet_: FZModelClassCloset!
+	fileprivate let signals_:FZSignalsService
 	
-	required public init() {
+	fileprivate var
+	ongoing_calls: [ String ]
+//	key_: FZKey!,
+//	closet_: FZModelClassCloset!
+	
+	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
+		signals_ = signals
 		ongoing_calls = []
-		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = FZKey(self)
+//		closet_ = FZModelClassCloset(self, key: key_)
 //		time_out = 3.0
 	}
 	

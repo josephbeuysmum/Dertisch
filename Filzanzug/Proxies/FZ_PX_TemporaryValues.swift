@@ -9,7 +9,7 @@
 import UIKit
 
 extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
-	public var closet: FZModelClassCloset { return closet_ }
+//	public var closet: FZModelClassCloset { return closet_ }
 	
 	
 	
@@ -24,7 +24,7 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	// todo use FZStorableDataType protocol (or something damned similar) to make value more flexible than just String
 	public func set(_ value: FZStorableDataType, by key: String) {
 		values_[key] = value
-		closet_.signals(key_)?.transmit(signal: FZSignalConsts.valueSet, with: key)
+		signals_.transmit(signal: FZSignalConsts.valueSet, with: key)
 	}
 	
 	public func annulValue(by key: String) {
@@ -33,9 +33,9 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 	}
 	
 	public func removeValues() {
-		guard let signals = closet_.signals(key_) else { return }
+//		guard let signals = closet_.signals(key_) else { return }
 		for (key, _) in values_ { _ = annulValue(by: key) }
-		signals.transmit(signal: FZSignalConsts.valuesRemoved )
+		signals_.transmit(signal: FZSignalConsts.valuesRemoved )
 	}
 	
 //	public func deleteValue ( by key: String ) {
@@ -61,17 +61,20 @@ extension FZTemporaryValuesProxy: FZTemporaryValuesProxyProtocol {
 }
 
 public class FZTemporaryValuesProxy {
+	fileprivate let signals_: FZSignalsService
+	
 	fileprivate var
 	is_activated: Bool,
-	values_: Dictionary<String, FZStorableDataType>,
-	key_: FZKey!,
-	closet_: FZModelClassCloset!
+	values_: Dictionary<String, FZStorableDataType>
+//	key_: FZKey!,
+//	closet_: FZModelClassCloset!
 
-	required public init() {
+	required public init(signals: FZSignalsService, modelClasses: [FZModelClassProtocol]?) {
+		signals_ = signals
 		is_activated = false
 		values_ = [:]
-		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_)
+//		key_ = FZKey(self)
+//		closet_ = FZModelClassCloset(self, key: key_)
 	}
 	
 	deinit {}

@@ -11,32 +11,34 @@ import Foundation
 public extension FZInteractorProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
-	public var closet: FZInteractorCloset? {
-		return FirstInstance().get(FZInteractorCloset.self, from: mirror_)
-	}
+//	public var closet: FZInteractorCloset? {
+//		return FirstInstance().get(FZInteractorCloset.self, from: mirror_)
+//	}
 	
-	private var key_: FZKey? {
-		return FirstInstance().get(FZKey.self, from: mirror_)
-	}
+//	private var key_: FZKey? {
+//		return FirstInstance().get(FZKey.self, from: mirror_)
+//	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	
+	private var presenter_: FZPresenterProtocol? { return FirstInstance().get(FZPresenterProtocol.self, from: mirror_) }
+	private var signals_: FZSignalsService? { return FirstInstance().get(FZSignalsService.self, from: mirror_) }
+
 	
 	
 	public func activate() {
 		guard
-			let key = key_,
-			let safeCloset = closet,
-			let presenterClassName = safeCloset.presenter(key)?.instanceDescriptor,
-			let signals = closet?.signals(key)
+//			let key = key_,
+//			let safeCloset = closet,
+			let presenterClassName = presenter_?.instanceDescriptor,
+			let signals = signals_
 			else { return }
 		_ = signals.scanFor(signal: FZSignalConsts.presenterActivated, scanner: self) { _, data in
 			guard
-				let safeSelf = self as FZInteractorProtocol?,
+				let strongSelf = self as FZInteractorProtocol?,
 				let presenter = data as? FZPresenterProtocol,
 				presenter.instanceDescriptor == presenterClassName
 				else { return }
-			var mutatingSelf = safeSelf
+			var mutatingSelf = strongSelf
 			mutatingSelf.presenterActivated()
 		}
 		// todo why is this not simply in the closure immediately above?
@@ -48,6 +50,7 @@ public extension FZInteractorProtocol {
 }
 
 public protocol FZInteractorProtocol: FZViperClassProtocol {
-	var closet: FZInteractorCloset? { get }
+	init(signals: FZSignalsService, presenter: FZPresenterProtocol, dependencies: [FZModelClassProtocol]?)
+//	var closet: FZInteractorCloset? { get }
 	mutating func presenterActivated ()
 }

@@ -13,7 +13,7 @@ public enum Presentations {
 }
 
 extension FZRoutingService: FZRoutingServiceProtocol {
-	public var closet: FZModelClassCloset { return closet_ }
+//	public var closet: FZModelClassCloset { return closet_ }
 
 	public var hasPopover: Bool {
 		return popover_bundle != nil
@@ -67,7 +67,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		popover_bundle!.viewController?.dismiss(animated: true) {
 			self.popover_bundle!.deallocate()
 			self.popover_bundle = nil
-			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverRemoved)
+			self.signals_.transmit(signal: FZSignalConsts.popoverRemoved)
 		}
 	}
 	
@@ -83,7 +83,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			else { return }
 		popover.modalPresentationStyle = .popover
 		currentViewController.present(popover, animated: true) {
-			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.popoverAdded)
+			self.signals_.transmit(signal: FZSignalConsts.popoverAdded)
 		}
 		popover.popoverPresentationController?.sourceView = currentViewController.view
 		if let safeRect = rect {
@@ -112,7 +112,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		}
 		currentViewController.present(viewController, animated: animated!) {
 			currentViewController.removeFromParentViewController()
-			self.closet_.signals(self.key_)?.transmit(signal: FZSignalConsts.viewRemoved)
+			self.signals_.transmit(signal: FZSignalConsts.viewRemoved)
 		}
 		view_bundle?.deallocate()
 		view_bundle = viperBundle
@@ -122,31 +122,19 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		_ modelClassType: FZModelClassProtocol.Type,
 		with key: String,
 		injecting dependencyTypes: [FZModelClassProtocol.Type]? = nil) {
-		guard
-			can_register(with: key),
-			let signals = closet_.signals(key_)
-			else { return }
-		let modelClass = modelClassType.init()
-		// todo a switch statement feels suboptimal, revisit later with more knowledge and time
-		if dependencyTypes != nil {
-			_ = dependencyTypes!.map { dependencyType in
+		guard can_register(with: key) else { return }
+		var modelClasses: [FZModelClassProtocol]?
+		if let strongDependencyTypes = dependencyTypes {
+			modelClasses = []
+			for dependencyType in strongDependencyTypes {
 				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
-					switch true {
-					case dependencyClass is FZBundledJsonService:
-						modelClass.closet.set(bundledJson: dependencyClass as! FZBundledJsonService)
-					case dependencyClass is FZCoreDataProxy:
-						modelClass.closet.set(coreData: dependencyClass as! FZCoreDataProxy)
-					case dependencyClass is FZUrlSessionService:
-						modelClass.closet.set(urlSession: dependencyClass as! FZUrlSessionService)
-					default:
-						modelClass.closet.bespoke.add(dependencyClass)
-					}
+					modelClasses!.append(dependencyClass)
 				} else {
 					fatalError("Attempting to inject a model class that has not been registered itself yet")
 				}
 			}
 		}
-		modelClass.closet.set(signalsService: signals)
+		let modelClass = modelClassType.init(signals: signals_, modelClasses: modelClasses)
 		model_class_singletons[String(describing: modelClassType)] = modelClass
 		modelClass.activate()
 	}
@@ -175,7 +163,7 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 			window_ == nil,
 			self is FZRoutingServiceExtensionProtocol
 			else { return }
-		(self as! FZRoutingServiceExtensionProtocol).registerDependencies(with: key_.teeth)
+		(self as! FZRoutingServiceExtensionProtocol).registerDependencies(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
 		add(rootViewController: rootViewController, from: storyboard)
@@ -184,19 +172,22 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 	
 	
 	fileprivate func can_register(with key: String) -> Bool {
-		return is_activated == false && key == key_.teeth
+		return is_activated == false && key == key_
 	}
 	
 	fileprivate func create_bundle(viewController id: String, from storyboard: String? = nil) -> FZViperBundle? {
 		guard
 			let vipRelationship = vip_relationships[id],
-			var viewController = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController,
-			initialise_(viewController: &viewController)
+			let viewController = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? FZViewController
 			else { return nil }
-		var presenter = vipRelationship.presenterType.init()
-		guard initialise_(presenter: &presenter, with: viewController) else { return nil }
-		var interactor = vipRelationship.interactorType.init()
-		guard initialise_(interactor: &interactor, with: presenter, and: vipRelationship.interactorDependencyTypes) else { return nil }
+		let presenter = vipRelationship.presenterType.init(signals: signals_, routing: self)
+		viewController.set(signals_, and: presenter)
+		let interactor = vipRelationship.interactorType.init(
+			signals: signals_,
+			presenter: presenter,
+			dependencies: get_interactor_dependencies(from: vipRelationship.interactorDependencyTypes))
+		presenter.activate()
+		interactor.activate()
 		return FZViperBundle(viewController: viewController, interactor: interactor, presenter: presenter)
 	}
 	
@@ -204,68 +195,70 @@ extension FZRoutingService: FZRoutingServiceProtocol {
 		return storyboard ?? "Main"
 	}
 	
-	fileprivate func initialise_(
-		interactor: inout FZInteractorProtocol,
-		with presenter: FZPresenterProtocol,
-		and dependencyTypes: [FZModelClassProtocol.Type]?) -> Bool {
-		guard let signals = closet_.signals(key_) else { return false }
-		if dependencyTypes != nil {
-			_ = dependencyTypes!.map {
-				dependencyType in
-				if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
-					if dependencyClass is FZImageProxy {
-						interactor.closet?.set(imageProxy: dependencyClass as! FZImageProxy)
-					} else {
-						interactor.closet?.bespoke.add(dependencyClass)
-					}
-				} else {
-					fatalError("Attempting to inject a model class that has not been registered itself yet")
-				}
+	fileprivate func get_interactor_dependencies(
+//		interactor: inout FZInteractorProtocol,
+//		with presenter: FZPresenterProtocol,
+		from dependencyTypes: [FZModelClassProtocol.Type]?) -> [FZModelClassProtocol]? {
+		guard let dependencyTypes = dependencyTypes else { return nil }
+		var dependencies: [FZModelClassProtocol] = []
+		_ = dependencyTypes.map {
+			dependencyType in
+			if let dependencyClass = model_class_singletons[String(describing: dependencyType)] {
+				dependencies.append(dependencyClass)
+//				if dependencyClass is FZImageProxy {
+//					interactor.closet?.set(imageProxy: dependencyClass as! FZImageProxy)
+//				} else {
+//					interactor.closet?.bespoke.add(dependencyClass)
+//				}
+			} else {
+				fatalError("Attempting to inject a model class that has not been registered itself yet")
 			}
 		}
-		interactor.closet?.set(signalsService: signals)
-		interactor.closet?.set(presenter: presenter)
-		interactor.activate()
-		return true
+//		interactor.closet?.set(signalsService: signals)
+//		interactor.closet?.set(presenter: presenter)
+//		interactor.activate()
+		return dependencies.count > 0 ? dependencies : nil
 	}
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
-	fileprivate func initialise_(presenter: inout FZPresenterProtocol, with viewController: FZViewController) -> Bool {
-		guard let signals = closet_.signals(key_) else { return false }
-		presenter.closet?.set(signalsService: signals)
-		presenter.closet?.set(routing: self)
-		presenter.closet?.set(viewController: viewController)
-		presenter.activate()
-		return true
-	}
+//	fileprivate func initialise_(presenter: inout FZPresenterProtocol, with viewController: FZViewController) -> Bool {
+//		guard let signals = closet_.signals(key_) else { return false }
+//		presenter.closet?.set(signalsService: signals)
+//		presenter.closet?.set(routing: self)
+//		presenter.closet?.set(viewController: viewController)
+//		presenter.activate()
+//		return true
+//	}
 	
-	fileprivate func initialise_(viewController: inout FZViewController) -> Bool {
-		guard let signals = closet_.signals(key_) else { return false }
-		viewController.set(signalsService: signals)
-		return true
-	}
+//	fileprivate func initialise_(viewController: inout FZViewController) -> Bool {
+//		guard let signals = closet_.signals(key_) else { return false }
+//		viewController.set(signalsService: signals)
+//		return true
+//	}
 }
 
 public class FZRoutingService {
+	fileprivate let
+	signals_: FZSignalsService,
+	key_: String
+	
 	fileprivate var
 	is_activated: Bool,
 	model_class_singletons: Dictionary<String, FZModelClassProtocol>,
 	vip_relationships: Dictionary<String, FZVipRelationship>,
-	key_: FZKey!,
-	closet_: FZModelClassCloset!,
+//	key_: FZKey!,
+//	closet_: FZModelClassCloset!,
 	window_: UIWindow!,
 	view_bundle: FZViperBundle?,
 	popover_bundle: FZViperBundle?
 
 	required public init() {
+		signals_ = FZSignalsService()
+		key_ = NSUUID().uuidString // FZKey(self)
 		is_activated = false
 		model_class_singletons = [:]
 		vip_relationships = [:]
-		key_ = FZKey(self)
-		closet_ = FZModelClassCloset(self, key: key_)
-		closet_.set(signalsService: FZSignalsService())
+//		closet_ = FZModelClassCloset(self, key: key_)
+//		closet_.set(signals: FZSignalsService())
 	}
-	
-	// todo FZRoutingService lives for the lifetime of an app, is this really needed?
-	deinit {}
 }

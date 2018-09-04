@@ -11,37 +11,41 @@ import Foundation
 public extension FZPresenterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
-	public var closet: FZPresenterCloset? {
-		return FirstInstance().get(FZPresenterCloset.self, from: mirror_)
-	}
+//	public var closet: FZPresenterCloset? {
+//		return FirstInstance().get(FZPresenterCloset.self, from: mirror_)
+//	}
 	
-	private var key_: FZKey? {
-		return FirstInstance().get(FZKey.self, from: mirror_)
-	}
+//	private var key_: FZKey? {
+//		return FirstInstance().get(FZKey.self, from: mirror_)
+//	}
 	
+	// todo these vars need to be made single instance safe
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-
+	private var routing_: FZRoutingService? { return FirstInstance().get(FZRoutingService.self, from: mirror_) }
+	private var signals_: FZSignalsService? { return FirstInstance().get(FZSignalsService.self, from: mirror_) }
+	private var view_controller: FZViewController? { return FirstInstance().get(FZViewController.self, from: mirror_) }
 	
+
 	
 	func activate() {
 		guard
-			let key = key_,
-			let signals = closet?.signals(key)
+//			let key = key_,
+			let signals = signals_
 			else { return }
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewLoaded, scanner: self) { _, data in
 			guard
-				let safeSelf = self as FZPresenterProtocol?,
-				safeSelf.check(data)
+				let strongSelf = self as FZPresenterProtocol?,
+				strongSelf.check(data)
 				else { return }
-			safeSelf.viewLoaded()
-			signals.transmit(signal: FZSignalConsts.presenterActivated, with: safeSelf)
+			strongSelf.viewLoaded()
+			signals.transmit(signal: FZSignalConsts.presenterActivated, with: strongSelf)
 		}
 		_ = signals.scanOnceFor(signal: FZSignalConsts.viewAppeared, scanner: self) { _, data in
 			guard
-				let safeSelf = self as FZPresenterProtocol?,
-				safeSelf.check(data)
+				let strongSelf = self as FZPresenterProtocol?,
+				strongSelf.check(data)
 				else { return }
-			safeSelf.viewAppeared()
+			strongSelf.viewAppeared()
 		}
 	}
 	
@@ -53,9 +57,9 @@ public extension FZPresenterProtocol {
 	
 	func present(_ viewControllerId: String, animated: Bool) {
 		guard
-			let key = key_,
-			let signals = closet?.signals(key),
-			let routing = closet?.routing(key)
+//			let key = key_,
+			let signals = signals_,
+			let routing = routing_
 			else { return }
 		if routing.hasPopover {
 			signals.scanOnceFor(signal: FZSignalConsts.popoverRemoved, scanner: self) { _,_ in
@@ -70,7 +74,7 @@ public extension FZPresenterProtocol {
 	private func check(_ data: Any?) -> Bool {
 		guard
 			let passedViewController = data as? FZViewController,
-			let ownViewController = self.closet?.viewController(key_)
+			let ownViewController = view_controller
 			else { return false }
 		return passedViewController == ownViewController
 	}
@@ -83,7 +87,41 @@ public extension FZPresenterProtocol {
 }
 
 public protocol FZPresenterProtocol: FZViperClassProtocol, FZPopulatableViewProtocol, FZPresentableViewProtocol, FZUpdatableProtocol {
-	var closet: FZPresenterCloset? { get }
+	init(signals: FZSignalsService, routing: FZRoutingService)//, viewController: FZViewController)
+//	var closet: FZPresenterCloset? { get }
 	func viewLoaded()
 	func viewAppeared()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

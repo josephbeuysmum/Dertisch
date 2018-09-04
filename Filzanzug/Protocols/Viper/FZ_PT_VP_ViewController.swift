@@ -6,4 +6,6 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol FZViewControllerProtocol: class, FZSignalsEntitySetterProtocol, FZSignalReceivableProtocol {}
+public protocol FZViewControllerProtocol: class, FZSignalReceivableProtocol {//}, FZSignalsEntitySetterProtocol {
+	func set(_ signals: FZSignalsService, and presenter: FZPresenterProtocol)
+}
