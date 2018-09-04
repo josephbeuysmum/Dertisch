@@ -10,9 +10,9 @@ NOTE
 A lightweight VIPER framework for Swift apps
 --------------------------------------------
 
-Filzanzug is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
+Dertisch is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
 
-Filzanzug is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
+Dertisch is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
 
 What is a VIPER framework?
 --------------------------
@@ -25,7 +25,7 @@ VIPER is an acronym, combining the following five words:
 -   `E` Entities
 -   `R` Routing
 
-`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular `VIPER` arrangement `Filzanzug` uses well.
+`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular `VIPER` arrangement `Dertisch` uses well.
 
 -   `S` Staff
 -   `W` Waiters
@@ -34,7 +34,7 @@ VIPER is an acronym, combining the following five words:
 -   `C` Customers
 -   `H` Head chefs
 
-I will now outline these six elements of `Filzanzug` in the order in which it uses them:
+I will now outline these six elements of `Dertisch` in the order in which it uses them:
 
 Ingredients
 -----------
@@ -66,7 +66,7 @@ Customers
 
 The people ordering the food. Customers are users: the actual people using the actual app.
 
-How SWITCH/VIPER works in Filzanzug
+How SWITCH/VIPER works in Dertisch
 -----------------------------------
 
 -   A customer makes an order (a `user` interacts with their device);
@@ -76,7 +76,7 @@ How SWITCH/VIPER works in Filzanzug
 -   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
-Filzanzug Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
+Dertisch Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `FZSignalsService`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
 
 On the Model side:
 
@@ -90,13 +90,13 @@ And on the View side:
 
 -	registration and presentation of ViewControllers with related Presenters and Interactors.
 
-`Filzanzug` Interactors work by implementing the `FZInteractorProtocol` protocol; Presenters by implementing the `FZPresenterProtocol` protocol; and ViewControllers by subclassing `FZViewController`. It uses **dependency injection** to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
+`Dertisch` Interactors work by implementing the `FZInteractorProtocol` protocol; Presenters by implementing the `FZPresenterProtocol` protocol; and ViewControllers by subclassing `FZViewController`. It uses **dependency injection** to register Interactor/Presenter/ViewController/ModelClass relationships at start-up.
 
 ---------------
-Using Filzanzug
+Using Dertisch
 ---------------
 
-Filzanzug allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
+Dertisch allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
 
 	FZBundledJsonService
 	// provides simplified access to json config data bundled with the app
@@ -119,15 +119,15 @@ Filzanzug allows you to create bespoke proxies and services tailored towards you
 	FZUrlSessionService
 	// provides access to RESTful APIs
 
-These - and all model classes - in `Filzanzug` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `FZTemporaryValuesProxy` injected have *the same instance* of `FZTemporaryValuesProxy` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `FZTemporaryValuesProxy` elsewhere.^
+These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `FZTemporaryValuesProxy` injected have *the same instance* of `FZTemporaryValuesProxy` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `FZTemporaryValuesProxy` elsewhere.^
 
-^ *this currently means that all `Filzanzug` model classes are exactly that: classes, although the longer term goal to make `Filzanzug` class-free (with the exception of View classes, which are already unavoidably class-based).*
+^ *this currently means that all `Dertisch` model classes are exactly that: classes, although the longer term goal to make `Dertisch` class-free (with the exception of View classes, which are already unavoidably class-based).*
 
-Amongst other things, `FZRoutingService` is responsible for starting `Filzanzug` apps, and `FZSignalsService` is a mandatory requirement for all `Filzanzug` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
+Amongst other things, `FZRoutingService` is responsible for starting `Dertisch` apps, and `FZSignalsService` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
-Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `AppDelegate`:
+Start up your `Dertisch` app by calling `FZRoutingService.start()` from your `AppDelegate`:
 
-	import Filzanzug
+	import Dertisch
 	import UIKit
 
 	@UIApplicationMain
@@ -146,7 +146,7 @@ Start up your `Filzanzug` app by calling `FZRoutingService.start()` from your `A
 
 `FZRoutingService`'s start up routine includes a call to its own `registerDependencies()` function, which is where the app's required dependencies must be registered. Extend `FZRoutingService` to implement this function:
 
-	import Filzanzug
+	import Dertisch
 
 	extension FZRoutingService: FZRoutingServiceExtensionProtocol {
 		public func registerDependencies(with key: String) {
@@ -170,11 +170,11 @@ In the above example, because `FZCoreDataProxy` and `FZImageProxy` are commented
 
 ^^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
-All `Filzanzug` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
+All `Dertisch` model classes have `FZSignalsService` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `FZImageProxy` has `FZUrlSessionService` injected as it depends upon it to load external images.
 
-The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Filzanzug` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` looks like this:
+The above code example features the two model classes `SomeProxy` and `SomeService`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeProxy` looks like this:
 
-	import Filzanzug
+	import Dertisch
 
 	extension SomeProxy: FZModelClassProtocol {
 		var closet: FZModelClassCloset { return closet_ }
@@ -207,11 +207,11 @@ And adding your own functionality in looks like this:
 
 ^^^ *the purpose of which is to ensure that the object they are injected into can only have one instance of each, as multiple instances of either would cause runtime errors.*
 
-`Filzanzug` Interactors and Presenters have similar `key_` and `closet_` properties for the same purpose.
+`Dertisch` Interactors and Presenters have similar `key_` and `closet_` properties for the same purpose.
 
-A boilerplate `Filzanzug` Interactor looks like this:
+A boilerplate `Dertisch` Interactor looks like this:
 
-	import Filzanzug
+	import Dertisch
 
 	extension SomeInteractor: FZInteractorProtocol {
 		mutating func presenterActivated() {}
@@ -228,9 +228,9 @@ A boilerplate `Filzanzug` Interactor looks like this:
 		}
 	}
 
-And a boilerplate `Filzanzug` Presenter looks like this:
+And a boilerplate `Dertisch` Presenter looks like this:
 
-	import Filzanzug
+	import Dertisch
 
 	extension SomePresenter: FZPresenterProtocol {
 		var closet: FZPresenterCloset? { return closet_ }
@@ -260,19 +260,19 @@ There are four additional functions that can be implemented if required.
 
 These functions are hopefully self-explanatory, and they are called in the order they are listed above.
 
-A boilerplate `Filzanzug` ViewController looks like this:
+A boilerplate `Dertisch` ViewController looks like this:
 
-	import Filzanzug
+	import Dertisch
 
 	class SomeViewController: FZViewController {}
 
-ViewControllers are the only classes in `Filzanzug` to utilise inheritance, each `Filzanzug` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
+ViewControllers are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` ViewController being required to extend the `FZViewController` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
 
 ---------------------
 Indepth Documentation
 ---------------------
 
-There are more elements to `Filzanzug` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
+There are more elements to `Dertisch` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
 
 ---------------------
 Developmental Roadmap
@@ -299,9 +299,9 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -   use cuisine as a metaphor instead of tailoring.
 
 -----------------------
-On the name "Filzanzug"
+On the name "Dertisch"
 -----------------------
 
-In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Filzanzug`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
+In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
-"Filzanzug" means "felt suit" in Deutsche, and is the name of an artwork by Joseph Beuys, which consists of 100 identical felt suits. [One of the suits](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) is in the collection of the Tate Gallery in the UK. If you'll permit me a bad pun, given that `Filzanzug` (the Swift library) is built around a "WORN closet" object, from all of Beuys' works, [Filzanzug](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) (the artwork) is "tailor-made" as a name.
+"Dertisch" means "felt suit" in Deutsche, and is the name of an artwork by Joseph Beuys, which consists of 100 identical felt suits. [One of the suits](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) is in the collection of the Tate Gallery in the UK. If you'll permit me a bad pun, given that `Dertisch` (the Swift library) is built around a "WORN closet" object, from all of Beuys' works, [Dertisch](http://www.tate.org.uk/art/artworks/beuys-felt-suit-ar00092) (the artwork) is "tailor-made" as a name.
