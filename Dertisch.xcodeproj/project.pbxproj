@@ -13,7 +13,7 @@
 		A92919F32063DFFC00A6AA16 /* FZTemporaryValuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Dertisch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Dertisch.framework */; };
-		A9EF367F213F460E00516F40 /* Filzanzug.h in Headers */ = {isa = PBXBuildFile; fileRef = A9EF363B213F460E00516F40 /* Filzanzug.h */; };
+		A9EF367F213F460E00516F40 /* Dertisch.h in Headers */ = {isa = PBXBuildFile; fileRef = A9EF363B213F460E00516F40 /* Dertisch.h */; };
 		A9EF3680213F460E00516F40 /* FZ_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF363D213F460E00516F40 /* FZ_CS_CommonPhrases.swift */; };
 		A9EF3681213F460E00516F40 /* FZ_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF363E213F460E00516F40 /* FZ_CS_Logs.swift */; };
 		A9EF3682213F460E00516F40 /* FZ_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF363F213F460E00516F40 /* FZ_CS_Signals.swift */; };
@@ -90,7 +90,7 @@
 		A9B5316D2039F62600DB1C85 /* Dertisch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dertisch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531762039F62700DB1C85 /* DertischTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DertischTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9EF363B213F460E00516F40 /* Filzanzug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filzanzug.h; sourceTree = "<group>"; };
+		A9EF363B213F460E00516F40 /* Dertisch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dertisch.h; sourceTree = "<group>"; };
 		A9EF363D213F460E00516F40 /* FZ_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_CommonPhrases.swift; sourceTree = "<group>"; };
 		A9EF363E213F460E00516F40 /* FZ_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Logs.swift; sourceTree = "<group>"; };
 		A9EF363F213F460E00516F40 /* FZ_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_CS_Signals.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		A9EF363A213F460E00516F40 /* Dertisch */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF363B213F460E00516F40 /* Filzanzug.h */,
+				A9EF363B213F460E00516F40 /* Dertisch.h */,
 				A9EF363C213F460E00516F40 /* Constants */,
 				A9EF3641213F460E00516F40 /* Utils */,
 				A9EF364C213F460E00516F40 /* Extensions */,
@@ -364,7 +364,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9EF367F213F460E00516F40 /* Filzanzug.h in Headers */,
+				A9EF367F213F460E00516F40 /* Dertisch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
