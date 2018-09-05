@@ -21,7 +21,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func startShift() {}
 	
-	public func add(rootDish id: String, from storyboard: String? = nil) {
+	public func add(mainDish id: String, from storyboard: String? = nil) {
 		guard let viperBundle = create_bundle(dish: id, from: storyboard) else { return }
 		window_.rootViewController = viperBundle.dish
 		dish_relationship = viperBundle
@@ -158,7 +158,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func start(rootDish: String, window: UIWindow, storyboard: String? = nil) {
+	public func start(mainDish: String, window: UIWindow, storyboard: String? = nil) {
 		guard
 			window_ == nil,
 			self is DTMaitreDExtensionProtocol
@@ -166,7 +166,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		(self as! DTMaitreDExtensionProtocol).registerDependencies(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
-		add(rootDish: rootDish, from: storyboard)
+		add(mainDish: mainDish, from: storyboard)
 	}
 	
 	
