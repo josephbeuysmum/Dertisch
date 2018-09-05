@@ -1,12 +1,6 @@
 Dertisch
 ========
 
-NOTE
-----
-
-*The last update has made much of the following documentation out-of-date. It will be updated as soon as possible.*
-
-
 A lightweight framework for Swift apps
 --------------------------------------
 
