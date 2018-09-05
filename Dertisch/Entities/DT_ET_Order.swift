@@ -7,12 +7,12 @@
 //
 
 extension DTOrder: DTOrderProtocol {
-	public var hasOrders: Bool { return wave_lengths.count > 0 }
+	public var hasOrders: Bool { return orders_.count > 0 }
 	
 	public mutating func cleanUp() {}
 	
 	public mutating func add(callback: @escaping DTOrderCallback, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
-		return add(wavelength: DTOrderDetails(
+		return add(order: DTOrderDetails(
 			key: transmissionName,
 			order: order,
 			isContinuous: isContinuous,
@@ -21,7 +21,7 @@ extension DTOrder: DTOrderProtocol {
 	}
 	
 	public mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
-		return add(wavelength: DTOrderDetails(
+		return add(order: DTOrderDetails(
 			key: transmissionName,
 			order: order,
 			isContinuous: isContinuous,
@@ -37,55 +37,55 @@ extension DTOrder: DTOrderProtocol {
 	}
 	
 	public mutating func removeAllDetails() {
-		wave_lengths.forEach { wavelength in
-			var mutatableWavelength = wavelength.value
+		orders_.forEach { order in
+			var mutatableWavelength = order.value
 			mutatableWavelength.cleanUp()
 		}
-		wave_lengths.removeAll()
+		orders_.removeAll()
 	}
 		
 	public mutating func removeSingleUseWavelengths() {
-		wave_lengths.forEach { wavelength in
-			guard !wavelength.value.isContinuous else { return }
-			self.removeWavelength(by: wavelength.value.description)
+		orders_.forEach { order in
+			guard !order.value.isContinuous else { return }
+			self.removeWavelength(by: order.value.description)
 		}
 	}
 	
 	public func transmit(with value: Any?) {
-		wave_lengths.forEach { wavelengthReference in
-			var wavelength = wavelengthReference.value
-			switch wavelength.returnMethod {
-			case DTOrderDetails.returnMethods.callback:		wavelength.callback!(transmissionName, value)
-			case DTOrderDetails.returnMethods.delegate:		wavelength.delegate!.orderTransmission(name: transmissionName, data: value)
+		orders_.forEach { orderReference in
+			var order = orderReference.value
+			switch order.returnMethod {
+			case DTOrderDetails.returnMethods.callback:		order.callback!(transmissionName, value)
+			case DTOrderDetails.returnMethods.delegate:		order.delegate!.orderTransmission(name: transmissionName, data: value)
 			case DTOrderDetails.returnMethods.none:			()
 			}
 		}
 	}
 	
-	fileprivate mutating func add(wavelength: DTOrderDetails) -> Bool {
-		let key = wavelength.description
-		guard wave_lengths[key] == nil else { return false }
-		wave_lengths[key] = wavelength
+	fileprivate mutating func add(order: DTOrderDetails) -> Bool {
+		let key = order.description
+		guard orders_[key] == nil else { return false }
+		orders_[key] = order
 		return true
 	}
 	
 	fileprivate mutating func removeWavelength(by key: String) {
-		guard var wavelength = wave_lengths.removeValue(forKey: key) else { return }
-		wavelength.cleanUp()
+		guard var order = orders_.removeValue(forKey: key) else { return }
+		order.cleanUp()
 	}
 }
 
 // orders_ are the actual orders,
-// whilst wave_lengths are references to the classes that observe them
+// whilst orders_ are references to the classes that observe them
 // a signal may have many signatures, but a signature only has one signal
 
 public struct DTOrder {
 	public var transmissionName: String
 	
-	fileprivate var wave_lengths: Dictionary<String, DTOrderDetails>
+	fileprivate var orders_: Dictionary<String, DTOrderDetails>
 	
 	public init (_ transmissionName: String) {
 		self.transmissionName = transmissionName
-		wave_lengths = [:]
+		orders_ = [:]
 	}
 }

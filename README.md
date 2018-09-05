@@ -101,7 +101,7 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 	DTTemporaryValuesSousChef
 	// provides app-wide storage for simple data in runtime memory
 
-	DTUrlSessionIngredients
+	DTUrlSession
 	// provides access to RESTful APIs
 
 These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `DTTemporaryValuesSousChef` injected have *the same instance* of `DTTemporaryValuesSousChef` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValuesSousChef` elsewhere.^
@@ -137,8 +137,8 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 		public func registerDependencies(with key: String) {
 	//		register(DTCoreDataSousChef.self, with: key)
 			register(DTTemporaryValuesSousChef.self, with: key)
-			register(DTUrlSessionIngredients.self, with: key)
-	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSessionIngredients.self])
+			register(DTUrlSession.self, with: key)
+	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSession.self])
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
@@ -155,7 +155,7 @@ In the above example, because `DTCoreDataSousChef` and `DTImageSousChef` are com
 
 ^^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
-All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSessionIngredients` injected as it depends upon it to load external images.
+All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSession` injected as it depends upon it to load external images.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
@@ -279,8 +279,8 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	replace `cleanUp()` functions with weak vars etc.;
 -	force `DTCoreDataSousChef` to take `dataModelName` at start up;
 -	remove `...Protocol` from protocol names?
--	reintroduce timeout stopwatch to `DTUrlSessionIngredients`;
--	complete list of MIME types in `DTUrlSessionIngredients`;
+-	reintroduce timeout stopwatch to `DTUrlSession`;
+-	complete list of MIME types in `DTUrlSession`;
 -   use cuisine as a metaphor instead of tailoring.
 
 -----------------------

@@ -17,12 +17,12 @@ public protocol DTCDEntityProtocol {
 	mutating func add(_ attribute: DTStorableDataType, by key: String) -> Bool
 }
 
-public protocol DTKeyProtocol: DTSingleInstanceProtocol {
-	var teeth: String { get }
-	init(_ delegate: DTSwitchClassProtocol)
-}
+//public protocol DTKeyProtocol: DTSingleInstanceProtocol {
+//	var teeth: String { get }
+//	init(_ delegate: DTSwitchClassProtocol)
+//}
 
-public protocol DTObject: Hashable {}
+//public protocol DTObject: Hashable {}
 
 public protocol DTOrderProtocol: DTDeallocatableProtocol {
 	var hasOrders: Bool { get }

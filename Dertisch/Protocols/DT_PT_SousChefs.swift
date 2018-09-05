@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-// todo should these be living here?
+// todo should these live here?
 public typealias DTCDCallback = ([NSManagedObject]?) -> Void
 public typealias DTCDDeletionCallback = (Bool) -> Void
 public typealias DTOrderCallback = (String, Any?) -> Void

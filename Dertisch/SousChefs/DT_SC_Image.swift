@@ -15,7 +15,7 @@ extension DTImageSousChef: DTImageSousChefProtocol {
 	
 	public func startShift() {}
 	
-	public func getImage ( by url: String, callback:( ( String, Any? ) -> Void )? = nil ) -> UIImage? {
+	public func getImage(by url: String, callback:((String, Any?) -> Void )? = nil) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
 		guard callback != nil else { return nil }
@@ -28,21 +28,21 @@ extension DTImageSousChef: DTImageSousChefProtocol {
 		return nil
 	}
 	
-	public func loadImage ( by url: String ) {
-		_ = orders_.listenForOneOff( order: url, order: self ) { [weak self] _, data in
+	public func loadImage(by url: String) {
+		_ = orders_.listenForOneOff(order: url, order: self) { [weak self] _, data in
 			guard let strongSelf = self else { return }
-			if let urlIndex = strongSelf.urlsResolving.index( of: url ) { strongSelf.urlsResolving.remove( at: urlIndex ) }
-			guard strongSelf.assess( result: data ) else { return }
+			if let urlIndex = strongSelf.urlsResolving.index(of: url) { strongSelf.urlsResolving.remove( at: urlIndex ) }
+			guard strongSelf.assess(result: data) else { return }
 			let result = data as! DTRawIngredient
-			strongSelf.raw_images[ url ] = result.data as? Data
-			strongSelf.orders_.make(order: strongSelf.getUrlKey( by: url ), with: url )
+			strongSelf.raw_images[url] = result.data as? Data
+			strongSelf.orders_.make(order: strongSelf.getUrlKey(by: url), with: url)
 		}
-		url_session.call( url: url, method: DTUrlSessionIngredients.methods.GET )
+		url_session.call(url: url, method: DTUrlSession.methods.GET)
 	}
 	
 	
 	
-	fileprivate func assess ( result: Any? ) -> Bool {
+	fileprivate func assess(result: Any?) -> Bool {
 		guard
 			let result = result as? DTRawIngredient,
 			let success = result.success,
@@ -52,8 +52,8 @@ extension DTImageSousChef: DTImageSousChefProtocol {
 		return true
 	}
 	
-	fileprivate func getLocalImage ( by url: String ) -> UIImage? {
-		return raw_images[ url ] != nil ? UIImage( data: raw_images[ url ]! ) : nil
+	fileprivate func getLocalImage(by url: String) -> UIImage? {
+		return raw_images[url] != nil ? UIImage(data: raw_images[url]!) : nil
 	}
 	
 	fileprivate func getUrlKey(by url: String) -> String { return "\(key_)_\(url)" }
@@ -72,10 +72,10 @@ public class DTImageSousChef {
 	key_: String
 
 	fileprivate var
-	urlsResolving: [ String ],
-	raw_images: Dictionary< String, Data >,
+	urlsResolving: [String],
+	raw_images: Dictionary<String, Data>,
 //	key_: DTKey!,
-	url_session: DTUrlSessionIngredients!
+	url_session: DTUrlSession!
 //	closet_: DTKitchenCloset!
 
 	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
@@ -83,8 +83,8 @@ public class DTImageSousChef {
 		key_ = NSUUID().uuidString
 		if let strongModelClasses = kitchenStaffMembers {
 			for modelClass in strongModelClasses {
-				if type(of: modelClass) == DTUrlSessionIngredients.self {
-					url_session = modelClass as! DTUrlSessionIngredients
+				if type(of: modelClass) == DTUrlSession.self {
+					url_session = modelClass as! DTUrlSession
 					break
 				}
 			}

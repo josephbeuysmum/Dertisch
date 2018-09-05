@@ -15,7 +15,7 @@ public struct DTJsonSettings {
 	}
 }
 
-extension DTBundledJsonIngredients: DTBundledJsonIngredientsProtocol {
+extension DTBundledJson: DTBundledJsonProtocol {
 //	public var closet: DTKitchenCloset { return closet_ }
 	public var settings: DTJsonSettings? { return settings_ }
 	
@@ -65,7 +65,7 @@ extension DTBundledJsonIngredients: DTBundledJsonIngredientsProtocol {
 	}
 }
 
-public class DTBundledJsonIngredients {
+public class DTBundledJson {
 	fileprivate let orders_:DTOrders
 	
 	fileprivate var
