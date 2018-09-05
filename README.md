@@ -61,7 +61,7 @@ How MV/IPER works in Dertisch
 -   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
-Dertisch Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `DTOrders`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
+Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
 
 On the Model side:
 
@@ -94,7 +94,7 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 
 	DTMaitreD
 	// manages the addition and removal of Dishs and their relationships with Interactors and Presenters (maitre Ds are classically VIPER routings)
-	
+
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
 
