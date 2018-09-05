@@ -83,7 +83,7 @@ Using Dertisch
 
 Dertisch allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
 
-	DTBundledJsonIngredient
+	DTBundledJson
 	// provides simplified access to json config data bundled with the app
 
 	DTCoreData
@@ -104,7 +104,7 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 	DTUrlSession
 	// provides access to RESTful APIs
 
-These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.^
+These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `DTTemporaryValuesSousChef` injected have *the same instance* of `DTTemporaryValuesSousChef` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValuesSousChef` elsewhere.^
 
 ^ *this currently means that all `Dertisch` model classes are exactly that: classes, although the longer term goal to make `Dertisch` class-free (with the exception of View classes, which are already unavoidably class-based).*
 
@@ -135,10 +135,10 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 
 	extension DTMaitreD: DTMaitreDExtensionProtocol {
 		public func registerDependencies(with key: String) {
-	//		register(DTCoreData.self, with: key)
-			register(DTTemporaryValues.self, with: key)
+	//		register(DTCoreDataSousChef.self, with: key)
+			register(DTTemporaryValuesSousChef.self, with: key)
 			register(DTUrlSession.self, with: key)
-	//		register(DTImages.self, with: key, injecting: [DTUrlSession.self])
+	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSession.self])
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
@@ -151,11 +151,11 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 		}
 	}
 
-In the above example, because `DTCoreData` and `DTImages` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.^^
+In the above example, because `DTCoreDataSousChef` and `DTImageSousChef` are commented out, injectable instances of these two model classes will not be instantiated, as whatever app it is that is utilising this code presumably has no need of their functionality.^^
 
 ^^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
-All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
+All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSession` injected as it depends upon it to load external images.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
@@ -277,7 +277,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	new `FirebaseIngredient`;
 -	create example boilerplate app;
 -	replace `cleanUp()` functions with weak vars etc.;
--	force `DTCoreData` to take `dataModelName` at start up;
+-	force `DTCoreDataSousChef` to take `dataModelName` at start up;
 -	remove `...Protocol` from protocol names?
 -	reintroduce timeout stopwatch to `DTUrlSession`;
 -	complete list of MIME types in `DTUrlSession`;
