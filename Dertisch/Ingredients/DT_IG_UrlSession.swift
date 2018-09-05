@@ -66,7 +66,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	
 	
 	
-	// unadulterated transmission because DTImageSousChef deals with post-processing
+	// unadulterated transmission because DTImages deals with post-processing
 	fileprivate func cast ( image data: Data, with url: String ) throws {
 		transmit( success: true, with: url, and: data )
 	}

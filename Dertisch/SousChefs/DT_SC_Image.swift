@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DTImageSousChef: DTImageSousChefProtocol {
+extension DTImages: DTImagesProtocol {
 //	public var closet: DTKitchenCloset { return closet_ }
 	
 	
@@ -59,7 +59,7 @@ extension DTImageSousChef: DTImageSousChefProtocol {
 	fileprivate func getUrlKey(by url: String) -> String { return "\(key_)_\(url)" }
 }
 
-public class DTImageSousChef {
+public class DTImages {
 	// herehere...
 	/*
 	- test changes

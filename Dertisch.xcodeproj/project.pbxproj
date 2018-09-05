@@ -33,9 +33,6 @@
 		A9EF3690213F460E00516F40 /* FZ_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3650213F460E00516F40 /* FZ_ViewController.swift */; };
 		A9EF3691213F460E00516F40 /* FZ_VC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3651213F460E00516F40 /* FZ_VC_Page.swift */; };
 		A9EF3692213F460E00516F40 /* FZ_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3652213F460E00516F40 /* FZ_TableCell.swift */; };
-		A9EF3693213F460E00516F40 /* FZ_PX_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3654213F460E00516F40 /* FZ_PX_TemporaryValues.swift */; };
-		A9EF3694213F460E00516F40 /* FZ_PX_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3655213F460E00516F40 /* FZ_PX_Image.swift */; };
-		A9EF3695213F460E00516F40 /* FZ_PX_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3656213F460E00516F40 /* FZ_PX_CoreData.swift */; };
 		A9EF3696213F460E00516F40 /* FZ_PT_Proxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3658213F460E00516F40 /* FZ_PT_Proxies.swift */; };
 		A9EF3697213F460E00516F40 /* FZ_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3659213F460E00516F40 /* FZ_PT_Entities.swift */; };
 		A9EF3698213F460E00516F40 /* FZ_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF365A213F460E00516F40 /* FZ_PT_Utils.swift */; };
@@ -51,10 +48,6 @@
 		A9EF36A2213F460E00516F40 /* FZ_PT_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3666213F460E00516F40 /* FZ_PT_SV_Signals.swift */; };
 		A9EF36A3213F460E00516F40 /* FZ_PT_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3667213F460E00516F40 /* FZ_PT_SV_Routing.swift */; };
 		A9EF36A4213F460E00516F40 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9EF3668213F460E00516F40 /* Info.plist */; };
-		A9EF36A5213F460E00516F40 /* FZ_SV_Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF366A213F460E00516F40 /* FZ_SV_Routing.swift */; };
-		A9EF36A6213F460E00516F40 /* FZ_SV_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF366B213F460E00516F40 /* FZ_SV_UrlSession.swift */; };
-		A9EF36A7213F460E00516F40 /* FZ_SV_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF366C213F460E00516F40 /* FZ_SV_Signals.swift */; };
-		A9EF36A8213F460E00516F40 /* FZ_SV_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF366D213F460E00516F40 /* FZ_SV_BundledJson.swift */; };
 		A9EF36A9213F460E00516F40 /* FZ_ET_FirstInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3670213F460E00516F40 /* FZ_ET_FirstInstance.swift */; };
 		A9EF36AA213F460E00516F40 /* FZ_ET_SignalWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3671213F460E00516F40 /* FZ_ET_SignalWaveform.swift */; };
 		A9EF36AB213F460E00516F40 /* FZ_ET_VipRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3672213F460E00516F40 /* FZ_ET_VipRelationship.swift */; };
@@ -69,6 +62,13 @@
 		A9EF36B4213F460E00516F40 /* FZ_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF367C213F460E00516F40 /* FZ_ET_ApiResult.swift */; };
 		A9EF36B5213F460E00516F40 /* FZ_ET_Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF367D213F460E00516F40 /* FZ_ET_Signal.swift */; };
 		A9EF36B6213F460E00516F40 /* FZ_ET_ViperBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF367E213F460E00516F40 /* FZ_ET_ViperBundle.swift */; };
+		A9EF36F62140114000516F40 /* DT_IG_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36ED2140114000516F40 /* DT_IG_Orders.swift */; };
+		A9EF36F72140114000516F40 /* DT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36EE2140114000516F40 /* DT_IG_BundledJson.swift */; };
+		A9EF36F82140114000516F40 /* DT_IG_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36EF2140114000516F40 /* DT_IG_MaitreD.swift */; };
+		A9EF36F92140114000516F40 /* DT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36F12140114000516F40 /* DT_IG_UrlSession.swift */; };
+		A9EF36FA2140114000516F40 /* DT_SC_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36F32140114000516F40 /* DT_SC_Image.swift */; };
+		A9EF36FB2140114000516F40 /* DT_SC_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36F42140114000516F40 /* DT_SC_TemporaryValues.swift */; };
+		A9EF36FC2140114000516F40 /* DT_SC_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36F52140114000516F40 /* DT_SC_CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,9 +110,6 @@
 		A9EF3650213F460E00516F40 /* FZ_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ViewController.swift; sourceTree = "<group>"; };
 		A9EF3651213F460E00516F40 /* FZ_VC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_VC_Page.swift; sourceTree = "<group>"; };
 		A9EF3652213F460E00516F40 /* FZ_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_TableCell.swift; sourceTree = "<group>"; };
-		A9EF3654213F460E00516F40 /* FZ_PX_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_TemporaryValues.swift; sourceTree = "<group>"; };
-		A9EF3655213F460E00516F40 /* FZ_PX_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_Image.swift; sourceTree = "<group>"; };
-		A9EF3656213F460E00516F40 /* FZ_PX_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PX_CoreData.swift; sourceTree = "<group>"; };
 		A9EF3658213F460E00516F40 /* FZ_PT_Proxies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_Proxies.swift; sourceTree = "<group>"; };
 		A9EF3659213F460E00516F40 /* FZ_PT_Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_Entities.swift; sourceTree = "<group>"; };
 		A9EF365A213F460E00516F40 /* FZ_PT_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_Utils.swift; sourceTree = "<group>"; };
@@ -128,10 +125,6 @@
 		A9EF3666213F460E00516F40 /* FZ_PT_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Signals.swift; sourceTree = "<group>"; };
 		A9EF3667213F460E00516F40 /* FZ_PT_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_PT_SV_Routing.swift; sourceTree = "<group>"; };
 		A9EF3668213F460E00516F40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9EF366A213F460E00516F40 /* FZ_SV_Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Routing.swift; sourceTree = "<group>"; };
-		A9EF366B213F460E00516F40 /* FZ_SV_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_UrlSession.swift; sourceTree = "<group>"; };
-		A9EF366C213F460E00516F40 /* FZ_SV_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_Signals.swift; sourceTree = "<group>"; };
-		A9EF366D213F460E00516F40 /* FZ_SV_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_SV_BundledJson.swift; sourceTree = "<group>"; };
 		A9EF3670213F460E00516F40 /* FZ_ET_FirstInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_FirstInstance.swift; sourceTree = "<group>"; };
 		A9EF3671213F460E00516F40 /* FZ_ET_SignalWaveform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_SignalWaveform.swift; sourceTree = "<group>"; };
 		A9EF3672213F460E00516F40 /* FZ_ET_VipRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_VipRelationship.swift; sourceTree = "<group>"; };
@@ -146,6 +139,13 @@
 		A9EF367C213F460E00516F40 /* FZ_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_ApiResult.swift; sourceTree = "<group>"; };
 		A9EF367D213F460E00516F40 /* FZ_ET_Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_Signal.swift; sourceTree = "<group>"; };
 		A9EF367E213F460E00516F40 /* FZ_ET_ViperBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZ_ET_ViperBundle.swift; sourceTree = "<group>"; };
+		A9EF36ED2140114000516F40 /* DT_IG_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_Orders.swift; sourceTree = "<group>"; };
+		A9EF36EE2140114000516F40 /* DT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_BundledJson.swift; sourceTree = "<group>"; };
+		A9EF36EF2140114000516F40 /* DT_IG_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_MaitreD.swift; sourceTree = "<group>"; };
+		A9EF36F12140114000516F40 /* DT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_UrlSession.swift; sourceTree = "<group>"; };
+		A9EF36F32140114000516F40 /* DT_SC_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_Image.swift; sourceTree = "<group>"; };
+		A9EF36F42140114000516F40 /* DT_SC_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_TemporaryValues.swift; sourceTree = "<group>"; };
+		A9EF36F52140114000516F40 /* DT_SC_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_CoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,15 +202,15 @@
 			isa = PBXGroup;
 			children = (
 				A9EF363B213F460E00516F40 /* Dertisch.h */,
-				A9EF363C213F460E00516F40 /* Constants */,
-				A9EF3641213F460E00516F40 /* Utils */,
-				A9EF364C213F460E00516F40 /* Extensions */,
-				A9EF364F213F460E00516F40 /* View */,
-				A9EF3653213F460E00516F40 /* Proxies */,
-				A9EF3657213F460E00516F40 /* Protocols */,
 				A9EF3668213F460E00516F40 /* Info.plist */,
-				A9EF3669213F460E00516F40 /* Services */,
+				A9EF363C213F460E00516F40 /* Constants */,
 				A9EF366F213F460E00516F40 /* Entities */,
+				A9EF364C213F460E00516F40 /* Extensions */,
+				A9EF36EC2140114000516F40 /* Ingredients */,
+				A9EF3657213F460E00516F40 /* Protocols */,
+				A9EF36F22140114000516F40 /* SousChefs */,
+				A9EF3641213F460E00516F40 /* Utils */,
+				A9EF364F213F460E00516F40 /* View */,
 			);
 			path = Dertisch;
 			sourceTree = "<group>";
@@ -262,16 +262,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		A9EF3653213F460E00516F40 /* Proxies */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF3654213F460E00516F40 /* FZ_PX_TemporaryValues.swift */,
-				A9EF3655213F460E00516F40 /* FZ_PX_Image.swift */,
-				A9EF3656213F460E00516F40 /* FZ_PX_CoreData.swift */,
-			);
-			path = Proxies;
-			sourceTree = "<group>";
-		};
 		A9EF3657213F460E00516F40 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,25 +299,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A9EF3669213F460E00516F40 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF366A213F460E00516F40 /* FZ_SV_Routing.swift */,
-				A9EF366B213F460E00516F40 /* FZ_SV_UrlSession.swift */,
-				A9EF366C213F460E00516F40 /* FZ_SV_Signals.swift */,
-				A9EF366D213F460E00516F40 /* FZ_SV_BundledJson.swift */,
-				A9EF366E213F460E00516F40 /* New Group */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		A9EF366E213F460E00516F40 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		A9EF366F213F460E00516F40 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +326,35 @@
 				A9EF367B213F460E00516F40 /* FZ_ET_CL_Interactor.swift */,
 			);
 			path = Collections;
+			sourceTree = "<group>";
+		};
+		A9EF36EC2140114000516F40 /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF36ED2140114000516F40 /* DT_IG_Orders.swift */,
+				A9EF36EE2140114000516F40 /* DT_IG_BundledJson.swift */,
+				A9EF36EF2140114000516F40 /* DT_IG_MaitreD.swift */,
+				A9EF36F02140114000516F40 /* New Group */,
+				A9EF36F12140114000516F40 /* DT_IG_UrlSession.swift */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		A9EF36F02140114000516F40 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A9EF36F22140114000516F40 /* SousChefs */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF36F32140114000516F40 /* DT_SC_Image.swift */,
+				A9EF36F42140114000516F40 /* DT_SC_TemporaryValues.swift */,
+				A9EF36F52140114000516F40 /* DT_SC_CoreData.swift */,
+			);
+			path = SousChefs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9EF36FC2140114000516F40 /* DT_SC_CoreData.swift in Sources */,
 				A9EF36B2213F460E00516F40 /* FZ_ET_Collection.swift in Sources */,
 				A9EF369A213F460E00516F40 /* FZ_PT_VP_Class.swift in Sources */,
 				A9EF369D213F460E00516F40 /* FZ_PT_VP_ViewController.swift in Sources */,
@@ -475,6 +476,7 @@
 				A9EF36A0213F460E00516F40 /* FZ_PT_SV_BundledJson.swift in Sources */,
 				A9EF36B5213F460E00516F40 /* FZ_ET_Signal.swift in Sources */,
 				A9EF36A3213F460E00516F40 /* FZ_PT_SV_Routing.swift in Sources */,
+				A9EF36F72140114000516F40 /* DT_IG_BundledJson.swift in Sources */,
 				A9EF36AD213F460E00516F40 /* FZ_ET_TimePeriod.swift in Sources */,
 				A9EF36A1213F460E00516F40 /* FZ_PT_SV_UrlSession.swift in Sources */,
 				A9EF3686213F460E00516F40 /* FZ_UT_Log.swift in Sources */,
@@ -482,36 +484,34 @@
 				A9EF368F213F460E00516F40 /* FZ_EX_Data.swift in Sources */,
 				A9EF3685213F460E00516F40 /* FZ_UT_Constraints.swift in Sources */,
 				A9EF368E213F460E00516F40 /* FZ_EX_UIControl.swift in Sources */,
+				A9EF36FA2140114000516F40 /* DT_SC_Image.swift in Sources */,
 				A9EF36B6213F460E00516F40 /* FZ_ET_ViperBundle.swift in Sources */,
 				A9EF36B4213F460E00516F40 /* FZ_ET_ApiResult.swift in Sources */,
 				A9EF369C213F460E00516F40 /* FZ_PT_VP_ModelClass.swift in Sources */,
-				A9EF36A7213F460E00516F40 /* FZ_SV_Signals.swift in Sources */,
 				A9EF36AE213F460E00516F40 /* FZ_ET_CoreData.swift in Sources */,
 				A9EF3682213F460E00516F40 /* FZ_CS_Signals.swift in Sources */,
 				A9EF3683213F460E00516F40 /* FZ_CS_Chars.swift in Sources */,
 				A9EF368C213F460E00516F40 /* FZ_UT_Time.swift in Sources */,
+				A9EF36FB2140114000516F40 /* DT_SC_TemporaryValues.swift in Sources */,
 				A9EF3699213F460E00516F40 /* FZ_PT_Closets.swift in Sources */,
 				A9EF36B3213F460E00516F40 /* FZ_ET_CL_Interactor.swift in Sources */,
-				A9EF3694213F460E00516F40 /* FZ_PX_Image.swift in Sources */,
 				A9EF3698213F460E00516F40 /* FZ_PT_Utils.swift in Sources */,
 				A9EF3690213F460E00516F40 /* FZ_ViewController.swift in Sources */,
-				A9EF36A6213F460E00516F40 /* FZ_SV_UrlSession.swift in Sources */,
 				A9EF36AF213F460E00516F40 /* FZ_ET_CL_Presenter.swift in Sources */,
 				A9EF36A9213F460E00516F40 /* FZ_ET_FirstInstance.swift in Sources */,
 				A9EF36AC213F460E00516F40 /* FZ_ET_Key.swift in Sources */,
 				A9EF3691213F460E00516F40 /* FZ_VC_Page.swift in Sources */,
-				A9EF3695213F460E00516F40 /* FZ_PX_CoreData.swift in Sources */,
 				A9EF36A2213F460E00516F40 /* FZ_PT_SV_Signals.swift in Sources */,
 				A9EF368A213F460E00516F40 /* FZ_UT_Misc.swift in Sources */,
-				A9EF36A8213F460E00516F40 /* FZ_SV_BundledJson.swift in Sources */,
-				A9EF36A5213F460E00516F40 /* FZ_SV_Routing.swift in Sources */,
 				A9EF369B213F460E00516F40 /* FZ_PT_VP_Presenter.swift in Sources */,
 				A9EF36B1213F460E00516F40 /* FZ_ET_CL_PageViewController.swift in Sources */,
 				A9EF3692213F460E00516F40 /* FZ_TableCell.swift in Sources */,
+				A9EF36F62140114000516F40 /* DT_IG_Orders.swift in Sources */,
 				A9EF3688213F460E00516F40 /* FZ_UT_Math.swift in Sources */,
 				A9EF3696213F460E00516F40 /* FZ_PT_Proxies.swift in Sources */,
+				A9EF36F92140114000516F40 /* DT_IG_UrlSession.swift in Sources */,
+				A9EF36F82140114000516F40 /* DT_IG_MaitreD.swift in Sources */,
 				A9EF36B0213F460E00516F40 /* FZ_ET_CL_ModelClass.swift in Sources */,
-				A9EF3693213F460E00516F40 /* FZ_PX_TemporaryValues.swift in Sources */,
 				A9EF3680213F460E00516F40 /* FZ_CS_CommonPhrases.swift in Sources */,
 				A9EF3697213F460E00516F40 /* FZ_PT_Entities.swift in Sources */,
 				A9EF368B213F460E00516F40 /* FZ_UT_String.swift in Sources */,

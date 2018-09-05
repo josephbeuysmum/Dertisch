@@ -10,13 +10,13 @@ import CoreData
 
 public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
-extension DTCoreDataSousChef: DTCoreDataSousChefProtocol {
+extension DTCoreData: DTCoreDataProtocol {
 //	public var closet: DTKitchenCloset { return closet_ }
 	
 	public var dataModelName: String? {
 		get { return data_model_name }
 		set {
-			guard data_model_name == nil else { fatalError("Currently DTCoreDataSousChef dataModelName can only be set once") }
+			guard data_model_name == nil else { fatalError("Currently DTCoreData dataModelName can only be set once") }
 			data_model_name = newValue
 		}
 	}
@@ -134,10 +134,10 @@ extension DTCoreDataSousChef: DTCoreDataSousChefProtocol {
 	}
 }
 
-public class DTCoreDataSousChef {
+public class DTCoreData {
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
-			loWarning("DTCoreDataSousChef dataModelName is nil")
+			loWarning("DTCoreData dataModelName is nil")
 			return nil
 		}
 		let container = NSPersistentContainer(name: dmn)

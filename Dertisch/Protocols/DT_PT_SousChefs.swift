@@ -16,7 +16,7 @@ public typealias DTOrderCallback = (String, Any?) -> Void
 
 // todo make more funcs etc "final"
 // todo? maybe move protocols into their implementing classes
-public protocol DTCoreDataSousChefProtocol: DTKitchenProtocol {
+public protocol DTCoreDataProtocol: DTKitchenProtocol {
 	var dataModelName: String? { get set }
 	func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback)
 	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback)
@@ -26,14 +26,14 @@ public protocol DTCoreDataSousChefProtocol: DTKitchenProtocol {
 	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDCallback)
 }
 
-public protocol DTTemporaryValuesSousChefProtocol: DTKitchenProtocol {
+public protocol DTTemporaryValuesProtocol: DTKitchenProtocol {
 	func getValue(by key: String, andAnnul: Bool?) -> DTStorableDataType?
 	func set(_ value: DTStorableDataType, by key: String)
 	func annulValue(by key: String)
 	func removeValues ()
 }
 
-public protocol DTImageSousChefProtocol: DTKitchenProtocol {
+public protocol DTImagesProtocol: DTKitchenProtocol {
 	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
 	func loadImage(by url: String)
 }

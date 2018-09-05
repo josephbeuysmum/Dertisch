@@ -205,8 +205,8 @@ extension DTMaitreD: DTMaitreDProtocol {
 			dependencyType in
 			if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
 				kitchenStaff.append(dependencyClass)
-//				if dependencyClass is DTImageSousChef {
-//					headChef.closet?.set(imageSousChef: dependencyClass as! DTImageSousChef)
+//				if dependencyClass is DTImages {
+//					headChef.closet?.set(imageSousChef: dependencyClass as! DTImages)
 //				} else {
 //					headChef.closet?.bespoke.add(dependencyClass)
 //				}

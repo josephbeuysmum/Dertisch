@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DTTemporaryValuesSousChef: DTTemporaryValuesSousChefProtocol {
+extension DTTemporaryValues: DTTemporaryValuesProtocol {
 //	public var closet: DTKitchenCloset { return closet_ }
 	
 	
@@ -60,7 +60,7 @@ extension DTTemporaryValuesSousChef: DTTemporaryValuesSousChefProtocol {
 
 }
 
-public class DTTemporaryValuesSousChef {
+public class DTTemporaryValues {
 	fileprivate let orders_: DTOrders
 	
 	fileprivate var
