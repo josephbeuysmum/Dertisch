@@ -15,52 +15,52 @@
 		A9B531772039F62700DB1C85 /* Dertisch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Dertisch.framework */; };
 		A9EF367F213F460E00516F40 /* Dertisch.h in Headers */ = {isa = PBXBuildFile; fileRef = A9EF363B213F460E00516F40 /* Dertisch.h */; };
 		A9EF36A4213F460E00516F40 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9EF3668213F460E00516F40 /* Info.plist */; };
-		A9EF37012140139E00516F40 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36FD2140139E00516F40 /* DT_CS_Logs.swift */; };
-		A9EF37022140139E00516F40 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36FE2140139E00516F40 /* DT_CS_Chars.swift */; };
-		A9EF37032140139E00516F40 /* DT_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF36FF2140139E00516F40 /* DT_CS_Signals.swift */; };
-		A9EF37042140139E00516F40 /* DT_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37002140139E00516F40 /* DT_CS_CommonPhrases.swift */; };
-		A9EF3725214013BC00516F40 /* DT_EX_UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3706214013BC00516F40 /* DT_EX_UIControl.swift */; };
-		A9EF3726214013BC00516F40 /* DT_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3707214013BC00516F40 /* DT_EX_Data.swift */; };
-		A9EF3727214013BC00516F40 /* DT_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3709214013BC00516F40 /* DT_PT_Entities.swift */; };
-		A9EF3728214013BC00516F40 /* DT_PT_SousChefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF370A214013BC00516F40 /* DT_PT_SousChefs.swift */; };
-		A9EF3729214013BC00516F40 /* DT_PT_IG_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF370C214013BC00516F40 /* DT_PT_IG_Orders.swift */; };
-		A9EF372A214013BC00516F40 /* DT_PT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF370D214013BC00516F40 /* DT_PT_IG_UrlSession.swift */; };
-		A9EF372B214013BC00516F40 /* DT_PT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF370E214013BC00516F40 /* DT_PT_IG_BundledJson.swift */; };
-		A9EF372C214013BC00516F40 /* DT_PT_IG_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF370F214013BC00516F40 /* DT_PT_IG_MaitreD.swift */; };
-		A9EF372D214013BC00516F40 /* DT_PT_SW_Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3711214013BC00516F40 /* DT_PT_SW_Class.swift */; };
-		A9EF372E214013BC00516F40 /* DT_PT_SW_Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3712214013BC00516F40 /* DT_PT_SW_Waiter.swift */; };
-		A9EF372F214013BC00516F40 /* DT_PT_SW_Kitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3713214013BC00516F40 /* DT_PT_SW_Kitchen.swift */; };
-		A9EF3730214013BC00516F40 /* DT_PT_SW_HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3714214013BC00516F40 /* DT_PT_SW_HeadChef.swift */; };
-		A9EF3731214013BC00516F40 /* DT_PT_SW_Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3715214013BC00516F40 /* DT_PT_SW_Dish.swift */; };
-		A9EF3732214013BC00516F40 /* DT_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3716214013BC00516F40 /* DT_PT_Utils.swift */; };
-		A9EF3733214013BC00516F40 /* DT_IG_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3718214013BC00516F40 /* DT_IG_Orders.swift */; };
-		A9EF3734214013BC00516F40 /* DT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3719214013BC00516F40 /* DT_IG_BundledJson.swift */; };
-		A9EF3735214013BC00516F40 /* DT_IG_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF371A214013BC00516F40 /* DT_IG_MaitreD.swift */; };
-		A9EF3736214013BC00516F40 /* DT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF371B214013BC00516F40 /* DT_IG_UrlSession.swift */; };
-		A9EF3737214013BC00516F40 /* DT_ET_SwitchRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF371D214013BC00516F40 /* DT_ET_SwitchRelationship.swift */; };
-		A9EF3738214013BC00516F40 /* DT_ET_Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF371E214013BC00516F40 /* DT_ET_Order.swift */; };
-		A9EF3739214013BC00516F40 /* DT_ET_StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF371F214013BC00516F40 /* DT_ET_StaffRelationship.swift */; };
-		A9EF373A214013BC00516F40 /* DT_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3720214013BC00516F40 /* DT_ET_TimePeriod.swift */; };
-		A9EF373B214013BC00516F40 /* DT_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3721214013BC00516F40 /* DT_ET_ApiResult.swift */; };
-		A9EF373C214013BC00516F40 /* DT_ET_OrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3722214013BC00516F40 /* DT_ET_OrderDetails.swift */; };
-		A9EF373D214013BC00516F40 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3723214013BC00516F40 /* DT_ET_CoreData.swift */; };
-		A9EF373E214013BC00516F40 /* DT_ET_FirstInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3724214013BC00516F40 /* DT_ET_FirstInstance.swift */; };
-		A9EF3752214013D700516F40 /* DT_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3740214013D700516F40 /* DT_UT_Consts.swift */; };
-		A9EF3753214013D700516F40 /* DT_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3741214013D700516F40 /* DT_UT_View.swift */; };
-		A9EF3754214013D700516F40 /* DT_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3742214013D700516F40 /* DT_UT_Math.swift */; };
-		A9EF3755214013D700516F40 /* DT_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3743214013D700516F40 /* DT_UT_Misc.swift */; };
-		A9EF3756214013D700516F40 /* DT_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3744214013D700516F40 /* DT_UT_Log.swift */; };
-		A9EF3757214013D700516F40 /* DT_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3745214013D700516F40 /* DT_UT_Constraints.swift */; };
-		A9EF3758214013D700516F40 /* DT_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3746214013D700516F40 /* DT_UT_Time.swift */; };
-		A9EF3759214013D700516F40 /* DT_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3747214013D700516F40 /* DT_UT_Extensions.swift */; };
-		A9EF375A214013D700516F40 /* DT_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3748214013D700516F40 /* DT_UT_String.swift */; };
-		A9EF375B214013D700516F40 /* DT_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3749214013D700516F40 /* DT_UT_Colors.swift */; };
-		A9EF375C214013D700516F40 /* DT_PageDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF374B214013D700516F40 /* DT_PageDish.swift */; };
-		A9EF375D214013D700516F40 /* DT_Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF374C214013D700516F40 /* DT_Dish.swift */; };
-		A9EF375E214013D700516F40 /* DT_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF374D214013D700516F40 /* DT_TableCell.swift */; };
-		A9EF375F214013D700516F40 /* DT_SC_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF374F214013D700516F40 /* DT_SC_Image.swift */; };
-		A9EF3760214013D700516F40 /* DT_SC_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3750214013D700516F40 /* DT_SC_TemporaryValues.swift */; };
-		A9EF3761214013D700516F40 /* DT_SC_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF3751214013D700516F40 /* DT_SC_CoreData.swift */; };
+		A9EF379E2140159200516F40 /* DT_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37642140159200516F40 /* DT_CS_Signals.swift */; };
+		A9EF379F2140159200516F40 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37652140159200516F40 /* DT_CS_Logs.swift */; };
+		A9EF37A02140159200516F40 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37662140159200516F40 /* DT_CS_Chars.swift */; };
+		A9EF37A12140159200516F40 /* DT_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37672140159200516F40 /* DT_CS_CommonPhrases.swift */; };
+		A9EF37A22140159200516F40 /* DT_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37692140159200516F40 /* DT_UT_Consts.swift */; };
+		A9EF37A32140159200516F40 /* DT_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376A2140159200516F40 /* DT_UT_View.swift */; };
+		A9EF37A42140159200516F40 /* DT_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376B2140159200516F40 /* DT_UT_Math.swift */; };
+		A9EF37A52140159200516F40 /* DT_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376C2140159200516F40 /* DT_UT_Misc.swift */; };
+		A9EF37A62140159200516F40 /* DT_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376D2140159200516F40 /* DT_UT_Log.swift */; };
+		A9EF37A72140159200516F40 /* DT_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376E2140159200516F40 /* DT_UT_Constraints.swift */; };
+		A9EF37A82140159200516F40 /* DT_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF376F2140159200516F40 /* DT_UT_Time.swift */; };
+		A9EF37A92140159200516F40 /* DT_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37702140159200516F40 /* DT_UT_Extensions.swift */; };
+		A9EF37AA2140159200516F40 /* DT_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37712140159200516F40 /* DT_UT_String.swift */; };
+		A9EF37AB2140159200516F40 /* DT_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37722140159200516F40 /* DT_UT_Colors.swift */; };
+		A9EF37AC2140159200516F40 /* DT_EX_UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37742140159200516F40 /* DT_EX_UIControl.swift */; };
+		A9EF37AD2140159200516F40 /* DT_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37752140159200516F40 /* DT_EX_Data.swift */; };
+		A9EF37AE2140159200516F40 /* DT_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37772140159200516F40 /* DT_PT_Entities.swift */; };
+		A9EF37AF2140159200516F40 /* DT_PT_SousChefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37782140159200516F40 /* DT_PT_SousChefs.swift */; };
+		A9EF37B02140159200516F40 /* DT_PT_IG_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF377A2140159200516F40 /* DT_PT_IG_Orders.swift */; };
+		A9EF37B12140159200516F40 /* DT_PT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF377B2140159200516F40 /* DT_PT_IG_UrlSession.swift */; };
+		A9EF37B22140159200516F40 /* DT_PT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF377C2140159200516F40 /* DT_PT_IG_BundledJson.swift */; };
+		A9EF37B32140159200516F40 /* DT_PT_IG_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF377D2140159200516F40 /* DT_PT_IG_MaitreD.swift */; };
+		A9EF37B42140159200516F40 /* DT_PT_SW_Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF377F2140159200516F40 /* DT_PT_SW_Class.swift */; };
+		A9EF37B52140159200516F40 /* DT_PT_SW_Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37802140159200516F40 /* DT_PT_SW_Waiter.swift */; };
+		A9EF37B62140159200516F40 /* DT_PT_SW_Kitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37812140159200516F40 /* DT_PT_SW_Kitchen.swift */; };
+		A9EF37B72140159200516F40 /* DT_PT_SW_HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37822140159200516F40 /* DT_PT_SW_HeadChef.swift */; };
+		A9EF37B82140159200516F40 /* DT_PT_SW_Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37832140159200516F40 /* DT_PT_SW_Dish.swift */; };
+		A9EF37B92140159200516F40 /* DT_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37842140159200516F40 /* DT_PT_Utils.swift */; };
+		A9EF37BA2140159200516F40 /* DT_ET_SwitchRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37862140159200516F40 /* DT_ET_SwitchRelationship.swift */; };
+		A9EF37BB2140159200516F40 /* DT_ET_Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37872140159200516F40 /* DT_ET_Order.swift */; };
+		A9EF37BC2140159200516F40 /* DT_ET_StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37882140159200516F40 /* DT_ET_StaffRelationship.swift */; };
+		A9EF37BD2140159200516F40 /* DT_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37892140159200516F40 /* DT_ET_TimePeriod.swift */; };
+		A9EF37BE2140159200516F40 /* DT_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF378A2140159200516F40 /* DT_ET_ApiResult.swift */; };
+		A9EF37BF2140159200516F40 /* DT_ET_OrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF378B2140159200516F40 /* DT_ET_OrderDetails.swift */; };
+		A9EF37C02140159200516F40 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF378C2140159200516F40 /* DT_ET_CoreData.swift */; };
+		A9EF37C12140159200516F40 /* DT_ET_FirstInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF378D2140159200516F40 /* DT_ET_FirstInstance.swift */; };
+		A9EF37C22140159200516F40 /* DT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37902140159200516F40 /* DT_IG_BundledJson.swift */; };
+		A9EF37C32140159200516F40 /* DT_IG_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37912140159200516F40 /* DT_IG_CoreData.swift */; };
+		A9EF37C42140159200516F40 /* DT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37922140159200516F40 /* DT_IG_UrlSession.swift */; };
+		A9EF37C52140159200516F40 /* DT_SC_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37942140159200516F40 /* DT_SC_Image.swift */; };
+		A9EF37C62140159200516F40 /* DT_SC_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37952140159200516F40 /* DT_SC_TemporaryValues.swift */; };
+		A9EF37C72140159200516F40 /* DT_WT_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37982140159200516F40 /* DT_WT_Orders.swift */; };
+		A9EF37C82140159200516F40 /* DT_WT_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */; };
+		A9EF37C92140159200516F40 /* DT_Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379B2140159200516F40 /* DT_Dish.swift */; };
+		A9EF37CA2140159200516F40 /* DT_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379C2140159200516F40 /* DT_TableCell.swift */; };
+		A9EF37CB2140159200516F40 /* DT_PageDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379D2140159200516F40 /* DT_PageDish.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,52 +84,52 @@
 		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9EF363B213F460E00516F40 /* Dertisch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dertisch.h; sourceTree = "<group>"; };
 		A9EF3668213F460E00516F40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9EF36FD2140139E00516F40 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
-		A9EF36FE2140139E00516F40 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
-		A9EF36FF2140139E00516F40 /* DT_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Signals.swift; sourceTree = "<group>"; };
-		A9EF37002140139E00516F40 /* DT_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_CommonPhrases.swift; sourceTree = "<group>"; };
-		A9EF3706214013BC00516F40 /* DT_EX_UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_UIControl.swift; sourceTree = "<group>"; };
-		A9EF3707214013BC00516F40 /* DT_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_Data.swift; sourceTree = "<group>"; };
-		A9EF3709214013BC00516F40 /* DT_PT_Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Entities.swift; sourceTree = "<group>"; };
-		A9EF370A214013BC00516F40 /* DT_PT_SousChefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SousChefs.swift; sourceTree = "<group>"; };
-		A9EF370C214013BC00516F40 /* DT_PT_IG_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_Orders.swift; sourceTree = "<group>"; };
-		A9EF370D214013BC00516F40 /* DT_PT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_UrlSession.swift; sourceTree = "<group>"; };
-		A9EF370E214013BC00516F40 /* DT_PT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_BundledJson.swift; sourceTree = "<group>"; };
-		A9EF370F214013BC00516F40 /* DT_PT_IG_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_MaitreD.swift; sourceTree = "<group>"; };
-		A9EF3711214013BC00516F40 /* DT_PT_SW_Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Class.swift; sourceTree = "<group>"; };
-		A9EF3712214013BC00516F40 /* DT_PT_SW_Waiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Waiter.swift; sourceTree = "<group>"; };
-		A9EF3713214013BC00516F40 /* DT_PT_SW_Kitchen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Kitchen.swift; sourceTree = "<group>"; };
-		A9EF3714214013BC00516F40 /* DT_PT_SW_HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_HeadChef.swift; sourceTree = "<group>"; };
-		A9EF3715214013BC00516F40 /* DT_PT_SW_Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Dish.swift; sourceTree = "<group>"; };
-		A9EF3716214013BC00516F40 /* DT_PT_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Utils.swift; sourceTree = "<group>"; };
-		A9EF3718214013BC00516F40 /* DT_IG_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_Orders.swift; sourceTree = "<group>"; };
-		A9EF3719214013BC00516F40 /* DT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_BundledJson.swift; sourceTree = "<group>"; };
-		A9EF371A214013BC00516F40 /* DT_IG_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_MaitreD.swift; sourceTree = "<group>"; };
-		A9EF371B214013BC00516F40 /* DT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_UrlSession.swift; sourceTree = "<group>"; };
-		A9EF371D214013BC00516F40 /* DT_ET_SwitchRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchRelationship.swift; sourceTree = "<group>"; };
-		A9EF371E214013BC00516F40 /* DT_ET_Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_Order.swift; sourceTree = "<group>"; };
-		A9EF371F214013BC00516F40 /* DT_ET_StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_StaffRelationship.swift; sourceTree = "<group>"; };
-		A9EF3720214013BC00516F40 /* DT_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_TimePeriod.swift; sourceTree = "<group>"; };
-		A9EF3721214013BC00516F40 /* DT_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_ApiResult.swift; sourceTree = "<group>"; };
-		A9EF3722214013BC00516F40 /* DT_ET_OrderDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_OrderDetails.swift; sourceTree = "<group>"; };
-		A9EF3723214013BC00516F40 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
-		A9EF3724214013BC00516F40 /* DT_ET_FirstInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_FirstInstance.swift; sourceTree = "<group>"; };
-		A9EF3740214013D700516F40 /* DT_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Consts.swift; sourceTree = "<group>"; };
-		A9EF3741214013D700516F40 /* DT_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_View.swift; sourceTree = "<group>"; };
-		A9EF3742214013D700516F40 /* DT_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Math.swift; sourceTree = "<group>"; };
-		A9EF3743214013D700516F40 /* DT_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Misc.swift; sourceTree = "<group>"; };
-		A9EF3744214013D700516F40 /* DT_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Log.swift; sourceTree = "<group>"; };
-		A9EF3745214013D700516F40 /* DT_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Constraints.swift; sourceTree = "<group>"; };
-		A9EF3746214013D700516F40 /* DT_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Time.swift; sourceTree = "<group>"; };
-		A9EF3747214013D700516F40 /* DT_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Extensions.swift; sourceTree = "<group>"; };
-		A9EF3748214013D700516F40 /* DT_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_String.swift; sourceTree = "<group>"; };
-		A9EF3749214013D700516F40 /* DT_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Colors.swift; sourceTree = "<group>"; };
-		A9EF374B214013D700516F40 /* DT_PageDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PageDish.swift; sourceTree = "<group>"; };
-		A9EF374C214013D700516F40 /* DT_Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Dish.swift; sourceTree = "<group>"; };
-		A9EF374D214013D700516F40 /* DT_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_TableCell.swift; sourceTree = "<group>"; };
-		A9EF374F214013D700516F40 /* DT_SC_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_Image.swift; sourceTree = "<group>"; };
-		A9EF3750214013D700516F40 /* DT_SC_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_TemporaryValues.swift; sourceTree = "<group>"; };
-		A9EF3751214013D700516F40 /* DT_SC_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_CoreData.swift; sourceTree = "<group>"; };
+		A9EF37642140159200516F40 /* DT_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Signals.swift; sourceTree = "<group>"; };
+		A9EF37652140159200516F40 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
+		A9EF37662140159200516F40 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
+		A9EF37672140159200516F40 /* DT_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_CommonPhrases.swift; sourceTree = "<group>"; };
+		A9EF37692140159200516F40 /* DT_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Consts.swift; sourceTree = "<group>"; };
+		A9EF376A2140159200516F40 /* DT_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_View.swift; sourceTree = "<group>"; };
+		A9EF376B2140159200516F40 /* DT_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Math.swift; sourceTree = "<group>"; };
+		A9EF376C2140159200516F40 /* DT_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Misc.swift; sourceTree = "<group>"; };
+		A9EF376D2140159200516F40 /* DT_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Log.swift; sourceTree = "<group>"; };
+		A9EF376E2140159200516F40 /* DT_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Constraints.swift; sourceTree = "<group>"; };
+		A9EF376F2140159200516F40 /* DT_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Time.swift; sourceTree = "<group>"; };
+		A9EF37702140159200516F40 /* DT_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Extensions.swift; sourceTree = "<group>"; };
+		A9EF37712140159200516F40 /* DT_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_String.swift; sourceTree = "<group>"; };
+		A9EF37722140159200516F40 /* DT_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Colors.swift; sourceTree = "<group>"; };
+		A9EF37742140159200516F40 /* DT_EX_UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_UIControl.swift; sourceTree = "<group>"; };
+		A9EF37752140159200516F40 /* DT_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_Data.swift; sourceTree = "<group>"; };
+		A9EF37772140159200516F40 /* DT_PT_Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Entities.swift; sourceTree = "<group>"; };
+		A9EF37782140159200516F40 /* DT_PT_SousChefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SousChefs.swift; sourceTree = "<group>"; };
+		A9EF377A2140159200516F40 /* DT_PT_IG_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_Orders.swift; sourceTree = "<group>"; };
+		A9EF377B2140159200516F40 /* DT_PT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_UrlSession.swift; sourceTree = "<group>"; };
+		A9EF377C2140159200516F40 /* DT_PT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_BundledJson.swift; sourceTree = "<group>"; };
+		A9EF377D2140159200516F40 /* DT_PT_IG_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_IG_MaitreD.swift; sourceTree = "<group>"; };
+		A9EF377F2140159200516F40 /* DT_PT_SW_Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Class.swift; sourceTree = "<group>"; };
+		A9EF37802140159200516F40 /* DT_PT_SW_Waiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Waiter.swift; sourceTree = "<group>"; };
+		A9EF37812140159200516F40 /* DT_PT_SW_Kitchen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Kitchen.swift; sourceTree = "<group>"; };
+		A9EF37822140159200516F40 /* DT_PT_SW_HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_HeadChef.swift; sourceTree = "<group>"; };
+		A9EF37832140159200516F40 /* DT_PT_SW_Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SW_Dish.swift; sourceTree = "<group>"; };
+		A9EF37842140159200516F40 /* DT_PT_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Utils.swift; sourceTree = "<group>"; };
+		A9EF37862140159200516F40 /* DT_ET_SwitchRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchRelationship.swift; sourceTree = "<group>"; };
+		A9EF37872140159200516F40 /* DT_ET_Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_Order.swift; sourceTree = "<group>"; };
+		A9EF37882140159200516F40 /* DT_ET_StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_StaffRelationship.swift; sourceTree = "<group>"; };
+		A9EF37892140159200516F40 /* DT_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_TimePeriod.swift; sourceTree = "<group>"; };
+		A9EF378A2140159200516F40 /* DT_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_ApiResult.swift; sourceTree = "<group>"; };
+		A9EF378B2140159200516F40 /* DT_ET_OrderDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_OrderDetails.swift; sourceTree = "<group>"; };
+		A9EF378C2140159200516F40 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
+		A9EF378D2140159200516F40 /* DT_ET_FirstInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_FirstInstance.swift; sourceTree = "<group>"; };
+		A9EF37902140159200516F40 /* DT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_BundledJson.swift; sourceTree = "<group>"; };
+		A9EF37912140159200516F40 /* DT_IG_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_CoreData.swift; sourceTree = "<group>"; };
+		A9EF37922140159200516F40 /* DT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_UrlSession.swift; sourceTree = "<group>"; };
+		A9EF37942140159200516F40 /* DT_SC_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_Image.swift; sourceTree = "<group>"; };
+		A9EF37952140159200516F40 /* DT_SC_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_TemporaryValues.swift; sourceTree = "<group>"; };
+		A9EF37982140159200516F40 /* DT_WT_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_Orders.swift; sourceTree = "<group>"; };
+		A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_MaitreD.swift; sourceTree = "<group>"; };
+		A9EF379B2140159200516F40 /* DT_Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Dish.swift; sourceTree = "<group>"; };
+		A9EF379C2140159200516F40 /* DT_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_TableCell.swift; sourceTree = "<group>"; };
+		A9EF379D2140159200516F40 /* DT_PageDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PageDish.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,136 +185,168 @@
 		A9EF363A213F460E00516F40 /* Dertisch */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF363C213F460E00516F40 /* Constants */,
-				A9EF371C214013BC00516F40 /* Entities */,
-				A9EF3705214013BC00516F40 /* Extensions */,
-				A9EF3717214013BC00516F40 /* Ingredients */,
-				A9EF3708214013BC00516F40 /* Protocols */,
-				A9EF374E214013D700516F40 /* SousChefs */,
-				A9EF373F214013D700516F40 /* Utils */,
-				A9EF374A214013D700516F40 /* View */,
+				A9EF378E2140159200516F40 /* Kitchen */,
+				A9EF37622140159200516F40 /* Others */,
+				A9EF37962140159200516F40 /* Restaurant */,
 				A9EF363B213F460E00516F40 /* Dertisch.h */,
 				A9EF3668213F460E00516F40 /* Info.plist */,
 			);
 			path = Dertisch;
 			sourceTree = "<group>";
 		};
-		A9EF363C213F460E00516F40 /* Constants */ = {
+		A9EF37622140159200516F40 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF36FE2140139E00516F40 /* DT_CS_Chars.swift */,
-				A9EF37002140139E00516F40 /* DT_CS_CommonPhrases.swift */,
-				A9EF36FD2140139E00516F40 /* DT_CS_Logs.swift */,
-				A9EF36FF2140139E00516F40 /* DT_CS_Signals.swift */,
+				A9EF37632140159200516F40 /* Constants */,
+				A9EF37682140159200516F40 /* Utils */,
+				A9EF37732140159200516F40 /* Extensions */,
+				A9EF37762140159200516F40 /* Protocols */,
+				A9EF37852140159200516F40 /* Entities */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		A9EF37632140159200516F40 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37642140159200516F40 /* DT_CS_Signals.swift */,
+				A9EF37652140159200516F40 /* DT_CS_Logs.swift */,
+				A9EF37662140159200516F40 /* DT_CS_Chars.swift */,
+				A9EF37672140159200516F40 /* DT_CS_CommonPhrases.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		A9EF3705214013BC00516F40 /* Extensions */ = {
+		A9EF37682140159200516F40 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF3706214013BC00516F40 /* DT_EX_UIControl.swift */,
-				A9EF3707214013BC00516F40 /* DT_EX_Data.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A9EF3708214013BC00516F40 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF3709214013BC00516F40 /* DT_PT_Entities.swift */,
-				A9EF370A214013BC00516F40 /* DT_PT_SousChefs.swift */,
-				A9EF3716214013BC00516F40 /* DT_PT_Utils.swift */,
-				A9EF370B214013BC00516F40 /* Ingredients */,
-				A9EF3710214013BC00516F40 /* Switch */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		A9EF370B214013BC00516F40 /* Ingredients */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF370E214013BC00516F40 /* DT_PT_IG_BundledJson.swift */,
-				A9EF370F214013BC00516F40 /* DT_PT_IG_MaitreD.swift */,
-				A9EF370C214013BC00516F40 /* DT_PT_IG_Orders.swift */,
-				A9EF370D214013BC00516F40 /* DT_PT_IG_UrlSession.swift */,
-			);
-			path = Ingredients;
-			sourceTree = "<group>";
-		};
-		A9EF3710214013BC00516F40 /* Switch */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF3711214013BC00516F40 /* DT_PT_SW_Class.swift */,
-				A9EF3715214013BC00516F40 /* DT_PT_SW_Dish.swift */,
-				A9EF3714214013BC00516F40 /* DT_PT_SW_HeadChef.swift */,
-				A9EF3713214013BC00516F40 /* DT_PT_SW_Kitchen.swift */,
-				A9EF3712214013BC00516F40 /* DT_PT_SW_Waiter.swift */,
-			);
-			path = Switch;
-			sourceTree = "<group>";
-		};
-		A9EF3717214013BC00516F40 /* Ingredients */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF3718214013BC00516F40 /* DT_IG_Orders.swift */,
-				A9EF3719214013BC00516F40 /* DT_IG_BundledJson.swift */,
-				A9EF371A214013BC00516F40 /* DT_IG_MaitreD.swift */,
-				A9EF371B214013BC00516F40 /* DT_IG_UrlSession.swift */,
-			);
-			path = Ingredients;
-			sourceTree = "<group>";
-		};
-		A9EF371C214013BC00516F40 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF371D214013BC00516F40 /* DT_ET_SwitchRelationship.swift */,
-				A9EF371E214013BC00516F40 /* DT_ET_Order.swift */,
-				A9EF371F214013BC00516F40 /* DT_ET_StaffRelationship.swift */,
-				A9EF3720214013BC00516F40 /* DT_ET_TimePeriod.swift */,
-				A9EF3721214013BC00516F40 /* DT_ET_ApiResult.swift */,
-				A9EF3722214013BC00516F40 /* DT_ET_OrderDetails.swift */,
-				A9EF3723214013BC00516F40 /* DT_ET_CoreData.swift */,
-				A9EF3724214013BC00516F40 /* DT_ET_FirstInstance.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		A9EF373F214013D700516F40 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF3749214013D700516F40 /* DT_UT_Colors.swift */,
-				A9EF3745214013D700516F40 /* DT_UT_Constraints.swift */,
-				A9EF3740214013D700516F40 /* DT_UT_Consts.swift */,
-				A9EF3747214013D700516F40 /* DT_UT_Extensions.swift */,
-				A9EF3744214013D700516F40 /* DT_UT_Log.swift */,
-				A9EF3742214013D700516F40 /* DT_UT_Math.swift */,
-				A9EF3743214013D700516F40 /* DT_UT_Misc.swift */,
-				A9EF3748214013D700516F40 /* DT_UT_String.swift */,
-				A9EF3746214013D700516F40 /* DT_UT_Time.swift */,
-				A9EF3741214013D700516F40 /* DT_UT_View.swift */,
+				A9EF37692140159200516F40 /* DT_UT_Consts.swift */,
+				A9EF376A2140159200516F40 /* DT_UT_View.swift */,
+				A9EF376B2140159200516F40 /* DT_UT_Math.swift */,
+				A9EF376C2140159200516F40 /* DT_UT_Misc.swift */,
+				A9EF376D2140159200516F40 /* DT_UT_Log.swift */,
+				A9EF376E2140159200516F40 /* DT_UT_Constraints.swift */,
+				A9EF376F2140159200516F40 /* DT_UT_Time.swift */,
+				A9EF37702140159200516F40 /* DT_UT_Extensions.swift */,
+				A9EF37712140159200516F40 /* DT_UT_String.swift */,
+				A9EF37722140159200516F40 /* DT_UT_Colors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A9EF374A214013D700516F40 /* View */ = {
+		A9EF37732140159200516F40 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF374C214013D700516F40 /* DT_Dish.swift */,
-				A9EF374B214013D700516F40 /* DT_PageDish.swift */,
-				A9EF374D214013D700516F40 /* DT_TableCell.swift */,
+				A9EF37742140159200516F40 /* DT_EX_UIControl.swift */,
+				A9EF37752140159200516F40 /* DT_EX_Data.swift */,
 			);
-			path = View;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A9EF374E214013D700516F40 /* SousChefs */ = {
+		A9EF37762140159200516F40 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				A9EF3751214013D700516F40 /* DT_SC_CoreData.swift */,
-				A9EF374F214013D700516F40 /* DT_SC_Image.swift */,
-				A9EF3750214013D700516F40 /* DT_SC_TemporaryValues.swift */,
+				A9EF37772140159200516F40 /* DT_PT_Entities.swift */,
+				A9EF37782140159200516F40 /* DT_PT_SousChefs.swift */,
+				A9EF37792140159200516F40 /* Ingredients */,
+				A9EF377E2140159200516F40 /* Switch */,
+				A9EF37842140159200516F40 /* DT_PT_Utils.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A9EF37792140159200516F40 /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF377A2140159200516F40 /* DT_PT_IG_Orders.swift */,
+				A9EF377B2140159200516F40 /* DT_PT_IG_UrlSession.swift */,
+				A9EF377C2140159200516F40 /* DT_PT_IG_BundledJson.swift */,
+				A9EF377D2140159200516F40 /* DT_PT_IG_MaitreD.swift */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		A9EF377E2140159200516F40 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF377F2140159200516F40 /* DT_PT_SW_Class.swift */,
+				A9EF37802140159200516F40 /* DT_PT_SW_Waiter.swift */,
+				A9EF37812140159200516F40 /* DT_PT_SW_Kitchen.swift */,
+				A9EF37822140159200516F40 /* DT_PT_SW_HeadChef.swift */,
+				A9EF37832140159200516F40 /* DT_PT_SW_Dish.swift */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		A9EF37852140159200516F40 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37862140159200516F40 /* DT_ET_SwitchRelationship.swift */,
+				A9EF37872140159200516F40 /* DT_ET_Order.swift */,
+				A9EF37882140159200516F40 /* DT_ET_StaffRelationship.swift */,
+				A9EF37892140159200516F40 /* DT_ET_TimePeriod.swift */,
+				A9EF378A2140159200516F40 /* DT_ET_ApiResult.swift */,
+				A9EF378B2140159200516F40 /* DT_ET_OrderDetails.swift */,
+				A9EF378C2140159200516F40 /* DT_ET_CoreData.swift */,
+				A9EF378D2140159200516F40 /* DT_ET_FirstInstance.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A9EF378E2140159200516F40 /* Kitchen */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF378F2140159200516F40 /* Ingredients */,
+				A9EF37932140159200516F40 /* SousChefs */,
+			);
+			path = Kitchen;
+			sourceTree = "<group>";
+		};
+		A9EF378F2140159200516F40 /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37902140159200516F40 /* DT_IG_BundledJson.swift */,
+				A9EF37912140159200516F40 /* DT_IG_CoreData.swift */,
+				A9EF37922140159200516F40 /* DT_IG_UrlSession.swift */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		A9EF37932140159200516F40 /* SousChefs */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37942140159200516F40 /* DT_SC_Image.swift */,
+				A9EF37952140159200516F40 /* DT_SC_TemporaryValues.swift */,
 			);
 			path = SousChefs;
+			sourceTree = "<group>";
+		};
+		A9EF37962140159200516F40 /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37972140159200516F40 /* Waiters */,
+				A9EF379A2140159200516F40 /* Dishes */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		A9EF37972140159200516F40 /* Waiters */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF37982140159200516F40 /* DT_WT_Orders.swift */,
+				A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */,
+			);
+			path = Waiters;
+			sourceTree = "<group>";
+		};
+		A9EF379A2140159200516F40 /* Dishes */ = {
+			isa = PBXGroup;
+			children = (
+				A9EF379B2140159200516F40 /* DT_Dish.swift */,
+				A9EF379C2140159200516F40 /* DT_TableCell.swift */,
+				A9EF379D2140159200516F40 /* DT_PageDish.swift */,
+			);
+			path = Dishes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,52 +460,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9EF3736214013BC00516F40 /* DT_IG_UrlSession.swift in Sources */,
-				A9EF3732214013BC00516F40 /* DT_PT_Utils.swift in Sources */,
-				A9EF37012140139E00516F40 /* DT_CS_Logs.swift in Sources */,
-				A9EF375F214013D700516F40 /* DT_SC_Image.swift in Sources */,
-				A9EF37032140139E00516F40 /* DT_CS_Signals.swift in Sources */,
-				A9EF373B214013BC00516F40 /* DT_ET_ApiResult.swift in Sources */,
-				A9EF3760214013D700516F40 /* DT_SC_TemporaryValues.swift in Sources */,
-				A9EF3757214013D700516F40 /* DT_UT_Constraints.swift in Sources */,
-				A9EF375A214013D700516F40 /* DT_UT_String.swift in Sources */,
-				A9EF3753214013D700516F40 /* DT_UT_View.swift in Sources */,
-				A9EF372A214013BC00516F40 /* DT_PT_IG_UrlSession.swift in Sources */,
-				A9EF3738214013BC00516F40 /* DT_ET_Order.swift in Sources */,
-				A9EF3733214013BC00516F40 /* DT_IG_Orders.swift in Sources */,
-				A9EF37022140139E00516F40 /* DT_CS_Chars.swift in Sources */,
-				A9EF375E214013D700516F40 /* DT_TableCell.swift in Sources */,
-				A9EF3756214013D700516F40 /* DT_UT_Log.swift in Sources */,
-				A9EF372B214013BC00516F40 /* DT_PT_IG_BundledJson.swift in Sources */,
-				A9EF3727214013BC00516F40 /* DT_PT_Entities.swift in Sources */,
-				A9EF3735214013BC00516F40 /* DT_IG_MaitreD.swift in Sources */,
-				A9EF3728214013BC00516F40 /* DT_PT_SousChefs.swift in Sources */,
-				A9EF37042140139E00516F40 /* DT_CS_CommonPhrases.swift in Sources */,
-				A9EF3754214013D700516F40 /* DT_UT_Math.swift in Sources */,
-				A9EF3759214013D700516F40 /* DT_UT_Extensions.swift in Sources */,
-				A9EF372F214013BC00516F40 /* DT_PT_SW_Kitchen.swift in Sources */,
-				A9EF373D214013BC00516F40 /* DT_ET_CoreData.swift in Sources */,
-				A9EF3755214013D700516F40 /* DT_UT_Misc.swift in Sources */,
-				A9EF3729214013BC00516F40 /* DT_PT_IG_Orders.swift in Sources */,
-				A9EF372D214013BC00516F40 /* DT_PT_SW_Class.swift in Sources */,
-				A9EF3725214013BC00516F40 /* DT_EX_UIControl.swift in Sources */,
-				A9EF3734214013BC00516F40 /* DT_IG_BundledJson.swift in Sources */,
-				A9EF372C214013BC00516F40 /* DT_PT_IG_MaitreD.swift in Sources */,
-				A9EF3731214013BC00516F40 /* DT_PT_SW_Dish.swift in Sources */,
-				A9EF3752214013D700516F40 /* DT_UT_Consts.swift in Sources */,
-				A9EF3726214013BC00516F40 /* DT_EX_Data.swift in Sources */,
-				A9EF375D214013D700516F40 /* DT_Dish.swift in Sources */,
-				A9EF372E214013BC00516F40 /* DT_PT_SW_Waiter.swift in Sources */,
-				A9EF373E214013BC00516F40 /* DT_ET_FirstInstance.swift in Sources */,
-				A9EF3739214013BC00516F40 /* DT_ET_StaffRelationship.swift in Sources */,
-				A9EF375C214013D700516F40 /* DT_PageDish.swift in Sources */,
-				A9EF373C214013BC00516F40 /* DT_ET_OrderDetails.swift in Sources */,
-				A9EF3737214013BC00516F40 /* DT_ET_SwitchRelationship.swift in Sources */,
-				A9EF3730214013BC00516F40 /* DT_PT_SW_HeadChef.swift in Sources */,
-				A9EF3761214013D700516F40 /* DT_SC_CoreData.swift in Sources */,
-				A9EF3758214013D700516F40 /* DT_UT_Time.swift in Sources */,
-				A9EF375B214013D700516F40 /* DT_UT_Colors.swift in Sources */,
-				A9EF373A214013BC00516F40 /* DT_ET_TimePeriod.swift in Sources */,
+				A9EF37BC2140159200516F40 /* DT_ET_StaffRelationship.swift in Sources */,
+				A9EF37AB2140159200516F40 /* DT_UT_Colors.swift in Sources */,
+				A9EF37A02140159200516F40 /* DT_CS_Chars.swift in Sources */,
+				A9EF37AC2140159200516F40 /* DT_EX_UIControl.swift in Sources */,
+				A9EF37CB2140159200516F40 /* DT_PageDish.swift in Sources */,
+				A9EF37AE2140159200516F40 /* DT_PT_Entities.swift in Sources */,
+				A9EF37B42140159200516F40 /* DT_PT_SW_Class.swift in Sources */,
+				A9EF379F2140159200516F40 /* DT_CS_Logs.swift in Sources */,
+				A9EF37A22140159200516F40 /* DT_UT_Consts.swift in Sources */,
+				A9EF37B52140159200516F40 /* DT_PT_SW_Waiter.swift in Sources */,
+				A9EF379E2140159200516F40 /* DT_CS_Signals.swift in Sources */,
+				A9EF37A92140159200516F40 /* DT_UT_Extensions.swift in Sources */,
+				A9EF37C72140159200516F40 /* DT_WT_Orders.swift in Sources */,
+				A9EF37B22140159200516F40 /* DT_PT_IG_BundledJson.swift in Sources */,
+				A9EF37C12140159200516F40 /* DT_ET_FirstInstance.swift in Sources */,
+				A9EF37BF2140159200516F40 /* DT_ET_OrderDetails.swift in Sources */,
+				A9EF37A82140159200516F40 /* DT_UT_Time.swift in Sources */,
+				A9EF37AD2140159200516F40 /* DT_EX_Data.swift in Sources */,
+				A9EF37C22140159200516F40 /* DT_IG_BundledJson.swift in Sources */,
+				A9EF37B62140159200516F40 /* DT_PT_SW_Kitchen.swift in Sources */,
+				A9EF37C82140159200516F40 /* DT_WT_MaitreD.swift in Sources */,
+				A9EF37AA2140159200516F40 /* DT_UT_String.swift in Sources */,
+				A9EF37C52140159200516F40 /* DT_SC_Image.swift in Sources */,
+				A9EF37B82140159200516F40 /* DT_PT_SW_Dish.swift in Sources */,
+				A9EF37C42140159200516F40 /* DT_IG_UrlSession.swift in Sources */,
+				A9EF37A42140159200516F40 /* DT_UT_Math.swift in Sources */,
+				A9EF37BD2140159200516F40 /* DT_ET_TimePeriod.swift in Sources */,
+				A9EF37B12140159200516F40 /* DT_PT_IG_UrlSession.swift in Sources */,
+				A9EF37C92140159200516F40 /* DT_Dish.swift in Sources */,
+				A9EF37BE2140159200516F40 /* DT_ET_ApiResult.swift in Sources */,
+				A9EF37A12140159200516F40 /* DT_CS_CommonPhrases.swift in Sources */,
+				A9EF37C62140159200516F40 /* DT_SC_TemporaryValues.swift in Sources */,
+				A9EF37B92140159200516F40 /* DT_PT_Utils.swift in Sources */,
+				A9EF37AF2140159200516F40 /* DT_PT_SousChefs.swift in Sources */,
+				A9EF37B72140159200516F40 /* DT_PT_SW_HeadChef.swift in Sources */,
+				A9EF37B02140159200516F40 /* DT_PT_IG_Orders.swift in Sources */,
+				A9EF37A62140159200516F40 /* DT_UT_Log.swift in Sources */,
+				A9EF37C32140159200516F40 /* DT_IG_CoreData.swift in Sources */,
+				A9EF37A52140159200516F40 /* DT_UT_Misc.swift in Sources */,
+				A9EF37BA2140159200516F40 /* DT_ET_SwitchRelationship.swift in Sources */,
+				A9EF37CA2140159200516F40 /* DT_TableCell.swift in Sources */,
+				A9EF37A32140159200516F40 /* DT_UT_View.swift in Sources */,
+				A9EF37BB2140159200516F40 /* DT_ET_Order.swift in Sources */,
+				A9EF37B32140159200516F40 /* DT_PT_IG_MaitreD.swift in Sources */,
+				A9EF37A72140159200516F40 /* DT_UT_Constraints.swift in Sources */,
+				A9EF37C02140159200516F40 /* DT_ET_CoreData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

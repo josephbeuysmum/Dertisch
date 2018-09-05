@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = "Dertisch"
-  s.version         = "0.1.0"
+  s.version         = "0.1.2"
   s.summary         = "A lightweight framework for Swift apps."
   s.description     = <<-DESC
   Dertisch is lightweight framework for Swift built around dependency injection system
