@@ -151,7 +151,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			switch_relationships[dishId] == nil,
 			can_register(with: key)
 			else { return }
-		switch_relationships[dishId] = DTVipRelationship(
+		switch_relationships[dishId] = DTStaffRelationship(
 			dishType: dishType,
 			headChefType: headChefType,
 			waiterType: waiterType,
@@ -245,7 +245,7 @@ public class DTMaitreD {
 	fileprivate var
 	is_activated: Bool,
 	kitchen_staff_singletons: Dictionary<String, DTKitchenProtocol>,
-	switch_relationships: Dictionary<String, DTVipRelationship>,
+	switch_relationships: Dictionary<String, DTStaffRelationship>,
 //	key_: DTKey!,
 //	closet_: DTKitchenCloset!,
 	window_: UIWindow!,

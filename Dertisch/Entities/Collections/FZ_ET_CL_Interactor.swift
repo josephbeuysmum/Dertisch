@@ -9,7 +9,7 @@
 //extension DTHeadChefCloset: DTHeadChefClosetProtocol {
 //	public var bespoke: DTBespokeEntities { return bespoke_entities! }
 //	
-//	// todo make these (and equivs in Presenter and ModelClass files) into optional subscripts
+//	// todo make these (and equivs in Waiter and ModelClass files) into optional subscripts
 //	public func imageSousChef(_ key: DTKey?) -> DTImageSousChef? {
 //		return key?.teeth == key_ ? image_proxy : nil
 //	}

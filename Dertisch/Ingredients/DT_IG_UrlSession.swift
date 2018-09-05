@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DTUrlSessionSousChef: DTUrlSessionSousChefProtocol {
+extension DTUrlSessionIngredients: DTUrlSessionIngredientsProtocol {
 	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
 	
 //	public var closet: DTKitchenCloset { return closet_ }
@@ -19,7 +19,7 @@ extension DTUrlSessionSousChef: DTUrlSessionSousChefProtocol {
 	
 	public func call (
 		url: String,
-		method: DTUrlSessionSousChef.methods,
+		method: DTUrlSessionIngredients.methods,
 		parameters: Dictionary< String, String >? = nil,
 		order: DTOrderReceivableProtocol? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
@@ -94,7 +94,7 @@ extension DTUrlSessionSousChef: DTUrlSessionSousChefProtocol {
 	}
 }
 
-public class DTUrlSessionSousChef {
+public class DTUrlSessionIngredients {
 	fileprivate let orders_:DTOrders
 	
 	fileprivate var

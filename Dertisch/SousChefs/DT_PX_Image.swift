@@ -37,7 +37,7 @@ extension DTImageSousChef: DTImageSousChefProtocol {
 			strongSelf.raw_images[ url ] = result.data as? Data
 			strongSelf.orders_.make(order: strongSelf.getUrlKey( by: url ), with: url )
 		}
-		url_session.call( url: url, method: DTUrlSessionSousChef.methods.GET )
+		url_session.call( url: url, method: DTUrlSessionIngredients.methods.GET )
 	}
 	
 	
@@ -75,7 +75,7 @@ public class DTImageSousChef {
 	urlsResolving: [ String ],
 	raw_images: Dictionary< String, Data >,
 //	key_: DTKey!,
-	url_session: DTUrlSessionSousChef!
+	url_session: DTUrlSessionIngredients!
 //	closet_: DTKitchenCloset!
 
 	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
@@ -83,8 +83,8 @@ public class DTImageSousChef {
 		key_ = NSUUID().uuidString
 		if let strongModelClasses = kitchenStaffMembers {
 			for modelClass in strongModelClasses {
-				if type(of: modelClass) == DTUrlSessionSousChef.self {
-					url_session = modelClass as! DTUrlSessionSousChef
+				if type(of: modelClass) == DTUrlSessionIngredients.self {
+					url_session = modelClass as! DTUrlSessionIngredients
 					break
 				}
 			}

@@ -42,7 +42,7 @@ public struct DTCommonPhrasesConsts {
 //	Login = "Login",
 //	Page = "Page",
 //	Ping = "Ping",
-//	Presenter = "Presenter",
+//	Waiter = "Waiter",
 //	SousChef = "SousChef",
 //	Reloaded = "Reloaded",
 //	Released = "Released",

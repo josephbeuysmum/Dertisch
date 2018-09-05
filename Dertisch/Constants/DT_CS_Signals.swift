@@ -10,7 +10,7 @@ public struct DTOrderConsts {
 	fileprivate static let
 	name_space = "DTOrders.",
 	navigate_ = "navigate",
-	waiter_ = "Presenter",
+	waiter_ = "Waiter",
 	value_ = "value"
 
 	// the [only] specific signal names used by DT classes

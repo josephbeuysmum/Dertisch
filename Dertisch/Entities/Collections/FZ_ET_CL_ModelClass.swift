@@ -9,7 +9,7 @@
 //extension DTKitchenCloset: DTKitchenClosetProtocol {
 //	public var bespoke: DTBespokeEntities { return bespoke_entities! }
 //
-//	public func bundledJson(_ key: DTKey?) -> DTBundledJsonService? {
+//	public func bundledJson(_ key: DTKey?) -> DTBundledJsonIngredients? {
 //		return key?.teeth == key_ ? bundled_json : nil
 //	}
 //	
@@ -21,7 +21,7 @@
 //		return key?.teeth == key_ ? orders_ : nil
 //	}
 //	
-//	public func urlSession(_ key: DTKey?) -> DTUrlSessionSousChef? {
+//	public func urlSession(_ key: DTKey?) -> DTUrlSessionIngredients? {
 //		return key?.teeth == key_ ? url_session : nil
 //	}
 //	
@@ -36,7 +36,7 @@
 //		url_session = nil
 //	}
 //	
-//	public func set(bundledJson: DTBundledJsonService) {
+//	public func set(bundledJson: DTBundledJsonIngredients) {
 //		guard bundled_json == nil else { return }
 //		bundled_json = bundledJson
 //	}
@@ -51,7 +51,7 @@
 //		orders_ = ordersService
 //	}
 //	
-//	public func set(urlSession: DTUrlSessionSousChef) {
+//	public func set(urlSession: DTUrlSessionIngredients) {
 //		guard url_session == nil else { return }
 //		url_session = urlSession
 //	}
@@ -61,10 +61,10 @@
 //	fileprivate let key_: String
 //
 //	fileprivate var
-//	bundled_json: DTBundledJsonService?,
+//	bundled_json: DTBundledJsonIngredients?,
 //	core_data: DTCoreDataSousChef?,
 //	orders_: DTOrders?,
-//	url_session: DTUrlSessionSousChef?
+//	url_session: DTUrlSessionIngredients?
 //	
 //	fileprivate lazy var bespoke_entities: DTBespokeEntities? = DTBespokeEntities()
 //	

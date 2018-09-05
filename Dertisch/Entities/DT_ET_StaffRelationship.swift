@@ -6,7 +6,7 @@
 //
 
 // todo a bunch more files can be made internal, no?
-internal struct DTVipRelationship {
+internal struct DTStaffRelationship {
 	let
 	dishType: DTDishProtocol.Type,
 	headChefType: DTHeadChefProtocol.Type,

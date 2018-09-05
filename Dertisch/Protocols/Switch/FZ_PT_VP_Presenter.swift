@@ -1,5 +1,5 @@
 //
-//  DT_PT_VP_Presenter.swift
+//  DT_PT_VP_Waiter.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 22/06/2017.
@@ -12,18 +12,18 @@ public extension DTWaiterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
 //	public var closet: DTWaiterCloset? {
-//		return FirstInstance().get(DTWaiterCloset.self, from: mirror_)
+//		return DTFirstInstance().get(DTWaiterCloset.self, from: mirror_)
 //	}
 	
 //	private var key_: DTKey? {
-//		return FirstInstance().get(DTKey.self, from: mirror_)
+//		return DTFirstInstance().get(DTKey.self, from: mirror_)
 //	}
 	
 	// todo these vars need to be made single instance safe
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	private var maitre_d: DTMaitreD? { return FirstInstance().get(DTMaitreD.self, from: mirror_) }
-	private var orders_: DTOrders? { return FirstInstance().get(DTOrders.self, from: mirror_) }
-	private var dish_: DTDish? { return FirstInstance().get(DTDish.self, from: mirror_) }
+	private var maitre_d: DTMaitreD? { return DTFirstInstance().get(DTMaitreD.self, from: mirror_) }
+	private var orders_: DTOrders? { return DTFirstInstance().get(DTOrders.self, from: mirror_) }
+	private var dish_: DTDish? { return DTFirstInstance().get(DTDish.self, from: mirror_) }
 	
 
 	

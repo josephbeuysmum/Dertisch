@@ -73,7 +73,7 @@ On the Model side:
 
 And on the View side:
 
--	registration and presentation of Dishs with related Presenters and Interactors.
+-	registration and presentation of Dishs with related Waiters and Interactors.
 
 `Dertisch` Head Chefs work by implementing the `DTHeadChefProtocol` protocol; Waiters by implementing the `DTWaiterProtocol` protocol; and Dishes by subclassing `DTDish`.
 
@@ -93,7 +93,7 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 	// provides capacity to load and get copies of images
 
 	DTMaitreD
-	// manages the addition and removal of Dishs and their relationships with Interactors and Presenters (maitre Ds are classically VIPER routings)
+	// manages the addition and removal of Dishs and their relationships with Interactors and Waiters (maitre Ds are classically VIPER routings)
 
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
@@ -101,7 +101,7 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 	DTTemporaryValuesSousChef
 	// provides app-wide storage for simple data in runtime memory
 
-	DTUrlSessionSousChef
+	DTUrlSessionIngredients
 	// provides access to RESTful APIs
 
 These - and all model classes - in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Interactors that both have an instance of `DTTemporaryValuesSousChef` injected have *the same instance* of `DTTemporaryValuesSousChef` injected, so any properties set on that instance by one of the Interactors will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValuesSousChef` elsewhere.^
@@ -137,15 +137,15 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 		public func registerDependencies(with key: String) {
 	//		register(DTCoreDataSousChef.self, with: key)
 			register(DTTemporaryValuesSousChef.self, with: key)
-			register(DTUrlSessionSousChef.self, with: key)
-	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSessionSousChef.self])
+			register(DTUrlSessionIngredients.self, with: key)
+	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSessionIngredients.self])
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
 				"SomeDish",
 				as: SomeDish.self,
 				with: SomeInteractor.self,
-				and: SomePresenter.self,
+				and: SomeWaiter.self,
 				lockedBy: key,
 				andInjecting: [SomeSousChef.self])
 		}
@@ -155,7 +155,7 @@ In the above example, because `DTCoreDataSousChef` and `DTImageSousChef` are com
 
 ^^ *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
-All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSessionSousChef` injected as it depends upon it to load external images.
+All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSessionIngredients` injected as it depends upon it to load external images.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
@@ -192,7 +192,7 @@ And adding your own functionality in looks like this:
 
 ^^^ *the purpose of which is to ensure that the object they are injected into can only have one instance of each, as multiple instances of either would cause runtime errors.*
 
-`Dertisch` Interactors and Presenters have similar `key_` and `closet_` properties for the same purpose.
+`Dertisch` Interactors and Waiters have similar `key_` and `closet_` properties for the same purpose.
 
 A boilerplate `Dertisch` Interactor looks like this:
 
@@ -213,15 +213,15 @@ A boilerplate `Dertisch` Interactor looks like this:
 		}
 	}
 
-And a boilerplate `Dertisch` Presenter looks like this:
+And a boilerplate `Dertisch` Waiter looks like this:
 
 	import Dertisch
 
-	extension SomePresenter: DTWaiterProtocol {
+	extension SomeWaiter: DTWaiterProtocol {
 		var closet: DTWaiterCloset? { return closet_ }
 	}
 
-	struct SomePresenter {
+	struct SomeWaiter {
 		fileprivate var key_: DTKey!
 		fileprivate var closet_: DTWaiterCloset!
 
@@ -231,11 +231,11 @@ And a boilerplate `Dertisch` Presenter looks like this:
 		}
 	}
 
-The `closet_` property in a model class, headChef, or waiter needs its accompanying `key_` property to access the properties stored within it, and because both are fileprivate properties, only the owning object - the `SomePresenter` struct in the above example, say - can access it.
+The `closet_` property in a model class, headChef, or waiter needs its accompanying `key_` property to access the properties stored within it, and because both are fileprivate properties, only the owning object - the `SomeWaiter` struct in the above example, say - can access it.
 
 There are four additional functions that can be implemented if required.
 
-	extension SomePresenter: DTWaiterProtocol {
+	extension SomeWaiter: DTWaiterProtocol {
 		...
 		func dishCooked() {}
 		mutating func serve<T>(with data: T?) {}
@@ -268,7 +268,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	replace `closet_` properties with init functions with optional params;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
--	make Interactors optional [at registration] so some screens can be entirely Presenter controlled;
+-	make Interactors optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
 -	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
 -	make utils functions native class extensions instead;
@@ -279,8 +279,8 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	replace `cleanUp()` functions with weak vars etc.;
 -	force `DTCoreDataSousChef` to take `dataModelName` at start up;
 -	remove `...Protocol` from protocol names?
--	reintroduce timeout stopwatch to `DTUrlSessionSousChef`;
--	complete list of MIME types in `DTUrlSessionSousChef`;
+-	reintroduce timeout stopwatch to `DTUrlSessionIngredients`;
+-	complete list of MIME types in `DTUrlSessionIngredients`;
 -   use cuisine as a metaphor instead of tailoring.
 
 -----------------------

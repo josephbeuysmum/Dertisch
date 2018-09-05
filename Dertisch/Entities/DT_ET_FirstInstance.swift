@@ -1,11 +1,11 @@
 //
-//  DT_ET_FirstInstanceGetter.swift
+//  DT_ET_DTFirstInstanceGetter.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 17/07/2018.
 //
 
-struct FirstInstance {
+struct DTFirstInstance {
 	func get<T>(_ from: T.Type, from mirror: Mirror) -> T? {
 		for (_, child) in mirror.children.enumerated() {
 			if let t = child.value as? T {

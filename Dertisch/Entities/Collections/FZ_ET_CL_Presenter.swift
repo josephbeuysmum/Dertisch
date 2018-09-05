@@ -1,5 +1,5 @@
 //
-//  DT_ET_CL_PresenterEntities.swift
+//  DT_ET_CL_WaiterEntities.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/08/2017.

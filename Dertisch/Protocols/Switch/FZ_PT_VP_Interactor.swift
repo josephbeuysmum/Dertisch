@@ -12,16 +12,16 @@ public extension DTHeadChefProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
 //	public var closet: DTHeadChefCloset? {
-//		return FirstInstance().get(DTHeadChefCloset.self, from: mirror_)
+//		return DTFirstInstance().get(DTHeadChefCloset.self, from: mirror_)
 //	}
 	
 //	private var key_: DTKey? {
-//		return FirstInstance().get(DTKey.self, from: mirror_)
+//		return DTFirstInstance().get(DTKey.self, from: mirror_)
 //	}
 	
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	private var waiter_: DTWaiterProtocol? { return FirstInstance().get(DTWaiterProtocol.self, from: mirror_) }
-	private var orders_: DTOrders? { return FirstInstance().get(DTOrders.self, from: mirror_) }
+	private var waiter_: DTWaiterProtocol? { return DTFirstInstance().get(DTWaiterProtocol.self, from: mirror_) }
+	private var orders_: DTOrders? { return DTFirstInstance().get(DTOrders.self, from: mirror_) }
 
 	
 	

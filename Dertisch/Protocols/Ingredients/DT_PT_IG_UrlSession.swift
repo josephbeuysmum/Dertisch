@@ -6,10 +6,10 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol DTUrlSessionSousChefProtocol: DTKitchenProtocol {
+public protocol DTUrlSessionIngredientsProtocol: DTKitchenProtocol {
 	func call (
 		url: String,
-		method: DTUrlSessionSousChef.methods,
+		method: DTUrlSessionIngredients.methods,
 		parameters: Dictionary< String, String >?,
 		order: DTOrderReceivableProtocol?,
 		callback: ( ( String, Any? ) -> Void )? )
