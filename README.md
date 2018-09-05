@@ -7,25 +7,12 @@ NOTE
 *The last update has made much of the following documentation out-of-date. It will be updated as soon as possible.*
 
 
-A lightweight VIPER framework for Swift apps
---------------------------------------------
+A lightweight framework for Swift apps
+--------------------------------------
 
-Dertisch is lightweight VIPER framework for Swift built using a "write once, read never", or **WORN** dependency injection system, meaning properties are injected once and not publicly accessible thereafter.
+Dertisch is a lightweight part-MVVM, part-VIPER framework for Swift built around dependency injection. It is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
 
-Dertisch is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
-
-What is a VIPER framework?
---------------------------
-
-VIPER is an acronym, combining the following five words:
-
--   `V` View
--   `I` Interactor
--   `P` Presenter
--   `E` Entities
--   `R` Routing
-
-`VIPER` frameworks take separation of concerns to a greater level of granularity. If you'll allow me to `SWITCH` to another acronym and metaphor briefly, I have a culinary example which I believe illustrates the particular `VIPER` arrangement `Dertisch` uses well.
+The following `SWITCH` acronym presents a culinary example which illustrates `Dertisch`'s hybrid `MV/IPER` nature.
 
 -   `S` Staff
 -   `W` Waiters
@@ -34,46 +21,44 @@ VIPER is an acronym, combining the following five words:
 -   `C` Customers
 -   `H` Head chefs
 
-I will now outline these six elements of `Dertisch` in the order in which it uses them:
-
 Ingredients
 -----------
 
-The raw materials of any dish. Ingredients are `services`, which query APIs etc. for data (`entities`).
+The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
 
-Staff
------
+Sous Chefs
+----------
 
-The kitchen staff who take the ingredients and combine them into dishes. Staff are `proxies`, which get and set data (`entities`) internally.
+The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
 
 Head Chefs
 ----------
 
-The people who control the staff and the menu. Head Chefs are `headChefs`, which have access to specific `proxies` in order to create particular combinations of data.
+The people who control the staff and the menu. Head Chefs are classically VIPER `interactors`, which have access to specific `Sous Chefs` in order to create particular combinations of data.
 
 Waiters
 -------
 
-The people who take dishes from kitchen to table. Waiters are `waiters`, which are given data by `headChefs` in order to populate and control `views`.
+The people who take dishes from kitchen to table. Waiters are classically VIPER `presenters`, which are given data by `Head Chefs` in order to populate and control views.
 
 Tables
 ------
 
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are `views`, the screens the user sees.
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `views`, the screens the user sees. However, it should be noted that because of the frequent use of the word "table" in Cocoa components, internally `Dertisch` uses the word "dish" instead, so as to avoid confusion.
 
 Customers
 ---------
 
 The people ordering the food. Customers are users: the actual people using the actual app.
 
-How SWITCH/VIPER works in Dertisch
+How MV/IPER works in Dertisch
 -----------------------------------
 
 -   A customer makes an order (a `user` interacts with their device);
--   the head chef instructs their staff as to the required dishes (the `headChef` queries its `proxies`);
+-   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need asynchronously from their `services`);
--   the head chef gives the dishes to the waiter (the `headChef` calls its `waiter` with data);
--   the waiter takes the dishes to the table (the `waiter` populates its `view` with data); and
+-   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter` with data);
+-   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
 Dertisch Interactors, Presenters, and Model Classes each have a fileprivate `closet_` property that grants access to singleton-with-a-small-s proxies and services, including the `DTOrders`, which is used to transmit and receive events throughout implementing apps. It is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -90,7 +75,7 @@ And on the View side:
 
 -	registration and presentation of Dishs with related Presenters and Interactors.
 
-`Dertisch` Interactors work by implementing the `DTHeadChefProtocol` protocol; Presenters by implementing the `DTWaiterProtocol` protocol; and Dishs by subclassing `DTDish`. It uses **dependency injection** to register Interactor/Presenter/Dish/ModelClass relationships at start-up.
+`Dertisch` Head Chefs work by implementing the `DTHeadChefProtocol` protocol; Waiters by implementing the `DTWaiterProtocol` protocol; and Dishes by subclassing `DTDish`.
 
 ---------------
 Using Dertisch
@@ -108,8 +93,8 @@ Dertisch allows you to create bespoke proxies and services tailored towards your
 	// provides capacity to load and get copies of images
 
 	DTMaitreD
-	// manages the addition and removal of Dishs and their relationships with Interactors and Presenters
-
+	// manages the addition and removal of Dishs and their relationships with Interactors and Presenters (maitre Ds are classically VIPER routings)
+	
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
 
