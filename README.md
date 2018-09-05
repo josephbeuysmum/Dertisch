@@ -14,12 +14,12 @@ Dertisch is a lightweight part-MVVM, part-VIPER framework for Swift built around
 
 The following `SWITCH` acronym presents a culinary example which illustrates `Dertisch`'s hybrid `MV/IPER` nature.
 
--   `S` Staff
+-   `S` Sous Chefs
 -   `W` Waiters
 -   `I` Ingredients
 -   `T` Tables
 -   `C` Customers
--   `H` Head chefs
+-   `H` Head Chefs
 
 Ingredients
 -----------
@@ -83,7 +83,7 @@ Using Dertisch
 
 Dertisch allows you to create bespoke proxies and services tailored towards your app's specific needs, and it also comes with seven in-built model classes tailored towards functionality common to all apps:
 
-	DTBundledJsonService
+	DTBundledJsonIngredient
 	// provides simplified access to json config data bundled with the app
 
 	DTCoreDataSousChef
@@ -140,7 +140,7 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 			register(DTUrlSessionSousChef.self, with: key)
 	//		register(DTImageSousChef.self, with: key, injecting: [DTUrlSessionSousChef.self])
 			register(SomeSousChef.self, with: key)
-			register(SomeService.self, with: key, injecting: [SomeSousChef.self])
+			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
 				"SomeDish",
 				as: SomeDish.self,
@@ -157,7 +157,7 @@ In the above example, because `DTCoreDataSousChef` and `DTImageSousChef` are com
 
 All `Dertisch` model classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImageSousChef` has `DTUrlSessionSousChef` injected as it depends upon it to load external images.
 
-The above code example features the two model classes `SomeSousChef` and `SomeService`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
+The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke model classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
 	import Dertisch
 
@@ -274,7 +274,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	make utils functions native class extensions instead;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `LanguageSousChef` for multi-lingual capabilities;
--	new `FirebaseService`;
+-	new `FirebaseIngredient`;
 -	create example boilerplate app;
 -	replace `cleanUp()` functions with weak vars etc.;
 -	force `DTCoreDataSousChef` to take `dataModelName` at start up;
