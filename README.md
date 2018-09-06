@@ -150,7 +150,13 @@ The above code example features the two model classes `SomeSousChef` and `SomeIn
 		init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {}
 	}
 
-A boilerplate `Dertisch` Head Chef looks like this:
+Sous chefs, head chefs, and waiters can all be either `class`es or `struct`s. So a boilerplate `Dertisch` Head Chef could look like this:
+
+	class SomeHeadChef: DTHeadChefProtocol {
+		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
+	}
+
+Or look like this:
 
 	struct SomeHeadChef: DTHeadChefProtocol {
 		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
@@ -158,23 +164,31 @@ A boilerplate `Dertisch` Head Chef looks like this:
 
 And a boilerplate `Dertisch` Waiter looks like this:
 
-	struct SomeWaiter: DTWaiterProtocol {
+	class/struct SomeWaiter: DTWaiterProtocol {
 		init(orders: DTOrders, maitreD: DTMaitreD) {
 	}
 
-There are four additional functions that can be implemented if required.
+dan 07527413718
+gas 01273325854
+
+There are four additional waiter functions that can be implemented if required. These are called in the order they are listed below.
 
 	extension SomeWaiter: DTWaiterProtocol {
 		...
+		// called after viewDidLoad()
 		func dishCooked() {}
+
+		// called from the related head chef
 		mutating func serve<T>(with data: T?) {}
+
+		 // called after viewDidAppear()
 		func dishServed() {}
+
+		// called at deallocation time
 		mutating func cleanUp() {}
 	}
 
-These functions are hopefully self-explanatory, and they are called in the order they are listed above.
-
-A boilerplate `Dertisch` Dish looks like this:
+A boilerplate `Dertisch` Dish (view controller) looks like this:
 
 	class SomeDish: DTDish {
 		override func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
@@ -194,23 +208,21 @@ Developmental Roadmap
 
 No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
--	replace `closet_` properties with init functions with optional params;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
--	make Interactors optional [at registration] so some screens can be entirely Waiter controlled;
--	instigate Redux-style 'reducer' process for model classes so they can become structs that overwrite themselves;
--	move off-the-peg proxies and services into their own individual repos so the core framework is as minimal as possible;
+-	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
+-	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
+-	move optional Sous Chefs, Ingredients, and Waiters into their own individual to minimise the footprint of the core framework;
 -	make utils functions native class extensions instead;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `LanguageSousChef` for multi-lingual capabilities;
 -	new `FirebaseIngredient`;
 -	create example boilerplate app;
--	replace `cleanUp()` functions with weak vars etc.;
--	force `DTCoreDataSousChef` to take `dataModelName` at start up;
+-	replace `cleanUp()` functions with weak vars etc?;
+-	force `DTCoreData` to take `dataModelName` at start up?;
 -	remove `...Protocol` from protocol names?
 -	reintroduce timeout stopwatch to `DTUrlSession`;
 -	complete list of MIME types in `DTUrlSession`;
--   use cuisine as a metaphor instead of tailoring.
 
 -----------------------
 On the name "Dertisch"
