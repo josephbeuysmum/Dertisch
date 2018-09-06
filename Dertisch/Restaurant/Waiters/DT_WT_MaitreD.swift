@@ -158,7 +158,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func start(mainDish: String, window: UIWindow, storyboard: String? = nil) {
+	public func greet(mainDish: String, window: UIWindow, storyboard: String? = nil) {
 		guard
 			window_ == nil,
 			self is DTMaitreDExtensionProtocol

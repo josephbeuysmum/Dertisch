@@ -33,26 +33,26 @@ The people who control the staff and the menu. Head Chefs are classically VIPER 
 Waiters
 -------
 
-The people who take dishes from kitchen to table. Waiters are classically VIPER `presenters`, which are given data by `Head Chefs` in order to populate and control views.
+The people who take dishes from kitchen to table. Waiters are classically part MVVM `viewModels` and part VIPER `presenters`, which are given data by `Head Chefs` in order to populate and control views.
 
 Tables
 ------
 
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `views`, the screens the user sees. However, it should be noted that because of the frequent use of the word "table" in Cocoa components, internally `Dertisch` uses the word "dish" instead, so as to avoid confusion.
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `views` and/or `viewControllers`, the screens the user sees. However, it should be noted that because of the frequent use of the word "table" in Cocoa components, internally `Dertisch` uses the word "dish" instead, so as to avoid confusion.
 
 Customers
 ---------
 
-The people ordering the food. Customers are users: the actual people using the actual app.
+The people ordering the food. Customers are classically `users`, the actual people using the actual app. Whilst being humand and therefore not officially part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of who all this is done for, to lower the risk of getting lost in intellectual abstraction.
 
 How MV/IPER works in Dertisch
 -----------------------------------
 
 -   A customer makes an order (a `user` interacts with their device);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
--   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need asynchronously from their `services`);
+-   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
 -   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter` with data);
--   the waiter takes the dishes to the table (the `presenter` populates its `view` with data); and
+-   the waiter serves the customer (the `view` populates itself via its `viewModel`); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
 Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -75,7 +75,7 @@ And on the View side:
 Using Dertisch
 ---------------
 
-Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes (model classes) tailored towards functionality common to all apps:
+Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes tailored towards functionality common to all apps:
 
 	KITCHEN (model)
 
@@ -106,13 +106,12 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
 
-All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one of the Head Chefs will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
+All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one Head Chefs will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
 
-Amongst other things, `DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
+`DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
-Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelegate`:
+Start up your `Dertisch` app by calling `DTMaitreD.greet()` from your `AppDelegate`:
 
-	@UIApplicationMain
 	class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		var window: UIWindow?
@@ -121,7 +120,7 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 			_ application: UIApplication,
 			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 			window = UIWindow(frame: UIScreen.main.bounds)
-			DTMaitreD().start(mainDish: "SomeDish", window: window!)
+			DTMaitreD().greet(mainDish: "SomeDish", window: window!)
 			return true
 		}
 	}
@@ -140,7 +139,7 @@ Start up your `Dertisch` app by calling `DTMaitreD.start()` from your `AppDelega
 
 In the above example, because `DTBundledJson` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality.*
 
-8 *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
+* *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
@@ -150,13 +149,13 @@ The above code example features the two model classes `SomeSousChef` and `SomeIn
 		init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {}
 	}
 
-Sous chefs, head chefs, and waiters can all be either `class`es or `struct`s. So a boilerplate `Dertisch` Head Chef could look like this:
+Sous chefs, head chefs, and waiters can all be either `classes` or `structs`. So a boilerplate `Dertisch` Head Chef could look like this:
 
 	class SomeHeadChef: DTHeadChefProtocol {
 		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
 	}
 
-Or look like this:
+or like this:
 
 	struct SomeHeadChef: DTHeadChefProtocol {
 		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
@@ -167,9 +166,6 @@ And a boilerplate `Dertisch` Waiter looks like this:
 	class/struct SomeWaiter: DTWaiterProtocol {
 		init(orders: DTOrders, maitreD: DTMaitreD) {
 	}
-
-dan 07527413718
-gas 01273325854
 
 There are four additional waiter functions that can be implemented if required. These are called in the order they are listed below.
 
@@ -194,7 +190,7 @@ A boilerplate `Dertisch` Dish (view controller) looks like this:
 		override func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
 	}
 
-Dishes are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` Dish being required to extend the `DTDish` class. This is because Swift view components are already built on multiple layers on inheritance, so there is nothing more to be lost by using inheritance. The rest of the library, uses `protocol`s and `extension`s exclusively.
+Dishes are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` Dish being required to extend the `DTDish` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
 
 ---------------------
 Indepth Documentation
