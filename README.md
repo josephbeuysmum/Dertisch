@@ -136,7 +136,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
-				"SomeDish,
+				"SomeDish",
 				as: SomeDish.self,
 				with: SomeWaiter.self,
 				and: SomeHeadChef.self,
