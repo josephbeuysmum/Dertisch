@@ -43,7 +43,7 @@ The literal, physical tables in the restaurant upon which the dishes are served.
 Customers
 ---------
 
-The people ordering the food. Customers are classically `users`, the actual people using the actual app. Whilst being humand and therefore not officially part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of who all this is done for, to lower the risk of getting lost in intellectual abstraction.
+The people ordering the food. Customers are classically `users`, the actual people using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of who all this is done for, to lower the risk of getting lost in intellectual abstraction.
 
 How MV/IPER works in Dertisch
 -----------------------------------
@@ -51,8 +51,8 @@ How MV/IPER works in Dertisch
 -   A customer makes an order (a `user` interacts with their device);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
--   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter/viewModel` with data);
--   the waiter serves the customer (the `view` populates itself via its `presenter/viewModel`); and
+-   the head chef gives the dishes to the waiter (the `interactor` calls its `presenterModel` with data);
+-   the waiter serves the customer (the `view` populates itself via its `presenterModel`); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
 Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -151,7 +151,7 @@ In the above example, because `DTBundledJson` is commented out, injectable insta
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
-In the final `register` function above, `SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `andInjecting` is an optional array in which one lists the sous chefs classes that `SomeHeadChef` will need to do their job.
+In the final `register` function above, `SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `andInjecting` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
@@ -218,7 +218,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
 -	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
--	move optional Sous Chefs, Ingredients, and Waiters into their own individual to minimise the footprint of the core framework;
+-	move optional Sous Chefs and Ingredients into their own repos to minimise the footprint of the core framework;
 -	make utils functions native class extensions instead;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `LanguageSousChef` for multi-lingual capabilities;
@@ -236,4 +236,4 @@ On the name "Dertisch"
 
 In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
-"Dertisch" means "the table" in Deutsche, and is the name of [an artwork by Joseph Beuys](http://www.artnet.com/artists/joseph-beuys/der-tisch-AzXWfzZdG5Z4npv6LZT_8g2). Given that `Dertisch` (the Swift library) is built around the metaphorical notion of serving hot dishes to restaurant customers, from all of Beuys' works, *Dertisch* fits excellently as a name.
+"Dertisch" means "the table" in Deutsche, and is the name of [an artwork by Joseph Beuys](http://www.artnet.com/artists/joseph-beuys/der-tisch-AzXWfzZdG5Z4npv6LZT_8g2). Given that `Dertisch` (the Swift library) is built around the metaphorical notion of serving hot dishes to restaurant customers, from all of Beuys' works, `Dertisch` fits excellently as a name.
