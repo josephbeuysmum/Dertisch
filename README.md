@@ -43,7 +43,7 @@ The literal, physical tables in the restaurant upon which the dishes are served.
 Customers
 ---------
 
-The people ordering the food. Customers are classically `users`, the actual people actually using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of what really matters, so as to lower the risk of getting lost in intellectual abstraction for its own sake.
+The people ordering the food. Customers are classically `users`, the actual people actually using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of what really matters, so as to lower the risk of getting lost in intellectual abstraction for its own sake. Also, talking about chefs, waiters, and dishes instead of interactors, presenters, and viewControllers makes life around the office a lot more fun.
 
 How MV/IPER works in Dertisch
 -----------------------------------
@@ -236,4 +236,4 @@ On the name "Dertisch"
 
 In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
-"Dertisch" means "the table" in Deutsche, and is the name of [an artwork by Joseph Beuys](http://www.artnet.com/artists/joseph-beuys/der-tisch-AzXWfzZdG5Z4npv6LZT_8g2). Given that `Dertisch` (the Swift library) is built around the metaphorical notion of serving hot dishes to restaurant customers, from all of Beuys' works, `Dertisch` fits excellently as a name.
+"Dertisch" means "the table" in Deutsche, and is the name of [an artwork by Joseph Beuys](http://www.artnet.com/artists/joseph-beuys/der-tisch-AzXWfzZdG5Z4npv6LZT_8g2). Given that it is built around the metaphorical notion of serving hot dishes to restaurant customers, from all of Beuys' works `Dertisch` fits excellently as a name.
