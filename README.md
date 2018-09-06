@@ -135,7 +135,13 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			register(DTImages.self, with: key, injecting: [DTUrlSession.self])
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
-			register("SomeDish, as: SomeDish.self, with: SomeWaiter.self, and: SomeHeadChef.self, lockedBy: key, andInjecting: [DTTemporaryValues.self])
+			register(
+				"SomeDish,
+				as: SomeDish.self,
+				with: SomeWaiter.self,
+				and: SomeHeadChef.self,
+				lockedBy: key,
+				andInjecting: [DTTemporaryValues.self])
 		}
 	}
 
@@ -145,7 +151,7 @@ In the above example, because `DTBundledJson` is commented out, injectable insta
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
-`SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship.
+In the final `register` function above, `SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `andInjecting` is an optional array in which one lists the sous chefs classes that `SomeHeadChef` will need to do their job.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
