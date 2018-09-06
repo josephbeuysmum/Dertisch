@@ -143,8 +143,8 @@ extension DTMaitreD: DTMaitreDProtocol {
 	public func register(
 		_ dishId: String,
 		as dishType: DTDishProtocol.Type,
-		with headChefType: DTHeadChefProtocol.Type,
-		and waiterType: DTWaiterProtocol.Type,
+		with waiterType: DTWaiterProtocol.Type,
+		and headChefType: DTHeadChefProtocol.Type,
 		lockedBy key: String,
 		andInjecting kitchenStaffTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard

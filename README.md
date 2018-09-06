@@ -33,7 +33,7 @@ The people who control the staff and the menu. Head Chefs are classically VIPER 
 Waiters
 -------
 
-The people who take dishes from kitchen to table. Waiters are classically part MVVM `viewModels` and part VIPER `presenters`, which are given data by `Head Chefs` in order to populate and control views.
+The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by `Head Chefs` in order to populate and control views.
 
 Tables
 ------
@@ -107,7 +107,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
 
-All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one Head Chefs will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
+All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
 
 `DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
@@ -126,7 +126,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 		}
 	}
 
-`DTMaitreD`'s start up routine includes a call to its own `registerStaff()` function, which is where the app's required kitchen staff must be registered. Extend `DTMaitreD` to implement this function:
+`DTMaitreD`'s start up routine includes a call to its own `registerStaff()` function, which is where the app's required kitchen and restaurant staff must be registered. Extend `DTMaitreD` to implement this function:
 
 	extension DTMaitreD: DTMaitreDExtensionProtocol {
 		public func registerStaff(with key: String) {
@@ -134,7 +134,8 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			register(DTTemporaryValues.self, with: key)
 			register(DTImages.self, with: key, injecting: [DTUrlSession.self])
 			register(SomeSousChef.self, with: key)
-			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])			register(Consts.introDish, as: IntroDish.self, with: IntroHeadChef.self, and: IntroWaiter.self, lockedBy: key)
+			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])	register(Consts.introDish, as: IntroDish.self, with: IntroHeadChef.self, and: IntroWaiter.self, lockedBy: key)
+			register("SomeDish, as: SomeDish.self, with: SomeWaiter.self, and: SomeHeadChef.self, lockedBy: key, andInjecting: [DTTemporaryValues.self])
 		}
 	}
 
@@ -143,6 +144,8 @@ In the above example, because `DTBundledJson` is commented out, injectable insta
 * *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
+
+`SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
