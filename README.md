@@ -102,7 +102,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 	DTMaitreD
 	// manages the addition and removal of Dishes and their relationships with Head Chefs and Waiters
-	// (maitre Ds are classically VIPER `routings`)
+	// (maitre Ds are classically VIPER routings)
 
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
