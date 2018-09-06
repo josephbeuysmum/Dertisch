@@ -85,7 +85,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	// provides simplified access to json config data bundled with the app
 
 	DTCoreData
-	// provides simplified access to Core Data data storage
+	// provides simplified access to Core Data storage
 
 	DTUrlSession
 	// provides access to RESTful APIs
@@ -101,7 +101,8 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	RESTAURANT (views and controllers)
 
 	DTMaitreD
-	// manages the addition and removal of Dishes and their relationships with Head Chefs and Waiters (maitre Ds are classically VIPER routings)
+	// manages the addition and removal of Dishes and their relationships with Head Chefs and Waiters
+	// (maitre Ds are classically VIPER `routings`)
 
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
