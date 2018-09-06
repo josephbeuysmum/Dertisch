@@ -27,7 +27,7 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 }
 
 public protocol DTMaitreDExtensionProtocol {
-	func registerDependencies(with key: String)
+	func registerStaff(with key: String)
 }
 
 public protocol DTMaitreDRegistrarProtocol {

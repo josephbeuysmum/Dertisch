@@ -51,8 +51,8 @@ How MV/IPER works in Dertisch
 -   A customer makes an order (a `user` interacts with their device);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
--   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter` with data);
--   the waiter serves the customer (the `view` populates itself via its `viewModel`); and
+-   the head chef gives the dishes to the waiter (the `interactor` calls its `presenter/viewModel` with data);
+-   the waiter serves the customer (the `view` populates itself via its `presenter/viewModel`); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
 Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -75,7 +75,7 @@ And on the View side:
 Using Dertisch
 ---------------
 
-Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes tailored towards functionality common to all apps:
+Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes, and two in-built `restaurant` serving functionality common to all apps:
 
 	KITCHEN (model)
 
@@ -110,7 +110,7 @@ All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* sin
 
 `DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
-Start up your `Dertisch` app by calling `DTMaitreD.greet()` from your `AppDelegate`:
+Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 
 	class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -125,10 +125,10 @@ Start up your `Dertisch` app by calling `DTMaitreD.greet()` from your `AppDelega
 		}
 	}
 
-`DTMaitreD`'s start up routine includes a call to its own `registerDependencies()` function, which is where the app's required kitchen staff must be registered. Extend `DTMaitreD` to implement this function:
+`DTMaitreD`'s start up routine includes a call to its own `registerStaff()` function, which is where the app's required kitchen staff must be registered. Extend `DTMaitreD` to implement this function:
 
 	extension DTMaitreD: DTMaitreDExtensionProtocol {
-		public func registerDependencies(with key: String) {
+		public func registerStaff(with key: String) {
 	//		register(DTBundledJson.self, with: key)
 			register(DTTemporaryValues.self, with: key)
 			register(DTImages.self, with: key, injecting: [DTUrlSession.self])

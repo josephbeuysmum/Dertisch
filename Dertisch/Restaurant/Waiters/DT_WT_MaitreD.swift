@@ -163,7 +163,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			window_ == nil,
 			self is DTMaitreDExtensionProtocol
 			else { return }
-		(self as! DTMaitreDExtensionProtocol).registerDependencies(with: key_)
+		(self as! DTMaitreDExtensionProtocol).registerStaff(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
 		add(mainDish: mainDish, from: storyboard)
