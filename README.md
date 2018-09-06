@@ -43,7 +43,7 @@ The literal, physical tables in the restaurant upon which the dishes are served.
 Customers
 ---------
 
-The people ordering the food. Customers are classically `users`, the actual people using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of who all this is done for, to lower the risk of getting lost in intellectual abstraction.
+The people ordering the food. Customers are classically `users`, the actual people actually using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of what really matters, so as to lower the risk of getting lost in intellectual abstraction for its own sake.
 
 How MV/IPER works in Dertisch
 -----------------------------------
@@ -75,7 +75,7 @@ And on the View side:
 Using Dertisch
 ---------------
 
-Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes, and two in-built `restaurant` serving functionality common to all apps:
+Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes, and two in-built `restaurant` classes serving functionality common to all apps:
 
 	KITCHEN (model)
 
