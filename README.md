@@ -134,7 +134,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			register(DTTemporaryValues.self, with: key)
 			register(DTImages.self, with: key, injecting: [DTUrlSession.self])
 			register(SomeSousChef.self, with: key)
-			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])	register(Consts.introDish, as: IntroDish.self, with: IntroHeadChef.self, and: IntroWaiter.self, lockedBy: key)
+			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register("SomeDish, as: SomeDish.self, with: SomeWaiter.self, and: SomeHeadChef.self, lockedBy: key, andInjecting: [DTTemporaryValues.self])
 		}
 	}
