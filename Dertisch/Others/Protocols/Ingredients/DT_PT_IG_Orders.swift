@@ -11,7 +11,7 @@ public protocol DTOrderCallbackDelegateProtocol {
 }
 
 protocol DTOrdersProtocol {
-	func cancel(order key: String, order: AnyObject)
+	func cancel(order key: String, orderer: AnyObject)
 	func has(order key: String) -> Bool
 	func listenFor(order key: String, order: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool
 //	func listenFor(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool

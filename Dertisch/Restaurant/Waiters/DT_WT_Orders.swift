@@ -7,7 +7,7 @@
 //
 
 extension DTOrders: DTOrdersProtocol {
-	public func cancel(order key: String, order: AnyObject) {
+	public func cancel(order key: String, orderer: AnyObject) {
 		annulOrder( by: key )
 	}
 	

@@ -166,7 +166,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		(self as! DTMaitreDExtensionProtocol).registerStaff(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
-		add(customer: customer, from: storyboard)
+		seat(customer: customer, from: storyboard)
 	}
 	
 	
