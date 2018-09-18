@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol DTTableViewCellProtocol: class, DTPopulatableDishProtocol {}
+public protocol DTTableViewCellProtocol: class, DTPopulatableCustomerProtocol {}
 
 open class DTTableViewCell: UITableViewCell, DTTableViewCellProtocol {
 	open func serve<T>(with data: T?) {}

@@ -10,10 +10,9 @@ import UIKit
 
 public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 	var hasPopover: Bool { get }
-	func add(mainDish id: String, from storyboard: String?)
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertControllerStyle?)
-	func createNibFrom(name nibName: String, for owner: DTDish) -> UIView?
-	func create(_ dishId: String, from storyboard: String?) -> DTDish?
+	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
+	func create(_ customerId: String, from storyboard: String?) -> DTCustomer?
 //	func createAlertWith(
 //		title: String,
 //		message: String,
@@ -21,9 +20,10 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 //		handler: @escaping ((UIAlertAction) -> Void),
 //		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
 	func dismissPopover()
-	func popover(_ dishId: String, inside rect: CGRect?, from storyboard: String?)
-	func serve(_ dishId: String, animated: Bool?, via presentationType: Presentations?, from storyboard: String?)
-	func greet(mainDish: String, window: UIWindow, storyboard: String?)
+	func popover(_ customerId: String, inside rect: CGRect?, from storyboard: String?)
+	func seat(customer id: String, from storyboard: String?)
+	func serve(_ customerId: String, animated: Bool?, via presentationType: Presentations?, from storyboard: String?)
+	func greet(customer: String, window: UIWindow, storyboard: String?)
 }
 
 public protocol DTMaitreDExtensionProtocol {
@@ -36,8 +36,8 @@ public protocol DTMaitreDRegistrarProtocol {
 		with key: String,
 		injecting dependencyTypes: [DTKitchenProtocol.Type]?)
 	func register(
-		_ dishId: String,
-		as dishType: DTDishProtocol.Type,
+		_ customerId: String,
+		as customerType: DTCustomerProtocol.Type,
 		with waiterType: DTWaiterProtocol.Type,
 		and headChefType: DTHeadChefProtocol.Type,
 		lockedBy key: String,

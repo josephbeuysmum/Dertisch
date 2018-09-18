@@ -22,7 +22,7 @@ public struct DTCommonPhrasesConsts {
 	Stored = "Stored",
 	Updated = "Updated",
 	View = "View",
-	Dish = "\( View )\( Controller )"
+	Customer = "\( View )\( Controller )"
 
 //	Account = "Account",
 //	Accounts = "\( Account )s",

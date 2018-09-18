@@ -8,7 +8,7 @@
 // todo a bunch more files can be made internal, no?
 internal struct DTStaffRelationship {
 	let
-	dishType: DTDishProtocol.Type,
+	customerType: DTCustomerProtocol.Type,
 	headChefType: DTHeadChefProtocol.Type,
 	waiterType: DTWaiterProtocol.Type,
 	kitchenStaffTypes: [DTKitchenProtocol.Type]?

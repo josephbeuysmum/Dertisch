@@ -16,35 +16,29 @@ extension DTMaitreD: DTMaitreDProtocol {
 //	public var closet: DTKitchenCloset { return closet_ }
 
 	public var hasPopover: Bool {
-		return side_dish_relationship != nil
+		return side_customer_relationship != nil
 	}
 	
 	public func startShift() {}
 	
-	public func add(mainDish id: String, from storyboard: String? = nil) {
-		guard let viperBundle = create_bundle(dish: id, from: storyboard) else { return }
-		window_.rootViewController = viperBundle.dish
-		dish_relationship = viperBundle
-	}
-	
 	public func alert(actions: [UIAlertAction], title: String? = nil, message: String? = nil, style: UIAlertControllerStyle? = .alert) {
-		guard let dish = dish_relationship?.dish else { return }
+		guard let customer = customer_relationship?.customer else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
 		countActions = actions.count
 		for i in 0..<countActions {
 			alert.addAction(actions[i])
 		}
-		dish.present(alert, animated: true)
+		customer.present(alert, animated: true)
 	}
 	
-	public func createNibFrom(name nibName: String, for owner: DTDish) -> UIView? {
+	public func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView? {
 		guard let viewArray = Bundle.main.loadNibNamed(nibName, owner: owner, options: nil) else { return nil }
 		return viewArray[0] as? UIView
 	}
 	
-	public func create(_ dishId: String, from storyboard: String? = nil) -> DTDish? {
-		return create_bundle(dish: dishId, from: storyboard)?.dish
+	public func create(_ customerId: String, from storyboard: String? = nil) -> DTCustomer? {
+		return create_bundle(customer: customerId, from: storyboard)?.customer
 	}
 	
 //	public func createAlertWith(
@@ -64,58 +58,64 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func dismissPopover() {
 		guard hasPopover else { return }
-		side_dish_relationship!.dish?.dismiss(animated: true) {
-			self.side_dish_relationship!.cleanUp()
-			self.side_dish_relationship = nil
+		side_customer_relationship!.customer?.dismiss(animated: true) {
+			self.side_customer_relationship!.cleanUp()
+			self.side_customer_relationship = nil
 			self.orders_.make(order: DTOrderConsts.popoverRemoved)
 		}
 	}
 	
 	public func popover(
-		_ dishId: String,
+		_ customerId: String,
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
 		guard
 			!hasPopover,
-			let currentDish = dish_relationship?.dish,
-			let viperBundle = create_bundle(dish: dishId, from: storyboard),
-			let popover = viperBundle.dish
+			let currentCustomer = customer_relationship?.customer,
+			let viperBundle = create_bundle(customer: customerId, from: storyboard),
+			let popover = viperBundle.customer
 			else { return }
 		popover.modalPresentationStyle = .popover
-		currentDish.present(popover, animated: true) {
+		currentCustomer.present(popover, animated: true) {
 			self.orders_.make(order: DTOrderConsts.popoverAdded)
 		}
-		popover.popoverPresentationController?.sourceView = currentDish.view
+		popover.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {
 			popover.popoverPresentationController?.sourceRect = safeRect
 		}
-		side_dish_relationship = viperBundle
+		side_customer_relationship = viperBundle
+	}
+	
+	public func seat(customer id: String, from storyboard: String? = nil) {
+		guard let viperBundle = create_bundle(customer: id, from: storyboard) else { return }
+		window_.rootViewController = viperBundle.customer
+		customer_relationship = viperBundle
 	}
 	
 	public func serve(
-		_ dishId: String,
+		_ customerId: String,
 		animated: Bool? = true,
 		via presentation: Presentations? = nil,
 		from storyboard: String? = nil) {
 		let presentationType = presentation ?? Presentations.show
 		guard
-			let currentDish = dish_relationship?.dish,
-			let viperBundle = create_bundle(dish: dishId, from: storyboard),
-			let dish = viperBundle.dish
+			let currentCustomer = customer_relationship?.customer,
+			let viperBundle = create_bundle(customer: customerId, from: storyboard),
+			let customer = viperBundle.customer
 			else { return }
 		switch presentationType {
-		case .curl:			dish.modalTransitionStyle = .partialCurl
-		case .dissolve:		dish.modalTransitionStyle = .crossDissolve
-		case .flip:			dish.modalTransitionStyle = .flipHorizontal
-		case .rise:			dish.modalTransitionStyle = .coverVertical
+		case .curl:			customer.modalTransitionStyle = .partialCurl
+		case .dissolve:		customer.modalTransitionStyle = .crossDissolve
+		case .flip:			customer.modalTransitionStyle = .flipHorizontal
+		case .rise:			customer.modalTransitionStyle = .coverVertical
 		default:			()
 		}
-		currentDish.present(dish, animated: animated!) {
-			currentDish.removeFromParentViewController()
+		currentCustomer.present(customer, animated: animated!) {
+			currentCustomer.removeFromParentViewController()
 			self.orders_.make(order: DTOrderConsts.viewRemoved)
 		}
-		dish_relationship?.cleanUp()
-		dish_relationship = viperBundle
+		customer_relationship?.cleanUp()
+		customer_relationship = viperBundle
 	}
 	
 	public func register(
@@ -141,24 +141,24 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	// todo some waiters and view controllers do not need an headChef (intro page in Cirk for example) and this registation should handle that case too
 	public func register(
-		_ dishId: String,
-		as dishType: DTDishProtocol.Type,
+		_ customerId: String,
+		as customerType: DTCustomerProtocol.Type,
 		with waiterType: DTWaiterProtocol.Type,
 		and headChefType: DTHeadChefProtocol.Type,
 		lockedBy key: String,
 		andInjecting kitchenStaffTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard
-			switch_relationships[dishId] == nil,
+			switch_relationships[customerId] == nil,
 			can_register(with: key)
 			else { return }
-		switch_relationships[dishId] = DTStaffRelationship(
-			dishType: dishType,
+		switch_relationships[customerId] = DTStaffRelationship(
+			customerType: customerType,
 			headChefType: headChefType,
 			waiterType: waiterType,
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func greet(mainDish: String, window: UIWindow, storyboard: String? = nil) {
+	public func greet(customer: String, window: UIWindow, storyboard: String? = nil) {
 		guard
 			window_ == nil,
 			self is DTMaitreDExtensionProtocol
@@ -166,7 +166,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		(self as! DTMaitreDExtensionProtocol).registerStaff(with: key_)
 		window_ = window
 		window_.makeKeyAndVisible()
-		add(mainDish: mainDish, from: storyboard)
+		add(customer: customer, from: storyboard)
 	}
 	
 	
@@ -175,20 +175,20 @@ extension DTMaitreD: DTMaitreDProtocol {
 		return is_activated == false && key == key_
 	}
 	
-	fileprivate func create_bundle(dish id: String, from storyboard: String? = nil) -> DTSwitchRelationship? {
+	fileprivate func create_bundle(customer id: String, from storyboard: String? = nil) -> DTSwitchRelationship? {
 		guard
 			let vipRelationship = switch_relationships[id],
-			let dish = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? DTDish
+			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? DTCustomer
 			else { return nil }
 		let waiter = vipRelationship.waiterType.init(orders: orders_, maitreD: self)
-		dish.set(orders_, and: waiter)
+		customer.set(orders_, and: waiter)
 		let headChef = vipRelationship.headChefType.init(
 			orders: orders_,
 			waiter: waiter,
 			kitchenStaff: get_head_chefkitchenStaff(from: vipRelationship.kitchenStaffTypes))
 		waiter.startShift()
 		headChef.startShift()
-		return DTSwitchRelationship(dish: dish, headChef: headChef, waiter: waiter)
+		return DTSwitchRelationship(customer: customer, headChef: headChef, waiter: waiter)
 	}
 	
 	fileprivate func get_(_ storyboard: String?) -> String {
@@ -221,18 +221,18 @@ extension DTMaitreD: DTMaitreDProtocol {
 	}
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
-//	fileprivate func initialise_(waiter: inout DTWaiterProtocol, with dish: DTDish) -> Bool {
+//	fileprivate func initialise_(waiter: inout DTWaiterProtocol, with customer: DTCustomer) -> Bool {
 //		guard let orders = closet_.orders(key_) else { return false }
 //		waiter.closet?.set(ordersService: orders)
 //		waiter.closet?.set(routing: self)
-//		waiter.closet?.set(dish: dish)
+//		waiter.closet?.set(customer: customer)
 //		waiter.activate()
 //		return true
 //	}
 	
-//	fileprivate func initialise_(dish: inout DTDish) -> Bool {
+//	fileprivate func initialise_(customer: inout DTCustomer) -> Bool {
 //		guard let orders = closet_.orders(key_) else { return false }
-//		dish.set(ordersService: orders)
+//		customer.set(ordersService: orders)
 //		return true
 //	}
 }
@@ -249,8 +249,8 @@ public class DTMaitreD {
 //	key_: DTKey!,
 //	closet_: DTKitchenCloset!,
 	window_: UIWindow!,
-	dish_relationship: DTSwitchRelationship?,
-	side_dish_relationship: DTSwitchRelationship?
+	customer_relationship: DTSwitchRelationship?,
+	side_customer_relationship: DTSwitchRelationship?
 
 	required public init() {
 		orders_ = DTOrders()

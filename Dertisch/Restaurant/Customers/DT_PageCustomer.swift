@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DTPageDish {//}: DTOrdersEntitySetterProtocol {
+extension DTPageCustomer {//}: DTOrdersEntitySetterProtocol {
 	public func set(orders: DTOrders) {
 		guard orders_ == nil else { return }
 		orders_ = orders
@@ -17,6 +17,6 @@ extension DTPageDish {//}: DTOrdersEntitySetterProtocol {
 	public func cleanUp() {}
 }
 
-open class DTPageDish: UIPageViewController {
+open class DTPageCustomer: UIPageViewController {
 	fileprivate var orders_: DTOrders?
 }

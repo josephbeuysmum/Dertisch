@@ -1,5 +1,5 @@
 //
-//  DT_Dish.swift
+//  DT_Customer.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 30/07/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DTDish: DTDishProtocol {
+extension DTCustomer: DTCustomerProtocol {
 //	public var key: String? {
 //		guard key_ == nil else { return nil }
 //		key_ = NSUUID().uuidString
@@ -16,7 +16,7 @@ extension DTDish: DTDishProtocol {
 //	}
 }
 
-open class DTDish: UIViewController {
+open class DTCustomer: UIViewController {
 	fileprivate var
 	key_: String?,
 	orders_: DTOrders?

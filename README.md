@@ -35,20 +35,21 @@ Waiters
 
 The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by `Head Chefs` in order to populate and control views.
 
-Tables
-------
-
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `views` and/or `viewControllers`, the screens the user sees. However, it should be noted that because of the frequent use of the word "table" in Cocoa components, internally `Dertisch` uses the word "dish" instead, so as to avoid confusion.
-
 Customers
 ---------
 
-The people ordering the food. Customers are classically `users`, the actual people actually using the actual app. Whilst obviously not being part of the framework, their inclusion in the metaphorical acronym acts as a conspicuous reminder of what really matters, so as to lower the risk of getting lost in intellectual abstraction for its own sake. Also, talking about chefs, waiters, and dishes instead of interactors, presenters, and viewControllers makes life around the office a lot more fun.
+The people ordering the food. Customers are classically `views` and/or `viewControllers`, the screens the user sees.
+
+Tables
+------
+
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, the a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully this lowers the risk of getting lost in intellectual abstraction for its own sake.
+
 
 How MV/IPER works in Dertisch
 -----------------------------------
 
--   A customer makes an order (a `user` interacts with their device);
+-   A customer makes an order (a user interacts with a `view`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
 -   the head chef gives the dishes to the waiter (the `interactor` calls its `presenterModel` with data);
@@ -237,3 +238,5 @@ On the name "Dertisch"
 In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
 "Dertisch" means "the table" in Deutsche, and is the name of [an artwork by Joseph Beuys](http://www.artnet.com/artists/joseph-beuys/der-tisch-AzXWfzZdG5Z4npv6LZT_8g2). Given that it is built around the metaphorical notion of serving hot dishes to restaurant customers, from all of Beuys' works `Dertisch` fits excellently as a name.
+
+It also sounds a bit like "Dirtish", which is fun.

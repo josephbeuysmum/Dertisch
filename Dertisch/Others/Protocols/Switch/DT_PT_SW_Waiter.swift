@@ -23,7 +23,7 @@ public extension DTWaiterProtocol {
 	private var mirror_: Mirror { return Mirror(reflecting: self) }
 	private var maitre_d: DTMaitreD? { return DTFirstInstance().get(DTMaitreD.self, from: mirror_) }
 	private var orders_: DTOrders? { return DTFirstInstance().get(DTOrders.self, from: mirror_) }
-	private var dish_: DTDish? { return DTFirstInstance().get(DTDish.self, from: mirror_) }
+	private var customer_: DTCustomer? { return DTFirstInstance().get(DTCustomer.self, from: mirror_) }
 	
 
 	
@@ -37,7 +37,7 @@ public extension DTWaiterProtocol {
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.dishCooked()
+			strongSelf.customerCooked()
 			orders.make(order: DTOrderConsts.waiterActivated, with: strongSelf)
 		}
 		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, order: self) { _, data in
@@ -45,7 +45,7 @@ public extension DTWaiterProtocol {
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.dishServed()
+			strongSelf.customerServed()
 		}
 	}
 	
@@ -55,7 +55,7 @@ public extension DTWaiterProtocol {
 //		closet?.orders(key_)?.make(order: DTOrderConsts.waiterUpdated, with: self)
 //	}
 	
-	func serve(_ dishId: String, animated: Bool) {
+	func serve(_ customerId: String, animated: Bool) {
 		guard
 //			let key = key_,
 			let orders = orders_,
@@ -63,34 +63,34 @@ public extension DTWaiterProtocol {
 			else { return }
 		if maitreD.hasPopover {
 			orders.listenForOneOff(order: DTOrderConsts.popoverRemoved, order: self) { _,_ in
-				maitreD.serve(dishId, animated: animated)
+				maitreD.serve(customerId, animated: animated)
 			}
 			maitreD.dismissPopover()
 		} else {
-			maitreD.serve(dishId, animated: animated)
+			maitreD.serve(customerId, animated: animated)
 		}
 	}
 
 	private func check(_ data: Any?) -> Bool {
 		guard
-			let passedDish = data as? DTDish,
-			let ownDish = dish_
+			let passedCustomer = data as? DTCustomer,
+			let ownCustomer = customer_
 			else { return false }
-		return passedDish == ownDish
+		return passedCustomer == ownCustomer
 	}
 	
 	mutating func cleanUp() {}
 	mutating func serve<T>(with data: T?) {}
 	mutating func update<T>(with data: T?) {}
-	func dishServed() {}
-	func dishCooked() {}
+	func customerServed() {}
+	func customerCooked() {}
 }
 
-public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTPopulatableDishProtocol, DTPresentableDishProtocol, DTUpdatableProtocol {
-	init(orders: DTOrders, maitreD: DTMaitreD)//, dish: DTDish)
+public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTPopulatableCustomerProtocol, DTPresentableCustomerProtocol, DTUpdatableProtocol {
+	init(orders: DTOrders, maitreD: DTMaitreD)//, customer: DTCustomer)
 //	var closet: DTWaiterCloset? { get }
-	func dishCooked()
-	func dishServed()
+	func customerCooked()
+	func customerServed()
 }
 
 

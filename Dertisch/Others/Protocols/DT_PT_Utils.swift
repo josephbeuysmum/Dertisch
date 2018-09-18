@@ -15,12 +15,12 @@ public protocol DTDescribableProtocol {
 	var description: String { get }
 }
 
-public protocol DTPopulatableDishProtocol {
+public protocol DTPopulatableCustomerProtocol {
 	mutating func serve<T>(with data: T?)
 }
 
-public protocol DTPresentableDishProtocol {
-	func serve(_ dishId: String, animated: Bool)
+public protocol DTPresentableCustomerProtocol {
+	func serve(_ customerId: String, animated: Bool)
 }
 
 public protocol DTOrderReceivableProtocol {}

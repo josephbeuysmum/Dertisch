@@ -11,6 +11,9 @@
 		A9024A3C2040B78C0070FFB3 /* FZImageProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */; };
 		A91514872063BABB000A410B /* FZCoreDataProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */; };
 		A92919F32063DFFC00A6AA16 /* FZTemporaryValuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */; };
+		A981EE9721510C2F006C85E1 /* DT_Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981EE9421510C2F006C85E1 /* DT_Customer.swift */; };
+		A981EE9821510C2F006C85E1 /* DT_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981EE9521510C2F006C85E1 /* DT_TableCell.swift */; };
+		A981EE9921510C2F006C85E1 /* DT_PageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981EE9621510C2F006C85E1 /* DT_PageCustomer.swift */; };
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Dertisch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Dertisch.framework */; };
 		A9EF367F213F460E00516F40 /* Dertisch.h in Headers */ = {isa = PBXBuildFile; fileRef = A9EF363B213F460E00516F40 /* Dertisch.h */; };
@@ -58,9 +61,6 @@
 		A9EF37C62140159200516F40 /* DT_SC_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37952140159200516F40 /* DT_SC_TemporaryValues.swift */; };
 		A9EF37C72140159200516F40 /* DT_WT_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37982140159200516F40 /* DT_WT_Orders.swift */; };
 		A9EF37C82140159200516F40 /* DT_WT_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */; };
-		A9EF37C92140159200516F40 /* DT_Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379B2140159200516F40 /* DT_Dish.swift */; };
-		A9EF37CA2140159200516F40 /* DT_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379C2140159200516F40 /* DT_TableCell.swift */; };
-		A9EF37CB2140159200516F40 /* DT_PageDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF379D2140159200516F40 /* DT_PageDish.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +78,9 @@
 		A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
 		A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZCoreDataProxyTests.swift; sourceTree = "<group>"; };
 		A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZTemporaryValuesTests.swift; sourceTree = "<group>"; };
+		A981EE9421510C2F006C85E1 /* DT_Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Customer.swift; sourceTree = "<group>"; };
+		A981EE9521510C2F006C85E1 /* DT_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_TableCell.swift; sourceTree = "<group>"; };
+		A981EE9621510C2F006C85E1 /* DT_PageCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PageCustomer.swift; sourceTree = "<group>"; };
 		A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZUrlSessionServiceTests.swift; sourceTree = "<group>"; };
 		A9B5316D2039F62600DB1C85 /* Dertisch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dertisch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B531762039F62700DB1C85 /* DertischTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DertischTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,9 +130,6 @@
 		A9EF37952140159200516F40 /* DT_SC_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_TemporaryValues.swift; sourceTree = "<group>"; };
 		A9EF37982140159200516F40 /* DT_WT_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_Orders.swift; sourceTree = "<group>"; };
 		A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_MaitreD.swift; sourceTree = "<group>"; };
-		A9EF379B2140159200516F40 /* DT_Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Dish.swift; sourceTree = "<group>"; };
-		A9EF379C2140159200516F40 /* DT_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_TableCell.swift; sourceTree = "<group>"; };
-		A9EF379D2140159200516F40 /* DT_PageDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PageDish.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +151,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A981EE9321510C2F006C85E1 /* Customers */ = {
+			isa = PBXGroup;
+			children = (
+				A981EE9421510C2F006C85E1 /* DT_Customer.swift */,
+				A981EE9521510C2F006C85E1 /* DT_TableCell.swift */,
+				A981EE9621510C2F006C85E1 /* DT_PageCustomer.swift */,
+			);
+			path = Customers;
+			sourceTree = "<group>";
+		};
 		A9B531632039F62600DB1C85 = {
 			isa = PBXGroup;
 			children = (
@@ -324,8 +334,8 @@
 		A9EF37962140159200516F40 /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				A981EE9321510C2F006C85E1 /* Customers */,
 				A9EF37972140159200516F40 /* Waiters */,
-				A9EF379A2140159200516F40 /* Dishes */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -337,16 +347,6 @@
 				A9EF37992140159200516F40 /* DT_WT_MaitreD.swift */,
 			);
 			path = Waiters;
-			sourceTree = "<group>";
-		};
-		A9EF379A2140159200516F40 /* Dishes */ = {
-			isa = PBXGroup;
-			children = (
-				A9EF379B2140159200516F40 /* DT_Dish.swift */,
-				A9EF379C2140159200516F40 /* DT_TableCell.swift */,
-				A9EF379D2140159200516F40 /* DT_PageDish.swift */,
-			);
-			path = Dishes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,7 +464,6 @@
 				A9EF37AB2140159200516F40 /* DT_UT_Colors.swift in Sources */,
 				A9EF37A02140159200516F40 /* DT_CS_Chars.swift in Sources */,
 				A9EF37AC2140159200516F40 /* DT_EX_UIControl.swift in Sources */,
-				A9EF37CB2140159200516F40 /* DT_PageDish.swift in Sources */,
 				A9EF37AE2140159200516F40 /* DT_PT_Entities.swift in Sources */,
 				A9EF37B42140159200516F40 /* DT_PT_SW_Class.swift in Sources */,
 				A9EF379F2140159200516F40 /* DT_CS_Logs.swift in Sources */,
@@ -474,6 +473,8 @@
 				A9EF37A92140159200516F40 /* DT_UT_Extensions.swift in Sources */,
 				A9EF37C72140159200516F40 /* DT_WT_Orders.swift in Sources */,
 				A9EF37B22140159200516F40 /* DT_PT_IG_BundledJson.swift in Sources */,
+				A981EE9721510C2F006C85E1 /* DT_Customer.swift in Sources */,
+				A981EE9921510C2F006C85E1 /* DT_PageCustomer.swift in Sources */,
 				A9EF37C12140159200516F40 /* DT_ET_FirstInstance.swift in Sources */,
 				A9EF37BF2140159200516F40 /* DT_ET_OrderDetails.swift in Sources */,
 				A9EF37A82140159200516F40 /* DT_UT_Time.swift in Sources */,
@@ -488,7 +489,6 @@
 				A9EF37A42140159200516F40 /* DT_UT_Math.swift in Sources */,
 				A9EF37BD2140159200516F40 /* DT_ET_TimePeriod.swift in Sources */,
 				A9EF37B12140159200516F40 /* DT_PT_IG_UrlSession.swift in Sources */,
-				A9EF37C92140159200516F40 /* DT_Dish.swift in Sources */,
 				A9EF37BE2140159200516F40 /* DT_ET_ApiResult.swift in Sources */,
 				A9EF37A12140159200516F40 /* DT_CS_CommonPhrases.swift in Sources */,
 				A9EF37C62140159200516F40 /* DT_SC_TemporaryValues.swift in Sources */,
@@ -500,7 +500,7 @@
 				A9EF37C32140159200516F40 /* DT_IG_CoreData.swift in Sources */,
 				A9EF37A52140159200516F40 /* DT_UT_Misc.swift in Sources */,
 				A9EF37BA2140159200516F40 /* DT_ET_SwitchRelationship.swift in Sources */,
-				A9EF37CA2140159200516F40 /* DT_TableCell.swift in Sources */,
+				A981EE9821510C2F006C85E1 /* DT_TableCell.swift in Sources */,
 				A9EF37A32140159200516F40 /* DT_UT_View.swift in Sources */,
 				A9EF37BB2140159200516F40 /* DT_ET_Order.swift in Sources */,
 				A9EF37B32140159200516F40 /* DT_PT_IG_MaitreD.swift in Sources */,
