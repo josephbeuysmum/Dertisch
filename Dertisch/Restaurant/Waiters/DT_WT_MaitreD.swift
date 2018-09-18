@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum Presentations {
+public enum DTPresentations {
 	case curl, dissolve, flip, rise, show
 }
 
@@ -21,7 +21,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func startShift() {}
 	
-	public func alert(actions: [UIAlertAction], title: String? = nil, message: String? = nil, style: UIAlertControllerStyle? = .alert) {
+	public func alert(actions: [UIAlertAction], title: String? = nil, message: String? = nil, style: UIAlertController.Style? = .alert) {
 		guard let customer = customer_relationship?.customer else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
@@ -95,9 +95,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 	public func serve(
 		_ customerId: String,
 		animated: Bool? = true,
-		via presentation: Presentations? = nil,
+		via presentation: DTPresentations? = nil,
 		from storyboard: String? = nil) {
-		let presentationType = presentation ?? Presentations.show
+		let presentationType = presentation ?? DTPresentations.show
 		guard
 			let currentCustomer = customer_relationship?.customer,
 			let viperBundle = create_bundle(customer: customerId, from: storyboard),
@@ -111,7 +111,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		default:			()
 		}
 		currentCustomer.present(customer, animated: animated!) {
-			currentCustomer.removeFromParentViewController()
+			currentCustomer.removeFromParent()
 			self.orders_.make(order: DTOrderConsts.viewRemoved)
 		}
 		customer_relationship?.cleanUp()
@@ -123,19 +123,20 @@ extension DTMaitreD: DTMaitreDProtocol {
 		with key: String,
 		injecting dependencyTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard can_register(with: key) else { return }
-		var kitchenStaffMembers: [DTKitchenProtocol]?
+		var kitchenStaffMembers: [String: DTKitchenProtocol]?
 		if let strongDependencyTypes = dependencyTypes {
-			kitchenStaffMembers = []
+			kitchenStaffMembers = [:]
 			for dependencyType in strongDependencyTypes {
-				if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
-					kitchenStaffMembers!.append(dependencyClass)
+				let dependencyId = dependencyType.staticId
+				if let dependencyClass = kitchen_staff_singletons[dependencyId] {
+					kitchenStaffMembers![dependencyId] = dependencyClass
 				} else {
 					fatalError("Attempting to inject a model class that has not been registered itself yet")
 				}
 			}
 		}
 		let kitchenStaff = kitchenStaffType.init(orders: orders_, kitchenStaffMembers: kitchenStaffMembers)
-		kitchen_staff_singletons[String(describing: kitchenStaffType)] = kitchenStaff
+		kitchen_staff_singletons[kitchenStaffType.staticId] = kitchenStaff
 		kitchenStaff.startShift()
 	}
 	
@@ -185,7 +186,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		let headChef = vipRelationship.headChefType.init(
 			orders: orders_,
 			waiter: waiter,
-			kitchenStaff: get_head_chefkitchenStaff(from: vipRelationship.kitchenStaffTypes))
+			kitchenStaff: get_kitchen_staff(from: vipRelationship.kitchenStaffTypes))
 		waiter.startShift()
 		headChef.startShift()
 		return DTSwitchRelationship(customer: customer, headChef: headChef, waiter: waiter)
@@ -195,7 +196,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		return storyboard ?? "Main"
 	}
 	
-	fileprivate func get_head_chefkitchenStaff(
+	fileprivate func get_kitchen_staff(
 //		headChef: inout DTHeadChefProtocol,
 //		with waiter: DTWaiterProtocol,
 		from dependencyTypes: [DTKitchenProtocol.Type]?) -> [DTKitchenProtocol]? {

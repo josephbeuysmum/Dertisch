@@ -17,7 +17,6 @@
 		A9A0D531204C648600598D72 /* FZUrlSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0D530204C648600598D72 /* FZUrlSessionServiceTests.swift */; };
 		A9B531772039F62700DB1C85 /* Dertisch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B5316D2039F62600DB1C85 /* Dertisch.framework */; };
 		A9EF367F213F460E00516F40 /* Dertisch.h in Headers */ = {isa = PBXBuildFile; fileRef = A9EF363B213F460E00516F40 /* Dertisch.h */; };
-		A9EF36A4213F460E00516F40 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9EF3668213F460E00516F40 /* Info.plist */; };
 		A9EF379E2140159200516F40 /* DT_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37642140159200516F40 /* DT_CS_Signals.swift */; };
 		A9EF379F2140159200516F40 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37652140159200516F40 /* DT_CS_Logs.swift */; };
 		A9EF37A02140159200516F40 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EF37662140159200516F40 /* DT_CS_Chars.swift */; };
@@ -76,6 +75,7 @@
 /* Begin PBXFileReference section */
 		A9024A382040AF610070FFB3 /* FZSignalsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZSignalsServiceTests.swift; sourceTree = "<group>"; };
 		A9024A3B2040B78C0070FFB3 /* FZImageProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZImageProxyTests.swift; sourceTree = "<group>"; };
+		A908B019215146D0000B78BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A91514862063BABB000A410B /* FZCoreDataProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZCoreDataProxyTests.swift; sourceTree = "<group>"; };
 		A92919F22063DFFC00A6AA16 /* FZTemporaryValuesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FZTemporaryValuesTests.swift; sourceTree = "<group>"; };
 		A981EE9421510C2F006C85E1 /* DT_Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Customer.swift; sourceTree = "<group>"; };
@@ -86,7 +86,6 @@
 		A9B531762039F62700DB1C85 /* DertischTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DertischTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B5317D2039F62700DB1C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9EF363B213F460E00516F40 /* Dertisch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dertisch.h; sourceTree = "<group>"; };
-		A9EF3668213F460E00516F40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9EF37642140159200516F40 /* DT_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Signals.swift; sourceTree = "<group>"; };
 		A9EF37652140159200516F40 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
 		A9EF37662140159200516F40 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
@@ -195,11 +194,11 @@
 		A9EF363A213F460E00516F40 /* Dertisch */ = {
 			isa = PBXGroup;
 			children = (
+				A908B019215146D0000B78BC /* Info.plist */,
 				A9EF378E2140159200516F40 /* Kitchen */,
 				A9EF37622140159200516F40 /* Others */,
 				A9EF37962140159200516F40 /* Restaurant */,
 				A9EF363B213F460E00516F40 /* Dertisch.h */,
-				A9EF3668213F460E00516F40 /* Info.plist */,
 			);
 			path = Dertisch;
 			sourceTree = "<group>";
@@ -442,7 +441,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9EF36A4213F460E00516F40 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +659,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.Dertisch;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -682,7 +680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.Dertisch;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -693,9 +691,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DM7DWP6VN6;
-				INFOPLIST_FILE = FilzanzugTests/Info.plist;
+				INFOPLIST_FILE = DertischTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.FilzanzugTests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.DertischTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -708,9 +706,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DM7DWP6VN6;
-				INFOPLIST_FILE = FilzanzugTests/Info.plist;
+				INFOPLIST_FILE = DertischTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.FilzanzugTests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.josephbeuysmum.DertischTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

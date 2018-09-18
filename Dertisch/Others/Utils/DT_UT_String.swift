@@ -37,7 +37,7 @@ public class DTString {
 		and endIndex: Int? = nil ) -> NSMutableAttributedString? {
 		let indices = _getIndicesFrom( subString: subString, startIndex: startIndex, andEndIndex: endIndex )
 		if let range = _getRangeFrom( attributedText: subString, between: indices[ 0 ], and: indices[ 1 ] ) {
-			subString.addAttributes( [ NSAttributedStringKey.font: UIFont.boldSystemFont( ofSize: fontSize ) ], range: range )
+			subString.addAttributes( [ NSAttributedString.Key.font: UIFont.boldSystemFont( ofSize: fontSize ) ], range: range )
 			return subString
 		} else {
 			return nil
@@ -219,7 +219,7 @@ public class DTString {
 		of fontSize: CGFloat
 		) -> NSMutableAttributedString {
 		string.addAttributes(
-			[ NSAttributedStringKey.font: UIFont.systemFont( ofSize: fontSize ) ],
+			[ NSAttributedString.Key.font: UIFont.systemFont( ofSize: fontSize ) ],
 			range: NSMakeRange( 0, string.mutableString.length )
 		)
 		return string
@@ -270,7 +270,7 @@ public class DTString {
 		// we can only tint the string if the start and end indices are valid
 		if let range = _getRangeFrom( attributedText: subString, between: startIndex, and: endIndex ) {
 			subString.addAttribute(
-				NSAttributedStringKey.foregroundColor,
+				NSAttributedString.Key.foregroundColor,
 				value: color,
 				range: range )
 			return subString
@@ -340,8 +340,8 @@ public class DTString {
 		// we can only underline the string if the start and end indices are valid
 		if let range = _getRangeFrom( attributedText: subString, between: startIndex, and: endIndex ) {
 			subString.addAttribute(
-				NSAttributedStringKey.underlineStyle,
-				value: NSUnderlineStyle.styleSingle.rawValue,
+				NSAttributedString.Key.underlineStyle,
+				value: NSUnderlineStyle.single.rawValue,
 				range: range )
 			return subString
 		} else {

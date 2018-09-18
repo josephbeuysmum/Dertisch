@@ -73,7 +73,7 @@ public class DTBundledJson {
 //	closet_: DTKitchenCloset!,
 	settings_: DTJsonSettings?
 	
-	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
 		orders_ = orders
 //		key_ = DTKey(self)
 //		closet_ = DTKitchenCloset(self, key: key_)

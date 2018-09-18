@@ -78,17 +78,10 @@ public class DTImages {
 	url_session: DTUrlSession!
 //	closet_: DTKitchenCloset!
 
-	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
 		orders_ = orders
 		key_ = NSUUID().uuidString
-		if let strongModelClasses = kitchenStaffMembers {
-			for modelClass in strongModelClasses {
-				if type(of: modelClass) == DTUrlSession.self {
-					url_session = modelClass as! DTUrlSession
-					break
-				}
-			}
-		}
+		url_session = kitchenStaffMembers?[DTUrlSession.staticId] as? DTUrlSession
 		urlsResolving = []
 		raw_images = [:]
 //		key_ = DTKey(self)

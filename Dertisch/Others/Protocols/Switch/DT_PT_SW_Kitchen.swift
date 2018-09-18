@@ -7,7 +7,8 @@
 //
 
 public extension DTKitchenProtocol {
-	public var instanceDescriptor: String { return String( describing: self ) }
+	public var instanceDescriptor: String { return String(describing: self) }
+	static public var staticId: String { return String(describing: self) }
 	
 	
 	
@@ -17,7 +18,7 @@ public extension DTKitchenProtocol {
 }
 
 public protocol DTKitchenProtocol: DTSwitchClassProtocol {
-	init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?)
+	init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?)
 //	init()
 //	var closet: DTKitchenCloset { get }
 }

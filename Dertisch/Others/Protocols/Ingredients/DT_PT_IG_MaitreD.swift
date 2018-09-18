@@ -10,7 +10,7 @@ import UIKit
 
 public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 	var hasPopover: Bool { get }
-	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertControllerStyle?)
+	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
 	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
 	func create(_ customerId: String, from storyboard: String?) -> DTCustomer?
 //	func createAlertWith(
@@ -22,7 +22,7 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 	func dismissPopover()
 	func popover(_ customerId: String, inside rect: CGRect?, from storyboard: String?)
 	func seat(customer id: String, from storyboard: String?)
-	func serve(_ customerId: String, animated: Bool?, via presentationType: Presentations?, from storyboard: String?)
+	func serve(_ customerId: String, animated: Bool?, via presentationType: DTPresentations?, from storyboard: String?)
 	func greet(customer: String, window: UIWindow, storyboard: String?)
 }
 

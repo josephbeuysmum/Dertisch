@@ -69,7 +69,7 @@ public class DTTemporaryValues {
 //	key_: DTKey!,
 //	closet_: DTKitchenCloset!
 
-	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
 		orders_ = orders
 		is_activated = false
 		values_ = [:]

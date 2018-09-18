@@ -102,7 +102,7 @@ public class DTUrlSession {
 //	key_: DTKey!,
 //	closet_: DTKitchenCloset!
 	
-	required public init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {
+	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
 		orders_ = orders
 		ongoing_calls = []
 //		key_ = DTKey(self)

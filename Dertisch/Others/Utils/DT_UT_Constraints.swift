@@ -81,7 +81,7 @@ public class DTConstraints {
 
 	static fileprivate func _getEdgeConstraintFor (
 		view: UIView,
-		toAttribute attribute: NSLayoutAttribute,
+		toAttribute attribute: NSLayoutConstraint.Attribute,
 		of gap: Int ) -> NSLayoutConstraint {
 		return NSLayoutConstraint(
 			item: view,
@@ -98,7 +98,7 @@ public class DTConstraints {
 	static fileprivate func _getEqualDimensionConstraintFor (
 		thisView firstView: UIView,
 		andThisView secondView: UIView,
-		of dimension: NSLayoutAttribute ) -> NSLayoutConstraint {
+		of dimension: NSLayoutConstraint.Attribute ) -> NSLayoutConstraint {
 		return NSLayoutConstraint(
 			item: firstView,
 			attribute: dimension,
@@ -111,7 +111,7 @@ public class DTConstraints {
 
 	static fileprivate func _getSizeConstraintFor (
 		view: UIView,
-		toAttribute attribute: NSLayoutAttribute,
+		toAttribute attribute: NSLayoutConstraint.Attribute,
 		of gap: Int ) -> NSLayoutConstraint {
 		return NSLayoutConstraint(
 			item: view,
