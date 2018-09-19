@@ -32,7 +32,7 @@ public extension DTWaiterProtocol {
 //			let key = key_,
 			let orders = orders_
 			else { return }
-		_ = orders.listenForOneOff(order: DTOrderConsts.viewLoaded, order: self) { _, data in
+		_ = orders.listenForOneOff(order: DTOrderConsts.viewLoaded, orderer: self) { _, data in
 			guard
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
@@ -40,7 +40,7 @@ public extension DTWaiterProtocol {
 			strongSelf.customerCooked()
 			orders.make(order: DTOrderConsts.waiterActivated, with: strongSelf)
 		}
-		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, order: self) { _, data in
+		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, orderer: self) { _, data in
 			guard
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
@@ -62,7 +62,7 @@ public extension DTWaiterProtocol {
 			let maitreD = maitre_d
 			else { return }
 		if maitreD.hasPopover {
-			orders.listenForOneOff(order: DTOrderConsts.popoverRemoved, order: self) { _,_ in
+			orders.listenForOneOff(order: DTOrderConsts.popoverRemoved, orderer: self) { _,_ in
 				maitreD.serve(customerId, animated: animated)
 			}
 			maitreD.dismissPopover()

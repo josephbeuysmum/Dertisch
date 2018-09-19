@@ -32,7 +32,7 @@ public extension DTHeadChefProtocol {
 			let waiterClassName = waiter_?.instanceDescriptor,
 			let orders = orders_
 			else { return }
-		_ = orders.listenFor(order: DTOrderConsts.waiterActivated, order: self) { _, data in
+		_ = orders.listenFor(order: DTOrderConsts.waiterActivated, orderer: self) { _, data in
 			guard
 				let strongSelf = self as DTHeadChefProtocol?,
 				let waiter = data as? DTWaiterProtocol,
@@ -43,7 +43,7 @@ public extension DTHeadChefProtocol {
 		}
 		// todo why is this not simply in the closure immediately above?
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
-			_ = orders.stopWaitingFor(order: DTOrderConsts.waiterActivated, order: self)
+			_ = orders.stopWaitingFor(order: DTOrderConsts.waiterActivated)
 			timer.invalidate()
 		}
 	}
