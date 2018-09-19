@@ -33,7 +33,7 @@ public struct DTCharConsts {
 	hyphen =					"-",
 	lessThan =					"<",
 	lineBreak =					"\n",
-//	minus =						hyphen,
+	minus =						hyphen,
 	openCurlyBracket =			"{",
 	openParenthesis =			"(",
 	openSquareBracket =			"[",
