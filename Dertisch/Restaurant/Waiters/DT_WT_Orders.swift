@@ -14,8 +14,8 @@ extension DTOrders: DTOrdersProtocol {
 	public func has(order key: String) -> Bool { return orders_[key] != nil }
 	
 	@discardableResult
-	public func listenFor(order key: String, order: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
-		return make(callback: callback, key: key, order: order, isContinuous: true)
+	public func listenFor(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+		return make(callback: callback, key: key, order: orderer, isContinuous: true)
 	}
 	
 //	public func listenFor(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
@@ -23,15 +23,15 @@ extension DTOrders: DTOrdersProtocol {
 //	}
 	
 	@discardableResult
-	public func listenForOneOff(order key: String, order: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
-		return make(callback: callback, key: key, order: order, isContinuous: false)
+	public func listenForOneOff(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+		return make(callback: callback, key: key, order: orderer, isContinuous: false)
 	}
 	
 //	public func listenForOneOff(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
 //		return make(delegate: delegate, key: key, order: order, isContinuous: false)
 //	}
 	
-	public func stopWaitingFor(order key: String, order: DTOrderReceivableProtocol) {
+	public func stopWaitingFor(order key: String) {//}, orderer: DTOrderReceivableProtocol) {
 		annulOrder(by: key)
 	}
 	
