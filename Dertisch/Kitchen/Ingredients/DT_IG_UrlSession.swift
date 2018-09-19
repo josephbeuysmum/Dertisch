@@ -38,11 +38,11 @@ extension DTUrlSession: DTUrlSessionProtocol {
 		_ = URLSession.shared.dataTask( with: request ) { [weak self] data, response, error in
 			guard let strongSelf = self else { return }
 			guard error == nil else {
-				lo( "todo ERROR to be handled here", url )
+//				lo( "todo ERROR to be handled here", url )
 				return
 			}
 			guard data != nil else {
-				lo( "todo NO DATA to be handled here" )
+//				lo( "todo NO DATA to be handled here" )
 				return
 			}
 			// todo reintroduce stopwatch so hanging calls can be cancelled?

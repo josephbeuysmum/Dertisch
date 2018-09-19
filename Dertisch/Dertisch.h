@@ -2,7 +2,7 @@
 //  Dertisch.h
 //  Dertisch
 //
-//  Created by Richard Willis on 18/02/2018.
+//  Created by Richard Willis on 19/09/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 

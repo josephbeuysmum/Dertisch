@@ -15,23 +15,23 @@ public class DTColors {
 	}
 	
 	// converts a hex string to a UIColor
-	public static func getColorBy (hex: String) -> UIColor? {
-		let permittedChars = "0123456789ABCDEF"
-		// todo this could be better
-		for char in hex.uppercased() {
-			if permittedChars.index(of: char) == nil {
-				return nil
-			}
-		}
-		let adjustedHex: String?
-		switch hex.count {
-		case 6:		adjustedHex = "\(hex)FF"
-		case 8:		adjustedHex = "\(hex)"
-		default:	adjustedHex = nil
-		}
-		guard adjustedHex != nil else { return nil }
-		return UIColor(hex: "#\(adjustedHex!)")
-	}
+//	public static func getColorBy (hex: String) -> UIColor? {
+//		let permittedChars = "0123456789ABCDEF"
+//		// todo this could be better
+//		for char in hex.uppercased() {
+//			if permittedChars.index(of: char) == nil {
+//				return nil
+//			}
+//		}
+//		let adjustedHex: String?
+//		switch hex.count {
+//		case 6:		adjustedHex = "\(hex)FF"
+//		case 8:		adjustedHex = "\(hex)"
+//		default:	adjustedHex = nil
+//		}
+//		guard adjustedHex != nil else { return nil }
+//		return UIColor(hex: "#\(adjustedHex!)")
+//	}
 	
 	// gives the all passed views a transparent background
 	public static func transparentize (views: [UIView]) {

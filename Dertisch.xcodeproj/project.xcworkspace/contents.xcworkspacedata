@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/richardwillis/Documents/Development/Filzanzug/Dertisch.xcodeproj">
+      location = "self:Dertisch.xcodeproj">
    </FileRef>
 </Workspace>
