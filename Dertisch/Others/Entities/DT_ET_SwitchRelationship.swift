@@ -12,7 +12,7 @@ internal struct DTSwitchRelationship: DTDeallocatableProtocol {
 	waiter: DTWaiterProtocol?
 	
 	mutating func cleanUp() {
-		customer?.removeFromParent()
+		customer?.removeFromParentViewController()
 //		waiter_?.checkIn()
 		// todo see note on checkIn in DTWaiterProtocol
 		headChef?.cleanUp()

@@ -111,7 +111,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		default:			()
 		}
 		currentCustomer.present(customer, animated: animated!) {
-			currentCustomer.removeFromParent()
+			currentCustomer.removeFromParentViewController()
 			self.orders_.make(order: DTOrderConsts.viewRemoved)
 		}
 		customer_relationship?.cleanUp()

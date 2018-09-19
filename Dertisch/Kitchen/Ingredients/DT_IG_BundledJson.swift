@@ -51,7 +51,7 @@ extension DTBundledJson: DTBundledJsonProtocol {
 	}
 	
 	fileprivate func handle(decodingError context: DecodingError.Context) {
-//		lo(context.debugDescription)
+		lo(context.debugDescription)
 	}
 	
 	fileprivate func parseSettings() {

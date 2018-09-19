@@ -84,7 +84,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 		do { try privateContext.execute(asyncFetchRequest)
 		} catch let error {
-//			loWarning("NSAsynchronousFetchRequest error: \(error)")
+			loWarning("NSAsynchronousFetchRequest error: \(error)")
 		}
 	}
 	
@@ -137,7 +137,7 @@ extension DTCoreData: DTCoreDataProtocol {
 public class DTCoreData {
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
-//			loWarning("DTCoreData dataModelName is nil")
+			loWarning("DTCoreData dataModelName is nil")
 			return nil
 		}
 		let container = NSPersistentContainer(name: dmn)

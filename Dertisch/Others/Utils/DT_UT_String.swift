@@ -341,7 +341,7 @@ public class DTString {
 		if let range = _getRangeFrom( attributedText: subString, between: startIndex, and: endIndex ) {
 			subString.addAttribute(
 				NSAttributedString.Key.underlineStyle,
-				value: NSUnderlineStyle.single.rawValue,
+				value: NSUnderlineStyle.styleSingle.rawValue,
 				range: range )
 			return subString
 		} else {
