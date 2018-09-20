@@ -43,7 +43,7 @@ The people ordering the food. Customers are classically `views` and/or `viewCont
 Tables
 ------
 
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, the a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully this lowers the risk of getting lost in intellectual abstraction for its own sake.
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, the a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
 
 
 How MV/IPER works in Dertisch
