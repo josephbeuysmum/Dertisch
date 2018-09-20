@@ -8,6 +8,14 @@
 
 import Foundation
 
+public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTWaiterForCustomerProtocol, DTWaiterForHeadChefProtocol {
+	//, DTPresentCustomerProtocol, DTServeCustomerAgainProtocol, DTServeCustomerProtocol,
+	init(orders: DTOrders, maitreD: DTMaitreD)//, customer: DTCustomer)
+	//	var closet: DTWaiterCloset? { get }
+	//	func customerArrived()
+	//	func customerSeated()
+}
+
 public extension DTWaiterProtocol {
 	public var instanceDescriptor: String { return String(describing: self) }
 	
@@ -93,14 +101,6 @@ public extension DTWaiterForCustomerProtocol {
 }
 
 
-
-public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTWaiterForCustomerProtocol, DTWaiterForHeadChefProtocol {
-//, DTPresentCustomerProtocol, DTServeCustomerAgainProtocol, DTServeCustomerProtocol,
-	init(orders: DTOrders, maitreD: DTMaitreD)//, customer: DTCustomer)
-//	var closet: DTWaiterCloset? { get }
-//	func customerArrived()
-//	func customerSeated()
-}
 
 public protocol DTWaiterForCustomerProtocol {
 	var maitreD: DTMaitreD? { get }

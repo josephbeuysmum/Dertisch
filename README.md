@@ -43,7 +43,7 @@ The people ordering the food. Customers are classically `views` and/or `viewCont
 Tables
 ------
 
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, a unified expression of the thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
 
 
 How MV/IPER works in Dertisch
@@ -197,25 +197,26 @@ There are more elements to `Dertisch` than those described above, but because no
 Developmental Roadmap
 ---------------------
 
-No official timescale exists for ongoing dev, but presently suggested developments are as follows:
+`Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -   remove unused code;
+-	make utils functions native class extensions instead;
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
 -	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
+-   investigate the possibility of entirely replacing `DTOrders` with specific protocols (akin to the way `DTWaiterProtocol` is subdivided into `DTWaiterProtocol`, `DTWaiterForCustomerProtocol`, `DTWaiterForTableCustomerProtocol`, and `DTWaiterForHeadChefProtocol` depending on context);
 -	move optional Sous Chefs and Ingredients into their own repos to minimise the footprint of the core framework;
--	make utils functions native class extensions instead;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `LanguageSousChef` for multi-lingual capabilities;
 -	new `FirebaseIngredient`;
--	create example boilerplate app;
--	replace `cleanUp()` functions with weak vars etc?;
--	force `DTCoreData` to take `dataModelName` at start up?;
--	remove `...Protocol` from protocol names?
+-	replace `cleanUp()` functions with weak vars etc;
+-	force `DTCoreData` to take `dataModelName` at start up;
+-	remove `...Protocol` from protocol names;
 -	reintroduce timeout stopwatch to `DTUrlSession`;
 -	complete list of MIME types in `DTUrlSession`;
--   remove fatal errors
+-	create example boilerplate app;
+-   remove fatal errors.
 
 -----------------------
 On the name "Dertisch"
