@@ -4,7 +4,7 @@ Dertisch
 A lightweight MV/IPER framework for Swift apps
 ----------------------------------------------
 
-Dertisch is a lightweight part-MVVM, part-VIPER framework for Swift built around dependency injection. It is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
+Dertisch is a lightweight part-MVVM, part-VIPER framework for Swift built around dependency injection. It is specifically structured around the goal of **minimising code resuse** through the **protocol oriented** nature of Swift.
 
 The following `SWITCH` acronym presents a culinary example which illustrates `Dertisch`'s hybrid `MV/IPER` nature.
 
