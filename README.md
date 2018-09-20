@@ -1,8 +1,8 @@
 Dertisch
 ========
 
-A lightweight framework for Swift apps
---------------------------------------
+A lightweight MV/IPER framework for Swift apps
+----------------------------------------------
 
 Dertisch is a lightweight part-MVVM, part-VIPER framework for Swift built around dependency injection. It is specifically structured with the goal of **minimising code resuse**, which simultaneously taking advantage of the **Protocol Orientated** nature of Swift.
 
@@ -28,7 +28,7 @@ The second-in-command chefs who take the ingredients and combine them into dishe
 Head Chefs
 ----------
 
-The people who control the staff and the menu. Head Chefs are classically VIPER `interactors`, which have access to specific `Sous Chefs` in order to create particular combinations of data.
+The people who control the staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific `Sous Chefs` in order to create particular combinations of data.
 
 Waiters
 -------
@@ -43,7 +43,7 @@ The people ordering the food. Customers are classically `views` and/or `viewCont
 Tables
 ------
 
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, the a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
+The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, a unified expression of thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and thus serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
 
 
 How MV/IPER works in Dertisch
@@ -122,7 +122,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			_ application: UIApplication,
 			didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 			window = UIWindow(frame: UIScreen.main.bounds)
-			DTMaitreD().greet(mainDish: "SomeDish", window: window!)
+			DTMaitreD().greet(firstCustomer: "SomeCustomer", window: window!)
 			return true
 		}
 	}
@@ -137,8 +137,8 @@ Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			register(
-				"SomeDish",
-				as: SomeDish.self,
+				"SomeCustomer",
+				as: SomeCustomer.self,
 				with: SomeWaiter.self,
 				and: SomeHeadChef.self,
 				lockedBy: key,
@@ -178,27 +178,10 @@ And a boilerplate `Dertisch` Waiter looks like this:
 		init(orders: DTOrders, maitreD: DTMaitreD) {
 	}
 
-There are four additional waiter functions that can be implemented if required. These are called in the order they are listed below.
+A boilerplate `Dertisch` Customer looks like this:
 
-	extension SomeWaiter: DTWaiterProtocol {
-		...
-		// called after viewDidLoad()
-		func dishCooked() {}
-
-		// called from the related head chef
-		mutating func serve<T>(with data: T?) {}
-
-		 // called after viewDidAppear()
-		func dishServed() {}
-
-		// called at deallocation time
-		mutating func cleanUp() {}
-	}
-
-A boilerplate `Dertisch` Dish (view controller) looks like this:
-
-	class SomeDish: DTDish {
-		override func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
+	class SomeCustomer: DTCustomer {
+		override func pass(_ orders: DTOrders, to waiter: DTWaiterForCustomerProtocol) {}
 	}
 
 Dishes are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` Dish being required to extend the `DTDish` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
