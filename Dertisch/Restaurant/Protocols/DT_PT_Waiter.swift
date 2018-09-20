@@ -37,7 +37,7 @@ public extension DTWaiterProtocol {
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.customerCooked()
+			strongSelf.customerArrived()
 			orders.make(order: DTOrderConsts.waiterActivated, with: strongSelf)
 		}
 		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, orderer: self) { _, data in
@@ -45,7 +45,7 @@ public extension DTWaiterProtocol {
 				let strongSelf = self as DTWaiterProtocol?,
 				strongSelf.check(data)
 				else { return }
-			strongSelf.customerServed()
+			strongSelf.customerSeated()
 		}
 	}
 	
@@ -82,46 +82,13 @@ public extension DTWaiterProtocol {
 	mutating func cleanUp() {}
 	mutating func serve<T>(with data: T?) {}
 	mutating func update<T>(with data: T?) {}
-	func customerServed() {}
-	func customerCooked() {}
+	func customerSeated() {}
+	func customerArrived() {}
 }
 
 public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTPopulatableCustomerProtocol, DTPresentableCustomerProtocol, DTUpdatableProtocol {
 	init(orders: DTOrders, maitreD: DTMaitreD)//, customer: DTCustomer)
 //	var closet: DTWaiterCloset? { get }
-	func customerCooked()
-	func customerServed()
+	func customerArrived()
+	func customerSeated()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

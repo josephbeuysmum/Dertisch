@@ -50,7 +50,7 @@ public extension DTHeadChefProtocol {
 }
 
 public protocol DTHeadChefProtocol: DTSwitchClassProtocol {
-	init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?)
+	init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [String: DTKitchenProtocol]?)
 //	var closet: DTHeadChefCloset? { get }
 	mutating func waiterActivated ()
 }

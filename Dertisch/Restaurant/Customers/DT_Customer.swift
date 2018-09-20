@@ -17,16 +17,16 @@ extension DTCustomer: DTCustomerProtocol {
 }
 
 open class DTCustomer: UIViewController {
-	fileprivate var
-	key_: String?,
-	orders_: DTOrders?
+//	fileprivate var
+//	key_: String?,
+//	orders_: DTOrders?
 	
-	public func cleanUp() {}
+	open func cleanUp() {}
 	
-	override open func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		orders_?.make(order: DTOrderConsts.viewWarnedAboutMemory, with: self)
-	}
+//	override open func didReceiveMemoryWarning() {
+//		super.didReceiveMemoryWarning()
+//		orders_?.make(order: DTOrderConsts.viewWarnedAboutMemory, with: self)
+//	}
 	
 	open func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
 	
@@ -35,13 +35,13 @@ open class DTCustomer: UIViewController {
 	//		return key == key_ ? orders_ : nil
 	//	}
 	
-	override open func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		orders_?.make(order: DTOrderConsts.viewAppeared, with: self)
-	}
-	
-	override open func viewDidLoad() {
-		super.viewDidLoad()
-		orders_?.make(order: DTOrderConsts.viewLoaded, with: self)
-	}
+//	override open func viewDidAppear(_ animated: Bool) {
+//		super.viewDidAppear(animated)
+//		orders_?.make(order: DTOrderConsts.viewAppeared, with: self)
+//	}
+//	
+//	override open func viewDidLoad() {
+//		super.viewDidLoad()
+//		orders_?.make(order: DTOrderConsts.viewLoaded, with: self)
+//	}
 }

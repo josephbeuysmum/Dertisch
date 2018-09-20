@@ -38,7 +38,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	}
 	
 	public func create(_ customerId: String, from storyboard: String? = nil) -> DTCustomer? {
-		return create_bundle(customer: customerId, from: storyboard)?.customer
+		return create_bundle(from: customerId, and: storyboard)?.customer
 	}
 	
 //	public func createAlertWith(
@@ -65,6 +65,17 @@ extension DTMaitreD: DTMaitreDProtocol {
 		}
 	}
 	
+	public func greet(firstCustomer: String, window: UIWindow, storyboard: String? = nil) {
+		guard
+			window_ == nil,
+			self is DTMaitreDExtensionProtocol
+			else { return }
+		(self as! DTMaitreDExtensionProtocol).registerStaff(with: key_)
+		window_ = window
+		window_.makeKeyAndVisible()
+		seat(firstCustomer, from: storyboard)
+	}
+	
 	public func popover(
 		_ customerId: String,
 		inside rect: CGRect? = nil,
@@ -72,7 +83,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		guard
 			!hasPopover,
 			let currentCustomer = customer_relationship?.customer,
-			let viperBundle = create_bundle(customer: customerId, from: storyboard),
+			let viperBundle = create_bundle(from: customerId, and: storyboard),
 			let popover = viperBundle.customer
 			else { return }
 		popover.modalPresentationStyle = .popover
@@ -86,55 +97,23 @@ extension DTMaitreD: DTMaitreDProtocol {
 		side_customer_relationship = viperBundle
 	}
 	
-	public func seat(customer id: String, from storyboard: String? = nil) {
-		guard let viperBundle = create_bundle(customer: id, from: storyboard) else { return }
-		window_.rootViewController = viperBundle.customer
-		customer_relationship = viperBundle
-	}
-	
-	public func serve(
-		_ customerId: String,
-		animated: Bool? = true,
-		via presentation: DTPresentations? = nil,
-		from storyboard: String? = nil) {
-		let presentationType = presentation ?? DTPresentations.show
-		guard
-			let currentCustomer = customer_relationship?.customer,
-			let viperBundle = create_bundle(customer: customerId, from: storyboard),
-			let customer = viperBundle.customer
-			else { return }
-		switch presentationType {
-		case .curl:			customer.modalTransitionStyle = .partialCurl
-		case .dissolve:		customer.modalTransitionStyle = .crossDissolve
-		case .flip:			customer.modalTransitionStyle = .flipHorizontal
-		case .rise:			customer.modalTransitionStyle = .coverVertical
-		default:			()
-		}
-		currentCustomer.present(customer, animated: animated!) {
-			currentCustomer.removeFromParentViewController()
-			self.orders_.make(order: DTOrderConsts.viewRemoved)
-		}
-		customer_relationship?.cleanUp()
-		customer_relationship = viperBundle
-	}
-	
 	public func register(
 		_ kitchenStaffType: DTKitchenProtocol.Type,
 		with key: String,
 		injecting dependencyTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard can_register(with: key) else { return }
-		var kitchenStaffMembers: [String: DTKitchenProtocol]?
-		if let strongDependencyTypes = dependencyTypes {
-			kitchenStaffMembers = [:]
-			for dependencyType in strongDependencyTypes {
-				let dependencyId = dependencyType.staticId
-				if let dependencyClass = kitchen_staff_singletons[dependencyId] {
-					kitchenStaffMembers![dependencyId] = dependencyClass
-				} else {
-					fatalError("Attempting to inject a model class that has not been registered itself yet")
-				}
-			}
-		}
+		let kitchenStaffMembers = get_kitchen_staff(from: dependencyTypes)
+//		if let strongDependencyTypes = dependencyTypes {
+//			kitchenStaffMembers = [:]
+//			for dependencyType in strongDependencyTypes {
+//				let dependencyId = dependencyType.staticId
+//				if let dependencyClass = kitchen_staff_singletons[dependencyId] {
+//					kitchenStaffMembers![dependencyId] = dependencyClass
+//				} else {
+//					fatalError("Attempting to inject a model class that has not been registered itself yet")
+//				}
+//			}
+//		}
 		let kitchenStaff = kitchenStaffType.init(orders: orders_, kitchenStaffMembers: kitchenStaffMembers)
 		kitchen_staff_singletons[kitchenStaffType.staticId] = kitchenStaff
 		kitchenStaff.startShift()
@@ -159,27 +138,48 @@ extension DTMaitreD: DTMaitreDProtocol {
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func greet(customer: String, window: UIWindow, storyboard: String? = nil) {
-		guard
-			window_ == nil,
-			self is DTMaitreDExtensionProtocol
-			else { return }
-		(self as! DTMaitreDExtensionProtocol).registerStaff(with: key_)
-		window_ = window
-		window_.makeKeyAndVisible()
-		seat(customer: customer, from: storyboard)
+	public func seat(_ customerId: String, from storyboard: String? = nil) {
+		guard let viperBundle = create_bundle(from: customerId, and: storyboard) else { return }
+		window_.rootViewController = viperBundle.customer
+		customer_relationship = viperBundle
 	}
 	
+	public func serve(
+		_ customerId: String,
+		animated: Bool? = true,
+		via presentation: DTPresentations? = nil,
+		from storyboard: String? = nil) {
+		let presentationType = presentation ?? DTPresentations.show
+		guard
+			let currentCustomer = customer_relationship?.customer,
+			let viperBundle = create_bundle(from: customerId, and: storyboard),
+			let customer = viperBundle.customer
+			else { return }
+		switch presentationType {
+		case .curl:			customer.modalTransitionStyle = .partialCurl
+		case .dissolve:		customer.modalTransitionStyle = .crossDissolve
+		case .flip:			customer.modalTransitionStyle = .flipHorizontal
+		case .rise:			customer.modalTransitionStyle = .coverVertical
+		default:			()
+		}
+		currentCustomer.present(customer, animated: animated!) {
+			currentCustomer.removeFromParent()
+			self.orders_.make(order: DTOrderConsts.viewRemoved)
+		}
+		customer_relationship?.cleanUp()
+		customer_relationship = viperBundle
+	}
 	
+
 	
 	fileprivate func can_register(with key: String) -> Bool {
 		return is_activated == false && key == key_
 	}
 	
-	fileprivate func create_bundle(customer id: String, from storyboard: String? = nil) -> DTSwitchRelationship? {
+	fileprivate func create_bundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchRelationship? {
 		guard
-			let vipRelationship = switch_relationships[id],
-			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: id) as? DTCustomer
+			let vipRelationship = switch_relationships[customerId],
+			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
 			else { return nil }
 		let waiter = vipRelationship.waiterType.init(orders: orders_, maitreD: self)
 		customer.set(orders_, and: waiter)
@@ -196,30 +196,45 @@ extension DTMaitreD: DTMaitreDProtocol {
 		return storyboard ?? "Main"
 	}
 	
-	fileprivate func get_kitchen_staff(
 //		headChef: inout DTHeadChefProtocol,
 //		with waiter: DTWaiterProtocol,
-		from dependencyTypes: [DTKitchenProtocol.Type]?) -> [DTKitchenProtocol]? {
-		guard let dependencyTypes = dependencyTypes else { return nil }
-		var kitchenStaff: [DTKitchenProtocol] = []
-		_ = dependencyTypes.map {
-			dependencyType in
-			if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
-				kitchenStaff.append(dependencyClass)
-//				if dependencyClass is DTImages {
-//					headChef.closet?.set(imageSousChef: dependencyClass as! DTImages)
-//				} else {
-//					headChef.closet?.bespoke.add(dependencyClass)
-//				}
-			} else {
-				fatalError("Attempting to inject a model class that has not been registered itself yet")
+	fileprivate func get_kitchen_staff(from dependencyTypes: [DTKitchenProtocol.Type]?) -> [String: DTKitchenProtocol]? {
+		guard
+			let dependencyTypes = dependencyTypes,
+			dependencyTypes.count > 0
+			else { return nil }
+		var kitchenStaff: [String: DTKitchenProtocol] = [:]
+		for dependencyType in dependencyTypes {
+			let dependencyId = dependencyType.staticId
+			if let dependencyClass = kitchen_staff_singletons[dependencyId] {
+				kitchenStaff[dependencyId] = dependencyClass
 			}
 		}
+		return kitchenStaff
+	}
+		
+		
+		
+		
+//		var kitchenStaff: [DTKitchenProtocol] = []
+//		_ = dependencyTypes.map {
+//			dependencyType in
+//			if let dependencyClass = kitchen_staff_singletons[String(describing: dependencyType)] {
+//				kitchenStaff.append(dependencyClass)
+////				if dependencyClass is DTImages {
+////					headChef.closet?.set(imageSousChef: dependencyClass as! DTImages)
+////				} else {
+////					headChef.closet?.bespoke.add(dependencyClass)
+////				}
+//			} else {
+//				fatalError("Attempting to inject a model class that has not been registered itself yet")
+//			}
+//		}
 //		headChef.closet?.set(ordersService: orders)
 //		headChef.closet?.set(waiter: waiter)
 //		headChef.activate()
-		return kitchenStaff.count > 0 ? kitchenStaff : nil
-	}
+//		return kitchenStaff
+//	}
 	
 	// todo do these IA PR and VC need to be passed via set or can they be created here (so that we don't need setter functions on the entity collections)
 //	fileprivate func initialise_(waiter: inout DTWaiterProtocol, with customer: DTCustomer) -> Bool {
