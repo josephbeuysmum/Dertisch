@@ -11,6 +11,6 @@ public protocol DTUrlSessionProtocol: DTKitchenProtocol {
 		url: String,
 		method: DTUrlSession.methods,
 		parameters: Dictionary< String, String >?,
-		order: DTOrderReceivableProtocol?,
+		order: DTOrdererProtocol?,
 		callback: ( ( String, Any? ) -> Void )? )
 }

@@ -14,24 +14,24 @@ extension DTOrders: DTOrdersProtocol {
 	public func has(order key: String) -> Bool { return orders_[key] != nil }
 	
 	@discardableResult
-	public func listenFor(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+	public func take(order key: String, orderer: DTOrdererProtocol, callback: @escaping DTOrderCallback) -> Bool {
 		return make(callback: callback, key: key, order: orderer, isContinuous: true)
 	}
 	
-//	public func listenFor(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
+//	public func take(order key: String, order: DTOrdererProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
 //		return make(delegate: delegate, key: key, order: order, isContinuous: true)
 //	}
 	
 	@discardableResult
-	public func listenForOneOff(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool {
+	public func takeSingle(order key: String, orderer: DTOrdererProtocol, callback: @escaping DTOrderCallback) -> Bool {
 		return make(callback: callback, key: key, order: orderer, isContinuous: false)
 	}
 	
-//	public func listenForOneOff(order key: String, order: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
+//	public func takeSingle(order key: String, order: DTOrdererProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool {
 //		return make(delegate: delegate, key: key, order: order, isContinuous: false)
 //	}
 	
-	public func stopWaitingFor(order key: String) {//}, orderer: DTOrderReceivableProtocol) {
+	public func stopWaitingFor(order key: String) {//}, orderer: DTOrdererProtocol) {
 		annulOrder(by: key)
 	}
 	
@@ -48,7 +48,7 @@ extension DTOrders: DTOrdersProtocol {
 	fileprivate func make(
 		callback: @escaping DTOrderCallback,
 		key: String,
-		order: DTOrderReceivableProtocol,
+		order: DTOrdererProtocol,
 		isContinuous: Bool) -> Bool {
 		createOrderIfNecessary(by: key)
 		return orders_[key]!.add(callback: callback, order: order, isContinuous: isContinuous)
@@ -57,7 +57,7 @@ extension DTOrders: DTOrdersProtocol {
 	fileprivate func make(
 		delegate: DTOrderCallbackDelegateProtocol,
 		key: String,
-		order: DTOrderReceivableProtocol,
+		order: DTOrdererProtocol,
 		isContinuous: Bool) -> Bool {
 		createOrderIfNecessary(by: key)
 		return orders_[key]!.add(delegate: delegate, order: order, isContinuous: isContinuous)

@@ -28,25 +28,25 @@ public extension DTWaiterProtocol {
 
 	
 	func startShift() {
-		guard
-//			let key = key_,
-			let orders = orders_
-			else { return }
-		_ = orders.listenForOneOff(order: DTOrderConsts.viewLoaded, orderer: self) { _, data in
-			guard
-				let strongSelf = self as DTWaiterProtocol?,
-				strongSelf.check(data)
-				else { return }
-			strongSelf.customerArrived()
-			orders.make(order: DTOrderConsts.waiterActivated, with: strongSelf)
-		}
-		_ = orders.listenForOneOff(order: DTOrderConsts.viewAppeared, orderer: self) { _, data in
-			guard
-				let strongSelf = self as DTWaiterProtocol?,
-				strongSelf.check(data)
-				else { return }
-			strongSelf.customerSeated()
-		}
+//		guard
+////			let key = key_,
+//			let orders = orders_
+//			else { return }
+//		_ = orders.takeSingle(order: DTOrderConsts.viewLoaded, orderer: self) { _, data in
+//			guard
+//				let strongSelf = self as DTWaiterProtocol?,
+//				strongSelf.check(data)
+//				else { return }
+//			strongSelf.customerArrived()
+//			orders.make(order: DTOrderConsts.waiterStartedShift, with: strongSelf)
+//		}
+//		_ = orders.takeSingle(order: DTOrderConsts.viewAppeared, orderer: self) { _, data in
+//			guard
+//				let strongSelf = self as DTWaiterProtocol?,
+//				strongSelf.check(data)
+//				else { return }
+//			strongSelf.customerSeated()
+//		}
 	}
 	
 	
@@ -62,7 +62,7 @@ public extension DTWaiterProtocol {
 			let maitreD = maitre_d
 			else { return }
 		if maitreD.hasPopover {
-			orders.listenForOneOff(order: DTOrderConsts.popoverRemoved, orderer: self) { _,_ in
+			orders.takeSingle(order: DTOrderConsts.popoverRemoved, orderer: self) { _,_ in
 				maitreD.serve(customerId, animated: animated)
 			}
 			maitreD.dismissPopover()
@@ -81,14 +81,35 @@ public extension DTWaiterProtocol {
 	
 	mutating func cleanUp() {}
 	mutating func serve<T>(with data: T?) {}
-	mutating func update<T>(with data: T?) {}
-	func customerSeated() {}
-	func customerArrived() {}
+	mutating func serveAgain<T>(with data: T?) {}
+//	func customerSeated() {}
+//	func customerArrived() {}
 }
 
-public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTPopulatableCustomerProtocol, DTPresentableCustomerProtocol, DTUpdatableProtocol {
+public extension DTWaiterForCustomerProtocol {
+	var maitreD: DTMaitreD? {
+		return DTFirstInstance().get(DTMaitreD.self, from: Mirror(reflecting: self))
+	}
+}
+
+
+
+public protocol DTWaiterProtocol: DTSwitchClassProtocol, DTWaiterForCustomerProtocol, DTWaiterForHeadChefProtocol {
+//, DTPresentCustomerProtocol, DTServeCustomerAgainProtocol, DTServeCustomerProtocol,
 	init(orders: DTOrders, maitreD: DTMaitreD)//, customer: DTCustomer)
 //	var closet: DTWaiterCloset? { get }
-	func customerArrived()
-	func customerSeated()
+//	func customerArrived()
+//	func customerSeated()
+}
+
+public protocol DTWaiterForCustomerProtocol {
+	var maitreD: DTMaitreD? { get }
+}
+
+public protocol DTWaiterForTableCustomerProtocol {
+	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
+}
+
+public protocol DTWaiterForHeadChefProtocol: DTServeCustomerProtocol {
+	mutating func serveAgain<T>(with data: T?)
 }

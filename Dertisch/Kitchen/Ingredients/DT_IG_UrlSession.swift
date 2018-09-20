@@ -21,7 +21,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 		url: String,
 		method: DTUrlSession.methods,
 		parameters: Dictionary< String, String >? = nil,
-		order: DTOrderReceivableProtocol? = nil,
+		order: DTOrdererProtocol? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
 		guard
 			ongoing_calls.index( of: url ) == nil,
@@ -29,7 +29,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 			else { return }
 		ongoing_calls.append( url )
 		if order != nil && callback != nil {
-			orders_.listenForOneOff(order: url, orderer: order!, callback: callback! )
+			orders_.takeSingle(order: url, orderer: order!, callback: callback! )
 		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue

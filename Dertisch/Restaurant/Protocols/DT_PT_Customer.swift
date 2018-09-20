@@ -6,6 +6,6 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol DTCustomerProtocol: class, DTOrderReceivableProtocol {//}, DTOrdersEntitySetterProtocol {
-	func set(_ orders: DTOrders, and waiter: DTWaiterProtocol)
+public protocol DTCustomerProtocol: class, DTOrdererProtocol {//}, DTOrdersEntitySetterProtocol {
+	func pass(_ orders: DTOrders, to waiter: DTWaiterForCustomerProtocol)
 }

@@ -18,12 +18,12 @@ public struct DTOrderConsts {
 	navigateTo = "\(name_space)NavigateTo",
 	popoverAdded = "\(name_space)Popover\(DTCommonPhrasesConsts.Added)",
 	popoverRemoved = "\(name_space)Popover\(DTCommonPhrasesConsts.Removed)",
-	waiterActivated = "\(name_space)\(waiter_)\(DTCommonPhrasesConsts.Activated)",
+	waiterStartedShift = "\(name_space)\(waiter_)\(DTCommonPhrasesConsts.Activated)",
 	valuesRemoved = "\(name_space)\(value_)s\(DTCommonPhrasesConsts.Removed)",
 	valueSet = "\(name_space)\(value_)\(DTCommonPhrasesConsts.Set)",
 	valueStored = "\(name_space)\(value_)\(DTCommonPhrasesConsts.Stored)",
-	viewAppeared = "\(name_space)\(DTCommonPhrasesConsts.View )Appeared",
-	viewLoaded = "\(name_space)\(DTCommonPhrasesConsts.View )\(DTCommonPhrasesConsts.Loaded)",
+//	viewAppeared = "\(name_space)\(DTCommonPhrasesConsts.View )Appeared",
+//	viewLoaded = "\(name_space)\(DTCommonPhrasesConsts.View )\(DTCommonPhrasesConsts.Loaded)",
 	viewRemoved = "\(name_space)\(DTCommonPhrasesConsts.View )\(DTCommonPhrasesConsts.Removed)",
 	viewWarnedAboutMemory = "\(name_space)\(DTCommonPhrasesConsts.View )WarnedAboutMemory"
 //	viewSet = "\(name_space)\(DTCommonPhrasesConsts.View )\(DTCommonPhrasesConsts.Set )"

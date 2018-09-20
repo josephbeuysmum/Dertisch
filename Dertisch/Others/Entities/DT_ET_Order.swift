@@ -11,7 +11,7 @@ extension DTOrder: DTOrderProtocol {
 	
 	public mutating func cleanUp() {}
 	
-	public mutating func add(callback: @escaping DTOrderCallback, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
+	public mutating func add(callback: @escaping DTOrderCallback, order: DTOrdererProtocol, isContinuous: Bool) -> Bool {
 		return add(order: DTOrderDetails(
 			key: transmissionName,
 			order: order,
@@ -20,7 +20,7 @@ extension DTOrder: DTOrderProtocol {
 			callback: callback))
 	}
 	
-	public mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool {
+	public mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrdererProtocol, isContinuous: Bool) -> Bool {
 		return add(order: DTOrderDetails(
 			key: transmissionName,
 			order: order,
@@ -29,7 +29,7 @@ extension DTOrder: DTOrderProtocol {
 			callback: nil))
 	}
 	
-	public mutating func cancel(order: DTOrderReceivableProtocol) {
+	public mutating func cancel(order: DTOrdererProtocol) {
 		var tempWavelength = DTOrderDetails(key: transmissionName, order: order)
 		let key = tempWavelength.description
 		tempWavelength.cleanUp()

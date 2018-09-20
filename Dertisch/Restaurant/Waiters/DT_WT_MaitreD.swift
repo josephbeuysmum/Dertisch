@@ -181,14 +181,15 @@ extension DTMaitreD: DTMaitreDProtocol {
 			let vipRelationship = switch_relationships[customerId],
 			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
 			else { return nil }
-		let waiter = vipRelationship.waiterType.init(orders: orders_, maitreD: self)
-		customer.set(orders_, and: waiter)
-		let headChef = vipRelationship.headChefType.init(
+		var
+		waiter = vipRelationship.waiterType.init(orders: orders_, maitreD: self),
+		headChef = vipRelationship.headChefType.init(
 			orders: orders_,
 			waiter: waiter,
 			kitchenStaff: get_kitchen_staff(from: vipRelationship.kitchenStaffTypes))
-		waiter.startShift()
 		headChef.startShift()
+		waiter.startShift()
+		customer.pass(orders_, to: waiter)
 		return DTSwitchRelationship(customer: customer, headChef: headChef, waiter: waiter)
 	}
 	

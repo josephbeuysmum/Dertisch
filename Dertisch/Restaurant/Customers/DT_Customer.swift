@@ -28,7 +28,7 @@ open class DTCustomer: UIViewController {
 //		orders_?.make(order: DTOrderConsts.viewWarnedAboutMemory, with: self)
 //	}
 	
-	open func set(_ orders: DTOrders, and waiter: DTWaiterProtocol) {}
+	open func pass(_ orders: DTOrders, to waiter: DTWaiterForCustomerProtocol) {}
 	
 	//	public func orders(_ key: String?) -> DTOrders? {
 	//		guard key != nil else { return nil }

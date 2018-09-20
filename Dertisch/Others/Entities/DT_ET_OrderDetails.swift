@@ -39,11 +39,11 @@ public struct DTOrderDetails {
 	
 	fileprivate let id_: String
 	
-	fileprivate var order_: DTOrderReceivableProtocol?
+	fileprivate var order_: DTOrdererProtocol?
 	
 	init(
 		key: String,
-		order: DTOrderReceivableProtocol,
+		order: DTOrdererProtocol,
 		isContinuous: Bool = true,
 		delegate: DTOrderCallbackDelegateProtocol? = nil,
 		callback: DTOrderCallback? = nil) {

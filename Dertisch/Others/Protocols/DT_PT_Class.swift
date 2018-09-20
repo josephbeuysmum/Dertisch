@@ -6,8 +6,8 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol DTSwitchClassProtocol: DTDeallocatableProtocol, DTOrderReceivableProtocol {
+public protocol DTSwitchClassProtocol: DTDeallocatableProtocol, DTOrdererProtocol {
 	var instanceDescriptor: String { get }
 //	init()
-	func startShift()
+	mutating func startShift()
 }

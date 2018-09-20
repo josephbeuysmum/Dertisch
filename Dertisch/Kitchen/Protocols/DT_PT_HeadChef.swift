@@ -19,38 +19,39 @@ public extension DTHeadChefProtocol {
 //		return DTFirstInstance().get(DTKey.self, from: mirror_)
 //	}
 	
-	private var mirror_: Mirror { return Mirror(reflecting: self) }
-	private var waiter_: DTWaiterProtocol? { return DTFirstInstance().get(DTWaiterProtocol.self, from: mirror_) }
-	private var orders_: DTOrders? { return DTFirstInstance().get(DTOrders.self, from: mirror_) }
+//	private var mirror_: Mirror { return Mirror(reflecting: self) }
+//	private var waiter_: DTWaiterForHeadChefProtocol? { return DTFirstInstance().get(DTWaiterForHeadChefProtocol.self, from: mirror_) }
+//	private var orders_: DTOrders? { return DTFirstInstance().get(DTOrders.self, from: mirror_) }
 
 	
 	
-	public func startShift() {
-		guard
-//			let key = key_,
-//			let safeCloset = closet,
-			let waiterClassName = waiter_?.instanceDescriptor,
-			let orders = orders_
-			else { return }
-		_ = orders.listenFor(order: DTOrderConsts.waiterActivated, orderer: self) { _, data in
-			guard
-				let strongSelf = self as DTHeadChefProtocol?,
-				let waiter = data as? DTWaiterProtocol,
-				waiter.instanceDescriptor == waiterClassName
-				else { return }
-			var mutatingSelf = strongSelf
-			mutatingSelf.waiterActivated()
-		}
+//	public func startShift() {
+//		guard
+////			let key = key_,
+////			let safeCloset = closet,
+//			let waiterClassName = waiter_?.instanceDescriptor,
+//			let orders = orders_
+//			else { return }
+//		_ = orders.take(order: DTOrderConsts.waiterStartedShift, orderer: self) { _, data in
+//			guard
+//				let strongSelf = self as DTHeadChefProtocol?,
+//				let waiter = data as? DTWaiterProtocol,
+//				waiter.instanceDescriptor == waiterClassName
+//				else { return }
+//			var mutatingSelf = strongSelf
+//			mutatingSelf.waiterStartedShift()
+//			orders.stopWaitingFor(order: DTOrderConsts.waiterStartedShift)
+//		}
 		// todo why is this not simply in the closure immediately above?
-		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
-			_ = orders.stopWaitingFor(order: DTOrderConsts.waiterActivated)
-			timer.invalidate()
-		}
-	}
+//		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: false) { timer in
+//			_ = orders.stopWaitingFor(order: DTOrderConsts.waiterStartedShift)
+//			timer.invalidate()
+//		}
+//	}
 }
 
 public protocol DTHeadChefProtocol: DTSwitchClassProtocol {
-	init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [String: DTKitchenProtocol]?)
+	init(orders: DTOrders, waiter: DTWaiterForHeadChefProtocol, kitchenStaff: [String: DTKitchenProtocol]?)
 //	var closet: DTHeadChefCloset? { get }
-	mutating func waiterActivated ()
+//	mutating func waiterStartedShift ()
 }

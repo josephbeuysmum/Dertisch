@@ -15,7 +15,7 @@
 //		data: Any? = nil,
 //		andCaller caller: DTCaller? ) {
 //		guard caller != nil else { return }
-//		orders.listenForOneOff(order: key, order: caller!.caller!, callback: caller!.callback! )
+//		orders.takeSingle(order: key, order: caller!.caller!, callback: caller!.callback! )
 ////		caller!.annul()
 //		orders.transmitSignalFor( key: key, data: data )
 //	}

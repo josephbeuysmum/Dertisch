@@ -27,9 +27,9 @@ public protocol DTCDEntityProtocol {
 public protocol DTOrderProtocol: DTDeallocatableProtocol {
 	var hasOrders: Bool { get }
 	init ( _ transmission: String )
-	mutating func add(callback: @escaping DTOrderCallback, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool
-	mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrderReceivableProtocol, isContinuous: Bool) -> Bool
-	mutating func cancel(order: DTOrderReceivableProtocol)
+	mutating func add(callback: @escaping DTOrderCallback, order: DTOrdererProtocol, isContinuous: Bool) -> Bool
+	mutating func add(delegate: DTOrderCallbackDelegateProtocol, order: DTOrdererProtocol, isContinuous: Bool) -> Bool
+	mutating func cancel(order: DTOrdererProtocol)
 	mutating func removeAllDetails()
 	mutating func removeSingleUseWavelengths()
 	func transmit ( with value: Any? )

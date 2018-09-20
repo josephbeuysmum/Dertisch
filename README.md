@@ -216,7 +216,7 @@ Developmental Roadmap
 No official timescale exists for ongoing dev, but presently suggested developments are as follows:
 
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
--   remove fatalError()s
+-   remove unused code;
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
 -	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
@@ -231,6 +231,7 @@ No official timescale exists for ongoing dev, but presently suggested developmen
 -	remove `...Protocol` from protocol names?
 -	reintroduce timeout stopwatch to `DTUrlSession`;
 -	complete list of MIME types in `DTUrlSession`;
+-   remove fatal errors
 
 -----------------------
 On the name "Dertisch"

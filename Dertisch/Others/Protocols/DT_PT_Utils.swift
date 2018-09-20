@@ -15,22 +15,23 @@ public protocol DTDescribableProtocol {
 	var description: String { get }
 }
 
-public protocol DTPopulatableCustomerProtocol {
+public protocol DTServeCustomerProtocol {
 	mutating func serve<T>(with data: T?)
 }
 
-public protocol DTPresentableCustomerProtocol {
+//public protocol DTServeCustomerAgainProtocol {
+//	mutating func serveAgain<T>(with data: T?)
+//}
+
+// todo: the presenter Model presenting a viewController: bad code smell
+public protocol DTPresentCustomerProtocol {
 	func serve(_ customerId: String, animated: Bool)
 }
 
-public protocol DTOrderReceivableProtocol {}
+public protocol DTOrdererProtocol {}
 
 public protocol DTSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)
-}
-
-public protocol DTUpdatableProtocol {
-	mutating func update<T>(with data: T?)
 }
 
 // todo the places where protocols and their extensions live is becoming increasingly messy, refactor into some sensible system

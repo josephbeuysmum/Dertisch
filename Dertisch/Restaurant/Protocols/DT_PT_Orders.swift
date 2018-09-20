@@ -13,10 +13,10 @@ public protocol DTOrderCallbackDelegateProtocol {
 protocol DTOrdersProtocol {
 	func cancel(order key: String, orderer: AnyObject)
 	func has(order key: String) -> Bool
-	func listenFor(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool
-//	func listenFor(order key: String, orderer: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool
-	func listenForOneOff(order key: String, orderer: DTOrderReceivableProtocol, callback: @escaping DTOrderCallback) -> Bool
-//	func listenForOneOff(order key: String, orderer: DTOrderReceivableProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool
-	func stopWaitingFor(order key: String)//, orderer: DTOrderReceivableProtocol)
+	func take(order key: String, orderer: DTOrdererProtocol, callback: @escaping DTOrderCallback) -> Bool
+//	func take(order key: String, orderer: DTOrdererProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool
+	func takeSingle(order key: String, orderer: DTOrdererProtocol, callback: @escaping DTOrderCallback) -> Bool
+//	func takeSingle(order key: String, orderer: DTOrdererProtocol, delegate: DTOrderCallbackDelegateProtocol) -> Bool
+	func stopWaitingFor(order key: String)//, orderer: DTOrdererProtocol)
 	func make(order key: String, with value: Any?)
 }
