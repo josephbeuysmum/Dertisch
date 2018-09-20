@@ -103,16 +103,17 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 	DTMaitreD
 	// manages the addition and removal of Dishes and their relationships with Head Chefs and Waiters
-	// (maitre Ds are classically VIPER routings)
+	// (the maitre D is classically a VIPER routing)
 
 	DTOrders
 	// provides an independent and scoped app-wide communications mechanism
+	// (orders are classically Observers)
 
 All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
 
 `DTMaitreD` is responsible for starting `Dertisch` apps, and `DTOrders` is a mandatory requirement for all `Dertisch` apps, and so they are instantiated by default. The others are instantiated on a **need-to-use** basis.
 
-Start your `Dertisch` app by calling `DTMaitreD.greet()` from `AppDelegate`:
+Start your `Dertisch` app by calling `DTMaitreD.greet(firstCustomer:)` from `AppDelegate`:
 
 	class AppDelegate: UIResponder, UIApplicationDelegate {
 
