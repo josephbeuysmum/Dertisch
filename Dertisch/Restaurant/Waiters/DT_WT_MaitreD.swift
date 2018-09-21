@@ -102,6 +102,8 @@ extension DTMaitreD: DTMaitreDProtocol {
 		with key: String,
 		injecting dependencyTypes: [DTKitchenProtocol.Type]? = nil) {
 		guard can_register(with: key) else { return }
+		// todo why does this not print?
+		print(kitchenStaffType)
 		let kitchenStaffMembers = get_kitchen_staff(from: dependencyTypes)
 //		if let strongDependencyTypes = dependencyTypes {
 //			kitchenStaffMembers = [:]
@@ -144,9 +146,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 		customer_relationship = viperBundle
 	}
 	
-	public func serve(
+	public func seatNew(
 		_ customerId: String,
-		animated: Bool? = true,
+		beAnimated animated: Bool? = true,
 		via presentation: DTPresentations? = nil,
 		from storyboard: String? = nil) {
 		let presentationType = presentation ?? DTPresentations.show
@@ -177,6 +179,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	}
 	
 	fileprivate func create_bundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchRelationship? {
+		lo(customerId)
 		guard
 			let vipRelationship = switch_relationships[customerId],
 			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
@@ -200,15 +203,14 @@ extension DTMaitreD: DTMaitreDProtocol {
 //		headChef: inout DTHeadChefProtocol,
 //		with waiter: DTWaiterProtocol,
 	fileprivate func get_kitchen_staff(from dependencyTypes: [DTKitchenProtocol.Type]?) -> [String: DTKitchenProtocol]? {
-		guard
-			let dependencyTypes = dependencyTypes,
-			dependencyTypes.count > 0
-			else { return nil }
+		lo(dependencyTypes?.count)
+		guard dependencyTypes?.count ?? -1 > 0 else { return nil }
 		var kitchenStaff: [String: DTKitchenProtocol] = [:]
-		for dependencyType in dependencyTypes {
+		for dependencyType in dependencyTypes! {
 			let dependencyId = dependencyType.staticId
 			if let dependencyClass = kitchen_staff_singletons[dependencyId] {
 				kitchenStaff[dependencyId] = dependencyClass
+				lo(dependencyId, dependencyClass)
 			}
 		}
 		return kitchenStaff

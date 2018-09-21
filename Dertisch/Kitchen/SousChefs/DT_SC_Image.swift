@@ -60,13 +60,7 @@ extension DTImages: DTImagesProtocol {
 }
 
 public class DTImages {
-	// herehere...
-	/*
-	- test changes
-	- forced unwraps for url_session and key_ is unacceptable, revisit this
-	- rename orders to orders?
-	- rename headChefs to headChefs etc?
-	*/
+	// herehere forced unwraps for url_session and key_ is unacceptable, revisit this
 	fileprivate let
 	orders_: DTOrders,
 	key_: String

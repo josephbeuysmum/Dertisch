@@ -22,7 +22,7 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrarProtocol {
 	func dismissPopover()
 	func popover(_ customerId: String, inside rect: CGRect?, from storyboard: String?)
 	func seat(_ customerId: String, from storyboard: String?)
-	func serve(_ customerId: String, animated: Bool?, via presentationType: DTPresentations?, from storyboard: String?)
+	func seatNew(_ customerId: String, beAnimated animated: Bool?, via presentationType: DTPresentations?, from storyboard: String?)
 	func greet(firstCustomer: String, window: UIWindow, storyboard: String?)
 }
 

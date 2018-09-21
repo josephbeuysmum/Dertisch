@@ -71,11 +71,11 @@ public extension DTWaiterProtocol {
 			else { return }
 		if maitreD.hasPopover {
 			orders.takeSingle(order: DTOrderConsts.popoverRemoved, orderer: self) { _,_ in
-				maitreD.serve(customerId, animated: animated)
+				maitreD.seatNew(customerId, beAnimated: animated)
 			}
 			maitreD.dismissPopover()
 		} else {
-			maitreD.serve(customerId, animated: animated)
+			maitreD.seatNew(customerId, beAnimated: animated)
 		}
 	}
 

@@ -4,9 +4,9 @@ Dertisch
 A lightweight SWITCH framework for Swift apps
 ----------------------------------------------
 
-Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither but instead a **SWITCH** framework specifically designed to be **Swifty** by way of the **protocol oriented** nature of Swift.
+Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCH** framework specifically designed to be **Swifty** by way of the **protocol oriented** nature of Swift.
 
-`SWITCH` is a metaphorical acronym designed to easily explain `Dertisch`'s hybrid nature.
+`SWITCH` is a metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
 
 -   `S` Sous Chefs
 -   `W` Waiters
@@ -46,8 +46,8 @@ Tables
 The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, a unified expression of the thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
 
 
-How MV/IPER works in Dertisch
------------------------------------
+How SWITCH works in Dertisch
+----------------------------
 
 -   A customer makes an order (a user interacts with a `view`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
@@ -70,7 +70,7 @@ And on the View side:
 
 -	registration and presentation of Dishes with related Waiters and Interactors.
 
-`Dertisch` Head Chefs work by implementing the `DTHeadChefProtocol` protocol; Waiters by implementing the `DTWaiterProtocol` protocol; and Dishes by subclassing `DTDish`.
+Head Chefs work by implementing the `DTHeadChefProtocol` protocol; waiters by implementing the `DTWaiterProtocol` protocol; and customers by subclassing `DTCustomer`.
 
 ---------------
 Using Dertisch
