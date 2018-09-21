@@ -193,22 +193,26 @@ Indepth Documentation
 
 There are more elements to `Dertisch` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
 
+**note to self** - things to document:
+
+-   Project settings [main target] > General > Deployment Info > Main Interface [leave empty]
+
 ---------------------
 Developmental Roadmap
 ---------------------
 
 `Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
+-   `0.3` goal is to investigate the possibility of entirely replacing `DTOrders` with specific protocols so a waiter to a customer acts differently than a waiter to a head chef (for example, `DTWaiterProtocol` is subdivided into `DTWaiterForCustomerProtocol`, `DTWaiterForTableCustomerProtocol`, and `DTWaiterForHeadChefProtocol` depending on context). This would allow `Customer <-> Waiter <-> Head Chef` (etc.) communications in a Swifty way without depending on an Observer pattern;
 -   remove unused code;
+-	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	make utils functions native class extensions instead;
 -	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
 -	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
--   investigate the possibility of entirely replacing `DTOrders` with specific protocols (akin to the way `DTWaiterProtocol` is subdivided into `DTWaiterProtocol`, `DTWaiterForCustomerProtocol`, `DTWaiterForTableCustomerProtocol`, and `DTWaiterForHeadChefProtocol` depending on context);
 -	move optional Sous Chefs and Ingredients into their own repos to minimise the footprint of the core framework;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
--	new `LanguageSousChef` for multi-lingual capabilities;
+-	new `LanguageSousChef` for multi-lingual capabilities (to somehow be plugged into`DTWaiterProtocol`?);
 -	new `FirebaseIngredient`;
 -	replace `cleanUp()` functions with weak vars etc;
 -	force `DTCoreData` to take `dataModelName` at start up;
