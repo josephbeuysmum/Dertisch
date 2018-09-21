@@ -29,7 +29,6 @@
 		A9E9E716215258A200820100 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6DF215258A200820100 /* DT_CS_Logs.swift */; };
 		A9E9E717215258A200820100 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6E0215258A200820100 /* DT_CS_Chars.swift */; };
 		A9E9E718215258A200820100 /* DT_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6E1215258A200820100 /* DT_CS_CommonPhrases.swift */; };
-		A9E9E723215258A200820100 /* DT_EX_UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6EE215258A200820100 /* DT_EX_UIControl.swift */; };
 		A9E9E724215258A200820100 /* DT_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6EF215258A200820100 /* DT_EX_Data.swift */; };
 		A9E9E725215258A200820100 /* DT_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6F1215258A200820100 /* DT_PT_Entities.swift */; };
 		A9E9E730215258A200820100 /* DT_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6FE215258A200820100 /* DT_PT_Utils.swift */; };
@@ -94,7 +93,6 @@
 		A9E9E6DF215258A200820100 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
 		A9E9E6E0215258A200820100 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
 		A9E9E6E1215258A200820100 /* DT_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_CommonPhrases.swift; sourceTree = "<group>"; };
-		A9E9E6EE215258A200820100 /* DT_EX_UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_UIControl.swift; sourceTree = "<group>"; };
 		A9E9E6EF215258A200820100 /* DT_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_Data.swift; sourceTree = "<group>"; };
 		A9E9E6F1215258A200820100 /* DT_PT_Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Entities.swift; sourceTree = "<group>"; };
 		A9E9E6FE215258A200820100 /* DT_PT_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Utils.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 			isa = PBXGroup;
 			children = (
 				A9E9E6EF215258A200820100 /* DT_EX_Data.swift */,
-				A9E9E6EE215258A200820100 /* DT_EX_UIControl.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -451,7 +448,6 @@
 				A9E9E7532152598A00820100 /* DT_UT_Log.swift in Sources */,
 				A9776DC521539D4D00693C99 /* DT_PT_Class.swift in Sources */,
 				A9776DB421539C2300693C99 /* DT_PT_MaitreD.swift in Sources */,
-				A9E9E723215258A200820100 /* DT_EX_UIControl.swift in Sources */,
 				A9776DB821539C7C00693C99 /* DT_PT_UrlSession.swift in Sources */,
 				A9E9E717215258A200820100 /* DT_CS_Chars.swift in Sources */,
 				A9E9E734215258A200820100 /* DT_ET_TimePeriod.swift in Sources */,

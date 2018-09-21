@@ -149,9 +149,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 	public func seatNew(
 		_ customerId: String,
 		beAnimated animated: Bool? = true,
-		via presentation: DTPresentations? = nil,
+		via presentationType: DTPresentations? = nil,
 		from storyboard: String? = nil) {
-		let presentationType = presentation ?? DTPresentations.show
+		let presentationType = presentationType ?? DTPresentations.show
 		guard
 			let currentCustomer = customer_relationship?.customer,
 			let viperBundle = create_bundle(from: customerId, and: storyboard),
