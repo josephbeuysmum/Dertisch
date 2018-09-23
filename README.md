@@ -68,7 +68,7 @@ On the Model side:
 
 And on the View side:
 
--	registration and presentation of Dishes with related Waiters and Interactors.
+-	registration and presentation of Customers with related Waiters and Head Chefs.
 
 Head Chefs work by implementing the `DTHeadChefProtocol` protocol; waiters by implementing the `DTWaiter` protocol; and customers by subclassing `DTCustomer`.
 
@@ -102,7 +102,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	RESTAURANT (views and controllers)
 
 	DTMaitreD
-	// manages the addition and removal of Dishes and their relationships with Head Chefs and Waiters
+	// manages the addition and removal of Customers and their relationships with Head Chefs and Waiters
 	// (the maitre D is classically a VIPER routing)
 
 	DTOrders
@@ -151,7 +151,7 @@ In the above example, because `DTBundledJson` is commented out, injectable insta
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
-In the final `register` function above, `SomeDish`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `andInjecting` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
+In the final `register` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `andInjecting` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
