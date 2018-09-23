@@ -128,7 +128,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet(firstCustomer:)` from `App
 		}
 	}
 
-`DTMaitreD`'s start up routine includes a call to its own `registerStaff()` function, which is where the app's required kitchen and restaurant staff must be registered. Extend `DTMaitreD` to implement this function:
+`DTMaitreD`'s start up routine includes a call to its own `registerStaff()` function, which is where the app's required kitchen and restaurant staff must be registered. Extend `DTMaitreD` implementing `DTMaitreDExtensionProtocol` to utilise this function:
 
 	extension DTMaitreD: DTMaitreDExtensionProtocol {
 		public func registerStaff(with key: String) {
@@ -147,9 +147,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet(firstCustomer:)` from `App
 		}
 	}
 
-In the above example, because `DTBundledJson` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality.*
-
-* *it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed.*
+In the above example, because `DTBundledJson` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality (it would make more sense to simply delete these two lines, but they are included here to demonstrate how they would be used if they were needed).
 
 All `Dertisch` kitchen classes have `DTOrders` injected by default, and it is also possible to inject other model classes into each other. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
@@ -203,7 +201,7 @@ Developmental Roadmap
 
 `Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--   `0.3` goal is to investigate the possibility of entirely replacing `DTOrders` with specific protocols so a waiter to a customer acts differently than a waiter to a head chef (for example, `DTWaiter` is subdivided into `DTWaiterForCustomer`, `DTWaiterForTableCustomer`, and `DTWaiterForHeadChef` depending on context). This would allow `Customer <-> Waiter <-> Head Chef` (etc.) communications in a Swifty way without depending on an Observer pattern;
+-   I am currently working on version `0.3`, in which `DTOrders` is entirely removed in favour of extensible protocols allowing waiters to pass communications between customers and head chefs (for example);
 -   remove unused code;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	make utils functions native class extensions instead;
