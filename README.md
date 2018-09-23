@@ -6,14 +6,19 @@ A lightweight SWITCH framework for Swift apps
 
 Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCH** framework specifically designed to be **Swifty** by way of the **protocol oriented** nature of Swift.
 
-`SWITCH` is a metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
+`SWITCH` is a culinary metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
 
 -   `S` Sous Chefs
 -   `W` Waiters
 -   `I` Ingredients
--   `T` Tables
+-   `T` The Maitre D
 -   `C` Customers
 -   `H` Head Chefs
+
+The Maitre D
+------------
+
+The head waiter. The Maitre D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
 
 Ingredients
 -----------
@@ -28,24 +33,19 @@ The second-in-command chefs who take the ingredients and combine them into dishe
 Head Chefs
 ----------
 
-The people who control the staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific `Sous Chefs` in order to create particular combinations of data.
+The people who control the staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific `sous chefs` in order to create particular combinations of data.
 
 Waiters
 -------
 
-The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by `Head Chefs` in order to populate and control views.
+The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by `head chefs` in order to populate and control views.
 
 Customers
 ---------
 
 The people ordering the food. Customers are classically `views` and/or `viewControllers`, the screens the user sees.
 
-Tables
-------
-
-The literal, physical tables in the restaurant upon which the dishes are served. Tables are classically `apps`, a unified expression of the thing one is making. Tables are what potential customers see when they gaze through a restaurant window, and serve as a conspicuous reminder of what really matters: the users. Hopefully their inclusion in the framework's metaphorical acronym lowers the risk of getting lost in intellectual abstraction for its own sake.
-
-
+----------------------------
 How SWITCH works in Dertisch
 ----------------------------
 
@@ -70,7 +70,7 @@ And on the View side:
 
 -	registration and presentation of Dishes with related Waiters and Interactors.
 
-Head Chefs work by implementing the `DTHeadChefProtocol` protocol; waiters by implementing the `DTWaiterProtocol` protocol; and customers by subclassing `DTCustomer`.
+Head Chefs work by implementing the `DTHeadChefProtocol` protocol; waiters by implementing the `DTWaiter` protocol; and customers by subclassing `DTCustomer`.
 
 ---------------
 Using Dertisch
@@ -158,34 +158,34 @@ In the final `register` function above, `SomeDish`, `SomeWaiter`, and `SomeHeadC
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
 	class SomeSousChef: DTSousChefProtocol {
-		init(orders: DTOrders, kitchenStaffMembers: [DTKitchenProtocol]?) {}
+		init(kitchenClasses: [String: DTKitchenProtocol]?: [DTKitchenProtocol]?) {}
 	}
 
 Sous chefs, head chefs, and waiters can all be either `classes` or `structs`. So a boilerplate `Dertisch` Head Chef could look like this:
 
 	class SomeHeadChef: DTHeadChefProtocol {
-		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
+		init(orders: DTOrders, waiter: DTWaiter, kitchenStaff: [DTKitchenProtocol]?) {}
 	}
 
 or like this:
 
 	struct SomeHeadChef: DTHeadChefProtocol {
-		init(orders: DTOrders, waiter: DTWaiterProtocol, kitchenStaff: [DTKitchenProtocol]?) {}
+		init(orders: DTOrders, waiter: DTWaiter, kitchenStaff: [DTKitchenProtocol]?) {}
 	}
 
 And a boilerplate `Dertisch` Waiter looks like this:
 
-	class/struct SomeWaiter: DTWaiterProtocol {
+	class/struct SomeWaiter: DTWaiter {
 		init(orders: DTOrders, maitreD: DTMaitreD) {
 	}
 
 A boilerplate `Dertisch` Customer looks like this:
 
 	class SomeCustomer: DTCustomer {
-		override func pass(_ orders: DTOrders, to waiter: DTWaiterForCustomerProtocol) {}
+		override func pass(_ orders: DTOrders, to waiter: DTWaiterForCustomer) {}
 	}
 
-Dishes are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` Dish being required to extend the `DTDish` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
+Customers are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` customer being required to extend the `DTCustomer` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
 
 ---------------------
 Indepth Documentation
@@ -203,16 +203,16 @@ Developmental Roadmap
 
 `Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--   `0.3` goal is to investigate the possibility of entirely replacing `DTOrders` with specific protocols so a waiter to a customer acts differently than a waiter to a head chef (for example, `DTWaiterProtocol` is subdivided into `DTWaiterForCustomerProtocol`, `DTWaiterForTableCustomerProtocol`, and `DTWaiterForHeadChefProtocol` depending on context). This would allow `Customer <-> Waiter <-> Head Chef` (etc.) communications in a Swifty way without depending on an Observer pattern;
+-   `0.3` goal is to investigate the possibility of entirely replacing `DTOrders` with specific protocols so a waiter to a customer acts differently than a waiter to a head chef (for example, `DTWaiter` is subdivided into `DTWaiterForCustomer`, `DTWaiterForTableCustomer`, and `DTWaiterForHeadChef` depending on context). This would allow `Customer <-> Waiter <-> Head Chef` (etc.) communications in a Swifty way without depending on an Observer pattern;
 -   remove unused code;
 -	work out which classes, structs, and protocols can be made internal and/or final, and make them internal and/or final;
 -	make utils functions native class extensions instead;
--	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiterProtocol` instance;
+-	allow multiple `DTHeadChefProtocol` instances to be associated with a single `DTWaiter` instance;
 -	make Head Chefs optional [at registration] so some screens can be entirely Waiter controlled;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
 -	move optional Sous Chefs and Ingredients into their own repos to minimise the footprint of the core framework;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
--	new `LanguageSousChef` for multi-lingual capabilities (to somehow be plugged into`DTWaiterProtocol`?);
+-	new `LanguageSousChef` for multi-lingual capabilities (to somehow be plugged into`DTWaiter`?);
 -	new `FirebaseIngredient`;
 -	replace `cleanUp()` functions with weak vars etc;
 -	force `DTCoreData` to take `dataModelName` at start up;
