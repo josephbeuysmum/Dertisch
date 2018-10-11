@@ -4,7 +4,7 @@ Dertisch
 A **Swifty** framework for Swift apps
 -------------------------------------
 
-Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCHES** framework specifically designed to be **Swifty** via the **protocol oriented** nature of Swift.
+Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCHES** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift.
 
 ------
 NOTICE
@@ -221,10 +221,9 @@ Developmental Roadmap
 
 `Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--	add `DTSommelier` for screen text;
 -	allow multiple `DTHeadChef` instances to be associated with a single `DTWaiter` instance;
--   *dry wrappers* for metaphorically-named functions and properties;
--	make classes, structs, and protocols can be made internal and/or final just that;
+-   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `DTWaiter` to a `DTPresenterModel` at runtime;
+-	make classes, structs, and protocols that can be made internal and/or final just that;
 -	make utils functions native class extensions instead;
 -	move optional `DTKitchenMembers` into their own repos to minimise the footprint of the core framework;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
