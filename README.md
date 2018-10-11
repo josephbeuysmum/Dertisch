@@ -25,7 +25,7 @@ NOTICE
 -   `E` Entrées
 -   `S` Sommelier
 
-As you can see, in `SWITCHES` vowels refer to food and consonants refer to people.
+As you can see, in `SWITCHES` vowels refer to food and consonants to people.
 
 Sous Chefs
 ----------
@@ -70,6 +70,12 @@ The wine waiter. The Sommelier is classically a `proxy` which specifically provi
 ------------------------------
 How SWITCHES works in Dertisch
 ------------------------------
+
+------
+NOTICE
+------
+
+Much of what follow relates to version `0.2` and has been superceded by recent updates related to version `0.3`.
 
 -   A customer makes an order (a user interacts with a `view`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
