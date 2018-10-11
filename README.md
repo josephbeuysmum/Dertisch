@@ -1,12 +1,20 @@
 Dertisch
 ========
 
-A lightweight SWITCH framework for Swift apps
-----------------------------------------------
+A **Swifty** framework for Swift apps
+-------------------------------------
 
-Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCH** framework specifically designed to be **Swifty** via the **protocol oriented** nature of Swift.
+Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCHES** framework specifically designed to be **Swifty** via the **protocol oriented** nature of Swift.
 
-`SWITCH` is a culinary metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
+------
+NOTICE
+------
+
+`Dertisch` is still in beta at version `0.2`. Version `0.3` is in development and well underway, in which `DTOrders` is entirely removed in favour of extensible protocols allowing, par exemple, `DTWaiters` to pass communications between `DTCustomers` and `DTHeadChefs`, and vice versa. The use of protocols such as `DTWaiterForCustomer` and `DTWaiterForHeadChef` as a method of in-app comms are a major part of the way `Dertisch` aims to become the **swiftiest** of Swift app frameworks.
+
+---
+
+`SWITCHES` is a culinary metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
 
 -   `S` Sous Chefs
 -   `W` Waiters
@@ -14,6 +22,8 @@ Dertisch is a lightweight framework for Swift built around **dependency injectio
 -   `T` The Maitre D
 -   `C` Customers
 -   `H` Head Chefs
+-   `E` Entrées
+-   `S` Sommelier
 
 Sous Chefs
 ----------
@@ -45,15 +55,25 @@ Head Chefs
 
 The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
 
-----------------------------
-How SWITCH works in Dertisch
-----------------------------
+Entrées
+----------
+
+The dishes customers start with. Entrées are classically VIPER `entities`, which are simple data objects.
+
+Sommelier
+---------
+
+The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
+
+------------------------------
+How SWITCHES works in Dertisch
+------------------------------
 
 -   A customer makes an order (a user interacts with a `view`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
 -   the head chef gives the dishes to the waiter (the `interactor` calls its `presenterModel` with data);
--   the waiter serves the customer (the `view` populates itself via its `presenterModel`); and
+-   the waiter and the sommelier serve the customer (the `view` populates itself via its `presenterModel` and its `textProxy`); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the `user`).
 
 Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -201,12 +221,12 @@ Developmental Roadmap
 
 `Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--   I am currently working on version `0.3`, in which `DTOrders` is entirely removed in favour of extensible protocols allowing waiters to pass communications between customers and head chefs (for example);
 -	add `DTSommelier` for screen text;
 -	allow multiple `DTHeadChef` instances to be associated with a single `DTWaiter` instance;
+-   *dry wrappers* for metaphorically-named functions and properties;
 -	make classes, structs, and protocols can be made internal and/or final just that;
 -	make utils functions native class extensions instead;
--	move optional Sous Chefs and Ingredients into their own repos to minimise the footprint of the core framework;
+-	move optional `DTKitchenMembers` into their own repos to minimise the footprint of the core framework;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
