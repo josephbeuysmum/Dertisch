@@ -7,7 +7,7 @@
 //
 
 // todo cleanUp in a better way, with weak vars etc
-public protocol DTDeallocatableProtocol {
+public protocol DTCleanUp {
 	mutating func cleanUp ()
 }
 
@@ -15,20 +15,10 @@ public protocol DTDescribableProtocol {
 	var description: String { get }
 }
 
-public protocol DTServeCustomerProtocol {
-	mutating func serve<T>(with data: T?)
-}
-
-//public protocol DTServeCustomerAgainProtocol {
-//	mutating func serveAgain<T>(with data: T?)
-//}
-
 // todo: the presenter Model presenting a viewController: bad code smell
 public protocol DTPresentCustomerProtocol {
 	func serve(_ customerId: String, animated: Bool)
 }
-
-public protocol DTOrdererProtocol {}
 
 public protocol DTSingleInstanceProtocol {
 	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)

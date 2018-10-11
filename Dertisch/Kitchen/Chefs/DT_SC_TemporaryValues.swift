@@ -8,13 +8,14 @@
 
 import UIKit
 
+public protocol DTTemporaryValuesProtocol: DTKitchenMember {
+	func getValue(by key: String, andAnnul: Bool?) -> DTStorableDataType?
+	func set(_ value: DTStorableDataType, by key: String)
+	func annulValue(by key: String)
+	func removeValues ()
+}
+
 extension DTTemporaryValues: DTTemporaryValuesProtocol {
-//	public var closet: DTKitchenCloset { return closet_ }
-	
-	
-	
-	public func startShift() { is_activated = true }
-	
 	public func getValue(by key: String, andAnnul: Bool? = false) -> DTStorableDataType? {
 		guard let value = values_[key] else { return nil }
 		if andAnnul! { annulValue(by: key) }
@@ -24,7 +25,6 @@ extension DTTemporaryValues: DTTemporaryValuesProtocol {
 	// todo use DTStorableDataType protocol (or something damned similar) to make value more flexible than just String
 	public func set(_ value: DTStorableDataType, by key: String) {
 		values_[key] = value
-		orders_.make(order: DTOrderConsts.valueSet, with: key)
 	}
 	
 	public func annulValue(by key: String) {
@@ -33,9 +33,7 @@ extension DTTemporaryValues: DTTemporaryValuesProtocol {
 	}
 	
 	public func removeValues() {
-//		guard let orders = closet_.orders(key_) else { return }
 		for (key, _) in values_ { _ = annulValue(by: key) }
-		orders_.make(order: DTOrderConsts.valuesRemoved )
 	}
 	
 //	public func deleteValue ( by key: String ) {
@@ -61,20 +59,11 @@ extension DTTemporaryValues: DTTemporaryValuesProtocol {
 }
 
 public class DTTemporaryValues {
-	fileprivate let orders_: DTOrders
-	
 	fileprivate var
-	is_activated: Bool,
 	values_: Dictionary<String, DTStorableDataType>
-//	key_: DTKey!,
-//	closet_: DTKitchenCloset!
 
-	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
-		orders_ = orders
-		is_activated = false
+	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
 		values_ = [:]
-//		key_ = DTKey(self)
-//		closet_ = DTKitchenCloset(self, key: key_)
 	}
 	
 	deinit {}

@@ -7,7 +7,6 @@
 //
 
 public struct DTLogConsts {
-	// used by log functions to decide what to log or not
 	public struct logLevel {
 		static let
 		output = 0,
@@ -17,7 +16,5 @@ public struct DTLogConsts {
 		error = 4
 	}
 	
-	// the current list of types of logs that should be written to the output window
-	// add logLevel.feedback if you want orders output
-	public static let logModes = [ logLevel.output, logLevel.info, logLevel.warning ]//, logLevel.feedback ]
+	public static let logModes = [logLevel.output, logLevel.info, logLevel.warning]//, logLevel.feedback]
 }

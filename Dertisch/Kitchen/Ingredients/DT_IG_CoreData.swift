@@ -10,9 +10,16 @@ import CoreData
 
 public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
+public protocol DTCoreDataProtocol: DTKitchenMember {
+	var dataModelName: String? { get set }
+	func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback)
+	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback)
+	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDCallback)
+	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback)
+	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDCallback)
+}
+
 extension DTCoreData: DTCoreDataProtocol {
-//	public var closet: DTKitchenCloset { return closet_ }
-	
 	public var dataModelName: String? {
 		get { return data_model_name }
 		set {
@@ -20,8 +27,6 @@ extension DTCoreData: DTCoreDataProtocol {
 			data_model_name = newValue
 		}
 	}
-	
-	
 	
 	public func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
@@ -147,20 +152,9 @@ public class DTCoreData {
 		return container
 	}()
 	
-	fileprivate let orders_:DTOrders
-	
-	fileprivate var
-	is_activated: Bool,
-//	key_: DTKey!,
-//	closet_: DTKitchenCloset!,
-	data_model_name: String?
+	fileprivate var data_model_name: String?
 
-	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
-		orders_ = orders
-		is_activated = false
-//		key_ = DTKey(self)
-//		closet_ = DTKitchenCloset(self, key: key_)
-	}
+	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {}
 	
 	deinit {}
 }

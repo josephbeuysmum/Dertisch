@@ -8,29 +8,30 @@
 
 import UIKit
 
+public protocol DTUrlSessionProtocol: DTKitchenMember {
+	func call (
+		url: String,
+		method: DTUrlSession.methods,
+		parameters: Dictionary< String, String >?,
+		callback: ( ( String, Any? ) -> Void )? )
+}
+
 extension DTUrlSession: DTUrlSessionProtocol {
-	public enum methods: String { case GET = "GET", POST = "POST", DELETE = "DELETE" }
-	
-//	public var closet: DTKitchenCloset { return closet_ }
-	
-	
-	
-	public func startShift() {}
+	public enum methods: String { case GET, POST, DELETE }
 	
 	public func call (
 		url: String,
 		method: DTUrlSession.methods,
 		parameters: Dictionary< String, String >? = nil,
-		order: DTOrdererProtocol? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
 		guard
 			ongoing_calls.index( of: url ) == nil,
 			let validUrl = URL( string: url )
 			else { return }
 		ongoing_calls.append( url )
-		if order != nil && callback != nil {
-			orders_.takeSingle(order: url, orderer: order!, callback: callback! )
-		}
+//		if order != nil && callback != nil {
+//			orders_.takeSingle(order: url, orderer: order!, callback: callback! )
+//		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
 		// todo serialise json for POSTs here?
@@ -59,7 +60,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 				default: ()						// todo process other mime types here as and when required...
 				}
 			} catch {
-				strongSelf.transmit( success: false, with: url )
+//				strongSelf.transmit( success: false, with: url )
 			}
 			}.resume()
 	}
@@ -68,46 +69,37 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	
 	// unadulterated transmission because DTImages deals with post-processing
 	fileprivate func cast ( image data: Data, with url: String ) throws {
-		transmit( success: true, with: url, and: data )
+//		transmit( success: true, with: url, and: data )
 	}
 	
 	fileprivate func cast ( richText data: Data, with url: String ) throws {
-		do {
-			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
-			//			let success = json[ DTKeyConsts.success ] is Bool ? json[ DTKeyConsts.success ] as? Bool : nil
-			let castArray: [ Dictionary< String, Any > ]
-			if let rawData = json[ "data" ] {
-				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!
-			} else {
-				castArray = [ json ]
-			}
-			transmit( success: true, with: url, and: castArray[ 0 ] )
-		} catch {
-			transmit( success: false, with: url )
-		}
+//		do {
+//			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
+//			//			let success = json[ DTKeyConsts.success ] is Bool ? json[ DTKeyConsts.success ] as? Bool : nil
+//			let castArray: [ Dictionary< String, Any > ]
+//			if let rawData = json[ "data" ] {
+//				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!
+//			} else {
+//				castArray = [ json ]
+//			}
+//			transmit( success: true, with: url, and: castArray[ 0 ] )
+//		} catch {
+//			transmit( success: false, with: url )
+//		}
 	}
 	
 	
 	
-	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-		orders_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
-	}
+//	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
+//		orders_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
+//	}
 }
 
 public class DTUrlSession {
-	fileprivate let orders_:DTOrders
+	fileprivate var ongoing_calls: [ String ]
 	
-	fileprivate var
-	ongoing_calls: [ String ]
-//	key_: DTKey!,
-//	closet_: DTKitchenCloset!
-	
-	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
-		orders_ = orders
+	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
 		ongoing_calls = []
-//		key_ = DTKey(self)
-//		closet_ = DTKitchenCloset(self, key: key_)
-//		time_out = 3.0
 	}
 	
 	deinit {}

@@ -1,20 +1,18 @@
 //
-//  DT_ET_ViperBundle.swift
+//  DT_ET_switchBundle.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct DTSwitchRelationship: DTDeallocatableProtocol {
+internal struct DTSwitchesRelationship: DTCleanUp {
 	var
 	customer: DTCustomer?,
-	headChef: DTHeadChefProtocol?,
-	waiter: DTWaiterProtocol?
-	
+	waiter: DTWaiter?,
+	headChef: DTHeadChef?
+
 	mutating func cleanUp() {
 		customer?.removeFromParent()
-//		waiter_?.checkIn()
-		// todo see note on checkIn in DTWaiterProtocol
 		headChef?.cleanUp()
 		waiter?.cleanUp()
 		customer?.cleanUp()

@@ -41,19 +41,32 @@ public func loError ( _ args: Any... , file: String = #file, function: String = 
 
 
 
-fileprivate func _lo ( _ args: [ Any? ], file: String, function: String, line: Int ) {
-	let printableArgs = args.count > 0 ? args : [ "\( function ) ()" ]
-	// if a file name is passed, create a shortened version of it to aid logging
-	if  let lastSlash = DTString.getLastIndexOf( subString: "/", inString: file ) as Int?,
+internal func flagNonImplementation(file: String = #file, function: String = #function) {
+	lo("\(function) not implemented for \(getShortFileName(from: file))")
+}
+
+
+
+fileprivate func getShortFileName(from file: String) -> String {
+	guard  let lastSlash = DTString.getLastIndexOf( subString: "/", inString: file ) as Int?,
 		let lastDot = DTString.getLastIndexOf( subString: ".", inString: file ) as Int?,
-		let shortenedFileName = DTString.getSubStringOf( string: file, between: lastSlash + 1, and: lastDot ),
-		let fileName = DTString.set( length: 16, ofText: shortenedFileName ),
-		let shortenedLine = DTString.set( length: 4, ofText: String( line ) ),
+		let fileName = DTString.getSubStringOf( string: file, between: lastSlash + 1, and: lastDot ),
+		let shortFileName = DTString.set(length: 16, ofText: fileName)
+		else { return "unknown file" }
+	return shortFileName
+}
+
+
+
+fileprivate func _lo ( _ args: [ Any? ], file: String, function: String, line: Int ) {
+	let
+	printableArgs = args.count > 0 ? args : [ "\( function ) ()" ],
+	fileName = getShortFileName(from: file)
+	if  let shortenedLine = DTString.set( length: 4, ofText: String( line ) ),
 		let shortenedInterval = DTString.set(
 			length: 5,
 			ofText: String( DTTime.getInterval( format: DTTime.intervalFormats.withoutHoursAndMinutes ) ) ) {
 		_log( printableArgs, location: "\( fileName ) \( shortenedLine ) \( shortenedInterval )" )
-	// otherwise just log the args as-are
 	} else {
 		_log( printableArgs )
 	}

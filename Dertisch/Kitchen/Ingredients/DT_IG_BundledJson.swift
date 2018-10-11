@@ -7,6 +7,11 @@
 
 import Foundation
 
+public protocol DTBundledJsonProtocol: DTKitchenMember {
+	var settings: DTJsonSettings? { get }
+	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
+}
+
 public struct DTJsonSettings {
 	let settings: Dictionary<String, String>
 	
@@ -16,10 +21,7 @@ public struct DTJsonSettings {
 }
 
 extension DTBundledJson: DTBundledJsonProtocol {
-//	public var closet: DTKitchenCloset { return closet_ }
 	public var settings: DTJsonSettings? { return settings_ }
-	
-	public func startShift() {}
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard
@@ -29,8 +31,6 @@ extension DTBundledJson: DTBundledJsonProtocol {
 			else { return nil }
 		do {
 			let json = try JSONDecoder().decode(type.self, from: jsonData)
-//			jsons_[fileName] = json
-//			parse(json)
 			return json
 			// todo complete error catching
 		} catch DecodingError.dataCorrupted(let context) {
@@ -66,17 +66,10 @@ extension DTBundledJson: DTBundledJsonProtocol {
 }
 
 public class DTBundledJson {
-	fileprivate let orders_:DTOrders
-	
 	fileprivate var
-//	key_: DTKey!,
-//	closet_: DTKitchenCloset!,
 	settings_: DTJsonSettings?
 	
-	required public init(orders: DTOrders, kitchenStaffMembers: [String: DTKitchenProtocol]?) {
-		orders_ = orders
-//		key_ = DTKey(self)
-//		closet_ = DTKitchenCloset(self, key: key_)
+	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
 		parseSettings()
 	}
 	

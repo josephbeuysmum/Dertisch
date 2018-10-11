@@ -12,8 +12,11 @@ public struct DTCommonPhrasesConsts {
 	Added = "Added",
 	Cell = "Cell",
 	Controller = "Controller",
+	Customer = "Customer",
 	Deleted = "Deleted",
 	Loaded = "Loaded",
+	Menu = "Menu",
+//	NotImplemented = "has not been implemented for",
 	Popover = "Popover",
 	Removed = "Removed",
 	Retrieved = "Retrieved",
@@ -21,8 +24,7 @@ public struct DTCommonPhrasesConsts {
 	Set = "Set",
 	Stored = "Stored",
 	Updated = "Updated",
-	View = "View",
-	Customer = "Customer"
+	View = "View"
 
 //	Account = "Account",
 //	Accounts = "\( Account )s",

@@ -10,7 +10,7 @@ Dertisch is a lightweight framework for Swift built around **dependency injectio
 NOTICE
 ------
 
-`Dertisch` is still in beta at version `0.2`. Version `0.3` is in development and well underway, in which `DTOrders` is entirely removed in favour of extensible protocols allowing, par exemple, `DTWaiters` to pass communications between `DTCustomers` and `DTHeadChefs`, and vice versa. The use of protocols such as `DTWaiterForCustomer` and `DTWaiterForHeadChef` as a method of in-app comms are a major part of the way `Dertisch` aims to become the **swiftiest** of Swift app frameworks.
+`Dertisch` is still in beta at version `0.2`. Version `0.3` is in development and well underway, in which `DTOrders` is entirely removed in favour of extensible protocols allowing, par exemple, `DTWaiters` to pass communications between `DTCustomers` and `DTHeadChefs`, and vice versa. The use of protocols such as `DTWaiterForCustomer` and `DTWaiterForHeadChef` as a method of in-app comms via a *many hats* mentality is a major part of the way `Dertisch` aims to become the **swiftiest** of Swift app frameworks.
 
 ---
 
@@ -24,6 +24,8 @@ NOTICE
 -   `H` Head Chefs
 -   `E` Entrées
 -   `S` Sommelier
+
+As you can see, in `SWITCHES` vowels refer to food and consonants refer to people.
 
 Sous Chefs
 ----------
