@@ -98,6 +98,22 @@ public extension String {
 public extension UIColor {
 	// allows creating colors from simple hex strings
 	public convenience init? (hex: String) {
+		let permittedChars = "0123456789ABCDEF"
+		// todo this could be better
+		for char in hex.uppercased() {
+			if permittedChars.index(of: char) == nil {
+				return nil
+			}
+		}
+		let adjustedHex: String?
+		switch hex.count {
+		case 6:		adjustedHex = "\(hex)FF"
+		case 8:		adjustedHex = "\(hex)"
+		default:	adjustedHex = nil
+		}
+		guard adjustedHex != nil else {
+			return nil
+		}
 		let red, green, blue, alpha: CGFloat
 		if hex.hasPrefix("#") {
 			let start = hex.index(hex.startIndex, offsetBy: 1)
