@@ -6,12 +6,6 @@ A **Swifty** framework for Swift apps
 
 Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCHES** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift.
 
-------
-NOTICE
-------
-
-`Dertisch` is still in beta at version `0.2`. Version `0.3` is in development and well underway, in which `DTOrders` is entirely removed in favour of extensible protocols allowing, par exemple, `DTWaiters` to pass communications between `DTCustomers` and `DTHeadChefs`, and vice versa. The use of protocols such as `DTWaiterForCustomer` and `DTWaiterForHeadChef` as a method of in-app comms via a *many hats* mentality is a major part of the way `Dertisch` aims to become the **swiftiest** of Swift app frameworks.
-
 ---
 
 `SWITCHES` is a culinary metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
@@ -67,13 +61,42 @@ Sommelier
 
 The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
+----------------------
+How SWITCHES is SWIFTY
+----------------------
+
+The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a *multifacted analogical delegate* pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+
+	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTCleanUp, DTStartShiftProtocol {
+		init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
+	}
+
+	protocol DTWaiterForCustomer: DTGiveOrderProtocol {
+		var carte: DTCarte? { get }
+		var maitreD: DTMaitreD { get }
+	}
+
+	protocol DTWaiterForHeadChef {
+		mutating func serve<T>(entrees: T?)
+	}
+
+	protocol DTCleanUp {
+		mutating func cleanUp ()
+	}
+
+	protocol DTGiveOrderProtocol {
+		mutating func give(_ order: DTOrder)
+	}
+
+	public protocol DTStartShiftProtocol {
+		func startShift()
+	}
+
+When a `DTCustomer` is passed a `DTWaiter` object it is done so as a `DTWaiterForCustomer` as opposed to a fully functioning `DTWaiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
+
 ------------------------------
 How SWITCHES works in Dertisch
 ------------------------------
-
-------
-NOTICE
-------
 
 -   A customer makes an order (a user interacts with a `view`, sending a request to its `presenterModel`, which in turn passes the request to its `interactor`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
