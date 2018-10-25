@@ -259,7 +259,7 @@ There are more elements to `Dertisch` than those described above, but because no
 Developmental Roadmap
 ---------------------
 
-`Dertisch` is still in beta at version `0.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
+`Dertisch` is still in beta at version `0.3.1`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
 -   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `DTWaiter` to a `DTPresenterModel` at runtime;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
