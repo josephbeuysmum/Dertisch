@@ -42,10 +42,10 @@ public protocol DTMaitreDRegistrar {
 	func introduce(
 		_ customerId: String,
 		as customerType: DTCustomerProtocol.Type,
-		to waiterType: DTWaiter.Type,
 		with key: String,
-		assignedChef headChefType: DTHeadChef.Type?,
-		andKitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]?)
+		waiter waiterType: DTWaiter.Type?,
+		chef headChefType: DTHeadChef.Type?,
+		kitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]?)
 }
 
 extension DTMaitreD: DTMaitreDProtocol {
@@ -136,22 +136,23 @@ extension DTMaitreD: DTMaitreDProtocol {
 		injecting dependencyTypes: [DTKitchenMember.Type]? = nil) {
 		guard key == self.key else { return }
 		let kitchenClasses = getKitchenStaff(from: dependencyTypes)
-		let kitchenStaff = kitchenStaffType.init(kitchenMembers: kitchenClasses)
-		kitchenStaffSingletons[kitchenStaffType.staticId] = kitchenStaff
+		let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
+		self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
+		kitchenStaffMember.startShift()
 	}
 	
 	public func introduce(
 		_ customerId: String,
 		as customerType: DTCustomerProtocol.Type,
-		to waiterType: DTWaiter.Type,
 		with key: String,
-		assignedChef headChefType: DTHeadChef.Type? = nil,
-		andKitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]? = nil) {
+		waiter waiterType: DTWaiter.Type? = nil,
+		chef headChefType: DTHeadChef.Type? = nil,
+		kitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]? = nil) {
 		guard
-			switchRelationships[customerId] == nil,
+			switchesRelationships[customerId] == nil,
 			key == self.key
 			else { return }
-		switchRelationships[customerId] = DTInternalSwitchRelationship(
+		switchesRelationships[customerId] = DTInternalSwitchRelationship(
 			customerType: customerType,
 			waiterType: waiterType,
 			headChefType: headChefType,
@@ -183,32 +184,32 @@ extension DTMaitreD: DTMaitreDProtocol {
 		default:			()
 		}
 		currentCustomer.present(customer, animated: animated!) {
+			// todo maybe don't do this?
 			currentCustomer.removeFromParent()
 		}
 		customerRelationship?.cleanUp()
 		customerRelationship = switchBundle
 	}
 	
-
+	
 	
 	fileprivate func createBundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchesRelationship? {
 		guard
-			let switchRelationship = switchRelationships[customerId],
-			let customer = UIStoryboard(name: get_(storyboard), bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
+			let switchesRelationship = switchesRelationships[customerId],
+			let customer = UIStoryboard(
+				name: storyboard ?? "Main",
+				bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
 			else { return nil }
-		let
-		waiter = switchRelationship.waiterType.init(maitreD: self, customer: customer),
-		headChef = switchRelationship.headChefType != nil ?
-			switchRelationship.headChefType!.init(
-				waiter: waiter,
-				sousChefs: getKitchenStaff(from: switchRelationship.kitchenStaffTypes)) :
-			nil
+		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
+		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
+		let waiter = switchesRelationship.waiterType != nil ?
+			switchesRelationship.waiterType!.init(customer: customer, maitreD: self, headChef: headChef) :
+			GeneralWaiter(customer: customer, maitreD: self, headChef: headChef)
+		headChef?.waiter = waiter
 		customer.assign(waiter, and: sommelier)
+		waiter.startShift()
+		headChef?.startShift()
 		return DTSwitchesRelationship(customer: customer, waiter: waiter, headChef: headChef)
-	}
-	
-	fileprivate func get_(_ storyboard: String?) -> String {
-		return storyboard ?? "Main"
 	}
 	
 	fileprivate func getKitchenStaff(from dependencyTypes: [DTKitchenMember.Type]?) -> [String: DTKitchenMember]? {
@@ -216,7 +217,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		var kitchenStaff: [String: DTKitchenMember] = [:]
 		for dependencyType in dependencyTypes! {
 			let dependencyId = dependencyType.staticId
-			if let dependencyClass = kitchenStaffSingletons[dependencyId] {
+			if let dependencyClass = self.kitchenStaff[dependencyId] {
 				kitchenStaff[dependencyId] = dependencyClass
 			}
 		}
@@ -230,18 +231,18 @@ public class DTMaitreD {
 	sommelier: DTSommelier
 	
 	fileprivate var
-	kitchenStaffSingletons: Dictionary<String, DTKitchenMember>,
-	switchRelationships: Dictionary<String, DTInternalSwitchRelationship>,
+	kitchenStaff: Dictionary<String, DTKitchenMember>,
+	switchesRelationships: Dictionary<String, DTInternalSwitchRelationship>,
 	window: UIWindow!,
 	customerRelationship: DTSwitchesRelationship?,
 	sideCustomerRelationship: DTSwitchesRelationship?
 
 	required public init() {
 		key = NSUUID().uuidString
-		switchRelationships = [:]
-		kitchenStaffSingletons = [:]
+		switchesRelationships = [:]
+		kitchenStaff = [:]
 		let bundledJson = DTBundledJson()
-		kitchenStaffSingletons[DTBundledJson.staticId] = bundledJson
+		kitchenStaff[DTBundledJson.staticId] = bundledJson
 		sommelier = DTSommelier(bundledJson: bundledJson)
 	}
 }

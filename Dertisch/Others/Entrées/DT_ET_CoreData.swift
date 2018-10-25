@@ -66,7 +66,6 @@ public struct DTCDEntity: DTCDEntityProtocol {
 		types_ = types
 	}
 	
-//	mutating public func add (_ attribute: DTCDAttribute) {
 	mutating public func add(_ attribute: DTStorableDataType, by key: String) -> Bool {
 		guard
 			let type = types_[key],
@@ -85,4 +84,3 @@ fileprivate func assessValidity(of attribute: DTStorableDataType, by type: DTCDT
 		}
 	}
 }
-

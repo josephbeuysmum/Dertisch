@@ -8,10 +8,20 @@
 
 import Foundation
 
-public extension DTHeadChef {
-	public var instanceDescriptor: String { return String(describing: self) }
+public protocol DTHeadChefForKitchenMember {
+	func hand(_ dish: DTDish)
 }
 
-public protocol DTHeadChef: DTCleanUp {//: DTSwitchClassProtocol {
-	init(waiter: DTWaiterForHeadChef, sousChefs: [String: DTKitchenMember]?)
+public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
+	
+public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTCleanUp, DTStartShiftProtocol {
+	init(_ sousChefs: [String: DTKitchenMember]?)
+	var waiter: DTWaiterForHeadChef? { get set }
+}
+
+public extension DTHeadChef {
+	//	public var instanceDescriptor: String { return String(describing: self) }
+	public mutating func give(_ order: DTOrder) { flagNonImplementation() }
+	public func hand(_ dish: DTDish) { flagNonImplementation() }
+	public func startShift() { flagNonImplementation() }
 }

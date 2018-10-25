@@ -9,20 +9,34 @@
 //import Dertisch
 
 class GeneralWaiter: DTWaiter {
-	let
-	maitreD: DTMaitreD,
-	customer: DTCustomerForWaiter
+	var carte: DTCarte? { return nil }
 	
-	required init(maitreD: DTMaitreD, customer: DTCustomerForWaiter) {
-		self.maitreD = maitreD
+	let
+	customer: DTCustomerForWaiter,
+	maitreD: DTMaitreD
+	
+	fileprivate var headChef: DTHeadChefForWaiter?
+	
+//	required init(maitreD: DTMaitreD, customer: DTCustomerForWaiter) {
+	required init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter? = nil) {
 		self.customer = customer
+		self.maitreD = maitreD
+		self.headChef = headChef
 	}
+	
+	public func giveOrder<T>(of order: T?) {}
+	public func serve<T>(entrees: T?) {}
+	public func startShift() {}
 }
 
-public protocol DTWaiterForCustomer {
+public protocol DTCarte {
+	init<T>(_ value: T)
+}
+
+public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
+	var carte: DTCarte? { get }
 	// todo should customers *really* access the maitre d directly through their waiters?
 	var maitreD: DTMaitreD { get }
-//	mutating func order<T>(_ entrées: T?)
 }
 
 //public protocol DTWaiterForTableCustomer {
@@ -30,15 +44,16 @@ public protocol DTWaiterForCustomer {
 //}
 
 public protocol DTWaiterForHeadChef {//: DTServeCustomerProtocol {
-	mutating func serve<T>(entrées: T?)
+	mutating func serve<T>(entrees: T?)
 }
 
-public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTCleanUp {
-	init(maitreD: DTMaitreD, customer: DTCustomerForWaiter)
+public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTCleanUp, DTStartShiftProtocol {
+	init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
 }
 
 public extension DTWaiter {
 	public func cleanUp() { flagNonImplementation() }
-//	public func order<T>(_ entrées: T?) { flagNonImplementation() }
-	public func serve<T>(entrées: T?) { flagNonImplementation() }
+	public func give(_ order: DTOrder) { flagNonImplementation() }
+	public func serve<T>(entrees: T?) { flagNonImplementation() }
+	public func startShift() { flagNonImplementation() }
 }

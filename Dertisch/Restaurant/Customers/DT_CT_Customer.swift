@@ -10,7 +10,7 @@ import UIKit
 
 public protocol DTCustomerForWaiter {
 	func approach()
-	func order()
+	func attemptOrder()
 }
 
 public protocol DTCustomerProtocol: class, DTCustomerForWaiter {
@@ -21,9 +21,13 @@ open class DTCustomer: UIViewController {
 	// these can only be overridden if they are in as opposed to the extension below
 	open func cleanUp() { flagNonImplementation() }
 	open func assign(_ waiter: DTWaiterForCustomer, and sommelier: DTSommelier) { flagNonImplementation() }
-	open func order() { flagNonImplementation() }
+	open func attemptOrder() { flagNonImplementation() }
+	override open func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		attemptOrder()
+	}
 }
 
 extension DTCustomer: DTCustomerProtocol {
-	public final func approach() { order() }
+	public final func approach() { attemptOrder() }
 }

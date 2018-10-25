@@ -13,6 +13,27 @@ public protocol DTImagesProtocol: DTKitchenMember {
 	func loadImage(by url: String)
 }
 
+public class DTImages {
+	public var headChef: DTHeadChefForKitchenMember?
+	
+	// todo forced unwraps for url_session and key is unacceptable, revisit this
+	fileprivate let key: String
+	
+	fileprivate var
+	urlsResolving: [String],
+	raw_images: Dictionary<String, Data>,
+	url_session: DTUrlSession!
+	
+	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+		key = NSUUID().uuidString
+		url_session = kitchenStaff?[DTUrlSession.staticId] as? DTUrlSession
+		urlsResolving = []
+		raw_images = [:]
+	}
+	
+	deinit {}
+}
+
 extension DTImages: DTImagesProtocol {
 	public func getImage(by url: String, callback:((String, Any?) -> Void )? = nil) -> UIImage? {
 		let image = getLocalImage( by: url )
@@ -56,23 +77,4 @@ extension DTImages: DTImagesProtocol {
 	}
 	
 	fileprivate func getUrlKey(by url: String) -> String { return "\(key)_\(url)" }
-}
-
-public class DTImages {
-	// todo forced unwraps for url_session and key is unacceptable, revisit this
-	fileprivate let key: String
-
-	fileprivate var
-	urlsResolving: [String],
-	raw_images: Dictionary<String, Data>,
-	url_session: DTUrlSession!
-
-	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
-		key = NSUUID().uuidString
-		url_session = kitchenMembers?[DTUrlSession.staticId] as? DTUrlSession
-		urlsResolving = []
-		raw_images = [:]
-	}
-	
-	deinit {}
 }

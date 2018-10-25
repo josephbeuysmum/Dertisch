@@ -12,11 +12,33 @@ public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
 public protocol DTCoreDataProtocol: DTKitchenMember {
 	var dataModelName: String? { get set }
-	func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback)
-	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback)
+	func delete(_ entityName: String, _ callback: @escaping DTCDDeletionCallback)
+	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback)
 	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDCallback)
 	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback)
 	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDCallback)
+}
+
+public class DTCoreData {
+	public var headChef: DTHeadChefForKitchenMember?
+	
+	lazy var persistentContainer: NSPersistentContainer? = {
+		guard let dmn = dataModelName else {
+			loWarning("DTCoreData dataModelName is nil")
+			return nil
+		}
+		let container = NSPersistentContainer(name: dmn)
+		container.loadPersistentStores { _, error in
+			guard error == nil else { fatalError(" Core Data error: \(error!)") }
+		}
+		return container
+	}()
+	
+	fileprivate var data_model_name: String?
+	
+	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {}
+	
+	deinit {}
 }
 
 extension DTCoreData: DTCoreDataProtocol {
@@ -28,7 +50,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func delete(entityName: String, _ callback: @escaping DTCDDeletionCallback) {
+	public func delete(_ entityName: String, _ callback: @escaping DTCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -41,7 +63,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback) {
+	public func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -69,12 +91,12 @@ extension DTCoreData: DTCoreDataProtocol {
 	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping DTCDCallback) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-		if let scopedPredicate = predicate {
-			fetchRequest.predicate = NSPredicate(format: scopedPredicate)
+		if let predicate = predicate {
+			fetchRequest.predicate = NSPredicate(format: predicate)
 		}
 		let asyncFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { asyncFetchResult in
 			guard let result = asyncFetchResult.finalResult as? [NSManagedObject] else { return }
-			DispatchQueue	.main.async {
+			DispatchQueue.main.async {
 				// create queue-safe array on the main thread
 				var safeManagedObjects = [NSManagedObject]()
 				for managedObject in result {
@@ -82,9 +104,6 @@ extension DTCoreData: DTCoreDataProtocol {
 					safeManagedObjects.append(safeManagedObject)
 				}
 				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
-//				self.worn_closet.getSignals(by: self.key_.teeth)?.transmitSignal(
-//					by: self.getSignalKey(by: entityName, and: DTCDOperationTypes.retrieve),
-//					with: safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
 		}
 		do { try privateContext.execute(asyncFetchRequest)
@@ -94,16 +113,22 @@ extension DTCoreData: DTCoreDataProtocol {
 	}
 	
 	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback) {
-		var managedEntity: NSManagedObject?
 		persistentContainer?.performBackgroundTask { privateContext in
-			managedEntity = NSEntityDescription.insertNewObject( forEntityName: entity.name, into: privateContext )
+			let managedEntity = NSEntityDescription.insertNewObject(forEntityName: entity.name, into: privateContext)
+			var
+			predicate = "",
+			predicateSection: String
 			for (key, value) in entity.attributes {
-				managedEntity?.setValue(value, forKey: key)
+				predicateSection = "\(key) == \(value)"
+				predicate = predicate.count == 0 ? predicateSection : "\(predicate) && \(predicateSection)"
+				managedEntity.setValue(value, forKey: key)
 			}
 			do {
 				try privateContext.save()
 				DispatchQueue.main.async {
-					callback(managedEntity != nil ? [managedEntity!] : nil)
+					self.retrieve(entity.name, by: predicate) { managedObjects in
+						callback(managedObjects)
+					}
 				}
 			} catch {
 				fatalError("Failure to save context: \(error)")
@@ -137,24 +162,4 @@ extension DTCoreData: DTCoreDataProtocol {
 			}
 		}
 	}
-}
-
-public class DTCoreData {
-	lazy var persistentContainer: NSPersistentContainer? = {
-		guard let dmn = dataModelName else {
-			loWarning("DTCoreData dataModelName is nil")
-			return nil
-		}
-		let container = NSPersistentContainer(name: dmn)
-		container.loadPersistentStores { _, error in
-			guard error == nil else { fatalError(" Core Data error: \(error!)") }
-		}
-		return container
-	}()
-	
-	fileprivate var data_model_name: String?
-
-	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {}
-	
-	deinit {}
 }

@@ -16,6 +16,18 @@ public protocol DTUrlSessionProtocol: DTKitchenMember {
 		callback: ( ( String, Any? ) -> Void )? )
 }
 
+public class DTUrlSession {
+	public var headChef: DTHeadChefForKitchenMember?
+	
+	fileprivate var ongoing_calls: [ String ]
+	
+	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+		ongoing_calls = []
+	}
+	
+	deinit {}
+}
+
 extension DTUrlSession: DTUrlSessionProtocol {
 	public enum methods: String { case GET, POST, DELETE }
 	
@@ -93,14 +105,4 @@ extension DTUrlSession: DTUrlSessionProtocol {
 //	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
 //		orders_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
 //	}
-}
-
-public class DTUrlSession {
-	fileprivate var ongoing_calls: [ String ]
-	
-	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
-		ongoing_calls = []
-	}
-	
-	deinit {}
 }

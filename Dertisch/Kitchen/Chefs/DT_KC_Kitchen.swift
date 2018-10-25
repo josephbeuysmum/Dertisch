@@ -6,12 +6,14 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public extension DTKitchenMember {
-	public var instanceDescriptor: String { return String(describing: self) }
-	static public var staticId: String { return String(describing: self) }
-	public mutating func cleanUp() {}
+public protocol DTKitchenMember: DTCleanUp, DTStartShiftProtocol {
+	init(_ kitchenStaff: [String: DTKitchenMember]?)
+	var headChef: DTHeadChefForKitchenMember? { get set }
 }
 
-public protocol DTKitchenMember: DTCleanUp {//}: DTSwitchClassProtocol {
-	init(kitchenMembers: [String: DTKitchenMember]?)
+public extension DTKitchenMember {
+//	public var instanceDescriptor: String { return String(describing: self) }
+	static public var staticId: String { return String(describing: self) }
+	public mutating func cleanUp() {}
+	public func startShift() {}
 }

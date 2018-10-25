@@ -15,25 +15,35 @@ public protocol DTTemporaryValuesProtocol: DTKitchenMember {
 	func removeValues ()
 }
 
+public class DTTemporaryValues {
+	public var headChef: DTHeadChefForKitchenMember?
+	
+	fileprivate var values: Dictionary<String, DTStorableDataType>
+	
+	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+		values = [:]
+	}
+}
+
 extension DTTemporaryValues: DTTemporaryValuesProtocol {
 	public func getValue(by key: String, andAnnul: Bool? = false) -> DTStorableDataType? {
-		guard let value = values_[key] else { return nil }
+		guard let value = values[key] else { return nil }
 		if andAnnul! { annulValue(by: key) }
 		return value
 	}
 	
 	// todo use DTStorableDataType protocol (or something damned similar) to make value more flexible than just String
 	public func set(_ value: DTStorableDataType, by key: String) {
-		values_[key] = value
+		values[key] = value
 	}
 	
 	public func annulValue(by key: String) {
-		guard values_[key] != nil else { return }
-		values_.removeValue(forKey: key)
+		guard values[key] != nil else { return }
+		values.removeValue(forKey: key)
 	}
 	
 	public func removeValues() {
-		for (key, _) in values_ { _ = annulValue(by: key) }
+		for (key, _) in values { _ = annulValue(by: key) }
 	}
 	
 //	public func deleteValue ( by key: String ) {
@@ -56,15 +66,4 @@ extension DTTemporaryValues: DTTemporaryValuesProtocol {
 //		orders.transmitSignalFor( key: signalKey )
 //	}
 
-}
-
-public class DTTemporaryValues {
-	fileprivate var
-	values_: Dictionary<String, DTStorableDataType>
-
-	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
-		values_ = [:]
-	}
-	
-	deinit {}
 }

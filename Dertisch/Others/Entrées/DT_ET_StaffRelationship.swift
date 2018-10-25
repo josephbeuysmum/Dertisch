@@ -9,7 +9,7 @@
 internal struct DTInternalSwitchRelationship {
 	let
 	customerType: DTCustomerProtocol.Type,
-	waiterType: DTWaiter.Type,
+	waiterType: DTWaiter.Type?,
 	headChefType: DTHeadChef.Type?,
 	kitchenStaffTypes: [DTKitchenMember.Type]?
 }

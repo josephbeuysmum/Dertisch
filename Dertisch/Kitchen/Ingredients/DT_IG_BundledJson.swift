@@ -12,12 +12,22 @@ public protocol DTBundledJsonProtocol: DTKitchenMember {
 	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
-public struct DTJsonSettings {
-	let settings: Dictionary<String, String>
+public class DTBundledJson {
+	public var headChef: DTHeadChefForKitchenMember?
 	
-	public subscript(key: String) -> String? {
-		get { return settings[key] }
+	fileprivate var
+	settings_: DTJsonSettings?
+	
+	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+		parseSettings()
 	}
+	
+	deinit {}
+}
+
+fileprivate struct DTPrivateSetting: Decodable {
+	let key: String
+	let value: String
 }
 
 extension DTBundledJson: DTBundledJsonProtocol {
@@ -65,15 +75,12 @@ extension DTBundledJson: DTBundledJsonProtocol {
 	}
 }
 
-public class DTBundledJson {
-	fileprivate var
-	settings_: DTJsonSettings?
+public struct DTJsonSettings {
+	let settings: Dictionary<String, String>
 	
-	required public init(kitchenMembers: [String: DTKitchenMember]? = nil) {
-		parseSettings()
+	public subscript(key: String) -> String? {
+		get { return settings[key] }
 	}
-	
-	deinit {}
 }
 
 fileprivate struct DTPrivateSettings: Decodable {
@@ -84,7 +91,3 @@ fileprivate struct DTPrivateSettings: Decodable {
 	}
 }
 
-fileprivate struct DTPrivateSetting: Decodable {
-	let key: String
-	let value: String
-}

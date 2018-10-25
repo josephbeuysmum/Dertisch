@@ -42,7 +42,7 @@ public func loError(_ args: Any... , file: String = #file, function: String = #f
 
 
 internal func flagNonImplementation(file: String = #file, function: String = #function) {
-	lo("\(function) not implemented for \(getShortFileName(from: file))")
+//	lo("\(function) not implemented for \(getShortFileName(from: file))")
 }
 
 
