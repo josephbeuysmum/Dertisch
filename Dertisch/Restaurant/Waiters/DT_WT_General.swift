@@ -47,12 +47,12 @@ public protocol DTWaiterForHeadChef {//: DTServeCustomerProtocol {
 	mutating func serve<T>(entrees: T?)
 }
 
-public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTCleanUp, DTStartShiftProtocol {
+public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTStartShiftProtocol, DTEndShiftProtocol {
 	init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
 }
 
 public extension DTWaiter {
-	public func cleanUp() { flagNonImplementation() }
+	public func endShift() { flagNonImplementation() }
 	public func give(_ order: DTOrder) { flagNonImplementation() }
 	public func serve<T>(entrees: T?) { flagNonImplementation() }
 	public func startShift() { flagNonImplementation() }

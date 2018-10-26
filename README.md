@@ -8,7 +8,7 @@ Dertisch is a lightweight framework for Swift built around **dependency injectio
 
 ---
 
-`SWITCHES` is a culinary metaphorical acronym designed to explain `Dertisch`'s hybrid nature.
+`SWITCHES` is a culinary analogical acronym designed to explain `Dertisch`'s hybrid nature.
 
 -   `S` Sous Chefs
 -   `W` Waiters
@@ -61,13 +61,13 @@ Sommelier
 
 The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
-----------------------
-How SWITCHES is SWIFTY
-----------------------
+------------------------
+How SWITCHES is 'swifty'
+------------------------
 
 The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a *multifacted analogical delegate* pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
-	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTCleanUp, DTStartShiftProtocol {
+	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTStartShiftProtocol, DTEndShiftProtocol {
 		init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
 	}
 
@@ -80,16 +80,16 @@ The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which 
 		mutating func serve<T>(entrees: T?)
 	}
 
-	protocol DTCleanUp {
-		mutating func cleanUp ()
-	}
-
 	protocol DTGiveOrderProtocol {
 		mutating func give(_ order: DTOrder)
 	}
 
 	public protocol DTStartShiftProtocol {
 		func startShift()
+	}
+
+	protocol DTEndShiftProtocol {
+		mutating func endShift ()
 	}
 
 When a `DTCustomer` is passed a `DTWaiter` object it is done so as a `DTWaiterForCustomer` as opposed to a fully functioning `DTWaiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
@@ -162,7 +162,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `DTTemporaryValues` injected have *the same instance* of `DTTemporaryValues` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `DTTemporaryValues` elsewhere.
 
-`DTMaitreD` is responsible for starting `Dertisch` apps; `DTSommelier` is a mandatory requirement for all `Dertisch` view controllers; and `DTSommelier` relies upon `DTBundledJson`, so these three are instantiated by default. The others are instantiated on a need-to-use basis.
+`DTMaitreD` is responsible for starting `Dertisch` apps; `DTSommelier` is a mandatory requirement for all `Dertisch` view controllers; and `DTSommelier` depends upon `DTBundledJson`, so these three are instantiated by default. The others are instantiated on a need-to-use basis.
 
 Start your `Dertisch` app by calling `DTMaitreD.greet(firstCustomer:)` from `AppDelegate`:
 
@@ -201,7 +201,7 @@ Start your `Dertisch` app by calling `DTMaitreD.greet(firstCustomer:)` from `App
 		}
 	}
 
-In the above example, because `DTTemporaryValues` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality (it would make more sense to simply delete this line, but it is included here to demonstrate how they would be used if they were needed).
+In the above example, because `DTTemporaryValues` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality (it would make more sense to simply delete this line, but it is included here to demonstrate how they would be used if it was needed).
 
 `Dertisch` kitchen classes can have other kitchen classes injected into them. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
@@ -211,33 +211,39 @@ The second `introduce(...)` function above shows the example of a view controlle
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
-	class SomeSousChef: DTSousChefProtocol {
+	class SomeSousChef: DTKitchenMember {
 		required init(_ kitchenStaff: [String: DTKitchenMember]?) {}
+		var headChef: DTHeadChefForKitchenMember?
+	}
+
+`DTKitchenMember` defines the two additional properties that `SomeSousChef` must conform to (in addition to the optional methods `startShift()` and `endShift()` defined in `DTStartShiftProtocol` and `DTEndShiftProtocol` respectively)
+
+	public protocol DTKitchenMember: DTStartShiftProtocol, DTEndShiftProtocol {
+		init(_ kitchenStaff: [String: DTKitchenMember]?)
+		var headChef: DTHeadChefForKitchenMember? { get set }
 	}
 
 Sous chefs, head chefs, and waiters can all be either `classes` or `structs`. So a boilerplate `Dertisch` Head Chef could look like this:
 
 	class SomeHeadChef: DTHeadChef {
-		var waiter: DTWaiterForHeadChef?
-
 		required init(_ sousChefs: [String: DTKitchenMember]?) {}
+		var waiter: DTWaiterForHeadChef?
 	}
 
-or like this:
+Or like this:
 
 	struct SomeHeadChef: DTHeadChef {
-		var waiter: DTWaiterForHeadChef?
-
 		required init(_ sousChefs: [String: DTKitchenMember]?) {}
+		var waiter: DTWaiterForHeadChef?
 	}
 
-And a boilerplate `Dertisch` Waiter looks like this:
+A boilerplate `Dertisch` Waiter looks like this:
 
 	class/struct SomeWaiter: DTWaiter {
 		required init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?) {}
 	}
 
-A boilerplate `Dertisch` Customer looks like this:
+And finally, a boilerplate `Dertisch` Customer looks like this:
 
 	class SomeCustomer: DTCustomer {
 		override func assign(_ waiter: DTWaiterForCustomer, and sommelier: DTSommelier) {}
@@ -268,7 +274,7 @@ Developmental Roadmap
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
--	replace `cleanUp()` functions with weak vars etc;
+-	replace `endShift()` functions with weak vars etc?;
 -	force `DTCoreData` to take `dataModelName` at start up;
 -	reintroduce timeout stopwatch to `DTUrlSession`;
 -	complete list of MIME types in `DTUrlSession`;

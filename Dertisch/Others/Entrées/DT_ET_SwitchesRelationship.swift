@@ -5,13 +5,13 @@
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct DTSwitchesRelationship: DTCleanUp {
+internal struct DTSwitchesRelationship: DTEndShiftProtocol {
 	var
 	customer: DTCustomer?,
 	waiter: DTWaiter?,
 	headChef: DTHeadChef?
 
-	mutating func cleanUp() {
+	mutating func endShift() {
 		customer?.removeFromParent()
 		headChef?.cleanUp()
 		waiter?.cleanUp()

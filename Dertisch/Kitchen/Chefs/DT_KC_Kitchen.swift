@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol DTKitchenMember: DTCleanUp, DTStartShiftProtocol {
+public protocol DTKitchenMember: DTStartShiftProtocol, DTEndShiftProtocol {
 	init(_ kitchenStaff: [String: DTKitchenMember]?)
 	var headChef: DTHeadChefForKitchenMember? { get set }
 }
@@ -14,6 +14,6 @@ public protocol DTKitchenMember: DTCleanUp, DTStartShiftProtocol {
 public extension DTKitchenMember {
 //	public var instanceDescriptor: String { return String(describing: self) }
 	static public var staticId: String { return String(describing: self) }
-	public mutating func cleanUp() {}
+	public mutating func endShift() {}
 	public func startShift() {}
 }

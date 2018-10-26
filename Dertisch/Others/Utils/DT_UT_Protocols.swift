@@ -7,8 +7,8 @@
 //
 
 // todo cleanUp in a better way, with weak vars etc
-public protocol DTCleanUp {
-	mutating func cleanUp ()
+public protocol DTEndShiftProtocol {
+	mutating func endShift ()
 }
 
 public protocol DTDescribableProtocol {

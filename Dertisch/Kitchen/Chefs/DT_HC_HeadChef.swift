@@ -14,7 +14,7 @@ public protocol DTHeadChefForKitchenMember {
 
 public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
 	
-public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTCleanUp, DTStartShiftProtocol {
+public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTStartShiftProtocol, DTEndShiftProtocol {
 	init(_ sousChefs: [String: DTKitchenMember]?)
 	var waiter: DTWaiterForHeadChef? { get set }
 }

@@ -19,7 +19,7 @@ public protocol DTCustomerProtocol: class, DTCustomerForWaiter {
 
 open class DTCustomer: UIViewController {
 	// these can only be overridden if they are in as opposed to the extension below
-	open func cleanUp() { flagNonImplementation() }
+	open func endShift() { flagNonImplementation() }
 	open func assign(_ waiter: DTWaiterForCustomer, and sommelier: DTSommelier) { flagNonImplementation() }
 	open func attemptOrder() { flagNonImplementation() }
 	override open func viewDidAppear(_ animated: Bool) {

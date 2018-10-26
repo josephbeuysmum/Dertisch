@@ -14,7 +14,7 @@
 //		orders_ = orders
 //	}
 //	
-//	public func cleanUp() {}
+//	public func endShift() {}
 //}
 //
 //open class DTPageCustomer: UIPageViewController {
