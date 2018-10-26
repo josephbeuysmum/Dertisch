@@ -94,8 +94,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func dismissPopover() {
 		guard hasPopover else { return }
+		// todo sideCustomerRelationship is a weird name, change it
 		sideCustomerRelationship!.customer?.dismiss(animated: true) {
-			self.sideCustomerRelationship!.cleanUp()
+			self.sideCustomerRelationship!.endShift()
 			self.sideCustomerRelationship = nil
 //			self.orders_.make(order: DTOrderConsts.popoverRemoved)
 		}
@@ -187,7 +188,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			// todo maybe don't do this?
 			currentCustomer.removeFromParent()
 		}
-		customerRelationship?.cleanUp()
+		customerRelationship?.endShift()
 		customerRelationship = switchBundle
 	}
 	
