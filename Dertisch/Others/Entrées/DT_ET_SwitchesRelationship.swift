@@ -13,9 +13,9 @@ internal struct DTSwitchesRelationship: DTEndShiftProtocol {
 
 	mutating func endShift() {
 		customer?.removeFromParent()
-		headChef?.cleanUp()
-		waiter?.cleanUp()
-		customer?.cleanUp()
+		headChef?.endShift()
+		waiter?.endShift()
+		customer?.endShift()
 		headChef = nil
 		waiter = nil
 		customer = nil
