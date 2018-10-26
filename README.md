@@ -62,10 +62,10 @@ Sommelier
 The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
 ------------------------
-How SWITCHES is 'swifty'
+How SWITCHES is *swifty*
 ------------------------
 
-The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a *multifacted analogical delegate* pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a **multifacted analogical delegate** pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
 	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTStartShiftProtocol, DTEndShiftProtocol {
 		init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
@@ -216,7 +216,7 @@ The above code example features the two model classes `SomeSousChef` and `SomeIn
 		var headChef: DTHeadChefForKitchenMember?
 	}
 
-`DTKitchenMember` defines the two additional properties that `SomeSousChef` must conform to (in addition to the optional methods `startShift()` and `endShift()` defined in `DTStartShiftProtocol` and `DTEndShiftProtocol` respectively)
+`DTKitchenMember` defines the two additional properties that `SomeSousChef` must conform to (in addition to the optional functions `startShift()` and `endShift()` defined in `DTStartShiftProtocol` and `DTEndShiftProtocol` respectively)
 
 	public protocol DTKitchenMember: DTStartShiftProtocol, DTEndShiftProtocol {
 		init(_ kitchenStaff: [String: DTKitchenMember]?)
