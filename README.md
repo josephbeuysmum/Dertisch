@@ -1,5 +1,4 @@
 Dertisch
-
 ===
 
 A **Swifty** MVP framework for Swift apps
