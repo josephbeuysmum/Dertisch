@@ -1,10 +1,10 @@
 Dertisch
 ========
 
-A **Swifty** framework for Swift apps
--------------------------------------
+A **Swifty** MVP framework for Swift apps
+---
 
-Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead a **SWITCHES** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift.
+Dertisch is a lightweight framework for Swift built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift by way of its **SWITCHES** analogy.
 
 ---
 
@@ -19,25 +19,23 @@ Dertisch is a lightweight framework for Swift built around **dependency injectio
 -   `E` Entrées
 -   `S` Sommelier
 
-As you can see, in `SWITCHES` vowels refer to food and consonants to people.
-
 Sous Chefs
-----------
+---
 
 The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
 
 Waiters
--------
+---
 
 The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by head chefs in order to populate and control views.
 
 Ingredients
------------
+---
 
 The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
 
 The Maitre D
-------------
+---
 
 The head waiter. The Maitre D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
 
@@ -61,9 +59,9 @@ Sommelier
 
 The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
-------------------------
-How SWITCHES is *swifty*
-------------------------
+---
+How SWITCHES is "swifty"
+---
 
 The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a **multifacted analogical delegate** pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
