@@ -1,5 +1,5 @@
 Dertisch
-========
+===
 
 A **Swifty** MVP framework for Swift apps
 ---
@@ -27,7 +27,7 @@ The second-in-command chefs who take the ingredients and combine them into dishe
 Waiters
 ---
 
-The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo `presenterModels` - which are given data by head chefs in order to populate and control views.
+The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo MVP `presenters` - which are given data by head chefs in order to populate and control views.
 
 Ingredients
 ---
@@ -40,22 +40,22 @@ The Maitre D
 The head waiter. The Maitre D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
 
 Customers
----------
+---
 
 The people ordering the food. Customers are classically `views` and/or `viewControllers`, the screens the user sees.
 
 Head Chefs
-----------
+---
 
 The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
 
 Entrées
-----------
+---
 
 The dishes customers start with. Entrées are classically VIPER `entities`, which are simple data objects.
 
 Sommelier
----------
+---
 
 The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
@@ -92,15 +92,15 @@ The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which 
 
 When a `DTCustomer` is passed a `DTWaiter` object it is done so as a `DTWaiterForCustomer` as opposed to a fully functioning `DTWaiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
 
-------------------------------
+---
 How SWITCHES works in Dertisch
-------------------------------
+---
 
--   A customer makes an order (a user interacts with a `view`, sending a request to its `presenterModel`, which in turn passes the request to its `interactor`);
+-   A customer makes an order (a user interacts with a `view`, sending a request to its `presenter`, which in turn passes the request to its `interactor`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
--   the head chef gives the dishes to the waiter, who approaches the customer (the `interactor` calls its `presenterModel` with data, which it stores before informing the `view` that there is new data available);
--   the waiter and the sommelier serve the customer (the `view` populates itself via its `presenterModel` and its `textProxy`); and
+-   the head chef gives the dishes to the waiter, who approaches the customer (the `interactor` calls its `presenter` with data, which it stores before informing the `view` that there is new data available);
+-   the waiter and the sommelier serve the customer (the `view` populates itself via its `presenter` and its `textProxy`); and
 -   the table is laid with dishes (the `view` updates in accordance with the original interaction of the user).
 
 Dertisch is designed to provide the functionality common to most apps, which specifically (at present) means the following.
@@ -121,9 +121,9 @@ And on the View side:
 
 Head Chefs work by implementing the `DTHeadChef` protocol; waiters by implementing the `DTWaiter` protocol; and customers by subclassing `DTCustomer`.
 
----------------
+---
 Using Dertisch
----------------
+---
 
 Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with five in-built `kitchen` classes, and two in-built `restaurant` classes serving functionality common to all apps:
 
@@ -203,7 +203,7 @@ In the above example, because `DTTemporaryValues` is commented out, injectable i
 
 `Dertisch` kitchen classes can have other kitchen classes injected into them. For instance, in the code example above `DTImages` has `DTUrlSession` injected as it depends upon it to load external images.
 
-In the first `introduce(...)` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenterModel <- interactor` relationship. `kitchenStaff` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
+In the first `introduce(...)` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenter <- interactor` relationship. `kitchenStaff` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
 
 The second `introduce(...)` function above shows the example of a view controller that has no need of a waiter or a head chef, meaning this is a simple page with no dependence on data.
 
@@ -249,9 +249,9 @@ And finally, a boilerplate `Dertisch` Customer looks like this:
 
 Customers are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` customer being required to extend the `DTCustomer` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
 
----------------------
+---
 Indepth Documentation
----------------------
+---
 
 There are more elements to `Dertisch` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
 
@@ -259,13 +259,13 @@ There are more elements to `Dertisch` than those described above, but because no
 
 -   Project settings [main target] > General > Deployment Info > Main Interface [leave empty]
 
----------------------
+---
 Developmental Roadmap
----------------------
+---
 
 `Dertisch` is still in beta at version `0.3.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
--   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `DTWaiter` to a `DTPresenterModel` at runtime;
+-   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `DTWaiter` to a `DTpresenter` at runtime;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -	make utils functions native class extensions instead;
 -	move optional `DTKitchenMembers` into their own repos to minimise the footprint of the core framework;
@@ -279,9 +279,9 @@ Developmental Roadmap
 -	create example boilerplate app;
 -   remove fatal errors.
 
------------------------
+---
 On the name "Dertisch"
------------------------
+---
 
 In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" extremely well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
