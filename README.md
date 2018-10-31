@@ -13,7 +13,7 @@ Dertisch is a lightweight framework for Swift built around **dependency injectio
 -   `S` Sous Chefs
 -   `W` Waiters
 -   `I` Ingredients
--   `T` The Maitre D
+-   `T` The Maître D
 -   `C` Customers
 -   `H` Head Chefs
 -   `E` Entrées
@@ -34,10 +34,10 @@ Ingredients
 
 The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
 
-The Maitre D
+The Maître D
 ---
 
-The head waiter. The Maitre D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
+The head waiter. The Maître D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
 
 Customers
 ---
@@ -152,7 +152,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 	DTMaitreD
 	// manages the addition and removal of Customers and their relationships with Head Chefs and Waiters
-	// (the maitre D is classically a VIPER routing)
+	// (the maître D is classically a VIPER routing)
 
 	DTSommelier
 	// provides multi-language support for screen text
