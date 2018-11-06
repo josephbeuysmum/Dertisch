@@ -6,6 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+// todo better generic word for orders and dishes than "passable"
 public typealias DTDish = DTPassable
 public typealias DTOrder = DTPassable
 public typealias DTTicket = String

@@ -8,8 +8,8 @@
 
 public enum DTRegions: String {
 	case
-	english = "en",
-	french = "fr"
+	england = "en",
+	france = "fr"
 }
 
 public protocol DTSommelierProtocol {
@@ -25,8 +25,8 @@ extension DTSommelier: DTSommelierProtocol {
 			return wine.all
 		} else {
 			switch region.rawValue {
-			case DTRegions.english.rawValue:	return wine.en
-			case DTRegions.french.rawValue:		return wine.fr
+			case DTRegions.england.rawValue:	return wine.en
+			case DTRegions.france.rawValue:		return wine.fr
 			default:							return nil
 			}
 		}
@@ -45,7 +45,7 @@ public class DTSommelier {
 	fileprivate var region_: DTRegions
 	
 	public required init(bundledJson: DTBundledJson) {
-		region_ = .english
+		region_ = .england
 		if let unbottledWines = bundledJson.decode(json: "text", into: DTWines.self) {
 			var bottledWines: [String: DTWine] = [:]
 			for var unbottledWine in unbottledWines.copy {

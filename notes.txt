@@ -1,0 +1,11 @@
+
+MID-SCREEN ORDERING PROCEDURE
+
+[Customer] -> waiter.give(DTOrder)
+    extension DTWaiterForCustomer.give(_ order: DTOrder)
+SomeHeadChef.give(_ order: DTOrder)
+SomeSousChef.doSomething(...)
+[SousChef] -> headChef.hand(DTDish)
+    extension DTHeadChef.hand(_ dish: DTDish)
+    extension DTWaiterForHeadChef.hand<T>(side: T?)
+SomeWaiter.serve<T>(_ sideDish: T?)

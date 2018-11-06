@@ -5,6 +5,7 @@
 //  Created by Richard Willis on 12/11/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
+// todo "All rights reserved" needs changing to MIT licence somehow
 
 import UIKit
 
@@ -15,6 +16,7 @@ public enum DTPresentations {
 public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
 	var hasPopover: Bool { get }
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
+	func closeRestaurant()
 	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
 	func create(_ customerId: String, from storyboard: String?) -> DTCustomer?
 	//	func createAlertWith(
@@ -30,9 +32,13 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
 	func greet(firstCustomer: String, window: UIWindow, storyboard: String?)
 }
 
+
+
 public protocol DTMaitreDExtension {
 	func registerStaff(with key: String)
 }
+
+
 
 public protocol DTMaitreDRegistrar {
 	func register(
@@ -48,9 +54,35 @@ public protocol DTMaitreDRegistrar {
 		kitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]?)
 }
 
+
+
+public class DTMaitreD {
+	fileprivate let
+	key: String,
+	sommelier: DTSommelier
+	
+	fileprivate var
+	kitchenStaff: Dictionary<String, DTKitchenMember>,
+	switchesRelationships: Dictionary<String, DTInternalSwitchRelationship>,
+	window: UIWindow!,
+	mainSwitches: DTSwitchesRelationship?,
+	sideSwitches: DTSwitchesRelationship?
+	
+	required public init() {
+		key = NSUUID().uuidString
+		switchesRelationships = [:]
+		kitchenStaff = [:]
+		let bundledJson = DTBundledJson()
+		kitchenStaff[DTBundledJson.staticId] = bundledJson
+		sommelier = DTSommelier(bundledJson: bundledJson)
+	}
+}
+
+
+
 extension DTMaitreD: DTMaitreDProtocol {
 	public var hasPopover: Bool {
-		return sideCustomerRelationship != nil
+		return sideSwitches != nil
 	}
 	
 	public func alert(
@@ -58,7 +90,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		title: String? = nil,
 		message: String? = nil,
 		style: UIAlertController.Style? = .alert) {
-		guard let customer = customerRelationship?.customer else { return }
+		guard let customer = mainSwitches?.customer else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
 		countActions = actions.count
@@ -94,16 +126,23 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func dismissPopover() {
 		guard hasPopover else { return }
-		// todo sideCustomerRelationship is a weird name, change it
-		sideCustomerRelationship!.customer?.dismiss(animated: true) {
-			self.sideCustomerRelationship!.endShift()
-			self.sideCustomerRelationship = nil
+		// todo sideSwitches is a weird name, change it
+		sideSwitches!.customer?.dismiss(animated: true) {
+			self.sideSwitches!.endShift()
+			self.sideSwitches = nil
 //			self.orders_.make(order: DTOrderConsts.popoverRemoved)
 		}
 	}
 	
+	public func closeRestaurant() {
+		mainSwitches?.endShift()
+		sideSwitches?.endShift()
+//		exit(1)
+	}
+	
 	public func greet(firstCustomer: String, window: UIWindow, storyboard: String? = nil) {
 		guard self.window == nil else { return }
+		DTTime.startInterval()
 		registerStaff(with: key)
 		self.window = window
 		self.window.makeKeyAndVisible()
@@ -116,7 +155,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		from storyboard: String? = nil) {
 		guard
 			!hasPopover,
-			let currentCustomer = customerRelationship?.customer,
+			let currentCustomer = mainSwitches?.customer,
 			let switchBundle = createBundle(from: customerId, and: storyboard),
 			let popover = switchBundle.customer
 			else { return }
@@ -128,7 +167,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		if let safeRect = rect {
 			popover.popoverPresentationController?.sourceRect = safeRect
 		}
-		sideCustomerRelationship = switchBundle
+		sideSwitches = switchBundle
 	}
 	
 	public func register(
@@ -163,7 +202,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	public func seat(_ customerId: String, from storyboard: String? = nil) {
 		guard let switchBundle = createBundle(from: customerId, and: storyboard) else { return }
 		window.rootViewController = switchBundle.customer
-		customerRelationship = switchBundle
+		mainSwitches = switchBundle
 	}
 	
 	public func seatNew(
@@ -173,7 +212,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		from storyboard: String? = nil) {
 		let presentationType = presentationType ?? DTPresentations.show
 		guard
-			let currentCustomer = customerRelationship?.customer,
+			let currentCustomer = mainSwitches?.customer,
 			let switchBundle = createBundle(from: customerId, and: storyboard),
 			let customer = switchBundle.customer
 			else { return }
@@ -188,8 +227,8 @@ extension DTMaitreD: DTMaitreDProtocol {
 			// todo maybe don't do this?
 			currentCustomer.removeFromParent()
 		}
-		customerRelationship?.endShift()
-		customerRelationship = switchBundle
+		mainSwitches?.endShift()
+		mainSwitches = switchBundle
 	}
 	
 	
@@ -204,10 +243,10 @@ extension DTMaitreD: DTMaitreDProtocol {
 		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
 		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
 		let waiter = switchesRelationship.waiterType != nil ?
-			switchesRelationship.waiterType!.init(customer: customer, maitreD: self, headChef: headChef) :
-			GeneralWaiter(customer: customer, maitreD: self, headChef: headChef)
+			switchesRelationship.waiterType!.init(customer: customer,  headChef: headChef) :
+			GeneralWaiter(customer: customer, headChef: headChef)
 		headChef?.waiter = waiter
-		customer.assign(waiter, and: sommelier)
+		customer.assign(waiter, maitreD: self, and: sommelier)
 		waiter.startShift()
 		headChef?.startShift()
 		return DTSwitchesRelationship(customer: customer, waiter: waiter, headChef: headChef)
@@ -223,27 +262,5 @@ extension DTMaitreD: DTMaitreDProtocol {
 			}
 		}
 		return kitchenStaff
-	}
-}
-
-public class DTMaitreD {
-	fileprivate let
-	key: String,
-	sommelier: DTSommelier
-	
-	fileprivate var
-	kitchenStaff: Dictionary<String, DTKitchenMember>,
-	switchesRelationships: Dictionary<String, DTInternalSwitchRelationship>,
-	window: UIWindow!,
-	customerRelationship: DTSwitchesRelationship?,
-	sideCustomerRelationship: DTSwitchesRelationship?
-
-	required public init() {
-		key = NSUUID().uuidString
-		switchesRelationships = [:]
-		kitchenStaff = [:]
-		let bundledJson = DTBundledJson()
-		kitchenStaff[DTBundledJson.staticId] = bundledJson
-		sommelier = DTSommelier(bundledJson: bundledJson)
 	}
 }

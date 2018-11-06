@@ -13,7 +13,7 @@ public class DTTime {
 		case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes
 	}
 	
-	fileprivate static var _startTime: Date?
+	fileprivate static var startTime: Date?
 	
 	// returns a timestamp based upon the intervalFormats case passed 
 	// (assumes full case if none passed)
@@ -65,9 +65,15 @@ public class DTTime {
 		return (gregorian as NSCalendar).components(flags, from: date)
 	}
 	
-	// _startTime acts as "zero hour" so setting it to nil basically restarts the clock
-	public static func resetInterval() { _startTime = nil }
+	// startTime acts as "zero hour" so setting it to nil basically restarts the clock
+	public static func resetInterval() {
+		startTime = nil
+	}
 	
+	public static func startInterval() {
+		startTime = Date()
+	}
+
 	
 	
 	// hours and milliseconds have accessor functions because they aren't used in all cases
@@ -82,9 +88,8 @@ public class DTTime {
 	fileprivate static func _getSecondsBy(interval: Int) -> Int { return interval % 60 }
 	
 	
-	// raw interval has its own accessor function as it *might* need to restart the _startTime clock
+	// raw interval has its own accessor function as it *might* need to restart the startTime clock
 	fileprivate static func _getRawInterval() -> TimeInterval {
-		if _startTime == nil { _startTime = Date() }
-		return Date().timeIntervalSince(_startTime!)
+		return Date().timeIntervalSince(startTime!)
 	}
 }

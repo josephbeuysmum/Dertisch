@@ -6,7 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo cleanUp in a better way, with weak vars etc
+// todo endShift in a better way, with weak vars etc
 public protocol DTEndShiftProtocol {
 	mutating func endShift ()
 }

@@ -9,19 +9,26 @@
 import Foundation
 
 public protocol DTHeadChefForKitchenMember {
-	func hand(_ dish: DTDish)
+	mutating func give(dish: DTDish)
 }
 
 public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
-	
+
 public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTStartShiftProtocol, DTEndShiftProtocol {
 	init(_ sousChefs: [String: DTKitchenMember]?)
 	var waiter: DTWaiterForHeadChef? { get set }
 }
 
 public extension DTHeadChef {
-	//	public var instanceDescriptor: String { return String(describing: self) }
+	public func enShift() { flagNonImplementation() }
 	public mutating func give(_ order: DTOrder) { flagNonImplementation() }
-	public func hand(_ dish: DTDish) { flagNonImplementation() }
 	public func startShift() { flagNonImplementation() }
+}
+
+public extension DTHeadChefForKitchenMember {
+	public func give(dish: DTDish) {
+//		lo()
+		guard var waiter = DTFirstInstance().get(DTWaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
+		waiter.hand(dish)
+	}
 }

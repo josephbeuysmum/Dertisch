@@ -9,51 +9,29 @@
 //import Dertisch
 
 class GeneralWaiter: DTWaiter {
-	var carte: DTCarte? { return nil }
+	var carte: DTCarteForCustomer? { return nil }
 	
-	let
-	customer: DTCustomerForWaiter,
-	maitreD: DTMaitreD
+	let customer: DTCustomerForWaiter
 	
 	fileprivate var headChef: DTHeadChefForWaiter?
 	
-//	required init(maitreD: DTMaitreD, customer: DTCustomerForWaiter) {
-	required init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter? = nil) {
+	//	required init(maitreD: DTMaitreD, customer: DTCustomerForWaiter) {
+	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter? = nil) {
 		self.customer = customer
-		self.maitreD = maitreD
 		self.headChef = headChef
 	}
 	
-	public func giveOrder<T>(of order: T?) {}
-	public func serve<T>(entrees: T?) {}
+	public func endShift() {
+		headChef = nil
+	}
 	public func startShift() {}
 }
 
-public protocol DTCarte {
-	init<T>(_ value: T)
+extension GeneralWaiter: DTWaiterForHeadChef {
+	public func serve<T>(entrees: T?) {}
 }
 
-public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
-	var carte: DTCarte? { get }
-	// todo should customers *really* access the maitre d directly through their waiters?
-	var maitreD: DTMaitreD { get }
-}
-
-//public protocol DTWaiterForTableCustomer {
-//	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
-//}
-
-public protocol DTWaiterForHeadChef {//: DTServeCustomerProtocol {
-	mutating func serve<T>(entrees: T?)
-}
-
-public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTStartShiftProtocol, DTEndShiftProtocol {
-	init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
-}
-
-public extension DTWaiter {
-	public func endShift() { flagNonImplementation() }
-	public func give(_ order: DTOrder) { flagNonImplementation() }
-	public func serve<T>(entrees: T?) { flagNonImplementation() }
-	public func startShift() { flagNonImplementation() }
+extension GeneralWaiter: DTWaiterForWaiter {
+	func fillCarte<T>(with entrees: T?) {}
+	func serve(_ dish: DTDish) {}
 }
