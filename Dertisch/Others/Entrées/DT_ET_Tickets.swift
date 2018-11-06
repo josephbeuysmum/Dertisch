@@ -7,21 +7,41 @@
 //
 
 // todo better generic word for orders and dishes than "passable"
-public typealias DTDish = DTPassable
+//public typealias DTDish = DTPassable
 public typealias DTOrder = DTPassable
 public typealias DTTicket = String
 
+public protocol DTPassableProtocol {
+	var id: DTTicket { get }
+	var content: Any? { get }
+}
+
+public protocol DTDishProtocol {
+	var isHot: Bool { get }
+}
+
 public struct DTPassable: DTPassableProtocol {
-	public var id: DTTicket { return id_ }
-	public var content: Any? { return content_ }
-	
-	private let
-	id_: DTTicket,
-	content_: Any?
+	public let
+	id: DTTicket,
+	content: Any?
 	
 	public init(_ id: DTTicket, _ content: Any?) {
-		id_ = id
-		content_ = content
+		self.id = id
+		self.content = content
+	}
+}
+
+public struct DTDish: DTDishProtocol {
+	var id: DTTicket { return passable.id }
+	var content: Any? { return passable.content }
+
+	public let isHot: Bool
+	
+	private let passable: DTPassable
+	
+	public init(_ id: DTTicket, _ isHot: Bool, _ content: Any?) {
+		passable = DTPassable(id, content)
+		self.isHot = isHot
 	}
 }
 

@@ -15,12 +15,6 @@ public protocol DTDescribableProtocol {
 	var description: String { get }
 }
 
-public protocol DTPassableProtocol {
-	var id: String { get }
-	var content: Any? { get }
-	init(_ id: String, _ content: Any?)
-}
-
 public protocol DTGiveOrderProtocol {
 	mutating func give(_ order: DTOrder)
 }

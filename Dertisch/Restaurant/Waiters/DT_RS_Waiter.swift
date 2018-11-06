@@ -59,11 +59,12 @@ public extension DTWaiterForCustomer {
 public extension DTWaiterForWaiter {
 	func serve(_ dish: DTDish) {
 		let mirror = Mirror(reflecting: self)
+		guard let carte = DTFirstInstance().get(DTCarte.self, from: mirror) else { return }
+		carte.stockCarte(with: dish)
 		guard
-			let carte = DTFirstInstance().get(DTCarte.self, from: mirror),
+			dish.isHot,
 			let customer = DTFirstInstance().get(DTCustomerForWaiter.self, from: mirror)
 			else { return }
-		carte.stockCarte(with: dish)
 		customer.informOf(dish: dish.id)
 	}
 }
