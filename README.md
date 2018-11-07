@@ -50,7 +50,7 @@ The people who control the kitchen staff and the dishes. Head Chefs are classica
 Entrées
 ---
 
-The dishes customers start with. Entrées are classically VIPER `entities`, which are simple data objects.
+The dishes customers start with. Entrées initialise viewControllers with data and are classically VIPER `entities`, which are simple data objects.
 
 Sommelier
 ---

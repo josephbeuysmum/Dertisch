@@ -22,7 +22,6 @@ extension DTCarteForWaiter {
 
 public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
 	var carte: DTCarteForCustomer? { get }
-//	var maitreD: DTMaitreD { get }
 }
 
 //public protocol DTWaiterForTableCustomer {
@@ -65,7 +64,7 @@ public extension DTWaiterForWaiter {
 			dish.isHot,
 			let customer = DTFirstInstance().get(DTCustomerForWaiter.self, from: mirror)
 			else { return }
-		customer.informOf(dish: dish.id)
+		customer.present(hotDish: dish.id)
 	}
 }
 

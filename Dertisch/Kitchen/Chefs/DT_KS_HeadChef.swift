@@ -20,7 +20,7 @@ public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTS
 }
 
 public extension DTHeadChef {
-	public func enShift() { flagNonImplementation() }
+	public func endShift() { flagNonImplementation() }
 	public mutating func give(_ order: DTOrder) { flagNonImplementation() }
 	public func startShift() { flagNonImplementation() }
 }
