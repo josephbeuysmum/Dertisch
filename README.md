@@ -63,24 +63,29 @@ How SWITCHES is "swifty"
 
 The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a **multifacted analogical delegate** pattern. Par exemple, the `DTWaiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
-	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTStartShiftProtocol, DTEndShiftProtocol {
-		init(customer: DTCustomerForWaiter, maitreD: DTMaitreD, headChef: DTHeadChefForWaiter?)
+	protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForWaiter, DTStartShiftProtocol, DTEndShiftProtocol {
+		init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?)
 	}
 
 	protocol DTWaiterForCustomer: DTGiveOrderProtocol {
-		var carte: DTCarte? { get }
-		var maitreD: DTMaitreD { get }
+		var carte: DTCarteForCustomer? { get }
 	}
 
 	protocol DTWaiterForHeadChef {
+		mutating func hand(_ sideDish: DTDish)
 		mutating func serve<T>(entrees: T?)
+	}
+
+	protocol DTWaiterForWaiter {
+		mutating func fillCarte<T>(with entrees: T?)
+		mutating func serve(_ dish: DTDish)
 	}
 
 	protocol DTGiveOrderProtocol {
 		mutating func give(_ order: DTOrder)
 	}
 
-	public protocol DTStartShiftProtocol {
+	protocol DTStartShiftProtocol {
 		func startShift()
 	}
 
