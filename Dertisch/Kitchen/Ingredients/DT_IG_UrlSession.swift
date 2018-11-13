@@ -87,7 +87,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	fileprivate func cast ( richText data: Data, with url: String ) throws {
 //		do {
 //			guard let json = try JSONSerialization.jsonObject( with: data, options: [] ) as? [ String: Any ] else { return }
-//			//			let success = json[ DTKeyConsts.success ] is Bool ? json[ DTKeyConsts.success ] as? Bool : nil
+//			//			let success = json[ DTKeycountCirclessuccess ] is Bool ? json[ DTKeycountCirclessuccess ] as? Bool : nil
 //			let castArray: [ Dictionary< String, Any > ]
 //			if let rawData = json[ "data" ] {
 //				castArray = ( rawData is NSArray ? ( rawData as! NSArray ) as? [ Dictionary< String, AnyObject > ] : nil )!

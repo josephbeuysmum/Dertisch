@@ -11,19 +11,22 @@
 class GeneralWaiter: DTWaiter {
 	var carte: DTCarteForCustomer? { return nil }
 	
-	let customer: DTCustomerForWaiter
+	fileprivate var
+	customer: DTCustomerForWaiter?,
+	headChef: DTHeadChefForWaiter?
 	
-	fileprivate var headChef: DTHeadChefForWaiter?
-	
-	//	required init(maitreD: DTMaitreD, customer: DTCustomerForWaiter) {
 	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter? = nil) {
 		self.customer = customer
 		self.headChef = headChef
 	}
 	
+	deinit { lo("au revoir general waiter") }
+	
 	public func endShift() {
+		customer = nil
 		headChef = nil
 	}
+	
 	public func startShift() {}
 }
 

@@ -18,10 +18,11 @@ public protocol DTCustomerProtocol: class, DTCustomerForWaiter {
 	func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier)
 }
 
+// todo the deninit func for a customer feels we
 open class DTCustomer: UIViewController {
 	// these can only be overridden if they are in as opposed to the extension below
 	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) { flagNonImplementation() }
-	open func endShift() { flagNonImplementation() }
+	open func finishMeal() { flagNonImplementation() }
 	
 	// present(hotDish) and order() needs to be here as opposed to the DTCustomerProtocol extension where it should *ideally* be because overriding it in a sub-viewController becomes more complicated otherwise
 	open func present(hotDish dishId: String) { flagNonImplementation() }

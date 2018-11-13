@@ -12,7 +12,7 @@ public typealias DTOrder = DTPassable
 public typealias DTTicket = String
 
 public protocol DTPassableProtocol {
-	var id: DTTicket { get }
+	var ticket: DTTicket { get }
 	var content: Any? { get }
 }
 
@@ -22,17 +22,17 @@ public protocol DTDishProtocol {
 
 public struct DTPassable: DTPassableProtocol {
 	public let
-	id: DTTicket,
+	ticket: DTTicket,
 	content: Any?
 	
-	public init(_ id: DTTicket, _ content: Any?) {
-		self.id = id
+	public init(_ ticket: DTTicket, _ content: Any?) {
+		self.ticket = ticket
 		self.content = content
 	}
 }
 
 public struct DTDish: DTDishProtocol {
-	var id: DTTicket { return passable.id }
+	var ticket: DTTicket { return passable.ticket }
 	var content: Any? { return passable.content }
 
 	public let isHot: Bool

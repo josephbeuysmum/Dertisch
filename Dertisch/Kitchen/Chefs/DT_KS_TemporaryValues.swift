@@ -59,7 +59,7 @@ extension DTTemporaryValues: DTTemporaryValuesProtocol {
 //	// store ("set") the given property
 //	public func store ( value: String, by key: String, and caller: DTCaller? = nil ) {
 //		guard let orders = wornCloset.getSignals( by: key_.teeth ) else { return }
-//		let signalKey = DTOrderConsts.valueStored
+//		let signalKey = DTOrdercountCirclesvalueStored
 //		DTMisc.set( orders: orders, withKey: signalKey, andCaller: caller )
 //		storage.setValue( value, forKey: key )
 //		storage.synchronize()

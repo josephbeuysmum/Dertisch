@@ -12,30 +12,30 @@ public func lo(_ args: Any?... , file: String = #file, function: String = #funct
 }
 
 // loops through an object, printing all of its keys and associated values
-public func lobject(_ object: [ String: Any ], file: String = #file, function: String = #function, line: Int = #line) {
+public func lobject(_ object: [String: Any], file: String = #file, function: String = #function, line: Int = #line) {
 	for (key, value) in object {
-		_lo([ key, ":", value ], file: file, function: function, line: line)
+		_lo([key, ":", value], file: file, function: function, line: line)
 	}
 }
 
 // differing levels of log (see DTConsts logLevel and logModes)
 public func loInfo(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTLogConsts.logModes.index(of: DTLogConsts.logLevel.info) != nil else { return }
+	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.info) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loFeedback(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTLogConsts.logModes.index(of: DTLogConsts.logLevel.feedback) != nil else { return }
+	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.feedback) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loWarning(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTLogConsts.logModes.index(of: DTLogConsts.logLevel.warning) != nil else { return }
+	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.warning) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loError(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTLogConsts.logModes.index(of: DTLogConsts.logLevel.error) != nil else { return }
+	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.error) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
@@ -58,9 +58,9 @@ fileprivate func getShortFileName(from file: String) -> String {
 
 
 
-fileprivate func _lo(_ args: [ Any? ], file: String, function: String, line: Int) {
+fileprivate func _lo(_ args: [Any?], file: String, function: String, line: Int) {
 	let
-	printableArgs = args.count > 0 ? args : [ "\(function) ()" ],
+	printableArgs = args.count > 0 ? args : ["\(function) ()"],
 	fileName = getShortFileName(from: file)
 	if  let shortenedLine = DTString.set(length: 4, ofText: String(line)),
 		let shortenedInterval = DTString.set(
@@ -72,13 +72,13 @@ fileprivate func _lo(_ args: [ Any? ], file: String, function: String, line: Int
 	}
 }
 
-fileprivate func _log(_ args: [ Any? ], location: String? = nil) {
+fileprivate func _log(_ args: [Any?], location: String? = nil) {
 	var mutableArgs = args
 	// occasionally args is just a one-value array that contains the real args
-	if  args.count == 1, let args = args[ 0 ] as? [ Any ] { mutableArgs = args }
+	if  args.count == 1, let args = args[0] as? [Any] { mutableArgs = args }
 	// turn args into single message string
 	guard mutableArgs.count > 0 else { return }
-	var message = DTCharConsts.emptyString
+	var message = DTCChars.emptyString
 	_ = mutableArgs.map { element in
 		if let messageSuffix = DTString.serialise(value: _serialise(arg: element)) {
 			message = "\(message)  \(messageSuffix)"

@@ -9,15 +9,15 @@ internal struct DTSwitchesRelationship: DTEndShiftProtocol {
 	var
 	customer: DTCustomer?,
 	waiter: DTWaiter?,
-	headChef: DTHeadChef?
+	headChef: DTHeadChef?,
+	animated: Bool
 
 	mutating func endShift() {
-		customer?.removeFromParent()
-		headChef?.endShift()
+		customer?.finishMeal()
 		waiter?.endShift()
-		customer?.endShift()
-		headChef = nil
-		waiter = nil
+		headChef?.endShift()
 		customer = nil
+		waiter = nil
+		headChef = nil
 	}
 }

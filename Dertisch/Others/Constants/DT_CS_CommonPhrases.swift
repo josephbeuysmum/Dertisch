@@ -1,12 +1,12 @@
 //
-//  DT_UT_CommonPhrasesConsts.swift
+//  DT_UT_CommonPhrasescountCirclesswift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct DTCommonPhrasesConsts {
+public struct DTCCommonPhrases {
 	public static let
 	Activated = "Activated",
 	Added = "Added",

@@ -12,11 +12,11 @@ public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
 public protocol DTCoreDataProtocol: DTKitchenMember {
 	var dataModelName: String? { get set }
-	func delete(_ entityName: String, _ callback: @escaping DTCDDeletionCallback)
-	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback)
-	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDCallback)
-	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback)
-	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDCallback)
+	func delete(_ entityName: String, _ callback: @escaping DTCDDeletionClosure)
+	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure)
+	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDClosure)
+	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure)
+	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDClosure)
 }
 
 public class DTCoreData {
@@ -50,7 +50,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func delete(_ entityName: String, _ callback: @escaping DTCDDeletionCallback) {
+	public func delete(_ entityName: String, _ callback: @escaping DTCDDeletionClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -63,7 +63,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionCallback) {
+	public func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -88,7 +88,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping DTCDCallback) {
+	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping DTCDClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		if let predicate = predicate {
@@ -112,7 +112,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDCallback) {
+	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure) {
 		persistentContainer?.performBackgroundTask { privateContext in
 			let managedEntity = NSEntityDescription.insertNewObject(forEntityName: entity.name, into: privateContext)
 			var
@@ -136,7 +136,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String? = nil, _ callback: @escaping DTCDCallback) {
+	public func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String? = nil, _ callback: @escaping DTCDClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		privateContext.perform {
 			let updateRequest = NSBatchUpdateRequest(entityName: entityName)

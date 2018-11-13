@@ -1,12 +1,12 @@
 //
-//  DT_UT_LogConsts.swift
+//  DT_UT_LogcountCirclesswift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct DTLogConsts {
+public struct DTCLogs {
 	public struct logLevel {
 		static let
 		output = 0,

@@ -9,36 +9,11 @@
 
 import UIKit
 
-public enum DTPresentations {
-	case curl, dissolve, flip, rise, show
-}
-
-public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
-	var hasPopover: Bool { get }
-	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
-	func closeRestaurant()
-	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
-	func create(_ customerId: String, from storyboard: String?) -> DTCustomer?
-	//	func createAlertWith(
-	//		title: String,
-	//		message: String,
-	//		buttonLabel: String,
-	//		handler: @escaping ((UIAlertAction) -> Void),
-	//		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
-	func dismissPopover()
-	func popover(_ customerId: String, inside rect: CGRect?, from storyboard: String?)
-	func seat(_ customerId: String, from storyboard: String?)
-	func seatNew(_ customerId: String, beAnimated animated: Bool?, via presentationType: DTPresentations?, from storyboard: String?)
-	func greet(firstCustomer: String, window: UIWindow, storyboard: String?)
-}
-
 
 
 public protocol DTMaitreDExtension {
 	func registerStaff(with key: String)
 }
-
-
 
 public protocol DTMaitreDRegistrar {
 	func register(
@@ -54,7 +29,28 @@ public protocol DTMaitreDRegistrar {
 		kitchenStaff kitchenStaffTypes: [DTKitchenMember.Type]?)
 }
 
+public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
+	var hasMenu: Bool { get }
+	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
+	func closeRestaurant()
+	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
+//	func create(_ customerId: String, from storyboard: String?) -> DTCustomer?
+//	func createAlertWith(
+//		title: String,
+//		message: String,
+//		buttonLabel: String,
+//		handler: @escaping ((UIAlertAction) -> Void),
+//		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
+	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
+	func present(menu menuId: String, inside rect: CGRect?, from storyboard: String?)
+	func removeMenu(_ closure: DTBasicClosure?)
+	func seatNext(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
+	func usherOutCurrentCustomer()
+}
 
+
+
+fileprivate typealias DTCustomerTicket = (customer: DTCustomer, id: String)
 
 public class DTMaitreD {
 	fileprivate let
@@ -65,13 +61,16 @@ public class DTMaitreD {
 	kitchenStaff: Dictionary<String, DTKitchenMember>,
 	switchesRelationships: Dictionary<String, DTInternalSwitchRelationship>,
 	window: UIWindow!,
-	mainSwitches: DTSwitchesRelationship?,
-	sideSwitches: DTSwitchesRelationship?
+	formerCustomers: [DTCustomerTicket],
+//	rootSwitches: DTSwitchesRelationship?,
+	currentSwitches: DTSwitchesRelationship?,
+	menuSwitches: DTSwitchesRelationship?
 	
 	required public init() {
 		key = NSUUID().uuidString
-		switchesRelationships = [:]
 		kitchenStaff = [:]
+		switchesRelationships = [:]
+		formerCustomers = []
 		let bundledJson = DTBundledJson()
 		kitchenStaff[DTBundledJson.staticId] = bundledJson
 		sommelier = DTSommelier(bundledJson: bundledJson)
@@ -81,8 +80,8 @@ public class DTMaitreD {
 
 
 extension DTMaitreD: DTMaitreDProtocol {
-	public var hasPopover: Bool {
-		return sideSwitches != nil
+	public var hasMenu: Bool {
+		return menuSwitches != nil
 	}
 	
 	public func alert(
@@ -90,7 +89,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		title: String? = nil,
 		message: String? = nil,
 		style: UIAlertController.Style? = .alert) {
-		guard let customer = mainSwitches?.customer else { return }
+		guard let customer = currentSwitches?.customer else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
 		countActions = actions.count
@@ -105,9 +104,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 		return viewArray[0] as? UIView
 	}
 	
-	public func create(_ customerId: String, from storyboard: String? = nil) -> DTCustomer? {
-		return createBundle(from: customerId, and: storyboard)?.customer
-	}
+//	public func create(_ customerId: String, from storyboard: String? = nil) -> DTCustomer? {
+//		return createBundleFrom(customerId, and: storyboard)?.customer
+//	}
 	
 //	public func createAlertWith(
 //		title: String,
@@ -124,61 +123,28 @@ extension DTMaitreD: DTMaitreDProtocol {
 //		return alert
 //	}
 	
-	public func dismissPopover() {
-		guard hasPopover else { return }
-		// todo sideSwitches is a weird name, change it
-		sideSwitches!.customer?.dismiss(animated: true) {
-			self.sideSwitches!.endShift()
-			self.sideSwitches = nil
-//			self.orders_.make(order: DTOrderConsts.popoverRemoved)
-		}
-	}
 	
 	public func closeRestaurant() {
-		mainSwitches?.endShift()
-		sideSwitches?.endShift()
+		currentSwitches?.endShift()
+		menuSwitches?.endShift()
 //		exit(1)
 	}
 	
-	public func greet(firstCustomer: String, window: UIWindow, storyboard: String? = nil) {
+	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
+		// todo should this be a fatal error?
 		guard self.window == nil else { return }
-		DTTime.startInterval()
 		registerStaff(with: key)
+		// todo some sort of feedback for silent returns?
+		guard
+			let rootSwitches = createBundle(from: customerId, and: storyboard),
+			let rootCustomer = rootSwitches.customer
+			else { return }
+		DTTime.startInterval()
 		self.window = window
 		self.window.makeKeyAndVisible()
-		seat(firstCustomer, from: storyboard)
-	}
-	
-	public func popover(
-		_ customerId: String,
-		inside rect: CGRect? = nil,
-		from storyboard: String? = nil) {
-		guard
-			!hasPopover,
-			let currentCustomer = mainSwitches?.customer,
-			let switchBundle = createBundle(from: customerId, and: storyboard),
-			let popover = switchBundle.customer
-			else { return }
-		popover.modalPresentationStyle = .popover
-		currentCustomer.present(popover, animated: true) {
-//			self.orders_.make(order: DTOrderConsts.popoverAdded)
-		}
-		popover.popoverPresentationController?.sourceView = currentCustomer.view
-		if let safeRect = rect {
-			popover.popoverPresentationController?.sourceRect = safeRect
-		}
-		sideSwitches = switchBundle
-	}
-	
-	public func register(
-		_ kitchenStaffType: DTKitchenMember.Type,
-		with key: String,
-		injecting dependencyTypes: [DTKitchenMember.Type]? = nil) {
-		guard key == self.key else { return }
-		let kitchenClasses = getKitchenStaff(from: dependencyTypes)
-		let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
-		self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
-		kitchenStaffMember.startShift()
+		self.window.rootViewController = rootCustomer
+		currentSwitches = rootSwitches
+		formerCustomers.append((rootCustomer, customerId))
 	}
 	
 	public func introduce(
@@ -199,57 +165,128 @@ extension DTMaitreD: DTMaitreDProtocol {
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func seat(_ customerId: String, from storyboard: String? = nil) {
-		guard let switchBundle = createBundle(from: customerId, and: storyboard) else { return }
-		window.rootViewController = switchBundle.customer
-		mainSwitches = switchBundle
-	}
-	
-	public func seatNew(
-		_ customerId: String,
-		beAnimated animated: Bool? = true,
-		via presentationType: DTPresentations? = nil,
+	public func present(
+		menu menuId: String,
+		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
-		let presentationType = presentationType ?? DTPresentations.show
 		guard
-			let currentCustomer = mainSwitches?.customer,
-			let switchBundle = createBundle(from: customerId, and: storyboard),
-			let customer = switchBundle.customer
+			!hasMenu,
+			let currentCustomer = currentSwitches?.customer,
+			let switchBundle = createBundle(from: menuId, and: storyboard),
+			let menu = switchBundle.customer
 			else { return }
-		switch presentationType {
-		case .curl:			customer.modalTransitionStyle = .partialCurl
-		case .dissolve:		customer.modalTransitionStyle = .crossDissolve
-		case .flip:			customer.modalTransitionStyle = .flipHorizontal
-		case .rise:			customer.modalTransitionStyle = .coverVertical
-		default:			()
+		menu.modalPresentationStyle = .popover
+		currentCustomer.present(menu, animated: true) {
+//			self.orders_.make(order: DTOrdercountCirclespopoverAdded)
 		}
-		currentCustomer.present(customer, animated: animated!) {
-			// todo maybe don't do this?
-			currentCustomer.removeFromParent()
+		menu.popoverPresentationController?.sourceView = currentCustomer.view
+		if let safeRect = rect {
+			menu.popoverPresentationController?.sourceRect = safeRect
 		}
-		mainSwitches?.endShift()
-		mainSwitches = switchBundle
+		menuSwitches = switchBundle
+	}
+	
+	public func register(
+		_ kitchenStaffType: DTKitchenMember.Type,
+		with key: String,
+		injecting dependencyTypes: [DTKitchenMember.Type]? = nil) {
+		guard key == self.key else { return }
+		let kitchenClasses = getKitchenStaff(from: dependencyTypes)
+		let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
+		self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
+		kitchenStaffMember.startShift()
+	}
+	
+	public func removeMenu(_ closure: DTBasicClosure? = nil) {
+		guard hasMenu else { return }
+		menuSwitches!.customer?.dismiss(animated: true) { [unowned self] in
+			closure?()
+			self.menuSwitches!.endShift()
+			self.menuSwitches = nil
+		}
+	}
+	
+	// todo will we reinstate something like this in future?
+//	public func seat(
+//		_ customerId: String,
+//		via transitionType: CATransitionType? = nil,
+//		and transitionSubtype: CATransitionSubtype? = nil,
+//		from storyboard: String? = nil) {
+//		guard
+//			let switchBundle = createBundle(from: customerId, and: storyboard),
+//			let customer = switchBundle.customer
+//			else { return }
+//		if let transitionType = transitionType {
+//			let transition = CATransition()
+//			transition.duration = 0.25
+//			transition.timingFunction = CAMediaTimingFunction.init(name: .easeInEaseOut)
+//			transition.type = transitionType
+//			transition.subtype = transitionSubtype ?? .fromRight
+//			window.layer.add(transition, forKey: nil)
+//		}
+//		window.rootViewController = customer
+//		currentSwitches?.endShift()
+//		currentSwitches = switchBundle
+//	}
+	
+	public func seatNext(
+		_ customerId: String,
+		via transitionStyle: UIModalTransitionStyle? = nil,
+		from storyboard: String? = nil) {
+		guard
+			let currentCustomer = currentSwitches?.customer,
+			var switchBundle = createBundle(from: customerId, and: storyboard),
+			let nextCustomer = switchBundle.customer
+			else { return }
+		let animated = transitionStyle != nil
+//		, currentCustomerIsRoot = currentCustomer === window.rootViewController
+//		lo(currentCustomerIsRoot)
+		if animated {
+			nextCustomer.modalTransitionStyle = transitionStyle!
+		}
+		currentCustomer.present(nextCustomer, animated: animated) { //[unowned self] in
+			lo("presented: \(nextCustomer)")
+		}
+		currentSwitches?.endShift()
+		switchBundle.animated = animated
+		currentSwitches = switchBundle
+	}
+	
+	public func usherOutCurrentCustomer() {
+		guard currentSwitches != nil else { return }
+		currentSwitches!.customer?.dismiss(animated: currentSwitches!.animated) { [unowned self] in
+			self.currentSwitches!.endShift()
+			guard let formerCustomer = self.formerCustomers.popLast() else { return }
+			self.currentSwitches = self.createBundle(from: formerCustomer)
+		}
 	}
 	
 	
+	
+	
+	
+	fileprivate func createBundle(from ticket: DTCustomerTicket) -> DTSwitchesRelationship? {
+		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
+		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
+		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
+		let waiter = switchesRelationship.waiterType != nil ?
+			switchesRelationship.waiterType!.init(customer: ticket.customer,  headChef: headChef) :
+			GeneralWaiter(customer: ticket.customer, headChef: headChef)
+		headChef?.waiter = waiter
+		ticket.customer.assign(waiter, maitreD: self, and: sommelier)
+		waiter.startShift()
+		headChef?.startShift()
+		return DTSwitchesRelationship(customer: ticket.customer, waiter: waiter, headChef: headChef, animated: false)
+	}
 	
 	fileprivate func createBundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchesRelationship? {
 		guard
-			let switchesRelationship = switchesRelationships[customerId],
+			switchesRelationships[customerId] != nil,
 			let customer = UIStoryboard(
 				name: storyboard ?? "Main",
 				bundle: nil).instantiateViewController(withIdentifier: customerId) as? DTCustomer
 			else { return nil }
-		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
-		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
-		let waiter = switchesRelationship.waiterType != nil ?
-			switchesRelationship.waiterType!.init(customer: customer,  headChef: headChef) :
-			GeneralWaiter(customer: customer, headChef: headChef)
-		headChef?.waiter = waiter
-		customer.assign(waiter, maitreD: self, and: sommelier)
-		waiter.startShift()
-		headChef?.startShift()
-		return DTSwitchesRelationship(customer: customer, waiter: waiter, headChef: headChef)
+		return createBundle(from: (customer: customer, id: customerId))
 	}
 	
 	fileprivate func getKitchenStaff(from dependencyTypes: [DTKitchenMember.Type]?) -> [String: DTKitchenMember]? {

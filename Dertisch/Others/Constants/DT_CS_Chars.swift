@@ -1,5 +1,5 @@
 //
-//  DT_UT_CharConsts.swift
+//  DT_UT_CharcountCirclesswift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
@@ -8,7 +8,7 @@
 
 // set of popular chars, created so as to ensure that an ampersand (say)
 // in one class is the same as an ampersand in another
-public struct DTCharConsts {
+public struct DTCChars {
 	public static let
 	ampersand =					"&",
 	asterisk =					"*",

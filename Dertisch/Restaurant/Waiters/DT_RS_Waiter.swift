@@ -8,8 +8,10 @@
 
 public protocol DTCarteForCustomer {}
 
+// todo see if we can make this procedure generic (specifically implemented in GameWaiter atm)
 public protocol DTCarteForWaiter {
 	func stockCarte(with dish: DTDish)
+	func empty()
 }
 
 public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
@@ -18,6 +20,7 @@ public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
 
 extension DTCarteForWaiter {
 	func stockCarte(with dish: DTDish) { flagNonImplementation() }
+	func empty() { flagNonImplementation() }
 }
 
 public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
@@ -64,7 +67,7 @@ public extension DTWaiterForWaiter {
 			dish.isHot,
 			let customer = DTFirstInstance().get(DTCustomerForWaiter.self, from: mirror)
 			else { return }
-		customer.present(hotDish: dish.id)
+		customer.present(hotDish: dish.ticket)
 	}
 }
 

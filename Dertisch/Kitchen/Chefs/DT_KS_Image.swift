@@ -39,7 +39,7 @@ extension DTImages: DTImagesProtocol {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
 		guard callback != nil else { return nil }
-		let urlKey = getUrlKey( by: url )
+//		let urlKey = getUrlKey( by: url )
 //		orders_.takeSingle( order: urlKey, orderer: self ) { [weak self] _, data in
 //			guard let strongSelf = self, strongSelf.assess( result: data ) else { return }
 //			callback!( url, strongSelf.getLocalImage( by: url ) )
