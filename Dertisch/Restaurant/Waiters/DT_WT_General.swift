@@ -16,11 +16,12 @@ class GeneralWaiter: DTWaiter {
 	headChef: DTHeadChefForWaiter?
 	
 	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter? = nil) {
+		//lo("bonjour general waiter")
 		self.customer = customer
 		self.headChef = headChef
 	}
 	
-	deinit { lo("au revoir general waiter") }
+//	deinit { lo("au revoir general waiter") }
 	
 	public func endShift() {
 		customer = nil

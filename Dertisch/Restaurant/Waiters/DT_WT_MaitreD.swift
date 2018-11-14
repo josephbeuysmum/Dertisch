@@ -43,7 +43,7 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
 //		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
 	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
 	func present(menu menuId: String, inside rect: CGRect?, from storyboard: String?)
-	func removeMenu(_ closure: DTBasicClosure?)
+	func removeMenu()//_ closure: DTBasicClosure?)
 	func seatNext(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
 	func usherOutCurrentCustomer()
 }
@@ -133,13 +133,13 @@ extension DTMaitreD: DTMaitreDProtocol {
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
 		// todo should this be a fatal error?
 		guard self.window == nil else { return }
+		DTTime.startInterval()
 		registerStaff(with: key)
 		// todo some sort of feedback for silent returns?
 		guard
 			let rootSwitches = createBundle(from: customerId, and: storyboard),
 			let rootCustomer = rootSwitches.customer
 			else { return }
-		DTTime.startInterval()
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootCustomer
@@ -177,7 +177,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 			else { return }
 		menu.modalPresentationStyle = .popover
 		currentCustomer.present(menu, animated: true) {
-//			self.orders_.make(order: DTOrdercountCirclespopoverAdded)
+//			self.orders_.make(order: DTOrder.popoverAdded)
 		}
 		menu.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {
@@ -197,10 +197,10 @@ extension DTMaitreD: DTMaitreDProtocol {
 		kitchenStaffMember.startShift()
 	}
 	
-	public func removeMenu(_ closure: DTBasicClosure? = nil) {
+	public func removeMenu() {//_ closure: DTBasicClosure? = nil) {
 		guard hasMenu else { return }
 		menuSwitches!.customer?.dismiss(animated: true) { [unowned self] in
-			closure?()
+//			closure?()
 			self.menuSwitches!.endShift()
 			self.menuSwitches = nil
 		}
@@ -244,9 +244,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 		if animated {
 			nextCustomer.modalTransitionStyle = transitionStyle!
 		}
-		currentCustomer.present(nextCustomer, animated: animated) { //[unowned self] in
-			lo("presented: \(nextCustomer)")
-		}
+		currentCustomer.present(nextCustomer, animated: animated) //{ //[unowned self] in
+//			lo("presented: \(nextCustomer)")
+//		}
 		currentSwitches?.endShift()
 		switchBundle.animated = animated
 		currentSwitches = switchBundle

@@ -19,8 +19,8 @@ public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
 }
 
 extension DTCarteForWaiter {
-	func stockCarte(with dish: DTDish) { flagNonImplementation() }
-	func empty() { flagNonImplementation() }
+	func stockCarte(with dish: DTDish) {}
+	func empty() {}
 }
 
 public protocol DTWaiterForCustomer: DTGiveOrderProtocol {

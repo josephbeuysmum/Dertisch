@@ -1,5 +1,5 @@
 //
-//  DT_UT_LogcountCirclesswift
+//  DT_UT_Log.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/06/2016.
