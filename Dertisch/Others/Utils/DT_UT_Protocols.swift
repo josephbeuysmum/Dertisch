@@ -6,13 +6,18 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo endShift in a better way, with weak vars etc
-public protocol DTEndShiftProtocol {
-	mutating func endShift ()
+public protocol DTCigaretteBreakProtocol {
+	mutating func startBreak ()
+	mutating func endBreak ()
 }
 
 public protocol DTDescribableProtocol {
 	var description: String { get }
+}
+
+// todo endShift in a better way, with weak vars etc
+public protocol DTEndShiftProtocol {
+	mutating func endShift ()
 }
 
 public protocol DTGiveOrderProtocol {

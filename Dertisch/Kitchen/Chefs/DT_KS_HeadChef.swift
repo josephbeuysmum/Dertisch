@@ -14,14 +14,16 @@ public protocol DTHeadChefForKitchenMember {
 
 public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
 
-public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTStartShiftProtocol, DTEndShiftProtocol {
+public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTStartShiftProtocol, DTEndShiftProtocol, DTCigaretteBreakProtocol {
 	init(_ sousChefs: [String: DTKitchenMember]?)
 	var waiter: DTWaiterForHeadChef? { get set }
 }
 
 public extension DTHeadChef {
+	public func endBreak() {}
 	public func endShift() { flagNonImplementation() }
 	public mutating func give(_ order: DTOrder) { flagNonImplementation() }
+	public func startBreak() {}
 	public func startShift() { flagNonImplementation() }
 }
 

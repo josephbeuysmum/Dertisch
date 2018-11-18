@@ -6,7 +6,9 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol DTCarteForCustomer {}
+public protocol DTCarteForCustomer {
+//	var isFull: Bool { get }
+}
 
 // todo see if we can make this procedure generic (specifically implemented in GameWaiter atm)
 public protocol DTCarteForWaiter {
@@ -25,6 +27,7 @@ extension DTCarteForWaiter {
 
 public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
 	var carte: DTCarteForCustomer? { get }
+	var onShift: Bool { get }
 }
 
 //public protocol DTWaiterForTableCustomer {
@@ -41,16 +44,26 @@ public protocol DTWaiterForWaiter {
 	mutating func serve(_ dish: DTDish)
 }
 
-public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForWaiter, DTStartShiftProtocol, DTEndShiftProtocol {
+public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForWaiter, DTStartShiftProtocol, DTEndShiftProtocol, DTCigaretteBreakProtocol {
 	init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?)
 }
 
 public extension DTWaiter {
+	public func endBreak() {}
 	public func endShift() { flagNonImplementation() }
+	public func startBreak() {}
 	public func startShift() { flagNonImplementation() }
 }
 
 public extension DTWaiterForCustomer {
+	public var onShift: Bool {
+		let headChef = DTFirstInstance().get(DTHeadChefForWaiter.self, from: Mirror(reflecting: self))
+		lo(headChef)
+		guard headChef != nil else { return true }
+//		lo(carte, carte?.isFull)
+		return carte != nil
+	}
+	
 	public func give(_ order: DTOrder) {
 //		lo()
 		guard var headChef = DTFirstInstance().get(DTHeadChefForWaiter.self, from: Mirror(reflecting: self)) else { return }
@@ -79,6 +92,7 @@ public extension DTWaiterForHeadChef {
 	}
 	
 	public func serve<T>(entrees: T?) {
+		lo()
 		guard
 			let customer = DTFirstInstance().get(DTCustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? DTWaiterForWaiter

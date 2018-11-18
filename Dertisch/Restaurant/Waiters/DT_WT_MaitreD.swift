@@ -175,6 +175,10 @@ extension DTMaitreD: DTMaitreDProtocol {
 			let switchBundle = createBundle(from: menuId, and: storyboard),
 			let menu = switchBundle.customer
 			else { return }
+		lo(currentSwitches?.headChef, currentSwitches?.waiter)
+		currentSwitches?.headChef?.startBreak()
+		currentSwitches?.waiter?.startBreak()
+		currentCustomer.peruseMenu()
 		menu.modalPresentationStyle = .popover
 		currentCustomer.present(menu, animated: true) {
 //			self.orders_.make(order: DTOrder.popoverAdded)
@@ -199,10 +203,16 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func removeMenu() {//_ closure: DTBasicClosure? = nil) {
 		guard hasMenu else { return }
+		lo()
 		menuSwitches!.customer?.dismiss(animated: true) { [unowned self] in
 //			closure?()
 			self.menuSwitches!.endShift()
 			self.menuSwitches = nil
+			guard let switches = self.currentSwitches else { return }
+			lo(switches.headChef, switches.waiter)
+			switches.headChef?.endBreak()
+			switches.waiter?.endBreak()
+			switches.customer?.returnMenuToWaiter()
 		}
 	}
 	

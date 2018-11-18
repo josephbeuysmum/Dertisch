@@ -115,14 +115,17 @@ extension DTCoreData: DTCoreDataProtocol {
 	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure) {
 		persistentContainer?.performBackgroundTask { privateContext in
 			let managedEntity = NSEntityDescription.insertNewObject(forEntityName: entity.name, into: privateContext)
+			// todo this string interpolations causes runtime errors (when storing string values is known, there may be others). I will have to replace it with that byzantine predicate syntax stuff. ugh
 			var
 			predicate = "",
 			predicateSection: String
 			for (key, value) in entity.attributes {
 				predicateSection = "\(key) == \(value)"
-				predicate = predicate.count == 0 ? predicateSection : "\(predicate) && \(predicateSection)"
+				predicate = predicate.count > 0 ? "\(predicate) && \(predicateSection)" : predicateSection
+//				lo(value, key)
 				managedEntity.setValue(value, forKey: key)
 			}
+//			lo("predicate:", predicate)
 			do {
 				try privateContext.save()
 				DispatchQueue.main.async {

@@ -20,8 +20,9 @@ public enum DTCDTypes { case bool, double, int, string }
 
 
 public struct DTCDKey {
-	public let key: String
-	public let type: DTCDTypes
+	public let
+	key: String,
+	type: DTCDTypes
 	
 	public init (_ key: String, _ type: DTCDTypes) {
 		self.key = key
@@ -32,8 +33,9 @@ public struct DTCDKey {
 
 
 public struct DTCDAttribute {
-	public let key: String
-	public let value: DTStorableDataType
+	public let
+	key: String,
+	value: DTStorableDataType
 	
 	public init (_ key: String, _ value: DTStorableDataType) {
 		self.key = key
@@ -72,6 +74,7 @@ public struct DTCDEntity: DTCDEntityProtocol {
 			self.assessValidity(of: attribute, by: type)
 			else { return false }
 		attributes_[key] = attribute
+//		lo(key, attribute, type)
 		return true
 	}
 	
