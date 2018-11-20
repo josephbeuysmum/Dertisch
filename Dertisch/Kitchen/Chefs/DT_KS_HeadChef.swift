@@ -30,7 +30,7 @@ public extension DTHeadChef {
 public extension DTHeadChefForKitchenMember {
 	public func give(dish: DTDish) {
 //		lo()
-		guard var waiter = DTFirstInstance().get(DTWaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
-		waiter.hand(dish)
+		guard var waiter = DTReflector().getFirst(DTWaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
+		waiter.serve(sideDish: dish)
 	}
 }

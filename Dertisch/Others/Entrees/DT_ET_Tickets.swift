@@ -11,14 +11,13 @@
 public typealias DTOrder = DTPassable
 public typealias DTTicket = String
 
+// tood this needs changing from Any? to <T?>
 public protocol DTPassableProtocol {
 	var ticket: DTTicket { get }
 	var content: Any? { get }
 }
 
-public protocol DTDishProtocol {
-	var isHot: Bool { get }
-}
+//public protocol DTDishProtocol {}
 
 public struct DTPassable: DTPassableProtocol {
 	public let
@@ -31,17 +30,14 @@ public struct DTPassable: DTPassableProtocol {
 	}
 }
 
-public struct DTDish: DTDishProtocol {
+public struct DTDish {//}: DTDishProtocol {
 	var ticket: DTTicket { return passable.ticket }
 	var content: Any? { return passable.content }
-
-	public let isHot: Bool
 	
 	private let passable: DTPassable
 	
-	public init(_ id: DTTicket, _ isHot: Bool, _ content: Any?) {
+	public init(_ id: DTTicket, _ content: Any?) {
 		passable = DTPassable(id, content)
-		self.isHot = isHot
 	}
 }
 

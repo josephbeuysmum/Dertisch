@@ -8,8 +8,17 @@
 
 // kudos to everyone involved in this stack overflow thread:
 // stackoverflow.com/questions/27989094/how-to-unwrap-an-optional-value-from-any-type
-struct DTFirstInstance {
-	func get<T>(_ type: T.Type, from mirror: Mirror) -> T? {
+struct DTReflector {
+	func getAll<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
+		return instances(of: type, from: mirror, getAll: true)
+	}
+	
+	func getFirst<T>(_ type: T.Type, from mirror: Mirror) -> T? {
+		return instances(of: type, from: mirror, getAll: false)?[0]
+	}
+	
+	private func instances<T>(of type: T.Type, from mirror: Mirror, getAll: Bool) -> [T]? {
+		var values: [T] = []
 		for (_, child) in mirror.children.enumerated() {
 			let mirror = Mirror(reflecting: child.value)
 			let value: Any
@@ -20,9 +29,10 @@ struct DTFirstInstance {
 				value = child.value
 			}
 			if let t = value as? T {
-				return t
+				values.append(t)
+				if !getAll { return values }
 			}
 		}
-		return nil
+		return values.count > 1 ? values : nil
 	}
 }

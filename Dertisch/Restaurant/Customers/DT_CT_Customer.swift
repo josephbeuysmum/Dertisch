@@ -10,10 +10,10 @@ import UIKit
 
 public protocol DTCustomerForWaiter {
 	func approach()
-	func mealServed()
+	func firstDishServed()
 	func placeOrder()
 	func peruseMenu()
-	func present(hotDish dishId: String)
+	func present(dish dishId: String)
 	func returnMenuToWaiter()
 }
 
@@ -25,26 +25,31 @@ open class DTCustomer: UIViewController {
 	// these can only be overridden if they are here as opposed to the extension below
 	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) { flagNonImplementation() }
 	open func finishMeal() { flagNonImplementation() }
-	open func mealServed() { flagNonImplementation() }
+	open func firstDishServed() { flagNonImplementation() }
 	open func returnMenuToWaiter() {}
 	open func peruseMenu() {}
 	open func placeOrder() { flagNonImplementation() }
-	open func present(hotDish dishId: String) { flagNonImplementation() }
+	open func present(dish dishId: String) { flagNonImplementation() }
 
 	override final public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		mealServed()
+		firstDishServed()
 	}
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
+		if let labels = DTReflector().getAll(UILabel.self, from: Mirror(reflecting: self)) {
+			for label in labels {
+				label.text = nil
+			}
+		}
 		checkReadinessToOrder()
 	}
 	
 	private final func checkReadinessToOrder() {
 		guard
 			isViewLoaded,
-			let waiter = DTFirstInstance().get(DTWaiterForCustomer.self, from: Mirror(reflecting: self)),
+			let waiter = DTReflector().getFirst(DTWaiterForCustomer.self, from: Mirror(reflecting: self)),
 			waiter.onShift
 			else { return }
 		placeOrder()
