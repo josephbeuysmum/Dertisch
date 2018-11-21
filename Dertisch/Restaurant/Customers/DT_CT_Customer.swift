@@ -17,19 +17,24 @@ public protocol DTCustomerForWaiter {
 	func returnMenuToWaiter()
 }
 
-public protocol DTCustomerProtocol: class, DTCustomerForWaiter {
+public protocol DTCustomerForSommelier {
+	func regionSet()
+}
+
+public protocol DTCustomerProtocol: class, DTCustomerForWaiter, DTCustomerForSommelier {
 	func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier)
 }
 
 open class DTCustomer: UIViewController {
 	// these can only be overridden if they are here as opposed to the extension below
-	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) { flagNonImplementation() }
-	open func finishMeal() { flagNonImplementation() }
-	open func firstDishServed() { flagNonImplementation() }
+	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {}
+	open func finishMeal() {}
+	open func firstDishServed() {}
 	open func returnMenuToWaiter() {}
 	open func peruseMenu() {}
-	open func placeOrder() { flagNonImplementation() }
-	open func present(dish dishId: String) { flagNonImplementation() }
+	open func placeOrder() {}
+	open func present(dish dishId: String) {}
+	open func regionSet() {}
 
 	override final public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -53,6 +58,7 @@ open class DTCustomer: UIViewController {
 			waiter.onShift
 			else { return }
 		placeOrder()
+		regionSet()
 	}
 }
 

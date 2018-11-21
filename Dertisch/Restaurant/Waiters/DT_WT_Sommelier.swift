@@ -15,6 +15,7 @@ public enum DTRegions: String {
 public protocol DTSommelierProtocol {
 	var region: DTRegions { get set }
 	init(bundledJson: DTBundledJson)
+	func set(_ customer: DTCustomerForSommelier?)
 	subscript(name: String) -> String? { get }
 }
 
@@ -33,16 +34,22 @@ extension DTSommelier: DTSommelierProtocol {
 	}
 }
 
-public class DTSommelier {
+public final class DTSommelier {
 	public var region: DTRegions {
 		get { return region_ }
 		// todo what should happen after the region gets re-set?
-		set { region_ = newValue }
+		set {
+			guard region_ != newValue else { return }
+			region_ = newValue
+			customer?.regionSet()
+		}
 	}
 	
 	fileprivate let wines: [String: DTWine]?
 	
-	fileprivate var region_: DTRegions
+	fileprivate var
+	region_: DTRegions,
+	customer: DTCustomerForSommelier?
 	
 	public required init(bundledJson: DTBundledJson) {
 		region_ = .england
@@ -58,6 +65,10 @@ public class DTSommelier {
 		} else {
 			wines = nil
 		}
+	}
+	
+	public func set(_ customer: DTCustomerForSommelier?) {
+		self.customer = customer
 	}
 }
 

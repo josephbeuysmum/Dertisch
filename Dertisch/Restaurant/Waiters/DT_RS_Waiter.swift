@@ -16,8 +16,9 @@ public protocol DTCarteForWaiter {
 	func empty()
 }
 
+// tood replace carte with a subscript in WaiterForCustomer that accepts a string id
 public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
-	init<T>(_ entrees: T)
+	init<T>(_ entrees: T?)
 }
 
 extension DTCarteForWaiter {
@@ -50,9 +51,9 @@ public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForW
 
 public extension DTWaiter {
 	public func endBreak() {}
-	public func endShift() { flagNonImplementation() }
+	public func endShift() {}
 	public func startBreak() {}
-	public func startShift() { flagNonImplementation() }
+	public func startShift() {}
 }
 
 public extension DTWaiterForCustomer {
@@ -70,6 +71,7 @@ public extension DTWaiterForCustomer {
 }
 
 public extension DTWaiterForWaiter {
+	func fillCarte<T>(with entrees: T?){}
 	func serve(_ dish: DTDish) {
 		let mirror = Mirror(reflecting: self)
 		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }

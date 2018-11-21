@@ -145,6 +145,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		self.window.rootViewController = rootCustomer
 		currentSwitches = rootSwitches
 		formerCustomers.append((rootCustomer, customerId))
+		sommelier.set(currentSwitches?.customer)
 	}
 	
 	public func introduce(
@@ -244,17 +245,14 @@ extension DTMaitreD: DTMaitreDProtocol {
 			let nextCustomer = switchBundle.customer
 			else { return }
 		let animated = transitionStyle != nil
-//		, currentCustomerIsRoot = currentCustomer === window.rootViewController
-//		lo(currentCustomerIsRoot)
 		if animated {
 			nextCustomer.modalTransitionStyle = transitionStyle!
 		}
-		currentCustomer.present(nextCustomer, animated: animated) //{ //[unowned self] in
-//			lo("presented: \(nextCustomer)")
-//		}
+		currentCustomer.present(nextCustomer, animated: animated)
 		currentSwitches?.endShift()
 		switchBundle.animated = animated
 		currentSwitches = switchBundle
+		sommelier.set(currentCustomer)
 	}
 	
 	public func usherOutCurrentCustomer() {
