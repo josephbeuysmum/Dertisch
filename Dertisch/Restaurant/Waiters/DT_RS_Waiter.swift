@@ -12,7 +12,7 @@ public protocol DTCarteForCustomer {}
 
 // todo see if we can make this procedure generic (specifically implemented in GameWaiter atm)
 public protocol DTCarteForWaiter {
-	func stockCarte(with dish: DTDish)
+	func stock(with order: DTDishes)
 	func empty()
 }
 
@@ -22,7 +22,7 @@ public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
 }
 
 extension DTCarteForWaiter {
-	func stockCarte(with dish: DTDish) {}
+	func stock(with order: DTDishes) { lo() }
 	func empty() {}
 }
 
@@ -36,13 +36,13 @@ public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
 //}
 
 public protocol DTWaiterForHeadChef {//: DTServeCustomerProtocol {
-	mutating func serve(sideDish: DTDish)
-	mutating func serve<T>(entrees: T?)
+	mutating func serve(entrees: DTDishes)
+	mutating func hand(main: DTDishes)
 }
 
 public protocol DTWaiterForWaiter {
-	mutating func fillCarte<T>(with entrees: T?)
-	mutating func serve(_ dish: DTDish)
+	mutating func fillCarte(with entrees: DTDishes)
+	mutating func serve(dishes: DTDishes)
 }
 
 public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForWaiter, DTStartShiftProtocol, DTEndShiftProtocol, DTCigaretteBreakProtocol {
@@ -71,29 +71,33 @@ public extension DTWaiterForCustomer {
 }
 
 public extension DTWaiterForWaiter {
-	func fillCarte<T>(with entrees: T?){}
-	func serve(_ dish: DTDish) {
+	func fillCarte(with entrees: DTDishes){}
+	func serve(dishes: DTDishes) {
 		let mirror = Mirror(reflecting: self)
 		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }
-		carte.stockCarte(with: dish)
+		carte.stock(with: dishes)
 		guard let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: mirror) else { return }
-		DispatchQueue.main.async { customer.present(dish: dish.ticket) }
+		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
+		DispatchQueue.main.async { customer.present(dish: dishes.ticket) }
 	}
 }
 
 public extension DTWaiterForHeadChef {
-	public func serve(sideDish: DTDish) {
-//		lo(sideDish)
+	public func hand(main: DTDishes) {
 		guard var waiter = self as? DTWaiterForWaiter else { return }
-		waiter.serve(sideDish)
+		waiter.serve(dishes: main)
 	}
 	
-	public func serve<T>(entrees: T?) {
+	public func serve(entrees: DTDishes) {
 		guard
 			let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? DTWaiterForWaiter
 			else { return }
-		waiter.fillCarte(with: entrees)
+		if let carte = DTReflector().getFirst(DTCarteForWaiter.self, from: Mirror(reflecting: self)) {
+			carte.stock(with: entrees)
+		} else {
+			waiter.fillCarte(with: entrees)
+		}
 		customer.approach()
 	}
 }

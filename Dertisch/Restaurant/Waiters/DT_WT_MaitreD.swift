@@ -206,10 +206,10 @@ extension DTMaitreD: DTMaitreDProtocol {
 		menuSwitches!.customer?.dismiss(animated: true) { [unowned self] in
 			self.menuSwitches!.endShift()
 			self.menuSwitches = nil
-			self.currentSwitches?.headChef?.endBreak()
-			self.currentSwitches?.waiter?.endBreak()
-			self.currentSwitches?.customer?.returnMenuToWaiter()
 		}
+		currentSwitches?.headChef?.endBreak()
+		currentSwitches?.waiter?.endBreak()
+		currentSwitches?.customer?.returnMenuToWaiter()
 	}
 	
 	// todo will we reinstate something like this in future?

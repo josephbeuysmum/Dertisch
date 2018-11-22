@@ -32,10 +32,10 @@ class GeneralWaiter: DTWaiter {
 }
 
 extension GeneralWaiter: DTWaiterForHeadChef {
-	public func serve<T>(entrees: T?) {}
+	public func serve(entrees: DTDishes) {}
 }
 
 extension GeneralWaiter: DTWaiterForWaiter {
-	func fillCarte<T>(with entrees: T?) {}
-	func serve(_ dish: DTDish) {}
+	func fillCarte(with entrees: DTDishes) {}
+	func serve(dishes: DTDishes) {}
 }
