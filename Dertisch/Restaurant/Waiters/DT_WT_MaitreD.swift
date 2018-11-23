@@ -203,10 +203,9 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func removeMenu() {//_ closure: DTBasicClosure? = nil) {
 		guard hasMenu else { return }
-		menuSwitches!.customer?.dismiss(animated: true) { [unowned self] in
-			self.menuSwitches!.endShift()
-			self.menuSwitches = nil
-		}
+		menuSwitches!.customer?.dismiss(animated: true)
+		menuSwitches!.endShift()
+		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
 		currentSwitches?.customer?.returnMenuToWaiter()

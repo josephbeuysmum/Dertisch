@@ -71,14 +71,16 @@ public extension DTWaiterForCustomer {
 }
 
 public extension DTWaiterForWaiter {
-	func fillCarte(with entrees: DTDishes){}
+	func fillCarte(with entrees: DTDishes) {}
 	func serve(dishes: DTDishes) {
 		let mirror = Mirror(reflecting: self)
 		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }
 		carte.stock(with: dishes)
 		guard let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: mirror) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
-		DispatchQueue.main.async { customer.present(dish: dishes.ticket) }
+		DispatchQueue.main.async {
+			customer.present(dish: dishes.ticket)
+		}
 	}
 }
 
