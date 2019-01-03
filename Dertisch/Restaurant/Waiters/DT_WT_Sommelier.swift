@@ -41,7 +41,7 @@ public final class DTSommelier {
 		set {
 			guard region_ != newValue else { return }
 			region_ = newValue
-			customer?.regionSet()
+			customer?.regionChosen()
 		}
 	}
 	

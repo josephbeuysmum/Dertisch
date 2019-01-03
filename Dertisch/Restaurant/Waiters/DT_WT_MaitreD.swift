@@ -181,7 +181,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		currentCustomer.peruseMenu()
 		menu.modalPresentationStyle = .popover
 		currentCustomer.present(menu, animated: true) {
-//			self.orders_.make(order: DTOrder.popoverAdded)
+//			self.dishes_.make(order: DTOrder.popoverAdded)
 		}
 		menu.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {

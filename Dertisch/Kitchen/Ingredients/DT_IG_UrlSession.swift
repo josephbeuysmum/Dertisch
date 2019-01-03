@@ -42,7 +42,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 			else { return }
 		ongoing_calls.append( url )
 //		if order != nil && callback != nil {
-//			orders_.takeSingle(order: url, orderer: order!, callback: callback! )
+//			dishes_.takeSingle(order: url, orderer: order!, callback: callback! )
 //		}
 		var request = URLRequest( url: validUrl )
 		request.httpMethod = method.rawValue
@@ -103,6 +103,6 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	
 	
 //	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-//		orders_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
+//		dishes_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
 //	}
 }

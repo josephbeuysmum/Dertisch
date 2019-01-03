@@ -8,7 +8,12 @@
 
 import Foundation
 
-public protocol DTCarteForCustomer {}
+public typealias DTDishCollection = [String : Any]
+
+public protocol DTCarteForCustomer {
+	func int(by id: String) -> Int?
+	func string(by id: String) -> String?
+}
 
 // todo see if we can make this procedure generic (specifically implemented in GameWaiter atm)
 public protocol DTCarteForWaiter {
@@ -16,15 +21,44 @@ public protocol DTCarteForWaiter {
 	func empty()
 }
 
-// tood replace carte with a subscript in WaiterForCustomer that accepts a string id
-public protocol DTCarte: DTCarteForCustomer, DTCarteForWaiter {
-	init<T>(_ entrees: T?)
+public protocol DTCarteProtocol: DTCarteForCustomer, DTCarteForWaiter {
+	init(_ entrees: DTDishCollection?)
 }
 
-extension DTCarteForWaiter {
+public extension DTCarteForWaiter {
 	func stock(with order: DTDishes) { lo() }
 	func empty() {}
 }
+
+public extension DTCarteForCustomer {
+	private var dishes: DTDishCollection? {
+		// todo replace the "get firsts" with some sort of generic ID
+		return DTReflector().getFirst(DTDishCollection.self, from: Mirror(reflecting: self))
+	}
+	
+	func int(by id: String) -> Int? {
+		return dishes?[id] as? Int
+	}
+	
+	func string(by id: String) -> String? {
+		return dishes?[id] as? String
+	}
+}
+
+public struct DTCarte: DTCarteProtocol {
+	fileprivate var dishes: DTDishCollection?
+
+	public init(_ entrees: DTDishCollection?) {
+		self.dishes = entrees
+	}
+}
+
+
+
+
+
+
+
 
 public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
 	var carte: DTCarteForCustomer? { get }
@@ -49,6 +83,8 @@ public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForW
 	init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?)
 }
 
+
+
 public extension DTWaiter {
 	public func endBreak() {}
 	public func endShift() {}
@@ -58,9 +94,7 @@ public extension DTWaiter {
 
 public extension DTWaiterForCustomer {
 	public var onShift: Bool {
-		let headChef = DTReflector().getFirst(DTHeadChefForWaiter.self, from: Mirror(reflecting: self))
-		guard headChef != nil else { return true }
-		return carte != nil
+		return carte != nil && DTReflector().getFirst(DTHeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
 	}
 	
 	public func give(_ order: DTOrder) {

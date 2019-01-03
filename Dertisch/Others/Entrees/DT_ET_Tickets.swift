@@ -6,12 +6,11 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo better generic word for orders and dishes than "passable"
+// todo better generic word for dishes and dishes than "passable"
 //public typealias DTDishes = DTPassable
 public typealias DTOrder = DTPassable
 public typealias DTTicket = String
 
-// tood this needs changing from Any? to <T?>
 public protocol DTPassableProtocol {
 	var ticket: DTTicket { get }
 	var content: Any? { get }
@@ -32,11 +31,11 @@ public struct DTPassable: DTPassableProtocol {
 
 public struct DTDishes {//}: DTDishesProtocol {
 	var ticket: DTTicket { return passable.ticket }
-	var dishes: Any? { return passable.content }
+	var dishes: DTDishCollection? { return passable.content as? DTDishCollection }
 	
 	private let passable: DTPassable
 	
-	public init(_ id: DTTicket, _ content: Any?) {
+	public init(_ id: DTTicket, _ content: DTDishCollection?) {
 		passable = DTPassable(id, content)
 	}
 }

@@ -40,7 +40,7 @@ extension DTImages: DTImagesProtocol {
 		guard image == nil else { return image }
 		guard callback != nil else { return nil }
 //		let urlKey = getUrlKey( by: url )
-//		orders_.takeSingle( order: urlKey, orderer: self ) { [weak self] _, data in
+//		dishes_.takeSingle( order: urlKey, orderer: self ) { [weak self] _, data in
 //			guard let strongSelf = self, strongSelf.assess( result: data ) else { return }
 //			callback!( url, strongSelf.getLocalImage( by: url ) )
 //		}
@@ -49,13 +49,13 @@ extension DTImages: DTImagesProtocol {
 	}
 	
 	public func loadImage(by url: String) {
-//		_ = orders_.takeSingle(order: url, orderer: self) { [weak self] _, data in
+//		_ = dishes_.takeSingle(order: url, orderer: self) { [weak self] _, data in
 //			guard let strongSelf = self else { return }
 //			if let urlIndex = strongSelf.urlsResolving.index(of: url) { strongSelf.urlsResolving.remove( at: urlIndex ) }
 //			guard strongSelf.assess(result: data) else { return }
 //			let result = data as! DTRawIngredient
 //			strongSelf.raw_images[url] = result.data as? Data
-//			strongSelf.orders_.make(order: strongSelf.getUrlKey(by: url), with: url)
+//			strongSelf.dishes_.make(order: strongSelf.getUrlKey(by: url), with: url)
 //		}
 		url_session.call(url: url, method: DTUrlSession.methods.GET)
 	}

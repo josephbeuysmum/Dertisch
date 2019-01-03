@@ -8,15 +8,15 @@
 
 //import UIKit
 //
-//extension DTPageCustomer {//}: DTOrdersEntitySetterProtocol {
-//	public func set(orders: DTOrders) {
-//		guard orders_ == nil else { return }
-//		orders_ = orders
+//extension DTPageCustomer {//}: DTDishesEntitySetterProtocol {
+//	public func set(dishes: DTDishes) {
+//		guard dishes_ == nil else { return }
+//		dishes_ = dishes
 //	}
 //	
 //	public func endShift() {}
 //}
 //
 //open class DTPageCustomer: UIPageViewController {
-//	fileprivate var orders_: DTOrders?
+//	fileprivate var dishes_: DTDishes?
 //}

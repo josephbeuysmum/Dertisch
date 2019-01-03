@@ -18,7 +18,7 @@ public protocol DTCustomerForWaiter {
 }
 
 public protocol DTCustomerForSommelier {
-	func regionSet()
+	func regionChosen()
 }
 
 public protocol DTCustomerProtocol: class, DTCustomerForWaiter, DTCustomerForSommelier {
@@ -34,7 +34,7 @@ open class DTCustomer: UIViewController {
 	open func peruseMenu() {}
 	open func placeOrder() {}
 	open func present(dish dishId: String) {}
-	open func regionSet() {}
+	open func regionChosen() {}
 
 	override final public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -58,7 +58,7 @@ open class DTCustomer: UIViewController {
 			waiter.onShift
 			else { return }
 		placeOrder()
-		regionSet()
+		regionChosen()
 	}
 }
 
