@@ -7,6 +7,7 @@
 
 internal struct DTSwitchesRelationship: DTEndShiftProtocol {
 	var
+	customerID: String,
 	customer: DTCustomer?,
 	waiter: DTWaiter?,
 	headChef: DTHeadChef?,

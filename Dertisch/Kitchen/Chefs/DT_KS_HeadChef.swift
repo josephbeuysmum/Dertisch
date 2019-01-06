@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol DTHeadChefForKitchenMember {
-	mutating func give(dishes: DTDishes)
+	mutating func give(dishes: DTOrderFromKitchen)
 }
 
 public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
@@ -28,7 +28,7 @@ public extension DTHeadChef {
 }
 
 public extension DTHeadChefForKitchenMember {
-	public func give(dishes: DTDishes) {
+	public func give(dishes: DTOrderFromKitchen) {
 		guard var waiter = DTReflector().getFirst(DTWaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
 		waiter.hand(main: dishes)
 	}

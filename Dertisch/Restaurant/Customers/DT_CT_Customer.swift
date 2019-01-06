@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol DTCustomerForWaiter {
+public protocol DTCustomerForWaiter: class {
 	func approach()
 	func firstDishServed()
 	func placeOrder()
@@ -21,7 +21,7 @@ public protocol DTCustomerForSommelier {
 	func regionChosen()
 }
 
-public protocol DTCustomerProtocol: class, DTCustomerForWaiter, DTCustomerForSommelier {
+public protocol DTCustomerProtocol: DTCustomerForWaiter, DTCustomerForSommelier {
 	func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier)
 }
 

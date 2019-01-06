@@ -30,7 +30,7 @@ public protocol DTMaitreDRegistrar {
 }
 
 public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
-	var hasMenu: Bool { get }
+	var menuId: String? { get }
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
 	func closeRestaurant()
 	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
@@ -53,11 +53,11 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
 fileprivate typealias DTCustomerTicket = (customer: DTCustomer, id: String)
 
 public class DTMaitreD {
-	fileprivate let
+	private let
 	key: String,
 	sommelier: DTSommelier
 	
-	fileprivate var
+	private var
 	kitchenStaff: Dictionary<String, DTKitchenMember>,
 	switchesRelationships: Dictionary<String, DTInternalSwitchRelationship>,
 	window: UIWindow!,
@@ -80,8 +80,8 @@ public class DTMaitreD {
 
 
 extension DTMaitreD: DTMaitreDProtocol {
-	public var hasMenu: Bool {
-		return menuSwitches != nil
+	public var menuId: String? {
+		return menuSwitches?.customerID
 	}
 	
 	public func alert(
@@ -97,6 +97,12 @@ extension DTMaitreD: DTMaitreDProtocol {
 			alert.addAction(actions[i])
 		}
 		customer.present(alert, animated: true)
+	}
+	
+	public func closeRestaurant() {
+		currentSwitches?.endShift()
+		menuSwitches?.endShift()
+		//		exit(1)
 	}
 	
 	public func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView? {
@@ -122,13 +128,6 @@ extension DTMaitreD: DTMaitreDProtocol {
 //		}
 //		return alert
 //	}
-	
-	
-	public func closeRestaurant() {
-		currentSwitches?.endShift()
-		menuSwitches?.endShift()
-//		exit(1)
-	}
 	
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
 		// todo should this be a fatal error?
@@ -171,7 +170,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
 		guard
-			!hasMenu,
+			menuSwitches == nil,
 			let currentCustomer = currentSwitches?.customer,
 			let switchBundle = createBundle(from: menuId, and: storyboard),
 			let menu = switchBundle.customer
@@ -201,8 +200,8 @@ extension DTMaitreD: DTMaitreDProtocol {
 		kitchenStaffMember.startShift()
 	}
 	
-	public func removeMenu() {//_ closure: DTBasicClosure? = nil) {
-		guard hasMenu else { return }
+	public func removeMenu() {
+		guard menuSwitches != nil else { return }
 		menuSwitches!.customer?.dismiss(animated: true)
 		menuSwitches!.endShift()
 		menuSwitches = nil
@@ -267,7 +266,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	
 	
-	fileprivate func createBundle(from ticket: DTCustomerTicket) -> DTSwitchesRelationship? {
+	private func createBundle(from ticket: DTCustomerTicket) -> DTSwitchesRelationship? {
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
 		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
 		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
@@ -278,10 +277,15 @@ extension DTMaitreD: DTMaitreDProtocol {
 		ticket.customer.assign(waiter, maitreD: self, and: sommelier)
 		waiter.startShift()
 		headChef?.startShift()
-		return DTSwitchesRelationship(customer: ticket.customer, waiter: waiter, headChef: headChef, animated: false)
+		return DTSwitchesRelationship(
+			customerID: ticket.id,
+			customer: ticket.customer,
+			waiter: waiter,
+			headChef: headChef,
+			animated: false)
 	}
 	
-	fileprivate func createBundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchesRelationship? {
+	private func createBundle(from customerId: String, and storyboard: String? = nil) -> DTSwitchesRelationship? {
 		guard
 			switchesRelationships[customerId] != nil,
 			let customer = UIStoryboard(
@@ -291,7 +295,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 		return createBundle(from: (customer: customer, id: customerId))
 	}
 	
-	fileprivate func getKitchenStaff(from dependencyTypes: [DTKitchenMember.Type]?) -> [String: DTKitchenMember]? {
+	private func getKitchenStaff(from dependencyTypes: [DTKitchenMember.Type]?) -> [String: DTKitchenMember]? {
 		guard dependencyTypes?.count ?? -1 > 0 else { return nil }
 		var kitchenStaff: [String: DTKitchenMember] = [:]
 		for dependencyType in dependencyTypes! {
