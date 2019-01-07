@@ -30,7 +30,7 @@ public protocol DTMaitreDRegistrar {
 }
 
 public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
-	var menuId: String? { get }
+//	var menuId: String? { get }
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
 	func closeRestaurant()
 	func createNibFrom(name nibName: String, for owner: DTCustomer) -> UIView?
@@ -80,9 +80,9 @@ public class DTMaitreD {
 
 
 extension DTMaitreD: DTMaitreDProtocol {
-	public var menuId: String? {
-		return menuSwitches?.customerID
-	}
+//	public var menuId: String? {
+//		return menuSwitches?.customerID
+//	}
 	
 	public func alert(
 		actions: [UIAlertAction],
@@ -202,12 +202,13 @@ extension DTMaitreD: DTMaitreDProtocol {
 	
 	public func removeMenu() {
 		guard menuSwitches != nil else { return }
+		let menuId = menuSwitches?.customerID
 		menuSwitches!.customer?.dismiss(animated: true)
 		menuSwitches!.endShift()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
-		currentSwitches?.customer?.returnMenuToWaiter()
+		currentSwitches?.customer?.returnMenuToWaiter(menuId)
 	}
 	
 	// todo will we reinstate something like this in future?

@@ -19,10 +19,6 @@ extension Float: DTSimpleDish {}
 extension Int: DTSimpleDish {}
 extension String: DTSimpleDish {}
 
-// todo instead of a typealias make own strictly-typed version of array and dictionary (deleting "extension Array: DTDish {}" above) called DT[Un]NamedDishes that can thereafter implement an empty protocol called DTDishes
-//public typealias DTDishes = [String : DTDish]
-
-
 public typealias DTDishionary = [String: DTSimpleDish]
 
 public struct DTDishes: DTComplexDish {
@@ -87,7 +83,13 @@ fileprivate func dishionize_(_ value: Any, in dishionary: inout DTDishionary, wi
 
 extension DTDishionarizer {
 	var dishionary: DTDishionary? {
-		return dishionize(self)
+		if let dishion = DTReflector().getFirst(DTDishionary.self, from: Mirror(reflecting: self)) {
+			lo("dishion exists")
+			return dishion
+		} else {
+			lo("dishion needs creating")
+			return dishionize(self)
+		}
 	}
 }
 
@@ -113,24 +115,18 @@ public extension DTCarteForWaiter {
 }
 
 public extension DTCarteForCustomer {
-//	var count: Int? {
-//		return (self as? DTCarte)?.dishes_?.count ?? nil
-//	}
-	
-//	func array<T>(_ id: String) -> [T]? {
-//		return des(id) as [T]?
-//	}
-//
-//	func bool(_ id: String) -> Bool? {
-//		return des(id) as Bool?
-//	}
-	
-//	func des<T>(_ id: String) -> T? {
-//		return (self as? DTCarte)?.dishes_?[id] as? T
-//	}
-	
 	func des<T>(_ id: String) -> T? {
-		guard let value = (self as? DTCarte)?.dishes_?[id] else { return nil }
+		guard let dishes = (self as? DTCarte)?.dishes_ else { return nil }
+		let tempValue: Any?
+		if let mandatoryValue = dishes[id] {
+			tempValue = mandatoryValue
+		} else if let optionalValue = dishes["\(id).some"] {
+			tempValue = optionalValue
+		} else {
+			tempValue = nil
+		}
+		guard tempValue != nil else { return nil }
+		let value = tempValue!
 		if let result = value as? T {
 			return result
 		} else {
@@ -148,39 +144,20 @@ public extension DTCarteForCustomer {
 				if value is Int { return Double(value as! Int) as? T }
 				if value is Float { return Double(value as! Float) as? T }
 			case tType == Bool.Type.self:
-				if value is Int {
-					return ((value as! Int) > 0) as? T
-				} else {
-					return false as? T
-				}
-			default:
-				return nil
+				if value is Int { return ((value as! Int) == 1) as? T }
+				if value is String { return ((value as! String) == "1") as? T }
+				if value is Double { return ((value as! Double) == 1.0) as? T }
+				if value is Float { return ((value as! Float) == 1.0) as? T }
+			default: ()
 			}
 		}
 		return nil
 	}
 	
-	
-	
-//	func double(_ id: String) -> Double? {
-//		return des(id) as Double?
-//	}
-	
+	// todo we are currently using these to get array, when really they should be accessible through des<T>()
 	func entrees<T>() -> T? {
 		return (self as? DTCarte)?.entrees_ as? T
 	}
-	
-//	func float(_ id: String) -> Float? {
-//		return des(id) as Float?
-//	}
-//	
-//	func int(_ id: String) -> Int? {
-//		return des(id) as Int?
-//	}
-//	
-//	func string(_ id: String) -> String? {
-//		return des(id) as  String?
-//	}
 }
 
 public struct DTCarte: DTCarteProtocol {
