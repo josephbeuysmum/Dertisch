@@ -4,6 +4,13 @@ Dertisch
 A **swifty** MVP framework for Swift apps
 ---
 
+Preamble
+---
+
+The codebase has been updated recently and the following documentation is somewhat out-of-date.
+
+===
+
 **Dertisch** is a lightweight Swift framework built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift by way of its **SWITCHES** analogy.
 
 `SWITCHES` is a culinary analogical acronym designed to explain `Dertisch`'s hybrid nature.
@@ -268,6 +275,7 @@ Developmental Roadmap
 
 `Dertisch` is still in beta at version `0.3.2`. No official timescale exists for ongoing development, but present suggestions are as follows:
 
+-   remove `DT` namespaces from classes etc.
 -   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `DTWaiter` to a `DTpresenter` at runtime;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -	make utils functions native class extensions instead;
