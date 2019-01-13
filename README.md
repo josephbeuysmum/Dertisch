@@ -7,7 +7,8 @@ A **swifty** MVP framework for Swift apps
 Preamble
 ---
 
-The codebase has been updated recently and the following documentation is somewhat out-of-date. Will be reviewed shortly (once I get the time, basically).
+-   The codebase has been updated recently and the following documentation is somewhat out-of-date. It will be reviewed shortly (once I get the time, basically); also
+-   `Dertisch` exists partly as an experiment into what being *swifty* means in relation to traditional view/model architectures, and some of its functionality is therefore of an experimental nature. Subsequently `Dertisch` is not currently recommended for production code.
 
 ---
 
