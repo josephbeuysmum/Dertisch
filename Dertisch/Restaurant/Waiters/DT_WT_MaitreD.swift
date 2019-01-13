@@ -42,8 +42,9 @@ public protocol DTMaitreDProtocol: DTMaitreDRegistrar {
 //		handler: @escaping ((UIAlertAction) -> Void),
 //		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
 	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
-	func present(menu menuId: String, inside rect: CGRect?, from storyboard: String?)
-	func removeMenu()//_ closure: DTBasicClosure?)
+	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
+	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
+	func removeMenu(_ chosenDishId: String?)
 	func seatNext(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
 	func usherOutCurrentCustomer()
 }
@@ -166,7 +167,7 @@ extension DTMaitreD: DTMaitreDProtocol {
 	}
 	
 	public func present(
-		menu menuId: String,
+		popoverMenu menuId: String,
 		inside rect: CGRect? = nil,
 		from storyboard: String? = nil) {
 		guard
@@ -179,9 +180,11 @@ extension DTMaitreD: DTMaitreDProtocol {
 		currentSwitches?.waiter?.startBreak()
 		currentCustomer.peruseMenu()
 		menu.modalPresentationStyle = .popover
-		currentCustomer.present(menu, animated: true) {
-//			self.dishes_.make(order: DTOrder.popoverAdded)
-		}
+		currentCustomer.present(menu, animated: true)
+//		{
+//			lo()
+////			self.dishes_.make(order: DTOrder.popoverAdded)
+//		}
 		menu.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {
 			menu.popoverPresentationController?.sourceRect = safeRect
@@ -200,15 +203,15 @@ extension DTMaitreD: DTMaitreDProtocol {
 		kitchenStaffMember.startShift()
 	}
 	
-	public func removeMenu() {
-		guard menuSwitches != nil else { return }
-		let menuId = menuSwitches?.customerID
-		menuSwitches!.customer?.dismiss(animated: true)
-		menuSwitches!.endShift()
+	public func removeMenu(_ chosenDishId: String? = nil) {
+		guard var strongMenuSwitches = menuSwitches else { return }
+		strongMenuSwitches.customer?.dismiss(animated: true)
+//		{ lo("removeMenu complete") }
+		strongMenuSwitches.endShift()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
-		currentSwitches?.customer?.returnMenuToWaiter(menuId)
+		currentSwitches?.customer?.returnMenuToWaiter(chosenDishId)
 	}
 	
 	// todo will we reinstate something like this in future?

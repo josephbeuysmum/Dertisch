@@ -23,11 +23,12 @@ struct DTReflector {
 			let mirror = Mirror(reflecting: child.value)
 			let value: Any
 			if  mirror.displayStyle == .optional,
-				let first = mirror.children.first {
+				  let first = mirror.children.first {
 				value = first.value
 			} else {
 				value = child.value
 			}
+//			lo(value)
 			if let t = value as? T {
 				values.append(t)
 				if !getAll { return values }

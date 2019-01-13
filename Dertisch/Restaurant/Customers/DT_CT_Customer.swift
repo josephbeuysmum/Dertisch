@@ -10,11 +10,11 @@ import UIKit
 
 public protocol DTCustomerForWaiter: class {
 	func approach()
-	func firstDishServed()
-	func placeOrder()
-	func peruseMenu()
+//	func firstDishServed()
+//	func placeOrder()
+//	func peruseMenu()
 	func present(dish dishId: String)
-	func returnMenuToWaiter(_ menuId: String?)
+//	func returnMenuToWaiter(_ chosenDishId: String?)
 }
 
 public protocol DTCustomerForSommelier {
@@ -30,7 +30,7 @@ open class DTCustomer: UIViewController {
 	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {}
 	open func finishMeal() {}
 	open func firstDishServed() {}
-	open func returnMenuToWaiter(_ menuId: String?) {}
+	open func returnMenuToWaiter(_ chosenDishId: String?) {}
 	open func peruseMenu() {}
 	open func placeOrder() {}
 	open func present(dish dishId: String) {}

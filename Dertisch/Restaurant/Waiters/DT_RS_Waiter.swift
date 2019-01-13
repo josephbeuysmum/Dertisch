@@ -82,14 +82,16 @@ fileprivate func dishionize_(_ value: Any, in dishionary: inout DTDishionary, wi
 }
 
 extension DTDishionarizer {
+	// todo make dishionary once and once only
 	var dishionary: DTDishionary? {
-		if let dishion = DTReflector().getFirst(DTDishionary.self, from: Mirror(reflecting: self)) {
-			lo("dishion exists")
-			return dishion
-		} else {
-			lo("dishion needs creating")
+//		lo("dish..............", self)
+//		if let dishion = DTReflector().getFirst(DTDishionary.self, from: Mirror(reflecting: self)) {
+//			lo("dishion exists")
+//			return dishion
+//		} else {
+//			lo("dishion needs creating")
 			return dishionize(self)
-		}
+//		}
 	}
 }
 
@@ -99,9 +101,9 @@ extension DTDishionarizer {
 
 public protocol DTCarteForCustomer {}
 
-// todo see if we can make this procedure generic (specifically implemented in GameWaiter atm)
+// todo reinstate carte.stock()? And see if we can somehow make it generic?
 public protocol DTCarteForWaiter {
-	func stock(with order: DTOrderFromKitchen)
+//	func stock(with order: DTOrderFromKitchen)
 	func empty()
 }
 
@@ -110,7 +112,7 @@ public protocol DTCarteProtocol: DTCarteForCustomer, DTCarteForWaiter {
 }
 
 public extension DTCarteForWaiter {
-	func stock(with order: DTOrderFromKitchen) { lo() }
+//	func stock(with order: DTOrderFromKitchen) { lo() }
 	func empty() {}
 }
 
@@ -229,8 +231,10 @@ public extension DTWaiterForWaiter {
 	func fillCarte(with entrees: DTOrderFromKitchen) {}
 	func serve(dishes: DTOrderFromKitchen) {
 		let mirror = Mirror(reflecting: self)
-		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }
-		carte.stock(with: dishes)
+//		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }
+//		carte.stock(with: dishes)
+//		guard var waiter = self as? DTWaiterForWaiter else { return  }
+		fillCarte(with: dishes)
 		guard let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: mirror) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
 		DispatchQueue.main.async {
@@ -250,11 +254,11 @@ public extension DTWaiterForHeadChef {
 			let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? DTWaiterForWaiter
 			else { return }
-		if let carte = DTReflector().getFirst(DTCarteForWaiter.self, from: Mirror(reflecting: self)) {
-			carte.stock(with: entrees)
-		} else {
+//		if let carte = DTReflector().getFirst(DTCarteForWaiter.self, from: Mirror(reflecting: self)) {
+//			carte.stock(with: entrees)
+//		} else {
 			waiter.fillCarte(with: entrees)
-		}
+//		}
 		customer.approach()
 	}
 }
