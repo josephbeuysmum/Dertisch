@@ -144,7 +144,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	BundledJson
 	// provides simplified access to json config data bundled with the app
 
-	DTCoreData
+	Freezer
 	// provides simplified access to Core Data storage
 
 	UrlSession
@@ -280,7 +280,7 @@ Developmental Roadmap
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
 -	replace `endShift()` functions with weak vars etc?;
--	force `DTCoreData` to take `dataModelName` at start up;
+-	force `Freezer` to take `dataModelName` at start up;
 -	reintroduce timeout stopwatch to `UrlSession`;
 -	complete list of MIME types in `UrlSession`;
 -	create example boilerplate app;
