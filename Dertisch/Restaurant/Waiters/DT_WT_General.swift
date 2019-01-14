@@ -32,10 +32,10 @@ class GeneralWaiter: Waiter {
 }
 
 extension GeneralWaiter: WaiterForHeadChef {
-	public func serve(entrees: OrderFromKitchen) {}
+	public func serve(entrees: FulfilledOrder) {}
 }
 
 extension GeneralWaiter: WaiterForWaiter {
-	func fillCarte(with entrees: OrderFromKitchen) {}
-	func serve(dishes: OrderFromKitchen) {}
+	func fillCarte(with entrees: FulfilledOrder) {}
+	func serve(dishes: FulfilledOrder) {}
 }

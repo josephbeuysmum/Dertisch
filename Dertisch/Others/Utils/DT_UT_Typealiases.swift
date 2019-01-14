@@ -7,12 +7,9 @@
 //
 
 import CoreData
-//import UIKit
 
-//public typealias DTBasicClosure = () -> Void
 public typealias FreezerClosure = ([NSManagedObject]?) -> Void
 public typealias FreezerDeletionClosure = (Bool) -> Void
-//public typealias OrderClosure = (String, Any?) -> Void
 
 //public protocol FreezerProtocol: KitchenMember {
 //	var dataModelName: String? { get set }

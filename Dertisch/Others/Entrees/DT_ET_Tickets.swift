@@ -6,29 +6,34 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo better generic word for dishes and dishes than "passable"
-//public typealias OrderFromKitchen = Passable
-public typealias Order = Passable
 public typealias Ticket = String
 
-public struct Passable {
+public struct Order {
 	public let
 	ticket: Ticket,
 	content: Any?
-	
+
 	public init(_ ticket: Ticket, _ content: Any?) {
 		self.ticket = ticket
 		self.content = content
 	}
 }
 
-public struct OrderFromKitchen {
-	var ticket: Ticket { return passable.ticket }
-	var dishes: Dishionarizer? { return passable.content as? Dishionarizer }
-	
-	private let passable: Passable
-	
-	public init(_ id: Ticket, _ content: Dishionarizer?) {
-		passable = Passable(id, content)
+public struct FulfilledOrder {
+	public let
+	ticket: Ticket,
+	dishes: Dishionarizer?,
+	multipleDishes: [String: Dishionarizer]?
+
+	public init(_ ticket: Ticket, _ dishes: Dishionarizer?) {
+		self.ticket = ticket
+		self.dishes = dishes
+		self.multipleDishes = nil
+	}
+
+	public init(_ ticket: Ticket, _ multipleDishes: [String: Dishionarizer]?) {
+		self.ticket = ticket
+		self.multipleDishes = multipleDishes
+		self.dishes = nil
 	}
 }

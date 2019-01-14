@@ -103,7 +103,7 @@ public protocol CarteForCustomer {}
 
 // todo reinstate carte.stock()? And see if we can somehow make it generic?
 public protocol CarteForWaiter {
-//	func stock(with order: OrderFromKitchen)
+//	func stock(with order: FulfilledOrder)
 	func empty()
 }
 
@@ -112,7 +112,7 @@ public protocol CarteProtocol: CarteForCustomer, CarteForWaiter {
 }
 
 public extension CarteForWaiter {
-//	func stock(with order: OrderFromKitchen) { lo() }
+//	func stock(with order: FulfilledOrder) { lo() }
 	func empty() {}
 }
 
@@ -190,14 +190,14 @@ public protocol WaiterForCustomer: GiveOrderProtocol {
 //	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
 //}
 
-public protocol WaiterForHeadChef {//: DTServeCustomerProtocol {
-	mutating func serve(entrees: OrderFromKitchen)
-	mutating func hand(main: OrderFromKitchen)
+public protocol WaiterForHeadChef {
+	mutating func serve(entrees: FulfilledOrder)
+	mutating func hand(main: FulfilledOrder)
 }
 
 public protocol WaiterForWaiter {
-	mutating func fillCarte(with entrees: OrderFromKitchen)
-	mutating func serve(dishes: OrderFromKitchen)
+	mutating func fillCarte(with entrees: FulfilledOrder)
+	mutating func serve(dishes: FulfilledOrder)
 }
 
 public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol {
@@ -228,8 +228,8 @@ public extension WaiterForCustomer {
 }
 
 public extension WaiterForWaiter {
-	func fillCarte(with entrees: OrderFromKitchen) {}
-	func serve(dishes: OrderFromKitchen) {
+	func fillCarte(with entrees: FulfilledOrder) {}
+	func serve(dishes: FulfilledOrder) {
 		let mirror = Mirror(reflecting: self)
 //		guard let carte = Reflector().getFirst(Carte.self, from: mirror) else { return }
 //		carte.stock(with: dishes)
@@ -244,12 +244,12 @@ public extension WaiterForWaiter {
 }
 
 public extension WaiterForHeadChef {
-	public func hand(main: OrderFromKitchen) {
+	public func hand(main: FulfilledOrder) {
 		guard var waiter = self as? WaiterForWaiter else { return }
 		waiter.serve(dishes: main)
 	}
 	
-	public func serve(entrees: OrderFromKitchen) {
+	public func serve(entrees: FulfilledOrder) {
 		guard
 			let customer = Reflector().getFirst(CustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? WaiterForWaiter

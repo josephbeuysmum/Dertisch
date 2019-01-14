@@ -6,7 +6,6 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo DTCD types still need namespace removing
 public enum FreezerTypes { case bool, double, int, string }
 
 //extension FreezerTypes: Equatable {

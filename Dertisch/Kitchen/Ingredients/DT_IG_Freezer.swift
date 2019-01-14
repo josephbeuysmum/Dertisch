@@ -8,8 +8,6 @@
 
 import CoreData
 
-//public enum DTCDOperationTypes { case delete, retrieve, store, update }
-
 public protocol FreezerProtocol: KitchenMember {
 	var dataModelName: String? { get set }
 	func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure)

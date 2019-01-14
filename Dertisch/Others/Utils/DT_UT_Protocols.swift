@@ -28,29 +28,6 @@ public protocol StartShiftProtocol {
 	func startShift()
 }
 
-// todo: the presenter Model presenting a viewController: bad code smell
-//public protocol DTPresentCustomerProtocol {
-//	func serve(_ customerId: String, animated: Bool)
-//}
-
-//public protocol DTSingleInstanceProtocol {
-//	func guaranteeSingleInstanceOfSelf<T>(within delegate: T)
-//}
-//
-//
-//
-//// todo the places where protocols and their extensions live is becoming increasingly messy, refactor into some sensible system
-//public extension DTSingleInstanceProtocol {
-//	func guaranteeSingleInstanceOfSelf<T>(within delegate: T) {
-//		let reflection = Mirror(reflecting: delegate)
-//		for (_, child) in reflection.children.enumerated() {
-//			if child.value is Self {
-//				fatalError("DTSingleInstanceProtocol delegates can only possess one instance of <T>.self")
-//			}
-//		}
-//	}
-//}
-
 public protocol FreezerEntityProtocol {
 	var attributes: [String: StorableDataType] { get }
 	var name: String { get }
