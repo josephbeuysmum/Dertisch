@@ -51,10 +51,10 @@ public protocol StartShiftProtocol {
 //	}
 //}
 
-public protocol DTCDEntityProtocol {
+public protocol FreezerEntityProtocol {
 	var attributes: [String: StorableDataType] { get }
 	var name: String { get }
-	init (_ name: String, keys: [DTCDKey])
+	init (_ name: String, keys: [FreezerKey])
 	mutating func add(_ attribute: StorableDataType, by key: String) -> Bool
 }
 

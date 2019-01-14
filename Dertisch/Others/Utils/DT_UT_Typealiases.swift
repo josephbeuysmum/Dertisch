@@ -10,17 +10,17 @@ import CoreData
 //import UIKit
 
 //public typealias DTBasicClosure = () -> Void
-public typealias DTCDClosure = ([NSManagedObject]?) -> Void
-public typealias DTCDDeletionClosure = (Bool) -> Void
+public typealias FreezerClosure = ([NSManagedObject]?) -> Void
+public typealias FreezerDeletionClosure = (Bool) -> Void
 //public typealias OrderClosure = (String, Any?) -> Void
 
-//public protocol DTCoreDataProtocol: KitchenMember {
+//public protocol FreezerProtocol: KitchenMember {
 //	var dataModelName: String? { get set }
-//	func delete(entityName: String, _ callback: @escaping DTCDDeletionClosure)
-//	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure)
-//	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDClosure)
-//	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure)
-//	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDClosure)
+//	func delete(entityName: String, _ callback: @escaping FreezerDeletionClosure)
+//	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
+//	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping FreezerClosure)
+//	func store(_ entity: FreezerEntity, _ callback: @escaping FreezerClosure)
+//	func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String?, _ callback: @escaping FreezerClosure)
 //}
 
 //public protocol DTTemporaryValuesProtocol: KitchenMember {
