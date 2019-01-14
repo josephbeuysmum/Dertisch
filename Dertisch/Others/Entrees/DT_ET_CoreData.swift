@@ -6,6 +6,7 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+// todo DTCT types still need namespace removing
 public enum DTCDTypes { case bool, double, int, string }
 
 //extension DTCDTypes: Equatable {
@@ -35,9 +36,9 @@ public struct DTCDKey {
 public struct DTCDAttribute {
 	public let
 	key: String,
-	value: DTStorableDataType
+	value: StorableDataType
 	
-	public init (_ key: String, _ value: DTStorableDataType) {
+	public init (_ key: String, _ value: StorableDataType) {
 		self.key = key
 		self.value = value
 	}
@@ -47,14 +48,14 @@ public struct DTCDAttribute {
 public struct DTCDEntity: DTCDEntityProtocol {
 	fileprivate typealias TypesCollection = [String: DTCDTypes]
 	
-	public var attributes: [String: DTStorableDataType] { return attributes_ }
+	public var attributes: [String: StorableDataType] { return attributes_ }
 	public var name: String { return name_ }
 	
 	fileprivate let
 	name_: String,
 	types_: TypesCollection
 	
-	fileprivate var attributes_: [String: DTStorableDataType]
+	fileprivate var attributes_: [String: StorableDataType]
 	
 	init () { fatalError("init() has not been implemented") }
 	
@@ -68,7 +69,7 @@ public struct DTCDEntity: DTCDEntityProtocol {
 		types_ = types
 	}
 	
-	mutating public func add(_ attribute: DTStorableDataType, by key: String) -> Bool {
+	mutating public func add(_ attribute: StorableDataType, by key: String) -> Bool {
 		guard
 			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)
@@ -78,7 +79,7 @@ public struct DTCDEntity: DTCDEntityProtocol {
 		return true
 	}
 	
-fileprivate func assessValidity(of attribute: DTStorableDataType, by type: DTCDTypes) -> Bool {
+fileprivate func assessValidity(of attribute: StorableDataType, by type: DTCDTypes) -> Bool {
 		switch type {
 		case DTCDTypes.bool:	return attribute is Bool
 		case DTCDTypes.double:	return attribute is Double

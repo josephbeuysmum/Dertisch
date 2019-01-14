@@ -1,5 +1,5 @@
 //
-//  DT_PT_Proxies.swift
+//  DT_UT_Typealiases.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
@@ -9,12 +9,12 @@
 import CoreData
 //import UIKit
 
-public typealias DTBasicClosure = () -> Void
+//public typealias DTBasicClosure = () -> Void
 public typealias DTCDClosure = ([NSManagedObject]?) -> Void
 public typealias DTCDDeletionClosure = (Bool) -> Void
-public typealias DTOrderClosure = (String, Any?) -> Void
+//public typealias OrderClosure = (String, Any?) -> Void
 
-//public protocol DTCoreDataProtocol: DTKitchenMember {
+//public protocol DTCoreDataProtocol: KitchenMember {
 //	var dataModelName: String? { get set }
 //	func delete(entityName: String, _ callback: @escaping DTCDDeletionClosure)
 //	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure)
@@ -23,14 +23,14 @@ public typealias DTOrderClosure = (String, Any?) -> Void
 //	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDClosure)
 //}
 
-//public protocol DTTemporaryValuesProtocol: DTKitchenMember {
-//	func getValue(by key: String, andAnnul: Bool?) -> DTStorableDataType?
-//	func set(_ value: DTStorableDataType, by key: String)
+//public protocol DTTemporaryValuesProtocol: KitchenMember {
+//	func getValue(by key: String, andAnnul: Bool?) -> StorableDataType?
+//	func set(_ value: StorableDataType, by key: String)
 //	func annulValue(by key: String)
 //	func removeValues ()
 //}
 
-//public protocol DTImagesProtocol: DTKitchenMember {
+//public protocol ImagesProtocol: KitchenMember {
 //	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
 //	func loadImage(by url: String)
 //}

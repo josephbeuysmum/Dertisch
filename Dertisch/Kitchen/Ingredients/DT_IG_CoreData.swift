@@ -10,7 +10,7 @@ import CoreData
 
 public enum DTCDOperationTypes { case delete, retrieve, store, update }
 
-public protocol DTCoreDataProtocol: DTKitchenMember {
+public protocol DTCoreDataProtocol: KitchenMember {
 	var dataModelName: String? { get set }
 	func delete(_ entityName: String, _ callback: @escaping DTCDDeletionClosure)
 	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure)
@@ -20,7 +20,7 @@ public protocol DTCoreDataProtocol: DTKitchenMember {
 }
 
 public class DTCoreData {
-	public var headChef: DTHeadChefForKitchenMember?
+	public var headChef: HeadChefForKitchenMember?
 	
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
@@ -36,7 +36,7 @@ public class DTCoreData {
 	
 	fileprivate var data_model_name: String?
 	
-	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {}
+	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {}
 	
 	deinit {}
 }
