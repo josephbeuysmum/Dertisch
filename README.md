@@ -269,13 +269,16 @@ There are more elements to `Dertisch` than those described above, but because no
 Developmental Roadmap
 ---
 
-`Dertisch` is still in beta at version `0.3.8`. No official timescale exists for ongoing development, but present suggestions are as follows:
+`Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
--   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
+-   make `Dertisch` a Cocoapod;
+-   change Customer <-> ViewController relationship from inheritance to composition;
+-   reassess filenames;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -	make utils functions native class extensions instead;
 -   remove remaining `DT` namespaces;
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
+-   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
 -	new `MetricsSousChef` for serving device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
