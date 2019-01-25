@@ -7,18 +7,16 @@
 
 import Foundation
 
-public protocol BundledJsonProtocol: KitchenMember {
+public protocol BundledJsonProtocol: Ingredients {
 //	var settings: JsonSettings? { get }
 //	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
 public class BundledJson {
-	public var headChef: HeadChefForKitchenMember?
-	
 	fileprivate var
 	settings_: JsonSettings?
 	
-	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {
+	required public init(_ resources: [String: KitchenResource]? = nil) {
 		parseSettings()
 	}
 	

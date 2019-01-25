@@ -11,6 +11,6 @@ internal struct InternalSwitchRelationship {
 	customerType: CustomerProtocol.Type,
 	waiterType: Waiter.Type?,
 	headChefType: HeadChef.Type?,
-	kitchenStaffTypes: [KitchenMember.Type]?
+	kitchenStaffTypes: [KitchenResource.Type]?
 }
 

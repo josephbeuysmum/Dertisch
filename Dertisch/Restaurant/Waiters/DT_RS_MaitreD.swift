@@ -17,16 +17,16 @@ public protocol MaitreDExtension {
 
 public protocol MaitreDRegistrar {
 	func register(
-		_ modelClassType: KitchenMember.Type,
+		_ modelClassType: KitchenResource.Type,
 		with key: String,
-		injecting dependencyTypes: [KitchenMember.Type]?)
+		injecting dependencyTypes: [KitchenResource.Type]?)
 	func introduce(
 		_ customerId: String,
 		as customerType: CustomerProtocol.Type,
 		with key: String,
 		waiter waiterType: Waiter.Type?,
 		chef headChefType: HeadChef.Type?,
-		kitchenStaff kitchenStaffTypes: [KitchenMember.Type]?)
+		kitchenStaff kitchenStaffTypes: [KitchenResource.Type]?)
 }
 
 public protocol MaitreDProtocol: MaitreDRegistrar {
@@ -52,7 +52,7 @@ public class MaitreD {
 	sommelier: Sommelier
 	
 	private var
-	kitchenStaff: Dictionary<String, KitchenMember>,
+	resources: Dictionary<String, KitchenResource>,
 	switchesRelationships: Dictionary<String, InternalSwitchRelationship>,
 	window: UIWindow!,
 	formerCustomers: [CustomerTicket],
@@ -62,11 +62,11 @@ public class MaitreD {
 	
 	required public init() {
 		key = NSUUID().uuidString
-		kitchenStaff = [:]
+		resources = [:]
 		switchesRelationships = [:]
 		formerCustomers = []
 		let bundledJson = BundledJson()
-		kitchenStaff[BundledJson.staticId] = bundledJson
+		resources[BundledJson.staticId] = bundledJson
 		sommelier = Sommelier(bundledJson: bundledJson)
 	}
 }
@@ -90,8 +90,8 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func closeRestaurant() {
-		currentSwitches?.endShift()
-		menuSwitches?.endShift()
+		currentSwitches?.end()
+		menuSwitches?.end()
 		//		exit(1)
 	}
 	
@@ -108,8 +108,8 @@ extension MaitreD: MaitreDProtocol {
 		
 		guard let rootSwitches = createBundle(from: customerId, and: storyboard) else { return }
 		currentSwitches = rootSwitches
-		currentSwitches!.waiter?.startShift()
-		currentSwitches!.headChef?.startShift()
+		currentSwitches!.waiter?.begin()
+		currentSwitches!.headChef?.begin()
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootSwitches.customer
@@ -123,7 +123,7 @@ extension MaitreD: MaitreDProtocol {
 		with key: String,
 		waiter waiterType: Waiter.Type? = nil,
 		chef headChefType: HeadChef.Type? = nil,
-		kitchenStaff kitchenStaffTypes: [KitchenMember.Type]? = nil) {
+		kitchenStaff kitchenStaffTypes: [KitchenResource.Type]? = nil) {
 		guard
 			switchesRelationships[customerId] == nil,
 			key == self.key
@@ -145,8 +145,8 @@ extension MaitreD: MaitreDProtocol {
 		currentSwitches?.headChef?.startBreak()
 		currentSwitches?.waiter?.startBreak()
 		currentCustomer.peruseMenu()
-		menuSwitches!.waiter?.startShift()
-		menuSwitches!.headChef?.startShift()
+		menuSwitches!.waiter?.begin()
+		menuSwitches!.headChef?.begin()
 		menuSwitches!.customer.modalPresentationStyle = .popover
 		currentCustomer.present(menuSwitches!.customer, animated: true)
 		menuSwitches!.customer.popoverPresentationController?.sourceView = currentCustomer.view
@@ -155,21 +155,35 @@ extension MaitreD: MaitreDProtocol {
 		}
 	}
 	
+	/*
 	public func register(
-		_ kitchenStaffType: KitchenMember.Type,
+	_ kitchenStaffType: KitchenMember.Type,
+	with key: String,
+	injecting dependencyTypes: [KitchenMember.Type]? = nil) {
+	guard key == self.key else { return }
+	let kitchenClasses = getResources(from: dependencyTypes)
+	let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
+	self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
+	kitchenStaffMember.begin()
+	}
+*/
+	
+	public func register(
+		_ resourceType: KitchenResource.Type,
 		with key: String,
-		injecting dependencyTypes: [KitchenMember.Type]? = nil) {
+		injecting dependencyTypes: [KitchenResource.Type]? = nil) {
 		guard key == self.key else { return }
-		let kitchenClasses = getKitchenStaff(from: dependencyTypes)
-		let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
-		self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
-		kitchenStaffMember.startShift()
+		let
+		resourceDependencies = getResources(from: dependencyTypes),
+		resource = resourceType.init(resourceDependencies)
+		self.resources[resourceType.staticId] = resource
+		resource.begin()
 	}
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
 		guard var strongMenuSwitches = menuSwitches else { return }
 		strongMenuSwitches.customer.dismiss(animated: true) //{}
-		strongMenuSwitches.endShift()
+		strongMenuSwitches.end()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
@@ -189,22 +203,22 @@ extension MaitreD: MaitreDProtocol {
 			switchBundle.customer.modalTransitionStyle = transitionStyle!
 		}
 		currentCustomer.present(switchBundle.customer, animated: animated)
-		currentSwitches?.endShift()
+		currentSwitches?.end()
 		switchBundle.animated = animated
 		currentSwitches = switchBundle
-		currentSwitches!.waiter?.startShift()
-		currentSwitches!.headChef?.startShift()
+		currentSwitches!.waiter?.begin()
+		currentSwitches!.headChef?.begin()
 		sommelier.set(currentCustomer)
 	}
 	
 	public func usherOutCurrentCustomer() {
 		guard currentSwitches != nil else { return }
 		currentSwitches!.customer.dismiss(animated: currentSwitches!.animated) { [unowned self] in
-			self.currentSwitches!.endShift()
+			self.currentSwitches!.end()
 			guard let formerCustomer = self.formerCustomers.popLast() else { return }
 			self.currentSwitches = self.createBundle(from: formerCustomer)
-			self.currentSwitches!.waiter?.startShift()
-			self.currentSwitches!.headChef?.startShift()
+			self.currentSwitches!.waiter?.begin()
+			self.currentSwitches!.headChef?.begin()
 		}
 	}
 	
@@ -254,7 +268,7 @@ extension MaitreD: MaitreDProtocol {
 	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
 		let
-		kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes),
+		kitchenStaff = getResources(from: switchesRelationship.kitchenStaffTypes),
 		headChef = switchesRelationship.headChefType != nil ?
 			switchesRelationship.headChefType!.init(kitchenStaff) :
 			nil,
@@ -281,16 +295,16 @@ extension MaitreD: MaitreDProtocol {
 		return createBundle(from: (customer: customer, id: customerId))
 	}
 	
-	private func getKitchenStaff(from dependencyTypes: [KitchenMember.Type]?) -> [String: KitchenMember]? {
+	private func getResources(from dependencyTypes: [KitchenResource.Type]?) -> [String: KitchenResource]? {
 		guard dependencyTypes?.count ?? -1 > 0 else { return nil }
-		var kitchenStaff: [String: KitchenMember] = [:]
+		var resources: [String: KitchenResource] = [:]
 		for dependencyType in dependencyTypes! {
 			let dependencyId = dependencyType.staticId
-			if let dependencyClass = self.kitchenStaff[dependencyId] {
-				kitchenStaff[dependencyId] = dependencyClass
+			if let dependencyClass = self.resources[dependencyId] {
+				resources[dependencyId] = dependencyClass
 			}
 		}
-		return kitchenStaff
+		return resources
 	}
 	
 	private func searchFor(

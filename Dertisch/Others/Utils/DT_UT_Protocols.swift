@@ -7,28 +7,43 @@
 //
 
 public protocol CigaretteBreakProtocol {
-	mutating func startBreak ()
-	mutating func endBreak ()
+	mutating func startBreak()
+	mutating func endBreak()
+}
+
+extension CigaretteBreakProtocol {
+	public func startBreak() {}
+	public func endBreak() {}
 }
 
 public protocol DescribableProtocol {
 	var description: String { get }
 }
 
-// todo endShift in a better way, with weak vars etc
-public protocol EndShiftProtocol {
-	mutating func endShift ()
+public protocol BeginProtocol {
+	func begin()
+}
+
+// todo end in a better way, with weak vars etc
+public protocol EndProtocol {
+	mutating func end()
 }
 
 public protocol GiveOrderProtocol {
 	mutating func give(_ order: Order)
 }
 
-public protocol StaffMember: StartShiftProtocol, EndShiftProtocol {}
-
-public protocol StartShiftProtocol {
-	func startShift()
+public protocol KitchenResource: BeginProtocol, EndProtocol {
+	init(_ resources: [String: KitchenResource]?)
 }
+
+extension KitchenResource {
+	static public var staticId: String { return String(describing: self) }
+	public func begin() {}
+	public func end() {}
+}
+
+public protocol StaffMember: CigaretteBreakProtocol {}
 
 public protocol FreezerEntityProtocol {
 	var attributes: [String: StorableDataType] { get }

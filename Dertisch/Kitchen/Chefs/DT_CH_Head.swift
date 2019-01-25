@@ -6,28 +6,28 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-import Foundation
+//import Foundation
 
-public protocol HeadChefForKitchenMember {
+public protocol HeadChefForSousChef {
 	mutating func give(dishes: FulfilledOrder)
 }
 
 public protocol HeadChefForWaiter: GiveOrderProtocol {}
 
-public protocol HeadChef: HeadChefForWaiter, HeadChefForKitchenMember, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol, SwitchesRelationshipProtocol {
-	init(_ sousChefs: [String: KitchenMember]?)
+public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, KitchenResource, StaffMember, SwitchesRelationshipProtocol {
+	init(_ resources: [String: KitchenResource]?)
 	var waiter: WaiterForHeadChef? { get set }
 }
 
 public extension HeadChef {
 	public func endBreak() {}
-	public func endShift() {}
+	public func end() {}
 	public func give(_ order: Order) {}
 	public func startBreak() {}
-	public func startShift() {}
+	public func begin() {}
 }
 
-public extension HeadChefForKitchenMember {
+public extension HeadChefForSousChef {
 	public func give(dishes: FulfilledOrder) {
 		Rota().waiterForHeadChef(self as? SwitchesRelationshipProtocol)?.serve(main: dishes)
 	}

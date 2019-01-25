@@ -6,8 +6,6 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-//import Dertisch
-
 class GeneralWaiter: Waiter {
 	var carte: CarteForCustomer? { return nil }
 	
@@ -26,12 +24,12 @@ class GeneralWaiter: Waiter {
 	
 //	deinit { lo("au revoir general waiter") }
 	
-	public func endShift() {
+	public func end() {
 		customer = nil
 		headChef = nil
 	}
 	
-	public func startShift() {}
+	public func begin() {}
 }
 
 extension GeneralWaiter: WaiterForHeadChef {

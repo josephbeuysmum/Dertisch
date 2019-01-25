@@ -8,13 +8,13 @@
 
 import UIKit
 
-public protocol ImagesProtocol: KitchenMember {
-	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
-	func loadImage(by url: String)
+public protocol ImagesProtocol: SousChef {
+//	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
+//	func loadImage(by url: String)
 }
 
 public class Images {
-	public var headChef: HeadChefForKitchenMember?
+	public var headChef: HeadChefForSousChef?
 	
 	// todo forced unwraps for url_session and key is unacceptable, revisit this
 	fileprivate let key: String
@@ -24,9 +24,9 @@ public class Images {
 	raw_images: Dictionary<String, Data>,
 	url_session: UrlSession!
 	
-	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {
+	required public init(_ resources: [String: KitchenResource]? = nil) {
 		key = NSUUID().uuidString
-		url_session = kitchenStaff?[UrlSession.staticId] as? UrlSession
+		url_session = resources?[UrlSession.staticId] as? UrlSession
 		urlsResolving = []
 		raw_images = [:]
 	}
@@ -53,18 +53,18 @@ extension Images: ImagesProtocol {
 //			guard let strongSelf = self else { return }
 //			if let urlIndex = strongSelf.urlsResolving.index(of: url) { strongSelf.urlsResolving.remove( at: urlIndex ) }
 //			guard strongSelf.assess(result: data) else { return }
-//			let result = data as! RawIngredient
+//			let result = data as! RawIngredients
 //			strongSelf.raw_images[url] = result.data as? Data
 //			strongSelf.dishes_.make(order: strongSelf.getUrlKey(by: url), with: url)
 //		}
-		url_session.call(url: url, method: UrlSession.methods.GET)
+		_ = url_session.call(url, from: self)
 	}
 	
 	
 	
 	fileprivate func assess(result: Any?) -> Bool {
 		guard
-			let result = result as? RawIngredient,
+			let result = result as? RawIngredients,
 			let success = result.success,
 			success,
 			result.data is Data

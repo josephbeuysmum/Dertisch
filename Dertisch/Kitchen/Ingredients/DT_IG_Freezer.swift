@@ -8,18 +8,16 @@
 
 import CoreData
 
-public protocol FreezerProtocol: KitchenMember {
-	var dataModelName: String? { get set }
-	func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure)
-	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
-	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping FreezerClosure)
-	func store(_ entity: FreezerEntity, _ callback: @escaping FreezerClosure)
-	func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String?, _ callback: @escaping FreezerClosure)
+public protocol FreezerProtocol: Ingredients {
+//	var dataModelName: String? { get set }
+//	func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure)
+//	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
+//	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping FreezerClosure)
+//	func store(_ entity: FreezerEntity, _ callback: @escaping FreezerClosure)
+//	func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String?, _ callback: @escaping FreezerClosure)
 }
 
 public class Freezer {
-	public var headChef: HeadChefForKitchenMember?
-	
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
 			loWarning("Freezer dataModelName is nil")
@@ -32,19 +30,17 @@ public class Freezer {
 		return container
 	}()
 	
-	fileprivate var data_model_name: String?
+	fileprivate var dataModelName_: String?
 	
-	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {}
-	
-	deinit {}
+	required public init(_ resources: [String: KitchenResource]? = nil) {}
 }
 
 extension Freezer: FreezerProtocol {
 	public var dataModelName: String? {
-		get { return data_model_name }
+		get { return dataModelName_ }
 		set {
-			guard data_model_name == nil else { fatalError("Currently Freezer dataModelName can only be set once") }
-			data_model_name = newValue
+			guard dataModelName_ == nil else { fatalError("Currently Freezer dataModelName can only be set once") }
+			dataModelName_ = newValue
 		}
 	}
 	

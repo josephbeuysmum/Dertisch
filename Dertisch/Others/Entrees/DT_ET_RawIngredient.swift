@@ -1,5 +1,5 @@
 //
-//  DT_ET_RawIngredient.swift
+//  DT_ET_RawIngredients.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 08/09/2016.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct RawIngredient: DescribableProtocol {
+public struct RawIngredients: DescribableProtocol {
 	public var description: String {
-		return "<RawIngredient success: \( String( describing:  success ) ) url: \( String( describing: url ) ) hasData: \( data != nil ) >"
+		return "<RawIngredients success: \( String( describing:  success ) ) url: \( String( describing: url ) ) hasData: \( data != nil ) >"
 	}
 	public let
 	success: Bool?,

@@ -201,7 +201,7 @@ public protocol WaiterForWaiter {
 	mutating func serve(dishes: FulfilledOrder)
 }
 
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, CigaretteBreakProtocol, SwitchesRelationshipProtocol {
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, SwitchesRelationshipProtocol {
 	init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }
 
@@ -209,9 +209,9 @@ public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, S
 
 public extension Waiter {
 	public func endBreak() {}
-	public func endShift() {}
+	public func end() {}
 	public func startBreak() {}
-	public func startShift() {}
+	public func begin() {}
 }
 
 public extension WaiterForCustomer {

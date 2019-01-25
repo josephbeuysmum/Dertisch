@@ -14,7 +14,7 @@
 //		dishes_ = dishes
 //	}
 //	
-//	public func endShift() {}
+//	public func end() {}
 //}
 //
 //open class PageCustomer: UIPageViewController {
