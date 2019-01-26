@@ -65,9 +65,9 @@ public class MaitreD {
 		resources = [:]
 		switchesRelationships = [:]
 		formerCustomers = []
-		let bundledJson = BundledJson()
-		resources[BundledJson.staticId] = bundledJson
-		sommelier = Sommelier(bundledJson: bundledJson)
+		let driedFoods = DriedFoods()
+		resources[DriedFoods.staticId] = driedFoods
+		sommelier = Sommelier(driedFoods: driedFoods)
 	}
 }
 

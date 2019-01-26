@@ -1,5 +1,5 @@
 //
-//  DT_PX_Settings.swift
+//  DT_IG_DriedFoods.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/07/2018.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol BundledJsonProtocol: Ingredients {
+public protocol DriedFoodsProtocol: Ingredients {
 //	var settings: JsonSettings? { get }
 //	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
-public class BundledJson {
+public class DriedFoods {
 	fileprivate var
 	settings_: JsonSettings?
 	
@@ -28,7 +28,7 @@ fileprivate struct PrivateSetting: Decodable {
 	let value: String
 }
 
-extension BundledJson: BundledJsonProtocol {
+extension DriedFoods: DriedFoodsProtocol {
 	public var settings: JsonSettings? { return settings_ }
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
@@ -88,4 +88,3 @@ fileprivate struct PrivateSettings: Decodable {
 		case data = "settings"
 	}
 }
-

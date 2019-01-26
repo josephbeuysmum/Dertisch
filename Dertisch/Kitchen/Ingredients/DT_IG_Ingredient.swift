@@ -6,7 +6,15 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol Ingredients: KitchenResource {}
+public protocol IngredientsForIngredients {
+	func blend(_ rawIngredients: RawIngredients)
+}
+
+public protocol Ingredients: IngredientsForIngredients, KitchenResource {}
+
+extension IngredientsForIngredients {
+	public func blend(_ rawIngredients: RawIngredients) {}
+}
 
 extension Ingredients {
 	public var sousChef: SousChefForIngredients? {

@@ -14,7 +14,7 @@ public enum Regions: String {
 
 public protocol SommelierProtocol {
 //	var region: Regions { get set }
-//	init(bundledJson: BundledJson)
+//	init(driedFoods: DriedFoods)
 //	func set(_ customer: CustomerForSommelier?)
 //	subscript(name: String) -> String? { get }
 }
@@ -36,9 +36,9 @@ public final class Sommelier {
 	region_: Regions,
 	customer: CustomerForSommelier?
 	
-	public required init(bundledJson: BundledJson) {
+	public required init(driedFoods: DriedFoods) {
 		region_ = .england
-		if let unbottledWines = bundledJson.decode(json: "text", into: Wines.self) {
+		if let unbottledWines = driedFoods.decode(json: "text", into: Wines.self) {
 			var bottledWines: [String: Wine] = [:]
 			for var unbottledWine in unbottledWines.copy {
 				if let name = unbottledWine.key {

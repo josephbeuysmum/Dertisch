@@ -201,7 +201,7 @@ public protocol WaiterForWaiter {
 	mutating func serve(dishes: FulfilledOrder)
 }
 
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, SwitchesRelationshipProtocol {
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginProtocol, EndProtocol, SwitchesRelationshipProtocol {
 	init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }
 

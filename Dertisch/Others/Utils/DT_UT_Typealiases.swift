@@ -29,5 +29,5 @@ public typealias FreezerDeletionClosure = (Bool) -> Void
 
 //public protocol ImagesProtocol: KitchenResource {
 //	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
-//	func loadImage(by url: String)
+//	func load(by url: String)
 //}

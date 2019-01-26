@@ -13,7 +13,7 @@ public struct RawIngredients: DescribableProtocol {
 		return "<RawIngredients success: \( String( describing:  success ) ) url: \( String( describing: url ) ) hasData: \( data != nil ) >"
 	}
 	public let
-	success: Bool?,
-	url: String?,
-	data: Any?
+	success: Bool,
+	url: String,
+	data: Data?
 }
