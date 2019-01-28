@@ -163,7 +163,7 @@ public extension CarteForCustomer {
 	}
 }
 
-public struct Carte: CarteProtocol {
+public class Carte: CarteProtocol {
 	fileprivate let entrees_: Dishionarizer
 	fileprivate var dishes_: Dishes?
 	
