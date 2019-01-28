@@ -8,7 +8,7 @@
 
 //public typealias Ticket = String
 
-public struct Order {
+public struct OrderFromCustomer {
 	public let
 	ticket: String,
 	content: Any?
@@ -25,6 +25,17 @@ public struct FulfilledOrder {
 	dishes: Dishionarizer?
 	
 	public init(_ ticket: String, dishes: Dishionarizer? = nil) {
+		self.ticket = ticket
+		self.dishes = dishes
+	}
+}
+
+public struct InternalOrder {
+	let
+	ticket: String,
+	dishes: Any?
+	
+	public init(_ ticket: String, dishes: Any? = nil) {
 		self.ticket = ticket
 		self.dishes = dishes
 	}

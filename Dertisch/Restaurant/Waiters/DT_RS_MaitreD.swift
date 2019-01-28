@@ -90,8 +90,8 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func closeRestaurant() {
-		currentSwitches?.end()
-		menuSwitches?.end()
+		currentSwitches?.endShift()
+		menuSwitches?.endShift()
 		//		exit(1)
 	}
 	
@@ -108,8 +108,8 @@ extension MaitreD: MaitreDProtocol {
 		
 		guard let rootSwitches = createBundle(from: customerId, and: storyboard) else { return }
 		currentSwitches = rootSwitches
-		currentSwitches!.waiter?.begin()
-		currentSwitches!.headChef?.begin()
+		currentSwitches!.waiter?.beginShift()
+		currentSwitches!.headChef?.beginShift()
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootSwitches.customer
@@ -142,11 +142,11 @@ extension MaitreD: MaitreDProtocol {
 			let menuBundle = createBundle(from: menuId, and: storyboard)
 			else { return }
 		menuSwitches = menuBundle
-		currentSwitches?.headChef?.startBreak()
-		currentSwitches?.waiter?.startBreak()
+		currentSwitches?.headChef?.beginBreak()
+		currentSwitches?.waiter?.beginBreak()
 		currentCustomer.peruseMenu()
-		menuSwitches!.waiter?.begin()
-		menuSwitches!.headChef?.begin()
+		menuSwitches!.waiter?.beginShift()
+		menuSwitches!.headChef?.beginShift()
 		menuSwitches!.customer.modalPresentationStyle = .popover
 		currentCustomer.present(menuSwitches!.customer, animated: true)
 		menuSwitches!.customer.popoverPresentationController?.sourceView = currentCustomer.view
@@ -164,10 +164,11 @@ extension MaitreD: MaitreDProtocol {
 	let kitchenClasses = getResources(from: dependencyTypes)
 	let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
 	self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
-	kitchenStaffMember.begin()
+	kitchenStaffMember.beginShift()
 	}
 */
 	
+	// todo when registering Images: ingredients we should automatically do UrlSession too
 	public func register(
 		_ resourceType: KitchenResource.Type,
 		with key: String,
@@ -177,13 +178,13 @@ extension MaitreD: MaitreDProtocol {
 		resourceDependencies = getResources(from: dependencyTypes),
 		resource = resourceType.init(resourceDependencies)
 		self.resources[resourceType.staticId] = resource
-		resource.begin()
+		resource.beginShift()
 	}
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
 		guard var strongMenuSwitches = menuSwitches else { return }
 		strongMenuSwitches.customer.dismiss(animated: true) //{}
-		strongMenuSwitches.end()
+		strongMenuSwitches.endShift()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
@@ -202,23 +203,24 @@ extension MaitreD: MaitreDProtocol {
 		if animated {
 			switchBundle.customer.modalTransitionStyle = transitionStyle!
 		}
-		currentCustomer.present(switchBundle.customer, animated: animated)
-		currentSwitches?.end()
-		switchBundle.animated = animated
+		var formerSwitches = currentSwitches
 		currentSwitches = switchBundle
-		currentSwitches!.waiter?.begin()
-		currentSwitches!.headChef?.begin()
+		currentCustomer.present(switchBundle.customer, animated: animated)
+		formerSwitches?.endShift()
+		switchBundle.animated = animated
+		currentSwitches!.waiter?.beginShift()
+		currentSwitches!.headChef?.beginShift()
 		sommelier.set(currentCustomer)
 	}
 	
 	public func usherOutCurrentCustomer() {
 		guard currentSwitches != nil else { return }
 		currentSwitches!.customer.dismiss(animated: currentSwitches!.animated) { [unowned self] in
-			self.currentSwitches!.end()
+			self.currentSwitches!.endShift()
 			guard let formerCustomer = self.formerCustomers.popLast() else { return }
 			self.currentSwitches = self.createBundle(from: formerCustomer)
-			self.currentSwitches!.waiter?.begin()
-			self.currentSwitches!.headChef?.begin()
+			self.currentSwitches!.waiter?.beginShift()
+			self.currentSwitches!.headChef?.beginShift()
 		}
 	}
 	
@@ -252,14 +254,6 @@ extension MaitreD: MaitreDProtocol {
 		default: 										return nil
 		}
 	}
-	
-//	internal func areColleagues(_ colleagueA: SwitchesRelationshipProtocol, _ colleagueB: SwitchesRelationshipProtocol) -> Bool {
-//		if searchFor(colleagueA, and: colleagueB, in: currentSwitches) {
-//			return true
-//		} else {
-//			return searchFor(colleagueA, and: colleagueB, in: menuSwitches)
-//		}
-//	}
 	
 	
 	

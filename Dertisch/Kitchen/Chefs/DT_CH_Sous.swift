@@ -20,6 +20,6 @@ public protocol SousChef: SousChefForIngredients, SousChefForHeadChef, KitchenRe
 
 public extension SousChef {
 	public mutating func cook(_ rawIngredients: RawIngredients) {}
-	public mutating func end() {}
-	public func begin() {}
+	public func beginShift() {}
+	public mutating func endShift() {}
 }

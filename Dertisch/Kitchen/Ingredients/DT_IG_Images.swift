@@ -15,16 +15,15 @@ public protocol ImagesProtocol: Ingredients {
 }
 
 public class Images {
-	fileprivate let key: String
-	
-	fileprivate var
+	private var
+	resources: [String: KitchenResource],
 	urlsResolving: [String],
 	rawImages: [String: Data],
 	foodDelivery: FoodDelivery?
 	
 	required public init(_ resources: [String: KitchenResource]? = nil) {
-		key = NSUUID().uuidString
 		foodDelivery = resources?[FoodDelivery.staticId] as? FoodDelivery
+		self.resources = [:]
 		urlsResolving = []
 		rawImages = [:]
 	}
@@ -38,30 +37,33 @@ extension Images: IngredientsForIngredients {
 			rawIngredients.success,
 			let image = rawIngredients.data
 			else { return }
-		rawImages[rawIngredients.url] = image
-		lo(rawIngredients)
+		let url = rawIngredients.url
+		rawImages[url] = image
+		guard let resource = resources[url] else { return }
+		resources.removeValue(forKey: url)
+		if var sousChef = resource as? SousChefForIngredients {
+			sousChef.cook(rawIngredients)
+		} else if let complexIngredients = resource as? IngredientsForIngredients {
+			complexIngredients.blend(rawIngredients)
+		}
 	}
 }
 
 extension Images: ImagesProtocol {
 	public subscript(url: String) -> UIImage? {
-		if let image = getImage(by: url) {
-			return image
-		} else {
-			_ = load(by: url)
-			return nil
-		}
+		return getImage(by: url)
 	}
 	
-	func has(by url: String) -> Bool {
+	func has(_ url: String) -> Bool {
 		return rawImages[url] != nil
 	}
 	
-	public func load(by url: String) -> Bool {
+	public func load(by url: String, from resource: KitchenResource) -> Bool {
 		guard
 			urlsResolving.index(of: url) == nil,
 			foodDelivery != nil
 			else { return false }
+		resources[url] = resource
 		return foodDelivery!.call(url, from: self)
 	}
 	

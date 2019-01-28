@@ -5,7 +5,7 @@
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct SwitchesRelationship: EndProtocol {
+internal struct SwitchesRelationship: EndShiftProtocol {
 	var
 	customerID: String,
 	customer: Customer,
@@ -13,10 +13,10 @@ internal struct SwitchesRelationship: EndProtocol {
 	headChef: HeadChef?,
 	animated: Bool
 
-	mutating func end() {
+	mutating func endShift() {
 		customer.finishMeal()
-		waiter?.end()
-		headChef?.end()
+		waiter?.endShift()
+		headChef?.endShift()
 //		customer = nil
 		waiter = nil
 		headChef = nil

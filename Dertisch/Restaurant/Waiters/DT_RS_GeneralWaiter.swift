@@ -24,12 +24,12 @@ class GeneralWaiter: Waiter {
 	
 //	deinit { lo("au revoir general waiter") }
 	
-	public func end() {
+	public func endShift() {
 		customer = nil
 		headChef = nil
 	}
 	
-	public func begin() {}
+	public func beginShift() {}
 }
 
 extension GeneralWaiter: WaiterForHeadChef {

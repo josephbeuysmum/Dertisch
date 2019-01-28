@@ -9,7 +9,7 @@
 //import Foundation
 
 public protocol HeadChefForSousChef {
-	mutating func give(dishes: FulfilledOrder)
+	mutating func give(prep: InternalOrder)
 }
 
 public protocol HeadChefForWaiter: GiveOrderProtocol {}
@@ -20,15 +20,21 @@ public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, KitchenResourc
 }
 
 public extension HeadChef {
+	public func beginBreak() {}
+	public func beginShift() {}
 	public func endBreak() {}
-	public func end() {}
-	public func give(_ order: Order) {}
-	public func startBreak() {}
-	public func begin() {}
+	public func endShift() {}
+	public func give(_ order: OrderFromCustomer) {}
 }
 
 public extension HeadChefForSousChef {
-	public func give(dishes: FulfilledOrder) {
-		Rota().waiterForHeadChef(self as? SwitchesRelationshipProtocol)?.serve(main: dishes)
+	public func give(prep: InternalOrder) {
+		let fulfilledOrder: FulfilledOrder
+		if let dishes = prep.dishes as? Dishionarizer {
+			fulfilledOrder = FulfilledOrder(prep.ticket, dishes: dishes)
+		} else {
+			fulfilledOrder = FulfilledOrder(prep.ticket)
+		}
+		Rota().waiterForHeadChef(self as? SwitchesRelationshipProtocol)?.serve(main: fulfilledOrder)
 	}
 }

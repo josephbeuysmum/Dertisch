@@ -11,3 +11,8 @@ open class RestaurantTableViewCell: UITableViewCell {
 	// todo make this a serve(entrees)
 	open func serve<T>(with data: T?) {}
 }
+
+open class RestaurantCollectionViewCell: UICollectionViewCell {
+	// todo make this a serve(entrees)
+	open func serve<T>(with data: T?) {}
+}

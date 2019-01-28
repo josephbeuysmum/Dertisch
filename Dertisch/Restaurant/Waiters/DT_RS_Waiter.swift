@@ -201,17 +201,17 @@ public protocol WaiterForWaiter {
 	mutating func serve(dishes: FulfilledOrder)
 }
 
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginProtocol, EndProtocol, SwitchesRelationshipProtocol {
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
 	init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }
 
 
 
 public extension Waiter {
+	public func beginBreak() {}
+	public func beginShift() {}
 	public func endBreak() {}
-	public func end() {}
-	public func startBreak() {}
-	public func begin() {}
+	public func endShift() {}
 }
 
 public extension WaiterForCustomer {
@@ -220,7 +220,7 @@ public extension WaiterForCustomer {
 		// && Rota().getColleague(HeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
 	}
 	
-	public func give(_ order: Order) {
+	public func give(_ order: OrderFromCustomer) {
 		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
 		headChef.give(order)
 	}

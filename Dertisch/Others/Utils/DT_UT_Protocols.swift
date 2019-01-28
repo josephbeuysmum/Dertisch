@@ -7,12 +7,12 @@
 //
 
 public protocol CigaretteBreakProtocol {
-	mutating func startBreak()
+	mutating func beginBreak()
 	mutating func endBreak()
 }
 
 extension CigaretteBreakProtocol {
-	public func startBreak() {}
+	public func beginBreak() {}
 	public func endBreak() {}
 }
 
@@ -20,27 +20,27 @@ public protocol DescribableProtocol {
 	var description: String { get }
 }
 
-public protocol BeginProtocol {
-	func begin()
+public protocol BeginShiftProtocol {
+	func beginShift()
 }
 
 // todo end in a better way, with weak vars etc
-public protocol EndProtocol {
-	mutating func end()
+public protocol EndShiftProtocol {
+	mutating func endShift()
 }
 
 public protocol GiveOrderProtocol {
-	mutating func give(_ order: Order)
+	mutating func give(_ order: OrderFromCustomer)
 }
 
-public protocol KitchenResource: BeginProtocol, EndProtocol {
+public protocol KitchenResource: BeginShiftProtocol, EndShiftProtocol {
 	init(_ resources: [String: KitchenResource]?)
 }
 
 extension KitchenResource {
 	static public var staticId: String { return String(describing: self) }
-	public func begin() {}
-	public func end() {}
+	public func beginShift() {}
+	public func endShift() {}
 }
 
 public protocol StaffMember: CigaretteBreakProtocol {}
