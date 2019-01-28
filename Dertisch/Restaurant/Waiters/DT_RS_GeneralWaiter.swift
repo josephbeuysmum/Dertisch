@@ -37,6 +37,7 @@ extension GeneralWaiter: WaiterForHeadChef {
 }
 
 extension GeneralWaiter: WaiterForWaiter {
+	func addToCarte(_ main: FulfilledOrder) {}
 	func fillCarte(with entrees: FulfilledOrder) {}
 	func serve(dishes: FulfilledOrder) {}
 }

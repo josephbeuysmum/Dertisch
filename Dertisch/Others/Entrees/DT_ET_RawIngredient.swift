@@ -8,12 +8,10 @@
 
 import Foundation
 
-public struct RawIngredients: DescribableProtocol {
-	public var description: String {
-		return "<RawIngredients success: \( String( describing:  success ) ) url: \( String( describing: url ) ) hasData: \( data != nil ) >"
-	}
+public struct RawIngredients {
 	public let
 	success: Bool,
 	url: String,
-	data: Data?
+	data: Data?,
+	flag: String?
 }

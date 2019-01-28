@@ -11,6 +11,10 @@ internal struct Rota {
 		return instances(of: type, from: mirror, getAll: true)
 	}
 	
+	func hasCarte(_ staffMember: SwitchesRelationshipProtocol?) -> Bool {
+		return getWaiter(staffMember)?.carte != nil
+	}
+	
 	func customerForWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> CustomerForWaiter? {
 		return getCustomer(staffMember)
 	}
@@ -31,18 +35,9 @@ internal struct Rota {
 		return getWaiter(staffMember)
 	}
 	
-
-	
-	
-	
 	private func getCustomer(_ staffMember: SwitchesRelationshipProtocol?) -> Customer? {
 		guard let staffMember = staffMember else { return nil }
 		return getMaitreD(staffMember)?.customer(for: staffMember)
-	}
-	
-	private func getWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> Waiter? {
-		guard let staffMember = staffMember else { return nil }
-		return getMaitreD(staffMember)?.waiter(for: staffMember)
 	}
 	
 	private func getHeadChef(_ staffMember: SwitchesRelationshipProtocol?) -> HeadChef? {
@@ -54,6 +49,11 @@ internal struct Rota {
 		let mirror = Mirror(reflecting: staffMember)
 		guard let maitreDs = instances(of: MaitreD.self, from: mirror, getAll: true) else { return nil }
 		return maitreDs.count == 1 ? maitreDs[0] : nil
+	}
+	
+	private func getWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> Waiter? {
+		guard let staffMember = staffMember else { return nil }
+		return getMaitreD(staffMember)?.waiter(for: staffMember)
 	}
 	
 	// kudos to everyone involved in this stack overflow thread:

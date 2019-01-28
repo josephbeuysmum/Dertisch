@@ -23,11 +23,11 @@ public class FoodDelivery {
 }
 
 extension FoodDelivery: FoodDeliveryProtocol {
-	func call(_ url: String, from resource: KitchenResource, method: Methods? = .GET) -> Bool {
+	func call(_ url: String, from resource: KitchenResource, method: Methods, flagged flag: String? = nil) -> Bool {
 		guard let validUrl = URL(string: url) else { return false }
 		resources[url] = resource
 		var request = URLRequest(url: validUrl)
-		request.httpMethod = method!.rawValue
+		request.httpMethod = method.rawValue
 		_ = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 			guard error == nil else {
 				lo("ERROR NEEDS HANDLING")
@@ -40,8 +40,8 @@ extension FoodDelivery: FoodDeliveryProtocol {
 			let
 			resource = strongSelf.resources[url],
 			rawIngredients = data != nil ?
-				RawIngredients(success: true, url: url, data: data!) :
-				RawIngredients(success: false, url: url, data: nil)
+				RawIngredients(success: true, url: url, data: data!, flag: flag) :
+				RawIngredients(success: false, url: url, data: nil, flag: flag)
 			strongSelf.resources.removeValue(forKey: url)
 			
 			if var sousChef = resource as? SousChefForIngredients {

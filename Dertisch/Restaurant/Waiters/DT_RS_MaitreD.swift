@@ -248,9 +248,11 @@ extension MaitreD: MaitreDProtocol {
 	internal func waiter(for staffMember: SwitchesRelationshipProtocol) -> Waiter? {
 		switch true {
 		case staffMember === currentSwitches?.headChef,
-			 staffMember === currentSwitches?.customer:	return currentSwitches!.waiter
+			 staffMember === currentSwitches?.customer,
+			 staffMember === currentSwitches?.waiter:	return currentSwitches!.waiter
 		case staffMember === menuSwitches?.headChef,
-			 staffMember === menuSwitches?.customer:	return menuSwitches!.waiter
+			 staffMember === menuSwitches?.customer,
+			 staffMember === menuSwitches?.waiter:		return menuSwitches!.waiter
 		default: 										return nil
 		}
 	}

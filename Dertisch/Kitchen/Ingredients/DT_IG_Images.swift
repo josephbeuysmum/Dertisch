@@ -41,6 +41,9 @@ extension Images: IngredientsForIngredients {
 		rawImages[url] = image
 		guard let resource = resources[url] else { return }
 		resources.removeValue(forKey: url)
+		if let urlIndex = urlsResolving.index(of: url) {
+			urlsResolving.remove(at: urlIndex)
+		}
 		if var sousChef = resource as? SousChefForIngredients {
 			sousChef.cook(rawIngredients)
 		} else if let complexIngredients = resource as? IngredientsForIngredients {
@@ -51,23 +54,32 @@ extension Images: IngredientsForIngredients {
 
 extension Images: ImagesProtocol {
 	public subscript(url: String) -> UIImage? {
-		return getImage(by: url)
+		return image(by: url)
 	}
 	
-	func has(_ url: String) -> Bool {
-		return rawImages[url] != nil
+	func hasOrIsLoading(_ url: String) -> Bool {
+		return has(url) || isLoading(url)
 	}
 	
-	public func load(by url: String, from resource: KitchenResource) -> Bool {
+	public func load(by url: String, from resource: KitchenResource, flagged flag: String? = nil) -> Bool {
 		guard
-			urlsResolving.index(of: url) == nil,
+			!hasOrIsLoading(url),
 			foodDelivery != nil
 			else { return false }
 		resources[url] = resource
-		return foodDelivery!.call(url, from: self)
+		urlsResolving.append(url)
+		return foodDelivery!.call(url, from: self, method: .GET, flagged: DertischFlags.imageLoad)
 	}
 	
-	private func getImage(by url: String) -> UIImage? {
-		return rawImages[url] != nil ? UIImage(data: rawImages[url]!) : nil
+	private func has(_ url: String) -> Bool {
+		return rawImages[url] != nil
+	}
+	
+	private func image(by url: String) -> UIImage? {
+		return has(url) ? UIImage(data: rawImages[url]!) : nil
+	}
+	
+	private func isLoading(_ url: String) -> Bool {
+		return urlsResolving.index(of: url) != nil
 	}
 }

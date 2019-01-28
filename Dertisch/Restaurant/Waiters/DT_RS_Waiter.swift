@@ -22,7 +22,6 @@ extension String: SimpleDish {}
 public typealias Dishionary = [String: SimpleDish]
 
 public struct Dishes: ComplexDish {
-	
 	private var dishes = Dishionary()
 	
 	init(_ dishes: Dishionary) {
@@ -164,6 +163,7 @@ public extension CarteForCustomer {
 }
 
 public class Carte: CarteProtocol {
+	// todo do these need trailing underscores?
 	fileprivate let entrees_: Dishionarizer
 	fileprivate var dishes_: Dishes?
 	
@@ -197,6 +197,7 @@ public protocol WaiterForHeadChef {
 }
 
 public protocol WaiterForWaiter {
+	mutating func addToCarte(_ main: FulfilledOrder)
 	mutating func fillCarte(with entrees: FulfilledOrder)
 	mutating func serve(dishes: FulfilledOrder)
 }
@@ -217,7 +218,6 @@ public extension Waiter {
 public extension WaiterForCustomer {
 	public var onShift: Bool {
 		return type(of: self) == GeneralWaiter.self || carte != nil
-		// && Rota().getColleague(HeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
 	}
 	
 	public func give(_ order: OrderFromCustomer) {
@@ -227,15 +227,13 @@ public extension WaiterForCustomer {
 }
 
 public extension WaiterForWaiter {
-//	func fillCarte(with entrees: FulfilledOrder) { lo() }
+	mutating func addToCarte(_ main: FulfilledOrder) {}
 	mutating func serve(dishes: FulfilledOrder) {
-//		let mirror = Mirror(reflecting: self)
-//		guard let carte = Rota().getColleague(Carte.self, from: mirror) else { return }
-//		carte.stock(with: dishes)
-//		guard var waiter = self as? WaiterForWaiter else { return  }
-		fillCarte(with: dishes)
-		guard let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol) else { return }
-		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
+		guard
+			let selfAsSwitchesRelationship = self as? SwitchesRelationshipProtocol,
+			let customer = Rota().customerForWaiter(selfAsSwitchesRelationship)
+			else { return }
+		Rota().hasCarte(selfAsSwitchesRelationship) ? addToCarte(dishes) : fillCarte(with: dishes)
 		DispatchQueue.main.async {
 			customer.present(dish: dishes.ticket)
 		}
@@ -253,12 +251,7 @@ public extension WaiterForHeadChef {
 			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol),
 			var waiter = self as? WaiterForWaiter
 			else { return }
-		// todo reinstate stock?
-//		if let carte = Rota().getColleague(CarteForWaiter.self, from: Mirror(reflecting: self)) {
-//			carte.stock(with: entrees)
-//		} else {
-			waiter.fillCarte(with: entrees)
-//		}
+		waiter.fillCarte(with: entrees)
 		customer.approach()
 	}
 }
