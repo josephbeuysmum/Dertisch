@@ -55,17 +55,16 @@ public class MaitreD {
 	resources: Dictionary<String, KitchenResource>,
 	switchesRelationships: Dictionary<String, InternalSwitchRelationship>,
 	window: UIWindow!,
-	formerCustomers: [CustomerTicket],
+	backgroundCustomers: [CustomerTicket],
 //	rootSwitches: SwitchesRelationship?,
 	currentSwitches: SwitchesRelationship?,
 	menuSwitches: SwitchesRelationship?
 	
 	required public init() {
-		lo()
 		key = NSUUID().uuidString
 		resources = [:]
 		switchesRelationships = [:]
-		formerCustomers = []
+		backgroundCustomers = []
 		let driedFoods = DriedFoods()
 		resources[DriedFoods.staticId] = driedFoods
 		sommelier = Sommelier(driedFoods: driedFoods)
@@ -102,7 +101,6 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
-		lo()
 		// todo should this be a fatal error?
 		guard self.window == nil else { return }
 		Time.startInterval()
@@ -115,7 +113,6 @@ extension MaitreD: MaitreDProtocol {
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootSwitches.customer
-		formerCustomers.append((customer: rootSwitches.customer!, id: customerId))
 		sommelier.set(currentSwitches!.customer)
 	}
 	
@@ -138,7 +135,6 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func present(popoverMenu menuId: String, inside rect: CGRect? = nil, from storyboard: String? = nil) {
-		lo()
 		guard
 			menuSwitches == nil,
 			let currentCustomer = currentSwitches?.customer,
@@ -186,7 +182,6 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
-		lo()
 		guard var strongMenuSwitches = menuSwitches else { return }
 		strongMenuSwitches.customer?.dismiss(animated: true) //{}
 		strongMenuSwitches.endShift()
@@ -200,7 +195,6 @@ extension MaitreD: MaitreDProtocol {
 		_ customerId: String,
 		via transitionStyle: UIModalTransitionStyle? = nil,
 		from storyboard: String? = nil) {
-		lo()
 		guard
 			let currentCustomer = currentSwitches?.customer,
 			var switchBundle = createBundle(from: customerId, and: storyboard),
@@ -210,10 +204,11 @@ extension MaitreD: MaitreDProtocol {
 		if animated {
 			switchBundle.customer?.modalTransitionStyle = transitionStyle!
 		}
-		var formerSwitches = currentSwitches
+		guard var formerSwitches = currentSwitches else { return }
+		backgroundCustomers.append((customer: formerSwitches.customer!, id: formerSwitches.customerID))
 		currentSwitches = switchBundle
 		currentCustomer.present(switchCustomer, animated: animated)
-		formerSwitches?.endShift()
+		formerSwitches.endShift()
 		switchBundle.animated = animated
 		currentSwitches!.waiter?.beginShift()
 		currentSwitches!.headChef?.beginShift()
@@ -221,11 +216,10 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func usherOutCurrentCustomer() {
-		lo()
 		guard currentSwitches != nil else { return }
 		currentSwitches!.customer?.dismiss(animated: currentSwitches!.animated) { [unowned self] in
 			self.currentSwitches!.endShift()
-			guard let formerCustomer = self.formerCustomers.popLast() else { return }
+			guard let formerCustomer = self.backgroundCustomers.popLast() else { return }
 			self.currentSwitches = self.createBundle(from: formerCustomer)
 			self.currentSwitches!.waiter?.beginShift()
 			self.currentSwitches!.headChef?.beginShift()
@@ -270,7 +264,6 @@ extension MaitreD: MaitreDProtocol {
 	
 	
 	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
-		lo()
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
 		let
 		kitchenStaff = getResources(from: switchesRelationship.kitchenStaffTypes),

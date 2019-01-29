@@ -117,10 +117,8 @@ extension Freezer: FreezerProtocol {
 			for (key, value) in entity.attributes {
 				predicateSection = "\(key) == \(value)"
 				predicate = predicate.count > 0 ? "\(predicate) && \(predicateSection)" : predicateSection
-//				lo(value, key)
 				managedEntity.setValue(value, forKey: key)
 			}
-//			lo("predicate:", predicate)
 			do {
 				try privateContext.save()
 				DispatchQueue.main.async {

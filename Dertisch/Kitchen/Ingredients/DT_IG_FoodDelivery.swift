@@ -24,7 +24,6 @@ public class FoodDelivery {
 
 extension FoodDelivery: FoodDeliveryProtocol {
 	func call(_ url: String, from resource: KitchenResource, method: Methods, flagged flag: String? = nil) -> Bool {
-		lo()
 		guard let validUrl = URL(string: url) else { return false }
 		resources[url] = resource
 		var request = URLRequest(url: validUrl)

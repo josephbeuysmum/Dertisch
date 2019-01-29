@@ -63,7 +63,6 @@ fileprivate func dishionize_(_ value: Any, in dishionary: inout Dishionary, with
 	let mirror = Mirror(reflecting: value)
 	var arrayCount = 0
 	_ = mirror.children.compactMap {
-//		lo(prefix, $0.label, type(of: $0.value))
 		let
 		label = $0.label ?? "\(arrayCount)",
 		compositeLabel = prefix == nil ? label : "\(prefix!).\(label)",
@@ -83,14 +82,7 @@ fileprivate func dishionize_(_ value: Any, in dishionary: inout Dishionary, with
 extension Dishionarizer {
 	// todo make dishionary once and once only
 	var dishionary: Dishionary? {
-//		lo("dish..............", self)
-//		if let dishion = Rota().getColleague(Dishionary.self, from: Mirror(reflecting: self)) {
-//			lo("dishion exists")
-//			return dishion
-//		} else {
-//			lo("dishion needs creating")
-			return dishionize(self)
-//		}
+		return dishionize(self)
 	}
 }
 
@@ -111,13 +103,12 @@ public protocol CarteProtocol: CarteForCustomer, CarteForWaiter {
 }
 
 public extension CarteForWaiter {
-//	func stock(with order: FulfilledOrder) { lo() }
+//	func stock(with order: FulfilledOrder) {}
 	func empty() {}
 }
 
 public extension CarteForCustomer {
 	func des<T>(_ id: String) -> T? {
-		lo()
 		guard let dishes = (self as? Carte)?.dishes_ else { return nil }
 		let tempValue: Any?
 		if let mandatoryValue = dishes[id] {
@@ -169,11 +160,9 @@ public class Carte: CarteProtocol {
 	fileprivate var dishes_: Dishes?
 	
 	public init(_ entrees: Dishionarizer) {
-		lo("init carte...")
 		self.entrees_ = entrees
 		guard let dishionary = entrees.dishionary else { return }
 		self.dishes_ = Dishes(dishionary)
-//		lo(dishionary)
 	}
 }
 
@@ -215,29 +204,22 @@ public extension Waiter {
 		Rota().customerForWaiter(self)?.approach()
 	}
 	
-	public func beginBreak() { lo() }
-	public func endBreak() { lo() }
-	public func endShift() { lo() }
+	public func beginBreak() {}
+	public func endBreak() {}
+	public func endShift() {}
 }
 
 public extension WaiterForCustomer {
-//	public var onShift: Bool {
-//		lo()
-//		return type(of: self) == GeneralWaiter.self || carte != nil
-//	}
-	
 	public func give(_ order: OrderFromCustomer) {
-		lo()
 		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
 		headChef.give(order)
 	}
 }
 
 public extension WaiterForWaiter {
-	mutating func addToCarte(_ main: FulfilledOrder) { lo() }
+	mutating func addToCarte(_ main: FulfilledOrder) {}
 	
 	mutating func serve(dishes: FulfilledOrder) {
-		lo()
 		guard
 			let selfAsSwitchesRelationship = self as? SwitchesRelationshipProtocol,
 			let customer = Rota().customerForWaiter(selfAsSwitchesRelationship)
@@ -252,13 +234,11 @@ public extension WaiterForWaiter {
 public extension WaiterForHeadChef {
 	// todo the waiter calls a serve function on itself from a serve function: is this necessary?
 	public func serve(main: FulfilledOrder) {
-		lo()
 		guard var waiter = self as? WaiterForWaiter else { return }
 		waiter.serve(dishes: main)
 	}
 	
 	public func serve(entrees: FulfilledOrder) {
-		lo()
 		guard
 			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol),
 			var waiter = self as? WaiterForWaiter

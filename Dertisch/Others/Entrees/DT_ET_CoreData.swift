@@ -74,7 +74,6 @@ public struct FreezerEntity: FreezerEntityProtocol {
 			self.assessValidity(of: attribute, by: type)
 			else { return false }
 		attributes_[key] = attribute
-//		lo(key, attribute, type)
 		return true
 	}
 	

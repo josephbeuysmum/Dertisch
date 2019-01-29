@@ -16,29 +16,28 @@ class GeneralWaiter: Waiter {
 	headChef: HeadChefForWaiter?
 	
 	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter? = nil) {
-		lo("bonjour general waiter")
+//		lo("bonjour general waiter")
 		self.maitreD = maitreD
 		self.customer = customer
 		self.headChef = headChef
 	}
 	
-	deinit { lo("au revoir general waiter") }
+//	deinit { lo("au revoir general waiter") }
 	
 	public func endShift() {
-		lo()
 		customer = nil
 		headChef = nil
 	}
 	
-	public func beginShift() { lo() }
+	public func beginShift() {}
 }
 
 extension GeneralWaiter: WaiterForHeadChef {
-	public func serve(entrees: FulfilledOrder) { lo() }
+	public func serve(entrees: FulfilledOrder) {}
 }
 
 extension GeneralWaiter: WaiterForWaiter {
-	func addToCarte(_ main: FulfilledOrder) { lo() }
-	func fillCarte(with entrees: FulfilledOrder) { lo() }
-	func serve(dishes: FulfilledOrder) { lo() }
+	func addToCarte(_ main: FulfilledOrder) {}
+	func fillCarte(with entrees: FulfilledOrder) {}
+	func serve(dishes: FulfilledOrder) {}
 }

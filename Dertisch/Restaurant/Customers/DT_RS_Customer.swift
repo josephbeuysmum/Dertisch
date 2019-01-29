@@ -22,41 +22,31 @@ public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier, Switc
 }
 
 open class Customer: UIViewController {
-	open func layTable() { lo() }
-	open func approach() { lo() }
-	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) { lo() }
-	open func presentCheck() { lo() }
-	open func peruseMenu() { lo() }
-	open func showToTable() { lo() }
-	open func present(dish dishId: String) { lo() }
-	open func regionChosen() { lo() }
-	open func returnMenuToWaiter(_ chosenDishId: String?) { lo() }
+	open func layTable() {}
+	open func approach() {}
+	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {}
+	open func presentCheck() {}
+	open func peruseMenu() {}
+	open func showToTable() {}
+	open func present(dish dishId: String) {}
+	open func regionChosen() {}
+	open func returnMenuToWaiter(_ chosenDishId: String?) {}
 
 	override final public func viewDidAppear(_ animated: Bool) {
-		lo()
 		super.viewDidAppear(animated)
 		layTable()
 	}
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
-		lo()
 		if let labels = Rota().all(UILabel.self, from: Mirror(reflecting: self)) {
 			for label in labels {
 				label.text = nil
 			}
 		}
-//		checkReadinessToOrder()
 		showToTable()
 		regionChosen()
 	}
-	
-//	private final func checkReadinessToOrder() {
-//		lo()
-//		guard isViewLoaded, Rota().waiterForCustomer(self)?.onShift ?? false else { return }
-//		showToTable()
-//		regionChosen()
-//	}
 }
 
 extension Customer: CustomerProtocol {}

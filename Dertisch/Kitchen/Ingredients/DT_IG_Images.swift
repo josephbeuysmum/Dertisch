@@ -33,7 +33,6 @@ public class Images {
 
 extension Images: IngredientsForIngredients {
 	public func blend(_ rawIngredients: RawIngredients) {
-		lo()
 		guard
 			rawIngredients.success,
 			let image = rawIngredients.data
@@ -63,7 +62,6 @@ extension Images: ImagesProtocol {
 	}
 	
 	public func load(by url: String, from resource: KitchenResource, flagged flag: String? = nil) -> Bool {
-		lo()
 		guard
 			!hasOrIsLoading(url),
 			foodDelivery != nil

@@ -3,14 +3,18 @@
 
 assign(_:maitreD:and:)  init()
 showToTable()           viewDidLoad()
-approach()              viewDidAppear()
+layTable()              viewDidAppear()
 present(dish:)          serve(entrees:) or serve(dishes:)
 finishMeal()            switchesRelationship.endShift()
 
+WHY DERTISCH
 
 mixed metaphors
+    - a factory, observers, and a decorator (say) in one context sounds like the plot of a surrealist movie
+    - Dertisch is an attempt at a *complex design pattern*. Most if not all design patterns are *simple* design patterns in the sense that they have a one-to-one relationship between their code-management and analogical elements
 
 not a perfect analogy
-    customers can never can seat other customers by making orders
-    customers do not have individual head chefs assigned to them
-    ingredients are often stored in the kitchen rather than having to be fetched
+    - customers can never can seat other customers by making orders
+    - customers do not have individual head chefs assigned to them
+    - ingredients are often stored in the kitchen rather than having to be fetched
+    - customers are never unassigned - or reassigned - waiters having been assigned them
