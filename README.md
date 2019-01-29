@@ -24,6 +24,11 @@ Preamble
 -   `E` Entrées
 -   `S` Sommelier
 
+
+![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn.gif)
+
+---
+
 Sous Chefs
 ---
 
