@@ -6,8 +6,7 @@ A **swifty** MVP framework for Swift apps
 Preamble
 ---
 
--   The codebase has been updated recently and the following documentation is somewhat out-of-date. It will be reviewed shortly (once I get the time, basically); also
--   `Dertisch` aims to be stable enough to use as production code, but at present partly exists as an experiment into what being *swifty* means in relation to traditional view/model architectures. Until the experiment is complete **Dertisch is not recommended for production code**.
+-   `Dertisch` aims to be stable enough to use as production code, but at present exists partly as an experiment into what being *swifty* means in relation to traditional view/model architectures. Because of this, currently **Dertisch is not recommended for production code**, although this is planned to change.
 
 ---
 
@@ -84,35 +83,42 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 
 You can think of this chaining as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
-	protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StartShiftProtocol, EndShiftProtocol {
-		init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
+	protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
+		init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 	}
 
 	protocol WaiterForCustomer: GiveOrderProtocol {
 		var carte: CarteForCustomer? { get }
+		func emptyCarte()
 	}
 
 	protocol WaiterForHeadChef {
-		mutating func hand(_ sideDish: Dish)
-		mutating func serve<T>(entrees: T?)
+		func serve(entrees: FulfilledOrder)
+		func serve(main: FulfilledOrder)
 	}
 
 	protocol WaiterForWaiter {
-		mutating func fillCarte<T>(with entrees: T?)
-		mutating func serve(_ dish: Dish)
+		func addToCarte(_ main: FulfilledOrder)
+		func fillCarte(with entrees: FulfilledOrder)
+		func serve(dishes: FulfilledOrder)
 	}
 
-	protocol GiveOrderProtocol {
-		mutating func give(_ order: Order)
+	protocol StaffMember: CigaretteBreakProtocol {}
+
+	protocol CigaretteBreakProtocol {
+		func beginBreak()
+		func endBreak()
 	}
 
-	protocol StartShiftProtocol {
-		func startShift()
+	protocol BeginShiftProtocol {
+		func beginShift()
 	}
 
 	protocol EndShiftProtocol {
-		mutating func endShift ()
+		func endShift()
 	}
+
+	public protocol SwitchesRelationshipProtocol: class {}
 
 When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
 
