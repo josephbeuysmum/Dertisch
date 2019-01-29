@@ -24,9 +24,6 @@ Preamble
 -   `E` Entrées
 -   `S` Sommelier
 
-
-![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn.gif)
-
 ---
 
 Sous Chefs
@@ -73,7 +70,19 @@ The wine waiter. The Sommelier is classically a `proxy` which specifically provi
 How SWITCHES is "swifty"
 ---
 
-The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context. You can think of this a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context.
+
+![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn.gif)
+
+There is a chain of responsibility passing from `Customer` to `Ingredient` and back again through a series of hands that all have one specific role.
+
+-   Ingredients **are** data;
+-   Sous chefs **parse** data;
+-   Head chefs **combine** data;
+-   Waiters **present** data; and
+-   Customers **consume** data.
+
+You can think of this chaining as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
 	protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StartShiftProtocol, EndShiftProtocol {
 		init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
