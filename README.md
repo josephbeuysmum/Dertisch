@@ -241,7 +241,7 @@ In the above example, because `Images` is commented out, injectable instances of
 
 `Dertisch` kitchen classes can have other kitchen classes injected into them. For instance, in the code example above `Images` has `UrlSession` injected as it depends upon it to load external images.
 
-In the first `introduce(...)` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes (or structs) written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenter <- interactor` relationship. `kitchenStaff` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
+In the first `introduce(...)` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenter <- interactor` relationship. `kitchenStaff` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
 
 The second `introduce(...)` function above shows the example of a view controller that has no need of a waiter or a head chef, meaning this is a simple page with no dependence on data.
 
@@ -259,23 +259,9 @@ The above code example features the two model classes `SomeSousChef` and `SomeIn
 		var headChef: HeadChefForKitchenMember? { get set }
 	}
 
-Sous chefs, head chefs, and waiters can all be either `classes` or `structs`. So a boilerplate `Dertisch` Head Chef could look like this:
-
-	class SomeHeadChef: HeadChef {
-		required init(_ sousChefs: [String: KitchenMember]?) {}
-		var waiter: WaiterForHeadChef?
-	}
-
-Or like this:
-
-	struct SomeHeadChef: HeadChef {
-		required init(_ sousChefs: [String: KitchenMember]?) {}
-		var waiter: WaiterForHeadChef?
-	}
-
 A boilerplate `Dertisch` Waiter looks like this:
 
-	class/struct SomeWaiter: Waiter {
+	class SomeWaiter: Waiter {
 		required init(customer: CustomerForWaiter, maitreD: MaitreD, headChef: HeadChefForWaiter?) {}
 	}
 
