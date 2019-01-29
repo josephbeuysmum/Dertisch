@@ -19,7 +19,7 @@ public class Time {
 	// (assumes full case if none passed)
 	public static func getInterval(format: intervalFormats = .full) -> String {
 		let rawInterval = _getRawInterval()
-		let interval = Int(rawInterval)
+		let interval = rawInterval != nil ? Int(rawInterval!) : 0
 		
 		switch format {
 		case .withoutHours:
@@ -79,8 +79,8 @@ public class Time {
 	// hours and milliseconds have accessor functions because they aren't used in all cases
 	fileprivate static func _getHoursBy(interval: Int) -> Int { return interval / 3600 }
 	
-	fileprivate static func _getMillisecondsBy(rawInterval: TimeInterval) -> Int {
-		return Int((rawInterval.truncatingRemainder(dividingBy: 1)) * 1000)
+	fileprivate static func _getMillisecondsBy(rawInterval: TimeInterval?) -> Int {
+		return rawInterval != nil ? Int((rawInterval!.truncatingRemainder(dividingBy: 1)) * 1000) : 0
 	}
 	
 	fileprivate static func _getMinutesBy(interval: Int) -> Int { return (interval / 60) % 60 }
@@ -89,7 +89,8 @@ public class Time {
 	
 	
 	// raw interval has its own accessor function as it *might* need to restart the startTime clock
-	fileprivate static func _getRawInterval() -> TimeInterval {
-		return Date().timeIntervalSince(startTime!)
+	fileprivate static func _getRawInterval() -> TimeInterval? {
+		
+		return startTime != nil ? Date().timeIntervalSince(startTime!) : nil
 	}
 }

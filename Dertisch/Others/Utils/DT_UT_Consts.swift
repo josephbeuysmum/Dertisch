@@ -104,7 +104,7 @@ public struct CommonPhrases {
 	//	Url = "Url"
 }
 
-public struct DertischFlags {
+public struct Flags {
 	public static let
 	imageLoad = "imageLoad"
 }

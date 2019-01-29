@@ -61,6 +61,7 @@ public class MaitreD {
 	menuSwitches: SwitchesRelationship?
 	
 	required public init() {
+		lo()
 		key = NSUUID().uuidString
 		resources = [:]
 		switchesRelationships = [:]
@@ -101,6 +102,7 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
+		lo()
 		// todo should this be a fatal error?
 		guard self.window == nil else { return }
 		Time.startInterval()
@@ -113,7 +115,7 @@ extension MaitreD: MaitreDProtocol {
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootSwitches.customer
-		formerCustomers.append((rootSwitches.customer, customerId))
+		formerCustomers.append((customer: rootSwitches.customer!, id: customerId))
 		sommelier.set(currentSwitches!.customer)
 	}
 	
@@ -136,10 +138,12 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func present(popoverMenu menuId: String, inside rect: CGRect? = nil, from storyboard: String? = nil) {
+		lo()
 		guard
 			menuSwitches == nil,
 			let currentCustomer = currentSwitches?.customer,
-			let menuBundle = createBundle(from: menuId, and: storyboard)
+			let menuBundle = createBundle(from: menuId, and: storyboard),
+			let menuCustomer = menuBundle.customer
 			else { return }
 		menuSwitches = menuBundle
 		currentSwitches?.headChef?.beginBreak()
@@ -147,11 +151,11 @@ extension MaitreD: MaitreDProtocol {
 		currentCustomer.peruseMenu()
 		menuSwitches!.waiter?.beginShift()
 		menuSwitches!.headChef?.beginShift()
-		menuSwitches!.customer.modalPresentationStyle = .popover
-		currentCustomer.present(menuSwitches!.customer, animated: true)
-		menuSwitches!.customer.popoverPresentationController?.sourceView = currentCustomer.view
+		menuSwitches!.customer?.modalPresentationStyle = .popover
+		currentCustomer.present(menuCustomer, animated: true)
+		menuSwitches!.customer?.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {
-			menuSwitches!.customer.popoverPresentationController?.sourceRect = safeRect
+			menuSwitches!.customer?.popoverPresentationController?.sourceRect = safeRect
 		}
 	}
 	
@@ -182,30 +186,33 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
+		lo()
 		guard var strongMenuSwitches = menuSwitches else { return }
-		strongMenuSwitches.customer.dismiss(animated: true) //{}
+		strongMenuSwitches.customer?.dismiss(animated: true) //{}
 		strongMenuSwitches.endShift()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
-		currentSwitches?.customer.returnMenuToWaiter(chosenDishId)
+		currentSwitches?.customer?.returnMenuToWaiter(chosenDishId)
 	}
 	
 	public func seat(
 		_ customerId: String,
 		via transitionStyle: UIModalTransitionStyle? = nil,
 		from storyboard: String? = nil) {
+		lo()
 		guard
 			let currentCustomer = currentSwitches?.customer,
-			var switchBundle = createBundle(from: customerId, and: storyboard)
+			var switchBundle = createBundle(from: customerId, and: storyboard),
+			let switchCustomer = switchBundle.customer
 			else { return }
 		let animated = transitionStyle != nil
 		if animated {
-			switchBundle.customer.modalTransitionStyle = transitionStyle!
+			switchBundle.customer?.modalTransitionStyle = transitionStyle!
 		}
 		var formerSwitches = currentSwitches
 		currentSwitches = switchBundle
-		currentCustomer.present(switchBundle.customer, animated: animated)
+		currentCustomer.present(switchCustomer, animated: animated)
 		formerSwitches?.endShift()
 		switchBundle.animated = animated
 		currentSwitches!.waiter?.beginShift()
@@ -214,8 +221,9 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func usherOutCurrentCustomer() {
+		lo()
 		guard currentSwitches != nil else { return }
-		currentSwitches!.customer.dismiss(animated: currentSwitches!.animated) { [unowned self] in
+		currentSwitches!.customer?.dismiss(animated: currentSwitches!.animated) { [unowned self] in
 			self.currentSwitches!.endShift()
 			guard let formerCustomer = self.formerCustomers.popLast() else { return }
 			self.currentSwitches = self.createBundle(from: formerCustomer)
@@ -244,7 +252,7 @@ extension MaitreD: MaitreDProtocol {
 		}
 	}
 	
-	// todo change to conditional conformance
+	// todo? change to conditional conformance (I wish I had made this more explicit, now I'm not sure what "change to conditional conformance" means in this context)
 	internal func waiter(for staffMember: SwitchesRelationshipProtocol) -> Waiter? {
 		switch true {
 		case staffMember === currentSwitches?.headChef,
@@ -262,6 +270,7 @@ extension MaitreD: MaitreDProtocol {
 	
 	
 	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
+		lo()
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
 		let
 		kitchenStaff = getResources(from: switchesRelationship.kitchenStaffTypes),

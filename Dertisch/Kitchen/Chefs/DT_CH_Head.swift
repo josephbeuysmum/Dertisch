@@ -20,15 +20,16 @@ public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, KitchenResourc
 }
 
 public extension HeadChef {
-	public func beginBreak() {}
-	public func beginShift() {}
-	public func endBreak() {}
-	public func endShift() {}
-	public func give(_ order: OrderFromCustomer) {}
+	public func beginBreak() { lo() }
+	public func beginShift() { lo() }
+	public func endBreak() { lo() }
+	public func endShift() { lo() }
+	public func give(_ order: OrderFromCustomer) { lo() }
 }
 
 public extension HeadChefForSousChef {
 	public func give(prep: InternalOrder) {
+		lo()
 		let fulfilledOrder: FulfilledOrder
 		if let dishes = prep.dishes as? Dishionarizer {
 			fulfilledOrder = FulfilledOrder(prep.ticket, dishes: dishes)

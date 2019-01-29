@@ -10,11 +10,7 @@ import UIKit
 
 public protocol CustomerForWaiter: class {
 	func approach()
-//	func firstDishServed()
-//	func placeOrder()
-//	func peruseMenu()
 	func present(dish dishId: String)
-//	func returnMenuToWaiter(_ chosenDishId: String?)
 }
 
 public protocol CustomerForSommelier {
@@ -26,40 +22,41 @@ public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier, Switc
 }
 
 open class Customer: UIViewController {
-	// these can only be overridden if they are here as opposed to the extension below
-	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {}
-	open func finishMeal() {}
-	open func firstDishServed() {}
-	open func returnMenuToWaiter(_ chosenDishId: String?) {}
-	open func peruseMenu() {}
-	open func placeOrder() {}
-	open func present(dish dishId: String) {}
-	open func regionChosen() {}
+	open func layTable() { lo() }
+	open func approach() { lo() }
+	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) { lo() }
+	open func presentCheck() { lo() }
+	open func peruseMenu() { lo() }
+	open func showToTable() { lo() }
+	open func present(dish dishId: String) { lo() }
+	open func regionChosen() { lo() }
+	open func returnMenuToWaiter(_ chosenDishId: String?) { lo() }
 
 	override final public func viewDidAppear(_ animated: Bool) {
+		lo()
 		super.viewDidAppear(animated)
-		firstDishServed()
+		layTable()
 	}
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
+		lo()
 		if let labels = Rota().all(UILabel.self, from: Mirror(reflecting: self)) {
 			for label in labels {
 				label.text = nil
 			}
 		}
-		checkReadinessToOrder()
-	}
-	
-	private final func checkReadinessToOrder() {
-		guard isViewLoaded, Rota().waiterForCustomer(self)?.onShift ?? false else { return }
-		placeOrder()
+//		checkReadinessToOrder()
+		showToTable()
 		regionChosen()
 	}
+	
+//	private final func checkReadinessToOrder() {
+//		lo()
+//		guard isViewLoaded, Rota().waiterForCustomer(self)?.onShift ?? false else { return }
+//		showToTable()
+//		regionChosen()
+//	}
 }
 
-extension Customer: CustomerProtocol {
-	public final func approach() {
-		checkReadinessToOrder()
-	}
-}
+extension Customer: CustomerProtocol {}

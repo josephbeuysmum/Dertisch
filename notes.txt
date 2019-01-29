@@ -1,11 +1,16 @@
 
-MID-SCREEN ORDERING PROCEDURE
 
-[Customer] -> waiter.give(DTOrder)
-    extension DTWaiterForCustomer.give(_ order: DTOrder)
-SomeHeadChef.give(_ order: DTOrder)
-SomeSousChef.doSomething(...)
-[SousChef] -> headChef.hand(DTDish)
-    extension DTHeadChef.hand(_ dish: DTDish)
-    extension DTWaiterForHeadChef.hand<T>(side: T?)
-SomeWaiter.serve<T>(_ sideDish: T?)
+
+assign(_:maitreD:and:)  init()
+showToTable()           viewDidLoad()
+approach()              viewDidAppear()
+present(dish:)          serve(entrees:) or serve(dishes:)
+finishMeal()            switchesRelationship.endShift()
+
+
+mixed metaphors
+
+not a perfect analogy
+    customers can never can seat other customers by making orders
+    customers do not have individual head chefs assigned to them
+    ingredients are often stored in the kitchen rather than having to be fetched

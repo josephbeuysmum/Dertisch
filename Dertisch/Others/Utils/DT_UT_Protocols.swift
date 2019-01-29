@@ -39,8 +39,8 @@ public protocol KitchenResource: BeginShiftProtocol, EndShiftProtocol {
 
 extension KitchenResource {
 	static public var staticId: String { return String(describing: self) }
-	public func beginShift() {}
-	public func endShift() {}
+	public func beginShift() { lo() }
+	public func endShift() { lo() }
 }
 
 public protocol StaffMember: CigaretteBreakProtocol {}
