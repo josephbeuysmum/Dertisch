@@ -175,6 +175,7 @@ public class Carte: CarteProtocol {
 
 public protocol WaiterForCustomer: GiveOrderProtocol {
 	var carte: CarteForCustomer? { get }
+	func emptyCarte()
 //	var onShift: Bool { get }
 }
 
@@ -210,6 +211,8 @@ public extension Waiter {
 }
 
 public extension WaiterForCustomer {
+	func emptyCarte() {}
+	
 	public func give(_ order: OrderFromCustomer) {
 		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
 		headChef.give(order)
