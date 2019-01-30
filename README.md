@@ -126,7 +126,7 @@ When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCusto
 The Restaurant Metaphor
 ---
 
-`Dertisch's` "restaurant" metaphor raises eyebrows, so it's worth taking a second to explain it. Most if not all design patterns are *simple design patterns* in the sense that they have a one-to-one relationship between their code-management and analogical elements. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**. To put another way, the literary equivalent of what developers might call an **anti-pattern** or a **bad code smell**. Dertisch is an attempt to alleviate this bad smell by implementing a *complex design pattern*. The individual metaphors make sense in isolation *but also* in the round, and the set-up of a restaurant is surprisingly alike the set up of a good app architecture:
+`Dertisch's` "restaurant" metaphor raises eyebrows, so it's worth taking a second to explain it. Most if not all design patterns are *simple design patterns* in the sense that they have a one-to-one relationship between their code-management and analogical elements. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**. To put another way, the literary equivalent of what developers might call an **anti-pattern** or a **bad code smell**. Dertisch is an attempt to alleviate this bad smell by implementing a *complex design pattern*. The individual metaphors make sense in isolation *but also* collectively, and the set-up of a restaurant is surprisingly alike the set up of a good app architecture:
 
 -   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
 -   The front-of-house section of a restaurant is aesthetially pleasing, easy to use, and comfortable for its customers. App Views should be the same.
@@ -169,25 +169,21 @@ Using Dertisch
 
 Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with four in-built `kitchen` classes, and two in-built `restaurant` classes serving functionality common to all apps:
 
-	KITCHEN (model)
+	KITCHEN: INGREDIENTS (model: services)
 
-	INGREDIENTS (services)
-
-	BundledJson
-	// provides simplified access to json config data bundled with the app
+	FoodDelivery
+	// provides access to RESTful APIs
 
 	Freezer
 	// provides simplified access to Core Data storage
 
-	UrlSession
-	// provides access to RESTful APIs
-
-	SOUS CHEFS (proxies)
-
 	Images
 	// provides capacity to load and get copies of images
 
-	RESTAURANT (views and controllers)
+	Larder
+	// provides simplified access to json bundled with the app
+
+	RESTAURANT (controllers)
 
 	MaitreD
 	// manages the addition and removal of Customers and their relationships with Head Chefs and Waiters
@@ -199,7 +195,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `Images` injected have *the same instance* of `Images` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `Images` elsewhere.
 
-`MaitreD` is responsible for starting `Dertisch` apps; `Sommelier` is a mandatory requirement for all `Dertisch` view controllers; and `Sommelier` depends upon `BundledJson`, so these three are instantiated by default. The others are instantiated on a need-to-use basis.
+`MaitreD` is responsible for starting `Dertisch` apps; `Sommelier` is a mandatory requirement for all `Dertisch` view controllers; and `Sommelier` depends upon `Larder`, so these three are instantiated by default. The others are instantiated on a need-to-use basis.
 
 Start your `Dertisch` app by calling `MaitreD.greet(firstCustomer:)` from `AppDelegate`:
 
@@ -220,7 +216,7 @@ Start your `Dertisch` app by calling `MaitreD.greet(firstCustomer:)` from `AppDe
 
 	extension MaitreD: MaitreDExtension {
 		public func registerStaff(with key: String) {
-	//		register(Images.self, with: key, injecting: [UrlSession.self])
+	//		register(Images.self, with: key, injecting: [FoodDelivery.self])
 			register(SomeSousChef.self, with: key)
 			register(SomeIngredient.self, with: key, injecting: [SomeSousChef.self])
 			introduce(
@@ -239,7 +235,7 @@ Start your `Dertisch` app by calling `MaitreD.greet(firstCustomer:)` from `AppDe
 
 In the above example, because `Images` is commented out, injectable instances of this kitchen class will not be instantiated, as whatever app it is that is utilising this code presumably has no need of its functionality (it would make more sense to simply delete this line, but it is included here to demonstrate how they would be used if it was needed).
 
-`Dertisch` kitchen classes can have other kitchen classes injected into them. For instance, in the code example above `Images` has `UrlSession` injected as it depends upon it to load external images.
+`Dertisch` kitchen classes can have other kitchen classes injected into them. For instance, in the code example above `Images` has `FoodDelivery` injected as it depends upon it to load external images.
 
 In the first `introduce(...)` function above, `SomeCustomer`, `SomeWaiter`, and `SomeHeadChef` are bespoke classes written for the implementing app in question, and the registration function is which they appear creates a `viewController -> presenter <- interactor` relationship. `kitchenStaff` is an optional array in which one lists the sous chef classes that `SomeHeadChef` will need to do their job.
 
@@ -289,9 +285,9 @@ Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
--   reassess filenames;
+-   rename Images ingredient;
 -   change Customer <-> ViewController relationship from inheritance to composition;
--   perhaps change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them);
+-   change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -   make `Dertisch` a Cocoapod;
 -	make utils functions native class extensions instead;
@@ -302,8 +298,8 @@ Developmental Roadmap
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
 -	replace `endShift()` functions with weak vars etc?;
 -	force `Freezer` to take `dataModelName` at start up;
--	reintroduce timeout stopwatch to `UrlSession`;
--	complete list of MIME types in `UrlSession`;
+-	reintroduce timeout stopwatch to `FoodDelivery`;
+-	complete list of MIME types in `FoodDelivery`;
 -	create example boilerplate app;
 -   remove fatal errors.
 

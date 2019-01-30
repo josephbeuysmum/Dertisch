@@ -1,5 +1,5 @@
 //
-//  DriedFoods.swift
+//  Larder.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/07/2018.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol DriedFoodsProtocol: Ingredients {
+public protocol LarderProtocol: Ingredients {
 //	var settings: JsonSettings? { get }
 //	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
-public class DriedFoods {
+public class Larder {
 	fileprivate var
 	settings_: JsonSettings?
 	
@@ -28,7 +28,7 @@ fileprivate struct PrivateSetting: Decodable {
 	let value: String
 }
 
-extension DriedFoods: DriedFoodsProtocol {
+extension Larder: LarderProtocol {
 	public var settings: JsonSettings? { return settings_ }
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
