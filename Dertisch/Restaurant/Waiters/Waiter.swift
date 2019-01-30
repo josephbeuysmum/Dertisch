@@ -1,5 +1,5 @@
 //
-//  DT_RS_Waiter.swift
+//  Waiter.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 05/11/2018.
@@ -194,6 +194,7 @@ public protocol WaiterForWaiter {
 	mutating func serve(dishes: FulfilledOrder)
 }
 
+// todo add :class conformance (for now at least, so people can't use to make structs). also get rid of mutating
 public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
 	init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }

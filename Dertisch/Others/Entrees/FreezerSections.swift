@@ -1,5 +1,5 @@
 //
-//  DT_ET_CoreData.swift
+//  FreezerSections.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.

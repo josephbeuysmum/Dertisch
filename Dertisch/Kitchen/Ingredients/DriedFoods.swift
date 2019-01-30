@@ -1,5 +1,5 @@
 //
-//  DT_IG_DriedFoods.swift
+//  DriedFoods.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 03/07/2018.

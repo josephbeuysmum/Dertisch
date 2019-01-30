@@ -1,5 +1,5 @@
 //
-//  DT_UT_Logs.swift
+//  Log.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 14/10/2016.

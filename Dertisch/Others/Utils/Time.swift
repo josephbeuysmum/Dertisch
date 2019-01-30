@@ -1,5 +1,5 @@
 //
-//  DT_UT_Time.swift
+//  Time.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 19/04/2016.

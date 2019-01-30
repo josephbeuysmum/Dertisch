@@ -289,12 +289,12 @@ Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
--   make `Dertisch` a Cocoapod;
--   change Customer <-> ViewController relationship from inheritance to composition;
 -   reassess filenames;
+-   change Customer <-> ViewController relationship from inheritance to composition;
+-   perhaps change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them);
 -	make classes, structs, and protocols that can be made internal and/or final just that;
+-   make `Dertisch` a Cocoapod;
 -	make utils functions native class extensions instead;
--   remove remaining `DT` namespaces;
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
 -   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
 -	new `MetricsSousChef` for serving device-specific numeric constants;

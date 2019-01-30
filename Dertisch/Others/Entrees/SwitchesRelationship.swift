@@ -1,5 +1,5 @@
 //
-//  DT_ET_SwitchesRelationship.swift
+//  SwitchesRelationship.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.

@@ -1,5 +1,5 @@
 //
-//  DT_UT_Extensions.swift
+//  Extensions.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/02/2016.

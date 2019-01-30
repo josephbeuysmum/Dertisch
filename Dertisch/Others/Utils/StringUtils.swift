@@ -1,5 +1,5 @@
 //
-//  DT_UT_String.swift
+//  StringUtils.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 15/02/2016.

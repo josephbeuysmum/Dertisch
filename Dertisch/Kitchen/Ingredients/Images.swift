@@ -1,5 +1,5 @@
 //
-//  DT_IG_Images.swift
+//  Images.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 25/11/2015.

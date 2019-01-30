@@ -1,5 +1,5 @@
 //
-//  DT_IG_Freezer.swift
+//  Freezer.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.

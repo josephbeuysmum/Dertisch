@@ -1,5 +1,5 @@
 //
-//  DT_UT_Constraints.swift
+//  Constraints.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 25/07/2016.
@@ -9,7 +9,7 @@
 //import UIKit
 //
 //// NSLayoutConstraint is a pain in the ass. These functions make it easier
-//public class DTConstraints {
+//public class Constraints {
 //	
 //	public static func getBottomEdgeConstraintFor ( view: UIView, of gap: Int ) -> NSLayoutConstraint {
 //		return _getEdgeConstraintFor( view: view, toAttribute: .bottom, of: gap )

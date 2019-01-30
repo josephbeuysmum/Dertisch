@@ -1,5 +1,5 @@
 //
-//  DT_TableCell.swift
+//  Cells.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.

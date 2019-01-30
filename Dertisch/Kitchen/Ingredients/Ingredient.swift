@@ -1,5 +1,5 @@
 //
-//  DT_IG_Ingredients.swift
+//  Ingredients.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 11/08/2017.

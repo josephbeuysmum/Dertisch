@@ -1,5 +1,5 @@
 //
-//  DT_Customer.swift
+//  Customer.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 30/07/2017.

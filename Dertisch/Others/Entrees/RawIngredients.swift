@@ -1,5 +1,5 @@
 //
-//  DT_ET_RawIngredients.swift
+//  RawIngredients.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 08/09/2016.

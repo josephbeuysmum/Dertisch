@@ -1,5 +1,5 @@
 //
-//  DT_WT_Simple.swift
+//  GeneralWaiter.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 09/10/2018.

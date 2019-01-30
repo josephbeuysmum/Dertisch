@@ -1,5 +1,5 @@
 //
-//  DT_VC_Page.swift
+//  PageCustomer.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 30/07/2017.

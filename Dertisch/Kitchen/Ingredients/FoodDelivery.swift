@@ -1,5 +1,5 @@
 //
-//  DT_IG_FoodDelivery.swift
+//  FoodDelivery.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 19/10/2015.

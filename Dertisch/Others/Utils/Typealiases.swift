@@ -1,5 +1,5 @@
 //
-//  DT_UT_Typealiases.swift
+//  Typealiases.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
@@ -20,7 +20,7 @@ public typealias FreezerDeletionClosure = (Bool) -> Void
 //	func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String?, _ callback: @escaping FreezerClosure)
 //}
 
-//public protocol DTTemporaryValuesProtocol: KitchenResource {
+//public protocolTemporaryValuesProtocol: KitchenResource {
 //	func getValue(by key: String, andAnnul: Bool?) -> StorableDataType?
 //	func set(_ value: StorableDataType, by key: String)
 //	func annulValue(by key: String)
