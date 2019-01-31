@@ -285,6 +285,7 @@ Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
+-   create and move to Dev branch in Git;
 -   rename Images ingredient;
 -   change Customer <-> ViewController relationship from inheritance to composition;
 -   change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);

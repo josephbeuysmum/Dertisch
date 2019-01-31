@@ -14,7 +14,7 @@ public enum Regions: String {
 
 public protocol SommelierProtocol {
 //	var region: Regions { get set }
-//	init(driedFoods: DriedFoods)
+//	init(driedFoods: Larder)
 //	func set(_ customer: CustomerForSommelier?)
 //	subscript(name: String) -> String? { get }
 }
@@ -36,7 +36,7 @@ public final class Sommelier {
 	region_: Regions,
 	customer: CustomerForSommelier?
 	
-	public required init(driedFoods: DriedFoods) {
+	public required init(driedFoods: Larder) {
 		region_ = .england
 		if let unbottledWines = driedFoods.decode(json: "text", into: Wines.self) {
 			var bottledWines: [String: Wine] = [:]

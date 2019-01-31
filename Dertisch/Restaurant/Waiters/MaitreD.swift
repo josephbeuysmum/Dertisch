@@ -65,8 +65,8 @@ public class MaitreD {
 		resources = [:]
 		switchesRelationships = [:]
 		backgroundCustomers = []
-		let driedFoods = DriedFoods()
-		resources[DriedFoods.staticId] = driedFoods
+		let driedFoods = Larder()
+		resources[Larder.staticId] = driedFoods
 		sommelier = Sommelier(driedFoods: driedFoods)
 	}
 }
