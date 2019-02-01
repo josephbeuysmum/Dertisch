@@ -15,11 +15,9 @@ class GeneralWaiter: Waiter {
 	customer: CustomerForWaiter?,
 	headChef: HeadChefForWaiter?
 	
-	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter? = nil) {
+	required init(maitreD: MaitreD) {
 //		lo("bonjour general waiter")
 		self.maitreD = maitreD
-		self.customer = customer
-		self.headChef = headChef
 	}
 	
 //	deinit { lo("au revoir general waiter") }
@@ -34,6 +32,13 @@ class GeneralWaiter: Waiter {
 
 extension GeneralWaiter: WaiterForHeadChef {
 	public func serve(entrees: FulfilledOrder) {}
+}
+
+extension GeneralWaiter: WaiterForMaitreD {
+	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {
+		self.customer = customer
+		self.headChef = headChef
+	}
 }
 
 extension GeneralWaiter: WaiterForWaiter {

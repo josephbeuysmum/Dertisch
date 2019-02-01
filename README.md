@@ -24,6 +24,18 @@ Preamble
 -   `S` Sommelier
 
 ---
+The Restaurant Metaphor
+---
+
+`Dertisch's` "restaurant" metaphor raises eyebrows, so it's worth taking a second to explain it. Most if not all design patterns are *simple design patterns* in the sense that they have a one-to-one relationship between their code-management and analogical elements. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**. To put another way, the literary equivalent of what developers might call an **anti-pattern** or a **bad code smell**. Dertisch is an attempt to alleviate this bad smell by implementing a *complex design pattern*. The individual metaphors make sense in isolation *but also* collectively, and the set-up of a restaurant is surprisingly alike the set up of a good app architecture:
+
+-   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
+-   The front-of-house section of a restaurant is aesthetially pleasing, easy to use, and comfortable for its customers. App Views should be the same.
+-   The kitchen section of a restaurant should be clean, efficient, well organised, and solely about the storage and preparation of raw ingredients. App Models should be the same.
+
+Restaurant agents (`Customers`) remain in the **View**. Kitchen agents (`Head chefs`, `Sous chefs`, `Ingredients`) remain in the **Model**. And waiters (`Waiters`, the `MaitreD`, the `Sommelier`) act like **Controllers**, connecting the world of the View and the Model.
+
+---
 
 Sous Chefs
 ---
@@ -123,18 +135,6 @@ You can think of this chaining as a **multifacted analogical delegate** pattern.
 When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
 
 ---
-The Restaurant Metaphor
----
-
-`Dertisch's` "restaurant" metaphor raises eyebrows, so it's worth taking a second to explain it. Most if not all design patterns are *simple design patterns* in the sense that they have a one-to-one relationship between their code-management and analogical elements. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**. To put another way, the literary equivalent of what developers might call an **anti-pattern** or a **bad code smell**. Dertisch is an attempt to alleviate this bad smell by implementing a *complex design pattern*. The individual metaphors make sense in isolation *but also* collectively, and the set-up of a restaurant is surprisingly alike the set up of a good app architecture:
-
--   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
--   The front-of-house section of a restaurant is aesthetially pleasing, easy to use, and comfortable for its customers. App Views should be the same.
--   The kitchen section of a restaurant should be clean, efficient, well organised, and solely about the storage and preparation of raw ingredients. App Models should be the same.
-
-Restaurant agents (`Customers`) remain in the **View**. Kitchen agents (`Head chefs`, `Sous chefs`, `Ingredients`) remain in the **Model**. And waiters (`Waiters`, the `MaitreD`, the `Sommelier`) act like **Controllers**, connecting the world of the View and the Model.
-
----
 How SWITCHES works in Dertisch
 ---
 
@@ -192,6 +192,8 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	Sommelier
 	// provides multi-language support for screen text
 	// (the sommelier is classically a text proxy)
+
+The built-in kitchen ingredients are very lightweight. For instance, `FoodDelivery` has a single `call(_:from:method:flagged:)` function that uses `URLSession.shared.dataTask(with:)`. Should you need more from your API service, you can simply create your own, say, `AlamofireSousChef` and put all the bells and whistles into it that you require.
 
 All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `Images` injected have *the same instance* of `Images` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `Images` elsewhere.
 

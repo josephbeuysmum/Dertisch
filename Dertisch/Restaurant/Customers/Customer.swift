@@ -6,47 +6,65 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-import UIKit
+public protocol CustomerForCustomer {
+	func layTable()
+	func showToTable()
+}
 
-public protocol CustomerForWaiter: class {
-	func approach()
-	func present(dish dishId: String)
+public protocol CustomerForMaitreD: class {
+	var restaurantTable: RestaurantTable? { get }
+	func peruseMenu()
+	func returnMenuToWaiter(_ chosenDishId: String?)
 }
 
 public protocol CustomerForSommelier {
 	func regionChosen()
 }
 
-public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier, SwitchesRelationshipProtocol {
-	func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier)
+public protocol CustomerForRestaurantTable {
+	func tableIsLaid()
+	func seat()
 }
 
-open class Customer: UIViewController {
-	open func layTable() {}
-	open func approach() {}
-	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {}
-	open func presentCheck() {}
-	open func peruseMenu() {}
-	open func showToTable() {}
-	open func present(dish dishId: String) {}
-	open func regionChosen() {}
-	open func returnMenuToWaiter(_ chosenDishId: String?) {}
+public protocol CustomerForWaiter: class {
+	func approach()
+	func present(dish dishId: String)
+	func presentCheck()
+}
 
-	override final public func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		layTable()
+public protocol Customer: CustomerForCustomer, CustomerForMaitreD, CustomerForSommelier, CustomerForRestaurantTable, CustomerForWaiter, SwitchesRelationshipProtocol {
+	init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?)
+}
+
+
+
+public extension CustomerForCustomer {
+	public func layTable() {}
+	public func showToTable() {}
+}
+
+public extension CustomerForMaitreD {
+	public func peruseMenu() {}
+	public func returnMenuToWaiter(_ chosenDishId: String?) {}
+}
+
+public extension CustomerForRestaurantTable {
+	public func seat() {
+		(self as? CustomerForCustomer)?.layTable()
 	}
 	
-	override final public func viewDidLoad() {
-		super.viewDidLoad()
-		if let labels = Rota().all(UILabel.self, from: Mirror(reflecting: self)) {
-			for label in labels {
-				label.text = nil
-			}
-		}
-		showToTable()
-		regionChosen()
+	public func tableIsLaid() {
+		(self as? CustomerForCustomer)?.showToTable()
+		(self as? CustomerForSommelier)?.regionChosen()
 	}
 }
 
-extension Customer: CustomerProtocol {}
+public extension CustomerForSommelier {
+	public func regionChosen() {}
+}
+
+public extension CustomerForWaiter {
+	public func approach() {}
+	public func present(dish dishId: String) {}
+	public func presentCheck() {}
+}

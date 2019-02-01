@@ -8,9 +8,9 @@
 // todo a bunch more files can be made internal, no?
 internal struct InternalSwitchRelationship {
 	let
-	customerType: CustomerProtocol.Type,
+	customerType: Customer.Type,
 	waiterType: Waiter.Type?,
 	headChefType: HeadChef.Type?,
-	kitchenStaffTypes: [KitchenResource.Type]?
+	kitchenResourceTypes: [KitchenResource.Type]?
 }
 

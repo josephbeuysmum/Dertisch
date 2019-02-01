@@ -8,7 +8,7 @@
 
 //public typealias Ticket = String
 
-public struct OrderFromCustomer {
+public struct CustomerOrder {
 	public let
 	ticket: String,
 	content: Any?

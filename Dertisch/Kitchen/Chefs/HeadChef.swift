@@ -14,9 +14,8 @@ public protocol HeadChefForSousChef {
 
 public protocol HeadChefForWaiter: GiveOrderProtocol {}
 
-public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, KitchenResource, StaffMember, SwitchesRelationshipProtocol {
-	init(_ resources: [String: KitchenResource]?)
-	var waiter: WaiterForHeadChef? { get set }
+public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, BeginShiftProtocol, EndShiftProtocol, StaffMember, SwitchesRelationshipProtocol {
+	init(waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?)
 }
 
 public extension HeadChef {
@@ -24,7 +23,7 @@ public extension HeadChef {
 	public func beginShift() {}
 	public func endBreak() {}
 	public func endShift() {}
-	public func give(_ order: OrderFromCustomer) {}
+	public func give(_ order: CustomerOrder) {}
 }
 
 public extension HeadChefForSousChef {

@@ -22,11 +22,11 @@ public protocol MaitreDRegistrar {
 		injecting dependencyTypes: [KitchenResource.Type]?)
 	func introduce(
 		_ customerId: String,
-		as customerType: CustomerProtocol.Type,
+		as customerType: Customer.Type,
 		with key: String,
 		waiter waiterType: Waiter.Type?,
 		chef headChefType: HeadChef.Type?,
-		kitchenStaff kitchenStaffTypes: [KitchenResource.Type]?)
+		kitchenResources: [KitchenResource.Type]?)
 }
 
 public protocol MaitreDProtocol: MaitreDRegistrar {
@@ -44,7 +44,7 @@ public protocol MaitreDProtocol: MaitreDRegistrar {
 
 
 
-fileprivate typealias CustomerTicket = (customer: Customer, id: String)
+fileprivate typealias CustomerTicket = (restaurantTable: RestaurantTable, id: String, animated: Bool)
 
 public class MaitreD {
 	private let
@@ -56,18 +56,17 @@ public class MaitreD {
 	switchesRelationships: Dictionary<String, InternalSwitchRelationship>,
 	window: UIWindow!,
 	backgroundCustomers: [CustomerTicket],
-//	rootSwitches: SwitchesRelationship?,
-	currentSwitches: SwitchesRelationship?,
-	menuSwitches: SwitchesRelationship?
+	currentRelationships: SwitchesRelationship?,
+	menuRelationships: SwitchesRelationship?
 	
 	required public init() {
 		key = NSUUID().uuidString
 		resources = [:]
 		switchesRelationships = [:]
 		backgroundCustomers = []
-		let driedFoods = Larder()
-		resources[Larder.staticId] = driedFoods
-		sommelier = Sommelier(driedFoods: driedFoods)
+		let larder = Larder()
+		resources[Larder.staticId] = larder
+		sommelier = Sommelier(larder: larder)
 	}
 }
 
@@ -79,20 +78,14 @@ extension MaitreD: MaitreDProtocol {
 		title: String? = nil,
 		message: String? = nil,
 		style: UIAlertController.Style? = .alert) {
-		guard let customer = currentSwitches?.customer else { return }
+		guard let customer = currentRelationships?.customer else { return }
 		let
 		alert = UIAlertController(title: title, message: message, preferredStyle: style!),
 		countActions = actions.count
 		for i in 0..<countActions {
 			alert.addAction(actions[i])
 		}
-		customer.present(alert, animated: true)
-	}
-	
-	public func closeRestaurant() {
-		currentSwitches?.endShift()
-		menuSwitches?.endShift()
-		//		exit(1)
+		customer.restaurantTable?.present(alert, animated: true)
 	}
 	
 	public func createNibFrom(name nibName: String, for owner: Customer) -> UIView? {
@@ -101,28 +94,29 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
-		// todo should this be a fatal error?
 		guard self.window == nil else { return }
 		Time.startInterval()
 		registerStaff(with: key)
-		
-		guard let rootSwitches = createBundle(from: customerId, and: storyboard) else { return }
-		currentSwitches = rootSwitches
-		currentSwitches!.waiter?.beginShift()
-		currentSwitches!.headChef?.beginShift()
+		guard
+			let rootRelationships = createRelationships(customerId: customerId, animated: false, storyboard: storyboard),
+			let rootRestaurantTable = rootRelationships.customer?.restaurantTable
+			else { return }
+		currentRelationships = rootRelationships
 		self.window = window
 		self.window.makeKeyAndVisible()
-		self.window.rootViewController = rootSwitches.customer
-		sommelier.set(currentSwitches!.customer)
+		self.window.rootViewController = rootRestaurantTable
+		sommelier.assign(currentRelationships!.customer)
+		currentRelationships!.waiter?.beginShift()
+		currentRelationships!.headChef?.beginShift()
 	}
 	
 	public func introduce(
 		_ customerId: String,
-		as customerType: CustomerProtocol.Type,
+		as customerType: Customer.Type,
 		with key: String,
 		waiter waiterType: Waiter.Type? = nil,
 		chef headChefType: HeadChef.Type? = nil,
-		kitchenStaff kitchenStaffTypes: [KitchenResource.Type]? = nil) {
+		kitchenResources: [KitchenResource.Type]? = nil) {
 		guard
 			switchesRelationships[customerId] == nil,
 			key == self.key
@@ -131,42 +125,33 @@ extension MaitreD: MaitreDProtocol {
 			customerType: customerType,
 			waiterType: waiterType,
 			headChefType: headChefType,
-			kitchenStaffTypes: kitchenStaffTypes)
+			kitchenResourceTypes: kitchenResources)
 	}
 	
 	public func present(popoverMenu menuId: String, inside rect: CGRect? = nil, from storyboard: String? = nil) {
 		guard
-			menuSwitches == nil,
-			let currentCustomer = currentSwitches?.customer,
-			let menuBundle = createBundle(from: menuId, and: storyboard),
-			let menuCustomer = menuBundle.customer
+			menuRelationships == nil,
+			let currentCustomer = currentRelationships?.customer,
+			let nextMenuRelationships = createRelationships(customerId: menuId, animated: true, storyboard: storyboard),
+			let menuTableAndChair = nextMenuRelationships.customer?.restaurantTable
 			else { return }
-		menuSwitches = menuBundle
-		currentSwitches?.headChef?.beginBreak()
-		currentSwitches?.waiter?.beginBreak()
+		menuRelationships = nextMenuRelationships
+		
 		currentCustomer.peruseMenu()
-		menuSwitches!.waiter?.beginShift()
-		menuSwitches!.headChef?.beginShift()
-		menuSwitches!.customer?.modalPresentationStyle = .popover
-		currentCustomer.present(menuCustomer, animated: true)
-		menuSwitches!.customer?.popoverPresentationController?.sourceView = currentCustomer.view
+		currentRelationships?.waiter?.beginBreak()
+		currentRelationships?.headChef?.beginBreak()
+		
+		menuRelationships!.customer?.restaurantTable?.modalPresentationStyle = .popover
+		currentCustomer.restaurantTable?.present(menuTableAndChair, animated: true)
+		menuRelationships!.customer?.restaurantTable?.popoverPresentationController?.sourceView = currentCustomer.restaurantTable?.view
 		if let safeRect = rect {
-			menuSwitches!.customer?.popoverPresentationController?.sourceRect = safeRect
+			menuRelationships!.customer?.restaurantTable?.popoverPresentationController?.sourceRect = safeRect
 		}
+		
+		sommelier.assign(menuRelationships!.customer)
+		menuRelationships!.waiter?.beginShift()
+		menuRelationships!.headChef?.beginShift()
 	}
-	
-	/*
-	public func register(
-	_ kitchenStaffType: KitchenMember.Type,
-	with key: String,
-	injecting dependencyTypes: [KitchenMember.Type]? = nil) {
-	guard key == self.key else { return }
-	let kitchenClasses = getResources(from: dependencyTypes)
-	let kitchenStaffMember = kitchenStaffType.init(kitchenClasses)
-	self.kitchenStaff[kitchenStaffType.staticId] = kitchenStaffMember
-	kitchenStaffMember.beginShift()
-	}
-*/
 	
 	// todo when registering Images: ingredients we should automatically do UrlSession too
 	public func register(
@@ -182,47 +167,55 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
-		guard var strongMenuSwitches = menuSwitches else { return }
-		strongMenuSwitches.customer?.dismiss(animated: true) //{}
-		strongMenuSwitches.endShift()
-		menuSwitches = nil
-		currentSwitches?.headChef?.endBreak()
-		currentSwitches?.waiter?.endBreak()
-		currentSwitches?.customer?.returnMenuToWaiter(chosenDishId)
+		guard menuRelationships != nil else { return }
+		menuRelationships!.customer?.restaurantTable?.dismiss(animated: true) //{}
+		endShift(for: menuRelationships)
+		menuRelationships = nil
+		currentRelationships?.headChef?.endBreak()
+		currentRelationships?.waiter?.endBreak()
+		currentRelationships?.customer?.returnMenuToWaiter(chosenDishId)
 	}
 	
 	public func seat(
 		_ customerId: String,
 		via transitionStyle: UIModalTransitionStyle? = nil,
 		from storyboard: String? = nil) {
-		guard
-			let currentCustomer = currentSwitches?.customer,
-			var switchBundle = createBundle(from: customerId, and: storyboard),
-			let switchCustomer = switchBundle.customer
-			else { return }
 		let animated = transitionStyle != nil
+		guard
+			let currentCustomer = currentRelationships?.customer,
+			let nextCurrentRelationships = createRelationships(
+				customerId: customerId,
+				animated: animated,
+				storyboard: storyboard),
+			let nextCustomer = nextCurrentRelationships.customer,
+			let currentRestaurantTable = currentCustomer.restaurantTable,
+			let nextRestaurantTable = nextCustomer.restaurantTable
+			else { return }
+		let ticket = CustomerTicket(restaurantTable: currentRestaurantTable, id: currentRelationships!.customerID, animated: animated)
+		backgroundCustomers.append(ticket)
+		endShift(for: currentRelationships)
+		
 		if animated {
-			switchBundle.customer?.modalTransitionStyle = transitionStyle!
+			nextCurrentRelationships.customer?.restaurantTable?.modalTransitionStyle = transitionStyle!
 		}
-		guard var formerSwitches = currentSwitches else { return }
-		backgroundCustomers.append((customer: formerSwitches.customer!, id: formerSwitches.customerID))
-		currentSwitches = switchBundle
-		currentCustomer.present(switchCustomer, animated: animated)
-		formerSwitches.endShift()
-		switchBundle.animated = animated
-		currentSwitches!.waiter?.beginShift()
-		currentSwitches!.headChef?.beginShift()
-		sommelier.set(currentCustomer)
+		
+		currentRelationships = nextCurrentRelationships
+		currentRestaurantTable.present(nextRestaurantTable, animated: animated)
+		sommelier.assign(currentCustomer)
+		currentRelationships!.waiter?.beginShift()
+		currentRelationships!.headChef?.beginShift()
 	}
 	
 	public func usherOutCurrentCustomer() {
-		guard currentSwitches != nil else { return }
-		currentSwitches!.customer?.dismiss(animated: currentSwitches!.animated) { [unowned self] in
-			self.currentSwitches!.endShift()
+		guard currentRelationships != nil else { return }
+		currentRelationships!.customer?.restaurantTable?.dismiss(animated: currentRelationships!.animated) { [unowned self] in
+			self.endShift(for: self.currentRelationships)
 			guard let formerCustomer = self.backgroundCustomers.popLast() else { return }
-			self.currentSwitches = self.createBundle(from: formerCustomer)
-			self.currentSwitches!.waiter?.beginShift()
-			self.currentSwitches!.headChef?.beginShift()
+			guard let formerRelationships = self.createRelationships(ticket: formerCustomer) else { return }
+			self.currentRelationships = formerRelationships
+			self.sommelier.assign(self.currentRelationships!.customer)
+			self.currentRelationships!.waiter?.beginShift()
+			self.currentRelationships!.headChef?.beginShift()
 		}
 	}
 	
@@ -232,30 +225,30 @@ extension MaitreD: MaitreDProtocol {
 	
 	internal func customer(for staffMember: SwitchesRelationshipProtocol) -> Customer? {
 		switch true {
-		case staffMember === currentSwitches?.waiter:	return currentSwitches!.customer
-		case staffMember === menuSwitches?.waiter:		return menuSwitches!.customer
-		default: 										return nil
+		case staffMember === currentRelationships?.waiter:		return currentRelationships!.customer
+		case staffMember === menuRelationships?.waiter:			return menuRelationships!.customer
+		default: 												return nil
 		}
 	}
 	
 	internal func headChef(for staffMember: SwitchesRelationshipProtocol) -> HeadChef? {
 		switch true {
-		case staffMember === currentSwitches?.waiter:	return currentSwitches!.headChef
-		case staffMember === menuSwitches?.waiter:		return menuSwitches!.headChef
-		default: 										return nil
+		case staffMember === currentRelationships?.waiter:		return currentRelationships!.headChef
+		case staffMember === menuRelationships?.waiter:			return menuRelationships!.headChef
+		default: 												return nil
 		}
 	}
 	
 	// todo? change to conditional conformance (I wish I had made this more explicit, now I'm not sure what "change to conditional conformance" means in this context)
 	internal func waiter(for staffMember: SwitchesRelationshipProtocol) -> Waiter? {
 		switch true {
-		case staffMember === currentSwitches?.headChef,
-			 staffMember === currentSwitches?.customer,
-			 staffMember === currentSwitches?.waiter:	return currentSwitches!.waiter
-		case staffMember === menuSwitches?.headChef,
-			 staffMember === menuSwitches?.customer,
-			 staffMember === menuSwitches?.waiter:		return menuSwitches!.waiter
-		default: 										return nil
+		case staffMember === currentRelationships?.headChef,
+			 staffMember === currentRelationships?.customer,
+			 staffMember === currentRelationships?.waiter:		return currentRelationships!.waiter
+		case staffMember === menuRelationships?.headChef,
+			 staffMember === menuRelationships?.customer,
+			 staffMember === menuRelationships?.waiter:			return menuRelationships!.waiter
+		default: 												return nil
 		}
 	}
 	
@@ -263,34 +256,39 @@ extension MaitreD: MaitreDProtocol {
 	
 	
 	
-	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
+	private func createRelationships(ticket: CustomerTicket) -> SwitchesRelationship? {
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
-		let
-		kitchenStaff = getResources(from: switchesRelationship.kitchenStaffTypes),
-		headChef = switchesRelationship.headChefType != nil ?
-			switchesRelationship.headChefType!.init(kitchenStaff) :
-			nil,
-		waiter = switchesRelationship.waiterType != nil ?
-			switchesRelationship.waiterType!.init(maitreD: self, customer: ticket.customer, headChef: headChef) :
-			GeneralWaiter(maitreD: self, customer: ticket.customer, headChef: headChef)
-		headChef?.waiter = waiter
-		ticket.customer.assign(waiter, maitreD: self, and: sommelier)
+		let waiter = switchesRelationship.waiterType != nil ?
+			switchesRelationship.waiterType!.init(maitreD: self) :
+			GeneralWaiter(maitreD: self)
+		let headChef = switchesRelationship.headChefType != nil ?
+			switchesRelationship.headChefType!.init(
+				waiter: waiter,
+				resources: getResources(from: switchesRelationship.kitchenResourceTypes)) :
+			nil
+		let customer = switchesRelationship.customerType.init(
+			maitreD: self,
+			restaurantTable: ticket.restaurantTable,
+			waiter: waiter,
+			sommelier: sommelier)
+		customer.restaurantTable?.customer = customer
+		waiter.introduce(customer, and: headChef)
 		return SwitchesRelationship(
 			customerID: ticket.id,
-			customer: ticket.customer,
+			animated: ticket.animated,
+			customer: customer,
 			waiter: waiter,
-			headChef: headChef,
-			animated: false)
+			headChef: headChef)
 	}
 	
-	private func createBundle(from customerId: String, and storyboard: String? = nil) -> SwitchesRelationship? {
-		guard
-			switchesRelationships[customerId] != nil,
-			let customer = UIStoryboard(
-				name: storyboard ?? "Main",
-				bundle: nil).instantiateViewController(withIdentifier: customerId) as? Customer
-			else { return nil }
-		return createBundle(from: (customer: customer, id: customerId))
+	private func createRelationships(customerId: String, animated: Bool, storyboard: String? = nil) -> SwitchesRelationship? {
+		guard switchesRelationships[customerId] != nil else { return nil }
+		let restaurantTableId = "\(customerId)\(CommonPhrases.View)\(CommonPhrases.Controller)"
+		guard let restaurantTable = UIStoryboard(
+			name: storyboard ?? "Main",
+			bundle: nil).instantiateViewController(withIdentifier: restaurantTableId) as? RestaurantTable else { return nil }
+		let ticket = CustomerTicket(restaurantTable: restaurantTable, id: customerId, animated: animated)
+		return createRelationships(ticket: ticket)
 	}
 	
 	private func getResources(from dependencyTypes: [KitchenResource.Type]?) -> [String: KitchenResource]? {
@@ -303,6 +301,13 @@ extension MaitreD: MaitreDProtocol {
 			}
 		}
 		return resources
+	}
+	
+	private func endShift(for switchesRelationship: SwitchesRelationship?) {
+		guard switchesRelationship != nil else { return }
+		switchesRelationship!.customer?.presentCheck()
+		switchesRelationship!.waiter?.endShift()
+		switchesRelationship!.headChef?.endShift()
 	}
 	
 	private func searchFor(

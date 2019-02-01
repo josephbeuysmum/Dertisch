@@ -30,7 +30,7 @@ public protocol EndShiftProtocol {
 }
 
 public protocol GiveOrderProtocol {
-	mutating func give(_ order: OrderFromCustomer)
+	mutating func give(_ order: CustomerOrder)
 }
 
 public protocol KitchenResource: BeginShiftProtocol, EndShiftProtocol {

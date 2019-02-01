@@ -5,20 +5,20 @@
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct SwitchesRelationship: EndShiftProtocol {
-	var
+internal struct SwitchesRelationship {
+	let
 	customerID: String,
+	animated: Bool,
 	customer: Customer?,
 	waiter: Waiter?,
-	headChef: HeadChef?,
-	animated: Bool
-
-	mutating func endShift() {
-		customer?.presentCheck()
-		waiter?.endShift()
-		headChef?.endShift()
-		customer = nil
-		waiter = nil
-		headChef = nil
-	}
+	headChef: HeadChef?
+//
+//	mutating func endShift() {
+//		customer?.presentCheck()
+//		waiter?.endShift()
+//		headChef?.endShift()
+//		customer = nil
+//		waiter = nil
+//		headChef = nil
+//	}
 }

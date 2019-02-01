@@ -188,6 +188,10 @@ public protocol WaiterForHeadChef {
 	mutating func serve(main: FulfilledOrder)
 }
 
+public protocol WaiterForMaitreD {
+	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?)
+}
+
 public protocol WaiterForWaiter {
 	mutating func addToCarte(_ main: FulfilledOrder)
 	mutating func fillCarte(with entrees: FulfilledOrder)
@@ -195,8 +199,8 @@ public protocol WaiterForWaiter {
 }
 
 // todo add :class conformance (for now at least, so people can't use to make structs). also get rid of mutating
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
-	init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForMaitreD, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
+	init(maitreD: MaitreD)
 }
 
 
@@ -214,7 +218,7 @@ public extension Waiter {
 public extension WaiterForCustomer {
 	func emptyCarte() {}
 	
-	public func give(_ order: OrderFromCustomer) {
+	public func give(_ order: CustomerOrder) {
 		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
 		headChef.give(order)
 	}
