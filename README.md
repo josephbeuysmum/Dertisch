@@ -289,7 +289,6 @@ Developmental Roadmap
 
 -   create and move to Dev branch in Git;
 -   rename Images ingredient;
--   change Customer <-> ViewController relationship from inheritance to composition;
 -   change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -   make `Dertisch` a Cocoapod;
