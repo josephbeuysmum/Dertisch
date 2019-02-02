@@ -27,10 +27,10 @@ Preamble
 The Restaurant Metaphor
 ---
 
-`Dertisch's` "restaurant" metaphor raises eyebrows, so it's worth taking a second to explain it. Most if not all design patterns are *simple design patterns* in the sense that they have a one-to-one relationship between their code-management and analogical elements. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**. To put another way, the literary equivalent of what developers might call an **anti-pattern** or a **bad code smell**. Dertisch is an attempt to alleviate this bad smell by implementing a *complex design pattern*. The individual metaphors make sense in isolation *but also* collectively, and the set-up of a restaurant is surprisingly alike the set up of a good app architecture:
+Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has the same structure as a good app:
 
 -   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
--   The front-of-house section of a restaurant is aesthetially pleasing, easy to use, and comfortable for its customers. App Views should be the same.
+-   The front-of-house section of a restaurant is aesthetically pleasing, easy to use, and comfortable for its customers. App Views should be the same.
 -   The kitchen section of a restaurant should be clean, efficient, well organised, and solely about the storage and preparation of raw ingredients. App Models should be the same.
 
 Restaurant agents (`Customers`) remain in the **View**. Kitchen agents (`Head chefs`, `Sous chefs`, `Ingredients`) remain in the **Model**. And waiters (`Waiters`, the `MaitreD`, the `Sommelier`) act like **Controllers**, connecting the world of the View and the Model.
@@ -287,15 +287,16 @@ Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
--   create and move to Dev branch in Git;
+-   move to Devops Git branch;
+-	make `Customer` and `Waiter` [RxSwift](https://github.com/ReactiveX/RxSwift/) compatible;
+-   change the multi-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -   rename Images ingredient;
--   change the mult-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -   make `Dertisch` a Cocoapod;
 -	make utils functions native class extensions instead;
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
 -   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
--	new `MetricsSousChef` for serving device-specific numeric constants;
+-	new `MetricsSousChef` for device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
 -	replace `endShift()` functions with weak vars etc?;
