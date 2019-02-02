@@ -24,10 +24,10 @@ Preamble
 -   `S` Sommelier
 
 ---
-The Restaurant Metaphor
+The Restaurant as a Design Pattern
 ---
 
-Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has the same structure as a good app:
+Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie - there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors** - the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern* - the metaphors make sense in isolation *but also* collectively. And a good restaurant has the same structure as a good app:
 
 -   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
 -   The front-of-house section of a restaurant is aesthetically pleasing, easy to use, and comfortable for its customers. App Views should be the same.
