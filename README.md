@@ -3,13 +3,6 @@
 A **swifty** MVP framework for Swift apps
 ---
 
-Preamble
----
-
--   `Dertisch` aims to be stable enough to use as production code, but at present exists partly as an experiment into what being *swifty* means in relation to traditional view/model architectures. Because of this, currently **Dertisch is not recommended for production code**, although this is planned to change.
-
----
-
 `Dertisch` is a lightweight Swift framework built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift. The framework's name forms a culinary analogical acronym designed to explain its own hybrid nature.
 
 -   `D` The Maître D
@@ -36,9 +29,9 @@ Most design patterns are *simple design patterns* in that they translate their o
 
 -   **customer** patterns: `customers`, and `restaurant tables`;
 -   **kitchen** patterns: `head chefs`, `sous chefs`, and `ingredients`; and
--   **salle** patterns: `waiters`, the `MaitreD`, and the `Sommelier`.
+-   **salle** patterns: `waiters`, the `maitre d`, and the `sommelier`.
 
-*La salle* is a French noun meaning "the dining room in a restaurant".
+*La salle* is a French noun meaning "the dining room in a restaurant", amongst other things.
 
 ---
 
