@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ImagesProtocol: Ingredients {
+public protocol Imageable: Ingredients {
 //	func image(by url: String) -> UIImage?
 //	func has(by url: String) -> Bool
 //	func load(by url: String) -> Bool
@@ -44,7 +44,7 @@ extension Images: IngredientsForIngredients {
 		if let urlIndex = urlsResolving.index(of: url) {
 			urlsResolving.remove(at: urlIndex)
 		}
-		if var sousChef = resource as? SousChefForIngredients {
+		if let sousChef = resource as? SousChefForIngredients {
 			sousChef.cook(rawIngredients)
 		} else if let complexIngredients = resource as? IngredientsForIngredients {
 			complexIngredients.blend(rawIngredients)
@@ -52,7 +52,7 @@ extension Images: IngredientsForIngredients {
 	}
 }
 
-extension Images: ImagesProtocol {
+extension Images: Imageable {
 	public subscript(url: String) -> UIImage? {
 		return image(by: url)
 	}

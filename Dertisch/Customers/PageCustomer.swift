@@ -8,7 +8,7 @@
 
 //import UIKit
 //
-//extension PageCustomer {//}: DishesEntitySetterProtocol {
+//extension PageCustomer {
 //	public func set(dishes: Dishes) {
 //		guard dishes_ == nil else { return }
 //		dishes_ = dishes

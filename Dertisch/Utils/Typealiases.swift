@@ -11,7 +11,7 @@ import CoreData
 public typealias FreezerClosure = ([NSManagedObject]?) -> Void
 public typealias FreezerDeletionClosure = (Bool) -> Void
 
-//public protocol FreezerProtocol: KitchenResource {
+//public protocol Freezable: KitchenResource {
 //	var dataModelName: String? { get set }
 //	func delete(entityName: String, _ callback: @escaping FreezerDeletionClosure)
 //	func delete(entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
@@ -27,7 +27,7 @@ public typealias FreezerDeletionClosure = (Bool) -> Void
 //	func removeValues ()
 //}
 
-//public protocol ImagesProtocol: KitchenResource {
+//public protocol Imageable: KitchenResource {
 //	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
 //	func load(by url: String)
 //}

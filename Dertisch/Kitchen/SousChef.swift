@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol SousChefForIngredients {
-	mutating func cook(_ rawIngredients: RawIngredients)
+	func cook(_ rawIngredients: RawIngredients)
 }
 
 public protocol SousChefForHeadChef {
@@ -19,7 +19,7 @@ public protocol SousChefForHeadChef {
 public protocol SousChef: SousChefForIngredients, SousChefForHeadChef, KitchenResource, StaffMember {}
 
 public extension SousChef {
-	public mutating func cook(_ rawIngredients: RawIngredients) {}
+	public func cook(_ rawIngredients: RawIngredients) {}
 	public func beginShift() {}
-	public mutating func endShift() {}
+	public func endShift() {}
 }

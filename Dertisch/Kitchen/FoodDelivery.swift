@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FoodDeliveryProtocol: Ingredients {
+public protocol FoodDeliverable: Ingredients {
 //	func call(_ url: String, from resource: SousChefForIngredients, method: Methods?) -> Bool
 }
 
@@ -22,7 +22,7 @@ public class FoodDelivery {
 	}
 }
 
-extension FoodDelivery: FoodDeliveryProtocol {
+extension FoodDelivery: FoodDeliverable {
 	func call(_ url: String, from resource: KitchenResource, method: Methods, flagged flag: String? = nil) -> Bool {
 		lo()
 		guard let validUrl = URL(string: url) else { return false }
@@ -45,7 +45,7 @@ extension FoodDelivery: FoodDeliveryProtocol {
 				RawIngredients(success: false, url: url, data: nil, flag: flag)
 			strongSelf.resources.removeValue(forKey: url)
 			
-			if var sousChef = resource as? SousChefForIngredients {
+			if let sousChef = resource as? SousChefForIngredients {
 				sousChef.cook(rawIngredients)
 			} else if let complexIngredients = resource as? IngredientsForIngredients {
 				complexIngredients.blend(rawIngredients)

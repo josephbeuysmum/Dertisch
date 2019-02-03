@@ -15,6 +15,7 @@ public protocol CustomerForMaitreD: class {
 	var restaurantTable: RestaurantTable? { get }
 	func peruseMenu()
 	func returnMenuToWaiter(_ chosenDishId: String?)
+	func menuReturnedToWaiter(_ chosenDishId: String?)
 }
 
 public protocol CustomerForSommelier {
@@ -22,8 +23,8 @@ public protocol CustomerForSommelier {
 }
 
 public protocol CustomerForRestaurantTable {
-	func tableIsLaid()
-	func seat()
+	func tableAssigned()
+	func isSeated()
 }
 
 public protocol CustomerForWaiter: class {
@@ -32,7 +33,7 @@ public protocol CustomerForWaiter: class {
 	func presentCheck()
 }
 
-public protocol Customer: CustomerForCustomer, CustomerForMaitreD, CustomerForSommelier, CustomerForRestaurantTable, CustomerForWaiter, SwitchesRelationshipProtocol {
+public protocol Customer: CustomerForCustomer, CustomerForMaitreD, CustomerForSommelier, CustomerForRestaurantTable, CustomerForWaiter, StaffRelatable {
 	init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?)
 }
 
@@ -46,16 +47,17 @@ public extension CustomerForCustomer {
 public extension CustomerForMaitreD {
 	public func peruseMenu() {}
 	public func returnMenuToWaiter(_ chosenDishId: String?) {}
+	public func menuReturnedToWaiter(_ chosenDishId: String?) {}
 }
 
 public extension CustomerForRestaurantTable {
-	public func seat() {
-		(self as? CustomerForCustomer)?.layTable()
-	}
-	
-	public func tableIsLaid() {
+	public func tableAssigned() {
 		(self as? CustomerForCustomer)?.showToTable()
 		(self as? CustomerForSommelier)?.regionChosen()
+	}
+	
+	public func isSeated() {
+		(self as? CustomerForCustomer)?.layTable()
 	}
 }
 

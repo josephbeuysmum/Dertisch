@@ -54,7 +54,7 @@ public struct Chars {
 
 public struct CommonPhrases {
 	public static let
-	Activated = "Activated",
+//	Activated = "Activated",
 	Added = "Added",
 	Cell = "Cell",
 	Controller = "Controller",
@@ -64,14 +64,17 @@ public struct CommonPhrases {
 	Menu = "Menu",
 	Popover = "Popover",
 	Removed = "Removed",
+	Restaurant = "Restaurant",
 	Retrieved = "Retrieved",
 	Search = "Search",
 	Selected = "Selected",
 	Set = "Set",
 	Stored = "Stored",
+	Table = "Table",
 	Updated = "Updated",
-	View = "View"
-	
+	View = "View",
+	RestaurantTable = "\(Restaurant)\(Table)"
+
 	//	Account = "Account",
 	//	Accounts = "\( Account )s",
 	//	Back = "Back",

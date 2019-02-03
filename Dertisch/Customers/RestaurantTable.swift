@@ -13,11 +13,16 @@ public class RestaurantTable: UIViewController {
 	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		customer?.seat()
+		customer?.isSeated()
 	}
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		customer?.tableIsLaid()
+		customer?.tableAssigned()
+	}
+	
+	override public func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		customer = nil
 	}
 }

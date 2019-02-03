@@ -6,34 +6,34 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol CigaretteBreakProtocol {
-	mutating func beginBreak()
-	mutating func endBreak()
+public protocol CigaretteBreakable {
+	func beginBreak()
+	func endBreak()
 }
 
-extension CigaretteBreakProtocol {
+extension CigaretteBreakable {
 	public func beginBreak() {}
 	public func endBreak() {}
 }
 
-public protocol DescribableProtocol {
+public protocol Describable {
 	var description: String { get }
 }
 
-public protocol BeginShiftProtocol {
+public protocol BeginShiftable {
 	func beginShift()
 }
 
 // todo end in a better way, with weak vars etc
-public protocol EndShiftProtocol {
-	mutating func endShift()
+public protocol EndShiftable {
+	func endShift()
 }
 
-public protocol GiveOrderProtocol {
-	mutating func give(_ order: CustomerOrder)
+public protocol GiveOrderable {
+	func give(_ order: CustomerOrder)
 }
 
-public protocol KitchenResource: BeginShiftProtocol, EndShiftProtocol {
+public protocol KitchenResource: BeginShiftable, EndShiftable {
 	init(_ resources: [String: KitchenResource]?)
 }
 
@@ -43,9 +43,9 @@ extension KitchenResource {
 	public func endShift() {}
 }
 
-public protocol StaffMember: CigaretteBreakProtocol {}
+public protocol StaffMember: CigaretteBreakable {}
 
-public protocol FreezerEntityProtocol {
+public protocol FreezerEntitiable {
 	var attributes: [String: StorableDataType] { get }
 	var name: String { get }
 	init (_ name: String, keys: [FreezerKey])
@@ -54,7 +54,7 @@ public protocol FreezerEntityProtocol {
 
 public protocol StorableDataType {}
 
-public protocol SwitchesRelationshipProtocol: class {}
+public protocol StaffRelatable: class {}
 
 extension Bool: StorableDataType {}
 extension Double: StorableDataType {}

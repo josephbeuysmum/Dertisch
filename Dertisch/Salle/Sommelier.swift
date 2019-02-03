@@ -25,16 +25,17 @@ public final class Sommelier {
 		// todo what should happen after the region gets re-set?
 		set {
 			guard region_ != newValue else { return }
+//			lo(customer)
 			region_ = newValue
-			customer?.regionChosen()
+//			customer?.regionChosen()
 		}
 	}
 	
 	fileprivate let wines: [String: Wine]?
 	
 	fileprivate var
-	region_: Regions,
-	customer: CustomerForSommelier?
+	region_: Regions
+//	, customer: CustomerForSommelier?
 	
 	public required init(larder: Larder) {
 		region_ = .england
@@ -52,9 +53,10 @@ public final class Sommelier {
 		}
 	}
 	
-	public func assign(_ customer: CustomerForSommelier?) {
-		self.customer = customer
-	}
+//	public func assign(_ customer: CustomerForSommelier?) {
+//		lo("assign", customer)
+//		self.customer = customer
+//	}
 }
 
 extension Sommelier: SommelierProtocol {

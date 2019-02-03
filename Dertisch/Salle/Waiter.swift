@@ -154,7 +154,8 @@ public extension CarteForCustomer {
 	}
 }
 
-public class Carte: CarteProtocol {
+// tood GC class or struct?
+public struct Carte: CarteProtocol {
 	// todo do these need trailing underscores?
 	fileprivate let entrees_: Dishionarizer
 	fileprivate var dishes_: Dishes?
@@ -173,7 +174,7 @@ public class Carte: CarteProtocol {
 
 
 
-public protocol WaiterForCustomer: GiveOrderProtocol {
+public protocol WaiterForCustomer: GiveOrderable {
 	var carte: CarteForCustomer? { get }
 	func emptyCarte()
 //	var onShift: Bool { get }
@@ -184,8 +185,8 @@ public protocol WaiterForCustomer: GiveOrderProtocol {
 //}
 
 public protocol WaiterForHeadChef {
-	mutating func serve(entrees: FulfilledOrder)
-	mutating func serve(main: FulfilledOrder)
+	func serve(entrees: FulfilledOrder)
+	func serve(main: FulfilledOrder)
 }
 
 public protocol WaiterForMaitreD {
@@ -193,13 +194,11 @@ public protocol WaiterForMaitreD {
 }
 
 public protocol WaiterForWaiter {
-	mutating func addToCarte(_ main: FulfilledOrder)
-	mutating func fillCarte(with entrees: FulfilledOrder)
-	mutating func serve(dishes: FulfilledOrder)
+	func addToCarte(_ main: FulfilledOrder)
+	func fillCarte(with entrees: FulfilledOrder)
 }
 
-// todo add :class conformance (for now at least, so people can't use to make structs). also get rid of mutating
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForMaitreD, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForMaitreD, WaiterForWaiter, StaffMember, BeginShiftable, EndShiftable, StaffRelatable {
 	init(maitreD: MaitreD)
 }
 
@@ -219,37 +218,34 @@ public extension WaiterForCustomer {
 	func emptyCarte() {}
 	
 	public func give(_ order: CustomerOrder) {
-		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
+		guard let headChef = Rota().headChefForWaiter(self as? StaffRelatable) else { return }
 		headChef.give(order)
 	}
 }
 
 public extension WaiterForWaiter {
-	mutating func addToCarte(_ main: FulfilledOrder) {}
-	
-	mutating func serve(dishes: FulfilledOrder) {
-		guard
-			let selfAsSwitchesRelationship = self as? SwitchesRelationshipProtocol,
-			let customer = Rota().customerForWaiter(selfAsSwitchesRelationship)
-			else { return }
-		Rota().hasCarte(selfAsSwitchesRelationship) ? addToCarte(dishes) : fillCarte(with: dishes)
-		DispatchQueue.main.async {
-			customer.present(dish: dishes.ticket)
-		}
-	}
+	func addToCarte(_ main: FulfilledOrder) {}
+	func fillCarte(with entrees: FulfilledOrder) {}
 }
 
 public extension WaiterForHeadChef {
 	// todo the waiter calls a serve function on itself from a serve function: is this necessary?
 	public func serve(main: FulfilledOrder) {
-		guard var waiter = self as? WaiterForWaiter else { return }
-		waiter.serve(dishes: main)
+		guard
+			let waiter = self as? WaiterForWaiter,
+			let selfAsStaffRelationship = self as? StaffRelatable,
+			let customer = Rota().customerForWaiter(selfAsStaffRelationship)
+			else { return }
+		Rota().hasCarte(selfAsStaffRelationship) ? waiter.addToCarte(main) : waiter.fillCarte(with: main)
+		DispatchQueue.main.async {
+			customer.present(dish: main.ticket)
+		}
 	}
 	
 	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol),
-			var waiter = self as? WaiterForWaiter
+			let waiter = self as? WaiterForWaiter,
+			let customer = Rota().customerForWaiter(self as? StaffRelatable)
 			else { return }
 		waiter.fillCarte(with: entrees)
 		customer.present(dish: entrees.ticket)

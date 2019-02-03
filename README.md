@@ -34,9 +34,11 @@ Most design patterns are *simple design patterns* in that they translate their o
 
 `Dertisch`'s restaurant design pattern is compromised of multiple simple design patterns divided into three categories:
 
--   **customer** design patterns: `customers`, and `restaurant tables`;
--   **kitchen** design patterns: `head chefs`, `sous chefs`, and `ingredients`; and
--   **restaurant**  design patterns: `waiters`, the `MaitreD`, and the `Sommelier`.
+-   **customer** patterns: `customers`, and `restaurant tables`;
+-   **kitchen** patterns: `head chefs`, `sous chefs`, and `ingredients`; and
+-   **salle** patterns: `waiters`, the `MaitreD`, and the `Sommelier`.
+
+*La salle* is a French noun meaning "the dining room in a restaurant".
 
 ---
 
@@ -139,7 +141,7 @@ You can think of this chaining as a **multifacted analogical delegate** pattern.
 When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
 
 ---
-How SWITCHES works in Dertisch
+An example interaction in Dertisch  
 ---
 
 -   A customer makes an order (a user interacts with a `view`, sending a request to its `presenter`, which in turn passes the request to its `interactor`);

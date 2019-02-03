@@ -44,7 +44,7 @@ public struct FreezerAttribute {
 }
 
 
-public struct FreezerEntity: FreezerEntityProtocol {
+public struct FreezerEntity: FreezerEntitiable {
 	fileprivate typealias TypesCollection = [String: FreezerTypes]
 	
 	public var attributes: [String: StorableDataType] { return attributes_ }
@@ -68,7 +68,7 @@ public struct FreezerEntity: FreezerEntityProtocol {
 		types_ = types
 	}
 	
-	mutating public func add(_ attribute: StorableDataType, by key: String) -> Bool {
+	public mutating func add(_ attribute: StorableDataType, by key: String) -> Bool {
 		guard
 			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)

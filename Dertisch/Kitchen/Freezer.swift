@@ -8,7 +8,7 @@
 
 import CoreData
 
-public protocol FreezerProtocol: Ingredients {
+public protocol Freezable: Ingredients {
 //	var dataModelName: String? { get set }
 //	func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure)
 //	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
@@ -35,7 +35,7 @@ public class Freezer {
 	required public init(_ resources: [String: KitchenResource]? = nil) {}
 }
 
-extension Freezer: FreezerProtocol {
+extension Freezer: Freezable {
 	public var dataModelName: String? {
 		get { return dataModelName_ }
 		set {
@@ -101,7 +101,8 @@ extension Freezer: FreezerProtocol {
 			}
 		}
 		// this is where a fail sometimes happens
-		do { try privateContext.execute(asyncFetchRequest)
+		do {
+			try privateContext.execute(asyncFetchRequest)
 		} catch let error {
 			loWarning("NSAsynchronousFetchRequest error: \(error)")
 		}
