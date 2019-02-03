@@ -10,75 +10,79 @@ Preamble
 
 ---
 
-`Dertisch` is a lightweight Swift framework built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift by way of its **SWITCHES** analogy.
+`Dertisch` is a lightweight Swift framework built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift. The framework's name forms a culinary analogical acronym designed to explain its own hybrid nature.
 
-`SWITCHES` is a culinary analogical acronym designed to explain `Dertisch`'s hybrid nature.
-
--   `S` Sous Chefs
--   `W` Waiters
+-   `D` The Maître D
+-   `E` Entrées
+-   `R` Restaurant Staff
+-   `T` Tables
 -   `I` Ingredients
--   `T` The Maître D
+-   `S` Sous Chefs
 -   `C` Customers
 -   `H` Head Chefs
--   `E` Entrées
--   `S` Sommelier
 
 ---
 The Restaurant as a Design Pattern
 ---
 
-Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - in one context it sounds like the plot of a surrealist movie - there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors** - the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern* - the metaphors make sense in isolation *but also* collectively. And a good restaurant has the same structure as a good app:
+Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has a very similar structure to a good app:
 
 -   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
--   The front-of-house section of a restaurant is aesthetically pleasing, easy to use, and comfortable for its customers. App Views should be the same.
--   The kitchen section of a restaurant should be clean, efficient, well organised, and solely about the storage and preparation of raw ingredients. App Models should be the same.
+-   The customer section of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good Views do likewise.
+-   The kitchen of a good restaurant is clean, efficient, well organised, and focused on the preperation of raw ingredients. App Good Models do likewise.
+-   A good restaurant maintains a clear division between its customer section and its kitchen, with the waiting staff connecting the two. Good Apps do likewise.
 
-Restaurant agents (`Customers`) remain in the **View**. Kitchen agents (`Head chefs`, `Sous chefs`, `Ingredients`) remain in the **Model**. And waiters (`Waiters`, the `MaitreD`, the `Sommelier`) act like **Controllers**, connecting the world of the View and the Model.
+`Dertisch`'s restaurant design pattern is compromised of multiple simple design patterns divided into three categories:
+
+-   **customer** design patterns: `customers`, and `restaurant tables`;
+-   **kitchen** design patterns: `head chefs`, `sous chefs`, and `ingredients`; and
+-   **restaurant**  design patterns: `waiters`, the `MaitreD`, and the `Sommelier`.
 
 ---
-
-Sous Chefs
----
-
-The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
-
-Waiters
----
-
-The people who take dishes from kitchen to table. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo MVP `presenters` - which are given data by head chefs in order to populate and control views.
-
-Ingredients
----
-
-The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
 
 The Maître D
 ---
 
 The head waiter. The Maître D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
 
+Entrées
+---
+
+The dishes customers start with. Entrées initialise viewControllers with data and are classically VIPER `entities`, which are simple data objects.
+
+Restaurant Staff
+---
+
+The waiting staff. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo MVP `presenters` - which are given data by head chefs in order to populate and control views, whilst the Sommelier (the wine waiter) is classically a `proxy` which specifically provides multilingual support for text.
+
+Tables
+---
+
+The physical tables at which customers are seated. Restaurant Tables are classically `viewControllers`, the screens the user sees.
+
+Ingredients
+---
+
+The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
+
+Sous Chefs
+---
+
+The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
+
 Customers
 ---
 
-The people ordering the food. Customers are classically `views` and/or `viewControllers`, the screens the user sees.
+The people ordering the food. Customers are classically users.
 
 Head Chefs
 ---
 
 The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
 
-Entrées
----
-
-The dishes customers start with. Entrées initialise viewControllers with data and are classically VIPER `entities`, which are simple data objects.
-
-Sommelier
----
-
-The wine waiter. The Sommelier is classically a `proxy` which specifically provides multilingual support for text.
 
 ---
-How SWITCHES is "swifty"
+How Dertisch is "swifty"
 ---
 
 The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context.
