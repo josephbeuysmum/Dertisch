@@ -20,10 +20,10 @@ The Restaurant as a Design Pattern
 
 Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - it sounds like the plot of a surrealist movie: there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has a very similar structure to a good app:
 
--   Most restaurants are variations on a Restaurant/Kitchen theme, and most app architectures are variations on a View/Model theme.
--   The customer section of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good Views do likewise.
--   The kitchen of a good restaurant is clean, efficient, well organised, and focused on the preperation of raw ingredients. App Good Models do likewise.
--   A good restaurant maintains a clear division between its customer section and its kitchen, with the waiting staff connecting the two. Good Apps do likewise.
+-   Most restaurants are variations on a salle/kitchen theme, and most app architectures are variations on a view/model theme.
+-   *La salle* of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good app views are likewise.
+-   The kitchen of a good restaurant is clean, efficient, well organised, and focused on the preperation of raw ingredients. Good app models are likewise.
+-   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
 `Dertisch`'s restaurant design pattern is compromised of multiple simple design patterns divided into three categories:
 
@@ -31,7 +31,7 @@ Most design patterns are *simple design patterns* in that they translate their o
 -   **kitchen** patterns: `head chefs`, `sous chefs`, and `ingredients`; and
 -   **salle** patterns: `waiters`, the `maitre d`, and the `sommelier`.
 
-*La salle* is a French noun meaning "the dining room in a restaurant", amongst other things.
+*La salle* is a French noun meaning "the dining room in a restaurant" in this context.
 
 ---
 
