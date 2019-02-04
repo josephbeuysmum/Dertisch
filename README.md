@@ -22,10 +22,12 @@ Most design patterns are *simple design patterns* in that they translate their o
 
 -   Most restaurants are variations on a salle/kitchen theme, and most app architectures are variations on a view/model theme.
 -   *La salle* of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good app views are likewise.
--   The kitchen of a good restaurant is clean, efficient, well organised, and focused on the preperation of raw ingredients. Good app models are likewise.
+-   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preperation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-`Dertisch`'s restaurant design pattern is compromised of multiple simple design patterns divided into three categories:
+Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically. 
+
+`Dertisch`'s restaurant design pattern is compromized of multiple simple design patterns divided into three categories:
 
 -   **customer** patterns: `customers`, and `restaurant tables`;
 -   **kitchen** patterns: `head chefs`, `sous chefs`, and `ingredients`; and
