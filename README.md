@@ -25,7 +25,7 @@ Most design patterns are *simple design patterns* in that they translate their o
 -   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preperation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically. 
+Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically.
 
 `Dertisch`'s restaurant design pattern is compromized of multiple simple design patterns divided into three categories:
 
@@ -37,48 +37,6 @@ Furthermore, thinking about process of `user interaction -> event fired -> data 
 
 ---
 
-The Maître D
----
-
-The head waiter. The Maître D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
-
-Entrées
----
-
-The dishes customers start with. Entrées initialise viewControllers with data and are classically VIPER `entities`, which are simple data objects.
-
-Restaurant Staff
----
-
-The waiting staff. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo MVP `presenters` - which are given data by head chefs in order to populate and control views, whilst the Sommelier (the wine waiter) is classically a `proxy` which specifically provides multilingual support for text.
-
-Tables
----
-
-The physical tables at which customers are seated. Restaurant Tables are classically `viewControllers`, the screens the user sees.
-
-Ingredients
----
-
-The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
-
-Sous Chefs
----
-
-The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
-
-Customers
----
-
-The people ordering the food. Customers are classically users.
-
-Head Chefs
----
-
-The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
-
-
----
 How Dertisch is "swifty"
 ---
 
@@ -136,6 +94,53 @@ You can think of this chaining as a **multifacted analogical delegate** pattern.
 When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
 
 ---
+
+The Roles in Dertisch
+---
+
+
+`D` is for The Maître D
+---
+
+The head waiter. The Maître D is classically a VIPER `routing`, which controls the addition and removal of `views` and manages relationships between customers, waiters, and head chefs.
+
+`E` is for Entrées
+---
+
+The dishes customers start with. Entrées initialise viewControllers with data and are classically VIPER `entities`, which are simple data objects.
+
+`R` is for Restaurant Staff
+---
+
+The waiting staff. Waiters are classically part VIPER `presenters` and part MVVM `viewModels` - ergo MVP `presenters` - which are given data by head chefs in order to populate and control views, whilst the Sommelier (the wine waiter) is classically a `proxy` which specifically provides multilingual support for text.
+
+`T` is for Tables
+---
+
+The physical tables at which customers are seated. Restaurant Tables are classically `viewControllers`, the screens the user sees.
+
+`I` is for Ingredients
+---
+
+The raw materials of any dish. Ingredients are classically `services`, which query APIs etc. for data.
+
+`S` is for Sous Chefs
+---
+
+The second-in-command chefs who take the ingredients and combine them into dishes. Sous Chefs are classically `proxies`, which get and set data internally.
+
+`C` is for Customers
+---
+
+The people ordering the food. Customers are classically users.
+
+`H` is for Head Chefs
+---
+
+The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
+
+---
+
 An example interaction in Dertisch  
 ---
 
