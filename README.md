@@ -262,13 +262,15 @@ The boilerplate for `SomeIngredient` looks like this:
 		required init(_ resources: [String: KitchenResource]?) {}
 	}
 
-	extension SomeIngredient: Ingredients
+	extension SomeIngredient: Ingredients {}
 
 A boilerplate `Customer` looks like this:
 
-	class SomeCustomer: Customer {
+	class SomeCustomer {
 		required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {}
 	}
+
+	extension SomeCustomer: Customer {}
 
 And a boilerplate `Waiter` looks like this:
 
@@ -298,6 +300,7 @@ Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
+-   warnings if instances of `Waiter` don't have requisite dependencies injected;
 -   move to Devops Git branch;
 -	make `Customer` and `Waiter` [RxSwift](https://github.com/ReactiveX/RxSwift/) compatible;
 -   change the multi-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
