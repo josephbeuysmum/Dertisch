@@ -256,6 +256,14 @@ The above code example features the two model classes `SomeSousChef` and `SomeIn
 
 	extension SomeSousChef: KitchenResource {}
 
+The boilerplate for `SomeIngredient` looks like this:
+
+	class SomeIngredient {
+		required init(_ resources: [String: KitchenResource]?) {}
+	}
+
+	extension SomeIngredient: Ingredients
+
 A boilerplate `Customer` looks like this:
 
 	class SomeCustomer: Customer {
@@ -272,11 +280,13 @@ And a boilerplate `Waiter` looks like this:
 		func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {}
 	}
 
+
+
 ---
 Indepth Documentation
 ---
 
-There are more elements to `Dertisch` than those described above, but because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
+There are more elements to `Dertisch` than those described above, including a host of optional functions that customer, waiters, sous chefs, etc can implement as and when needed. However, because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
 
 **note to self** - things to document:
 
