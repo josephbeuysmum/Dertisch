@@ -173,7 +173,7 @@ Head Chefs work by implementing the `HeadChef` protocol; waiters by implementing
 Using Dertisch
 ---
 
-Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Restaurant` classes make up `Dertisch`'s view and controller. Dertisch allows you to create bespoke `sous chefs` and `ingredients` (proxies and services) tailored towards your app's specific needs, and also comes with four in-built `kitchen` classes, and two in-built `restaurant` classes serving functionality common to all apps:
+Dertisch allows you to create bespoke `sous chefs` and `ingredients` tailored towards your app's specific needs, and also comes with four in-built `ingredients` classes, and three in-built `salle` classes serving functionality common to all apps:
 
 	KITCHEN: INGREDIENTS (model: services)
 
@@ -193,11 +193,9 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 
 	MaitreD
 	// manages the addition and removal of Customers and their relationships with Head Chefs and Waiters
-	// (the maître D is classically a VIPER routing)
 
 	Sommelier
 	// provides multi-language support for screen text
-	// (the sommelier is classically a text proxy)
 
 The built-in kitchen ingredients are very lightweight. For instance, `FoodDelivery` has a single `call(_:from:method:flagged:)` function that uses `URLSession.shared.dataTask(with:)`. Should you need more from your API service, you can simply create your own, say, `AlamofireIngredient` and put all the bells and whistles into it that you need.
 
@@ -251,31 +249,28 @@ The second `introduce(...)` function above shows the example of a view controlle
 
 The above code example features the two model classes `SomeSousChef` and `SomeIngredient`. These are bespoke kitchen classes not included in `Dertisch` but written specifically for the implementing app in question. The boilerplate code for `SomeSousChef` looks like this:
 
-	class SomeSousChef: KitchenMember {
-		required init(_ kitchenStaff: [String: KitchenMember]?) {}
+	class SomeSousChef {
 		var headChef: HeadChefForKitchenMember?
+		required init(_ resources: [String: KitchenResource]?) {}
 	}
 
-`KitchenMember` defines the two additional properties that `SomeSousChef` must conform to (in addition to the optional functions `startShift()` and `endShift()` defined in `StartShiftProtocol` and `EndShiftProtocol` respectively)
+	extension SomeSousChef: KitchenResource {}
 
-	public protocol KitchenMember: StartShiftProtocol, EndShiftProtocol {
-		init(_ kitchenStaff: [String: KitchenMember]?)
-		var headChef: HeadChefForKitchenMember? { get set }
-	}
-
-A boilerplate `Dertisch` Waiter looks like this:
-
-	class SomeWaiter: Waiter {
-		required init(customer: CustomerForWaiter, maitreD: MaitreD, headChef: HeadChefForWaiter?) {}
-	}
-
-And finally, a boilerplate `Dertisch` Customer looks like this:
+A boilerplate `Customer` looks like this:
 
 	class SomeCustomer: Customer {
-		override func assign(_ waiter: WaiterForCustomer, and sommelier: Sommelier) {}
+		required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {}
 	}
 
-Customers are the only classes in `Dertisch` to utilise inheritance, each `Dertisch` customer being required to extend the `Customer` class, which itself extends `UIViewController`. The rest of the library, uses `protocols` and `extensions` exclusively.
+And a boilerplate `Waiter` looks like this:
+
+	class SomeWaiter: Waiter {
+		required init(maitreD: MaitreD) {}
+	}
+
+	extension SomeWaiter: WaiterForMaitreD {
+		func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {}
+	}
 
 ---
 Indepth Documentation
