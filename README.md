@@ -173,9 +173,9 @@ Head Chefs work by implementing the `HeadChef` protocol; waiters by implementing
 Using Dertisch
 ---
 
-Dertisch allows you to create bespoke `sous chefs` and `ingredients` tailored towards your app's specific needs, and also comes with four in-built `ingredients` classes, and three in-built `salle` classes serving functionality common to all apps:
+Dertisch allows you to create bespoke `sous chefs` and `ingredients` tailored towards your app's specific needs, and also comes with four in-built `ingredients` classes, and two in-built `salle` classes serving functionality common to all apps:
 
-	KITCHEN: INGREDIENTS (model: services)
+	KITCHEN: INGREDIENTS
 
 	FoodDelivery
 	// provides access to RESTful APIs
@@ -189,7 +189,7 @@ Dertisch allows you to create bespoke `sous chefs` and `ingredients` tailored to
 	Larder
 	// provides simplified access to json bundled with the app
 
-	RESTAURANT (controllers)
+	SALLE
 
 	MaitreD
 	// manages the addition and removal of Customers and their relationships with Head Chefs and Waiters
