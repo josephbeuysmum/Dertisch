@@ -25,7 +25,7 @@ Most design patterns are *simple design patterns* in that they translate their o
 -   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preperation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically.
+Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer makes order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically.
 
 `Dertisch`'s restaurant design pattern is compromized of multiple simple design patterns divided into three categories:
 
@@ -144,7 +144,7 @@ The people who control the kitchen staff and the dishes. Head Chefs are classica
 An example interaction in Dertisch  
 ---
 
--   A customer makes an order (a user interacts with a `view`, sending a request to its `presenter`, which in turn passes the request to its `interactor`);
+-   A customer gives an order to the waiter, who takes it to the kitchen (a user interacts with a `view`, sending a request to its `presenter`, which in turn passes the request to its `interactor`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
 -   the staff cook ingredients and present the head chef with the dishes (the `proxies` combine data they already have with data they need, probably asynchronously, from their `services`);
 -   the head chef gives the dishes to the waiter, who approaches the customer (the `interactor` calls its `presenter` with data, which it stores before informing the `view` that there is new data available);
@@ -199,7 +199,7 @@ Classically speaking, `Kitchen` classes make up `Dertisch`'s model, whilst `Rest
 	// provides multi-language support for screen text
 	// (the sommelier is classically a text proxy)
 
-The built-in kitchen ingredients are very lightweight. For instance, `FoodDelivery` has a single `call(_:from:method:flagged:)` function that uses `URLSession.shared.dataTask(with:)`. Should you need more from your API service, you can simply create your own, say, `AlamofireSousChef` and put all the bells and whistles into it that you require.
+The built-in kitchen ingredients are very lightweight. For instance, `FoodDelivery` has a single `call(_:from:method:flagged:)` function that uses `URLSession.shared.dataTask(with:)`. Should you need more from your API service, you can simply create your own, say, `AlamofireIngredient` and put all the bells and whistles into it that you need.
 
 All kitchen classes in `Dertisch` are injected as *singleton-with-a-small-s* single instances. For instance, this mean that two separate Head Chefs that both have an instance of `Images` injected have *the same instance* of `Images` injected, so any properties set on that instance by one Head Chef will be readable by the other, and vice versa. And the same goes for all subsequent injections of `Images` elsewhere.
 
