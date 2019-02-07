@@ -27,7 +27,21 @@ Most design patterns are *simple design patterns* in that they translate their o
 -   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preperation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-Furthermore, thinking about process of `user interaction -> event fired -> data fetched and parsed -> view update` in terms of `customer makes order -> waiter takes order -> chefs prepare food -> table laid with dishes` imbues the app building process with a easily-visualized and human character that makes it much simpler to conceptualize holistically.
+A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically. For instance, instead of:
+
+	user interaction ->
+	event fired ->
+	data fetched ->
+	data parsed ->
+	view updates
+
+we have:
+
+	customer makes order ->
+	waiter takes order ->
+	ingredients sourced ->
+	chefs prepare food ->
+	table laid with dishes
 
 `Dertisch`'s restaurant design pattern is compromized of multiple simple design patterns divided into three categories:
 
