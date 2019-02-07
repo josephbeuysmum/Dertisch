@@ -20,7 +20,7 @@ A **swifty** MVP framework for Swift apps
 The Restaurant as a Design Pattern
 ---
 
-Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - it sounds like the character list from a [Monty Python episode](https://en.wikipedia.org/wiki/List_of_Monty_Python%27s_Flying_Circus_episodes#3._How_to_Recognise_Different_Types_of_Trees_From_Quite_a_Long_Way_Away): there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has a very similar structure to a good app:
+Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - it sounds like the character list from [an episode of Monty Python](https://en.wikipedia.org/wiki/List_of_Monty_Python%27s_Flying_Circus_episodes#3._How_to_Recognise_Different_Types_of_Trees_From_Quite_a_Long_Way_Away): there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has a very similar structure to a good app:
 
 -   Most restaurants are variations on a salle/kitchen theme, and most app architectures are variations on a view/model theme.
 -   *La salle* of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good app views are likewise.
@@ -33,7 +33,7 @@ A *complex design pattern* like this allows us to see the steps in a given proce
 	event fired ->
 	data fetched ->
 	data parsed ->
-	view updates
+	view updates;
 
 we have:
 
@@ -41,7 +41,7 @@ we have:
 	waiter takes order ->
 	ingredients sourced ->
 	chefs prepare food ->
-	table laid with dishes
+	table laid with dishes.
 
 `Dertisch`'s restaurant design pattern is compromized of multiple simple design patterns divided into three categories:
 
