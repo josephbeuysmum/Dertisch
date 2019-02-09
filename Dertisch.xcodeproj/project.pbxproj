@@ -7,54 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9776DB321539C2300693C99 /* DT_PT_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DB121539C2300693C99 /* DT_PT_Orders.swift */; };
-		A9776DB421539C2300693C99 /* DT_PT_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DB221539C2300693C99 /* DT_PT_MaitreD.swift */; };
-		A9776DB821539C7C00693C99 /* DT_PT_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DB621539C7C00693C99 /* DT_PT_UrlSession.swift */; };
-		A9776DB921539C7C00693C99 /* DT_PT_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DB721539C7C00693C99 /* DT_PT_BundledJson.swift */; };
-		A9776DBB21539CB100693C99 /* DT_PT_SousChefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DBA21539CB100693C99 /* DT_PT_SousChefs.swift */; };
-		A9776DBE21539CFA00693C99 /* DT_PT_Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DBC21539CFA00693C99 /* DT_PT_Waiter.swift */; };
-		A9776DBF21539CFA00693C99 /* DT_PT_Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DBD21539CFA00693C99 /* DT_PT_Customer.swift */; };
-		A9776DC221539D2A00693C99 /* DT_PT_HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DC021539D2A00693C99 /* DT_PT_HeadChef.swift */; };
-		A9776DC321539D2A00693C99 /* DT_PT_Kitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DC121539D2A00693C99 /* DT_PT_Kitchen.swift */; };
-		A9776DC521539D4D00693C99 /* DT_PT_Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DC421539D4D00693C99 /* DT_PT_Class.swift */; };
+		A97A2BC7220EDA4F00EE85FB /* StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */; };
+		A97A2BC8220EDA4F00EE85FB /* FreezerSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */; };
+		A97A2BC9220EDA4F00EE85FB /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB0220EDA4F00EE85FB /* Orders.swift */; };
+		A97A2BCA220EDA4F00EE85FB /* InternalRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */; };
+		A97A2BCB220EDA4F00EE85FB /* RawIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */; };
+		A97A2BCC220EDA4F00EE85FB /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB4220EDA4F00EE85FB /* Constraints.swift */; };
+		A97A2BCD220EDA4F00EE85FB /* Rota.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB5220EDA4F00EE85FB /* Rota.swift */; };
+		A97A2BCE220EDA4F00EE85FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB6220EDA4F00EE85FB /* Consts.swift */; };
+		A97A2BCF220EDA4F00EE85FB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB7220EDA4F00EE85FB /* Log.swift */; };
+		A97A2BD0220EDA4F00EE85FB /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */; };
+		A97A2BD1220EDA4F00EE85FB /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB9220EDA4F00EE85FB /* Time.swift */; };
+		A97A2BD2220EDA4F00EE85FB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BBA220EDA4F00EE85FB /* Extensions.swift */; };
+		A97A2BD3220EDA4F00EE85FB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BBB220EDA4F00EE85FB /* Protocols.swift */; };
+		A97A2BD4220EDA4F00EE85FB /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BBC220EDA4F00EE85FB /* Typealiases.swift */; };
+		A97A2BD5220EDA4F00EE85FB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BBE220EDA4F00EE85FB /* Cells.swift */; };
+		A97A2BD6220EDA4F00EE85FB /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BBF220EDA4F00EE85FB /* Customer.swift */; };
+		A97A2BD7220EDA4F00EE85FB /* PageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC0220EDA4F00EE85FB /* PageCustomer.swift */; };
+		A97A2BD8220EDA4F00EE85FB /* RestaurantTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC1220EDA4F00EE85FB /* RestaurantTable.swift */; };
+		A97A2BD9220EDA4F00EE85FB /* Sommelier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC3220EDA4F00EE85FB /* Sommelier.swift */; };
+		A97A2BDA220EDA4F00EE85FB /* GeneralWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC4220EDA4F00EE85FB /* GeneralWaiter.swift */; };
+		A97A2BDB220EDA4F00EE85FB /* Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC5220EDA4F00EE85FB /* Waiter.swift */; };
+		A97A2BDC220EDA4F00EE85FB /* MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BC6220EDA4F00EE85FB /* MaitreD.swift */; };
+		A97A2BE6220EDA9F00EE85FB /* Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BDF220EDA9E00EE85FB /* Freezer.swift */; };
+		A97A2BE7220EDA9F00EE85FB /* SousChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE0220EDA9E00EE85FB /* SousChef.swift */; };
+		A97A2BE8220EDA9F00EE85FB /* FoodDelivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE1220EDA9E00EE85FB /* FoodDelivery.swift */; };
+		A97A2BE9220EDA9F00EE85FB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE2220EDA9F00EE85FB /* Images.swift */; };
+		A97A2BEA220EDA9F00EE85FB /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE3220EDA9F00EE85FB /* Ingredient.swift */; };
+		A97A2BEB220EDA9F00EE85FB /* HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE4220EDA9F00EE85FB /* HeadChef.swift */; };
+		A97A2BEC220EDA9F00EE85FB /* Larder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BE5220EDA9F00EE85FB /* Larder.swift */; };
 		A9E9E5C3215257CE00820100 /* Dertisch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E9E5B9215257CE00820100 /* Dertisch.framework */; };
 		A9E9E5C8215257CE00820100 /* DertischTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E5C7215257CE00820100 /* DertischTests.swift */; };
-		A9E9E5CA215257CE00820100 /* Dertisch.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E9E5BC215257CE00820100 /* Dertisch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9E9E710215258A200820100 /* DT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6D6215258A200820100 /* DT_IG_BundledJson.swift */; };
-		A9E9E711215258A200820100 /* DT_IG_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6D7215258A200820100 /* DT_IG_CoreData.swift */; };
-		A9E9E712215258A200820100 /* DT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6D8215258A200820100 /* DT_IG_UrlSession.swift */; };
-		A9E9E713215258A200820100 /* DT_SC_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6DA215258A200820100 /* DT_SC_Image.swift */; };
-		A9E9E714215258A200820100 /* DT_SC_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6DB215258A200820100 /* DT_SC_TemporaryValues.swift */; };
-		A9E9E715215258A200820100 /* DT_CS_Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6DE215258A200820100 /* DT_CS_Signals.swift */; };
-		A9E9E716215258A200820100 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6DF215258A200820100 /* DT_CS_Logs.swift */; };
-		A9E9E717215258A200820100 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6E0215258A200820100 /* DT_CS_Chars.swift */; };
-		A9E9E718215258A200820100 /* DT_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6E1215258A200820100 /* DT_CS_CommonPhrases.swift */; };
-		A9E9E724215258A200820100 /* DT_EX_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6EF215258A200820100 /* DT_EX_Data.swift */; };
-		A9E9E725215258A200820100 /* DT_PT_Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6F1215258A200820100 /* DT_PT_Entities.swift */; };
-		A9E9E730215258A200820100 /* DT_PT_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E6FE215258A200820100 /* DT_PT_Utils.swift */; };
-		A9E9E731215258A200820100 /* DT_ET_SwitchRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E700215258A200820100 /* DT_ET_SwitchRelationship.swift */; };
-		A9E9E732215258A200820100 /* DT_ET_Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E701215258A200820100 /* DT_ET_Order.swift */; };
-		A9E9E733215258A200820100 /* DT_ET_StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E702215258A200820100 /* DT_ET_StaffRelationship.swift */; };
-		A9E9E734215258A200820100 /* DT_ET_TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E703215258A200820100 /* DT_ET_TimePeriod.swift */; };
-		A9E9E735215258A200820100 /* DT_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E704215258A200820100 /* DT_ET_ApiResult.swift */; };
-		A9E9E736215258A200820100 /* DT_ET_OrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E705215258A200820100 /* DT_ET_OrderDetails.swift */; };
-		A9E9E737215258A300820100 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E706215258A200820100 /* DT_ET_CoreData.swift */; };
-		A9E9E738215258A300820100 /* DT_ET_FirstInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E707215258A200820100 /* DT_ET_FirstInstance.swift */; };
-		A9E9E739215258A300820100 /* DT_Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E70A215258A200820100 /* DT_Customer.swift */; };
-		A9E9E73A215258A300820100 /* DT_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E70B215258A200820100 /* DT_TableCell.swift */; };
-		A9E9E73B215258A300820100 /* DT_PageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E70C215258A200820100 /* DT_PageCustomer.swift */; };
-		A9E9E73C215258A300820100 /* DT_WT_Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E70E215258A200820100 /* DT_WT_Orders.swift */; };
-		A9E9E73D215258A300820100 /* DT_WT_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E70F215258A200820100 /* DT_WT_MaitreD.swift */; };
-		A9E9E73F215258D500820100 /* DT_UT_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E73E215258D500820100 /* DT_UT_Colors.swift */; };
-		A9E9E7412152590C00820100 /* DT_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7402152590C00820100 /* DT_UT_Constraints.swift */; };
-		A9E9E7432152591300820100 /* DT_UT_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7422152591300820100 /* DT_UT_Consts.swift */; };
-		A9E9E7452152592100820100 /* DT_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7442152592100820100 /* DT_UT_Extensions.swift */; };
-		A9E9E7492152594A00820100 /* DT_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7482152594A00820100 /* DT_UT_String.swift */; };
-		A9E9E74B2152596B00820100 /* DT_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E74A2152596B00820100 /* DT_UT_Time.swift */; };
-		A9E9E74D2152597300820100 /* DT_UT_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E74C2152597300820100 /* DT_UT_Math.swift */; };
-		A9E9E74F2152597C00820100 /* DT_UT_Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E74E2152597C00820100 /* DT_UT_Misc.swift */; };
-		A9E9E7512152598300820100 /* DT_UT_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7502152598300820100 /* DT_UT_View.swift */; };
-		A9E9E7532152598A00820100 /* DT_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9E7522152598A00820100 /* DT_UT_Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,57 +51,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A9776DB121539C2300693C99 /* DT_PT_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Orders.swift; sourceTree = "<group>"; };
-		A9776DB221539C2300693C99 /* DT_PT_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_MaitreD.swift; sourceTree = "<group>"; };
-		A9776DB621539C7C00693C99 /* DT_PT_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_UrlSession.swift; sourceTree = "<group>"; };
-		A9776DB721539C7C00693C99 /* DT_PT_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_BundledJson.swift; sourceTree = "<group>"; };
-		A9776DBA21539CB100693C99 /* DT_PT_SousChefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_SousChefs.swift; sourceTree = "<group>"; };
-		A9776DBC21539CFA00693C99 /* DT_PT_Waiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Waiter.swift; sourceTree = "<group>"; };
-		A9776DBD21539CFA00693C99 /* DT_PT_Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Customer.swift; sourceTree = "<group>"; };
-		A9776DC021539D2A00693C99 /* DT_PT_HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_HeadChef.swift; sourceTree = "<group>"; };
-		A9776DC121539D2A00693C99 /* DT_PT_Kitchen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Kitchen.swift; sourceTree = "<group>"; };
-		A9776DC421539D4D00693C99 /* DT_PT_Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Class.swift; sourceTree = "<group>"; };
+		A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffRelationship.swift; sourceTree = "<group>"; };
+		A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerSections.swift; sourceTree = "<group>"; };
+		A97A2BB0220EDA4F00EE85FB /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
+		A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalRelationship.swift; sourceTree = "<group>"; };
+		A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawIngredients.swift; sourceTree = "<group>"; };
+		A97A2BB4220EDA4F00EE85FB /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		A97A2BB5220EDA4F00EE85FB /* Rota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rota.swift; sourceTree = "<group>"; };
+		A97A2BB6220EDA4F00EE85FB /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		A97A2BB7220EDA4F00EE85FB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		A97A2BB9220EDA4F00EE85FB /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		A97A2BBA220EDA4F00EE85FB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A97A2BBB220EDA4F00EE85FB /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A97A2BBC220EDA4F00EE85FB /* Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		A97A2BBE220EDA4F00EE85FB /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		A97A2BBF220EDA4F00EE85FB /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		A97A2BC0220EDA4F00EE85FB /* PageCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCustomer.swift; sourceTree = "<group>"; };
+		A97A2BC1220EDA4F00EE85FB /* RestaurantTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTable.swift; sourceTree = "<group>"; };
+		A97A2BC3220EDA4F00EE85FB /* Sommelier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sommelier.swift; sourceTree = "<group>"; };
+		A97A2BC4220EDA4F00EE85FB /* GeneralWaiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralWaiter.swift; sourceTree = "<group>"; };
+		A97A2BC5220EDA4F00EE85FB /* Waiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waiter.swift; sourceTree = "<group>"; };
+		A97A2BC6220EDA4F00EE85FB /* MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaitreD.swift; sourceTree = "<group>"; };
+		A97A2BDF220EDA9E00EE85FB /* Freezer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Freezer.swift; sourceTree = "<group>"; };
+		A97A2BE0220EDA9E00EE85FB /* SousChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SousChef.swift; sourceTree = "<group>"; };
+		A97A2BE1220EDA9E00EE85FB /* FoodDelivery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDelivery.swift; sourceTree = "<group>"; };
+		A97A2BE2220EDA9F00EE85FB /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		A97A2BE3220EDA9F00EE85FB /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		A97A2BE4220EDA9F00EE85FB /* HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadChef.swift; sourceTree = "<group>"; };
+		A97A2BE5220EDA9F00EE85FB /* Larder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Larder.swift; sourceTree = "<group>"; };
 		A9E9E5B9215257CE00820100 /* Dertisch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dertisch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9E9E5BC215257CE00820100 /* Dertisch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dertisch.h; sourceTree = "<group>"; };
-		A9E9E5BD215257CE00820100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9E9E5C2215257CE00820100 /* DertischTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DertischTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E9E5C7215257CE00820100 /* DertischTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DertischTests.swift; sourceTree = "<group>"; };
 		A9E9E5C9215257CE00820100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9E9E6D6215258A200820100 /* DT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_BundledJson.swift; sourceTree = "<group>"; };
-		A9E9E6D7215258A200820100 /* DT_IG_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_CoreData.swift; sourceTree = "<group>"; };
-		A9E9E6D8215258A200820100 /* DT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_UrlSession.swift; sourceTree = "<group>"; };
-		A9E9E6DA215258A200820100 /* DT_SC_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_Image.swift; sourceTree = "<group>"; };
-		A9E9E6DB215258A200820100 /* DT_SC_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_SC_TemporaryValues.swift; sourceTree = "<group>"; };
-		A9E9E6DE215258A200820100 /* DT_CS_Signals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Signals.swift; sourceTree = "<group>"; };
-		A9E9E6DF215258A200820100 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
-		A9E9E6E0215258A200820100 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
-		A9E9E6E1215258A200820100 /* DT_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_CommonPhrases.swift; sourceTree = "<group>"; };
-		A9E9E6EF215258A200820100 /* DT_EX_Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_EX_Data.swift; sourceTree = "<group>"; };
-		A9E9E6F1215258A200820100 /* DT_PT_Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Entities.swift; sourceTree = "<group>"; };
-		A9E9E6FE215258A200820100 /* DT_PT_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PT_Utils.swift; sourceTree = "<group>"; };
-		A9E9E700215258A200820100 /* DT_ET_SwitchRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchRelationship.swift; sourceTree = "<group>"; };
-		A9E9E701215258A200820100 /* DT_ET_Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_Order.swift; sourceTree = "<group>"; };
-		A9E9E702215258A200820100 /* DT_ET_StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_StaffRelationship.swift; sourceTree = "<group>"; };
-		A9E9E703215258A200820100 /* DT_ET_TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_TimePeriod.swift; sourceTree = "<group>"; };
-		A9E9E704215258A200820100 /* DT_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_ApiResult.swift; sourceTree = "<group>"; };
-		A9E9E705215258A200820100 /* DT_ET_OrderDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_OrderDetails.swift; sourceTree = "<group>"; };
-		A9E9E706215258A200820100 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
-		A9E9E707215258A200820100 /* DT_ET_FirstInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_FirstInstance.swift; sourceTree = "<group>"; };
-		A9E9E70A215258A200820100 /* DT_Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_Customer.swift; sourceTree = "<group>"; };
-		A9E9E70B215258A200820100 /* DT_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_TableCell.swift; sourceTree = "<group>"; };
-		A9E9E70C215258A200820100 /* DT_PageCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_PageCustomer.swift; sourceTree = "<group>"; };
-		A9E9E70E215258A200820100 /* DT_WT_Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_Orders.swift; sourceTree = "<group>"; };
-		A9E9E70F215258A200820100 /* DT_WT_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_WT_MaitreD.swift; sourceTree = "<group>"; };
-		A9E9E73E215258D500820100 /* DT_UT_Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Colors.swift; sourceTree = "<group>"; };
-		A9E9E7402152590C00820100 /* DT_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Constraints.swift; sourceTree = "<group>"; };
-		A9E9E7422152591300820100 /* DT_UT_Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Consts.swift; sourceTree = "<group>"; };
-		A9E9E7442152592100820100 /* DT_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Extensions.swift; sourceTree = "<group>"; };
-		A9E9E7482152594A00820100 /* DT_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_String.swift; sourceTree = "<group>"; };
-		A9E9E74A2152596B00820100 /* DT_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Time.swift; sourceTree = "<group>"; };
-		A9E9E74C2152597300820100 /* DT_UT_Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Math.swift; sourceTree = "<group>"; };
-		A9E9E74E2152597C00820100 /* DT_UT_Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Misc.swift; sourceTree = "<group>"; };
-		A9E9E7502152598300820100 /* DT_UT_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_View.swift; sourceTree = "<group>"; };
-		A9E9E7522152598A00820100 /* DT_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,27 +105,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A9776DB021539C2300693C99 /* Protocols */ = {
+		A97A2BAD220EDA4F00EE85FB /* Entrees */ = {
 			isa = PBXGroup;
 			children = (
-				A9776DBD21539CFA00693C99 /* DT_PT_Customer.swift */,
-				A9776DB221539C2300693C99 /* DT_PT_MaitreD.swift */,
-				A9776DB121539C2300693C99 /* DT_PT_Orders.swift */,
-				A9776DBC21539CFA00693C99 /* DT_PT_Waiter.swift */,
+				A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */,
+				A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */,
+				A97A2BB0220EDA4F00EE85FB /* Orders.swift */,
+				A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */,
+				A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */,
 			);
-			path = Protocols;
+			path = Entrees;
 			sourceTree = "<group>";
 		};
-		A9776DB521539C7C00693C99 /* Protocols */ = {
+		A97A2BB3220EDA4F00EE85FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9776DB721539C7C00693C99 /* DT_PT_BundledJson.swift */,
-				A9776DC021539D2A00693C99 /* DT_PT_HeadChef.swift */,
-				A9776DC121539D2A00693C99 /* DT_PT_Kitchen.swift */,
-				A9776DBA21539CB100693C99 /* DT_PT_SousChefs.swift */,
-				A9776DB621539C7C00693C99 /* DT_PT_UrlSession.swift */,
+				A97A2BB4220EDA4F00EE85FB /* Constraints.swift */,
+				A97A2BB5220EDA4F00EE85FB /* Rota.swift */,
+				A97A2BB6220EDA4F00EE85FB /* Consts.swift */,
+				A97A2BB7220EDA4F00EE85FB /* Log.swift */,
+				A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */,
+				A97A2BB9220EDA4F00EE85FB /* Time.swift */,
+				A97A2BBA220EDA4F00EE85FB /* Extensions.swift */,
+				A97A2BBB220EDA4F00EE85FB /* Protocols.swift */,
+				A97A2BBC220EDA4F00EE85FB /* Typealiases.swift */,
 			);
-			path = Protocols;
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A97A2BBD220EDA4F00EE85FB /* Customers */ = {
+			isa = PBXGroup;
+			children = (
+				A97A2BBE220EDA4F00EE85FB /* Cells.swift */,
+				A97A2BBF220EDA4F00EE85FB /* Customer.swift */,
+				A97A2BC0220EDA4F00EE85FB /* PageCustomer.swift */,
+				A97A2BC1220EDA4F00EE85FB /* RestaurantTable.swift */,
+			);
+			path = Customers;
+			sourceTree = "<group>";
+		};
+		A97A2BC2220EDA4F00EE85FB /* Salle */ = {
+			isa = PBXGroup;
+			children = (
+				A97A2BC3220EDA4F00EE85FB /* Sommelier.swift */,
+				A97A2BC4220EDA4F00EE85FB /* GeneralWaiter.swift */,
+				A97A2BC5220EDA4F00EE85FB /* Waiter.swift */,
+				A97A2BC6220EDA4F00EE85FB /* MaitreD.swift */,
+			);
+			path = Salle;
 			sourceTree = "<group>";
 		};
 		A9E9E5AF215257CE00820100 = {
@@ -184,11 +176,11 @@
 		A9E9E5BB215257CE00820100 /* Dertisch */ = {
 			isa = PBXGroup;
 			children = (
+				A97A2BBD220EDA4F00EE85FB /* Customers */,
+				A97A2BAD220EDA4F00EE85FB /* Entrees */,
 				A9E9E6D4215258A200820100 /* Kitchen */,
-				A9E9E6DC215258A200820100 /* Others */,
-				A9E9E708215258A200820100 /* Restaurant */,
-				A9E9E5BC215257CE00820100 /* Dertisch.h */,
-				A9E9E5BD215257CE00820100 /* Info.plist */,
+				A97A2BC2220EDA4F00EE85FB /* Salle */,
+				A97A2BB3220EDA4F00EE85FB /* Utils */,
 			);
 			path = Dertisch;
 			sourceTree = "<group>";
@@ -205,132 +197,15 @@
 		A9E9E6D4215258A200820100 /* Kitchen */ = {
 			isa = PBXGroup;
 			children = (
-				A9E9E6D5215258A200820100 /* Ingredients */,
-				A9776DB521539C7C00693C99 /* Protocols */,
-				A9E9E6D9215258A200820100 /* SousChefs */,
+				A97A2BE1220EDA9E00EE85FB /* FoodDelivery.swift */,
+				A97A2BDF220EDA9E00EE85FB /* Freezer.swift */,
+				A97A2BE4220EDA9F00EE85FB /* HeadChef.swift */,
+				A97A2BE2220EDA9F00EE85FB /* Images.swift */,
+				A97A2BE3220EDA9F00EE85FB /* Ingredient.swift */,
+				A97A2BE5220EDA9F00EE85FB /* Larder.swift */,
+				A97A2BE0220EDA9E00EE85FB /* SousChef.swift */,
 			);
 			path = Kitchen;
-			sourceTree = "<group>";
-		};
-		A9E9E6D5215258A200820100 /* Ingredients */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E6D6215258A200820100 /* DT_IG_BundledJson.swift */,
-				A9E9E6D7215258A200820100 /* DT_IG_CoreData.swift */,
-				A9E9E6D8215258A200820100 /* DT_IG_UrlSession.swift */,
-			);
-			path = Ingredients;
-			sourceTree = "<group>";
-		};
-		A9E9E6D9215258A200820100 /* SousChefs */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E6DA215258A200820100 /* DT_SC_Image.swift */,
-				A9E9E6DB215258A200820100 /* DT_SC_TemporaryValues.swift */,
-			);
-			path = SousChefs;
-			sourceTree = "<group>";
-		};
-		A9E9E6DC215258A200820100 /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E6DD215258A200820100 /* Constants */,
-				A9E9E6FF215258A200820100 /* Entities */,
-				A9E9E6ED215258A200820100 /* Extensions */,
-				A9E9E6F0215258A200820100 /* Protocols */,
-				A9E9E6E2215258A200820100 /* Utils */,
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		A9E9E6DD215258A200820100 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E6E0215258A200820100 /* DT_CS_Chars.swift */,
-				A9E9E6E1215258A200820100 /* DT_CS_CommonPhrases.swift */,
-				A9E9E6DF215258A200820100 /* DT_CS_Logs.swift */,
-				A9E9E6DE215258A200820100 /* DT_CS_Signals.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		A9E9E6E2215258A200820100 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E73E215258D500820100 /* DT_UT_Colors.swift */,
-				A9E9E7402152590C00820100 /* DT_UT_Constraints.swift */,
-				A9E9E7422152591300820100 /* DT_UT_Consts.swift */,
-				A9E9E7442152592100820100 /* DT_UT_Extensions.swift */,
-				A9E9E7522152598A00820100 /* DT_UT_Log.swift */,
-				A9E9E74C2152597300820100 /* DT_UT_Math.swift */,
-				A9E9E74E2152597C00820100 /* DT_UT_Misc.swift */,
-				A9E9E7482152594A00820100 /* DT_UT_String.swift */,
-				A9E9E74A2152596B00820100 /* DT_UT_Time.swift */,
-				A9E9E7502152598300820100 /* DT_UT_View.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		A9E9E6ED215258A200820100 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E6EF215258A200820100 /* DT_EX_Data.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A9E9E6F0215258A200820100 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				A9776DC421539D4D00693C99 /* DT_PT_Class.swift */,
-				A9E9E6F1215258A200820100 /* DT_PT_Entities.swift */,
-				A9E9E6FE215258A200820100 /* DT_PT_Utils.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		A9E9E6FF215258A200820100 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E704215258A200820100 /* DT_ET_ApiResult.swift */,
-				A9E9E706215258A200820100 /* DT_ET_CoreData.swift */,
-				A9E9E707215258A200820100 /* DT_ET_FirstInstance.swift */,
-				A9E9E701215258A200820100 /* DT_ET_Order.swift */,
-				A9E9E705215258A200820100 /* DT_ET_OrderDetails.swift */,
-				A9E9E700215258A200820100 /* DT_ET_SwitchRelationship.swift */,
-				A9E9E702215258A200820100 /* DT_ET_StaffRelationship.swift */,
-				A9E9E703215258A200820100 /* DT_ET_TimePeriod.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		A9E9E708215258A200820100 /* Restaurant */ = {
-			isa = PBXGroup;
-			children = (
-				A9776DB021539C2300693C99 /* Protocols */,
-				A9E9E709215258A200820100 /* Customers */,
-				A9E9E70D215258A200820100 /* Waiters */,
-			);
-			path = Restaurant;
-			sourceTree = "<group>";
-		};
-		A9E9E709215258A200820100 /* Customers */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E70A215258A200820100 /* DT_Customer.swift */,
-				A9E9E70C215258A200820100 /* DT_PageCustomer.swift */,
-				A9E9E70B215258A200820100 /* DT_TableCell.swift */,
-			);
-			path = Customers;
-			sourceTree = "<group>";
-		};
-		A9E9E70D215258A200820100 /* Waiters */ = {
-			isa = PBXGroup;
-			children = (
-				A9E9E70F215258A200820100 /* DT_WT_MaitreD.swift */,
-				A9E9E70E215258A200820100 /* DT_WT_Orders.swift */,
-			);
-			path = Waiters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +215,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9E9E5CA215257CE00820100 /* Dertisch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,51 +316,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9E9E73F215258D500820100 /* DT_UT_Colors.swift in Sources */,
-				A9E9E725215258A200820100 /* DT_PT_Entities.swift in Sources */,
-				A9E9E711215258A200820100 /* DT_IG_CoreData.swift in Sources */,
-				A9E9E7532152598A00820100 /* DT_UT_Log.swift in Sources */,
-				A9776DC521539D4D00693C99 /* DT_PT_Class.swift in Sources */,
-				A9776DB421539C2300693C99 /* DT_PT_MaitreD.swift in Sources */,
-				A9776DB821539C7C00693C99 /* DT_PT_UrlSession.swift in Sources */,
-				A9E9E717215258A200820100 /* DT_CS_Chars.swift in Sources */,
-				A9E9E734215258A200820100 /* DT_ET_TimePeriod.swift in Sources */,
-				A9776DBF21539CFA00693C99 /* DT_PT_Customer.swift in Sources */,
-				A9E9E737215258A300820100 /* DT_ET_CoreData.swift in Sources */,
-				A9E9E730215258A200820100 /* DT_PT_Utils.swift in Sources */,
-				A9E9E73A215258A300820100 /* DT_TableCell.swift in Sources */,
-				A9E9E731215258A200820100 /* DT_ET_SwitchRelationship.swift in Sources */,
-				A9776DB321539C2300693C99 /* DT_PT_Orders.swift in Sources */,
-				A9E9E733215258A200820100 /* DT_ET_StaffRelationship.swift in Sources */,
-				A9776DC221539D2A00693C99 /* DT_PT_HeadChef.swift in Sources */,
-				A9E9E715215258A200820100 /* DT_CS_Signals.swift in Sources */,
-				A9776DB921539C7C00693C99 /* DT_PT_BundledJson.swift in Sources */,
-				A9E9E7452152592100820100 /* DT_UT_Extensions.swift in Sources */,
-				A9776DBB21539CB100693C99 /* DT_PT_SousChefs.swift in Sources */,
-				A9E9E714215258A200820100 /* DT_SC_TemporaryValues.swift in Sources */,
-				A9E9E738215258A300820100 /* DT_ET_FirstInstance.swift in Sources */,
-				A9E9E74D2152597300820100 /* DT_UT_Math.swift in Sources */,
-				A9776DC321539D2A00693C99 /* DT_PT_Kitchen.swift in Sources */,
-				A9E9E73C215258A300820100 /* DT_WT_Orders.swift in Sources */,
-				A9E9E724215258A200820100 /* DT_EX_Data.swift in Sources */,
-				A9E9E7512152598300820100 /* DT_UT_View.swift in Sources */,
-				A9E9E710215258A200820100 /* DT_IG_BundledJson.swift in Sources */,
-				A9E9E735215258A200820100 /* DT_ET_ApiResult.swift in Sources */,
-				A9E9E716215258A200820100 /* DT_CS_Logs.swift in Sources */,
-				A9E9E718215258A200820100 /* DT_CS_CommonPhrases.swift in Sources */,
-				A9E9E712215258A200820100 /* DT_IG_UrlSession.swift in Sources */,
-				A9E9E713215258A200820100 /* DT_SC_Image.swift in Sources */,
-				A9E9E74F2152597C00820100 /* DT_UT_Misc.swift in Sources */,
-				A9E9E739215258A300820100 /* DT_Customer.swift in Sources */,
-				A9E9E7412152590C00820100 /* DT_UT_Constraints.swift in Sources */,
-				A9E9E73B215258A300820100 /* DT_PageCustomer.swift in Sources */,
-				A9E9E73D215258A300820100 /* DT_WT_MaitreD.swift in Sources */,
-				A9E9E732215258A200820100 /* DT_ET_Order.swift in Sources */,
-				A9E9E7492152594A00820100 /* DT_UT_String.swift in Sources */,
-				A9E9E7432152591300820100 /* DT_UT_Consts.swift in Sources */,
-				A9776DBE21539CFA00693C99 /* DT_PT_Waiter.swift in Sources */,
-				A9E9E736215258A200820100 /* DT_ET_OrderDetails.swift in Sources */,
-				A9E9E74B2152596B00820100 /* DT_UT_Time.swift in Sources */,
+				A97A2BD3220EDA4F00EE85FB /* Protocols.swift in Sources */,
+				A97A2BD7220EDA4F00EE85FB /* PageCustomer.swift in Sources */,
+				A97A2BEA220EDA9F00EE85FB /* Ingredient.swift in Sources */,
+				A97A2BD5220EDA4F00EE85FB /* Cells.swift in Sources */,
+				A97A2BC9220EDA4F00EE85FB /* Orders.swift in Sources */,
+				A97A2BCC220EDA4F00EE85FB /* Constraints.swift in Sources */,
+				A97A2BDA220EDA4F00EE85FB /* GeneralWaiter.swift in Sources */,
+				A97A2BDB220EDA4F00EE85FB /* Waiter.swift in Sources */,
+				A97A2BD6220EDA4F00EE85FB /* Customer.swift in Sources */,
+				A97A2BD4220EDA4F00EE85FB /* Typealiases.swift in Sources */,
+				A97A2BE7220EDA9F00EE85FB /* SousChef.swift in Sources */,
+				A97A2BDC220EDA4F00EE85FB /* MaitreD.swift in Sources */,
+				A97A2BCE220EDA4F00EE85FB /* Consts.swift in Sources */,
+				A97A2BD9220EDA4F00EE85FB /* Sommelier.swift in Sources */,
+				A97A2BC7220EDA4F00EE85FB /* StaffRelationship.swift in Sources */,
+				A97A2BD2220EDA4F00EE85FB /* Extensions.swift in Sources */,
+				A97A2BD1220EDA4F00EE85FB /* Time.swift in Sources */,
+				A97A2BD8220EDA4F00EE85FB /* RestaurantTable.swift in Sources */,
+				A97A2BE9220EDA9F00EE85FB /* Images.swift in Sources */,
+				A97A2BEC220EDA9F00EE85FB /* Larder.swift in Sources */,
+				A97A2BCA220EDA4F00EE85FB /* InternalRelationship.swift in Sources */,
+				A97A2BE6220EDA9F00EE85FB /* Freezer.swift in Sources */,
+				A97A2BEB220EDA9F00EE85FB /* HeadChef.swift in Sources */,
+				A97A2BCB220EDA4F00EE85FB /* RawIngredients.swift in Sources */,
+				A97A2BCF220EDA4F00EE85FB /* Log.swift in Sources */,
+				A97A2BD0220EDA4F00EE85FB /* StringUtils.swift in Sources */,
+				A97A2BCD220EDA4F00EE85FB /* Rota.swift in Sources */,
+				A97A2BE8220EDA9F00EE85FB /* FoodDelivery.swift in Sources */,
+				A97A2BC8220EDA4F00EE85FB /* FreezerSections.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
