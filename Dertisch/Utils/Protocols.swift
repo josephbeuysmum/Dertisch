@@ -20,6 +20,15 @@ public protocol Describable {
 	var description: String { get }
 }
 
+public protocol Initializable {
+	init()
+}
+
+public protocol ComplexColleagueProtocol {}
+
+public protocol SimpleColleagueProtocol: Initializable {}
+
+
 public protocol BeginShiftable {
 	func beginShift()
 }
@@ -29,7 +38,7 @@ public protocol EndShiftable {
 	func endShift()
 }
 
-public protocol GiveOrderable {
+public protocol GiveCustomerOrderable {
 	func give(_ order: CustomerOrder)
 }
 
@@ -54,7 +63,9 @@ public protocol FreezerEntitiable {
 
 public protocol StorableDataType {}
 
-public protocol StaffRelatable: class {}
+internal protocol StaffRelatable: class {
+//	var isInjected: Bool { get }
+}
 
 extension Bool: StorableDataType {}
 extension Double: StorableDataType {}

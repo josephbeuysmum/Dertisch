@@ -9,7 +9,7 @@ import Foundation
 
 public protocol LarderProtocol: Ingredients {
 //	var settings: JsonSettings? { get }
-//	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
+//	func open<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
 public class Larder {
@@ -31,7 +31,7 @@ fileprivate struct PrivateSetting: Decodable {
 extension Larder: LarderProtocol {
 	public var settings: JsonSettings? { return settings_ }
 	
-	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
+	public func open<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard
 			// todo add sub-directories to jsonPath
 			let jsonPath = Bundle.main.path(forResource: fileName, ofType: "json"),
@@ -63,9 +63,9 @@ extension Larder: LarderProtocol {
 	}
 	
 	fileprivate func parseSettings() {
-		guard let decodedSettings = decode(json: PrivateSettings.CodingKeys.data.rawValue, into: PrivateSettings.self) else { return }
+		guard let openedSettings = open(json: PrivateSettings.CodingKeys.data.rawValue, into: PrivateSettings.self) else { return }
 		var settings: Dictionary<String, String> = [:]
-		for setting in decodedSettings.data {
+		for setting in openedSettings.data {
 			guard settings[setting.key] == nil else { fatalError("DUPLICATED SETTING") }
 			settings[setting.key] = setting.value
 		}

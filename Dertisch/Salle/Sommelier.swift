@@ -35,9 +35,9 @@ public final class Sommelier {
 	region_: Regions
 //	, customer: CustomerForSommelier?
 	
-	public required init(larder: Larder) {
+	public required init(_ larder: Larder) {
 		region_ = .england
-		if let unbottledWines = larder.decode(json: "text", into: Wines.self) {
+		if let unbottledWines = larder.open(json: "text", into: Wines.self) {
 			var bottledWines: [String: Wine] = [:]
 			for var unbottledWine in unbottledWines.copy {
 				if let name = unbottledWine.key {
