@@ -66,9 +66,9 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 -   Waiters **present** data; and
 -   Customers **consume** data.
 
-You can think of this chaining as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+The chaining in `Dertisch` presently can be thought of as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
 
-	protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
+	protocol Waiter: WaiterForCustomer, WaiterForHeadChef {
 		init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 	}
 
@@ -82,30 +82,7 @@ You can think of this chaining as a **multifacted analogical delegate** pattern.
 		func serve(main: FulfilledOrder)
 	}
 
-	protocol WaiterForWaiter {
-		func addToCarte(_ main: FulfilledOrder)
-		func fillCarte(with entrees: FulfilledOrder)
-		func serve(dishes: FulfilledOrder)
-	}
-
-	protocol StaffMember: CigaretteBreakProtocol {}
-
-	protocol CigaretteBreakProtocol {
-		func beginBreak()
-		func endBreak()
-	}
-
-	protocol BeginShiftProtocol {
-		func beginShift()
-	}
-
-	protocol EndShiftProtocol {
-		func endShift()
-	}
-
-	public protocol SwitchesRelationshipProtocol: class {}
-
-When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
+However this has changed in the `devops` branch, where now `Waiter` is an `internal` class that has `WaiterForCustomer` etc properties within it. More on this as and when I get the time to expand.
 
 ---
 
