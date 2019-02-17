@@ -12,18 +12,15 @@ fileprivate class CustomerFacets {
 	let
 	forRestaurantTable: CustomerForRestaurantTable,
 	forMaitreD: CustomerForMaitreD,
-	forMaitreDType: CustomerForMaitreD.Type,
 	forSommelier: CustomerForSommelier,
 	forWaiter: CustomerForWaiter?
 	
 	init(
 		_ forRestaurantTable: CustomerForRestaurantTable,
 		_ forMaitreD: CustomerForMaitreD,
-		_ forMaitreDType: CustomerForMaitreD.Type,
 		_ forSommelier: CustomerForSommelier,
 		_ forWaiter: CustomerForWaiter?) {
 		self.forRestaurantTable = forRestaurantTable
-		self.forMaitreDType = forMaitreDType
 		self.forMaitreD = forMaitreD
 		self.forSommelier = forSommelier
 		self.forWaiter = forWaiter
@@ -110,18 +107,19 @@ public protocol CustomerProtocol {
 	func forMaitreD(by key: String) -> CustomerForMaitreD?
 	func forSommelier(by key: String) -> CustomerForSommelier?
 	func forWaiter(by key: String) -> CustomerForWaiter?
+	func waiter(by key: String) -> WaiterForCustomer?
 }
 
 internal protocol CustomerInternalProtocol: ComplexColleagueProtocol {
-	var internalKey: String { get }
 	var restaurantTable: RestaurantTable { get }
-	init(_ key: String, _ restaurantTable: RestaurantTable)
-	func inject(
+	init(
+		_ key: String,
+		_ table: RestaurantTable,
 		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
 		_ forMaitreDType: CustomerForMaitreD.Type,
 		_ forSommelierType: CustomerForSommelier.Type,
-		_ forWaiterType: CustomerForWaiter.Type?,
-		_ waiter: WaiterForCustomer?)
+		_ forWaiterType: CustomerForWaiter.Type?)
+	func inject(_ waiter: WaiterForCustomer?)
 }
 
 public class Customer {
@@ -132,9 +130,21 @@ public class Customer {
 	fileprivate var
 	waiter: WaiterForCustomer?
 	
-	internal required init(_ key: String, _ table: RestaurantTable) {
+	internal required init(
+		_ key: String,
+		_ table: RestaurantTable,
+		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
+		_ forMaitreDType: CustomerForMaitreD.Type,
+		_ forSommelierType: CustomerForSommelier.Type,
+		_ forWaiterType: CustomerForWaiter.Type?) {
 		privateKey = key
 		self.table = table
+		let forWaiter = forWaiterType != nil ? forWaiterType!.init(self, privateKey) : nil
+		rota[privateKey] = CustomerFacets(
+			forRestaurantTableType.init(self, privateKey),
+			forMaitreDType.init(self, privateKey),
+			forSommelierType.init(self, privateKey),
+			forWaiter)
 		lo("BONJOUR  ", self)
 	}
 	
@@ -160,6 +170,10 @@ extension Customer: CustomerProtocol {
 	public func forWaiter(by key: String) -> CustomerForWaiter? {
 		return rota[key]?.forWaiter
 	}
+	
+	public func waiter(by key: String) -> WaiterForCustomer? {
+		return key == privateKey ? waiter : nil
+	}
 }
 
 extension Customer: CustomerInternalProtocol {
@@ -171,21 +185,8 @@ extension Customer: CustomerInternalProtocol {
 		return table
 	}
 	
-	internal func inject(
-		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
-		_ forMaitreDType: CustomerForMaitreD.Type,
-		_ forSommelierType: CustomerForSommelier.Type,
-		_ forWaiterType: CustomerForWaiter.Type?,
-		_ waiter: WaiterForCustomer?) {
+	internal func inject(_ waiter: WaiterForCustomer?) {
 		self.waiter = waiter
-//		let inj = Customer(self)
-		let forWaiter = forWaiterType != nil ? forWaiterType!.init(self, privateKey) : nil
-		rota[privateKey] = CustomerFacets(
-			forRestaurantTableType.init(self, privateKey),
-			forMaitreDType.init(self, privateKey),
-			forMaitreDType,
-			forSommelierType.init(self, privateKey),
-			forWaiter)
 	}
 	
 	internal func beginShift() {

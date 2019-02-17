@@ -83,6 +83,9 @@ public extension WaiterForHeadChef {
 	
 	public func serve(entrees: FulfilledOrder) {
 		lo("commented out presently 5")
+		
+		
+		
 		//		guard
 		//			let waiter = self as? WaiterForWaiter,
 		//			let customer = Rota().customerForWaiter(self as? StaffRelatable)
@@ -100,30 +103,37 @@ public extension WaiterForHeadChef {
 
 
 public protocol WaiterProtocol {
-	var forMaitreD: WaiterForMaitreD? { get }
-	var forCustomer: WaiterForCustomer? { get }
-	var forHeadChef: WaiterForHeadChef? { get }
+	func forMaitreD(by key: String) -> WaiterForMaitreD?
+	func forCustomer(by key: String) -> WaiterForCustomer?
+	func forHeadChef(by key: String) -> WaiterForHeadChef?
+	func customer(by key: String) -> CustomerForWaiter?
+	func headChef(by key: String) -> HeadChefForWaiter?
 }
 
 internal protocol WaiterInternalProtocol: ComplexColleagueProtocol, StaffMember {
-	init(_ name: String)
-	func inject(
+	init(
+		_ key: String,
 		_ forCustomer: WaiterForCustomer.Type,
 		_ forMaitreD: WaiterForMaitreD.Type,
-		_ forHeadChef: WaiterForHeadChef.Type?,
-		_ customer: CustomerForWaiter?,
-		_ headChef: HeadChefForWaiter?)
+		_ forHeadChef: WaiterForHeadChef.Type?)
+	func inject(_ customer: CustomerForWaiter?, _ headChef: HeadChefForWaiter?)
 }
 
 public class Waiter {
-	fileprivate let name: String
-	
+	private let privateKey: String
+
 	fileprivate var
 	customer: CustomerForWaiter?,
 	headChef: HeadChefForWaiter?
 	
-	internal required init(_ name: String) {
-		self.name = name
+	internal required init(
+		_ key: String,
+		_ forCustomer: WaiterForCustomer.Type,
+		_ forMaitreD: WaiterForMaitreD.Type,
+		_ forHeadChef: WaiterForHeadChef.Type?) {
+		privateKey = key
+		let headChef = forHeadChef != nil ? forHeadChef!.init(self) : nil
+		rota[privateKey] = WaiterFacets(forCustomer.init(self), forMaitreD.init(self), headChef)
 		lo("BONJOUR  ", self)
 	}
 	
@@ -131,31 +141,35 @@ public class Waiter {
 }
 
 extension Waiter: WaiterProtocol {
-	public var forMaitreD: WaiterForMaitreD? {
-		return rota[name]?.forMaitreD
+	public func forMaitreD(by key: String) -> WaiterForMaitreD? {
+		return rota[key]?.forMaitreD
 	}
 	
-	public var forCustomer: WaiterForCustomer? {
-		return rota[name]?.forCustomer
+	public func forCustomer(by key: String) -> WaiterForCustomer? {
+		return rota[key]?.forCustomer
 	}
 	
-	public var forHeadChef: WaiterForHeadChef? {
-		return rota[name]?.forHeadChef
+	public func forHeadChef(by key: String) -> WaiterForHeadChef? {
+		return rota[key]?.forHeadChef
+	}
+	
+	public func customer(by key: String) -> CustomerForWaiter? {
+		return key == privateKey ? customer : nil
+	}
+	
+	public func headChef(by key: String) -> HeadChefForWaiter? {
+		return key == privateKey ? headChef : nil
 	}
 }
 
 extension Waiter: WaiterInternalProtocol {
-	func inject(
-		_ forCustomer: WaiterForCustomer.Type,
-		_ forMaitreD: WaiterForMaitreD.Type,
-		_ forHeadChef: WaiterForHeadChef.Type?,
-		_ customer: CustomerForWaiter?,
-		_ headChef: HeadChefForWaiter?) {
+	internal var internalKey: String {
+		return privateKey
+	}
+	
+	func inject(_ customer: CustomerForWaiter?, _ headChef: HeadChefForWaiter?) {
 		self.customer = customer
 		self.headChef = headChef
-		
-		let headChef = forHeadChef != nil ? forHeadChef!.init(self) : nil
-		rota[name] = WaiterFacets(forCustomer.init(self), forMaitreD.init(self), headChef)
 	}
 	
 	internal func beginShift() {

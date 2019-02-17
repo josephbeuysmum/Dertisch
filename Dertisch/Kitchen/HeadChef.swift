@@ -51,47 +51,31 @@ extension HeadChefForWaiter {
 
 
 public protocol HeadChefProtocol {
-	var forWaiter: HeadChefForWaiter? { get }
-	var forSousChef: HeadChefForSousChef? { get }
+	func forWaiter(by key: String) -> HeadChefForWaiter?
+	func forSousChef(by key: String) -> HeadChefForSousChef?
+	func waiter(by key: String) -> WaiterForHeadChef?
 }
 
 internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
-	init(_ name: String, _ resources: [String: KitchenResource]?)
-	func inject(
+	init(
+		_ key: String,
 		_ forWaiterType: HeadChefForWaiter.Type?,
 		_ forSousChefType: HeadChefForSousChef.Type?,
-		_ waiter: WaiterForHeadChef?)
+		_ resources: [String: KitchenResource]?)
+	func inject(_ waiter: WaiterForHeadChef?)
 }
 
 public class HeadChef: HeadChefInternalProtocol {
-	fileprivate let name: String
+	fileprivate let privateKey: String
 	
 	fileprivate var waiter: WaiterForHeadChef?
 	
-	internal required init(_ name: String, _ resources: [String: KitchenResource]?) {
-		self.name = name
-		lo("BONJOUR  ", self)
-	}
-	
-	deinit { lo("AU REVOIR", self) }
-}
-
-extension HeadChef: HeadChefProtocol {
-	public var forWaiter: HeadChefForWaiter? {
-		return rota[name]?.forWaiter
-	}
-	
-	public var forSousChef: HeadChefForSousChef? {
-		return rota[name]?.forSousChef
-	}
-}
-
-extension HeadChef {
-	internal func inject(
+	internal required init(
+		_ key: String,
 		_ forWaiterType: HeadChefForWaiter.Type?,
 		_ forSousChefType: HeadChefForSousChef.Type?,
-		_ waiter: WaiterForHeadChef?) {
-		self.waiter = waiter
+		_ resources: [String: KitchenResource]?) {
+		privateKey = key
 		if let strongWaiterType = forWaiterType {
 			let waiter = strongWaiterType.init(self)
 			let sousChef: HeadChefForSousChef?
@@ -100,9 +84,35 @@ extension HeadChef {
 			} else {
 				sousChef = nil
 			}
-			rota[name] = HeadChefFacets(waiter, sousChef)
+			rota[privateKey] = HeadChefFacets(waiter, sousChef)
 		}
+		lo("BONJOUR  ", self)
+	}
+	
+	deinit { lo("AU REVOIR", self) }
+}
 
+extension HeadChef: HeadChefProtocol {
+	public func forWaiter(by key: String) -> HeadChefForWaiter? {
+		return rota[key]?.forWaiter
+	}
+	
+	public func forSousChef(by key: String) -> HeadChefForSousChef? {
+		return rota[key]?.forSousChef
+	}
+	
+	public func waiter(by key: String) -> WaiterForHeadChef? {
+		return key == privateKey ? waiter : nil
+	}
+}
+
+extension HeadChef {
+	internal var internalKey: String {
+		return privateKey
+	}
+	
+	internal func inject(_ waiter: WaiterForHeadChef?) {
+		self.waiter = waiter
 	}
 	
 	internal func beginShift() {

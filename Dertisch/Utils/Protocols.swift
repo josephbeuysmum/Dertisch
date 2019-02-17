@@ -25,6 +25,7 @@ public protocol Describable {
 //}
 
 internal protocol ComplexColleagueProtocol: StaffRelatable {
+	var internalKey: String { get }
 	func beginShift()
 	func endShift()
 }

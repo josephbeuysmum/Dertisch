@@ -252,36 +252,39 @@ extension MaitreD {
 		guard let colleagueRelationship = colleagueRelationships[ticket.id] else { return nil }
 		let relationshipsKey = "\(ticket.id)-\(NSUUID().uuidString)"
 		let restaurantTable = ticket.restaurantTable
-		let customer = Customer(relationshipsKey, restaurantTable)
+		let customer = Customer(
+			relationshipsKey,
+			restaurantTable,
+			colleagueRelationship.customerForRestaurantTableType,
+			colleagueRelationship.customerForMaitreDType,
+			colleagueRelationship.customerForSommelierType,
+			colleagueRelationship.customerForWaiterType)
 		let headChef = colleagueRelationship.hasHeadChef ?
-			HeadChef(relationshipsKey, getResources(from: colleagueRelationship.kitchenResourceTypes)) : nil
-		let waiter = colleagueRelationship.hasWaiter ? Waiter(relationshipsKey) :  nil
+			HeadChef(
+				relationshipsKey,
+				colleagueRelationship.headChefForWaiterType,
+				colleagueRelationship.headChefForSousChefType,
+				getResources(from: colleagueRelationship.kitchenResourceTypes)) :
+			nil
+		let waiter = colleagueRelationship.hasWaiter ?
+			Waiter(
+				relationshipsKey,
+				colleagueRelationship.waiterForCustomerType!,
+				colleagueRelationship.waiterForMaitreDType!,
+				colleagueRelationship.waiterForHeadChefType!) :
+			nil
 		
 		// tood reinstate general waiter
 		lo("no general waiter currently")
+		lo(waiter?.forCustomer, customer.forWaiter(by: relationshipsKey), headChef?.forWaiter, waiter?.forHeadChef)
 		//		let waiter = colleagueRelationship.waiterType != nil ?
 		//			colleagueRelationship.waiterType!.init(maitreD: self) :
 		//			GeneralWaiter(maitreD: self)
 		
-		let customerKey = customer.internalKey
-		
-		customer.inject(
-			colleagueRelationship.customerForRestaurantTableType,
-			colleagueRelationship.customerForMaitreDType,
-			colleagueRelationship.customerForSommelierType,
-			colleagueRelationship.customerForWaiterType,
-			waiter?.forCustomer)
-		waiter?.inject(
-			colleagueRelationship.waiterForCustomerType!,
-			colleagueRelationship.waiterForMaitreDType!,
-			colleagueRelationship.waiterForHeadChefType!,
-			customer.forWaiter(by: customerKey),
-			headChef?.forWaiter)
-		headChef?.inject(
-			colleagueRelationship.headChefForWaiterType,
-			colleagueRelationship.headChefForSousChefType,
-			waiter?.forHeadChef)
-		restaurantTable.customer = customer.forRestaurantTable(by: customerKey)
+		customer.inject(waiter?.forCustomer(by: relationshipsKey))
+		waiter?.inject(customer.forWaiter(by: relationshipsKey), headChef?.forWaiter(by: relationshipsKey))
+		headChef?.inject(waiter?.forHeadChef(by: relationshipsKey))
+		restaurantTable.customer = customer.forRestaurantTable(by: relationshipsKey)
 		restaurantTable.key = relationshipsKey
 		return StaffRelationship(
 			customerID: ticket.id,
