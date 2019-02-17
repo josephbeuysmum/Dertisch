@@ -20,21 +20,21 @@ public protocol Describable {
 	var description: String { get }
 }
 
-public protocol Initializable {
-	init()
-}
+//public protocol Initializable {
+//	init()
+//}
 
-public protocol ComplexColleagueProtocol {}
-
-public protocol SimpleColleagueProtocol: Initializable {}
-
-
-public protocol BeginShiftable {
+internal protocol ComplexColleagueProtocol: StaffRelatable {
 	func beginShift()
+	func endShift()
 }
 
-// todo end in a better way, with weak vars etc
-public protocol EndShiftable {
+public protocol StaffHead {}
+
+public protocol SimpleColleagueProtocol {}
+
+public protocol Shiftable {
+	func beginShift()
 	func endShift()
 }
 
@@ -42,7 +42,7 @@ public protocol GiveCustomerOrderable {
 	func give(_ order: CustomerOrder)
 }
 
-public protocol KitchenResource: BeginShiftable, EndShiftable {
+public protocol KitchenResource: Shiftable {
 	init(_ resources: [String: KitchenResource]?)
 }
 

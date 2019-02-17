@@ -94,20 +94,17 @@ extension MaitreD {
 		guard self.window == nil else { return }
 		Time.startInterval()
 		registerStaff(with: key)
-		lo()
 		guard
 			let rootRelationships = createColleagues(customerId: customerId, animated: false, storyboard: storyboard),
 			let rootRestaurantTable = rootRelationships.customer?.restaurantTable
 			else {
 				return }
-		lo()
 		currentRelationships = rootRelationships
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootRestaurantTable
 		currentRelationships!.waiter?.beginShift()
 		currentRelationships!.headChef?.beginShift()
-		lo()
 	}
 	
 	public func present(popoverMenu menuId: String, inside rect: CGRect? = nil, from storyboard: String? = nil) {
@@ -117,9 +114,9 @@ extension MaitreD {
 			let nextMenuRelationships = createColleagues(customerId: menuId, animated: true, storyboard: storyboard),
 			let menuTableAndChair = nextMenuRelationships.customer?.restaurantTable
 			else { return }
+		let customerKey = currentCustomer.internalKey
 		menuRelationships = nextMenuRelationships
-		
-		currentCustomer.forMaitreD()?.peruseMenu()
+		currentCustomer.forMaitreD(by: customerKey)?.peruseMenu(customerKey)
 		// tood GC is this assignation necessary?
 		currentRelationships?.waiter?.beginBreak()
 		currentRelationships?.headChef?.beginBreak()
@@ -141,15 +138,19 @@ extension MaitreD {
 	public func removeMenu(_ order: CustomerOrder? = nil) {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable.dismiss(animated: true) { [unowned self] in
-			self.currentRelationships?.customer?.forMaitreD()?.menuReturnedToWaiter(order)
+			guard let customerKey = self.currentRelationships?.customer?.internalKey else { return }
+			self.currentRelationships?.customer?.forMaitreD(by: customerKey)?.menuReturnedToWaiter(customerKey, order)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
-		guard currentRelationships != nil else { return }
+		guard
+			currentRelationships != nil,
+			let customerKey = currentRelationships!.customer?.internalKey
+			else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.forMaitreD()?.returnMenuToWaiter(order)
-		currentRelationships!.customer?.forSommelier()?.regionChosen()
+		currentRelationships!.customer?.forMaitreD(by: customerKey)?.returnMenuToWaiter(customerKey, order)
+		currentRelationships!.customer?.forSommelier(by: customerKey)?.regionChosen(customerKey)
 	}
 	
 	public func seat(
@@ -249,11 +250,12 @@ extension MaitreD {
 	
 	private func createColleagues(from ticket: RestaurantTableTicket) -> StaffRelationship? {
 		guard let colleagueRelationship = colleagueRelationships[ticket.id] else { return nil }
-		let colleagueName = ticket.id
-		let customer = Customer(colleagueName, ticket.restaurantTable)
+		let relationshipsKey = "\(ticket.id)-\(NSUUID().uuidString)"
+		let restaurantTable = ticket.restaurantTable
+		let customer = Customer(relationshipsKey, restaurantTable)
 		let headChef = colleagueRelationship.hasHeadChef ?
-			HeadChef(colleagueName, getResources(from: colleagueRelationship.kitchenResourceTypes)) : nil
-		let waiter = colleagueRelationship.hasWaiter ? Waiter(colleagueName) :  nil
+			HeadChef(relationshipsKey, getResources(from: colleagueRelationship.kitchenResourceTypes)) : nil
+		let waiter = colleagueRelationship.hasWaiter ? Waiter(relationshipsKey) :  nil
 		
 		// tood reinstate general waiter
 		lo("no general waiter currently")
@@ -261,22 +263,26 @@ extension MaitreD {
 		//			colleagueRelationship.waiterType!.init(maitreD: self) :
 		//			GeneralWaiter(maitreD: self)
 		
+		let customerKey = customer.internalKey
+		
 		customer.inject(
 			colleagueRelationship.customerForRestaurantTableType,
 			colleagueRelationship.customerForMaitreDType,
 			colleagueRelationship.customerForSommelierType,
 			colleagueRelationship.customerForWaiterType,
-			waiter?.forCustomer())
+			waiter?.forCustomer)
 		waiter?.inject(
 			colleagueRelationship.waiterForCustomerType!,
 			colleagueRelationship.waiterForMaitreDType!,
 			colleagueRelationship.waiterForHeadChefType!,
-			customer.forWaiter(),
-			headChef?.forWaiter())
+			customer.forWaiter(by: customerKey),
+			headChef?.forWaiter)
 		headChef?.inject(
 			colleagueRelationship.headChefForWaiterType,
 			colleagueRelationship.headChefForSousChefType,
-			waiter?.forHeadChef())
+			waiter?.forHeadChef)
+		restaurantTable.customer = customer.forRestaurantTable(by: customerKey)
+		restaurantTable.key = relationshipsKey
 		return StaffRelationship(
 			customerID: ticket.id,
 			animated: ticket.animated,
@@ -298,8 +304,11 @@ extension MaitreD {
 	}
 	
 	private func endShift(for formerRelationship: StaffRelationship?) {
-		guard formerRelationship != nil else { return }
-		formerRelationship!.customer?.forWaiter()?.presentCheck()
+		guard
+			formerRelationship != nil,
+			let customerKey = formerRelationship!.customer?.internalKey
+			else { return }
+		formerRelationship!.customer?.forWaiter(by: customerKey)?.presentCheck(customerKey)
 		formerRelationship!.waiter?.endShift()
 		formerRelationship!.headChef?.endShift()
 	}

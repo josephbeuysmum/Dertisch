@@ -6,22 +6,31 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-fileprivate struct HeadChefFacets {
+fileprivate class HeadChefFacets {
 	let
 	forWaiter: HeadChefForWaiter,
 	forSousChef: HeadChefForSousChef?
+	
+	init(_ forWaiter: HeadChefForWaiter, _ forSousChef: HeadChefForSousChef?) {
+		self.forWaiter = forWaiter
+		self.forSousChef = forSousChef
+	}
 }
 
 fileprivate var rota: [String: HeadChefFacets] = [:]
 
 
 
+public protocol HeadChefFacet {
+	init(_ headChef: HeadChef)
+}
+
 // tood why is class here and not in SimpleColleagueProtocol?
-public protocol HeadChefForSousChef: class, SimpleColleagueProtocol {
+public protocol HeadChefForSousChef: class, HeadChefFacet, SimpleColleagueProtocol {
 	func give(prep: InternalOrder)
 }
 
-public protocol HeadChefForWaiter: SimpleColleagueProtocol, GiveCustomerOrderable {}
+public protocol HeadChefForWaiter: class, HeadChefFacet, SimpleColleagueProtocol, GiveCustomerOrderable {}
 
 
 
@@ -41,7 +50,12 @@ extension HeadChefForWaiter {
 
 
 
-internal protocol HeadChefProtocol: ComplexColleagueProtocol, BeginShiftable, EndShiftable, StaffMember, StaffRelatable {
+public protocol HeadChefProtocol {
+	var forWaiter: HeadChefForWaiter? { get }
+	var forSousChef: HeadChefForSousChef? { get }
+}
+
+internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
 	init(_ name: String, _ resources: [String: KitchenResource]?)
 	func inject(
 		_ forWaiterType: HeadChefForWaiter.Type?,
@@ -49,7 +63,7 @@ internal protocol HeadChefProtocol: ComplexColleagueProtocol, BeginShiftable, En
 		_ waiter: WaiterForHeadChef?)
 }
 
-internal class HeadChef {
+public class HeadChef: HeadChefInternalProtocol {
 	fileprivate let name: String
 	
 	fileprivate var waiter: WaiterForHeadChef?
@@ -63,35 +77,38 @@ internal class HeadChef {
 }
 
 extension HeadChef: HeadChefProtocol {
+	public var forWaiter: HeadChefForWaiter? {
+		return rota[name]?.forWaiter
+	}
+	
+	public var forSousChef: HeadChefForSousChef? {
+		return rota[name]?.forSousChef
+	}
+}
+
+extension HeadChef {
 	internal func inject(
 		_ forWaiterType: HeadChefForWaiter.Type?,
 		_ forSousChefType: HeadChefForSousChef.Type?,
 		_ waiter: WaiterForHeadChef?) {
 		self.waiter = waiter
 		if let strongWaiterType = forWaiterType {
-			let waiter = strongWaiterType.init()
+			let waiter = strongWaiterType.init(self)
 			let sousChef: HeadChefForSousChef?
 			if let strongSousChefType = forSousChefType {
-				sousChef = strongSousChefType.init()
+				sousChef = strongSousChefType.init(self)
 			} else {
 				sousChef = nil
 			}
-			rota[name] = HeadChefFacets(forWaiter: waiter, forSousChef: sousChef)
+			rota[name] = HeadChefFacets(waiter, sousChef)
 		}
 
-	}
-	
-	internal func forSousChef() -> HeadChefForSousChef? {
-		return rota[name]?.forSousChef
-	}
-	
-	internal func forWaiter() -> HeadChefForWaiter? {
-		return rota[name]?.forWaiter
 	}
 	
 	internal func beginShift() {
 		lo()
 	}
+	
 	internal func endShift() {
 		lo()
 	}

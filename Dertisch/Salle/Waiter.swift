@@ -6,43 +6,51 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-fileprivate struct WaiterFacets {
+fileprivate class WaiterFacets {
 	let
-	name: String,
 	forCustomer: WaiterForCustomer,
 	forMaitreD: WaiterForMaitreD,
 	forHeadChef: WaiterForHeadChef?
+	
+	init (
+	_ forCustomer: WaiterForCustomer,
+	_ forMaitreD: WaiterForMaitreD,
+	_ forHeadChef: WaiterForHeadChef?) {
+		self.forCustomer = forCustomer
+		self.forMaitreD = forMaitreD
+		self.forHeadChef = forHeadChef
+	}
 }
 
-fileprivate var rota: [WaiterFacets] = []
+fileprivate var rota: [String: WaiterFacets] = [:]
 
 
 
+public protocol WaiterFacet {
+	init(_ waiter: Waiter)
+}
 
+// tood is this (and similar) still needed?
+public protocol WaiterForMaitreD: class, WaiterFacet, SimpleColleagueProtocol {}
 
-
-
-public protocol WaiterForCustomer: class, SimpleColleagueProtocol, GiveCustomerOrderable {
+public protocol WaiterForCustomer: class, WaiterFacet, SimpleColleagueProtocol, GiveCustomerOrderable {
 	var carte: CarteForCustomer? { get }
 	func emptyCarte()
 }
 
-//public protocol WaiterForTableCustomer {
-//	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
-//}
-
-public protocol WaiterForHeadChef: class, SimpleColleagueProtocol {
+public protocol WaiterForHeadChef: class, WaiterFacet, SimpleColleagueProtocol {
 	func serve(entrees: FulfilledOrder)
 	func serve(main: FulfilledOrder)
 }
 
-// tood is this still needed?
-public protocol WaiterForMaitreD: class, SimpleColleagueProtocol {}
+//public protocol WaiterForWaiter {
+//	func addToCarte(_ main: FulfilledOrder)
+//	func fillCarte(with entrees: FulfilledOrder)
+//}
 
-public protocol WaiterForWaiter {
-	func addToCarte(_ main: FulfilledOrder)
-	func fillCarte(with entrees: FulfilledOrder)
-}
+//public protocol WaiterForTableCustomer {
+//	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
+//}
 
 
 
@@ -56,7 +64,7 @@ public extension WaiterForCustomer {
 	}
 }
 
-public extension WaiterForMaitreD {}
+//public extension WaiterForMaitreD {}
 
 public extension WaiterForHeadChef {
 	// todo the waiter calls a serve function on itself from a serve function: is this necessary?
@@ -84,14 +92,20 @@ public extension WaiterForHeadChef {
 	}
 }
 
-public extension WaiterForWaiter {
-	func addToCarte(_ main: FulfilledOrder) {}
-	func fillCarte(with entrees: FulfilledOrder) {}
+//public extension WaiterForWaiter {
+//	func addToCarte(_ main: FulfilledOrder) {}
+//	func fillCarte(with entrees: FulfilledOrder) {}
+//}
+
+
+
+public protocol WaiterProtocol {
+	var forMaitreD: WaiterForMaitreD? { get }
+	var forCustomer: WaiterForCustomer? { get }
+	var forHeadChef: WaiterForHeadChef? { get }
 }
 
-
-
-internal protocol WaiterProtocol: ComplexColleagueProtocol, BeginShiftable, EndShiftable, StaffMember, StaffRelatable {
+internal protocol WaiterInternalProtocol: ComplexColleagueProtocol, StaffMember {
 	init(_ name: String)
 	func inject(
 		_ forCustomer: WaiterForCustomer.Type,
@@ -101,7 +115,7 @@ internal protocol WaiterProtocol: ComplexColleagueProtocol, BeginShiftable, EndS
 		_ headChef: HeadChefForWaiter?)
 }
 
-internal class Waiter {
+public class Waiter {
 	fileprivate let name: String
 	
 	fileprivate var
@@ -117,11 +131,20 @@ internal class Waiter {
 }
 
 extension Waiter: WaiterProtocol {
-	private var facets: WaiterFacets? {
-		let results = rota.filter { $0.name == name }
-		return results.count == 1 ? results[0] : nil
+	public var forMaitreD: WaiterForMaitreD? {
+		return rota[name]?.forMaitreD
 	}
 	
+	public var forCustomer: WaiterForCustomer? {
+		return rota[name]?.forCustomer
+	}
+	
+	public var forHeadChef: WaiterForHeadChef? {
+		return rota[name]?.forHeadChef
+	}
+}
+
+extension Waiter: WaiterInternalProtocol {
 	func inject(
 		_ forCustomer: WaiterForCustomer.Type,
 		_ forMaitreD: WaiterForMaitreD.Type,
@@ -131,30 +154,14 @@ extension Waiter: WaiterProtocol {
 		self.customer = customer
 		self.headChef = headChef
 		
-		let headChef = forHeadChef != nil ? forHeadChef!.init() : nil
-		rota.append(WaiterFacets(
-			name: name,
-			forCustomer: forCustomer.init(),
-			forMaitreD: forMaitreD.init(),
-			forHeadChef: headChef))
-	}
-
-	
-	internal func forCustomer() -> WaiterForCustomer? {
-		return facets?.forCustomer
-	}
-	
-	internal func forMaitreD() -> WaiterForMaitreD? {
-		return facets?.forMaitreD
-	}
-	
-	internal func forHeadChef() -> WaiterForHeadChef? {
-		return facets?.forHeadChef
+		let headChef = forHeadChef != nil ? forHeadChef!.init(self) : nil
+		rota[name] = WaiterFacets(forCustomer.init(self), forMaitreD.init(self), headChef)
 	}
 	
 	internal func beginShift() {
 		lo()
 	}
+	
 	internal func endShift() {
 		lo()
 	}
