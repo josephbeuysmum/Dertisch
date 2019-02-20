@@ -6,8 +6,7 @@
 //
 
 internal struct StaffRelationship {
-	// tood GC return to let?
-	var
+	let
 	customerID: String,
 	animated: Bool,
 	customer: Customer?,

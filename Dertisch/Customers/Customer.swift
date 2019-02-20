@@ -40,27 +40,27 @@ public protocol CustomerFacet {
 	init(_ customer: Customer, _ key: String)
 }
 
-public protocol CustomerForMaitreD: class, CustomerFacet, SimpleColleagueProtocol {
+public protocol CustomerForMaitreD: SimpleColleagueProtocol, CustomerFacet {
 	func layTable(_ key: String)
 	func showToTable(_ key: String)
 	func peruseMenu(_ key: String)
-	func returnMenuToWaiter(_ key: String, _ order: CustomerOrder?)
-	func menuReturnedToWaiter(_ key: String, _ order: CustomerOrder?)
+	func returnMenuToWaiter(_ order: CustomerOrder?, _ key: String)
+	func menuReturnedToWaiter(_ order: CustomerOrder?, _ key: String)
 }
 
-public protocol CustomerForSommelier: class, CustomerFacet, SimpleColleagueProtocol {
+public protocol CustomerForSommelier: SimpleColleagueProtocol, CustomerFacet {
 	func regionChosen(_ key: String)
 }
 
-public protocol CustomerForRestaurantTable: class, CustomerFacet, SimpleColleagueProtocol {
+public protocol CustomerForRestaurantTable: SimpleColleagueProtocol, CustomerFacet {
 	func tableAssigned(_ key: String)
 	func isSeated(_ key: String)
 }
 
-public protocol CustomerForWaiter: class, CustomerFacet, SimpleColleagueProtocol {
-	func approach(_ key: String)
-	func present(_ key: String, dish dishId: String)
-	func presentCheck(_ key: String)
+public protocol CustomerForWaiter: SimpleColleagueProtocol, CustomerFacet {
+	func approach()
+	func present(dish dishId: String)
+	func presentCheck()
 }
 
 
@@ -74,8 +74,8 @@ public extension CustomerForMaitreD {
 	public func layTable(_ key: String) { lo() }
 	public func showToTable(_ key: String) { lo() }
 	public func peruseMenu(_ key: String) {}
-	public func returnMenuToWaiter(_ key: String, _ order: CustomerOrder? = nil) {}
-	public func menuReturnedToWaiter(_ key: String, _ order: CustomerOrder? = nil) {}
+	public func returnMenuToWaiter(_ order: CustomerOrder? = nil, _ key: String) {}
+	public func menuReturnedToWaiter(_ order: CustomerOrder? = nil, _ key: String) {}
 }
 
 public extension CustomerForRestaurantTable {
@@ -95,9 +95,9 @@ public extension CustomerForSommelier {
 }
 
 public extension CustomerForWaiter {
-	public func approach(_ key: String) {}
-	public func present(_ key: String, dish dishId: String) {}
-	public func presentCheck(_ key: String) {}
+	public func approach() {}
+	public func present(dish dishId: String) {}
+	public func presentCheck() {}
 }
 
 

@@ -32,7 +32,7 @@ internal protocol ComplexColleagueProtocol: StaffRelatable {
 
 public protocol StaffHead {}
 
-public protocol SimpleColleagueProtocol {}
+public protocol SimpleColleagueProtocol: class {}
 
 public protocol Shiftable {
 	func beginShift()
@@ -40,7 +40,7 @@ public protocol Shiftable {
 }
 
 public protocol GiveCustomerOrderable {
-	func give(_ key: String, _ order: CustomerOrder)
+	func give(_ order: CustomerOrder, _ key: String)
 }
 
 public protocol KitchenResource: Shiftable {

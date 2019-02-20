@@ -6,6 +6,12 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+class GeneralWaiterForWaiter: WaiterForWaiter {
+	required init(_ waiter: Waiter) {
+		
+	}
+}
+
 //class GeneralWaiter: Waiter {
 //	var carte: CarteForCustomer? { return nil }
 //

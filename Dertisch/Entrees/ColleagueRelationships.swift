@@ -14,14 +14,14 @@ internal struct ColleagueRelationships {
 	customerForSommelierType: CustomerForSommelier.Type,
 	customerForWaiterType: CustomerForWaiter.Type?,
 	waiterForCustomerType: WaiterForCustomer.Type?,
-	waiterForMaitreDType: WaiterForMaitreD.Type?,
+//	waiterForMaitreDType: WaiterForMaitreD.Type?,
 	waiterForHeadChefType: WaiterForHeadChef.Type?,
 	headChefForWaiterType: HeadChefForWaiter.Type?,
 	headChefForSousChefType: HeadChefForSousChef.Type?,
 	kitchenResourceTypes: [KitchenResource.Type]?
 	
 	var hasWaiter: Bool {
-		return waiterForCustomerType != nil && waiterForMaitreDType != nil && waiterForHeadChefType != nil
+		return waiterForCustomerType != nil && /*waiterForMaitreDType != nil &&*/ waiterForHeadChefType != nil
 	}
 	
 	var hasHeadChef: Bool {

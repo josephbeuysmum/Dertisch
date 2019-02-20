@@ -14,17 +14,16 @@ public protocol HeadChefFacet {
 	init(_ headChef: HeadChef)
 }
 
-// tood why is class here and not in SimpleColleagueProtocol?
-public protocol HeadChefForSousChef: class, HeadChefFacet, SimpleColleagueProtocol {
-	func give(_ key: String, prep: InternalOrder)
+public protocol HeadChefForSousChef: SimpleColleagueProtocol, HeadChefFacet {
+	func give(_ prep: InternalOrder, _ key: String)
 }
 
-public protocol HeadChefForWaiter: class, HeadChefFacet, SimpleColleagueProtocol, GiveCustomerOrderable {}
+public protocol HeadChefForWaiter: SimpleColleagueProtocol, HeadChefFacet, GiveCustomerOrderable {}
 
 
 
 extension HeadChefForSousChef {
-	public func give(_ key: String, prep: InternalOrder) {
+	public func give(_ prep: InternalOrder, _ key: String) {
 		lo("commented out presently 2")
 //		let fulfilledOrder = FulfilledOrder(prep.ticket, dishes: prep.dishes as? Dishionarizer)
 //		Rota().waiterForHeadChef(self as? StaffRelatable)?.serve(main: fulfilledOrder)
@@ -32,7 +31,7 @@ extension HeadChefForSousChef {
 }
 
 extension HeadChefForWaiter {
-	public func give(_ key: String, _ order: CustomerOrder) {}
+	public func give(_ order: CustomerOrder, _ key: String) {}
 }
 
 

@@ -24,7 +24,7 @@ public struct FreezerKey {
 	key: String,
 	type: FreezerTypes
 	
-	public init (_ key: String, _ type: FreezerTypes) {
+	public init (_ type: FreezerTypes, _ key: String) {
 		self.key = key
 		self.type = type
 	}

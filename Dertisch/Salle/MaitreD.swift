@@ -11,9 +11,6 @@ import UIKit
 
 
 
-// tood move this elsewhere
-//public typealias HeadChefTypes = (sousChef: HeadChefForSousChef.Type?, waiter: HeadChefForWaiter.Type?)
-
 public protocol MaitreDRegistrar {
 	func register(
 		_ resourceType: KitchenResource.Type,
@@ -27,7 +24,7 @@ public protocol MaitreDRegistrar {
 		customerForSommelier: CustomerForSommelier.Type,
 		customerForWaiter: CustomerForWaiter.Type?,
 		waiterForCustomer: WaiterForCustomer.Type?,
-		waiterForMaitreD: WaiterForMaitreD.Type?,
+//		waiterForMaitreD: WaiterForMaitreD.Type?,
 		waiterForHeadChef: WaiterForHeadChef.Type?,
 //		waiter waiterType: Waiter.Type?,
 		headChefForWaiter: HeadChefForWaiter.Type?,
@@ -56,6 +53,7 @@ public class MaitreD {
 	currentRelationships: StaffRelationship?,
 	menuRelationships: StaffRelationship?
 	
+	// todo is there a better way to keep a ref to the maitre d than a property in AppDelegate?
 	required public init() {
 		key = NSUUID().uuidString
 		resources = [:]
@@ -139,7 +137,7 @@ extension MaitreD {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable.dismiss(animated: true) { [unowned self] in
 			guard let customerKey = self.currentRelationships?.customer?.internalKey else { return }
-			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(customerKey, order)
+			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(order, customerKey)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
@@ -149,7 +147,7 @@ extension MaitreD {
 			else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(customerKey, order)
+		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(order, customerKey)
 		currentRelationships!.customer?.forSommelier(customerKey)?.regionChosen(customerKey)
 	}
 	
@@ -270,7 +268,7 @@ extension MaitreD {
 			Waiter(
 				relationshipsKey,
 				colleagueRelationship.waiterForCustomerType!,
-				colleagueRelationship.waiterForMaitreDType!,
+//				colleagueRelationship.waiterForMaitreDType!,
 				colleagueRelationship.waiterForHeadChefType!) :
 			nil
 		
@@ -311,7 +309,7 @@ extension MaitreD {
 			formerRelationship != nil,
 			let customerKey = formerRelationship!.customer?.internalKey
 			else { return }
-		formerRelationship!.customer?.forWaiter(customerKey)?.presentCheck(customerKey)
+		formerRelationship!.customer?.forWaiter(customerKey)?.presentCheck()
 		formerRelationship!.waiter?.endShift()
 		formerRelationship!.headChef?.endShift()
 	}
@@ -336,7 +334,7 @@ extension MaitreD: MaitreDRegistrar {
 		customerForSommelier: CustomerForSommelier.Type,
 		customerForWaiter: CustomerForWaiter.Type?,
 		waiterForCustomer: WaiterForCustomer.Type?,
-		waiterForMaitreD: WaiterForMaitreD.Type?,
+//		waiterForMaitreD: WaiterForMaitreD.Type?,
 		waiterForHeadChef: WaiterForHeadChef.Type?,
 //		waiter waiterType: Waiter.Type?,
 		headChefForWaiter: HeadChefForWaiter.Type?,
@@ -352,7 +350,7 @@ extension MaitreD: MaitreDRegistrar {
 			customerForSommelierType: customerForSommelier,
 			customerForWaiterType: customerForWaiter,
 			waiterForCustomerType: waiterForCustomer,
-			waiterForMaitreDType: waiterForMaitreD,
+//			waiterForMaitreDType: waiterForMaitreD,
 			waiterForHeadChefType: waiterForHeadChef,
 			headChefForWaiterType: headChefForWaiter,
 			headChefForSousChefType: headChefForSousChef,
