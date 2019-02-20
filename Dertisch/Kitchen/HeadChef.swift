@@ -6,18 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-fileprivate class HeadChefFacets {
-	let
-	forWaiter: HeadChefForWaiter,
-	forSousChef: HeadChefForSousChef?
-	
-	init(_ forWaiter: HeadChefForWaiter, _ forSousChef: HeadChefForSousChef?) {
-		self.forWaiter = forWaiter
-		self.forSousChef = forSousChef
-	}
-}
-
-fileprivate var rota: [String: HeadChefFacets] = [:]
+fileprivate var rota: [String: HeadChef] = [:]
 
 
 
@@ -27,7 +16,7 @@ public protocol HeadChefFacet {
 
 // tood why is class here and not in SimpleColleagueProtocol?
 public protocol HeadChefForSousChef: class, HeadChefFacet, SimpleColleagueProtocol {
-	func give(prep: InternalOrder)
+	func give(_ key: String, prep: InternalOrder)
 }
 
 public protocol HeadChefForWaiter: class, HeadChefFacet, SimpleColleagueProtocol, GiveCustomerOrderable {}
@@ -35,7 +24,7 @@ public protocol HeadChefForWaiter: class, HeadChefFacet, SimpleColleagueProtocol
 
 
 extension HeadChefForSousChef {
-	public func give(prep: InternalOrder) {
+	public func give(_ key: String, prep: InternalOrder) {
 		lo("commented out presently 2")
 //		let fulfilledOrder = FulfilledOrder(prep.ticket, dishes: prep.dishes as? Dishionarizer)
 //		Rota().waiterForHeadChef(self as? StaffRelatable)?.serve(main: fulfilledOrder)
@@ -43,17 +32,15 @@ extension HeadChefForSousChef {
 }
 
 extension HeadChefForWaiter {
-	public func give(_ order: CustomerOrder) {
-		lo(rota.count, self)
-	}
+	public func give(_ key: String, _ order: CustomerOrder) {}
 }
 
 
 
 public protocol HeadChefProtocol {
-	func forWaiter(by key: String) -> HeadChefForWaiter?
-	func forSousChef(by key: String) -> HeadChefForSousChef?
-	func waiter(by key: String) -> WaiterForHeadChef?
+	func forWaiter(_ key: String) -> HeadChefForWaiter?
+	func forSousChef(_ key: String) -> HeadChefForSousChef?
+	func waiter(_ key: String) -> WaiterForHeadChef?
 }
 
 internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
@@ -68,7 +55,10 @@ internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMembe
 public class HeadChef: HeadChefInternalProtocol {
 	fileprivate let privateKey: String
 	
-	fileprivate var waiter: WaiterForHeadChef?
+	fileprivate var
+	_forWaiter: HeadChefForWaiter?,
+	_forSousChef: HeadChefForSousChef?,
+	_waiter: WaiterForHeadChef?
 	
 	internal required init(
 		_ key: String,
@@ -76,16 +66,9 @@ public class HeadChef: HeadChefInternalProtocol {
 		_ forSousChefType: HeadChefForSousChef.Type?,
 		_ resources: [String: KitchenResource]?) {
 		privateKey = key
-		if let strongWaiterType = forWaiterType {
-			let waiter = strongWaiterType.init(self)
-			let sousChef: HeadChefForSousChef?
-			if let strongSousChefType = forSousChefType {
-				sousChef = strongSousChefType.init(self)
-			} else {
-				sousChef = nil
-			}
-			rota[privateKey] = HeadChefFacets(waiter, sousChef)
-		}
+		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self) : nil
+		_forSousChef = forSousChefType != nil ? forSousChefType!.init(self) : nil
+		rota[privateKey] = self
 		lo("BONJOUR  ", self)
 	}
 	
@@ -93,16 +76,16 @@ public class HeadChef: HeadChefInternalProtocol {
 }
 
 extension HeadChef: HeadChefProtocol {
-	public func forWaiter(by key: String) -> HeadChefForWaiter? {
-		return rota[key]?.forWaiter
+	public func forWaiter(_ key: String) -> HeadChefForWaiter? {
+		return key == privateKey ? _forWaiter : nil
 	}
 	
-	public func forSousChef(by key: String) -> HeadChefForSousChef? {
-		return rota[key]?.forSousChef
+	public func forSousChef(_ key: String) -> HeadChefForSousChef? {
+		return key == privateKey ? _forSousChef : nil
 	}
 	
-	public func waiter(by key: String) -> WaiterForHeadChef? {
-		return key == privateKey ? waiter : nil
+	public func waiter(_ key: String) -> WaiterForHeadChef? {
+		return key == privateKey ? _waiter : nil
 	}
 }
 
@@ -112,7 +95,7 @@ extension HeadChef {
 	}
 	
 	internal func inject(_ waiter: WaiterForHeadChef?) {
-		self.waiter = waiter
+		self._waiter = waiter
 	}
 	
 	internal func beginShift() {

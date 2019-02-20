@@ -21,9 +21,9 @@ public typealias FreezerDeletionClosure = (Bool) -> Void
 //}
 
 //public protocolTemporaryValuesProtocol: KitchenResource {
-//	func getValue(by key: String, andAnnul: Bool?) -> StorableDataType?
-//	func set(_ value: StorableDataType, by key: String)
-//	func annulValue(by key: String)
+//	func getValue(_ key: String, andAnnul: Bool?) -> StorableDataType?
+//	func set(_ value: StorableDataType, _ key: String)
+//	func annulValue(_ key: String)
 //	func removeValues ()
 //}
 

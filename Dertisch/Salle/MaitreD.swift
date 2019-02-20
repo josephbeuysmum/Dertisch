@@ -116,7 +116,7 @@ extension MaitreD {
 			else { return }
 		let customerKey = currentCustomer.internalKey
 		menuRelationships = nextMenuRelationships
-		currentCustomer.forMaitreD(by: customerKey)?.peruseMenu(customerKey)
+		currentCustomer.forMaitreD(customerKey)?.peruseMenu(customerKey)
 		// tood GC is this assignation necessary?
 		currentRelationships?.waiter?.beginBreak()
 		currentRelationships?.headChef?.beginBreak()
@@ -139,7 +139,7 @@ extension MaitreD {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable.dismiss(animated: true) { [unowned self] in
 			guard let customerKey = self.currentRelationships?.customer?.internalKey else { return }
-			self.currentRelationships?.customer?.forMaitreD(by: customerKey)?.menuReturnedToWaiter(customerKey, order)
+			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(customerKey, order)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
@@ -149,8 +149,8 @@ extension MaitreD {
 			else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.forMaitreD(by: customerKey)?.returnMenuToWaiter(customerKey, order)
-		currentRelationships!.customer?.forSommelier(by: customerKey)?.regionChosen(customerKey)
+		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(customerKey, order)
+		currentRelationships!.customer?.forSommelier(customerKey)?.regionChosen(customerKey)
 	}
 	
 	public func seat(
@@ -276,15 +276,15 @@ extension MaitreD {
 		
 		// tood reinstate general waiter
 		lo("no general waiter currently")
-		lo(waiter?.forCustomer, customer.forWaiter(by: relationshipsKey), headChef?.forWaiter, waiter?.forHeadChef)
+		lo(waiter?.forCustomer, customer.forWaiter(relationshipsKey), headChef?.forWaiter, waiter?.forHeadChef)
 		//		let waiter = colleagueRelationship.waiterType != nil ?
 		//			colleagueRelationship.waiterType!.init(maitreD: self) :
 		//			GeneralWaiter(maitreD: self)
 		
-		customer.inject(waiter?.forCustomer(by: relationshipsKey))
-		waiter?.inject(customer.forWaiter(by: relationshipsKey), headChef?.forWaiter(by: relationshipsKey))
-		headChef?.inject(waiter?.forHeadChef(by: relationshipsKey))
-		restaurantTable.customer = customer.forRestaurantTable(by: relationshipsKey)
+		customer.inject(waiter?.forCustomer(relationshipsKey))
+		waiter?.inject(customer.forWaiter(relationshipsKey), headChef?.forWaiter(relationshipsKey))
+		headChef?.inject(waiter?.forHeadChef(relationshipsKey))
+		restaurantTable.customer = customer.forRestaurantTable(relationshipsKey)
 		restaurantTable.key = relationshipsKey
 		return StaffRelationship(
 			customerID: ticket.id,
@@ -311,7 +311,7 @@ extension MaitreD {
 			formerRelationship != nil,
 			let customerKey = formerRelationship!.customer?.internalKey
 			else { return }
-		formerRelationship!.customer?.forWaiter(by: customerKey)?.presentCheck(customerKey)
+		formerRelationship!.customer?.forWaiter(customerKey)?.presentCheck(customerKey)
 		formerRelationship!.waiter?.endShift()
 		formerRelationship!.headChef?.endShift()
 	}

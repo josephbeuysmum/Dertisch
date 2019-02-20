@@ -40,7 +40,7 @@ public protocol Shiftable {
 }
 
 public protocol GiveCustomerOrderable {
-	func give(_ order: CustomerOrder)
+	func give(_ key: String, _ order: CustomerOrder)
 }
 
 public protocol KitchenResource: Shiftable {
@@ -59,7 +59,7 @@ public protocol FreezerEntitiable {
 	var attributes: [String: StorableDataType] { get }
 	var name: String { get }
 	init (_ name: String, keys: [FreezerKey])
-	mutating func add(_ attribute: StorableDataType, by key: String) -> Bool
+	mutating func add(_ attribute: StorableDataType, _ key: String) -> Bool
 }
 
 public protocol StorableDataType {}
