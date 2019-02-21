@@ -13,14 +13,14 @@ fileprivate var rota: [String: Waiter] = [:]
 
 
 public protocol WaiterFacet {
-	init(_ waiter: Waiter)
+	init(_ waiter: Waiter, _ key: String)
 }
 
 //public protocol WaiterForMaitreD: class, WaiterFacet, SimpleColleagueProtocol {}
 
 public protocol WaiterForCustomer: SimpleColleagueProtocol, WaiterFacet, GiveCustomerOrderable {
 	var carte: CarteForCustomer? { get }
-	func emptyCarte(_ key: String)
+	func emptyCarte()
 }
 
 public protocol WaiterForHeadChef: SimpleColleagueProtocol, WaiterFacet {
@@ -40,7 +40,7 @@ public protocol WaiterForWaiter: SimpleColleagueProtocol, WaiterFacet {
 
 
 public extension WaiterForCustomer {
-	func emptyCarte(_ key: String) {}
+	func emptyCarte() {}
 	
 	public func give(_ order: CustomerOrder, _ key: String) {
 		rota[key]?._headChef?.give(order, key)
@@ -110,10 +110,10 @@ public class Waiter {
 //		_ forMaitreD: WaiterForMaitreD.Type,
 		_ forHeadChef: WaiterForHeadChef.Type?) {
 		privateKey = key
-		self._forCustomer = forCustomer.init(self)
+		self._forCustomer = forCustomer.init(self, key)
 //		self._forMaitreD = forMaitreD.init(self)
-		self._forHeadChef = forHeadChef != nil ? forHeadChef!.init(self) : nil
-		self._forWaiter = GeneralWaiterForWaiter(self)
+		self._forHeadChef = forHeadChef != nil ? forHeadChef!.init(self, key) : nil
+		self._forWaiter = GeneralWaiterForWaiter(self, key)
 		rota[privateKey] = self
 		lo("BONJOUR  ", self)
 	}

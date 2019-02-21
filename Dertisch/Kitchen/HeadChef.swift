@@ -11,11 +11,11 @@ fileprivate var rota: [String: HeadChef] = [:]
 
 
 public protocol HeadChefFacet {
-	init(_ headChef: HeadChef)
+	init(_ headChef: HeadChef, _ key: String)
 }
 
 public protocol HeadChefForSousChef: SimpleColleagueProtocol, HeadChefFacet {
-	func give(_ prep: InternalOrder, _ key: String)
+	func give(_ prep: InternalOrder)
 }
 
 public protocol HeadChefForWaiter: SimpleColleagueProtocol, HeadChefFacet, GiveCustomerOrderable {}
@@ -23,7 +23,7 @@ public protocol HeadChefForWaiter: SimpleColleagueProtocol, HeadChefFacet, GiveC
 
 
 extension HeadChefForSousChef {
-	public func give(_ prep: InternalOrder, _ key: String) {
+	public func give(_ prep: InternalOrder) {
 		lo("commented out presently 2")
 //		let fulfilledOrder = FulfilledOrder(prep.ticket, dishes: prep.dishes as? Dishionarizer)
 //		Rota().waiterForHeadChef(self as? StaffRelatable)?.serve(main: fulfilledOrder)
@@ -65,8 +65,8 @@ public class HeadChef: HeadChefInternalProtocol {
 		_ forSousChefType: HeadChefForSousChef.Type?,
 		_ resources: [String: KitchenResource]?) {
 		privateKey = key
-		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self) : nil
-		_forSousChef = forSousChefType != nil ? forSousChefType!.init(self) : nil
+		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self, key) : nil
+		_forSousChef = forSousChefType != nil ? forSousChefType!.init(self, key) : nil
 		rota[privateKey] = self
 		lo("BONJOUR  ", self)
 	}

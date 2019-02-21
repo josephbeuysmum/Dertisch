@@ -8,48 +8,26 @@
 
 import Foundation
 
-//fileprivate class CustomerFacets {
-//	let
-//	forRestaurantTable: CustomerForRestaurantTable,
-//	forMaitreD: CustomerForMaitreD,
-//	forSommelier: CustomerForSommelier,
-//	forWaiter: CustomerForWaiter?
-//
-//	init(
-//		_ forRestaurantTable: CustomerForRestaurantTable,
-//		_ forMaitreD: CustomerForMaitreD,
-//		_ forSommelier: CustomerForSommelier,
-//		_ forWaiter: CustomerForWaiter?) {
-//		self.forRestaurantTable = forRestaurantTable
-//		self.forMaitreD = forMaitreD
-//		self.forSommelier = forSommelier
-//		self.forWaiter = forWaiter
-//	}
-//}
-
 fileprivate var rota: [String: Customer] = [:]
 
 
-
-//public protocol CustomerForCustomer: class, SimpleColleagueProtocol {
-//	func layTable()
-//	func showToTable()
-//}
 
 public protocol CustomerFacet {
 	init(_ customer: Customer, _ key: String)
 }
 
+
+
 public protocol CustomerForMaitreD: SimpleColleagueProtocol, CustomerFacet {
-	func layTable(_ key: String)
-	func showToTable(_ key: String)
-	func peruseMenu(_ key: String)
-	func returnMenuToWaiter(_ order: CustomerOrder?, _ key: String)
-	func menuReturnedToWaiter(_ order: CustomerOrder?, _ key: String)
+	func layTable()
+	func showToTable()
+	func peruseMenu()
+	func returnMenuToWaiter(_ order: CustomerOrder?)
+	func menuReturnedToWaiter(_ order: CustomerOrder?)
 }
 
 public protocol CustomerForSommelier: SimpleColleagueProtocol, CustomerFacet {
-	func regionChosen(_ key: String)
+	func regionChosen()
 }
 
 public protocol CustomerForRestaurantTable: SimpleColleagueProtocol, CustomerFacet {
@@ -60,44 +38,39 @@ public protocol CustomerForRestaurantTable: SimpleColleagueProtocol, CustomerFac
 public protocol CustomerForWaiter: SimpleColleagueProtocol, CustomerFacet {
 	func approach()
 	func present(dish dishId: String)
-	func presentCheck()
+	func serveBill()
 }
 
 
 
-//extension CustomerForCustomer {
-//	public func layTable() {}
-//	public func showToTable() {}
-//}
-
 public extension CustomerForMaitreD {
-	public func layTable(_ key: String) { lo() }
-	public func showToTable(_ key: String) { lo() }
-	public func peruseMenu(_ key: String) {}
-	public func returnMenuToWaiter(_ order: CustomerOrder? = nil, _ key: String) {}
-	public func menuReturnedToWaiter(_ order: CustomerOrder? = nil, _ key: String) {}
+	public func layTable() {}
+	public func showToTable() {}
+	public func peruseMenu() {}
+	public func returnMenuToWaiter(_ order: CustomerOrder? = nil) {}
+	public func menuReturnedToWaiter(_ order: CustomerOrder? = nil) {}
 }
 
 public extension CustomerForRestaurantTable {
 	public func tableAssigned(_ key: String) {
 		guard let customer = rota[key] else { return }
-		customer.forMaitreD(key)?.showToTable(key)
-		customer.forSommelier(key)?.regionChosen(key)
+		customer.forMaitreD(key)?.showToTable()
+		customer.forSommelier(key)?.regionChosen()
 	}
 	
 	public func isSeated(_ key: String) {
-		rota[key]?.forMaitreD(key)?.layTable(key)
+		rota[key]?.forMaitreD(key)?.layTable()
 	}
 }
 
 public extension CustomerForSommelier {
-	public func regionChosen(_ key: String) {}
+	public func regionChosen() {}
 }
 
 public extension CustomerForWaiter {
 	public func approach() {}
 	public func present(dish dishId: String) {}
-	public func presentCheck() {}
+	public func serveBill() {}
 }
 
 
@@ -143,10 +116,10 @@ public class Customer {
 		_ forWaiterType: CustomerForWaiter.Type?) {
 		privateKey = key
 		self.table = table
-		_forRestaurantTable = forRestaurantTableType.init(self, privateKey)
-		_forMaitreD = forMaitreDType.init(self, privateKey)
-		_forSommelier = forSommelierType.init(self, privateKey)
-		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self, privateKey) : nil
+		_forRestaurantTable = forRestaurantTableType.init(self, key)
+		_forMaitreD = forMaitreDType.init(self, key)
+		_forSommelier = forSommelierType.init(self, key)
+		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self, key) : nil
 		rota[privateKey] = self
 		lo("BONJOUR  ", self)
 	}

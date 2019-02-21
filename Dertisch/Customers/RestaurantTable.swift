@@ -9,6 +9,12 @@
 import UIKit
 
 public class RestaurantTable: UIViewController {
+	
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		ownKey = ""
+	}
+	
 	var customer: CustomerForRestaurantTable? {
 		get { return nil }
 		set { ownCustomer = newValue }
@@ -21,18 +27,18 @@ public class RestaurantTable: UIViewController {
 
 	private var
 	ownCustomer: CustomerForRestaurantTable?,
-	ownKey: String?
+	ownKey: String!
 	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		guard ownKey != nil else { return }
-		ownCustomer?.isSeated(ownKey!)
+		ownCustomer?.isSeated(ownKey)
 	}
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		guard ownKey != nil else { return }
-		ownCustomer?.tableAssigned(ownKey!)
+		ownCustomer?.tableAssigned(ownKey)
 	}
 	
 	override public func viewDidDisappear(_ animated: Bool) {

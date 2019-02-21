@@ -7,7 +7,7 @@
 //
 
 class GeneralWaiterForWaiter: WaiterForWaiter {
-	required init(_ waiter: Waiter) {
+	required init(_ waiter: Waiter, _ key: String) {
 		
 	}
 }

@@ -114,7 +114,7 @@ extension MaitreD {
 			else { return }
 		let customerKey = currentCustomer.internalKey
 		menuRelationships = nextMenuRelationships
-		currentCustomer.forMaitreD(customerKey)?.peruseMenu(customerKey)
+		currentCustomer.forMaitreD(customerKey)?.peruseMenu()
 		// tood GC is this assignation necessary?
 		currentRelationships?.waiter?.beginBreak()
 		currentRelationships?.headChef?.beginBreak()
@@ -137,7 +137,7 @@ extension MaitreD {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable.dismiss(animated: true) { [unowned self] in
 			guard let customerKey = self.currentRelationships?.customer?.internalKey else { return }
-			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(order, customerKey)
+			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(order)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
@@ -147,8 +147,8 @@ extension MaitreD {
 			else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(order, customerKey)
-		currentRelationships!.customer?.forSommelier(customerKey)?.regionChosen(customerKey)
+		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(order)
+		currentRelationships!.customer?.forSommelier(customerKey)?.regionChosen()
 	}
 	
 	public func seat(
@@ -309,7 +309,7 @@ extension MaitreD {
 			formerRelationship != nil,
 			let customerKey = formerRelationship!.customer?.internalKey
 			else { return }
-		formerRelationship!.customer?.forWaiter(customerKey)?.presentCheck()
+		formerRelationship!.customer?.forWaiter(customerKey)?.serveBill()
 		formerRelationship!.waiter?.endShift()
 		formerRelationship!.headChef?.endShift()
 	}
