@@ -331,9 +331,7 @@ Developmental Roadmap
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
 -   warnings if instances of `Waiter` don't have requisite dependencies injected;
--   move to Devops Git branch;
 -	make `Customer` and `Waiter` [RxSwift](https://github.com/ReactiveX/RxSwift/) compatible;
--   change the multi-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -   rename Images ingredient;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -   make `Dertisch` a Cocoapod;
