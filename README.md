@@ -14,7 +14,7 @@ A **swifty** MVP framework for Swift apps
 -   `C` Customers
 -   `H` Head Chefs
 
-![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn.gif)
+![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn1.gif)
 
 ---
 The Restaurant as a Design Pattern
@@ -66,23 +66,59 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 -   Waiters **present** data; and
 -   Customers **consume** data.
 
-The chaining in `Dertisch` presently can be thought of as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. However, to guard against - in this case - a `Waiter` being able to access aspect of its `HeadChef` that it shouldn't be able to, this is not organised in terms of delegates, but instead in terms of separate `HeadChefFor...` objects that belong to `HeadChef`
 
-	protocol Waiter: WaiterForCustomer, WaiterForHeadChef {
-		init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
+![Venn diagram of Waiter/HeadChef relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn2.gif)
+
+`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that one must concretely implement as specific classes. The `Waiter` only has access to the `HeadChefForWaiter` instance within `HeadChef`.
+
+	public protocol HeadChefFacet {
+		init(_ headChef: HeadChef, _ key: String)
 	}
 
-	protocol WaiterForCustomer: GiveOrderProtocol {
-		var carte: CarteForCustomer? { get }
-		func emptyCarte()
+	public protocol HeadChefForWaiter: class, HeadChefFacet {
+		func give(_ order: CustomerOrder, _ key: String)
 	}
 
-	protocol WaiterForHeadChef {
-		func serve(entrees: FulfilledOrder)
-		func serve(main: FulfilledOrder)
+	public protocol HeadChefForSousChef: class, HeadChefFacet {
+		func give(_ prep: InternalOrder)
 	}
 
-However this has changed in the `devops` branch, where now `Waiter` is an `internal` class that has `WaiterForCustomer` etc properties within it. More on this as and when I get the time to expand.
+	public protocol HeadChefProtocol {
+		func forWaiter(_ key: String) -> HeadChefForWaiter?
+		func forSousChef(_ key: String) -> HeadChefForSousChef?
+		func waiter(_ key: String) -> WaiterForHeadChef?
+	}
+
+	internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
+		init(_ key: String, _ forWaiterType: HeadChefForWaiter.Type?, _ forSousChefType: HeadChefForSousChef.Type?, _ resources: [String: KitchenResource]?)
+		func inject(_ waiter: WaiterForHeadChef?)
+	}
+
+	public class HeadChef: HeadChefInternalProtocol {
+		...
+	}
+
+	extension HeadChef: HeadChefProtocol {
+		...
+	}
+
+A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to other facets of its role. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access its other facets.
+
+	class SomeHeadChefForWaiter: HeadChefForWaiter {
+		private let headChef: HeadChef
+		private let key: String
+
+		required init(_ headChef: HeadChef, _ key: String) {
+			self.headChef = headChef
+			self.key = key
+		}
+
+		func give(_ order: CustomerOrder, _ key: String) {
+			lo(order)
+			headChef.waiter(key)?.serve(main: FulfilledOrder("dishCooked"))
+		}
+	}
 
 ---
 
