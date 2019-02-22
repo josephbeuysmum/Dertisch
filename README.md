@@ -66,11 +66,11 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 -   Waiters **present** data; and
 -   Customers **consume** data.
 
-Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. However, to guard against - in this case - a `Waiter` being able to access aspect of its `HeadChef` that it shouldn't be able to, this is not organised in terms of delegates, but instead in terms of separate `HeadChefFor...` objects that belong to `HeadChef`
+Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. However, to guard against - in this case - a `Waiter` being able to access aspect of its `HeadChef` that it shouldn't be able to (via casting), this is not organised in terms of delegates, but instead in terms of separate `HeadChefFor...` objects that belong to `HeadChef`
 
 ![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
 
-`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that must be implemented concretely as specific classes, and which are referred to internally as `facets`. Thereafter a `Waiter` only has access to the `HeadChefForWaiter` instance within its `HeadChef`.
+`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that must be implemented concretely as specific classes. These specific classes are referred to as `Facets`, as in facets of a personality (and also in reference to the `Facade` design pattern).
 
 	public protocol HeadChefFacet: class {
 		init(_ headChef: HeadChef, _ key: String)
@@ -103,7 +103,7 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 		...
 	}
 
-A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access its other facets.
+A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
 
 	class SomeHeadChefForWaiter: HeadChefForWaiter {
 		private let headChef: HeadChef
