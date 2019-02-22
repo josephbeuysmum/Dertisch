@@ -66,14 +66,14 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 -   Waiters **present** data; and
 -   Customers **consume** data.
 
-Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. The responsibilities of `HeadChef` are:
+Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. To take an example, the responsibilities of a `HeadChef` are:
 
 -   to accept orders from waiters;
 -   to assign tasks to sous chefs;
 -   to prepare dishes from the prep of sous chefs; and
 -   to give waiters dishes for customers.
 
-In a real restaurant a `Waiter` would only be able to get its `HeadChef` to undertake the first and last of these four responsibilities. If a `Waiter` had *actual delegate* access to its `HeadChef` it could potentially access the other two responsibilities by casting its `HeadChef` as a `HeadChefForSousChef`. To guard against this, `HeadChefs` are not instances of classes which implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols, but instead instances of classes that contain *discrete concrete instances* of classes that implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols
+In a real restaurant a `Waiter` would only be able to get its `HeadChef` to undertake the first of these responsibilities, and conversely the `HeadChef` would only be able to get its `Waiter` to undertake the last. However, if a `Waiter` had *actual delegate* access to its `HeadChef` it could potentially access the other two responsibilities by casting its `HeadChef` as a `HeadChefForSousChef`. To guard against this, `HeadChefs` are not instances of classes which implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols, but instead instances of classes that contain *discrete concrete instances* of classes that implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols
 
 ![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
 
