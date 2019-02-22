@@ -14,7 +14,7 @@ A **swifty** MVP framework for Swift apps
 -   `C` Customers
 -   `H` Head Chefs
 
-![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn1.gif)
+![Venn diagram of Dertisch relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn1.gif?raw=true)
 
 ---
 The Restaurant as a Design Pattern
@@ -68,7 +68,7 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 
 Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. However, to guard against - in this case - a `Waiter` being able to access aspect of its `HeadChef` that it shouldn't be able to, this is not organised in terms of delegates, but instead in terms of separate `HeadChefFor...` objects that belong to `HeadChef`
 
-![Venn diagram of Waiter/HeadChef relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn2.gif)
+![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
 
 `HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that one must concretely implement as specific classes. The `Waiter` only has access to the `HeadChefForWaiter` instance within `HeadChef`.
 
