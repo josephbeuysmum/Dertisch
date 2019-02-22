@@ -91,7 +91,11 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 	}
 
 	internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
-		init(_ key: String, _ forWaiterType: HeadChefForWaiter.Type?, _ forSousChefType: HeadChefForSousChef.Type?, _ resources: [String: KitchenResource]?)
+		init(
+			_ key: String,
+			_ forWaiterType: HeadChefForWaiter.Type?,
+			_ forSousChefType: HeadChefForSousChef.Type?,
+			_ resources: [String: KitchenResource]?)
 		func inject(_ waiter: WaiterForHeadChef?)
 	}
 
@@ -103,7 +107,7 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 		...
 	}
 
-A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
+A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granting access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
 
 	class SomeHeadChefForWaiter: HeadChefForWaiter {
 		private let headChef: HeadChef
@@ -115,7 +119,6 @@ A `HeadChef`'s internal functionality is entirely concerned with initialization 
 		}
 
 		func give(_ order: CustomerOrder, _ key: String) {
-			lo(order)
 			headChef.waiter(key)?.serve(main: FulfilledOrder("dishCooked"))
 		}
 	}
