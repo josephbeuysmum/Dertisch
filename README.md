@@ -70,17 +70,17 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 
 ![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
 
-`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that one must concretely implement as specific classes. The `Waiter` only has access to the `HeadChefForWaiter` instance within `HeadChef`.
+`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that must be implemented concretely as specific classes, and which are referred to internally as `facets`. Thereafter a `Waiter` only has access to the `HeadChefForWaiter` instance within its `HeadChef`.
 
-	public protocol HeadChefFacet {
+	public protocol HeadChefFacet: class {
 		init(_ headChef: HeadChef, _ key: String)
 	}
 
-	public protocol HeadChefForWaiter: class, HeadChefFacet {
+	public protocol HeadChefForWaiter: HeadChefFacet {
 		func give(_ order: CustomerOrder, _ key: String)
 	}
 
-	public protocol HeadChefForSousChef: class, HeadChefFacet {
+	public protocol HeadChefForSousChef: HeadChefFacet {
 		func give(_ prep: InternalOrder)
 	}
 
@@ -103,7 +103,7 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 		...
 	}
 
-A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to other facets of its role. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access its other facets.
+A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granted access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access its other facets.
 
 	class SomeHeadChefForWaiter: HeadChefForWaiter {
 		private let headChef: HeadChef
