@@ -352,7 +352,7 @@ Developmental Roadmap
 -   make `Dertisch` a Cocoapod;
 -	make utils functions native class extensions instead;
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
--   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
+-   change class etc. names into their design-pattern originals (`Waiter` to `Presenter` say) and then make restaurant-design-pattern wrappers for them (akin to [RxSwift Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md));
 -	new `MetricsSousChef` for device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;
