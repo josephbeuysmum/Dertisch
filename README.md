@@ -27,7 +27,13 @@ Most design patterns are *simple design patterns* in that they translate their o
 -   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preparation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically. For instance, instead of:
+A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically.
+
+To [quote the team behind RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md#observables-aka-sequences)
+
+	Sequences are a simple, familiar concept that is easy to visualize ... People are creatures with huge visual cortexes. When we can visualize a concept easily, it's a lot easier to reason about it.
+
+For instance, instead of:
 
 	user interaction ->
 	event fired ->
@@ -114,7 +120,7 @@ In a real restaurant a `Waiter` would only be able to get its `HeadChef` to unde
 		...
 	}
 
-A `HeadChef`'s internal functionality is entirely concerned with initialization and dependency injection, whilst its public functionality is entirely concerned with granting access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
+A `HeadChef`'s internal functionality is entirely concerned with dependency injection, whilst its public functionality is entirely concerned with granting access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
 
 	class SomeHeadChefForWaiter: HeadChefForWaiter {
 		private let headChef: HeadChef
