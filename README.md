@@ -29,9 +29,13 @@ Most design patterns are *simple design patterns* in that they translate their o
 
 A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically.
 
-To [quote the team behind RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md#observables-aka-sequences)
+To [quote the team behind RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md#observables-aka-sequences):
 
-	Sequences are a simple, familiar concept that is easy to visualize ... People are creatures with huge visual cortexes. When we can visualize a concept easily, it's a lot easier to reason about it.
+	Sequences are a simple, familiar concept that is easy to visualize.
+
+	People are creatures with huge visual cortexes.
+
+	When we can visualize a concept easily, it's a lot easier to reason about it.
 
 For instance, instead of:
 
