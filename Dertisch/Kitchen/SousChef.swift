@@ -13,7 +13,7 @@ public protocol SousChefForIngredients {
 }
 
 public protocol SousChefForHeadChef {
-	var headChef: HeadChefForSousChef? { get set }
+//	var headChef: HeadChefForSousChef? { get set }
 }
 
 public protocol SousChef: SousChefForIngredients, SousChefForHeadChef, KitchenResource, StaffMember {}

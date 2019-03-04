@@ -14,7 +14,7 @@ A **swifty** MVP framework for Swift apps
 -   `C` Customers
 -   `H` Head Chefs
 
-![Venn diagram of Dertisch relationships](https://raw.githubusercontent.com/josephbeuysmum/Dertisch/master/Assets/Venn.gif)
+![Venn diagram of Dertisch relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn1.gif?raw=true)
 
 ---
 The Restaurant as a Design Pattern
@@ -24,10 +24,18 @@ Most design patterns are *simple design patterns* in that they translate their o
 
 -   Most restaurants are variations on a salle/kitchen theme, and most app architectures are variations on a view/model theme.
 -   *La salle* of a good restaurant is visually enticing, warm and comfortable, and on brand for its particular cuisine. Good app views are likewise.
--   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preperation of raw ingredients. Good app models are likewise.
+-   The kitchen of a good restaurant is clean, efficient, well organized, and focused on the preparation of raw ingredients. Good app models are likewise.
 -   A good restaurant maintains a clear division between its salle and its kitchen, with the waiting staff connecting the two. Good apps are likewise.
 
-A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically. For instance, instead of:
+A *complex design pattern* like this allows us to see the steps in a given procedure as if they were plot developments in a movie, which makes them: 1. easier to grasp; and 2. easier to conceptualize holistically.
+
+To [quote the team behind RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md#observables-aka-sequences):
+
+	// Sequences are a simple, familiar concept that is easy to visualize.
+	// People are creatures with huge visual cortexes.
+	// When we can visualize a concept easily, it's a lot easier to reason about it.
+
+For instance, instead of:
 
 	user interaction ->
 	event fired ->
@@ -66,46 +74,69 @@ There is a chain of responsibility passing from `Customer` to `Ingredient` and b
 -   Waiters **present** data; and
 -   Customers **consume** data.
 
-You can think of this chaining as a **multifacted analogical delegate** pattern. Par exemple, the `Waiter` protocol only requires the implementation of an `init(...)` function for dependency injection, but also implements a number of other protocols that give the waiter different behaviours depending on context.
+Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - have *delegate-like* access to each other in that they only have access a limited subset of each other's functionality. To take an example, the responsibilities of a `HeadChef` are:
 
-	protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, BeginShiftProtocol, EndShiftProtocol, SwitchesRelationshipProtocol {
-		init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
+-   to accept orders from waiters;
+-   to assign tasks to sous chefs;
+-   to prepare dishes from the prep of sous chefs; and
+-   to give waiters dishes for customers.
+
+In a real restaurant a `Waiter` would only be able to get its `HeadChef` to undertake the first of these responsibilities, and conversely the `HeadChef` would only be able to get its `Waiter` to undertake the last. However, if a `Waiter` had *actual delegate* access to its `HeadChef` it could potentially access the other two responsibilities by casting its `HeadChef` as a `HeadChefForSousChef`. To guard against this, `HeadChefs` are not instances of classes which implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols, but instead instances of classes that contain *discrete concrete instances* of classes that implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols
+
+![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
+
+`HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that must be implemented concretely as specific classes. These specific classes are referred to as `Facets`, as in facets of a personality (and also in reference to the `Facade` design pattern).
+
+	public protocol HeadChefFacet: class {
+		init(_ headChef: HeadChef, _ key: String)
 	}
 
-	protocol WaiterForCustomer: GiveOrderProtocol {
-		var carte: CarteForCustomer? { get }
-		func emptyCarte()
+	public protocol HeadChefForWaiter: HeadChefFacet {
+		func give(_ order: CustomerOrder, _ key: String)
 	}
 
-	protocol WaiterForHeadChef {
-		func serve(entrees: FulfilledOrder)
-		func serve(main: FulfilledOrder)
+	public protocol HeadChefForSousChef: HeadChefFacet {
+		func give(_ prep: InternalOrder)
 	}
 
-	protocol WaiterForWaiter {
-		func addToCarte(_ main: FulfilledOrder)
-		func fillCarte(with entrees: FulfilledOrder)
-		func serve(dishes: FulfilledOrder)
+	public protocol HeadChefProtocol {
+		func forWaiter(_ key: String) -> HeadChefForWaiter?
+		func forSousChef(_ key: String) -> HeadChefForSousChef?
+		func waiter(_ key: String) -> WaiterForHeadChef?
 	}
 
-	protocol StaffMember: CigaretteBreakProtocol {}
-
-	protocol CigaretteBreakProtocol {
-		func beginBreak()
-		func endBreak()
+	internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
+		init(
+			_ key: String,
+			_ forWaiterType: HeadChefForWaiter.Type?,
+			_ forSousChefType: HeadChefForSousChef.Type?,
+			_ resources: [String: KitchenResource]?)
+		func inject(_ waiter: WaiterForHeadChef?)
 	}
 
-	protocol BeginShiftProtocol {
-		func beginShift()
+	public class HeadChef: HeadChefInternalProtocol {
+		...
 	}
 
-	protocol EndShiftProtocol {
-		func endShift()
+	extension HeadChef: HeadChefProtocol {
+		...
 	}
 
-	public protocol SwitchesRelationshipProtocol: class {}
+A `HeadChef`'s internal functionality is entirely concerned with dependency injection, whilst its public functionality is entirely concerned with granting access to its other facets. Keys are passed around internally in order to ensure that only facets of, say, a `HeadChef` can access both: its other facets; and also facets in its overlapping objects, in this case the `WaiterForHeadChef` object of a `Waiter` instance.
 
-When a `Customer` is passed a `Waiter` object it is done so as a `WaiterForCustomer` as opposed to a fully functioning `Waiter`, meaning that a waiter cannot be made to `serve(...)` by its customer in the way it can be by its head chef. Conversely, a waiter's head chef has no access to its `carte` of dishes, whereas its customer does.
+	class SomeHeadChefForWaiter: HeadChefForWaiter {
+		private let headChef: HeadChef
+		private let key: String
+
+		required init(_ headChef: HeadChef, _ key: String) {
+			self.headChef = headChef
+			self.key = key
+		}
+
+		func give(_ order: CustomerOrder, _ key: String) {
+			headChef.waiter(key)?.serve(main: FulfilledOrder("dishCooked"))
+		}
+	}
 
 ---
 
@@ -315,15 +346,13 @@ Developmental Roadmap
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
 -   warnings if instances of `Waiter` don't have requisite dependencies injected;
--   move to Devops Git branch;
 -	make `Customer` and `Waiter` [RxSwift](https://github.com/ReactiveX/RxSwift/) compatible;
--   change the multi-protocol'ed situation so that, say, `Waiter` becomes a single object containing the child objects `WaiterForCustomer`, `WaiterForWaiter`, and `WaiterForHeadChef` (these would be structs/classes that implement protocols rather than protocols thus meaning we could store properties in them, thus possibly removing the need for the Rota);
 -   rename Images ingredient;
 -	make classes, structs, and protocols that can be made internal and/or final just that;
 -   make `Dertisch` a Cocoapod;
 -	make utils functions native class extensions instead;
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
--   *dry protocols* for metaphorically-named functions and properties, so that injected properties can be cast from, par exemple, a `Waiter` to a `Presenter` at runtime;
+-   change class etc. names into their design-pattern originals (`Waiter` to `Presenter` say) and then make restaurant-design-pattern wrappers for them (akin to [RxSwift Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md));
 -	new `MetricsSousChef` for device-specific numeric constants;
 -	new `FirebaseIngredient`;
 -	instigate Redux-style 'reducer' process for kitchen classes so they can become structs that overwrite themselves;

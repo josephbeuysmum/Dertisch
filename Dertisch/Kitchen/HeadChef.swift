@@ -6,34 +6,102 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-//import Foundation
+fileprivate var rota: [String: HeadChef] = [:]
 
-public protocol HeadChefForSousChef {
-	func give(prep: InternalOrder)
+
+
+public protocol HeadChefFacet {
+	init(_ headChef: HeadChef, _ key: String)
 }
 
-public protocol HeadChefForMaitreD: BeginShiftable, EndShiftable {}
-
-public protocol HeadChefForWaiter: GiveOrderable {}
-
-public protocol HeadChef: HeadChefForWaiter, HeadChefForSousChef, HeadChefForMaitreD, StaffMember, StaffRelatable {
-	init(maitreD: MaitreD, waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?)
+public protocol HeadChefForSousChef: SimpleColleagueProtocol, HeadChefFacet {
+	func give(_ prep: InternalOrder)
 }
 
-public extension HeadChef {
-	public func beginBreak() {}
-	public func endBreak() {}
-	public func give(_ order: CustomerOrder) {}
+public protocol HeadChefForWaiter: SimpleColleagueProtocol, HeadChefFacet, GiveCustomerOrderable {}
+
+
+
+extension HeadChefForSousChef {
+	public func give(_ prep: InternalOrder) {
+		lo("commented out presently 2")
+//		let fulfilledOrder = FulfilledOrder(prep.ticket, dishes: prep.dishes as? Dishionarizer)
+//		Rota().waiterForHeadChef(self as? StaffRelatable)?.serve(main: fulfilledOrder)
+	}
 }
 
-public extension HeadChefForMaitreD {
-	public func beginShift() {}
-	public func endShift() {}
+extension HeadChefForWaiter {
+	public func give(_ order: CustomerOrder, _ key: String) {}
 }
 
-public extension HeadChefForSousChef {
-	public func give(prep: InternalOrder) {
-		let fulfilledOrder = FulfilledOrder(prep.ticket, dishes: prep.dishes as? Dishionarizer)
-		Rota().waiterForHeadChef(self as? StaffRelatable)?.serve(main: fulfilledOrder)
+
+
+public protocol HeadChefProtocol {
+	func forWaiter(_ key: String) -> HeadChefForWaiter?
+	func forSousChef(_ key: String) -> HeadChefForSousChef?
+	func waiter(_ key: String) -> WaiterForHeadChef?
+}
+
+internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
+	init(
+		_ key: String,
+		_ forWaiterType: HeadChefForWaiter.Type?,
+		_ forSousChefType: HeadChefForSousChef.Type?,
+		_ resources: [String: KitchenResource]?)
+	func inject(_ waiter: WaiterForHeadChef?)
+}
+
+public class HeadChef: HeadChefInternalProtocol {
+	fileprivate let privateKey: String
+	
+	fileprivate var
+	_forWaiter: HeadChefForWaiter?,
+	_forSousChef: HeadChefForSousChef?,
+	_waiter: WaiterForHeadChef?
+	
+	internal required init(
+		_ key: String,
+		_ forWaiterType: HeadChefForWaiter.Type?,
+		_ forSousChefType: HeadChefForSousChef.Type?,
+		_ resources: [String: KitchenResource]?) {
+		privateKey = key
+		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self, key) : nil
+		_forSousChef = forSousChefType != nil ? forSousChefType!.init(self, key) : nil
+		rota[privateKey] = self
+		lo("BONJOUR  ", self)
+	}
+	
+	deinit { lo("AU REVOIR", self) }
+}
+
+extension HeadChef: HeadChefProtocol {
+	public func forWaiter(_ key: String) -> HeadChefForWaiter? {
+		return key == privateKey ? _forWaiter : nil
+	}
+	
+	public func forSousChef(_ key: String) -> HeadChefForSousChef? {
+		return key == privateKey ? _forSousChef : nil
+	}
+	
+	public func waiter(_ key: String) -> WaiterForHeadChef? {
+		return key == privateKey ? _waiter : nil
+	}
+}
+
+extension HeadChef {
+	internal var internalKey: String {
+		return privateKey
+	}
+	
+	internal func inject(_ waiter: WaiterForHeadChef?) {
+		self._waiter = waiter
+	}
+	
+	internal func beginShift() {
+		lo()
+	}
+	
+	internal func endShift() {
+		lo()
 	}
 }

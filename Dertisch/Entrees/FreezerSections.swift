@@ -24,7 +24,7 @@ public struct FreezerKey {
 	key: String,
 	type: FreezerTypes
 	
-	public init (_ key: String, _ type: FreezerTypes) {
+	public init (_ type: FreezerTypes, _ key: String) {
 		self.key = key
 		self.type = type
 	}
@@ -68,7 +68,7 @@ public struct FreezerEntity: FreezerEntitiable {
 		types_ = types
 	}
 	
-	public mutating func add(_ attribute: StorableDataType, by key: String) -> Bool {
+	public mutating func add(_ attribute: StorableDataType, _ key: String) -> Bool {
 		guard
 			let type = types_[key],
 			self.assessValidity(of: attribute, by: type)

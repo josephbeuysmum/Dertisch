@@ -20,20 +20,30 @@ public protocol Describable {
 	var description: String { get }
 }
 
-public protocol BeginShiftable {
-	func beginShift()
-}
+//public protocol Initializable {
+//	init()
+//}
 
-// todo end in a better way, with weak vars etc
-public protocol EndShiftable {
+internal protocol ComplexColleagueProtocol: StaffRelatable {
+	var internalKey: String { get }
+	func beginShift()
 	func endShift()
 }
 
-public protocol GiveOrderable {
-	func give(_ order: CustomerOrder)
+public protocol StaffHead {}
+
+public protocol SimpleColleagueProtocol: class {}
+
+public protocol Shiftable {
+	func beginShift()
+	func endShift()
 }
 
-public protocol KitchenResource: BeginShiftable, EndShiftable {
+public protocol GiveCustomerOrderable {
+	func give(_ order: CustomerOrder, _ key: String)
+}
+
+public protocol KitchenResource: Shiftable {
 	init(_ resources: [String: KitchenResource]?)
 }
 
@@ -49,12 +59,14 @@ public protocol FreezerEntitiable {
 	var attributes: [String: StorableDataType] { get }
 	var name: String { get }
 	init (_ name: String, keys: [FreezerKey])
-	mutating func add(_ attribute: StorableDataType, by key: String) -> Bool
+	mutating func add(_ attribute: StorableDataType, _ key: String) -> Bool
 }
 
 public protocol StorableDataType {}
 
-public protocol StaffRelatable: class {}
+internal protocol StaffRelatable: class {
+//	var isInjected: Bool { get }
+}
 
 extension Bool: StorableDataType {}
 extension Double: StorableDataType {}
