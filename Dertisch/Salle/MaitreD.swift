@@ -91,7 +91,7 @@ extension MaitreD {
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
 		guard self.window == nil else { return }
 		Time.startInterval()
-		registerStaff(with: key)
+		(self as? MaitreDExtension)?.registerStaff(with: key)
 		guard
 			let rootRelationships = createColleagues(customerId: customerId, animated: false, storyboard: storyboard),
 			let rootRestaurantTable = rootRelationships.customer?.restaurantTable
