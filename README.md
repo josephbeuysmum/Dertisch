@@ -31,7 +31,7 @@ A *complex design pattern* like this allows us to see the steps in a given proce
 
 To [quote the team behind RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md#observables-aka-sequences):
 
-> People are creatures with huge visual cortexes. When we can visualize a concept easily, it's a lot easier to reason about it.
+> People are creatures with huge visual cortexes. When we can visualize a concept easily, it's a lot easier to reason about.
 
 For instance, instead of:
 
