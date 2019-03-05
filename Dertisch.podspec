@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description     = <<-DESC
   Dertisch is a swifty MVP framework for Swift apps built around dependency injection
   DESC
-  s.homepage        = "http://josephbeuysmum.co.uk"
+  s.homepage        = "https://github.com/josephbeuysmum/Dertisch"
   s.license         = "MIT"
   s.author          = {"Richard Willis" => "richard@josephbeuysmum.co.uk"}
   s.platform        = :ios, "10.0"

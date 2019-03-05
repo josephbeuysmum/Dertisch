@@ -76,6 +76,7 @@ public extension CustomerForWaiter {
 
 
 public protocol CustomerProtocol {
+	var restaurantTable: RestaurantTable { get }
 	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?
 	func forMaitreD(_ key: String) -> CustomerForMaitreD?
 	func forSommelier(_ key: String) -> CustomerForSommelier?
@@ -84,7 +85,6 @@ public protocol CustomerProtocol {
 }
 
 internal protocol CustomerInternalProtocol: ComplexColleagueProtocol {
-	var restaurantTable: RestaurantTable { get }
 	init(
 		_ key: String,
 		_ table: RestaurantTable,
@@ -131,6 +131,10 @@ public class Customer {
 }
 
 extension Customer: CustomerProtocol {
+	public var restaurantTable: RestaurantTable {
+		return table
+	}
+	
 	public func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable? {
 		return key == privateKey ? _forRestaurantTable : nil
 	}
@@ -155,10 +159,6 @@ extension Customer: CustomerProtocol {
 extension Customer: CustomerInternalProtocol {
 	internal var internalKey: String {
 		return privateKey
-	}
-	
-	internal var restaurantTable: RestaurantTable {
-		return table
 	}
 	
 	internal func inject(_ waiter: WaiterForCustomer?) {

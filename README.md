@@ -1,6 +1,12 @@
 # Dertisch
 
 A **swifty** MVP framework for Swift apps
+
+---
+# Preamble
+
+*Some of the following is out-of-date and is awaiting updates.*
+
 ---
 
 `Dertisch` is a lightweight Swift framework built around **dependency injection**. Part [**MVVM**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) and part [**VIPER**](https://www.objc.io/issues/13-architecture/viper/), its hybrid nature makes it strictly neither, but instead an **MVP** framework specifically designed to be **swifty** via the **protocol oriented** nature of Swift. The framework's name forms a culinary analogical acronym designed to explain its own hybrid nature.
@@ -17,8 +23,7 @@ A **swifty** MVP framework for Swift apps
 ![Venn diagram of Dertisch relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn1.gif?raw=true)
 
 ---
-The Restaurant as a Design Pattern
----
+# The Restaurant as a Design Pattern
 
 Most design patterns are *simple design patterns* in that they translate their own purposes well without regard of how they relate to other patterns in a given app. When put together - a factory, some observers, and a decorator, say - it sounds like the character list from [an episode of Monty Python](https://en.wikipedia.org/wiki/List_of_Monty_Python%27s_Flying_Circus_episodes#3._How_to_Recognise_Different_Types_of_Trees_From_Quite_a_Long_Way_Away): there is no common element tying these metaphors together. Writers describe this situation as **mixed metaphors**: the literary equivalent of an **anti-pattern** or **bad code smell**. Dertisch alleviates this bad smell by implementing a *complex design pattern*: the metaphors make sense in isolation *but also* collectively. And a good restaurant has a very similar structure to a good app:
 
@@ -58,9 +63,7 @@ we have:
 *La salle* is a French noun meaning "the dining room in a restaurant" in this context.
 
 ---
-
-How Dertisch is "swifty"
----
+# How Dertisch is "swifty"
 
 The **swiftiness** of `Dertisch` comes via its *many hats* philosophy, in which objects have different functions and properties exposed depending on the given context.
 
@@ -137,10 +140,7 @@ A `HeadChef`'s internal functionality is entirely concerned with dependency inje
 	}
 
 ---
-
-The Roles in Dertisch
----
-
+# The Roles in Dertisch
 
 `D` is for The Maître D
 ---
@@ -183,9 +183,7 @@ The people ordering the food. Customers are classically users.
 The people who control the kitchen staff and the dishes. Head Chefs are classically VIPER `interactors`, which have access to specific sous chefs in order to create particular combinations of data.
 
 ---
-
-An example interaction in Dertisch  
----
+# An example interaction in Dertisch
 
 -   A customer gives an order to the waiter, who takes it to the kitchen (a user interacts with a `view`, sending a request to its `presenter`, which in turn passes the request to its `interactor`);
 -   the head chef instructs their staff as to the required dishes (the `interactor` queries its `proxies`);
@@ -213,8 +211,7 @@ And on the View side:
 Head Chefs work by implementing the `HeadChef` protocol; waiters by implementing the `Waiter` protocol; and customers by subclassing `Customer`.
 
 ---
-Using Dertisch
----
+# Using Dertisch
 
 Dertisch allows you to create bespoke `sous chefs` and `ingredients` tailored towards your app's specific needs, and also comes with four in-built `ingredients` classes, and two in-built `salle` classes serving functionality common to all apps:
 
@@ -325,11 +322,8 @@ And a boilerplate `Waiter` looks like this:
 		func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {}
 	}
 
-
-
 ---
-Indepth Documentation
----
+# Indepth Documentation
 
 There are more elements to `Dertisch` than those described above, including a host of optional functions that customer, waiters, sous chefs, etc can implement as and when needed. However, because nobody except myself is known to be using it presently I see no need for greater detail yet. If you would like to know more, please ask.
 
@@ -338,8 +332,7 @@ There are more elements to `Dertisch` than those described above, including a ho
 -   Project settings [main target] > General > Deployment Info > Main Interface [leave empty]
 
 ---
-Developmental Roadmap
----
+# Developmental Roadmap
 
 `Dertisch` is still in beta, and whilst no official timescale exists for ongoing development, presently suggestions are as follows:
 
@@ -362,8 +355,7 @@ Developmental Roadmap
 -   remove fatal errors.
 
 ---
-On the names "Dertisch" and "JosephBeuysMum"
----
+# On the names "Dertisch" and "JosephBeuysMum"
 
 In 1984 the German painter Martin Kippenberger painted a portrait entitled "The Mother of Joseph Beuys". Beuys was also a German artist, working principally in sculpture and conceptual pieces, and was a contemporary of Kippenberger. The portrait does not capture the likeness of Beuys' mother, Frau Johanna Beuys. It does not even capture the likeness of a woman. It is said to be a self-portrait, but does not capture the likeness of Kippenberger especially well either. However, it does capture the likeness of someone called "Richard Willis" surprisingly well. Richard is the author of `Dertisch`, and was born the same year that the real Frau Johanna Beuys died. He is the person behind the various manifestations of the "JosephBeuysMum" username online, and the avatar he uses on these accounts is a cropped thumbnail of Kippenberger's painting.
 
