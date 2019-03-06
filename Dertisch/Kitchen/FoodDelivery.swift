@@ -30,11 +30,10 @@ extension FoodDelivery: FoodDeliverable {
 		request.httpMethod = method.rawValue
 		_ = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 			guard error == nil else {
+				lo("\(error.debugDescription): NEEDS HANDLING")
 				return
 			}
-			guard let strongSelf = self else {
-				return
-			}
+			guard let strongSelf = self else { return }
 			let
 			resource = strongSelf.resources[url],
 			rawIngredients = data != nil ?

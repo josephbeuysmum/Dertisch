@@ -16,7 +16,7 @@ public protocol SousChefForHeadChef {
 //	var headChef: HeadChefForSousChef? { get set }
 }
 
-public protocol SousChef: SousChefForIngredients, SousChefForHeadChef, KitchenResource, StaffMember {}
+public protocol SousChef: SousChefForIngredients, SousChefForHeadChef, KitchenResource, CigaretteBreakable {}
 
 public extension SousChef {
 	public func cook(_ rawIngredients: RawIngredients) {}

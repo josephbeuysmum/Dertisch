@@ -10,10 +10,8 @@
 		A97A2BC7220EDA4F00EE85FB /* StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */; };
 		A97A2BC8220EDA4F00EE85FB /* FreezerSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */; };
 		A97A2BC9220EDA4F00EE85FB /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB0220EDA4F00EE85FB /* Orders.swift */; };
-		A97A2BCA220EDA4F00EE85FB /* InternalRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */; };
 		A97A2BCB220EDA4F00EE85FB /* RawIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */; };
 		A97A2BCC220EDA4F00EE85FB /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB4220EDA4F00EE85FB /* Constraints.swift */; };
-		A97A2BCD220EDA4F00EE85FB /* Rota.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB5220EDA4F00EE85FB /* Rota.swift */; };
 		A97A2BCE220EDA4F00EE85FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB6220EDA4F00EE85FB /* Consts.swift */; };
 		A97A2BCF220EDA4F00EE85FB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB7220EDA4F00EE85FB /* Log.swift */; };
 		A97A2BD0220EDA4F00EE85FB /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */; };
@@ -54,10 +52,8 @@
 		A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffRelationship.swift; sourceTree = "<group>"; };
 		A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerSections.swift; sourceTree = "<group>"; };
 		A97A2BB0220EDA4F00EE85FB /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
-		A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalRelationship.swift; sourceTree = "<group>"; };
 		A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawIngredients.swift; sourceTree = "<group>"; };
 		A97A2BB4220EDA4F00EE85FB /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		A97A2BB5220EDA4F00EE85FB /* Rota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rota.swift; sourceTree = "<group>"; };
 		A97A2BB6220EDA4F00EE85FB /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		A97A2BB7220EDA4F00EE85FB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
@@ -111,7 +107,6 @@
 				A97A2BAE220EDA4F00EE85FB /* StaffRelationship.swift */,
 				A97A2BAF220EDA4F00EE85FB /* FreezerSections.swift */,
 				A97A2BB0220EDA4F00EE85FB /* Orders.swift */,
-				A97A2BB1220EDA4F00EE85FB /* InternalRelationship.swift */,
 				A97A2BB2220EDA4F00EE85FB /* RawIngredients.swift */,
 			);
 			path = Entrees;
@@ -125,7 +120,6 @@
 				A97A2BBA220EDA4F00EE85FB /* Extensions.swift */,
 				A97A2BB7220EDA4F00EE85FB /* Log.swift */,
 				A97A2BBB220EDA4F00EE85FB /* Protocols.swift */,
-				A97A2BB5220EDA4F00EE85FB /* Rota.swift */,
 				A97A2BB8220EDA4F00EE85FB /* StringUtils.swift */,
 				A97A2BB9220EDA4F00EE85FB /* Time.swift */,
 				A97A2BBC220EDA4F00EE85FB /* Typealiases.swift */,
@@ -336,13 +330,11 @@
 				A97A2BD8220EDA4F00EE85FB /* RestaurantTable.swift in Sources */,
 				A97A2BE9220EDA9F00EE85FB /* Images.swift in Sources */,
 				A97A2BEC220EDA9F00EE85FB /* Larder.swift in Sources */,
-				A97A2BCA220EDA4F00EE85FB /* InternalRelationship.swift in Sources */,
 				A97A2BE6220EDA9F00EE85FB /* Freezer.swift in Sources */,
 				A97A2BEB220EDA9F00EE85FB /* HeadChef.swift in Sources */,
 				A97A2BCB220EDA4F00EE85FB /* RawIngredients.swift in Sources */,
 				A97A2BCF220EDA4F00EE85FB /* Log.swift in Sources */,
 				A97A2BD0220EDA4F00EE85FB /* StringUtils.swift in Sources */,
-				A97A2BCD220EDA4F00EE85FB /* Rota.swift in Sources */,
 				A97A2BE8220EDA9F00EE85FB /* FoodDelivery.swift in Sources */,
 				A97A2BC8220EDA4F00EE85FB /* FreezerSections.swift in Sources */,
 			);

@@ -18,7 +18,7 @@ public protocol CustomerFacet {
 
 
 
-public protocol CustomerForMaitreD: SimpleColleagueProtocol, CustomerFacet {
+public protocol CustomerForMaitreD: class, CustomerFacet {
 	func layTable()
 	func showToTable()
 	func peruseMenu()
@@ -26,16 +26,16 @@ public protocol CustomerForMaitreD: SimpleColleagueProtocol, CustomerFacet {
 	func menuReturnedToWaiter(_ order: CustomerOrder?)
 }
 
-public protocol CustomerForSommelier: SimpleColleagueProtocol, CustomerFacet {
+public protocol CustomerForSommelier: class, CustomerFacet {
 	func regionChosen()
 }
 
-public protocol CustomerForRestaurantTable: SimpleColleagueProtocol, CustomerFacet {
+public protocol CustomerForRestaurantTable: class, CustomerFacet {
 	func tableAssigned(_ key: String)
 	func isSeated(_ key: String)
 }
 
-public protocol CustomerForWaiter: SimpleColleagueProtocol, CustomerFacet {
+public protocol CustomerForWaiter: class, CustomerFacet {
 	func approach()
 	func present(dish dishId: String)
 	func serveBill()
@@ -75,7 +75,7 @@ public extension CustomerForWaiter {
 
 
 
-public protocol CustomerProtocol {
+public protocol CustomerProtocol: WorkShiftable {
 	var restaurantTable: RestaurantTable { get }
 	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?
 	func forMaitreD(_ key: String) -> CustomerForMaitreD?
@@ -84,7 +84,7 @@ public protocol CustomerProtocol {
 	func waiter(_ key: String) -> WaiterForCustomer?
 }
 
-internal protocol CustomerInternalProtocol: ComplexColleagueProtocol {
+internal protocol CustomerInternalProtocol {
 	init(
 		_ key: String,
 		_ table: RestaurantTable,
@@ -157,19 +157,17 @@ extension Customer: CustomerProtocol {
 }
 
 extension Customer: CustomerInternalProtocol {
-	internal var internalKey: String {
-		return privateKey
-	}
-	
 	internal func inject(_ waiter: WaiterForCustomer?) {
 		self._waiter = waiter
 	}
-	
-	internal func beginShift() {
+}
+
+extension Customer: WorkShiftable {
+	public func beginShift() {
 		lo()
 	}
 	
-	internal func endShift() {
+	public func endShift() {
 		lo()
 	}
 }

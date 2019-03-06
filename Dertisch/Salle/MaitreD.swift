@@ -24,12 +24,12 @@ public protocol MaitreDRegistrar {
 		customerForSommelier: CustomerForSommelier.Type,
 		customerForWaiter: CustomerForWaiter.Type?,
 		waiterForCustomer: WaiterForCustomer.Type?,
-//		waiterForMaitreD: WaiterForMaitreD.Type?,
 		waiterForHeadChef: WaiterForHeadChef.Type?,
-//		waiter waiterType: Waiter.Type?,
 		headChefForWaiter: HeadChefForWaiter.Type?,
 		headChefForSousChef: HeadChefForSousChef.Type?,
-		kitchenResources: [KitchenResource.Type]?)
+		kitchenResources: [KitchenResource.Type]?,
+		waiterable: Waiterable.Type?
+	)
 }
 
 public protocol MaitreDExtension {
@@ -110,12 +110,12 @@ extension MaitreD {
 		guard
 			menuRelationships == nil,
 			let currentCustomer = currentRelationships?.customer,
+			let relationshipsKey = currentRelationships?.key,
 			let nextMenuRelationships = createColleagues(customerId: menuId, animated: true, storyboard: storyboard),
 			let menuTableAndChair = nextMenuRelationships.customer?.restaurantTable
 			else { return }
-		let customerKey = currentCustomer.internalKey
 		menuRelationships = nextMenuRelationships
-		currentCustomer.forMaitreD(customerKey)?.peruseMenu()
+		currentCustomer.forMaitreD(relationshipsKey)?.peruseMenu()
 		// tood GC is this assignation necessary?
 		currentRelationships?.waiter?.beginBreak()
 		currentRelationships?.headChef?.beginBreak()
@@ -137,19 +137,19 @@ extension MaitreD {
 	public func removeMenu(_ order: CustomerOrder? = nil) {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable.dismiss(animated: true) { [unowned self] in
-			guard let customerKey = self.currentRelationships?.customer?.internalKey else { return }
-			self.currentRelationships?.customer?.forMaitreD(customerKey)?.menuReturnedToWaiter(order)
+			guard let relationshipsKey = self.currentRelationships?.key else { return }
+			self.currentRelationships?.customer?.forMaitreD(relationshipsKey)?.menuReturnedToWaiter(order)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
 		guard
 			currentRelationships != nil,
-			let customerKey = currentRelationships!.customer?.internalKey
+			let relationshipsKey = self.currentRelationships?.key
 			else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.forMaitreD(customerKey)?.returnMenuToWaiter(order)
-		currentRelationships!.customer?.forSommelier(customerKey)?.regionChosen()
+		currentRelationships!.customer?.forMaitreD(relationshipsKey)?.returnMenuToWaiter(order)
+		currentRelationships!.customer?.forSommelier(relationshipsKey)?.regionChosen()
 	}
 	
 	public func seat(
@@ -201,34 +201,34 @@ extension MaitreD {
 	
 	
 	
-	internal func customer(for staffMember: StaffRelatable) -> Customer? {
-		switch true {
-		case staffMember === currentRelationships?.waiter:		return currentRelationships!.customer
-		case staffMember === menuRelationships?.waiter:			return menuRelationships!.customer
-		default: 												return nil
-		}
-	}
-	
-	internal func headChef(for staffMember: StaffRelatable) -> HeadChef? {
-		switch true {
-		case staffMember === currentRelationships?.waiter:		return currentRelationships!.headChef
-		case staffMember === menuRelationships?.waiter:			return menuRelationships!.headChef
-		default: 												return nil
-		}
-	}
-	
-	// todo? change to conditional conformance (I wish I had made this more explicit, now I'm not sure what "change to conditional conformance" means in this context)
-	internal func waiter(for staffMember: StaffRelatable) -> Waiter? {
-		switch true {
-		case staffMember === currentRelationships?.headChef,
-			 staffMember === currentRelationships?.customer,
-			 staffMember === currentRelationships?.waiter:		return currentRelationships!.waiter
-		case staffMember === menuRelationships?.headChef,
-			 staffMember === menuRelationships?.customer,
-			 staffMember === menuRelationships?.waiter:			return menuRelationships!.waiter
-		default: 												return nil
-		}
-	}
+//	internal func customer(for staffMember: StaffRelatable) -> Customer? {
+//		switch true {
+//		case staffMember === currentRelationships?.waiter:		return currentRelationships!.customer
+//		case staffMember === menuRelationships?.waiter:			return menuRelationships!.customer
+//		default: 												return nil
+//		}
+//	}
+//
+//	internal func headChef(for staffMember: StaffRelatable) -> HeadChef? {
+//		switch true {
+//		case staffMember === currentRelationships?.waiter:		return currentRelationships!.headChef
+//		case staffMember === menuRelationships?.waiter:			return menuRelationships!.headChef
+//		default: 												return nil
+//		}
+//	}
+//
+//	// todo? change to conditional conformance (I wish I had made this more explicit, now I'm not sure what "change to conditional conformance" means in this context)
+//	internal func waiter(for staffMember: StaffRelatable) -> Waiter? {
+//		switch true {
+//		case staffMember === currentRelationships?.headChef,
+//			 staffMember === currentRelationships?.customer,
+//			 staffMember === currentRelationships?.waiter:		return currentRelationships!.waiter
+//		case staffMember === menuRelationships?.headChef,
+//			 staffMember === menuRelationships?.customer,
+//			 staffMember === menuRelationships?.waiter:			return menuRelationships!.waiter
+//		default: 												return nil
+//		}
+//	}
 	
 	
 	
@@ -265,21 +265,20 @@ extension MaitreD {
 				colleagueRelationship.headChefForSousChefType,
 				getResources(from: colleagueRelationship.kitchenResourceTypes)) :
 			nil
-		let waiter = colleagueRelationship.hasWaiter ?
-			Waiter(
-				relationshipsKey,
-				colleagueRelationship.waiterForCustomerType!,
-//				colleagueRelationship.waiterForMaitreDType!,
-				colleagueRelationship.waiterForHeadChefType!) :
-			nil
 		
-		// tood reinstate general waiter
-		lo("no general waiter currently")
-		lo(waiter?.forCustomer, customer.forWaiter(relationshipsKey), headChef?.forWaiter, waiter?.forHeadChef)
-		//		let waiter = colleagueRelationship.waiterType != nil ?
-		//			colleagueRelationship.waiterType!.init(maitreD: self) :
-		//			GeneralWaiter(maitreD: self)
+		let waiter: Waiter?
+		if colleagueRelationship.hasWaiter {
+			waiter = Waiter(
+				key,
+				colleagueRelationship.internalWaiterableType!.init(
+					key,
+					colleagueRelationship.waiterForCustomerType!,
+					colleagueRelationship.waiterForHeadChefType))
+		} else {
+			waiter = nil
+		}
 		
+		// tood these need injecting, which means we need an internal mechanism with the same two funcs found in DtWaiterProtocol but without the "Dt" specialisation
 		customer.inject(waiter?.forCustomer(relationshipsKey))
 		waiter?.inject(customer.forWaiter(relationshipsKey), headChef?.forWaiter(relationshipsKey))
 		headChef?.inject(waiter?.forHeadChef(relationshipsKey))
@@ -287,6 +286,7 @@ extension MaitreD {
 		restaurantTable.key = relationshipsKey
 		return StaffRelationship(
 			customerID: ticket.id,
+			key: relationshipsKey,
 			animated: ticket.animated,
 			customer: customer,
 			waiter: waiter,
@@ -306,24 +306,22 @@ extension MaitreD {
 	}
 	
 	private func endShift(for formerRelationship: StaffRelationship?) {
-		guard
-			formerRelationship != nil,
-			let customerKey = formerRelationship!.customer?.internalKey
-			else { return }
-		formerRelationship!.customer?.forWaiter(customerKey)?.serveBill()
+		guard formerRelationship != nil else { return }
+		let relationshipsKey = formerRelationship!.key
+		formerRelationship!.customer?.forWaiter(relationshipsKey)?.serveBill()
 		formerRelationship!.waiter?.endShift()
 		formerRelationship!.headChef?.endShift()
 	}
 	
-	private func searchFor(
-		_ colleagueA: StaffRelatable,
-		and colleagueB: StaffRelatable,
-		in colleagueRelationship: StaffRelationship?) -> Bool {
-		guard let colleagues = colleagueRelationship else { return false }
-//		lo(colleagueA === colleagues.customer, colleagueA === colleagues.waiter, colleagueA === colleagues.headChef, colleagueB === colleagues.customer, colleagueB === colleagues.waiter, colleagueB === colleagues.headChef)
-		return  (colleagueA === colleagues.customer || colleagueA === colleagues.waiter || colleagueA === colleagues.headChef) &&
-				(colleagueB === colleagues.customer || colleagueB === colleagues.waiter || colleagueB === colleagues.headChef)
-	}
+//	private func searchFor(
+//		_ colleagueA: StaffRelatable,
+//		and colleagueB: StaffRelatable,
+//		in colleagueRelationship: StaffRelationship?) -> Bool {
+//		guard let colleagues = colleagueRelationship else { return false }
+////		lo(colleagueA === colleagues.customer, colleagueA === colleagues.waiter, colleagueA === colleagues.headChef, colleagueB === colleagues.customer, colleagueB === colleagues.waiter, colleagueB === colleagues.headChef)
+//		return  (colleagueA === colleagues.customer || colleagueA === colleagues.waiter || colleagueA === colleagues.headChef) &&
+//				(colleagueB === colleagues.customer || colleagueB === colleagues.waiter || colleagueB === colleagues.headChef)
+//	}
 }
 
 extension MaitreD: MaitreDRegistrar {
@@ -335,23 +333,23 @@ extension MaitreD: MaitreDRegistrar {
 		customerForSommelier: CustomerForSommelier.Type,
 		customerForWaiter: CustomerForWaiter.Type?,
 		waiterForCustomer: WaiterForCustomer.Type?,
-//		waiterForMaitreD: WaiterForMaitreD.Type?,
 		waiterForHeadChef: WaiterForHeadChef.Type?,
-//		waiter waiterType: Waiter.Type?,
 		headChefForWaiter: HeadChefForWaiter.Type?,
 		headChefForSousChef: HeadChefForSousChef.Type?,
-		kitchenResources: [KitchenResource.Type]?) {
+		kitchenResources: [KitchenResource.Type]?,
+		waiterable: Waiterable.Type?) {
 		guard
 			key == self.key,
 			colleagueRelationships[customerId] == nil
 			else { return }
+		let strongWaiterable = waiterForCustomer == nil ? nil : DtWaiter.self
 		colleagueRelationships[customerId] = ColleagueRelationships(
 			customerForRestaurantTableType: customerForRestaurantTable,
 			customerForMaitreDType: customerForMaitreD,
 			customerForSommelierType: customerForSommelier,
 			customerForWaiterType: customerForWaiter,
+			waiterableType: strongWaiterable,
 			waiterForCustomerType: waiterForCustomer,
-//			waiterForMaitreDType: waiterForMaitreD,
 			waiterForHeadChefType: waiterForHeadChef,
 			headChefForWaiterType: headChefForWaiter,
 			headChefForSousChefType: headChefForSousChef,

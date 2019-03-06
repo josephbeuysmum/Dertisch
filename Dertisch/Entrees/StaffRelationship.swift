@@ -8,6 +8,7 @@
 internal struct StaffRelationship {
 	let
 	customerID: String,
+	key: String,
 	animated: Bool,
 	customer: Customer?,
 	waiter: Waiter?,

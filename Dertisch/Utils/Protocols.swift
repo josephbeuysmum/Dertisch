@@ -24,26 +24,26 @@ public protocol Describable {
 //	init()
 //}
 
-internal protocol ComplexColleagueProtocol: StaffRelatable {
-	var internalKey: String { get }
+public protocol WorkShiftable: StaffRelatable {
+//	var internalKey: String { get }
 	func beginShift()
 	func endShift()
 }
 
 public protocol StaffHead {}
 
-public protocol SimpleColleagueProtocol: class {}
+//public protocol SimpleColleagueProtocol: class {}
 
-public protocol Shiftable {
-	func beginShift()
-	func endShift()
-}
+//public protocol WorkShiftable {
+//	func beginShift()
+//	func endShift()
+//}
 
 public protocol GiveCustomerOrderable {
 	func give(_ order: CustomerOrder, _ key: String)
 }
 
-public protocol KitchenResource: Shiftable {
+public protocol KitchenResource: WorkShiftable {
 	init(_ resources: [String: KitchenResource]?)
 }
 
@@ -53,7 +53,7 @@ extension KitchenResource {
 	public func endShift() {}
 }
 
-public protocol StaffMember: CigaretteBreakable {}
+//public protocol StaffMember: CigaretteBreakable {}
 
 public protocol FreezerEntitiable {
 	var attributes: [String: StorableDataType] { get }
@@ -64,7 +64,7 @@ public protocol FreezerEntitiable {
 
 public protocol StorableDataType {}
 
-internal protocol StaffRelatable: class {
+public protocol StaffRelatable: class {
 //	var isInjected: Bool { get }
 }
 

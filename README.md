@@ -106,7 +106,7 @@ In a real restaurant a `Waiter` would only be able to get its `HeadChef` to unde
 		func waiter(_ key: String) -> WaiterForHeadChef?
 	}
 
-	internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
+	internal protocol HeadChefInternalProtocol: WorkShiftable, StaffMember {
 		init(
 			_ key: String,
 			_ forWaiterType: HeadChefForWaiter.Type?,
@@ -334,9 +334,14 @@ There are more elements to `Dertisch` than those described above, including a ho
 ---
 ## Developmental Roadmap
 
-`Dertisch` is still in beta and whilst no official timescale exists for development, suggestions are as follows:
+`Dertisch` is still in beta and whilst no official timescale exists for development.
+
+### Current Development
 
 -	make `Customer` and `Waiter` [RxSwift](https://github.com/ReactiveX/RxSwift/) compatible;
+
+### Suggested Future Development
+
 -	move optional `KitchenMembers` into their own repos to minimise the footprint of the core framework;
 -   warnings if instances of `Waiter` don't have requisite dependencies injected;
 -   rename Images ingredient;

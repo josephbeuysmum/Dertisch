@@ -10,15 +10,23 @@ fileprivate var rota: [String: HeadChef] = [:]
 
 
 
+
+
+
+
 public protocol HeadChefFacet {
 	init(_ headChef: HeadChef, _ key: String)
 }
 
-public protocol HeadChefForSousChef: SimpleColleagueProtocol, HeadChefFacet {
+public protocol HeadChefForSousChef: class, HeadChefFacet {
 	func give(_ prep: InternalOrder)
 }
 
-public protocol HeadChefForWaiter: SimpleColleagueProtocol, HeadChefFacet, GiveCustomerOrderable {}
+public protocol HeadChefForWaiter: class, HeadChefFacet, GiveCustomerOrderable {}
+
+
+
+
 
 
 
@@ -42,7 +50,7 @@ public protocol HeadChefProtocol {
 	func waiter(_ key: String) -> WaiterForHeadChef?
 }
 
-internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMember {
+internal protocol HeadChefInternalProtocol: WorkShiftable {
 	init(
 		_ key: String,
 		_ forWaiterType: HeadChefForWaiter.Type?,
@@ -51,7 +59,7 @@ internal protocol HeadChefInternalProtocol: ComplexColleagueProtocol, StaffMembe
 	func inject(_ waiter: WaiterForHeadChef?)
 }
 
-public class HeadChef: HeadChefInternalProtocol {
+public class HeadChef {
 	fileprivate let privateKey: String
 	
 	fileprivate var
@@ -88,20 +96,28 @@ extension HeadChef: HeadChefProtocol {
 	}
 }
 
-extension HeadChef {
-	internal var internalKey: String {
-		return privateKey
-	}
-	
+extension HeadChef: HeadChefInternalProtocol {
 	internal func inject(_ waiter: WaiterForHeadChef?) {
 		self._waiter = waiter
 	}
-	
-	internal func beginShift() {
+}
+
+extension HeadChef: WorkShiftable {
+	public final func beginShift() {
 		lo()
 	}
 	
-	internal func endShift() {
+	public final func endShift() {
+		lo()
+	}
+}
+
+extension HeadChef: CigaretteBreakable {
+	public final func beginBreak() {
+		lo()
+	}
+	
+	public final func endBreak() {
 		lo()
 	}
 }
