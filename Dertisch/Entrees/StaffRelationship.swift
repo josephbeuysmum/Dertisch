@@ -10,7 +10,7 @@ internal struct StaffRelationship {
 	customerID: String,
 	key: String,
 	animated: Bool,
-	customer: Customer?,
+	customer: InternalCustomer?,
 	waiter: Waiter?,
 	headChef: HeadChef?
 }

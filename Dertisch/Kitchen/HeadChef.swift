@@ -60,7 +60,7 @@ internal protocol HeadChefInternalProtocol: WorkShiftable {
 }
 
 public class HeadChef {
-	fileprivate let privateKey: String
+	fileprivate let private_key: String
 	
 	fileprivate var
 	_forWaiter: HeadChefForWaiter?,
@@ -72,10 +72,10 @@ public class HeadChef {
 		_ forWaiterType: HeadChefForWaiter.Type?,
 		_ forSousChefType: HeadChefForSousChef.Type?,
 		_ resources: [String: KitchenResource]?) {
-		privateKey = key
+		private_key = key
 		_forWaiter = forWaiterType != nil ? forWaiterType!.init(self, key) : nil
 		_forSousChef = forSousChefType != nil ? forSousChefType!.init(self, key) : nil
-		rota[privateKey] = self
+		rota[private_key] = self
 		lo("BONJOUR  ", self)
 	}
 	
@@ -84,15 +84,15 @@ public class HeadChef {
 
 extension HeadChef: HeadChefProtocol {
 	public func forWaiter(_ key: String) -> HeadChefForWaiter? {
-		return key == privateKey ? _forWaiter : nil
+		return key == private_key ? _forWaiter : nil
 	}
 	
 	public func forSousChef(_ key: String) -> HeadChefForSousChef? {
-		return key == privateKey ? _forSousChef : nil
+		return key == private_key ? _forSousChef : nil
 	}
 	
 	public func waiter(_ key: String) -> WaiterForHeadChef? {
-		return key == privateKey ? _waiter : nil
+		return key == private_key ? _waiter : nil
 	}
 }
 

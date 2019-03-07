@@ -1,0 +1,76 @@
+
+DtCustomer PUBLIC
+    func forWaiter(_ key: String) -> DtCustomerForWaiter?
+    PUB Customer (PUB WorkShiftable, PUB CigaretteBreakable)
+    INT CustomerInternal (PUB Customerable, INT CustomerableInternal , INT CustomerInjectable)
+
+InternalCustomer INTERNAL
+    PUB Customer (WorkShiftable, CigaretteBreakable)
+    INT CustomerableInternal
+    INT CustomerInjectable
+
+PUBLIC
+Customer
+	var restaurantTable: RestaurantTable { get }
+CigaretteBreakable
+	func beginBreak()
+    func endBreak()
+Customerable
+	func waiter(_ key: String) -> WaiterForCustomer?
+WorkShiftable
+    func beginShift()
+    func endShift()
+
+INTERNAL
+CustomerInjectable
+	func inject(_ waiter: WaiterForCustomer?)
+CustomerableInternal
+    func forWaiter(_ key: String) -> CustomerForWaiter?
+CustomerInternalProtocol
+    func forMaitreD(_ key: String) -> CustomerForMaitreD?
+	func forSommelier(_ key: String) -> CustomerForSommelier?
+	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?
+
+
+
+
+
+DtCustomer
+
+    PUBLIC (for developers)
+        var -> RestaurantTable
+        func -> DtCustomerForWaiter?
+            func approach
+        	func present dishId
+            CustomerForWaiter?
+                func serveBill
+        func beginShift
+        func endShift
+        func beginBreak
+        func endBreak
+
+    INTERNAL (for maitreD)
+        func inject WaiterForCustomer?
+        func -> CustomerForMaitreD?
+            func layTable
+            func showToTable
+            func peruseMenu
+            func returnMenuToWaiter CustomerOrder?
+            func menuReturnedToWaiter CustomerOrder?
+        func -> CustomerForSommelier?
+            func regionChosen
+        func -> CustomerForRestaurantTable?
+            func isSeated
+            func tableAssigned
+        func -> CustomerForWaiter?
+        func -> WaiterForCustomer?
+            func give CustomerOrder
+
+    FILE/PRIVATE (for self)
+        key
+        RestaurantTable/UIViewController
+        Dt/CustomerForRestaurantTable?
+        Dt/CustomerForMaitreD?
+    	Dt/CustomerForSommelier?
+    	Dt/CustomerForWaiter?
+    	Dt/WaiterForCustomer?

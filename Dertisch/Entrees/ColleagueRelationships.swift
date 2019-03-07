@@ -7,16 +7,17 @@
 
 // todo a bunch more files can be made internal, no?
 internal struct ColleagueRelationships {
-	let customerForRestaurantTableType: CustomerForRestaurantTable.Type,
-	customerForMaitreDType: CustomerForMaitreD.Type,
-	customerForSommelierType: CustomerForSommelier.Type,
-	customerForWaiterType: CustomerForWaiter.Type?,
-	waiterableType: Waiterable.Type?,
-	waiterForCustomerType: WaiterForCustomer.Type?,
-	waiterForHeadChefType: WaiterForHeadChef.Type?,
-	headChefForWaiterType: HeadChefForWaiter.Type?,
-	headChefForSousChefType: HeadChefForSousChef.Type?,
-	kitchenResourceTypes: [KitchenResource.Type]?
+	let customerableType: Customerable.Type
+	let customerForRestaurantTableType: CustomerForRestaurantTable.Type
+	let customerForMaitreDType: CustomerForMaitreD.Type
+	let customerForSommelierType: CustomerForSommelier.Type
+	let customerForWaiterType: CustomerForWaiter.Type?
+	let waiterableType: Waiterable.Type?
+	let waiterForCustomerType: WaiterForCustomer.Type?
+	let waiterForHeadChefType: WaiterForHeadChef.Type?
+	let headChefForWaiterType: HeadChefForWaiter.Type?
+	let headChefForSousChefType: HeadChefForSousChef.Type?
+	let kitchenResourceTypes: [KitchenResource.Type]?
 	
 	var hasWaiter: Bool {
 		return waiterableType != nil && waiterableType! is WaiterableInternal.Type && waiterForCustomerType != nil
@@ -26,6 +27,10 @@ internal struct ColleagueRelationships {
 		return headChefForWaiterType != nil
 	}
 	
+	var internalCustomerableType: CustomerInternal.Type? {
+		return customerableType as? CustomerInternal.Type
+	}
+
 	var internalWaiterableType: WaiterableInternal.Type? {
 		return waiterableType as? WaiterableInternal.Type
 	}

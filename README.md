@@ -2,9 +2,6 @@
 
 A **swifty** MVP framework for Swift apps
 
----
-## Preamble
-
 *Some of the following is out-of-date and is awaiting updates.*
 
 ---

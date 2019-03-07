@@ -7,7 +7,7 @@
 //
 
 public class GeneralWaiterForWaiter: DtWaiterForWaiter {
-	required public init(_ key: String, _ waiter: Waiterable) {
+	required public init(/*_ key: String, */_ waiter: Waiterable) {
 		
 	}
 }
