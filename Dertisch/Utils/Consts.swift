@@ -67,13 +67,14 @@ public struct CommonPhrases {
 	Restaurant = "Restaurant",
 	Retrieved = "Retrieved",
 	Search = "Search",
+	Seat = "Seat",
 	Selected = "Selected",
 	Set = "Set",
 	Stored = "Stored",
 	Table = "Table",
 	Updated = "Updated",
-	View = "View",
-	RestaurantTable = "\(Restaurant)\(Table)"
+	View = "View"
+//	, Seat = "\(Restaurant)\(Table)"
 
 	//	Account = "Account",
 	//	Accounts = "\( Account )s",

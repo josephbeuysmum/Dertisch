@@ -304,7 +304,7 @@ The boilerplate for `SomeIngredient` looks like this:
 A boilerplate `Customer` looks like this:
 
 	class SomeCustomer {
-		required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {}
+		required init(maitreD: MaitreD, restaurantTable: Seat, waiter: WaiterForCustomer, sommelier: Sommelier?) {}
 	}
 
 	extension SomeCustomer: Customer {}

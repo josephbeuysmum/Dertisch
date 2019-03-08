@@ -1,5 +1,5 @@
 //
-//  RestaurantTable.swift
+//  Seat.swift
 //  Cirk
 //
 //  Created by Richard Willis on 01/02/2019.
@@ -8,25 +8,25 @@
 
 import UIKit
 
-open class RestaurantTable: UIViewController {
+open class Seat: UIViewController {
 	
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		ownKey = ""
 	}
 	
-	var customer: CustomerForRestaurantTable? {
+	final var customer: CustomerForSeat? {
 		get { return nil }
 		set { ownCustomer = newValue }
 	}
 	
-	var key: String? {
+	final var key: String? {
 		get { return nil }
 		set { ownKey = newValue }
 	}
 	
 	private var
-	ownCustomer: CustomerForRestaurantTable?,
+	ownCustomer: CustomerForSeat?,
 	ownKey: String!
 	
 	override open func viewDidAppear(_ animated: Bool) {

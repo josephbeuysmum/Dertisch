@@ -9,7 +9,7 @@
 
 import UIKit
 
-open class RestaurantTableViewCell: UITableViewCell {
+open class SeatViewCell: UITableViewCell {
 	// todo make this a serve(entrees)
 	open func serve<T>(with data: T?) {}
 }

@@ -19,15 +19,15 @@ public protocol Customerable {
 internal protocol CustomerInternal {
 	init(
 		_ key: String,
-		_ restaurantTable: RestaurantTable,
-		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
+		_ restaurantTable: Seat,
+		_ forSeatType: CustomerForSeat.Type,
 		_ forMaitreDType: CustomerForMaitreD.Type,
 		_ forSommelierType: CustomerForSommelier.Type,
 		_ forWaiterType: CustomerForWaiter.Type?)
 	func inject(_ waiter: WaiterForCustomer?)
 	func forMaitreD(_ key: String) -> CustomerForMaitreD?
 	func forSommelier(_ key: String) -> CustomerForSommelier?
-	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?
+	func forSeat(_ key: String) -> CustomerForSeat?
 }
 
 
@@ -66,12 +66,12 @@ extension CustomerForMaitreD {
 
 
 
-public protocol CustomerForRestaurantTable: class, CustomerFacet {
+public protocol CustomerForSeat: class, CustomerFacet {
 	func isSeated(_ key: String)
 	func tableAssigned(_ key: String)
 }
 
-extension CustomerForRestaurantTable {
+extension CustomerForSeat {
 	public func isSeated(_ key: String) {
 		rota[key]?.forMaitreD(key)?.layTable()
 	}
@@ -94,9 +94,9 @@ extension CustomerForSommelier {
 
 public class Customer {
 	private let private_key: String
-	private let restaurant_table: RestaurantTable
+	private let restaurant_table: Seat
 	
-	fileprivate var for_restaurant_table: CustomerForRestaurantTable?
+	fileprivate var for_restaurant_table: CustomerForSeat?
 	fileprivate var for_maitre_d: CustomerForMaitreD?
 	fileprivate var for_sommelier: CustomerForSommelier?
 	fileprivate var for_waiter: CustomerForWaiter?
@@ -104,14 +104,14 @@ public class Customer {
 	
 	internal required init(
 		_ key: String,
-		_ restaurantTable: RestaurantTable,
-		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
+		_ restaurantTable: Seat,
+		_ forSeatType: CustomerForSeat.Type,
 		_ forMaitreDType: CustomerForMaitreD.Type,
 		_ forSommelierType: CustomerForSommelier.Type,
 		_ forWaiterType: CustomerForWaiter.Type?) {
 		private_key = key
 		restaurant_table = restaurantTable
-		for_restaurant_table = forRestaurantTableType.init(key, self)
+		for_restaurant_table = forSeatType.init(key, self)
 		for_maitre_d = forMaitreDType.init(key, self)
 		for_sommelier = forSommelierType.init(key, self)
 		for_waiter = forWaiterType?.init(key, self)
@@ -123,7 +123,7 @@ public class Customer {
 }
 
 extension Customer {
-	public final var restaurantTable: RestaurantTable { return restaurant_table }
+	public final var seat: Seat { return restaurant_table }
 	
 	public final func forWaiter(_ key: String) -> CustomerForWaiter? {
 		return key == private_key ? for_waiter : nil
@@ -159,7 +159,7 @@ extension Customer: CustomerInternal {
 		return key == private_key ? for_sommelier : nil
 	}
 	
-	final func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable? {
+	final func forSeat(_ key: String) -> CustomerForSeat? {
 		return key == private_key ? for_restaurant_table : nil
 	}
 }

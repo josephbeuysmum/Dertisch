@@ -8,7 +8,7 @@
 // todo a bunch more files can be made internal, no?
 internal struct ColleagueRelationships {
 	let customerableType: Customerable.Type
-	let customerForRestaurantTableType: CustomerForRestaurantTable.Type
+	let customerForSeatType: CustomerForSeat.Type
 	let customerForMaitreDType: CustomerForMaitreD.Type
 	let customerForSommelierType: CustomerForSommelier.Type
 	let customerForWaiterType: CustomerForWaiter.Type?
