@@ -27,9 +27,9 @@ internal struct ColleagueRelationships {
 		return headChefForWaiterType != nil
 	}
 	
-	var internalCustomerableType: CustomerInternal.Type? {
-		return customerableType as? CustomerInternal.Type
-	}
+//	var internalCustomerableType: CustomerInternal.Type? {
+//		return customerableType as? CustomerInternal.Type
+//	}
 
 	var internalWaiterableType: WaiterableInternal.Type? {
 		return waiterableType as? WaiterableInternal.Type

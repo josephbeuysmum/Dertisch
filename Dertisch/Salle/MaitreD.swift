@@ -217,20 +217,18 @@ extension MaitreD {
 	
 	private func createColleagues(from ticket: RestaurantTableTicket) -> StaffRelationship? {
 		guard
-			let colleagueRelationship = colleagueRelationships[ticket.id],
-			let internalCustomerableType = colleagueRelationship.internalCustomerableType
+			let colleagueRelationship = colleagueRelationships[ticket.id]
+//			let internalCustomerableType = colleagueRelationship.internalCustomerableType
 			else { return nil }
 		let key = "\(ticket.id)-\(NSUUID().uuidString)"
 		let restaurantTable = ticket.restaurantTable
-		let customer = InternalCustomer(
+		let customer = Customer(
 			key,
-			internalCustomerableType.init(
-				key,
-				restaurantTable,
-				colleagueRelationship.customerForRestaurantTableType,
-				colleagueRelationship.customerForMaitreDType,
-				colleagueRelationship.customerForSommelierType,
-				colleagueRelationship.customerForWaiterType))
+			restaurantTable,
+			colleagueRelationship.customerForRestaurantTableType,
+			colleagueRelationship.customerForMaitreDType,
+			colleagueRelationship.customerForSommelierType,
+			colleagueRelationship.customerForWaiterType)
 		let headChef = colleagueRelationship.hasHeadChef ?
 			HeadChef(
 				key,
@@ -303,7 +301,7 @@ extension MaitreD: MaitreDRegistrar {
 			key == self.key,
 			colleagueRelationships[customerId] == nil
 			else { return }
-		let strongCustomerable = customerable == nil ? DtCustomer.self : customerable!
+		let strongCustomerable = customerable == nil ? Customer.self : customerable!
 		let strongWaiterable = waiterable == nil ? DtWaiter.self : waiterable!
 		colleagueRelationships[customerId] = ColleagueRelationships(
 			customerableType: strongCustomerable,

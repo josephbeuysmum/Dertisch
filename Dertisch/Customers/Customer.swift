@@ -6,21 +6,49 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-fileprivate var rota: [String: DtCustomer] = [:]
+import Foundation
+
+fileprivate var rota: [String: Customer] = [:]
 
 
-
-
-
-public protocol Customer: WorkShiftable, CigaretteBreakable {
-	var restaurantTable: RestaurantTable { get }
-}
 
 public protocol Customerable {
 	func waiter(_ key: String) -> WaiterForCustomer?
 }
 
-public protocol CustomerForMaitreD: class {
+internal protocol CustomerInternal {
+	init(
+		_ key: String,
+		_ restaurantTable: RestaurantTable,
+		_ forRestaurantTableType: CustomerForRestaurantTable.Type,
+		_ forMaitreDType: CustomerForMaitreD.Type,
+		_ forSommelierType: CustomerForSommelier.Type,
+		_ forWaiterType: CustomerForWaiter.Type?)
+	func inject(_ waiter: WaiterForCustomer?)
+	func forMaitreD(_ key: String) -> CustomerForMaitreD?
+	func forSommelier(_ key: String) -> CustomerForSommelier?
+	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?
+}
+
+
+
+public protocol CustomerFacet {
+	init(_ key: String, _ customer: Customer)
+}
+
+public protocol CustomerForWaiter: class, CustomerFacet {
+	func approach()
+	func present(dish dishId: String)
+	func serveBill()
+}
+
+public extension CustomerForWaiter {
+	public func approach() {}
+	public func present(dish dishId: String) {}
+	public func serveBill() {}
+}
+
+public protocol CustomerForMaitreD: class, CustomerFacet {
 	func layTable()
 	func showToTable()
 	func peruseMenu()
@@ -36,18 +64,11 @@ extension CustomerForMaitreD {
 	public func menuReturnedToWaiter(_ order: CustomerOrder? = nil) {}
 }
 
-public protocol CustomerForWaiter: class {
-	func serveBill()
-}
 
-extension CustomerForWaiter {
-	public func serveBill() {}
-}
 
-public protocol CustomerForRestaurantTable: class {
+public protocol CustomerForRestaurantTable: class, CustomerFacet {
 	func isSeated(_ key: String)
 	func tableAssigned(_ key: String)
-	
 }
 
 extension CustomerForRestaurantTable {
@@ -61,7 +82,7 @@ extension CustomerForRestaurantTable {
 	}
 }
 
-public protocol CustomerForSommelier: class {
+public protocol CustomerForSommelier: class, CustomerFacet {
 	func regionChosen()
 }
 
@@ -71,37 +92,14 @@ extension CustomerForSommelier {
 
 
 
-
-
-public protocol DTCustomerFacet {
-	init(_ key: String, _ customer: DtCustomer)
-}
-
-public protocol DtCustomerForWaiter: DTCustomerFacet, CustomerForWaiter {
-	func approach()
-	func present(dish dishId: String)
-}
-
-public extension DtCustomerForWaiter {
-	public func approach() {}
-	public func present(dish dishId: String) {}
-}
-
-public protocol DtCustomerForMaitreD: DTCustomerFacet, CustomerForMaitreD {}
-
-public protocol DtCustomerForRestaurantTable: DTCustomerFacet, CustomerForRestaurantTable {}
-
-public protocol DtCustomerForSommelier: DTCustomerFacet, CustomerForSommelier {}
-
-public class DtCustomer {
+public class Customer {
 	private let private_key: String
 	private let restaurant_table: RestaurantTable
 	
-	fileprivate var for_restaurant_table: DtCustomerForRestaurantTable?
-	// tood do we really need a public version of CustomerForMaitreD?
-	fileprivate var for_maitre_d: DtCustomerForMaitreD?
-	fileprivate var for_sommelier: DtCustomerForSommelier?
-	fileprivate var for_waiter: DtCustomerForWaiter?
+	fileprivate var for_restaurant_table: CustomerForRestaurantTable?
+	fileprivate var for_maitre_d: CustomerForMaitreD?
+	fileprivate var for_sommelier: CustomerForSommelier?
+	fileprivate var for_waiter: CustomerForWaiter?
 	fileprivate var waiter_: DtWaiterForCustomer?
 	
 	internal required init(
@@ -113,35 +111,46 @@ public class DtCustomer {
 		_ forWaiterType: CustomerForWaiter.Type?) {
 		private_key = key
 		restaurant_table = restaurantTable
-		for_restaurant_table = (forRestaurantTableType as? DtCustomerForRestaurantTable.Type)?.init(key, self)
-		for_maitre_d = (forMaitreDType as? DtCustomerForMaitreD.Type)?.init(key, self)
-		for_sommelier = (forSommelierType as? DtCustomerForSommelier.Type)?.init(key, self)
-		for_waiter = (forWaiterType as? DtCustomerForWaiter.Type)?.init(key, self)
+		for_restaurant_table = forRestaurantTableType.init(key, self)
+		for_maitre_d = forMaitreDType.init(key, self)
+		for_sommelier = forSommelierType.init(key, self)
+		for_waiter = forWaiterType?.init(key, self)
 		rota[private_key] = self
 		lo("BONJOUR  ", self)
 	}
 	
-	deinit {
-		lo("AU REVOIR", self)
-		
-	}
+	deinit { lo("AU REVOIR", self) }
 }
 
-extension DtCustomer {
-	public final func forWaiter(_ key: String) -> DtCustomerForWaiter? {
+extension Customer {
+	public final var restaurantTable: RestaurantTable { return restaurant_table }
+	
+	public final func forWaiter(_ key: String) -> CustomerForWaiter? {
 		return key == private_key ? for_waiter : nil
 	}
 }
 
-extension DtCustomer: Customer {
-	public final var restaurantTable: RestaurantTable { return restaurant_table }
+extension Customer: WorkShiftable {
 	public func beginShift() { lo() }
 	public func endShift() { lo() }
+}
+
+extension Customer: CigaretteBreakable {
 	public func beginBreak() { lo() }
 	public func endBreak() { lo() }
 }
 
-extension DtCustomer: CustomerInternalProtocol {
+extension Customer: Customerable {
+	final public func waiter(_ key: String) -> WaiterForCustomer? {
+		return key == private_key ? waiter_ : nil
+	}
+}
+
+extension Customer: CustomerInternal {
+	final func inject(_ waiter: WaiterForCustomer?) {
+		waiter_ = waiter as? DtWaiterForCustomer
+	}
+	
 	final func forMaitreD(_ key: String) -> CustomerForMaitreD? {
 		return key == private_key ? for_maitre_d : nil
 	}
@@ -152,19 +161,5 @@ extension DtCustomer: CustomerInternalProtocol {
 	
 	final func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable? {
 		return key == private_key ? for_restaurant_table : nil
-	}
-}
-
-extension DtCustomer: CustomerInternal {
-	public final func waiter(_ key: String) -> WaiterForCustomer? {
-		return key == private_key ? waiter_ : nil
-	}
-	
-	final func forWaiter(_ key: String) -> CustomerForWaiter? {
-		return key == private_key ? for_waiter : nil
-	}
-	
-	final func inject(_ waiter: WaiterForCustomer?) {
-		waiter_ = waiter as? DtWaiterForCustomer
 	}
 }

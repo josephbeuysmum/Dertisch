@@ -2,7 +2,7 @@
 DtCustomer PUBLIC
     func forWaiter(_ key: String) -> DtCustomerForWaiter?
     PUB Customer (PUB WorkShiftable, PUB CigaretteBreakable)
-    INT CustomerInternal (PUB Customerable, INT CustomerableInternal , INT CustomerInjectable)
+    INT CustomerInternal (PUB Customerable, INT CustomerableInternal)
 
 InternalCustomer INTERNAL
     PUB Customer (WorkShiftable, CigaretteBreakable)
@@ -22,11 +22,10 @@ WorkShiftable
     func endShift()
 
 INTERNAL
-CustomerInjectable
-	func inject(_ waiter: WaiterForCustomer?)
 CustomerableInternal
     func forWaiter(_ key: String) -> CustomerForWaiter?
-CustomerInternalProtocol
+    func inject(_ waiter: WaiterForCustomer?)
+CustomerTMPNAMInternalProtocol
     func forMaitreD(_ key: String) -> CustomerForMaitreD?
 	func forSommelier(_ key: String) -> CustomerForSommelier?
 	func forRestaurantTable(_ key: String) -> CustomerForRestaurantTable?

@@ -170,7 +170,7 @@ public class DtWaiter {
 	fileprivate var for_customer: DtWaiterForCustomer?
 	fileprivate var for_head_chef: DtWaiterForHeadChef?
 	fileprivate var for_waiter: DtWaiterForWaiter?
-	fileprivate var customer_: DtCustomerForWaiter?
+	fileprivate var customer_: CustomerForWaiter?
 	fileprivate var head_chef: HeadChefForWaiter?
 	
 	internal required init(
@@ -216,7 +216,7 @@ extension DtWaiter: WaiterableInternal {
 	}
 	
 	func inject(_ customer: CustomerForWaiter?, _ headChef: HeadChefForWaiter?) {
-		customer_ = customer as? DtCustomerForWaiter
+		customer_ = customer
 		head_chef = headChef
 	}
 }
