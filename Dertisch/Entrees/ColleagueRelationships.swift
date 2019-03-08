@@ -20,7 +20,7 @@ internal struct ColleagueRelationships {
 	let kitchenResourceTypes: [KitchenResource.Type]?
 	
 	var hasWaiter: Bool {
-		return waiterableType != nil && waiterableType! is WaiterableInternal.Type && waiterForCustomerType != nil
+		return waiterableType != nil && waiterForCustomerType != nil
 	}
 	
 	var hasHeadChef: Bool {
@@ -31,7 +31,7 @@ internal struct ColleagueRelationships {
 //		return customerableType as? CustomerInternal.Type
 //	}
 
-	var internalWaiterableType: WaiterableInternal.Type? {
-		return waiterableType as? WaiterableInternal.Type
-	}
+//	var internalWaiterableType: WaiterableInternal.Type? {
+//		return waiterableType as? WaiterableInternal.Type
+//	}
 }

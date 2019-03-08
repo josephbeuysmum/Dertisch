@@ -6,8 +6,8 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public class GeneralWaiterForWaiter: DtWaiterForWaiter {
-	required public init(/*_ key: String, */_ waiter: Waiterable) {
+public class GeneralWaiterForWaiter: WaiterForWaiter {
+	required public init(_ key: String, _ waiter: DtWaiter) {
 		
 	}
 }

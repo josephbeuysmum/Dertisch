@@ -236,13 +236,12 @@ extension MaitreD {
 				colleagueRelationship.headChefForSousChefType,
 				getResources(from: colleagueRelationship.kitchenResourceTypes)) :
 			nil
-		let waiter: Waiter?
+		let waiter: DtWaiter?
 		if colleagueRelationship.hasWaiter {
-			waiter = Waiter(
-				colleagueRelationship.internalWaiterableType!.init(
-					key,
-					colleagueRelationship.waiterForCustomerType!,
-					colleagueRelationship.waiterForHeadChefType))
+			waiter = DtWaiter(
+				key,
+				colleagueRelationship.waiterForCustomerType!,
+				colleagueRelationship.waiterForHeadChefType)
 		} else {
 			waiter = nil
 		}

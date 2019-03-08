@@ -100,7 +100,7 @@ public class Customer {
 	fileprivate var for_maitre_d: CustomerForMaitreD?
 	fileprivate var for_sommelier: CustomerForSommelier?
 	fileprivate var for_waiter: CustomerForWaiter?
-	fileprivate var waiter_: DtWaiterForCustomer?
+	fileprivate var waiter_: WaiterForCustomer?
 	
 	internal required init(
 		_ key: String,
@@ -148,7 +148,7 @@ extension Customer: Customerable {
 
 extension Customer: CustomerInternal {
 	final func inject(_ waiter: WaiterForCustomer?) {
-		waiter_ = waiter as? DtWaiterForCustomer
+		waiter_ = waiter
 	}
 	
 	final func forMaitreD(_ key: String) -> CustomerForMaitreD? {
