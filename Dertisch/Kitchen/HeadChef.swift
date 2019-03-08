@@ -22,7 +22,9 @@ public protocol HeadChefForSousChef: class, HeadChefFacet {
 	func give(_ prep: InternalOrder)
 }
 
-public protocol HeadChefForWaiter: class, HeadChefFacet, GiveCustomerOrderable {}
+public protocol BasicHeadChefForWaiter: class, GiveCustomerOrderable {}
+
+public protocol HeadChefForWaiter: BasicHeadChefForWaiter, HeadChefFacet {}
 
 
 

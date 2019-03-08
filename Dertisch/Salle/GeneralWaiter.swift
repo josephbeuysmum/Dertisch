@@ -6,9 +6,17 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public class GeneralWaiterForWaiter: WaiterForWaiter {
-	required public init(_ key: String, _ waiter: DtWaiter) {
+public class GeneralWaiterForWaiter: BasicWaiterForWaiter {
+	public init(_ key: String, _ waiter: Waiterable) {
 		
+	}
+	
+	public func addToCarte(_ main: FulfilledOrder) {
+		lo()
+	}
+	
+	public func fillCarte(with entrees: FulfilledOrder) {
+		lo()
 	}
 }
 

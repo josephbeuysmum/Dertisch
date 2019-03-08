@@ -11,6 +11,6 @@ internal struct StaffRelationship {
 	key: String,
 	animated: Bool,
 	customer: Customer?,
-	waiter: DtWaiter?,
+	waiter: Waiter?,
 	headChef: HeadChef?
 }

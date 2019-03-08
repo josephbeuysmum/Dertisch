@@ -8,21 +8,21 @@
 
 import Foundation
 
-fileprivate var rota: [String: DtWaiter] = [:]
+fileprivate var rota: [String: Waiter] = [:]
 
 
 
 public protocol Waiterable {
-	func customer(_ key: String) -> CustomerForWaiter?
 	func headChef(_ key: String) -> HeadChefForWaiter?
 }
 
-internal protocol WaiterInternal: Waiterable{
+internal protocol WaiterInternal: Waiterable {
 	init(
 		_ key: String,
-		_ forCustomer: WaiterForCustomer.Type,
-		_ forHeadChef: WaiterForHeadChef.Type?)
-	func inject(_ customer: CustomerForWaiter?, _ headChef: HeadChefForWaiter?)
+		_ forCustomer: BasicWaiterForCustomer.Type,
+		_ forHeadChef: BasicWaiterForHeadChef.Type?)
+	func inject(_ customer: BasicCustomerForWaiter?, _ headChef: BasicHeadChefForWaiter?)
+	func customer(_ key: String) -> CustomerForWaiter?
 	func forCustomer(_ key: String) -> WaiterForCustomer?
 	func forHeadChef(_ key: String) -> WaiterForHeadChef?
 }
@@ -30,10 +30,12 @@ internal protocol WaiterInternal: Waiterable{
 
 
 public protocol WaiterFacet {
-	init(_ key: String, _ waiter: DtWaiter)
+	init(_ key: String, _ waiter: Waiter)
 }
 
-public protocol WaiterForCustomer: class, WaiterFacet, GiveCustomerOrderable {
+public protocol BasicWaiterForCustomer: class, GiveCustomerOrderable {}
+
+public protocol WaiterForCustomer: BasicWaiterForCustomer, WaiterFacet {
 	var carte: CarteForCustomer? { get }
 	func emptyCarte()
 }
@@ -46,10 +48,12 @@ public extension WaiterForCustomer {
 	}
 }
 
-public protocol WaiterForHeadChef: class, WaiterFacet {
+public protocol BasicWaiterForHeadChef: class {
 	func serve(entrees: FulfilledOrder, _ key: String)
 	func serve(main: FulfilledOrder, _ key: String)
 }
+
+public protocol WaiterForHeadChef: BasicWaiterForHeadChef, WaiterFacet {}
 
 public extension WaiterForHeadChef {
 	public func serve(main: FulfilledOrder, _ key: String) {
@@ -72,10 +76,12 @@ public extension WaiterForHeadChef {
 
 
 
-public protocol WaiterForWaiter: class, WaiterFacet {
+public protocol BasicWaiterForWaiter: class {
 	func addToCarte(_ main: FulfilledOrder)
 	func fillCarte(with entrees: FulfilledOrder)
 }
+
+public protocol WaiterForWaiter: BasicWaiterForWaiter, WaiterFacet {}
 
 public extension WaiterForWaiter {
 	func addToCarte(_ main: FulfilledOrder) {}
@@ -83,6 +89,70 @@ public extension WaiterForWaiter {
 }
 
 
+
+public class Waiter {
+	private let private_key: String
+	
+	// tood change to lets?
+	fileprivate var for_customer: WaiterForCustomer?
+	fileprivate var for_head_chef: WaiterForHeadChef?
+	fileprivate var for_waiter: GeneralWaiterForWaiter?
+	fileprivate var customer_: CustomerForWaiter?
+	fileprivate var head_chef: HeadChefForWaiter?
+	
+	internal required init(
+		_ key: String,
+		_ forCustomer: BasicWaiterForCustomer.Type,
+		_ forHeadChef: BasicWaiterForHeadChef.Type?) {
+		private_key = key
+		if let forCustomerType = forCustomer as? WaiterForCustomer.Type {
+			for_customer = forCustomerType.init(key, self)
+		}
+		if let forHeadChefType = forHeadChef as? WaiterForHeadChef.Type {
+			for_head_chef = forHeadChefType.init(key, self)
+		}
+		for_waiter = GeneralWaiterForWaiter(key, self)
+		rota[private_key] = self
+		lo("BONJOUR  ", self)
+	}
+	
+	deinit { lo("AU REVOIR", self) }
+}
+
+extension Waiter: WorkShiftable {
+	public func beginShift() { lo() }
+	public func endShift() { lo() }
+}
+
+extension Waiter: CigaretteBreakable {
+	public func beginBreak() { lo() }
+	public func endBreak() { lo() }
+}
+
+extension Waiter: Waiterable {
+	public final func headChef(_ key: String) -> HeadChefForWaiter? {
+		return key == private_key ? head_chef : nil
+	}
+}
+
+extension Waiter: WaiterInternal {
+	public func inject(_ customer: BasicCustomerForWaiter?, _ headChef: BasicHeadChefForWaiter?) {
+		customer_ = customer as? CustomerForWaiter
+		head_chef = headChef as? HeadChefForWaiter
+	}
+	
+	public final func customer(_ key: String) -> CustomerForWaiter? {
+		return key == private_key ? customer_ : nil
+	}
+	
+	func forCustomer(_ key: String) -> WaiterForCustomer? {
+		return key == private_key ? for_customer : nil
+	}
+	
+	func forHeadChef(_ key: String) -> WaiterForHeadChef? {
+		return key == private_key ? for_head_chef : nil
+	}
+}
 
 //internal class Waiter {
 ////	private let key: String
@@ -198,72 +268,3 @@ public extension WaiterForWaiter {
 //	func forHeadChef(_ key: String) -> DtWaiterForHeadChef?
 //}
 
-public class DtWaiter {
-	private let private_key: String
-	
-	// tood change to lets?
-	fileprivate var for_customer: WaiterForCustomer?
-	fileprivate var for_head_chef: WaiterForHeadChef?
-	fileprivate var for_waiter: WaiterForWaiter?
-	fileprivate var customer_: CustomerForWaiter?
-	fileprivate var head_chef: HeadChefForWaiter?
-	
-	internal required init(
-		_ key: String,
-		_ forCustomer: WaiterForCustomer.Type,
-		_ forHeadChef: WaiterForHeadChef.Type?) {
-		private_key = key
-		self.for_customer = forCustomer.init(key, self)
-		self.for_head_chef = forHeadChef != nil ? forHeadChef!.init(key, self) : nil
-		self.for_waiter = GeneralWaiterForWaiter(key, self)
-		rota[private_key] = self
-		lo("BONJOUR  ", self)
-	}
-	
-	deinit { lo("AU REVOIR", self) }
-}
-
-//extension DtWaiter {
-//	public final func forCustomer(_ key: String) -> WaiterForCustomer? {
-//		return key == private_key ? for_customer : nil
-//	}
-//	
-//	public final func forHeadChef(_ key: String) -> WaiterForHeadChef? {
-//		return key == private_key ? for_head_chef : nil
-//	}
-//}
-
-extension DtWaiter: WorkShiftable {
-	public func beginShift() { lo() }
-	public func endShift() { lo() }
-}
-
-extension DtWaiter: CigaretteBreakable {
-	public func beginBreak() { lo() }
-	public func endBreak() { lo() }
-}
-
-extension DtWaiter: Waiterable {
-	public final func customer(_ key: String) -> CustomerForWaiter? {
-		return key == private_key ? customer_ : nil
-	}
-	
-	public final func headChef(_ key: String) -> HeadChefForWaiter? {
-		return key == private_key ? head_chef : nil
-	}
-}
-
-extension DtWaiter: WaiterInternal {
-	func inject(_ customer: CustomerForWaiter?, _ headChef: HeadChefForWaiter?) {
-		customer_ = customer
-		head_chef = headChef
-	}
-	
-	func forCustomer(_ key: String) -> WaiterForCustomer? {
-		return key == private_key ? for_customer : nil
-	}
-	
-	func forHeadChef(_ key: String) -> WaiterForHeadChef? {
-		return key == private_key ? for_head_chef : nil
-	}
-}

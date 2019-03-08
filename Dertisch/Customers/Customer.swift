@@ -13,7 +13,7 @@ fileprivate var rota: [String: Customer] = [:]
 
 
 public protocol Customerable {
-	func waiter(_ key: String) -> WaiterForCustomer?
+	func waiter(_ key: String) -> BasicWaiterForCustomer?
 }
 
 internal protocol CustomerInternal {
@@ -36,7 +36,10 @@ public protocol CustomerFacet {
 	init(_ key: String, _ customer: Customer)
 }
 
-public protocol CustomerForWaiter: class, CustomerFacet {
+public protocol BasicCustomerForWaiter: class {}
+	
+// tood probable that some of these functions will be migrated into BasicCustomerForWaiter, same goes for rest of the CustomerFor... proats
+public protocol CustomerForWaiter: BasicCustomerForWaiter, CustomerFacet {
 	func approach()
 	func present(dish dishId: String)
 	func serveBill()
@@ -48,7 +51,11 @@ public extension CustomerForWaiter {
 	public func serveBill() {}
 }
 
-public protocol CustomerForMaitreD: class, CustomerFacet {
+
+
+public protocol BasicCustomerForMaitreD: class {}
+
+public protocol CustomerForMaitreD: BasicCustomerForMaitreD, CustomerFacet {
 	func layTable()
 	func showToTable()
 	func peruseMenu()
@@ -66,7 +73,9 @@ extension CustomerForMaitreD {
 
 
 
-public protocol CustomerForSeat: class, CustomerFacet {
+public protocol BasicCustomerForSeat: class {}
+
+public protocol CustomerForSeat: BasicCustomerForSeat, CustomerFacet {
 	func isSeated(_ key: String)
 	func tableAssigned(_ key: String)
 }
@@ -82,7 +91,11 @@ extension CustomerForSeat {
 	}
 }
 
-public protocol CustomerForSommelier: class, CustomerFacet {
+
+
+public protocol BasicCustomerForSommelier: class {}
+
+public protocol CustomerForSommelier: BasicCustomerForSommelier, CustomerFacet {
 	func regionChosen()
 }
 
@@ -141,7 +154,7 @@ extension Customer: CigaretteBreakable {
 }
 
 extension Customer: Customerable {
-	final public func waiter(_ key: String) -> WaiterForCustomer? {
+	final public func waiter(_ key: String) -> BasicWaiterForCustomer? {
 		return key == private_key ? waiter_ : nil
 	}
 }

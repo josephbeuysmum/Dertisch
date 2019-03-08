@@ -236,9 +236,9 @@ extension MaitreD {
 				colleagueRelationship.headChefForSousChefType,
 				getResources(from: colleagueRelationship.kitchenResourceTypes)) :
 			nil
-		let waiter: DtWaiter?
+		let waiter: Waiter?
 		if colleagueRelationship.hasWaiter {
-			waiter = DtWaiter(
+			waiter = Waiter(
 				key,
 				colleagueRelationship.waiterForCustomerType!,
 				colleagueRelationship.waiterForHeadChefType)
@@ -301,7 +301,7 @@ extension MaitreD: MaitreDRegistrar {
 			colleagueRelationships[customerId] == nil
 			else { return }
 		let strongCustomerable = customerable == nil ? Customer.self : customerable!
-		let strongWaiterable = waiterable == nil ? DtWaiter.self : waiterable!
+		let strongWaiterable = waiterable == nil ? Waiter.self : waiterable!
 		colleagueRelationships[customerId] = ColleagueRelationships(
 			customerableType: strongCustomerable,
 			customerForSeatType: customerForSeat,
