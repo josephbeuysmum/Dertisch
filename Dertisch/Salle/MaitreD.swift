@@ -16,18 +16,13 @@ public protocol MaitreDRegistrar {
 		_ resourceType: KitchenResource.Type,
 		with key: String,
 		injecting dependencyTypes: [KitchenResource.Type]?)
-	// tood sort this mess out!
+	// tood these need packaging into WaiterTypeContainer structs or similar
 	func introduce(
 		_ customerId: String,
 		with key: String,
-		customerForSeat: CustomerForSeat.Type,
-		customerForMaitreD: CustomerForMaitreD.Type,
-		customerForSommelier: CustomerForSommelier.Type,
-		customerForWaiter: CustomerForWaiter.Type?,
-		waiterForCustomer: WaiterForCustomer.Type?,
-		waiterForHeadChef: WaiterForHeadChef.Type?,
-		headChefForWaiter: HeadChefForWaiter.Type?,
-		headChefForSousChef: HeadChefForSousChef.Type?,
+		customer: CustomerPersonality,
+		waiter: WaiterPersonality?,
+		headChef: HeadChefPersonality?,
 		kitchenResources: [KitchenResource.Type]?,
 		customerable: Customerable.Type?,
 		waiterable: Waiterable.Type?)
@@ -285,14 +280,9 @@ extension MaitreD: MaitreDRegistrar {
 	public func introduce(
 		_ customerId: String,
 		with key: String,
-		customerForSeat: CustomerForSeat.Type,
-		customerForMaitreD: CustomerForMaitreD.Type,
-		customerForSommelier: CustomerForSommelier.Type,
-		customerForWaiter: CustomerForWaiter.Type?,
-		waiterForCustomer: WaiterForCustomer.Type?,
-		waiterForHeadChef: WaiterForHeadChef.Type?,
-		headChefForWaiter: HeadChefForWaiter.Type?,
-		headChefForSousChef: HeadChefForSousChef.Type?,
+		customer: CustomerPersonality,
+		waiter: WaiterPersonality?,
+		headChef: HeadChefPersonality?,
 		kitchenResources: [KitchenResource.Type]?,
 		customerable: Customerable.Type?,
 		waiterable: Waiterable.Type?) {
@@ -304,15 +294,15 @@ extension MaitreD: MaitreDRegistrar {
 		let strongWaiterable = waiterable == nil ? Waiter.self : waiterable!
 		colleagueRelationships[customerId] = ColleagueRelationships(
 			customerableType: strongCustomerable,
-			customerForSeatType: customerForSeat,
-			customerForMaitreDType: customerForMaitreD,
-			customerForSommelierType: customerForSommelier,
-			customerForWaiterType: customerForWaiter,
+			customerForSeatType: customer.forSeat,
+			customerForMaitreDType: customer.forMaitreD,
+			customerForSommelierType: customer.forSommelier,
+			customerForWaiterType: customer.forWaiter,
 			waiterableType: strongWaiterable,
-			waiterForCustomerType: waiterForCustomer,
-			waiterForHeadChefType: waiterForHeadChef,
-			headChefForWaiterType: headChefForWaiter,
-			headChefForSousChefType: headChefForSousChef,
+			waiterForCustomerType: waiter?.forCustomer,
+			waiterForHeadChefType: waiter?.forHeadChef,
+			headChefForWaiterType: headChef?.forWaiter,
+			headChefForSousChefType: headChef?.forSousChef,
 			kitchenResourceTypes: kitchenResources)
 	}
 	

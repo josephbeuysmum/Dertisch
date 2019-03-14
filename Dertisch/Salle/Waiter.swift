@@ -93,7 +93,6 @@ public extension WaiterForWaiter {
 public class Waiter {
 	private let private_key: String
 	
-	// tood change to lets?
 	fileprivate var for_customer: WaiterForCustomer?
 	fileprivate var for_head_chef: WaiterForHeadChef?
 	fileprivate var for_waiter: GeneralWaiterForWaiter?
