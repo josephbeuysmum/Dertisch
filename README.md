@@ -20,7 +20,7 @@ A **swifty** MVP framework for Swift apps
 -   `C` Customers
 -   `H` Head Chefs
 
-![Venn diagram of Dertisch relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn1.gif?raw=true)
+![Venn diagram of Dertisch relationships](https://github.com/josephbeuysmum/Dertisch/blob/master/Assets/Venn1.gif?raw=true)
 
 ---
 ## The Restaurant as a Design Pattern
@@ -84,7 +84,7 @@ Theoretically, two overlapping objects - a `Waiter` and its `HeadChef` say - hav
 
 In a real restaurant a `Waiter` would only be able to get its `HeadChef` to undertake the first of these responsibilities, and conversely the `HeadChef` would only be able to get its `Waiter` to undertake the last. However, if a `Waiter` had *actual delegate* access to its `HeadChef` it could potentially access the other two responsibilities by casting its `HeadChef` as a `HeadChefForSousChef`. To guard against this, `HeadChefs` are not instances of classes which implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols, but instead instances of classes that contain *discrete concrete instances* of classes that implement `HeadChefForSousChef` and `HeadChefForWaiter` protocols
 
-![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/devops/Assets/Venn2.gif?raw=true)
+![Venn diagram of Waiter/HeadChef relationships](https://github.com/josephbeuysmum/Dertisch/blob/master/Assets/Venn2.gif?raw=true)
 
 `HeadChef` is a part-public, part-internal class that has its own `HeadChefForWaiter` and `HeadChefForSousChef` objects, which themselves are defined as protocols that must be implemented concretely as specific classes. These specific classes are referred to as `Facets`, as in facets of a personality (and also in reference to the `Facade` design pattern).
 
